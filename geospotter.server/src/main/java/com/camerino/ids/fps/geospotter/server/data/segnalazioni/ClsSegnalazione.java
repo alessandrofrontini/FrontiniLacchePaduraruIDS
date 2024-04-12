@@ -1,4 +1,4 @@
-package com.camerino.ids.fps.geospotter.server.data;
+package com.camerino.ids.fps.geospotter.server.data.segnalazioni;
 
 public class ClsSegnalazione {
     long id;
