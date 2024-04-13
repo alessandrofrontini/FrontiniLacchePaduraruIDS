@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GeospotterServerApplication {
 
 	public static void main(String[] args) {
-		// Fermo l'applicazione dall'avviare il server
-		//SpringApplication.run(GeospotterServerApplication.class, args);
+		SpringApplication.run(GeospotterServerApplication.class, args);
 	}
-
 }
