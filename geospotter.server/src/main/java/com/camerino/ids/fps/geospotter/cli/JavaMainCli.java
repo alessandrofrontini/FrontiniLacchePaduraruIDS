@@ -1,17 +1,18 @@
-package com.camerino.ids.fps.geospotter.server;
+package com.camerino.ids.fps.geospotter.cli;
 
+import com.camerino.ids.fps.geospotter.cli.menu.ClsMenuContributorAuth;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
-import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.fps.geospotter.server.data.utenti.IContributable;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
 import com.camerino.ids.fps.geospotter.server.data.utils.Posizione;
 
 import java.util.Scanner;
 
-public class JavaMain {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
+import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.print;
+import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.println;
+
+public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
     enum USER_TYPE{TOURIST, AUTH_TURIST, CONTRIBUTOR, AUTH_CONTRIBUTOR, ANIMATORE, CURATORE, GESTORE}
-    public static void print(Object obj){System.out.print(obj);}
-    public static void println(Object obj){System.out.println(obj);}
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         USER_TYPE uType = null;
@@ -56,45 +57,15 @@ public class JavaMain {//Gli scanner i double li vuole con la , e non punto .  .
             println("Cosa vuoi fare?");
         }
     }
-    private static void main_auth_contributor() {
-        boolean exit = false;
-        Scanner in = new Scanner(System.in);
-        ClsContributorAutorizzato user = new ClsContributorAutorizzato();
-        user.setId("1");
-        user.setPunteggio(666);
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("contributor autorizzato");
-        user.getCredenziali().setPassword("password");
-        while (!exit) {
-            println("1) Aggiungi Nodo");
-            println("2) Modifica Nodo");
-            println("3) Elimina Nodo");
-            println("4) Inserisci Itinerario");
-            println("5) Modifica Itinerario");
-            println("6) Modifica Itinerario");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()){//Gli altri case sono placeholder
-                case "1" -> aggiungi_nodo(user);
-                case "2" -> aggiungi_nodo(user);
-                case "3" -> aggiungi_nodo(user);
-                case "4" -> aggiungi_nodo(user);
-                case "5" -> aggiungi_nodo(user);
-                case "6" -> aggiungi_nodo(user);
-                case "0" -> aggiungi_nodo(user);
-            }
-        }
-    }
-
     private static void aggiungi_nodo(IContributable user){
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsNodo nodo = new ClsNodo();
         Posizione pos = new Posizione();
-        while (!ok){
+        while (ok){
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
-            print("Inserisci tipo: 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
+            print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
             switch (in.nextLine()){
                 case "1" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.COMMERCIALE);
                 case "2" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.CULTURALE);
@@ -157,7 +128,7 @@ public class JavaMain {//Gli scanner i double li vuole con la , e non punto .  .
             case TOURIST -> main_tourist();
             case AUTH_TURIST -> main_auth_tourist();
             case CONTRIBUTOR -> main_contributor();
-            case AUTH_CONTRIBUTOR -> main_auth_contributor();
+            case AUTH_CONTRIBUTOR -> new ClsMenuContributorAuth().menu();
             case ANIMATORE -> main_animatore();
             case CURATORE -> main_curatore();
             case GESTORE -> main_gestore();
