@@ -7,7 +7,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     //Metodi override di Contributor Autorizzato
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        return false;
+        return mNodi.aggiungiNodo(nodo);
     }
 
     @Override

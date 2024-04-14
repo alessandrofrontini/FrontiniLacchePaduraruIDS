@@ -1,25 +1,15 @@
 package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
-public class ClsNodo {
+public class ClsNodo extends ClsContenuto{
     public enum TipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
-    private String id;
-    private long idComune;
+    private String idComune;
     private TipologiaNodo tipologiaNodo;
     private boolean aTempo;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public long getIdComune() {
+    public String getIdComune() {
         return idComune;
     }
 
-    public void setIdComune(long idComune) {
+    public void setIdComune(String idComune) {
         this.idComune = idComune;
     }
 

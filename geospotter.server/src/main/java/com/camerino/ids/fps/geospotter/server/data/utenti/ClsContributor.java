@@ -37,6 +37,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     //Metodi di IContributable
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
+        //TODO: modificare
         return mNodi.aggiungiNodo(nodo);
     }
 
