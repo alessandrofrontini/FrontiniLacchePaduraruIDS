@@ -9,5 +9,4 @@ public class GeospotterServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GeospotterServerApplication.class, args);
 	}
-
 }
