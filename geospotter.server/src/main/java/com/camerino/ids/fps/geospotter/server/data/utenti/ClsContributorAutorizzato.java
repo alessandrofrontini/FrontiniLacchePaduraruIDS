@@ -12,7 +12,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
 
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
-        return false;
+        return mNodi.modificaNodo(nodo);
     }
 
     @Override

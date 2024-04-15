@@ -12,6 +12,7 @@ import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.print
 import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.println;
 
 public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
+    //TODO: spostare dentro turista autenticato e rinominare in base alla documentazione
     enum USER_TYPE{TOURIST, AUTH_TURIST, CONTRIBUTOR, AUTH_CONTRIBUTOR, ANIMATORE, CURATORE, GESTORE}
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -62,7 +63,7 @@ public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .
         Scanner in = new Scanner(System.in);
         ClsNodo nodo = new ClsNodo();
         Posizione pos = new Posizione();
-        while (ok){
+        while (!ok){
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
             print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");

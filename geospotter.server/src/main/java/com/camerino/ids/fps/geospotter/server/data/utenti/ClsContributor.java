@@ -47,6 +47,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 
     @Override
+    public boolean eliminaNodo(String id) {
+        return mNodi.eliminaNodo(id);
+    }
+
+    @Override
     public boolean inserisciItinerario(ClsItinerario irinerario) {
         return false;
     }
