@@ -4,11 +4,9 @@ import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MockNodi {
     private static MockNodi instance = null;
-    private MockNodi(){}
     public static MockNodi getInstance(){
         if(instance==null)
             instance = new MockNodi();
@@ -16,11 +14,16 @@ public class MockNodi {
     }
 
     private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    private long idCounter = 0;
+
+    private MockNodi(){
+        idCounter = nodi.size();
+    }
 
     public boolean aggiungiNodo(ClsNodo nodo){
-        nodo.setId(""+nodi.size());
-        nodi.add(nodo);
-        return true;
+        idCounter++;
+        nodo.setId(""+idCounter);
+        return nodi.add(nodo);
     }
 
     public boolean eliminaNodo(String id){

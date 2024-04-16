@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.geospotter.cli.actions;
 
 import com.camerino.ids.fps.geospotter.cli.menu.Input;
+import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.geospotter.server.data.utenti.IContributable;
 
@@ -14,5 +15,12 @@ public class ClsCommonActions {
 
     public static boolean eliminaNodo(IContributable user, String id){
         return user.eliminaNodo(id);
+    }
+
+    public static boolean aggiungiItinerario(IContributable user){
+        ClsItinerario itinerario = Input.richiediItinerario();
+        if(itinerario!= null)
+            return user.inserisciItinerario(itinerario);
+        return false;
     }
 }

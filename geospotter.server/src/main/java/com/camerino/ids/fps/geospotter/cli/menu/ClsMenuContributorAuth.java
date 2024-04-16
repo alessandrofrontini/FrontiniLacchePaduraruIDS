@@ -3,14 +3,14 @@ package com.camerino.ids.fps.geospotter.cli.menu;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
+import com.camerino.ids.fps.geospotter.server.persistance.mock.MockNodi;
 
 import java.util.Scanner;
 
-import static com.camerino.ids.fps.geospotter.cli.actions.ClsCommonActions.aggiungiNodo;
-import static com.camerino.ids.fps.geospotter.cli.actions.ClsCommonActions.eliminaNodo;
+import static com.camerino.ids.fps.geospotter.cli.actions.ClsCommonActions.*;
 import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.println;
-import static com.camerino.ids.fps.geospotter.cli.menu.Input.richiediNodo;
+import static com.camerino.ids.fps.geospotter.cli.menu.Input.modificaNodo;
 
 public class ClsMenuContributorAuth implements IMenu{
     private ClsContributorAutorizzato user = new ClsContributorAutorizzato();
@@ -37,16 +37,23 @@ public class ClsMenuContributorAuth implements IMenu{
                 case "1" -> aggiungiNodo(user);
                 case "2" -> menuModificaNodo();
                 case "3" -> menuEliminaNodo();
-                case "4" -> aggiungiNodo(user);
+                case "4" -> aggiungiItinerario(user);
                 case "5" -> aggiungiNodo(user);
                 case "6" -> aggiungiNodo(user);
-                case "0" -> aggiungiNodo(user);
+                case "0" -> exit = true;
             }
         }
     }
 
     private void menuModificaNodo() {
-        ClsNodo nodo = richiediNodo();
+        print("Inserisci id del nodo da modificare: ");
+        //TODO: aggiungere get nodo a user o usare le mock?
+        ClsNodo old = MockNodi.getInstance().getNodoById(in.nextLine());
+        if(old==null){
+            println("Nessun Nodo Trovato");
+            return;
+        }
+        ClsNodo nodo = modificaNodo(old);
         if(nodo==null) return;
         user.modificaNodo(nodo.getId(), nodo);
     }

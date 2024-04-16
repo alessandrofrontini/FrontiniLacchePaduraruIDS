@@ -3,11 +3,13 @@ package com.camerino.ids.fps.geospotter.server.data.utenti;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsRecensione;
+import com.camerino.ids.fps.geospotter.server.persistance.mock.MockItinerari;
 import com.camerino.ids.fps.geospotter.server.persistance.mock.MockNodi;
 
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
     MockNodi mNodi = MockNodi.getInstance();
+    MockItinerari mItinerari = MockItinerari.getInstance();
     //Metodi di ClsTuristaAutenticato
     @Override
     public boolean inserisciRecensione() {
