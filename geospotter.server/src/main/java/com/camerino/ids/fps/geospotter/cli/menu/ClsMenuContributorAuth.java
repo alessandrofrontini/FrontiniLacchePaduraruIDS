@@ -13,8 +13,11 @@ import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.print
 import static com.camerino.ids.fps.geospotter.cli.menu.Input.modificaNodo;
 
 public class ClsMenuContributorAuth implements IMenu{
-    private ClsContributorAutorizzato user = new ClsContributorAutorizzato();
+    private ClsContributorAutorizzato user;
     Scanner in = new Scanner(System.in);
+    public ClsMenuContributorAuth(ClsContributorAutorizzato user) {
+        this.user = user;
+    }
     @Override
     public void menu() {
         boolean exit = false;

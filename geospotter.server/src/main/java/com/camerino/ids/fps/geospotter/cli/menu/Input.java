@@ -2,6 +2,7 @@ package com.camerino.ids.fps.geospotter.cli.menu;
 
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
+import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
 import com.camerino.ids.fps.geospotter.server.data.utils.Posizione;
 
 import java.util.Scanner;
@@ -88,5 +89,19 @@ public class Input {
             ok = true;
         }
         return itinerario;
+    }
+
+    public static Credenziali richiediCredenziali(){
+        boolean ok = false;
+        Scanner in = new Scanner(System.in);
+        Credenziali credenziali = new Credenziali();
+        while (!ok){
+            print("Username: ");
+            credenziali.setUsername(in.nextLine());
+            print("Password: ");
+            credenziali.setPassword(in.nextLine());
+            ok = true;
+        }
+        return credenziali;
     }
 }
