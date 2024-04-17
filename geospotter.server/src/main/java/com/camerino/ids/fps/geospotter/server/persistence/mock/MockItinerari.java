@@ -1,7 +1,6 @@
-package com.camerino.ids.fps.geospotter.server.persistance.mock;
+package com.camerino.ids.fps.geospotter.server.persistence.mock;
 
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
-import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,6 +4,13 @@ public class Posizione {
     double x;
     double y;
 
+    public Posizione(){}
+
+    public Posizione(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public double getX() {
         return x;
     }

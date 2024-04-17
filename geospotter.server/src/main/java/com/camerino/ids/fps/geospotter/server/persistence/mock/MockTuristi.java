@@ -1,4 +1,4 @@
-package com.camerino.ids.fps.geospotter.server.persistance.mock;
+package com.camerino.ids.fps.geospotter.server.persistence.mock;
 
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsTuristaAutenticato;

@@ -4,8 +4,7 @@ import com.camerino.ids.fps.geospotter.cli.menu.ClsMenuContributorAuth;
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
-import com.camerino.ids.fps.geospotter.server.data.utenti.ClsTuristaAutenticato.RUOLO_UTENTE;
-import com.camerino.ids.fps.geospotter.server.persistance.mock.MockTuristi;
+import com.camerino.ids.fps.geospotter.server.persistence.mock.MockTuristi;
 
 import java.util.Scanner;
 
@@ -30,12 +29,16 @@ public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .
                     return;
                 }
                 case "1"-> login();
-                case "2"-> println("Noop");
+                case "2"-> listaComuni();
                 case "3"-> println("Noop");
                 case "4"-> println("Noop");
                 case "5"-> println("Noop");
             }
         }
+    }
+
+    private static void listaComuni() {
+
     }
 
     private static void login() {

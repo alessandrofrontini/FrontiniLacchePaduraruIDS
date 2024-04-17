@@ -3,7 +3,7 @@ package com.camerino.ids.fps.geospotter.cli.menu;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
-import com.camerino.ids.fps.geospotter.server.persistance.mock.MockNodi;
+import com.camerino.ids.fps.geospotter.server.persistence.mock.MockNodi;
 
 import java.util.Scanner;
 
