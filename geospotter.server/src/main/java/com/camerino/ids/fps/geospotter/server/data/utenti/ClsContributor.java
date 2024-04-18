@@ -6,6 +6,8 @@ import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsRecensione;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockItinerari;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockNodi;
 
+import java.util.HashMap;
+
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
     MockNodi mNodi = MockNodi.getInstance();
@@ -40,7 +42,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
         //TODO: modificare
-        return mNodi.aggiungiNodo(nodo);
+        return mNodi.insert(nodo);
     }
 
     @Override
@@ -50,7 +52,9 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     @Override
     public boolean eliminaNodo(String id) {
-        return mNodi.eliminaNodo(id);
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return mNodi.delete(tmp);
     }
 
     @Override

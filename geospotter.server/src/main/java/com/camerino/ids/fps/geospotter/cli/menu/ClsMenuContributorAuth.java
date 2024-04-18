@@ -5,6 +5,7 @@ import com.camerino.ids.fps.geospotter.server.data.utenti.ClsContributorAutorizz
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockNodi;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static com.camerino.ids.fps.geospotter.cli.actions.ClsCommonActions.*;
@@ -50,8 +51,10 @@ public class ClsMenuContributorAuth implements IMenu{
 
     private void menuModificaNodo() {
         print("Inserisci id del nodo da modificare: ");
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", in.nextLine());
         //TODO: aggiungere get nodo a user o usare le mock?
-        ClsNodo old = MockNodi.getInstance().getNodoById(in.nextLine());
+        ClsNodo old = MockNodi.getInstance().get(tmp)[0];
         if(old==null){
             println("Nessun Nodo Trovato");
             return;

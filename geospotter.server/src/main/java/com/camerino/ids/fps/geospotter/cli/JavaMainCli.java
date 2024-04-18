@@ -6,6 +6,8 @@ import com.camerino.ids.fps.geospotter.server.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockTuristi;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static com.camerino.ids.fps.geospotter.cli.loggers.ClsConsoleLogger.println;
@@ -43,7 +45,9 @@ public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .
 
     private static void login() {
         Credenziali credenziali = richiediCredenziali();
-        ClsTuristaAutenticato user = mUtenti.login(credenziali);
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("credenziali", credenziali);
+        ClsTuristaAutenticato user = mUtenti.get(tmp)[0];
         if (user == null) {
             println("Credenziali errate");
             return;

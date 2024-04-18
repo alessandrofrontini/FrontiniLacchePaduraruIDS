@@ -4,16 +4,20 @@ import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import org.springframework.context.annotation.Bean;
 
+import java.util.HashMap;
+
 public class ClsContributorAutorizzato extends ClsContributor {
     //Metodi override di Contributor Autorizzato
     @Bean
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        return mNodi.aggiungiNodo(nodo);
+        return mNodi.insert(nodo);
     }
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
-        return mNodi.modificaNodo(nodo);
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return mNodi.update(tmp, nodo);
     }
 
     @Override
