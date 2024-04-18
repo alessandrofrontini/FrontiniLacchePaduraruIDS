@@ -3,6 +3,7 @@ package com.camerino.ids.fps.geospotter.server.data.utenti;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsItinerario;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsRecensione;
+import com.camerino.ids.fps.geospotter.server.persistence.IPersistenceModel;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockItinerari;
 import com.camerino.ids.fps.geospotter.server.persistence.mock.MockNodi;
 
@@ -16,29 +17,8 @@ import java.util.HashMap;
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
-    MockNodi mNodi = MockNodi.getInstance();
+    IPersistenceModel<ClsNodo> mNodi = MockNodi.getInstance();
     MockItinerari mItinerari = MockItinerari.getInstance();
-    //Metodi di ClsTuristaAutenticato
-    //TODO: ovveride inutile, non ha un modo diverso di scrivere recensioni rispetto a Turista A.
-    @Override
-    public boolean inserisciRecensione() {
-        return false;
-    }
-    //TODO: ovveride inutile, non ha un modo diverso di eliminare recensioni rispetto a Turista A.
-    @Override
-    public boolean eliminaRecensione(String id) {
-        return false;
-    }
-    //TODO: ovveride inutile, non ha un modo diverso di modificare recensioni rispetto a Turista A.
-    @Override
-    public boolean modificaRecensione() {
-        return false;
-    }
-    //TODO: ovveride inutile? non dovrebbe avere un modo diverso per inserire le immagini
-    @Override
-    public boolean inserisciImmagine() {
-        return false;
-    }
 
     //Metodi di IContributable
 
