@@ -2,6 +2,9 @@ package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
 import com.camerino.ids.fps.geospotter.server.data.utils.Posizione;
 
+/**
+ * Contiene i dati di un Contenuto generico nella piattaforma
+ */
 public class ClsContenuto extends ClsInformazione{
     String id;
     Posizione posizione;

@@ -2,6 +2,9 @@ package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
 import java.util.ArrayList;
 
+/**
+ * TODO: commentare
+ */
 public class ClsItinerario {
     //TODO: idCreatore invece di username(?)
     String usernameCreatore;

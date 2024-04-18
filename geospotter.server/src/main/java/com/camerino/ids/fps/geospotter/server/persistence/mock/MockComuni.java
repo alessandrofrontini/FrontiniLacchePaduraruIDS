@@ -7,6 +7,9 @@ import com.camerino.ids.fps.geospotter.server.persistence.IPersistenceModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Classe che emula molto semplicemente
+ */
 public class MockComuni implements IPersistenceModel<ClsComune> {
     private static MockComuni instance = new MockComuni();
     private MockComuni(){

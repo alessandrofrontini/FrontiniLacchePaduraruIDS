@@ -3,7 +3,18 @@ package com.camerino.ids.fps.geospotter.server.data.utenti;
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsRecensione;
 import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
 
+/**
+ * Ruolo associato ad un utente autenticato base.
+ * Ha la possibilità di richiedere l’aggiunta di immagini e può inserire,
+ * modificare ed eliminare le proprie recensioni nella piattaforma.
+ *
+ * E' il ruolo iniziale di un nuovo utente.
+ */
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+    /**
+     * Contiene i diversi ruoli nella piattaforma
+     * e il loro punteggio massimo per appartenere a quel ruolo.
+     */
     public enum RUOLO_UTENTE {
         TURISTA_AUTENTICATO(49),
         CONTRIBUTOR(599),
@@ -21,6 +32,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             this.value = value;
         }
     }
+
     String id;
     Credenziali credenziali;
     int punteggio;
@@ -58,26 +70,27 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.punteggio = punteggio;
     }
 
+    //TODO
     @Override
     public boolean inserisciRecensione() {
         return false;
     }
-
+//TODO
     @Override
     public boolean eliminaRecensione(String id) {
         return false;
     }
-
+//TODO
     @Override
     public boolean modificaRecensione() {
         return false;
     }
-
+//TODO
     @Override
     public boolean inserisciImmagine() {
         return false;
     }
-
+//TODO
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         return null;

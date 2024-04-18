@@ -5,6 +5,9 @@ import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsContestDiContrib
 
 import java.util.Date;
 
+/**
+ * TODO: commentare
+ */
 public interface IContestManager {
     //TODO: da aggiornare con la documentazione
     boolean creaContestDiContribuzione(ClsContributor[] invitati, Date inizio, Date fine);

@@ -1,5 +1,8 @@
 package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
+/**
+ * TODO: commentare
+ */
 public class ClsNodo extends ClsContenuto{
     public enum TipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     private String idComune;

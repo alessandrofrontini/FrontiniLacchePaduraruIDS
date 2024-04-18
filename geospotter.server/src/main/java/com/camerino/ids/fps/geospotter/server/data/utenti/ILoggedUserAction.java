@@ -2,6 +2,9 @@ package com.camerino.ids.fps.geospotter.server.data.utenti;
 
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsRecensione;
 
+/**
+ * TODO: commentare
+ */
 public interface ILoggedUserAction {
     //TODO: da finire di aggiungere i parametri ai metodi
     boolean inserisciRecensione();

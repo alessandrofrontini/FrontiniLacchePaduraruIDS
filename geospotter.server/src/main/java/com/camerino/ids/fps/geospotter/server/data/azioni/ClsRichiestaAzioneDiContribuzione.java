@@ -1,5 +1,8 @@
 package com.camerino.ids.fps.geospotter.server.data.azioni;
 
+/**
+ * TODO: commentare
+ */
 public class ClsRichiestaAzioneDiContribuzione {
     public enum AzioneDiContribuzione{
         INSERISCI_RECENSIONE, INSERISCI_IMMAGINE,
