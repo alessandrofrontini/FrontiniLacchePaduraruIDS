@@ -1,5 +1,6 @@
 package com.camerino.cli.menu;
 
+import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 
@@ -54,7 +55,7 @@ public class ClsMenuContributorAuth implements IMenu{
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", in.nextLine());
         //TODO: aggiungere get nodo a user o usare le mock?
-        ClsNodo old = MockNodi.getInstance().get(tmp)[0];
+        ClsNodo old = MockLocator.getMockNodi().get(tmp)[0];
         if(old==null){
             println("Nessun Nodo Trovato");
             return;

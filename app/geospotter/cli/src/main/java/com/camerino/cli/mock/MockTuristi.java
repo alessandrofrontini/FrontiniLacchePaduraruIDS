@@ -10,13 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
-    private static MockTuristi instance = null;
-    public static MockTuristi getInstance(){
-        if(instance==null)
-            instance = new MockTuristi();
-        return instance;
-    }
-    private MockTuristi(){
+    public MockTuristi(){
         creaTuristi();
     }
 

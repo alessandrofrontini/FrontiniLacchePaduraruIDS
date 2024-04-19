@@ -3,6 +3,7 @@ package com.camerino.cli;
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.cli.menu.ClsMenuContributorAuth;
 import com.camerino.cli.menu.Input;
+import com.camerino.cli.mock.MockLocator;
 import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
@@ -12,7 +13,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
-    private static MockTuristi mUtenti = MockTuristi.getInstance();
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         while (true) {
@@ -45,7 +45,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         Credenziali credenziali = Input.richiediCredenziali();
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("credenziali", credenziali);
-        ClsTuristaAutenticato user = mUtenti.get(tmp)[0];
+        ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp)[0];
         if (user == null) {
             ClsConsoleLogger.println("Credenziali errate");
             return;

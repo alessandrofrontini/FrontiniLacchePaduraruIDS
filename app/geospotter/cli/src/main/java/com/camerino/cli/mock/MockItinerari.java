@@ -8,16 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MockItinerari implements IPersistenceModel<ClsItinerario> {
-    private static MockItinerari instance = null;
-    public static MockItinerari getInstance(){
-        if(instance==null)
-            instance = new MockItinerari();
-        return instance;
-    }
 
     private ArrayList<ClsItinerario> nodi = new ArrayList<ClsItinerario>();
     private long idCounter = 0;
-    private MockNodi mNodi = MockNodi.getInstance();
+    private MockNodi mNodi;
+
+    public MockItinerari(MockNodi mNodi){
+        this.mNodi = mNodi;
+    }
 
     public boolean inserisciItinerario(ClsItinerario itinerario){
         idCounter++;

@@ -11,14 +11,6 @@ import java.util.HashMap;
  * Classe che emula molto semplicemente
  */
 public class MockComuni implements IPersistenceModel<ClsComune> {
-    private static MockComuni instance = new MockComuni();
-    private MockComuni(){
-        generaComuni();
-    }
-
-    public static MockComuni getInstance(){
-        return instance;
-    }
 
     ArrayList<ClsComune> comuni = new ArrayList<>();
     long id = 0;

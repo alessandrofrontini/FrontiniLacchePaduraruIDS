@@ -8,19 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MockNodi implements IPersistenceModel<ClsNodo> {
-    private static MockNodi instance = null;
-    public static MockNodi getInstance(){
-        if(instance==null)
-            instance = new MockNodi();
-        return instance;
-    }
 
     private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
     private long idCounter = 0;
-
-    private MockNodi(){
-        idCounter = nodi.size();
-    }
 
     @Override
     public ClsNodo[] get(HashMap<String, Object> filters) {
