@@ -7,6 +7,7 @@ import com.camerino.ids.core.data.utils.Credenziali;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     private static MockTuristi instance = null;
@@ -41,7 +42,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
 
     private ClsTuristaAutenticato login(Credenziali  credenziali){
-        var tmp = turisti.stream().filter(t->t.getCredenziali().equals(credenziali)).toList();
+        List<ClsTuristaAutenticato> tmp = turisti.stream().filter(t->t.getCredenziali().equals(credenziali)).toList();
         if(tmp.isEmpty())
             return null;
         return  tmp.get(0);
