@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="server:jar" />
+      <artifact name="client:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="" />
+    <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/out/artifacts/client/client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/client2/client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/client_jar/client.jar" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +98,7 @@
       <recent name="com.camerino.ids.fps.client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.server">
+  <component name="RunManager" selected="JAR Application.SERVER">
     <configuration name="cli" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.camerino.cli.Main" />
       <module name="cli" />
@@ -138,7 +144,7 @@
       </method>
     </configuration>
     <configuration name="CLIENT" type="JarApplication">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/client2/client.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/client/client.jar" />
       <option name="WORKING_DIRECTORY" value="C:\Users\danut\Documents\gh-repos\FrontiniLacchePaduraruIDS\app\geospotter" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
@@ -206,7 +212,8 @@
       <workItem from="1713535024150" duration="937000" />
       <workItem from="1713537154798" duration="1105000" />
       <workItem from="1713540967108" duration="2526000" />
-      <workItem from="1713555412284" duration="2711000" />
+      <workItem from="1713555412284" duration="3963000" />
+      <workItem from="1713563451754" duration="116000" />
     </task>
     <servers />
   </component>
