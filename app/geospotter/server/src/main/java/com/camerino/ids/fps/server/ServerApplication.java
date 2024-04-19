@@ -1,4 +1,4 @@
-package com.camerino.ids.fps.geospotter.server;
+package com.camerino.ids.fps.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

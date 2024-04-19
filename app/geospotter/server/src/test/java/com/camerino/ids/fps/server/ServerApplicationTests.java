@@ -1,4 +1,4 @@
-package com.camerino.ids.fps.geospotter.server;
+package com.camerino.ids.fps.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
