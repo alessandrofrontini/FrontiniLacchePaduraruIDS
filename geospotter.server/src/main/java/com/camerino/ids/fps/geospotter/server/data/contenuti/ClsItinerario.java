@@ -1,15 +1,22 @@
 package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
+<<<<<<< Updated upstream
 import java.util.ArrayList;
 
 /**
  * TODO: commentare
  */
 public class ClsItinerario {
+=======
+public class ClsItinerario 
+{
+    String id;
+>>>>>>> Stashed changes
     //TODO: idCreatore invece di username(?)
     String usernameCreatore;
     ArrayList<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
+<<<<<<< Updated upstream
     String id;
     //TODO: aggiungere titolo itinerario sulla documentazione
     String nome;
@@ -51,5 +58,12 @@ public class ClsItinerario {
 
     public void setOrdinato(boolean ordinato) {
         this.ordinato = ordinato;
+=======
+
+    //TODO: sviluppa
+    public String visualizzaItinerario()
+    {
+        return "";
+>>>>>>> Stashed changes
     }
 }
