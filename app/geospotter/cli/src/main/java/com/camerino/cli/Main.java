@@ -46,6 +46,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("credenziali", credenziali);
         ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp)[0];
+
         if (user == null) {
             ClsConsoleLogger.println("Credenziali errate");
             return;

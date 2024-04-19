@@ -9,6 +9,9 @@ import java.util.Scanner;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 
+/**
+ * Questa classe contiene i menu comuni di input dati
+ */
 public class Input {
     public static ClsNodo richiediNodo(){
         boolean ok = false;

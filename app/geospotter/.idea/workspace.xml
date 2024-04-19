@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="client:jar" />
+      <artifact name="server:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,11 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/out/artifacts/client/client.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/client_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuAnimatore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuCuratore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuTuristaAutenticato.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Documentazione/UML/GeoSpotter.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Documentazione/UML/GeoSpotter.vpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/client2/client.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/client_jar/client.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +220,7 @@
       <workItem from="1713537154798" duration="1105000" />
       <workItem from="1713540967108" duration="2526000" />
       <workItem from="1713555412284" duration="3963000" />
-      <workItem from="1713563451754" duration="116000" />
+      <workItem from="1713563451754" duration="2656000" />
     </task>
     <servers />
   </component>

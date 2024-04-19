@@ -13,7 +13,7 @@ public class ClsMenuGestore implements IMenu {
     Scanner in = new Scanner(System.in);
 
     @Override
-    public void menu() {
+    public void menu() {//TODO: implementare
         boolean exit = false;
         user = new ClsGestoreDellaPiattaforma();
         user.setId("1");
