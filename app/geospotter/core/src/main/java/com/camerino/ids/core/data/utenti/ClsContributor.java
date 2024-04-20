@@ -7,10 +7,13 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 import java.util.HashMap;
 
 /**
- * Questo ruolo può effettuare richieste di inserimento, modifica ed eliminazione
+ * Questo ruolo può effettuare Richieste Di Contribuzione
+ * ({@link com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione})
+ * , modifica ed eliminazione
  * di Nodi e Itinerari nella piattaforma.
  * Le richieste dovranno poi essere accettate o rifiutate da un Curatore di competenza.
  * Si diventa contributor a 50+ punti.
+ *
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
