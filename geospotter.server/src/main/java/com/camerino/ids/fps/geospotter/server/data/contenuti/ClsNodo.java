@@ -1,10 +1,21 @@
 package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
+<<<<<<< Updated upstream
+/**
+ * TODO: commentare
+ */
 public class ClsNodo extends ClsContenuto{
+=======
+public class ClsNodo extends ClsContenuto
+{
+    
+>>>>>>> Stashed changes
     public enum TipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
+    
     private String idComune;
     private TipologiaNodo tipologiaNodo;
     private boolean aTempo;
+
     public String getIdComune() {
         return idComune;
     }
@@ -27,5 +38,11 @@ public class ClsNodo extends ClsContenuto{
 
     public void setaTempo(boolean aTempo) {
         this.aTempo = aTempo;
+    }
+
+    //TODO: sviluppa
+    public String visualizzaNodo()
+    {
+        return "";
     }
 }

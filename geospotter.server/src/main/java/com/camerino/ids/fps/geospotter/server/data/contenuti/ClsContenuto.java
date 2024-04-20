@@ -2,8 +2,16 @@ package com.camerino.ids.fps.geospotter.server.data.contenuti;
 
 import com.camerino.ids.fps.geospotter.server.data.utils.Posizione;
 
+<<<<<<< Updated upstream
+/**
+ * Contiene i dati di un Contenuto generico nella piattaforma
+ */
 public class ClsContenuto extends ClsInformazione{
     String id;
+=======
+public class ClsContenuto extends ClsInformazione
+{
+>>>>>>> Stashed changes
     Posizione posizione;
     String nome;
     String descrizione;
@@ -38,5 +46,17 @@ public class ClsContenuto extends ClsInformazione{
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    //TODO: sviluppa
+    public String visualizzaRecensioniAssociate()
+    {
+        return "";
+    }
+
+    //TODO: sviluppa
+    public String visualizzaImmaginiAssociate()
+    {
+        return "";
     }
 }
