@@ -2,11 +2,13 @@ package com.camerino.cli;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.cli.menu.ClsMenuContributorAuth;
+import com.camerino.cli.menu.ClsMenuGestore;
 import com.camerino.cli.menu.Input;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 
@@ -55,7 +57,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         Credenziali credenziali = Input.richiediCredenziali();
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("credenziali", credenziali);
-        ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(null).get(0);
+        ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp).get(0);
 
         if (user == null) {
             ClsConsoleLogger.println("Credenziali errate");
@@ -71,9 +73,11 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth((ClsContributorAutorizzato) turista).menu();
             case ANIMATORE -> ClsConsoleLogger.println("Noop");
             case CURATORE -> ClsConsoleLogger.println("Noop");
-            case GESTORE_DELLA_PIATTAFORMA -> ClsConsoleLogger.println("Noop");
+            case GESTORE_DELLA_PIATTAFORMA -> new ClsMenuGestore((ClsGestoreDellaPiattaforma) turista).menu();
         }
     }
+
+    //region Visualizzazione header e team
     //https://patorjk.com/software/taag/
     private static void print_header() {
         System.out.println("""
@@ -105,4 +109,5 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
                 "                                                                                                                                              \n" +
                 "                                                                                                                                              \n");
     }
+    //endregion
 }

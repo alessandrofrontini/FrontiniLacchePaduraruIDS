@@ -1,7 +1,10 @@
 package com.camerino.cli.menu;
 
+import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 
@@ -12,8 +15,11 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 /**
  * Questa classe contiene i menu comuni di input dati
  */
-public class Input {
-    public static ClsNodo richiediNodo(){
+public class Input
+{
+
+    //region Input Nodi
+    public static ClsNodo inserisciNodo(){
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsNodo nodo = new ClsNodo();
@@ -67,6 +73,41 @@ public class Input {
         }
         return nodo;
     }
+
+    //endregion
+
+    //region Input Comuni
+    public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp)
+    {
+        boolean ok = false;
+        Scanner in = new Scanner(System.in);
+        ClsComune comune = new ClsComune();
+        Posizione pos = new Posizione();
+        while (!ok){
+            print("Inserisci nome: ");
+            comune.setNome(in.nextLine());
+            print("Inserisci coordinata X del nodo: ");
+            pos.setX(in.nextDouble());
+            print("Inserisci coordinata Y del nodo: ");
+            pos.setY(in.nextDouble());
+            comune.setPosizione(pos);
+            print("Inserisci numero abitanti: ");
+            comune.setAbitanti(in.nextInt());
+            print("Inserisci superficie: ");
+            comune.setSuperficie(in.nextDouble());
+            print("Inserisci descrizione: ");
+            comune.setDescrizione(in.nextLine());
+            //TODO: aggiungere inserimento "aTempo" e durata
+            //TODO: aggiungere eventuali controlli sui dati inseriti
+            comune.setCuratoriAssociati(null);
+            comune.setUsernameCreatore(gdp.getCredenziali().getUsername());
+            ok = true;
+        }
+        return comune;
+    }
+    //endregion
+
+
 
     public static ClsItinerario richiediItinerario(){
         boolean ok = false;

@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -21,34 +22,80 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     //region CRUD metodi
+
+
     @Override
-    public ArrayList<ClsComune> get(HashMap<String, Object> filters) {
-//        if(filters.containsKey("id"))
-//            return filterById(filters.get("id"));
+    public ArrayList<ClsComune> get(HashMap<String, Object> filters)
+    {
+        ArrayList<ClsComune> tmp = new ArrayList<ClsComune>();
+
+        if(filters != null)
+        {
+            if(filters.containsKey("id"))
+            {
+                tmp.add(filterById(filters.get("id")));
+                return tmp;
+            }
+        }
+
         return comuni;
     }
 
-    private ArrayList<ClsComune> filterById(Object id) {
-        return null; //comuni.stream().filter(comune -> comune.getId().equals(id));
-    }
-
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsComune object) {
-        //TODO
+    public boolean update(HashMap<String, Object> filters, ClsComune object)
+    {
+        if(filters != null)
+        {
+            if(filters.containsKey("id"))
+                return modificaComune(filters.get("id").toString(), object);
+            return false;
+        }
         return false;
     }
 
     @Override
-    public boolean insert(ClsComune comune) {
-        id++;
-        comune.setId(""+id);
-        return comuni.add(comune);
+    public boolean insert(ClsComune comune)
+    {
+        this.id++;
+
+        if(!this.comuni.contains(comune))
+        {
+            comune.setId(""+this.id);
+            return this.comuni.add(comune);
+        }
+
+        return false;
+
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {//TODO
+    public boolean delete(HashMap<String, Object> filters)
+    {
+        ClsComune c = this.filterById(filters.get("id"));
+
+        if(c != null)
+        {
+            return this.comuni.remove(this.comuni.remove(c));
+        }
         return false;
     }
+
+
+    // ------------------------------ Metodi Privati ------------------------------------------
+    private boolean modificaComune(String id, ClsComune comune){
+        ClsComune tmp = filterById(comune.getId());
+        int index = comuni.indexOf(tmp);
+        if(index<0)
+            return false;
+        comuni.set(index, comune);
+        return true;
+    }
+
+    private ClsComune filterById(Object id)
+    {
+        return comuni.stream().filter(comune -> comune.getId().equals(id)).toList().get(0);
+    }
+
 //endregion
 
 

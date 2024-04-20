@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -21,8 +22,14 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     //region CRUD metodi
     @Override
     public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters) {
-//        if (filters.containsKey("credenziali"))
-//            return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
+       ArrayList<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
+        if (filters.containsKey("credenziali"))
+        {
+            //return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
+            tmp.add(login((Credenziali) filters.get("credenziali")));
+            return tmp;
+        }
+
         return this.turisti;
     }
 
@@ -58,11 +65,20 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     private void creaTuristi() {
         ClsContributorAutorizzato ca = new ClsContributorAutorizzato();
         Credenziali credenzialiCA = new Credenziali();
-        credenzialiCA.setUsername("con aut");
+        credenzialiCA.setUsername("CA");
         credenzialiCA.setPassword("");
         ca.setCredenziali(credenzialiCA);
         ca.setPunteggio(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
         ca.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         inserisciUtente(ca);
+
+        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
+        Credenziali credenzialiGdP = new Credenziali();
+        credenzialiGdP.setUsername("GDP");
+        credenzialiGdP.setPassword("");
+        gdp.setCredenziali(credenzialiGdP);
+        gdp.setPunteggio(ClsGestoreDellaPiattaforma.RUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+        gdp.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        inserisciUtente(gdp);
     }
 }

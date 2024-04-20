@@ -12,25 +12,14 @@
     <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributorAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributorAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/actions/ClsCommonActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/actions/ClsCommonActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockTuristi.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockTuristi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsImmagine.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsImmagine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsInformazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsInformazione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsItinerario.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsItinerario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsMappa.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsMappa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/client/client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/client/client.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/server_jar/server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/server_jar/server.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsGestoreDellaPiattaforma.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsGestoreDellaPiattaforma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsTuristaAutenticato.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsTuristaAutenticato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ITownHallAdministrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ITownHallAdministrator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,43 +63,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.cli.executor&quot;: &quot;Run&quot;,
-    &quot;Application.cli_main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.client.executor&quot;: &quot;Run&quot;,
-    &quot;Application.client_main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.com.camerino.ids.fps.client.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.CLI.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.CLIENT.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.SERVER.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in server.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.server.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;p-creazione-classi&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/savel/Desktop/FrontiniLacchePaduraruIDS/app/geospotter/out/artifacts/client/client.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.291954&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.cli.executor": "Debug",
+    "Application.cli_main.executor": "Run",
+    "Application.client.executor": "Run",
+    "Application.client_main.executor": "Run",
+    "Application.com.camerino.ids.fps.client.HelloApplication.executor": "Run",
+    "JAR Application.CLI.executor": "Run",
+    "JAR Application.CLIENT.executor": "Run",
+    "JAR Application.SERVER.executor": "Run",
+    "JUnit.All in server.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.server.executor": "Run",
+    "git-widget-placeholder": "p-creazione-classi",
+    "jdk.selected.JAVA_MODULE": "19",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/savel/Desktop/FrontiniLacchePaduraruIDS/app/geospotter/out/artifacts/client/client.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.291954",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.camerino.ids.fps.client" />
@@ -232,7 +221,7 @@
       <workItem from="1713555412284" duration="3963000" />
       <workItem from="1713563451754" duration="2656000" />
       <workItem from="1713615168130" duration="4525000" />
-      <workItem from="1713619725925" duration="384000" />
+      <workItem from="1713619725925" duration="5129000" />
     </task>
     <servers />
   </component>
@@ -257,8 +246,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java</url>
-          <line>56</line>
+          <line>103</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

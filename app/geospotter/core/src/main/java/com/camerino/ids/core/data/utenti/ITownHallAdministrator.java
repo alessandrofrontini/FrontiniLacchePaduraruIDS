@@ -6,7 +6,7 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
  * TODO: commentare
  */
 public interface ITownHallAdministrator {
-    boolean aggiungiComune(ClsComune comune);
+    boolean inserisciComune(ClsComune comune);
     boolean modificaComune(ClsComune comune, String id);
     boolean eliminaComune(String id);
     ClsComune[] visualizzaComuni();

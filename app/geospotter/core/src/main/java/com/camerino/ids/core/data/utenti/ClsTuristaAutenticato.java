@@ -20,7 +20,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         CONTRIBUTOR(599),
         CONTRIBUTOR_AUTORIZZATO(999),
         ANIMATORE(1000),
-        CURATORE(Integer.MAX_VALUE), GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
+        CURATORE(Integer.MAX_VALUE),
+        GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
 
         private Integer value;
 

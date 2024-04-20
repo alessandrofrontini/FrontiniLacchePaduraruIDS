@@ -1,5 +1,8 @@
 package com.camerino.cli.menu;
 
+import com.camerino.cli.actions.ClsCommonActions;
+import com.camerino.cli.mock.MockComuni;
+import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utils.Credenziali;
 
@@ -12,16 +15,18 @@ public class ClsMenuGestore implements IMenu {
     ClsGestoreDellaPiattaforma user;
     Scanner in = new Scanner(System.in);
 
+    public ClsMenuGestore (ClsGestoreDellaPiattaforma gdp)
+    {
+        this.user = gdp;
+        gdp.setMockComuni(MockLocator.getMockComuni());
+    }
+
     @Override
     public void menu() {//TODO: implementare
         boolean exit = false;
-        user = new ClsGestoreDellaPiattaforma();
-        user.setId("1");
-        user.setPunteggio(666);
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("contributor autorizzato");
-        user.getCredenziali().setPassword("password");
-        while (!exit) {
+
+        while (!exit)
+        {
             println("1) Aggiungi Comune");
             println("2) Modifica Comune");
             println("3) Elimina Comune");
@@ -31,7 +36,7 @@ public class ClsMenuGestore implements IMenu {
             println("0) Esci");
             print(">> ");
             switch (in.nextLine()) {
-                case "1" -> print("noop");
+                case "1" -> ClsCommonActions.aggiungiComune(this.user);
                 case "2" -> print("noop");
                 case "3" -> print("noop");
                 case "4" -> print("noop");
