@@ -11,13 +11,22 @@ public class ClsContenuto extends ClsInformazione {
     String nome;
     String descrizione;
 
-    public String getId() {
-        return id;
-    }
+    //region Getter e setter
 
-    public void setId(String id) {
-        this.id = id;
+    //region Getter e setter (ClsInformazione)
+    public String getId()
+    {
+        return super.getId() ;
     }
+    public void setId(String id) {
+        super.setId(id);
+    }
+    public String getUsernameCreatore() {return super.getUsernameCreatore();}
+    public void setUsernameCreatore(String usernameCreatore)
+    {
+        super.setUsernameCreatore(usernameCreatore);
+    }
+    //endregion
 
     public Posizione getPosizione() {
         return posizione;
@@ -42,4 +51,5 @@ public class ClsContenuto extends ClsInformazione {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+    //endregion
 }

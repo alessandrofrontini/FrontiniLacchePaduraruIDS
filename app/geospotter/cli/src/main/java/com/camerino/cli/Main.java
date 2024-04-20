@@ -3,6 +3,7 @@ package com.camerino.cli;
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.cli.menu.ClsMenuContributorAuth;
 import com.camerino.cli.menu.Input;
+import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
@@ -13,9 +14,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         Scanner in = new Scanner(System.in);
         while (true) {
+            print_team();
+
             print_header();
             //Queste sono le azioni che un turista (non aitenticato) più fare
             ClsConsoleLogger.println("1)Login");
@@ -37,7 +41,13 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         }
     }
 
-    private static void listaComuni() {
+    private static void listaComuni()
+    {
+        MockComuni mockComuni = MockLocator.getMockComuni();
+        for(int i = 0; i < mockComuni.get(null).size(); i++)
+        {
+            System.out.println(mockComuni.get(null).get(i).visualizzaComune());
+        }
 
     }
 
@@ -45,7 +55,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         Credenziali credenziali = Input.richiediCredenziali();
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("credenziali", credenziali);
-        ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp)[0];
+        ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(null).get(0);
 
         if (user == null) {
             ClsConsoleLogger.println("Credenziali errate");
@@ -80,5 +90,19 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
                                                     \\____/ \\____//_/ /_//____/ \\____//_/ \\___/\s
                                                                                               \s
                 """);
+
+
+    }
+    private static void print_team()
+    {
+        ClsConsoleLogger.print("\n" +
+                "   _____ _____        ______      __  __       _______   _______ ______          __  __   _____  _____  ______  _____ ______ _   _ _______    \n" +
+                "  / ____|  __ \\ /\\   |  ____/\\   |  \\/  |   /\\|__   __| |__   __|  ____|   /\\   |  \\/  | |  __ \\|  __ \\|  ____|/ ____|  ____| \\ | |__   __|   \n" +
+                " | (___ | |__) /  \\  | |__ /  \\  | \\  / |  /  \\  | |       | |  | |__     /  \\  | \\  / | | |__) | |__) | |__  | (___ | |__  |  \\| |  | |      \n" +
+                "  \\___ \\|  ___/ /\\ \\ |  __/ /\\ \\ | |\\/| | / /\\ \\ | |       | |  |  __|   / /\\ \\ | |\\/| | |  ___/|  _  /|  __|  \\___ \\|  __| | . ` |  | |      \n" +
+                "  ____) | |  / ____ \\| | / ____ \\| |  | |/ ____ \\| |       | |  | |____ / ____ \\| |  | | | |    | | \\ \\| |____ ____) | |____| |\\  |  | |_ _ _ \n" +
+                " |_____/|_| /_/    \\_\\_|/_/    \\_\\_|  |_/_/    \\_\\_|       |_|  |______/_/    \\_\\_|  |_| |_|    |_|  \\_\\______|_____/|______|_| \\_|  |_(_|_|_)\n" +
+                "                                                                                                                                              \n" +
+                "                                                                                                                                              \n");
     }
 }

@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
+import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
@@ -17,22 +18,12 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     private ArrayList<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
     private long idCounter = 0;
 
-    private void creaTuristi() {
-        ClsContributorAutorizzato ca = new ClsContributorAutorizzato();
-        Credenziali credenzialiCA = new Credenziali();
-        credenzialiCA.setUsername("con aut");
-        credenzialiCA.setPassword("");
-        ca.setCredenziali(credenzialiCA);
-        ca.setPunteggio(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-        ca.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-        inserisciUtente(ca);
-    }
-
+    //region CRUD metodi
     @Override
-    public ClsTuristaAutenticato[] get(HashMap<String, Object> filters) {
-        if (filters.containsKey("credenziali"))
-            return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
-        return new ClsTuristaAutenticato[0];
+    public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters) {
+//        if (filters.containsKey("credenziali"))
+//            return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
+        return this.turisti;
     }
 
     private ClsTuristaAutenticato login(Credenziali  credenziali){
@@ -61,5 +52,17 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     @Override
     public boolean delete(HashMap<String, Object> filters) {
         return false;//TODO
+    }
+    //endregion
+
+    private void creaTuristi() {
+        ClsContributorAutorizzato ca = new ClsContributorAutorizzato();
+        Credenziali credenzialiCA = new Credenziali();
+        credenzialiCA.setUsername("con aut");
+        credenzialiCA.setPassword("");
+        ca.setCredenziali(credenzialiCA);
+        ca.setPunteggio(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+        ca.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        inserisciUtente(ca);
     }
 }

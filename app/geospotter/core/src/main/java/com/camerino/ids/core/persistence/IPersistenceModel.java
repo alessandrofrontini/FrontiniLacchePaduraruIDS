@@ -1,4 +1,5 @@
 package com.camerino.ids.core.persistence;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**TODO: aggiornare la documentazione
@@ -10,7 +11,7 @@ public interface IPersistenceModel<E> {
      * @param filters Eventuali filtri da applicare. Questo è un parametro libero. E' a discrezione del programmatore come usarlo.
      * @return Array contente i dati letti.
      */
-    E[] get(HashMap<String,Object> filters);
+    ArrayList<E> get(HashMap<String,Object> filters);
 
     /**
      * Questo metodo rappresenta l'aggiornamento di un dato.

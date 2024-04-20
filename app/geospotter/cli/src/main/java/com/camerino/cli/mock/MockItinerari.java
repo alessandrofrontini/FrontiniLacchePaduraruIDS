@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
-    private ArrayList<ClsItinerario> nodi = new ArrayList<ClsItinerario>();
+    private ArrayList<ClsItinerario> itinerari = new ArrayList<ClsItinerario>();
     private long idCounter = 0;
     private MockNodi mNodi;
 
@@ -17,27 +17,28 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         this.mNodi = mNodi;
     }
 
+    //region CRUD metodi
     public boolean inserisciItinerario(ClsItinerario itinerario){
         idCounter++;
         itinerario.setId(""+idCounter);
-        for(int i=0; i<itinerario.getTappe().size(); i++){
-            HashMap<String, Object> tmp = new HashMap<>();
-            tmp.put("id",itinerario.getTappe().get(i).getId());
-            itinerario.getTappe().set(i, mNodi.get(tmp)[0]);
-        }
-        return nodi.add(itinerario);
+//        for(int i=0; i<itinerario.getTappe().size(); i++){
+//            HashMap<String, Object> tmp = new HashMap<>();
+//            tmp.put("id",itinerario.getTappe().get(i).getId());
+//            itinerario.getTappe().set(i, mNodi.get(tmp)[0]);
+//        }
+        return itinerari.add(itinerario);
     }
 
     @Override
-    public ClsItinerario[] get(HashMap<String, Object> filters) {
-        if(filters.containsKey("id"))
-            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
+    public ArrayList<ClsItinerario> get(HashMap<String, Object> filters) {
+//        if(filters.containsKey("id"))
+//            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
 
-        return new ClsItinerario[0];
+        return this.itinerari;
     }
 
     private ClsItinerario getItinerarioById(String id){
-        List<ClsItinerario> tmp =  nodi.stream().filter(n->n.getId().equals(id)).toList();
+        List<ClsItinerario> tmp =  itinerari.stream().filter(n->n.getId().equals(id)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
@@ -52,10 +53,10 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
     private boolean modificaItinerario(String id, ClsItinerario itinerario){
         ClsItinerario tmp = getItinerarioById(id);
-        int index = nodi.indexOf(tmp);
+        int index = itinerari.indexOf(tmp);
         if(index<0)
             return false;
-        nodi.set(index, itinerario);
+        itinerari.set(index, itinerario);
         return true;
     }
 
@@ -72,6 +73,10 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     private boolean eliminaItinerario(String id){
-        return nodi.remove(getItinerarioById(id));
+        return itinerari.remove(getItinerarioById(id));
     }
+    //endregion
+
+
+
 }

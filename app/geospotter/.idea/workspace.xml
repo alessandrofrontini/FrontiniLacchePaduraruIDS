@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="server:jar" />
+      <artifact name="client:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,18 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuAnimatore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuCuratore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuTuristaAutenticato.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Documentazione/UML/GeoSpotter.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Documentazione/UML/GeoSpotter.vpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributorAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuContributorAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockSegnalazioni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockTuristi.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockTuristi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsImmagine.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsImmagine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsInformazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsInformazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsItinerario.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsItinerario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsMappa.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsMappa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/persistence/IPersistenceModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/client/client.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/client/client.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/server_jar/server.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/server_jar/server.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +79,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.cli.executor&quot;: &quot;Run&quot;,
     &quot;Application.cli_main.executor&quot;: &quot;Run&quot;,
     &quot;Application.client.executor&quot;: &quot;Run&quot;,
     &quot;Application.client_main.executor&quot;: &quot;Run&quot;,
@@ -82,12 +92,13 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.server.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;p-creazione-classi&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;19&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/danut/Desktop/JAVAFX/vcruntime140_1.dll&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/savel/Desktop/FrontiniLacchePaduraruIDS/app/geospotter/out/artifacts/client/client.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -105,7 +116,7 @@
       <recent name="com.camerino.ids.fps.client" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.SERVER">
+  <component name="RunManager" selected="Application.cli">
     <configuration name="cli" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.camerino.cli.Main" />
       <module name="cli" />
@@ -152,7 +163,7 @@
     </configuration>
     <configuration name="CLIENT" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/client/client.jar" />
-      <option name="WORKING_DIRECTORY" value="C:\Users\danut\Documents\gh-repos\FrontiniLacchePaduraruIDS\app\geospotter" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\savel\Desktop\FrontiniLacchePaduraruIDS\app\geospotter" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
@@ -198,8 +209,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555" />
       </set>
     </attachedChunks>
   </component>
@@ -221,6 +231,8 @@
       <workItem from="1713540967108" duration="2526000" />
       <workItem from="1713555412284" duration="3963000" />
       <workItem from="1713563451754" duration="2656000" />
+      <workItem from="1713615168130" duration="4525000" />
+      <workItem from="1713619725925" duration="384000" />
     </task>
     <servers />
   </component>
@@ -229,5 +241,26 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsInformazione.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
