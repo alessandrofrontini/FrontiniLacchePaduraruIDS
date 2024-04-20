@@ -38,9 +38,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return pNodi.insert(nodo);
     }
 
-    /**TODO: giusto?
-     * Se il nodo è di sua proprietò la modifica avviene subito,
-     * sennò viene creata una richiesta di modifica.
+    /**
+     * Crea una richiesta di modifica di un nodo in suo possesso.
      * @param id Id del nodo dal modificare
      * @param nodo Il nodo contenente i dati modificati
      * @return True se la creazione della richiesta o la modifica ha avuto successo,
@@ -51,9 +50,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return false;
     }
 
-    /**TODO: giusto?
-     * Se il nodo è di sua proprietà l'eliminazione avviene istantaneamente.
-     * sennò viene creata una richiesta di eliminazione.
+    /**
+     * Crea una richiesta di eliminazione di un nodo in suo possesso.
      * @param id Id del nodo da eliminare
      * @return True se la creazione della richiesta o l'eliminazione ha avuto successo,
      *         False altrimenti.
@@ -67,6 +65,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di inserimento itinerario.
+     * (L'itinerario può contenere nodi che non sono di proprietà del Curatore)
      * @param itinerario L'itinerario da aggiungere
      * @return True se la richiesta viene creata con successo,
      *         False altrimenti.
@@ -76,8 +75,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return false;
     }
 
-    /**TODO: giusto?
-     * Se l'itinerario è di sua proprietà, la modifica avviene subito,
+    /**
+     * Crea una richiesta di modifica di un itinerario di sua proprietà.
      * @param itinerario Itinerario modificato
      * @param id Id dell'itinerario da modificare
      * @return True se la modifica o la creazione della rihiesta ha successo,
@@ -88,9 +87,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return false;
     }
 
-    /**TODO: giusto?
-     * Se l'itinerario è di sua proprietà, l'eliminazione avviene subito,
-     * sennò viene creata una richiesta di eliminazione itinerario.
+    /**
+     * Crea una richiesta di eliminazione di un proprio itinerario.
      * @param id Id dell'itinerario da eliminare.
      * @return True se l'eliminazione o la creazione della richiesta ha successo,
      *         False altirmenti.
