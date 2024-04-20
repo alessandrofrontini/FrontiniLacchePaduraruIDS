@@ -47,12 +47,10 @@ public class JavaMainCli {//Gli scanner i double li vuole con la , e non punto .
 //        }
         //endregion
 
-        MockNodi mockNodi = MockNodi.getInstance();
+        //Comuni Nodi e Itinerari
         ClsMappa mappa = new ClsMappa();
         System.out.println(mappa.visualizzaMappa());
 
-        MockComuni mockComuni = MockComuni.getInstance();
-        System.out.println(mockComuni.visualizzaComuni());
 
         MockRecensioni mockRecensioni = MockRecensioni.getInstance();
         System.out.println(mockRecensioni.visualizzaRecensioni());

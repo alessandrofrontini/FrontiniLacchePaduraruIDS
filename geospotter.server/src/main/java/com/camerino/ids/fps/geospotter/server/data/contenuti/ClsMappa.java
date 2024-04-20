@@ -12,28 +12,30 @@ public class ClsMappa
     ClsComune[] comuni;
     ClsItinerario[] itinerari;
 
-    //TODO: aggiungi
+    //TODO: aggiungi al vpp
+    //region Mocks
     MockNodi mockNodi = MockNodi.getInstance();
-
     MockComuni mockComuni = MockComuni.getInstance();
     MockItinerari mockItinerari = MockItinerari.getInstance();
     MockRecensioni mockRecensioni = MockRecensioni.getInstance();
     MockImmagini mockImmagini = MockImmagini.getInstance();
-
-
-
-    public void setComuni(ClsComune[] comuni) {
-        this.comuni = comuni;
-    }
-
-    public ClsItinerario[] visualizzaItinerari() {
-        return itinerari;
-    }
-
-    public void setItinerari(ClsItinerario[] itinerari) {
-        this.itinerari = itinerari;
-    }
     //endregion
+
+    //region Getter e setter
+        public void setComuni(ClsComune[] comuni) {
+            this.comuni = comuni;
+        }
+
+        public ClsItinerario[] visualizzaItinerari() {
+            return itinerari;
+        }
+
+        public void setItinerari(ClsItinerario[] itinerari) {
+            this.itinerari = itinerari;
+        }
+
+        //endregion
+
 
     public String visualizzaMappa()
     {
@@ -46,12 +48,20 @@ public class ClsMappa
 
         dummy += "\n\n\n-<-<-<-<-<-<-< I COMUNI -<-<-<-<-<-<-<\n\n\n ";
 
-
         for(int i = 0; i < this.mockComuni.get(null).size(); i++)
-        {
+        {3
             dummy += this.mockComuni.get(null).get(i).visualizzaComune();
         }
+
+        dummy += "\n\n\n-<-<-<-<-<-<-< GLI ITINERARI -<-<-<-<-<-<-<\n\n\n ";
+
+
+        for(int i = 0; i < this.mockItinerari.get(null).size(); i++)
+        {
+            dummy += this.mockItinerari.get(null).get(i).visualizzaItinerario();
+        }
     return dummy;
+
 
     }
 

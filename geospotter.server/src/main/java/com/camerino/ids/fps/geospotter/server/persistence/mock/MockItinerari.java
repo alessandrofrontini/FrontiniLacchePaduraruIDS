@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MockItinerari implements IPersistenceModel<ClsItinerario> {
+public class MockItinerari {
     private static MockItinerari instance = null;
     public static MockItinerari getInstance(){
         if(instance==null)
@@ -15,7 +15,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return instance;
     }
 
-    private ArrayList<ClsItinerario> nodi = new ArrayList<ClsItinerario>();
+    private ArrayList<ClsItinerario>  nodi = new ArrayList<ClsItinerario>();
     private long idCounter = 0;
     private MockNodi mNodi = MockNodi.getInstance();
 
@@ -31,12 +31,13 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return nodi.add(itinerario);
     }
 
-    @Override
-    public ClsItinerario[] get(HashMap<String, Object> filters) {
-        if(filters.containsKey("id"))
-            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
 
-        return new ClsItinerario[0];
+    public ArrayList<ClsItinerario> get(HashMap<String, Object> filters) {
+//        if(filters.containsKey("id"))
+//            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
+//
+//        return new ClsItinerario[0];
+        return this.nodi;
     }
 
     private ClsItinerario getItinerarioById(String id){
@@ -46,7 +47,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return tmp.get(0);
     }
 
-    @Override
+
     public boolean update(HashMap<String, Object> filters, ClsItinerario object) {
         if(filters.containsKey("id"))
             return modificaItinerario(filters.get("id").toString(), object);
@@ -62,12 +63,12 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return true;
     }
 
-    @Override
+
     public boolean insert(ClsItinerario object) {
         return false;
     }
 
-    @Override
+
     public boolean delete(HashMap<String, Object> filters) {
         if (filters.containsKey("id"))
             return eliminaItinerario(filters.get("id").toString());

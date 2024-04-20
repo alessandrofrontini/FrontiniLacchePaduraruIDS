@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MockComuni
 {
     private static MockComuni instance = null;
-    private HashMap<String, ClsComune> comuni = new HashMap<String, ClsComune>();
+    private ArrayList<ClsComune> comuni = new ArrayList<ClsComune>();
 
     //TODO:add to vpp
     private long idCounter = 0;
@@ -33,7 +33,7 @@ public class MockComuni
     //endregion
 
     //region metodi
-    public HashMap<String, ClsComune> get(HashMap<String, Object> filters)
+    public ArrayList<ClsComune> get(HashMap<String, Object> filters)
     {
         return this.comuni;
     }
@@ -47,9 +47,9 @@ public class MockComuni
         return false;
     }
 
-    public boolean insert(ClsComune c, String IDUtente)
+    public boolean insert(ClsComune c)
     {
-        this.comuni.add(c)
+        this.comuni.add(c);
         return true;
     }
 

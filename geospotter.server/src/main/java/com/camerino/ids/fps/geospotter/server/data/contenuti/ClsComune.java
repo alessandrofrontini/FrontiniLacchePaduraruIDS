@@ -54,6 +54,7 @@ public class ClsComune extends ClsContenuto
 
     public  String visualizzaComune()
     {
+
         String dummy = "-<-<-<-<-<-<-< DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
 
         dummy += "\n\nID: " + this.getId() + "\n";

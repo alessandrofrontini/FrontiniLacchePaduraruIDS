@@ -72,6 +72,11 @@ public class ClsItinerario {
         return dummy;
     }
 
+    /**
+     * Metodo di utility per la visualizzazione delle tappe di un Itinerario
+     * @param tappe elenco tappe
+     * @return
+     */
     private String visualizzaTappe(ArrayList<ClsNodo> tappe)
     {
         String dummy = "";
