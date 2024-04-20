@@ -1,48 +1,69 @@
 package com.camerino.ids.fps.geospotter.server.persistence.mock;
 
 import com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo;
+import com.camerino.ids.fps.geospotter.server.data.utils.Posizione;
 import com.camerino.ids.fps.geospotter.server.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MockNodi implements IPersistenceModel<ClsNodo> {
+import static com.camerino.ids.fps.geospotter.server.data.contenuti.ClsNodo.TipologiaNodo.*;
+
+public class MockNodi
+{
     private static MockNodi instance = null;
+    private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    //TODO:add to vpp
+    private long idCounter = 0;
+
+    //Costruttore
+    private MockNodi()
+    {
+        this.generaNodi();
+        idCounter = nodi.size();
+    }
+
+    //region getInstance MockNodi
     public static MockNodi getInstance(){
         if(instance==null)
             instance = new MockNodi();
         return instance;
     }
+    //endregion
 
-    private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
-    private long idCounter = 0;
+    //region metodi
 
-    private MockNodi(){
-        idCounter = nodi.size();
+    /**
+     * restituisce tutti i nodi memorizzati
+     * @return la lista dei nodi
+     */
+    public ArrayList<ClsNodo> getNodi()
+    {
+        return this.nodi;
     }
 
-    @Override
-    public ClsNodo[] get(HashMap<String, Object> filters) {
-        if(filters.containsKey("id"))
-            return new ClsNodo[]{getNodoById(filters.get("id").toString())};
-        return new ClsNodo[0];
-    }
-
-    private ClsNodo getNodoById(String id){
+    /**
+     * restituisce un nodo scelto per id
+     * @param id del nodo da ricercare
+     * @return il nodo se presente, null altrimenti
+     */
+    private ClsNodo getNodoById(String id)
+    {
         List<ClsNodo> tmp =  nodi.stream().filter(n->n.getId().equals(id)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
     }
 
-    @Override
+    //TODO: cambia signature, serve username
     public boolean update(HashMap<String, Object> filters, ClsNodo object) {
         if(filters.containsKey("id"))
             return modificaNodo(filters.get("id").toString(), object);
         return false;
     }
 
+    //TODO: cambia signature, serve username
     private boolean modificaNodo(String id, ClsNodo nodo){
         ClsNodo tmp = getNodoById(nodo.getId());
         int index = nodi.indexOf(tmp);
@@ -52,18 +73,19 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         return true;
     }
 
-    @Override
+    //TODO: cambia signature, serve username
     public boolean insert(ClsNodo object) {
         return aggiungiNodo(object);
     }
 
+    //TODO: cambia signature, serve username
     private boolean aggiungiNodo(ClsNodo nodo){
         idCounter++;
         nodo.setId(""+idCounter);
         return nodi.add(nodo);
     }
 
-    @Override
+    //TODO: cambia signature, serve username
     public boolean delete(HashMap<String, Object> filters) {
         if(filters.containsKey("id"))
             return eliminaNodo(filters.get("id").toString());
@@ -71,7 +93,49 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         return false;
     }
 
+    //TODO: cambia signature, serve username
     private boolean eliminaNodo(String id){
         return nodi.remove(getNodoById(id));
     }
+    //endregion
+
+    //ID numeri pari
+    private void generaNodi()
+    {
+
+        ClsNodo nodo1 = new ClsNodo();
+        nodo1.setId("2");
+        nodo1.setIdComune("1");
+        nodo1.setaTempo(false);
+        nodo1.setTipologiaNodo(COMMERCIALE);
+        nodo1.setUsernameCreatore("");
+        nodo1.setDescrizione("Descrizione - Nodo 1");
+        nodo1.setNome("Negozio");
+        nodo1.setPosizione(new Posizione(104,104));
+        nodi.add(nodo1);
+
+        ClsNodo nodo2 = new ClsNodo();
+        nodo2.setId("4");
+        nodo2.setIdComune("3");
+        nodo2.setaTempo(false);
+        nodo2.setTipologiaNodo(CULTURALE);
+        nodo2.setUsernameCreatore("");
+        nodo2.setDescrizione("Descrizione - Nodo 2");
+        nodo2.setNome("Statua");
+        nodo2.setPosizione(new Posizione(114,114));
+        nodi.add(nodo2);
+
+        ClsNodo nodo3 = new ClsNodo();
+        nodo3.setId("6");
+        nodo3.setIdComune("5");
+        nodo3.setaTempo(false);
+        nodo3.setTipologiaNodo(CULINARIO);
+        nodo3.setUsernameCreatore("");
+        nodo3.setDescrizione("Descrizione - Nodo 3");
+        nodo3.setNome("Ristorante");
+        nodo3.setPosizione(new Posizione(124,124));
+        nodi.add(nodo3);
+    }
+
+
 }

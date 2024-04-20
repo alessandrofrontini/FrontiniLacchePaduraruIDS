@@ -10,7 +10,9 @@ import com.camerino.ids.fps.geospotter.server.data.utils.Credenziali;
  *
  * E' il ruolo iniziale di un nuovo utente.
  */
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction
+{
+    //region RUOLO_UTENTE (ENUMERAZIONE)
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -32,12 +34,14 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             this.value = value;
         }
     }
+    //endregion
 
-    String id;
-    Credenziali credenziali;
-    int punteggio;
-    RUOLO_UTENTE ruoloUtente;
+    private String id;
+    private Credenziali credenziali;
+    private int punteggio;
+    private RUOLO_UTENTE ruoloUtente;
 
+    //region Getter e setter
     public String getId() {
         return id;
     }
@@ -69,10 +73,14 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
+    //endregion
 
+    //region metodi ILoggedUserAction
     //TODO
     @Override
-    public boolean inserisciRecensione() {
+    public boolean inserisciRecensione(ClsRecensione recensione, String IDContenuto)
+    {
+
         return false;
     }
 //TODO
@@ -95,5 +103,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         return null;
     }
+    //endregion
 
 }

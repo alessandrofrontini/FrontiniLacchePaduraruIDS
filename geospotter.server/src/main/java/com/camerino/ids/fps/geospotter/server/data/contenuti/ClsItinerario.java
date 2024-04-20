@@ -13,6 +13,8 @@ public class ClsItinerario {
     String id;
     //TODO: aggiungere titolo itinerario sulla documentazione
     String nome;
+
+    //region Getter e setter
     public String getNome() {
         return nome;
     }
@@ -51,5 +53,34 @@ public class ClsItinerario {
 
     public void setOrdinato(boolean ordinato) {
         this.ordinato = ordinato;
+    }
+    //endregion
+
+    public String visualizzaItinerario()
+    {
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "isOrdered: " + this.ordinato + "\n";
+        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Nome: " + this.getNome() + "\n";
+        dummy += "TAPPE: " + this.tappe + "\n" + this.visualizzaTappe(this.tappe);
+
+
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+
+        return dummy;
+    }
+
+    private String visualizzaTappe(ArrayList<ClsNodo> tappe)
+    {
+        String dummy = "";
+
+            for(int i = 0; i < tappe.size(); i++)
+            {
+                 dummy += "\t" + i + ")" + tappe.get(i).getNome() + " - (" + tappe.get(i).getIdComune() + ")\n\n";
+            }
+
+        return  dummy;
     }
 }

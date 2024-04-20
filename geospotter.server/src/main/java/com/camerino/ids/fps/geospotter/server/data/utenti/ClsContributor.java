@@ -18,27 +18,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     MockNodi mNodi = MockNodi.getInstance();
     MockItinerari mItinerari = MockItinerari.getInstance();
-    //Metodi di ClsTuristaAutenticato
-    //TODO: ovveride inutile, non ha un modo diverso di scrivere recensioni rispetto a Turista A.
-    @Override
-    public boolean inserisciRecensione() {
-        return false;
-    }
-    //TODO: ovveride inutile, non ha un modo diverso di eliminare recensioni rispetto a Turista A.
-    @Override
-    public boolean eliminaRecensione(String id) {
-        return false;
-    }
-    //TODO: ovveride inutile, non ha un modo diverso di modificare recensioni rispetto a Turista A.
-    @Override
-    public boolean modificaRecensione() {
-        return false;
-    }
-    //TODO: ovveride inutile? non dovrebbe avere un modo diverso per inserire le immagini
-    @Override
-    public boolean inserisciImmagine() {
-        return false;
-    }
 
     //Metodi di IContributable
 

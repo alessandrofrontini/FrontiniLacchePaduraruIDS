@@ -13,6 +13,6 @@ public class ClsCuratore extends ClsAnimatore{
     // (modificato id da String a long)
     String idComuneAssociato;
     public ClsCuratore(){
-        this.punteggio = Integer.MAX_VALUE;
+        super.setPunteggio(Integer.MAX_VALUE);
     }
 }

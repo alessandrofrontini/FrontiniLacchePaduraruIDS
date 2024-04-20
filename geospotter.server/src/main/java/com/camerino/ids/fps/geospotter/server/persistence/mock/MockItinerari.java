@@ -19,14 +19,15 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     private long idCounter = 0;
     private MockNodi mNodi = MockNodi.getInstance();
 
-    public boolean inserisciItinerario(ClsItinerario itinerario){
-        idCounter++;
-        itinerario.setId(""+idCounter);
-        for(int i=0; i<itinerario.getTappe().size(); i++){
-            HashMap<String, Object> tmp = new HashMap<>();
-            tmp.put("id",itinerario.getTappe().get(i).getId());
-            itinerario.getTappe().set(i, mNodi.get(tmp)[0]);
-        }
+    public boolean inserisciItinerario(ClsItinerario itinerario)
+    {
+//        idCounter++;
+//        itinerario.setId(""+idCounter);
+//        for(int i=0; i<itinerario.getTappe().size(); i++){
+//            HashMap<String, Object> tmp = new HashMap<>();
+//            tmp.put("id",itinerario.getTappe().get(i).getId());
+//            itinerario.getTappe().set(i, mNodi.get(tmp)[0]);
+//        }
         return nodi.add(itinerario);
     }
 
