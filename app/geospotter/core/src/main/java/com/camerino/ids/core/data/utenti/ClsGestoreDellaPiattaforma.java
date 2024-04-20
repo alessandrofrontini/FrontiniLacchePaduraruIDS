@@ -12,7 +12,14 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
 {
     IPersistenceModel<ClsComune> mockComuni;
 
+    //region Getters and Setters
+    public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
+    {
+        this.mockComuni = mockComuni;
+    }
+    //endregion
 
+    //region Override ITownHallAdministrator
     /**
      * Aggiunge direttamente un comune.
      * @param comune Comune da aggiungere.
@@ -53,9 +60,5 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
     public ClsComune[] visualizzaComuni(){
         return null;
     }
-
-    public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
-    {
-        this.mockComuni = mockComuni;
-    }
+//endregion
 }

@@ -24,7 +24,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.pItinerari = pItinerari;
     }
 
-    //Metodi di IContributable
+    //Region Override IContributable
 
     /**
      * Crea una richiesta di inserimento nodo.
@@ -104,4 +104,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public boolean visualizzaNodiPosessore() {
         return false;
     }
+
+    //endregion
 }
