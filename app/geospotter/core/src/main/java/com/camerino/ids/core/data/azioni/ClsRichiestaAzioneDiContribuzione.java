@@ -1,20 +1,15 @@
 package com.camerino.ids.core.data.azioni;
 
+import com.camerino.ids.core.data.contenuti.ClsNodo;
+
 /**
  * TODO: commentare
  */
 public class ClsRichiestaAzioneDiContribuzione {
-    public enum eAzioneDiContribuzione {
-        INSERISCI_RECENSIONE, INSERISCI_IMMAGINE,
-        INSERISCI_NODO, MODIFICA_NODO, ELIMINA_NODO,
-        INSERISCI_ITINERARIO, MODIFICA_ITINERARIO,
-        ELIMINA_ITINERARIO, INSERISCI_NODO_CONTEST,
-        INSERISCI_FOTO_CONTEST
-    }
     String id,
-    IdoNodo,
     usernameCreatoreRichiesta;
-    eAzioneDiContribuzione eAzioneDiContribuzione;
+    EAzioniDiContribuzione eAzioneDiContribuzione;
+    ClsNodo datiNodo;
 
     //region Getters and Setters
     public String getId() {
@@ -25,12 +20,12 @@ public class ClsRichiestaAzioneDiContribuzione {
         this.id = id;
     }
 
-    public String getIdoNodo() {
-        return IdoNodo;
+    public ClsNodo getDatiNodo() {
+        return datiNodo;
     }
 
-    public void setIdoNodo(String idoNodo) {
-        IdoNodo = idoNodo;
+    public void setDatiNodo(ClsNodo datiNodo) {
+        this.datiNodo = datiNodo;
     }
 
     public String getUsernameCreatoreRichiesta() {
@@ -41,11 +36,11 @@ public class ClsRichiestaAzioneDiContribuzione {
         this.usernameCreatoreRichiesta = usernameCreatoreRichiesta;
     }
 
-    public ClsRichiestaAzioneDiContribuzione.eAzioneDiContribuzione geteAzioneDiContribuzione() {
+    public EAzioniDiContribuzione geteAzioneDiContribuzione() {
         return eAzioneDiContribuzione;
     }
 
-    public void seteAzioneDiContribuzione(ClsRichiestaAzioneDiContribuzione.eAzioneDiContribuzione eAzioneDiContribuzione) {
+    public void seteAzioneDiContribuzione(EAzioniDiContribuzione eAzioneDiContribuzione) {
         this.eAzioneDiContribuzione = eAzioneDiContribuzione;
     }
     //endregion
