@@ -1,10 +1,13 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
+
+import static com.camerino.ids.core.data.azioni.EAzioniDiContribuzione.MODIFICA_NODO;
 
 /**
  * Questo ruolo può effettuare Richieste Di Contribuzione
@@ -19,14 +22,29 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
 
-    public ClsContributor() {}
+    public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
         super();
         pNodi = pNodo;
         this.pItinerari = pItinerari;
     }
+//region Getters and Setters
 
+    public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
+        this.pNodi = pNodi;
+    }
+
+    public void setpItinerari(IPersistenceModel<ClsItinerario> pItinerari) {
+        this.pItinerari = pItinerari;
+    }
+
+    public void setpRDC(IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC) {
+        this.pRDC = pRDC;
+    }
+
+    //endregion
     //Region Override IContributable
 
     /**
@@ -37,7 +55,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        //TODO: creare richiesta invece di aggiungere nodo
+        //TODO
+        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
         return pNodi.insert(nodo);
     }
 
@@ -50,6 +69,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
+        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
+        req.setDatiNodo(nodo);
+        req.seteAzioneDiContribuzione(MODIFICA_NODO);
+        req.setUsernameCreatoreRichiesta(this.credenziali.getUsername());
         return false;
     }
 
