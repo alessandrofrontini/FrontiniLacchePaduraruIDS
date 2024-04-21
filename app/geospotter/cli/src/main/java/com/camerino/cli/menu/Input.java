@@ -3,7 +3,6 @@ package com.camerino.cli.menu;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
@@ -29,9 +28,9 @@ public class Input
             nodo.setNome(in.nextLine());
             print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
             switch (in.nextLine()){
-                case "1" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.COMMERCIALE);
-                case "2" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.CULTURALE);
-                case "3" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.CULINARIO);
+                case "1" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
+                case "2" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+                case "3" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
             }
             print("Inserisci coordinata X del nodo: ");
             pos.setX(in.nextDouble());
@@ -56,9 +55,9 @@ public class Input
             nodo.setNome(in.nextLine());
             print(String.format("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n(old: %s)\n>> ", nodo.getTipologiaNodo()));
             switch (in.nextLine()){//TODO: nuovo "Input" per selezione tipo nodo
-                case "1" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.COMMERCIALE);
-                case "2" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.CULTURALE);
-                case "3" -> nodo.setTipologiaNodo(ClsNodo.TipologiaNodo.CULINARIO);
+                case "1" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
+                case "2" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+                case "3" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
             }
             print(String.format("Inserisci coordinata X del nodo (old: %s): ", pos.getX()));
             pos.setX(in.nextDouble());

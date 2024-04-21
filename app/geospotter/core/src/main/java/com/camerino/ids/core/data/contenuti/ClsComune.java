@@ -7,27 +7,12 @@ import com.camerino.ids.core.data.utenti.ClsCuratore;
  */
 public class ClsComune extends ClsContenuto
 {
-    //TODO: usernameCreatore? ID creatore nel caso
     String usernameCreatore = "ADMIN";
     int abitanti;
     double superficie;
     ClsCuratore[] curatoriAssociati;
 
     //region Getter e setter
-    //region Getter e setter (ClsContenuto)
-    public String getId()
-    {
-        return super.getId() ;
-    }
-    public void setId(String id) {
-        super.setId(id);
-    }
-    public String getUsernameCreatore() {return super.getUsernameCreatore();}
-    public void setUsernameCreatore(String usernameCreatore)
-    {
-        super.setUsernameCreatore(usernameCreatore);
-    }
-    //endregion
     public int getAbitanti() {
         return abitanti;
     }

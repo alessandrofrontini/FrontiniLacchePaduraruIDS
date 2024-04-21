@@ -11,7 +11,7 @@ import java.util.HashMap;
  * Questo ruolo si ottiene avendo 600+ punti.
  */
 public class ClsContributorAutorizzato extends ClsContributor {
-    //Metodi override di Contributor Autorizzato
+    //region Override Contributor Autorizzato
 
     /**
      * Inserisce direttamente il nodo creato.
@@ -80,5 +80,5 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean visualizzaNodiPosessore() {
         return false;
     }
-
+//endregion
 }

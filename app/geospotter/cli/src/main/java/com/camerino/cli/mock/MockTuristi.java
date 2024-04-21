@@ -2,7 +2,6 @@ package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
-import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
@@ -68,8 +67,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         credenzialiCA.setUsername("CA");
         credenzialiCA.setPassword("");
         ca.setCredenziali(credenzialiCA);
-        ca.setPunteggio(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-        ca.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         inserisciUtente(ca);
 
         ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
@@ -77,8 +76,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         credenzialiGdP.setUsername("GDP");
         credenzialiGdP.setPassword("");
         gdp.setCredenziali(credenzialiGdP);
-        gdp.setPunteggio(ClsGestoreDellaPiattaforma.RUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
-        gdp.setRuoloUtente(ClsTuristaAutenticato.RUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         inserisciUtente(gdp);
     }
 }

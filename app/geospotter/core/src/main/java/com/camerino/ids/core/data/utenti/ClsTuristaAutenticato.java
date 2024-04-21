@@ -7,7 +7,6 @@ import com.camerino.ids.core.data.utils.Credenziali;
  * Ruolo associato ad un utente autenticato base.
  * Ha la possibilità di richiedere l’aggiunta di immagini e può inserire,
  * modificare ed eliminare le proprie recensioni nella piattaforma.
- *
  * E' il ruolo iniziale di un nuovo utente.
  */
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
@@ -15,7 +14,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
      */
-    public enum RUOLO_UTENTE {
+    public enum eRUOLO_UTENTE {
         TURISTA_AUTENTICATO(49),
         CONTRIBUTOR(599),
         CONTRIBUTOR_AUTORIZZATO(999),
@@ -29,7 +28,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             return value;
         }
 
-        RUOLO_UTENTE(Integer value){
+        eRUOLO_UTENTE(Integer value){
             this.value = value;
         }
     }
@@ -37,8 +36,9 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     String id;
     Credenziali credenziali;
     int punteggio;
-    RUOLO_UTENTE ruoloUtente;
+    eRUOLO_UTENTE ruoloUtente;
 
+    //region Getters and Setters
     public String getId() {
         return id;
     }
@@ -47,11 +47,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.id = id;
     }
 
-    public RUOLO_UTENTE getRuoloUtente() {
+    public eRUOLO_UTENTE getRuoloUtente() {
         return ruoloUtente;
     }
 
-    public void setRuoloUtente(RUOLO_UTENTE ruoloUtente) {
+    public void setRuoloUtente(eRUOLO_UTENTE ruoloUtente) {
         this.ruoloUtente = ruoloUtente;
     }
 
@@ -70,7 +70,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
-
+//endregion
+    //region Override ILoggedUserAction
     //TODO
     @Override
     public boolean inserisciRecensione() {
@@ -96,5 +97,5 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         return null;
     }
-
+//endregion
 }

@@ -2,7 +2,7 @@ package com.camerino.ids.core.persistence;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**TODO: aggiornare la documentazione
+/**TODO: aggiornare la documentazione con questa classe
  * Questa classe definisce quali metodi CRUD definire
  */
 public interface IPersistenceModel<E> {

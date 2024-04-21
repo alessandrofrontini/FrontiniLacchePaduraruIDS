@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.TipologiaNodo.*;
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
 public class MockNodi implements IPersistenceModel<ClsNodo> {
 

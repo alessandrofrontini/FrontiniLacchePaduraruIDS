@@ -6,28 +6,14 @@ package com.camerino.ids.core.data.contenuti;
 public class ClsNodo extends ClsContenuto{
 
     //region Tipologia nodo (enumerazione)
-    public enum TipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
+    public enum eTologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
 
     private String idComune;
-    private TipologiaNodo tipologiaNodo;
+    private eTologiaNodo eTologiaNodo;
     private boolean aTempo;
 
     //region Getter e setter
-    //region Getter e setter (ClsContenuto)
-    public String getId()
-    {
-        return super.getId() ;
-    }
-    public void setId(String id) {
-        super.setId(id);
-    }
-    public String getUsernameCreatore() {return super.getUsernameCreatore();}
-    public void setUsernameCreatore(String usernameCreatore)
-    {
-        super.setUsernameCreatore(usernameCreatore);
-    }
-    //endregion
     public String getIdComune() {
         return idComune;
     }
@@ -36,12 +22,12 @@ public class ClsNodo extends ClsContenuto{
         this.idComune = idComune;
     }
 
-    public TipologiaNodo getTipologiaNodo() {
-        return tipologiaNodo;
+    public eTologiaNodo getTipologiaNodo() {
+        return eTologiaNodo;
     }
 
-    public void setTipologiaNodo(TipologiaNodo tipologiaNodo) {
-        this.tipologiaNodo = tipologiaNodo;
+    public void setTipologiaNodo(eTologiaNodo eTologiaNodo) {
+        this.eTologiaNodo = eTologiaNodo;
     }
 
     public boolean isaTempo() {
