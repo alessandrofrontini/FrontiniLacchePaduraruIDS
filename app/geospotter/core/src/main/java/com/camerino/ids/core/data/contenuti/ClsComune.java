@@ -13,21 +13,6 @@ public class ClsComune extends ClsContenuto
     ClsCuratore[] curatoriAssociati;
 
     //region Getter e setter
-    //region Getter e setter (ClsInformazione)
-    public String getId()
-    {
-        return super.getId() ;
-    }
-    public void setId(String id) {
-        super.setId(id);
-    }
-    public String getUsernameCreatore() {return super.getUsernameCreatore();}
-    public void setUsernameCreatore(String usernameCreatore)
-    {
-        super.setUsernameCreatore(usernameCreatore);
-    }
-    //endregion
-
     public int getAbitanti() {
         return abitanti;
     }
@@ -56,7 +41,7 @@ public class ClsComune extends ClsContenuto
     public  String visualizzaComune()
     {
 
-        String dummy = "\n\n";
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "\nUsernameCreatore: " + this.getUsernameCreatore() + "\n";
@@ -64,7 +49,7 @@ public class ClsComune extends ClsContenuto
         dummy += "\nDescrizione: " + this.getDescrizione() + "\n";
         dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY() + "\n";
         dummy += "Superficie: \n" + this.getSuperficie() + "\n\n";
-        dummy += "\n\n";
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
 
         return dummy;
     }

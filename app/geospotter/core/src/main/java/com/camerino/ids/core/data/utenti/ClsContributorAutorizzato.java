@@ -20,8 +20,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *         False altrimenti.
      */
     @Override
-    public boolean inserisciNodo(ClsNodo nodo)
-    {
+    public boolean inserisciNodo(ClsNodo nodo) {
         return pNodi.insert(nodo);
     }
 

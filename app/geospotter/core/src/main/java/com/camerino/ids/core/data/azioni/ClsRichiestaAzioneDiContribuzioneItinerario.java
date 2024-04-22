@@ -7,4 +7,37 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     ClsItinerario datiItinerario;
     String usernameCreatore;
 
+    public EAzioniDiContribuzione geteAzioniDiContribuzione() {
+        return eAzioniDiContribuzione;
+    }
+
+    public void seteAzioniDiContribuzione(EAzioniDiContribuzione eAzioniDiContribuzione) {
+        this.eAzioniDiContribuzione = eAzioniDiContribuzione;
+    }
+
+    EAzioniDiContribuzione eAzioniDiContribuzione;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ClsItinerario getDatiItinerario() {
+        return datiItinerario;
+    }
+
+    public void setDatiItinerario(ClsItinerario datiItinerario) {
+        this.datiItinerario = datiItinerario;
+    }
+
+    public String getUsernameCreatore() {
+        return usernameCreatore;
+    }
+
+    public void setUsernameCreatore(String usernameCreatore) {
+        this.usernameCreatore = usernameCreatore;
+    }
 }

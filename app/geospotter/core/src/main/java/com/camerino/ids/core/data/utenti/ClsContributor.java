@@ -1,13 +1,13 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
-
-import static com.camerino.ids.core.data.azioni.EAzioniDiContribuzione.MODIFICA_NODO;
 
 /**
  * Questo ruolo può effettuare Richieste Di Contribuzione
@@ -23,6 +23,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
@@ -44,7 +45,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.pRDC = pRDC;
     }
 
-    //endregion
+    public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
+        this.pRDCI = pRDCI;
+    }
+//endregion
     //Region Override IContributable
 
     /**
@@ -55,9 +59,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        //TODO
         ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        return pNodi.insert(nodo);
+        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
+        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_NODO);
+        req.setDatiNodo(nodo);
+        return pRDC.insert(req);
     }
 
     /**
@@ -70,10 +76,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
         ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
+        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
+        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.MODIFICA_NODO);
         req.setDatiNodo(nodo);
-        req.seteAzioneDiContribuzione(MODIFICA_NODO);
-        req.setUsernameCreatoreRichiesta(this.credenziali.getUsername());
-        return false;
+        return pRDC.insert(req);
     }
 
     /**
@@ -84,9 +90,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean eliminaNodo(String id) {
+        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
+        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
+        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.ELIMINA_NODO);
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
-        return pNodi.delete(tmp);
+        req.setDatiNodo(pNodi.get(tmp).get(0));
+        return pRDC.insert(req);
     }
 
     /**
@@ -98,7 +108,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
-        return false;
+        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        req.setUsernameCreatore(this.getCredenziali().getUsername());
+        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
+        req.setDatiItinerario(itinerario);
+        return pRDCI.insert(req);
     }
 
     /**
@@ -110,7 +124,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, String id) {
-        return false;
+        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        req.setUsernameCreatore(this.getCredenziali().getUsername());
+        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
+        req.setDatiItinerario(itinerario);
+        return pRDCI.insert(req);
     }
 
     /**
@@ -121,7 +139,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean eliminaItinerario(String id) {
-        return false;
+        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        req.setUsernameCreatore(this.getCredenziali().getUsername());
+        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        req.setDatiItinerario(pItinerari.get(tmp).get(0));
+        return pRDCI.insert(req);
     }
     //TODO: i nodi di chi?
     @Override
