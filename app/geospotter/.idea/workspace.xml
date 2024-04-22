@@ -11,6 +11,24 @@
   <component name="ChangeListManager">
     <list default="true" id="0701056a-332e-4355-901f-b519993addfd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cli/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/menu/ClsMenuGestore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockImmagini.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockItinerari.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockLocator.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockLocator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsNodo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsRecensione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsContributorAutorizzato.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsContributorAutorizzato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsGestoreDellaPiattaforma.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsGestoreDellaPiattaforma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsTuristaAutenticato.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ClsTuristaAutenticato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ILoggedUserAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ILoggedUserAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ITownHallAdministrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/utenti/ITownHallAdministrator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,6 +232,7 @@
       <workItem from="1713615168130" duration="4525000" />
       <workItem from="1713619725925" duration="5129000" />
       <workItem from="1713625875825" duration="417000" />
+      <workItem from="1713778869055" duration="9696000" />
     </task>
     <servers />
   </component>
@@ -232,24 +251,34 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockNodi.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockComuni.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java</url>
-          <line>36</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java</url>
-          <line>59</line>
+          <line>223</line>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsComune.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/com/camerino/ids/core/data/contenuti/ClsContenuto.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/Main.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cli/src/main/java/com/camerino/cli/mock/MockRecensioni.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

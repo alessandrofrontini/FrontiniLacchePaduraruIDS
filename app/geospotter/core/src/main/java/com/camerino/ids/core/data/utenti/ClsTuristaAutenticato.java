@@ -1,7 +1,12 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.IPersistenceModel;
+
+import java.util.HashMap;
 
 /**
  * Ruolo associato ad un utente autenticato base.
@@ -37,6 +42,19 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
+
+    IPersistenceModel<ClsRecensione> pRecensioni;
+    IPersistenceModel<ClsImmagine> pImmagini;
+
+    public void setpRecensioni (IPersistenceModel<ClsRecensione> pRecensioni)
+        {
+            this.pRecensioni = pRecensioni;
+        }
+
+    public void setpimmagini (IPersistenceModel<ClsImmagine> pImmagini)
+    {
+        this.pImmagini = pImmagini;
+    }
 
     //region Getters and Setters
     public String getId() {
@@ -74,18 +92,25 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     //region Override ILoggedUserAction
     //TODO
     @Override
-    public boolean inserisciRecensione() {
-        return false;
+    public boolean inserisciRecensione(ClsRecensione recensione)
+    {
+        return pRecensioni.insert(recensione);
     }
 //TODO
     @Override
-    public boolean eliminaRecensione(String id) {
-        return false;
+    public boolean eliminaRecensione(String id)
+    {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pRecensioni.delete(tmp);
     }
 //TODO
     @Override
-    public boolean modificaRecensione() {
-        return false;
+    public boolean modificaRecensione(String id, ClsRecensione recensione)
+    {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pRecensioni.update(tmp, recensione);
     }
 //TODO
     @Override

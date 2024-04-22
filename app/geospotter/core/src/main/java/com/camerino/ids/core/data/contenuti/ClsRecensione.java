@@ -42,11 +42,25 @@ public class ClsRecensione extends ClsInformazione{
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
     }
+    //region Getter e setter (ClsInformazione)
+    public String getId()
+    {
+        return super.getId() ;
+    }
+    public void setId(String id) {
+        super.setId(id);
+    }
+    public String getUsernameCreatore() {return super.getUsernameCreatore();}
+    public void setUsernameCreatore(String usernameCreatore)
+    {
+        super.setUsernameCreatore(usernameCreatore);
+    }
+    //endregion
     //endregion
 
     public String visualizzaRecensione()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO RECENSIONE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "\n\n\n\n";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "Valutazione: " + this.getValutazione() + "\n";
@@ -54,7 +68,7 @@ public class ClsRecensione extends ClsInformazione{
         dummy += "Contenuto: " + this.getContenuto()+ "\n";
         dummy += "Contenuto Associato: " + this.getIdContenutoAssociato()+ "\n";
 
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO RECENSIONE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "\n\n\n\n";
 
         return dummy;
     }

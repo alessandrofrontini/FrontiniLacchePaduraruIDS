@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -10,53 +11,41 @@ import java.util.List;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
-public class MockNodi implements IPersistenceModel<ClsNodo> {
-
+//TODO: CHECKS
+public class MockNodi implements IPersistenceModel<ClsNodo>
+{
     private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
     private long idCounter = 0;
+
+    public MockNodi () {
+        //generaNodi();
+    }
 
     //region CRUD metodi
         @Override
         public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
-    //        if(filters.containsKey("id"))
-    //            return new ArrayList<ClsNodo>().{getNodoById(filters.get("id").toString())};
+            ArrayList<ClsNodo> tmp = new ArrayList<ClsNodo>();
+
+            if(filters != null)
+            {
+                if(filters.containsKey("id"))
+                {
+                    tmp.add(getNodoById(filters.get("id").toString()));
+                    return tmp;
+                }
+            }
             return this.nodi;
         }
-
-        private ClsNodo getNodoById(String id){
-            List<ClsNodo> tmp =  nodi.stream().filter(n->n.getId().equals(id)).toList();
-            if(tmp.isEmpty())
-                return null;
-            return tmp.get(0);
-        }
-
         @Override
         public boolean update(HashMap<String, Object> filters, ClsNodo object) {
             if(filters.containsKey("id"))
                 return modificaNodo(filters.get("id").toString(), object);
             return false;
         }
-
-        private boolean modificaNodo(String id, ClsNodo nodo){
-            ClsNodo tmp = getNodoById(nodo.getId());
-            int index = nodi.indexOf(tmp);
-            if(index<0)
-                return false;
-            nodi.set(index, nodo);
-            return true;
-        }
-
         @Override
         public boolean insert(ClsNodo object) {
             return aggiungiNodo(object);
         }
-
-        private boolean aggiungiNodo(ClsNodo nodo){
-            idCounter++;
-            nodo.setId(""+idCounter);
-            return nodi.add(nodo);
-        }
-
         @Override
         public boolean delete(HashMap<String, Object> filters) {
             if(filters.containsKey("id"))
@@ -65,14 +54,35 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
             return false;
         }
 
-        private boolean eliminaNodo(String id){
-            return nodi.remove(getNodoById(id));
-        }
         //endregion
 
+    //region ------------------------------ Metodi Privati (CRUD) ------------------------------------------
+    private ClsNodo getNodoById(String id){
+        List<ClsNodo> tmp =  nodi.stream().filter(n->n.getId().equals(id)).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp.get(0);
+    }
+    private boolean modificaNodo(String id, ClsNodo nodo){
+        ClsNodo tmp = getNodoById(id);
+        int index = nodi.indexOf(tmp);
+        if(index<0)
+            return false;
+        nodi.set(index, nodo);
+        return true;
+    }
+    private boolean aggiungiNodo(ClsNodo nodo){
+        idCounter++;
+        //nodo.setId(""+idCounter);
+        return nodi.add(nodo);
+    }
+    private boolean eliminaNodo(String id){
+        return nodi.remove(getNodoById(id));
+    }
+    //endregion
 
-    private void generaNodi()
-    {
+    //region ------------------------------ Metodi Privati (UTILS) ------------------------------------------
+    private void generaNodi() {
         //ID numeri pari
 
         ClsNodo nodo1 = new ClsNodo();
@@ -108,4 +118,6 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         nodo3.setPosizione(new Posizione(124,124));
         nodi.add(nodo3);
     }
+    //endregion
+
 }

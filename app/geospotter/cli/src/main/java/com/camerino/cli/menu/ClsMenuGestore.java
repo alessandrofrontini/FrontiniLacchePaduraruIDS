@@ -42,7 +42,7 @@ public class ClsMenuGestore implements IMenu {
                 case "4" -> print("noop");
                 case "5" -> print("noop");
                 case "6" -> print("noop");
-                case "0" -> print("noop");
+                case "0" -> exit = true;
             }
         }
     }
