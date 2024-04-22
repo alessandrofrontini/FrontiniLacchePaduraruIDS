@@ -45,7 +45,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.pRDC = pRDC;
     }
 
-    //endregion
+    public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
+        this.pRDCI = pRDCI;
+    }
+//endregion
     //Region Override IContributable
 
     /**
