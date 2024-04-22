@@ -41,7 +41,42 @@ public class ClsMenuCuratore implements IMenu{
             println("8) Pubblica contenuto sui social");
             println("0) Esci");
             print(">> ");
+            switch(in.nextLine()){
+                case "1" -> menuVisualizzaRichieste();
+                case "2" -> menuUprankUtente();
+                case "3" -> menuDownRankUtente();
+                case "4" -> menuResetRankUtente();
+                case "5" -> menuRegistraNuovoUtente();
+                case "6" -> menuModificaUtente();
+                case "7" -> menuEliminaUtente();
+                case "8" -> menuPubblicaSocial();
+                case "0" -> exit = true;
+            }
         }
-        //TODO: continuare (front)
+    }
+
+    private void menuVisualizzaRichieste(){
+
+    }
+    private void menuUprankUtente(){
+
+    }
+    private void menuDownRankUtente(){
+
+    }
+    private void menuResetRankUtente(){
+
+    }
+    private void menuRegistraNuovoUtente(){
+    
+    }
+    private void menuModificaUtente(){
+
+    }
+    private void menuEliminaUtente(){
+
+    }
+    private void menuPubblicaSocial(){
+
     }
 }
