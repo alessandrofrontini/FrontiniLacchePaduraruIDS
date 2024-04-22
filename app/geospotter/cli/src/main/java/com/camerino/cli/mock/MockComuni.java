@@ -8,17 +8,22 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//TODO: CHECKS
+/**
+ * Classe che emula molto semplicemente
+ */
 public class MockComuni implements IPersistenceModel<ClsComune>
 {
     ArrayList<ClsComune> comuni = new ArrayList<ClsComune>();
-    long idCounter = 0;
+    long id = 0;
 
-    public MockComuni() {
-        //this.generaComuni();
+    public MockComuni()
+    {
+        this.generaComuni();
     }
 
     //region CRUD metodi
+
+
     @Override
     public ArrayList<ClsComune> get(HashMap<String, Object> filters)
     {
@@ -35,32 +40,34 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
         return comuni;
     }
+
     @Override
     public boolean update(HashMap<String, Object> filters, ClsComune object)
     {
         if(filters != null)
         {
             if(filters.containsKey("id"))
-            {
-                return this.modificaComune(filters.get("id").toString(), object);
-            }
+                return modificaComune(filters.get("id").toString(), object);
+            return false;
         }
         return false;
     }
+
     @Override
     public boolean insert(ClsComune comune)
     {
-        this.idCounter++;
+        this.id++;
 
         if(!this.comuni.contains(comune))
         {
-//            comune.setId(""+this.id);
+            comune.setId(""+this.id);
             return this.comuni.add(comune);
         }
 
         return false;
 
     }
+
     @Override
     public boolean delete(HashMap<String, Object> filters)
     {
@@ -72,31 +79,29 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         }
         return false;
     }
-    //endregion
 
-    //region  ------------------------------ Metodi Privati (CRUD) ------------------------------------------
+
+    // ------------------------------ Metodi Privati ------------------------------------------
     private boolean modificaComune(String id, ClsComune comune){
-        ClsComune tmp = filterById(id);
+        ClsComune tmp = filterById(comune.getId());
         int index = comuni.indexOf(tmp);
         if(index<0)
-        {
             return false;
-        }
-        else
-        {
-            comuni.set(index, comune);
-        }
-
+        comuni.set(index, comune);
         return true;
     }
+
     private ClsComune filterById(Object id)
     {
         return comuni.stream().filter(comune -> comune.getId().equals(id)).toList().get(0);
     }
-    //endregion
 
-    //region  ------------------------------ Metodi Privati (UTILS)------------------------------------------
-    private void generaComuni() {
+//endregion
+
+
+
+    private void generaComuni()
+    {
         //ID numeri dispari
 
 
@@ -130,7 +135,4 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         comune3.setPosizione(new Posizione(102,456));
         this.comuni.add(comune3);
     }
-    //endregion
-
-
 }

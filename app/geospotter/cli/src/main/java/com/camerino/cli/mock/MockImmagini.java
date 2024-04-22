@@ -1,91 +1,41 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
-import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 //TODO:implementare
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
     private ArrayList<ClsImmagine> immagini = new ArrayList<>();
+    //TODO:add to vpp
     private long idCounter = 0;
 
     //region CRUD metodi
     @Override
     public ArrayList<ClsImmagine> get(HashMap<String, Object> filters) {
-        ArrayList<ClsImmagine> tmp = new ArrayList<ClsImmagine>();
-
-        if(filters != null)
-        {
-            if(filters.containsKey("id"))
-            {
-                tmp.add(getImmagineById(filters.get("id").toString()));
-                return tmp;
-            }
-        }
-
         return this.immagini;
     }
+
     @Override
     public boolean update(HashMap<String, Object> filters, ClsImmagine object) {
-        if(object.getUsernameCreatore() == getImmagineById(filters.get("id").toString()).getUsernameCreatore())
-        {
-            if(filters.containsKey("id"))
-            {
-                return modificaImmagine(filters.get("id").toString(), object);
-            }
-        }
-
         return false;
     }
+
     @Override
     public boolean insert(ClsImmagine object) {
-        if(!this.immagini.contains(object))
-        {
-            return aggiungiImmagine(object);
-        }
         return false;
     }
+
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        //TODO: come faccio il controllo sullo username?
-        if(filters.containsKey("id"))
-            return eliminaImmagine(filters.get("id").toString());
         return false;
     }
     //endregion
 
-    //region  ------------------------------ Metodi Privati (CRUD) ------------------------------------------
-    private ClsImmagine getImmagineById(String id) {
-        List<ClsImmagine> tmp =  immagini.stream().filter(n->n.getId().equals(id)).toList();
-        if(tmp.isEmpty())
-            return null;
-        return tmp.get(0);
-    }
-    private boolean modificaImmagine(String id, ClsImmagine immagine){
-        ClsImmagine tmp = getImmagineById(id);
-        int index = immagini.indexOf(tmp);
-        if(index<0)
-            return false;
-        immagini.set(index, immagine);
-        return true;
-    }
-    private boolean aggiungiImmagine(ClsImmagine immagine){
-        idCounter++;
-        //nodo.setId(""+idCounter);
-        return immagini.add(immagine);
-    }
-    private boolean eliminaImmagine(String id){
-        return immagini.remove(getImmagineById(id));
-    }
-    //endregion
-
-    //region  ------------------------------ Metodi Privati (UTILS) ------------------------------------------
-    private void generaImmagini() {
+    private void generaImmagini()
+    {
         ClsImmagine immagine1 = new ClsImmagine();
         immagine1.setId("1");
         immagine1.setURL("https://picsum.photos/200");
@@ -110,6 +60,4 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
         immagine4.setIdCOntenutoAssociato(" ");
         immagine4.setUsernameCreatore("");
     }
-    //endregion
-
 }
