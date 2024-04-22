@@ -1,12 +1,15 @@
 package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.cli.mock.MockNodi;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -17,7 +20,9 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuTuristaAutenticato implements IMenu {
     private ClsTuristaAutenticato user;
     Scanner in = new Scanner(System.in);
-
+    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
+    IPersistenceModel<ClsRecensione> pRecensioni;
+    IPersistenceModel<ClsImmagine> pImmagini;
     public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
         this.user = turistaAutenticato;
     }
@@ -25,7 +30,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsTuristaAutenticato();
+        user = new ClsTuristaAutenticato(pSegnalazioni, pRecensioni, pImmagini);
         user.setId("1");
         user.setPunteggio(100); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());

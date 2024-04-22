@@ -19,7 +19,6 @@ import static com.camerino.ids.core.data.azioni.EAzioniDiContribuzione.MODIFICA_
  *
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
-
     IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
