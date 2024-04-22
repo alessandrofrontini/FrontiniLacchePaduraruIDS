@@ -14,6 +14,21 @@ public class ClsNodo extends ClsContenuto{
     private boolean aTempo;
 
     //region Getter e setter
+
+    //region Getter e setter (ClsInformazione)
+    public String getId()
+    {
+        return super.getId() ;
+    }
+    public void setId(String id) {
+        super.setId(id);
+    }
+    public String getUsernameCreatore() {return super.getUsernameCreatore();}
+    public void setUsernameCreatore(String usernameCreatore)
+    {
+        super.setUsernameCreatore(usernameCreatore);
+    }
+    //endregion
     public String getIdComune() {
         return idComune;
     }

@@ -3,6 +3,9 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Questo ruolo ha potere assoluto.
  * Viene assegnato soltanto ai creatori della piattaforma.
@@ -40,8 +43,12 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      *         False altrimenti.
      */
     @Override
-    public boolean modificaComune(ClsComune comune, String id){
-        return  false;
+    public boolean modificaComune(ClsComune comune, String id)
+    {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+
+        return this.mockComuni.update(tmp,comune);
     }
 
     /**
@@ -52,13 +59,18 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      *         False altrimenti.
      */
     @Override
-    public boolean eliminaComune(String id){
-        return false;
+    public boolean eliminaComune(String id)
+    {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+
+        return this.mockComuni.delete(tmp);
     }
     //TODO
     @Override
-    public ClsComune[] visualizzaComuni(){
-        return null;
+    public ArrayList<ClsComune> visualizzaComuni()
+    {
+        return this.mockComuni.get(null);
     }
 //endregion
 }
