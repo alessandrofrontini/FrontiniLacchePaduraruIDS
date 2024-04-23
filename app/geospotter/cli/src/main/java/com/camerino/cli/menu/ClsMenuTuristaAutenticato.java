@@ -18,6 +18,7 @@ import static com.camerino.cli.actions.ClsCommonActions.*;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuTuristaAutenticato implements IMenu {
+
     private ClsTuristaAutenticato user;
     Scanner in = new Scanner(System.in);
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
@@ -26,8 +27,6 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
         this.user = turistaAutenticato;
     }
-
-public class ClsMenuTuristaAutenticato implements IMenu{
     @Override
     public void menu() {
         boolean exit = false;
@@ -55,10 +54,33 @@ public class ClsMenuTuristaAutenticato implements IMenu{
         }
     }
 
-    private void menuInserisciRecensione() {
+    private boolean menuInserisciRecensione() {
+        ClsRecensione recensione = new ClsRecensione();
+        println("Inserisci l'ID del contenuto da recensire");
+        String idContenuto = in.nextLine();
+        if(idContenuto == null){
+            println("Errore.");
+            return false;
+        }
+        recensione.setIdContenutoAssociato(idContenuto);
+        println("Dai un punteggio da 1 a 5");
+        String punteggio = "+";
+        punteggio += in.nextLine();
+        if(punteggio == "+"){
+            println("Errore.");
+            return false;
+        }
+        recensione.setValutazione(Double.parseDouble(punteggio));
+        println("Scegli un titolo per la recensione");
+        recensione.setOggetto(in.nextLine());
+        println("Aggiungi una descrizione");
+        recensione.setContenuto(in.nextLine());
+        return pRecensioni.insert(recensione);
+
     }
 
     private void menuModificaRecensione() {
+        //TODO
         //immagina che il turista autenticato trova l'elenco delle sue recensioni (visualizzaRecensioniPossessore)
         //poi seleziona la recensione da modificare
         print("Inserisci l'id della recensione da modificare: ");
@@ -77,6 +99,7 @@ public class ClsMenuTuristaAutenticato implements IMenu{
     }
 
     private void menuEliminaRecensione() {
+        //TODO
         print("inserisci l'id della recensione da eliminare: ");
         //eliminaRecensione(user, in.nextLine()); -> aggiungere su CommonActions
         println("recensione eliminata.");
@@ -90,15 +113,20 @@ public class ClsMenuTuristaAutenticato implements IMenu{
             println("1) Inserisci Foto");
             println("0) Esci");
             switch (in.nextLine()) {
-                case "1" -> menuInserisciRecensione();
+                case "1" -> inserisciFotoContenuto(contenuto);
                 case "2" -> exit = true;
             }
         }
     }
 
     private void inserisciFotoContenuto(String idContenuto){
-        //input della foto
+        ClsImmagine immagine = new ClsImmagine();
+        immagine.setIdCOntenutoAssociato(idContenuto);
+        immagine.setUsernameCreatore("TuristaAuth"); //TODO: cambiare quando disponibile
+        println("Inserisci l'URL dell'immagine");
+        immagine.setURL(in.nextLine());
+        user.inserisciImmagine(immagine);
+        //TODO
         //metodo CommonActions che richiede l'inserimento delle foto
-        //metodo User che richiede l'inserimento delle foto
     }
 }

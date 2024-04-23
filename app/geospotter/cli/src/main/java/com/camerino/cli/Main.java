@@ -6,19 +6,26 @@ import com.camerino.cli.menu.ClsMenuGestore;
 import com.camerino.cli.menu.Input;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.cli.mock.MockSegnalazioni;
 import com.camerino.cli.mock.MockTuristi;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
+public class Main {
+    IPersistenceModel<ClsSegnalazione> segnalazioni = null;
+    ClsTurista user = new ClsTurista(segnalazioni);
+    static Scanner in = new Scanner(System.in);
+    //Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
     public static void main(String[] args)
     {
-        Scanner in = new Scanner(System.in);
         while (true) {
             print_team();
 
@@ -38,7 +45,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
                 case "2"-> listaComuni();
                 case "3"-> ClsConsoleLogger.println("Noop");
                 case "4"-> ClsConsoleLogger.println("Noop");
-                case "5"-> ClsConsoleLogger.println("Noop");
+                case "5"-> menuSegnalaNodo();
             }
         }
     }
@@ -77,6 +84,14 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
         }
     }
 
+    private static void menuSegnalaNodo(){
+        ClsSegnalazione segnalazione = new ClsSegnalazione();
+        ClsConsoleLogger.println("inserisci l'id del nodo");
+        //l'ID del curatore non viene impostato perchè viene inserito quando il curatore prende in carico la richiesta (?)
+        segnalazione.setIdContenuto(Long.parseLong(in.nextLine()));
+        ClsConsoleLogger.println("fornisci una descrizione");
+        segnalazione.setDescrizione(in.nextLine());
+    }
     //region Visualizzazione header e team
     //https://patorjk.com/software/taag/
     private static void print_header() {

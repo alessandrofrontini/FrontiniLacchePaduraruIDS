@@ -97,13 +97,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     //TODO
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
-        //TODO: merge con richiesta azione di conribuzione
         return pRecensioni.insert(recensione);
     }
 //TODO
     @Override
     public boolean eliminaRecensione(String id) {
-        //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
         return pRecensioni.delete(tmp);
@@ -111,7 +109,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 //TODO
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
-        //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", old.getId());
         return pRecensioni.update(tmp, newrec);
