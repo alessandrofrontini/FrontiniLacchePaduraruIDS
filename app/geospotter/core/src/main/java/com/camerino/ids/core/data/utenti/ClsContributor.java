@@ -19,7 +19,6 @@ import java.util.HashMap;
  *
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
-
     IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;

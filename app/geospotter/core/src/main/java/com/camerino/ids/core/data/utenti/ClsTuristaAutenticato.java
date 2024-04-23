@@ -1,7 +1,12 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.IPersistenceModel;
+
+import java.util.HashMap;
 
 /**
  * Ruolo associato ad un utente autenticato base.
@@ -38,6 +43,9 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
 
+    IPersistenceModel<ClsRecensione> pRecensioni;
+    IPersistenceModel<ClsImmagine> pImmagini;
+
     //region Getters and Setters
     public String getId() {
         return id;
@@ -71,30 +79,53 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.punteggio = punteggio;
     }
 //endregion
+
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+        super(segnalazioni);
+        pRecensioni = recensioni;
+        pImmagini = immagini;
+    }
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+        super(segnalazioni);
+        credenziali = c;
+        ruoloUtente = ruolo;
+        punteggio = ruolo.getValue();
+        pRecensioni = recensioni;
+        pImmagini = immagini;
+    }
     //region Override ILoggedUserAction
     //TODO
     @Override
-    public boolean inserisciRecensione() {
-        return false;
+    public boolean inserisciRecensione(ClsRecensione recensione) {
+        //TODO: merge con richiesta azione di conribuzione
+        return pRecensioni.insert(recensione);
     }
 //TODO
     @Override
     public boolean eliminaRecensione(String id) {
-        return false;
+        //TODO: merge con richiesta azione di contribuzione
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pRecensioni.delete(tmp);
     }
 //TODO
     @Override
-    public boolean modificaRecensione() {
-        return false;
+    public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
+        //TODO: merge con richiesta azione di contribuzione
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", old.getId());
+        return pRecensioni.update(tmp, newrec);
     }
 //TODO
     @Override
-    public boolean inserisciImmagine() {
-        return false;
+    public boolean inserisciImmagine(ClsImmagine immagine) {
+        //TODO: merge con richiesta azione di contribuzione
+        return pImmagini.insert(immagine);
     }
 //TODO
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
+        //TODO: manca l'associazione recensione - utente che la scrive
         return null;
     }
 //endregion
