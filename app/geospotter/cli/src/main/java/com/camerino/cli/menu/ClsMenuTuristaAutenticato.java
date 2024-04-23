@@ -27,6 +27,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
         this.user = turistaAutenticato;
     }
 
+public class ClsMenuTuristaAutenticato implements IMenu{
     @Override
     public void menu() {
         boolean exit = false;
