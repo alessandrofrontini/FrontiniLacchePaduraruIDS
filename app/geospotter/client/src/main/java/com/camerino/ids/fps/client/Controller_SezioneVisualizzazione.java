@@ -28,24 +28,46 @@ public class Controller_SezioneVisualizzazione
     {
        String azione = this.getValueFromCombobox(sezioneVisualizzazioneSceltaAzione);
 
-        if( azione.equals("InserisciNodo") )
-        {
-            this.navigateToSezioneInserimentoNodi(mouseEvent);
-        }
+       if(azione == null)
+       {
+           azione = "";
+       }
 
+       switch (azione)
+       {
+           case "":
+               Alert alert = new Alert (Alert.AlertType.WARNING);
+               alert.setTitle("Attenzione");
+               alert.setContentText("Devi selezionare almeno un' azione");
+               alert.show();
+               break;
 
-//        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-//        alert.setTitle(azione);
-//        alert.setContentText("--"+azione+"--");
-//        alert.show();
+           case "Inserisci Nodo":
+               this.navigateToSezioneInserimentoNodi(mouseEvent);
+               break;
 
+           case "Modifica Nodo":
+               this.navigateToSezioneModificaNodi(mouseEvent);
+               break;
 
+           case "Elimina Nodo":
+               this.navigateToSezioneEliminazioneNodi(mouseEvent);
+               break;
+       }
     }
 
     //region Navigazione
     public void navigateToSezioneInserimentoNodi (MouseEvent mouseEvent)
     {
         this.SwitchScene("SezioneInserimentoNodi.fxml",mouseEvent);
+    }
+    public void navigateToSezioneModificaNodi (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneModificaNodi.fxml",mouseEvent);
+    }
+    public void navigateToSezioneEliminazioneNodi (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneEliminazioneNodi.fxml",mouseEvent);
     }
     public void navigateToSezioneRegistrazione(MouseEvent mouseEvent)
     {
