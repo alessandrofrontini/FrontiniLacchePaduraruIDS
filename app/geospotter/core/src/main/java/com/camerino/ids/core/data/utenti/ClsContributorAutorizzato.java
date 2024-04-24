@@ -18,8 +18,10 @@ import java.util.HashMap;
  */
 public class ClsContributorAutorizzato extends ClsContributor {
     //region Override Contributor Autorizzato
+    IPersistenceModel<ClsImmagine> pImmagini;
     public ClsContributorAutorizzato(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari){
-        super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari);
+        super(r, s, pRCDNodo, pRCDItinerari, nodi, itinerari);
+        pImmagini = i;
     }
     /**
      * Inserisce direttamente il nodo creato.

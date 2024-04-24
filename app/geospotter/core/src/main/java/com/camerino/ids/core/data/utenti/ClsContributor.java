@@ -27,9 +27,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
-    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
-        super(s, r, i);
-        this.pRDC = pRCDNodo;
+    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
+        super(s, r, pRCDNodo);
         this.pRDCI = pRCDItinerari;
         this.pNodi = nodi;
         this.pItinerari = itinerari;

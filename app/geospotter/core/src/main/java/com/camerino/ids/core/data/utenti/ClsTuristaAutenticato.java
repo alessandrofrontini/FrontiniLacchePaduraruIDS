@@ -1,5 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
@@ -44,7 +45,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     eRUOLO_UTENTE ruoloUtente;
 
     IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione>  pRichiestaImmagini;
 
     //region Getters and Setters
     public String getId() {
@@ -80,18 +81,18 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
 
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> immagini){
         super(segnalazioni);
         pRecensioni = recensioni;
-        pImmagini = immagini;
+        pRichiestaImmagini = immagini;
     }
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> immagini){
         super(segnalazioni);
         credenziali = c;
         ruoloUtente = ruolo;
         punteggio = ruolo.getValue();
         pRecensioni = recensioni;
-        pImmagini = immagini;
+        pRichiestaImmagini = immagini;
     }
     //region Override ILoggedUserAction
     //TODO
@@ -116,8 +117,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 //TODO
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
-        //TODO: merge con richiesta azione di contribuzione
-        return pImmagini.insert(immagine);
+        //ASSOCIAZIONE CON COMUNE
+        ClsRichiestaAzioneDiContribuzione richiesta = new ClsRichiestaAzioneDiContribuzione();
+        richiesta.setDatiImmagine(immagine);
+        return pRichiestaImmagini.insert(richiesta);
     }
 //TODO
     @Override

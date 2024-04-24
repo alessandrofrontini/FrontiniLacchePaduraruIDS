@@ -1,5 +1,6 @@
 package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
@@ -23,7 +24,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     Scanner in = new Scanner(System.in);
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
     IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pImmagini;
     public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
         this.user = turistaAutenticato;
     }

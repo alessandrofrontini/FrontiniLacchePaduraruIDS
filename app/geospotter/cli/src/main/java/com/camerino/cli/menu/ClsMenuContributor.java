@@ -31,7 +31,7 @@ public class ClsMenuContributor implements IMenu{
     public void menu() {
 //TODO: implementare
         boolean exit = false;
-        user = new ClsContributor(pRecensioni, pSegnalazioni, pImmagini, pRCD, pRCDI, pNodi, pItinerari);
+        user = new ClsContributor(pRecensioni, pSegnalazioni, pRCD, pRCDI, pNodi, pItinerari);
         user.setId("1");
         user.setPunteggio(200); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());
