@@ -1,6 +1,9 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 /**
@@ -8,10 +11,12 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
  * Viene assegnato soltanto ai creatori della piattaforma.
  * Non è possibile diventare Gestore della Piattaforma tramite sistema a punteggi.
  */
-public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator
+public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHallAdministrator
 {
     IPersistenceModel<ClsComune> mockComuni;
-
+    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ILoggedUserAction>utenti){
+        super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest, null, utenti);
+    }
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
     {

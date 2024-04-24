@@ -3,8 +3,11 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
@@ -24,12 +27,14 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
-    public ClsContributor() {super();}
-    public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
-        super();
-        pNodi = pNodo;
-        this.pItinerari = pItinerari;
+    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
+        super(s, r, i);
+        this.pRDC = pRCDNodo;
+        this.pRDCI = pRCDItinerari;
+        this.pNodi = nodi;
+        this.pItinerari = itinerari;
     }
+
 //region Getters and Setters
 
     public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {

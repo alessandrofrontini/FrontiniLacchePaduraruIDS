@@ -1,5 +1,9 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
@@ -11,6 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
+    IPersistenceModel<ClsRecensione> pRecensioni;
+    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
+    IPersistenceModel<ClsImmagine> pImmagini;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodi;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCItinerari;
+    IPersistenceModel<ClsContestDiContribuzione> pContest;
+
+    IPersistenceModel<ClsNodo> pNodi;
+    IPersistenceModel<ClsItinerario> pItinerari;
     public MockTuristi(){
         creaTuristi();
     }
@@ -62,7 +75,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     //endregion
 
     private void creaTuristi() {
-        ClsContributorAutorizzato ca = new ClsContributorAutorizzato();
+        ClsContributorAutorizzato ca = new ClsContributorAutorizzato(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari);
         Credenziali credenzialiCA = new Credenziali();
         credenzialiCA.setUsername("CA");
         credenzialiCA.setPassword("");
@@ -71,7 +84,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         inserisciUtente(ca);
 
-        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
+        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari, pContest, null, null);
         Credenziali credenzialiGdP = new Credenziali();
         credenzialiGdP.setUsername("GDP");
         credenzialiGdP.setPassword("");

@@ -1,11 +1,18 @@
 package com.camerino.cli.menu;
 
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.cli.mock.MockNodi;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -17,13 +24,20 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributorAuth implements IMenu{
     private ClsContributorAutorizzato user;
     Scanner in = new Scanner(System.in);
+    IPersistenceModel<ClsRecensione> r;
+    IPersistenceModel<ClsSegnalazione> s;
+    IPersistenceModel<ClsImmagine> i;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari;
+    IPersistenceModel<ClsNodo> nodi;
+    IPersistenceModel<ClsItinerario> itinerari;
     public ClsMenuContributorAuth(ClsContributorAutorizzato user) {
         this.user = user;
     }
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsContributorAutorizzato();
+        user = new ClsContributorAutorizzato(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari);
         user.setId("1");
         user.setPunteggio(666);
         user.setCredenziali(new Credenziali());
@@ -67,8 +81,12 @@ public class ClsMenuContributorAuth implements IMenu{
 
     private void menuEliminaNodo(){
         print("Inserisci id del nodo da eliminare: ");
-        eliminaNodo(user, in.nextLine());
-        println("Nodo eliminato");
+        String idNodo = in.nextLine();
+        if(idNodo != null){
+            user.eliminaNodo(idNodo);
+            println("Nodo eliminato");
+        }
+        else println("Errore");
     }
 
 }

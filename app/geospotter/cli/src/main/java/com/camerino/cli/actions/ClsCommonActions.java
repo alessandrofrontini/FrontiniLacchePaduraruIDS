@@ -33,4 +33,5 @@ public class ClsCommonActions {
             return gdp.inserisciComune(comune);
         return false;
     }
+
 }

@@ -1,31 +1,37 @@
 package com.camerino.cli.menu;
-import com.camerino.cli.actions.ClsCommonActions;
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 
 import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.cli.mock.MockNodi;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static com.camerino.cli.actions.ClsCommonActions.*;
-        import static com.camerino.cli.loggers.ClsConsoleLogger.print;
+import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
+    //rec segn imm n it
+    IPersistenceModel<ClsRecensione> pRecensioni;
+    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
+    IPersistenceModel<ClsImmagine> pImmagini;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCD;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDI;
+    IPersistenceModel<ClsContestDiContribuzione> pContest;
+    IPersistenceModel<ClsNodo> pNodi;
+    IPersistenceModel<ClsItinerario> pItinerari;
     Scanner in = new Scanner(System.in);
     public ClsMenuContributor(ClsContributor contributor){ user = contributor;}
     @Override
     public void menu() {
 //TODO: implementare
         boolean exit = false;
-        user = new ClsContributor();
+        user = new ClsContributor(pRecensioni, pSegnalazioni, pImmagini, pRCD, pRCDI, pNodi, pItinerari);
         user.setId("1");
         user.setPunteggio(200); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());
@@ -129,14 +135,18 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuInserisciNodoContest(){
-        //TODO: implementare (front)
+        //TODO: collegare nodo a contest
     }
 
     private void menuInserisciFotoContest(){
-        //TODO: implementare (front)
+        //TODO: collegare nodo a contest
     }
 
     private void menuVisualizzaContestAperti(){
-        //TODO: implementare (front)
+        for(ClsContestDiContribuzione c:pContest.get(null)){
+            if(c.isAperto()){
+                println("Contest - ID -> " + c.getId() + ", Luogo -> " + c.getLocation().getNome() + ", durata -> " + c.getDataFine());
+            }
+        }
     }
 }

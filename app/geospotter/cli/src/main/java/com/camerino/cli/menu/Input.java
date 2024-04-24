@@ -1,12 +1,21 @@
 package com.camerino.cli.menu;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.ILoggedUserAction;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import javax.naming.AuthenticationException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -16,11 +25,10 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.print;
  */
 public class Input
 {
-
+    static Scanner in = new Scanner(System.in);
     //region Input Nodi
     public static ClsNodo inserisciNodo(){
         boolean ok = false;
-        Scanner in = new Scanner(System.in);
         ClsNodo nodo = new ClsNodo();
         Posizione pos = new Posizione();
         while (!ok){
@@ -48,7 +56,6 @@ public class Input
 
     public static ClsNodo modificaNodo(ClsNodo nodo){
         boolean ok = false;
-        Scanner in = new Scanner(System.in);
         Posizione pos = nodo.getPosizione();
         while (!ok){
             print(String.format("Inserisci nome (old: %s): ", nodo.getNome()));
@@ -79,7 +86,6 @@ public class Input
     public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp)
     {
         boolean ok = false;
-        Scanner in = new Scanner(System.in);
         ClsComune comune = new ClsComune();
         Posizione pos = new Posizione();
         while (!ok){
@@ -110,7 +116,6 @@ public class Input
 
     public static ClsItinerario richiediItinerario(){
         boolean ok = false;
-        Scanner in = new Scanner(System.in);
         ClsItinerario itinerario = new ClsItinerario();
         String idNodo = "0";
         while (!ok){
@@ -136,7 +141,6 @@ public class Input
 
     public static Credenziali richiediCredenziali(){
         boolean ok = false;
-        Scanner in = new Scanner(System.in);
         Credenziali credenziali = new Credenziali();
         while (!ok){
             print("Username: ");
@@ -147,4 +151,33 @@ public class Input
         }
         return credenziali;
     }
+
+    public static ClsContestDiContribuzione creaContest(){
+        ClsContestDiContribuzione contest = new ClsContestDiContribuzione();
+        print("Inserisci un nome per il contest: ");
+        contest.setNome(in.nextLine());
+        print("Inserisci la data di fine contest: ");
+        contest.setDataFine(new Date(in.nextLine()));
+        print("Il contest è a numero chiuso? Y/N: ");
+        String chiuso = in.nextLine();
+        return contest;
+    }
+
+    public static ArrayList<ClsContributor> invitaUtenti(IPersistenceModel<ClsContributor> utenti){
+        ArrayList<ClsContributor> partecipanti = new ArrayList<>();
+        boolean exit = false;
+        while(!exit){
+            HashMap<String, Object> filtri = new HashMap<>();
+            print("Inserisci l'ID dell'utente da invitare o premi 0 per uscire: ");
+            String input = in.nextLine();
+            if(input == "0")
+                exit = true;
+            else{
+                filtri.put("id", in.nextLine());
+                partecipanti.add(utenti.get(filtri).get(0));
+            }
+        }
+        return partecipanti;
+    }
+
 }
