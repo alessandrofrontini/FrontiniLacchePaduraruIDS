@@ -3,6 +3,8 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 
+import java.util.ArrayList;
+
 /**
  * TODO: commentare
  */
@@ -13,5 +15,5 @@ public interface ILoggedUserAction {
     boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec);
     boolean inserisciImmagine(ClsImmagine immagine);
     //TODO: cambiare da boolean a ClsRecensione
-    ClsRecensione[] visualizzaRecensioniPosessore();
+    ArrayList<ClsRecensione> visualizzaRecensioniPosessore();
 }

@@ -7,6 +7,7 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -94,39 +95,35 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         pRecensioni = recensioni;
         pRichiestaImmagini = immagini;
     }
-    //region Override ILoggedUserAction
-    //TODO
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
+
         return pRecensioni.insert(recensione);
     }
-//TODO
     @Override
     public boolean eliminaRecensione(String id) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
         return pRecensioni.delete(tmp);
     }
-//TODO
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", old.getId());
         return pRecensioni.update(tmp, newrec);
     }
-//TODO
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
-        //ASSOCIAZIONE CON COMUNE
         ClsRichiestaAzioneDiContribuzione richiesta = new ClsRichiestaAzioneDiContribuzione();
         richiesta.setDatiImmagine(immagine);
         return pRichiestaImmagini.insert(richiesta);
     }
-//TODO
+
     @Override
-    public ClsRecensione[] visualizzaRecensioniPosessore() {
-        //TODO: manca l'associazione recensione - utente che la scrive
-        return null;
+    public ArrayList<ClsRecensione> visualizzaRecensioniPosessore() {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("idUtente", this.getId());
+        return pRecensioni.get(tmp);
     }
 //endregion
 }

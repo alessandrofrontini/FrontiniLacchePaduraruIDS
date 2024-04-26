@@ -3,13 +3,11 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsImmagine;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -152,8 +150,15 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
     //TODO: i nodi di chi?
     @Override
-    public boolean visualizzaNodiPosessore() {
-        return false;
+    public ArrayList<ClsNodo> visualizzaNodiPosessore() {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("idUtente", this.id);
+        return pNodi.get(tmp);
+    }
+    public void partecipaContest(ClsContestDiContribuzione c){
+        ClsPartecipazioneContestDiContribuzione partecipazione = new ClsPartecipazioneContestDiContribuzione();
+        partecipazione.setIdContest(c.getId());
+        partecipazione.setUsernamePartecipante(this.credenziali.getUsername());
     }
 
     //endregion

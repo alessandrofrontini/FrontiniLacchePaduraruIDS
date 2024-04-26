@@ -1,5 +1,7 @@
 package com.camerino.ids.core.data.contenuti;
 
+import java.util.Date;
+
 /**
  * TODO: commentare
  */
@@ -12,6 +14,9 @@ public class ClsNodo extends ClsContenuto{
     private String idComune;
     private eTologiaNodo eTologiaNodo;
     private boolean aTempo;
+    private Date dataFine;
+    private String idUtente;
+    private String idContest;
 
     //region Getter e setter
     public String getIdComune() {
@@ -37,6 +42,12 @@ public class ClsNodo extends ClsContenuto{
     public void setaTempo(boolean aTempo) {
         this.aTempo = aTempo;
     }
+    public void setDataFine(Date d){this.dataFine = d;}
+    public Date getDataFine(){return this.dataFine;}
+    public void setIdUtente(String i){this.idUtente = i;}
+    public String getIdUtente(){return this.idUtente;}
+    public void setIdContest(String idc){this.idContest = idc;}
+    public String getIdContest(){return this.idContest;}
     //endregion
 
     public String visualizzaNodo()
