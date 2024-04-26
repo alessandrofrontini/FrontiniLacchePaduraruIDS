@@ -107,7 +107,7 @@ public class ClsMenuCuratore implements IMenu{
 
     private void menuVisualizzaSegnalazioni(){
         for(ClsSegnalazione seg:s.get(null)){
-            if(seg.getIdCuratore() == 0){
+            if(seg.getIdCuratore() == null){
                 println("Segnalazione n. " + seg.getId());
             }
         }

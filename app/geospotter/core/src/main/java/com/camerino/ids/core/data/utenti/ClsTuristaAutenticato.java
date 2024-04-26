@@ -125,5 +125,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         tmp.put("idUtente", this.getId());
         return pRecensioni.get(tmp);
     }
+    @Override
+    public boolean segnalaContenuto(ClsSegnalazione segnalazione){
+        segnalazione.setIdUtente(this.id);
+        return pSegnalazioni.insert(segnalazione);
+    }
 //endregion
 }

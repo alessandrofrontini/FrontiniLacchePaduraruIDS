@@ -88,7 +88,7 @@ public class Main {
         ClsSegnalazione segnalazione = new ClsSegnalazione();
         ClsConsoleLogger.println("inserisci l'id del nodo");
         //l'ID del curatore non viene impostato perchè viene inserito quando il curatore prende in carico la richiesta (?)
-        segnalazione.setIdContenuto(Long.parseLong(in.nextLine()));
+        segnalazione.setIdContenuto(in.nextLine());
         ClsConsoleLogger.println("fornisci una descrizione");
         segnalazione.setDescrizione(in.nextLine());
     }

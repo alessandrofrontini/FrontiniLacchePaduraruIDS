@@ -9,6 +9,7 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -31,6 +32,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
+        nodo.setIdUtente(this.id);
         return pNodi.insert(nodo);
     }
 
@@ -47,6 +49,12 @@ public class ClsContributorAutorizzato extends ClsContributor {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
         return pNodi.update(tmp, nodo);
+    }
+
+    public boolean eliminaNodo(String id){
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pNodi.delete(tmp);
     }
 
     /**
@@ -71,7 +79,9 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, String id) {
-        return false;
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pItinerari.update(tmp, itinerario);
     }
 
     /**
@@ -83,12 +93,9 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean eliminaItinerario(String id) {
-        return false;
-    }
-    //TODO
-    @Override
-    public boolean visualizzaNodiPosessore() {
-        return false;
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pItinerari.delete(tmp);
     }
 //endregion
 }

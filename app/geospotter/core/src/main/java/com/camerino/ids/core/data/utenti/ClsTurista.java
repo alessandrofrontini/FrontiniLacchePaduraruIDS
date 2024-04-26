@@ -20,8 +20,6 @@ public class ClsTurista implements ISignalable {
 
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {
-        //Contenuti segnalabili: Nodo, Foto, Itinerario, Recensione (fonte: vpp)
-        //ipotizzo che dal menu iniziale(in cui scegli anche se fare login o registrazione) si possa già segnalare
         pSegnalazioni.insert(segnalazione);
         return false;
     }

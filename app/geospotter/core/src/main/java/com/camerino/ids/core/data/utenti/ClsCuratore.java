@@ -67,10 +67,7 @@ public class ClsCuratore extends ClsAnimatore{
         return esito;
     }
     public boolean validaSegnalazione(ClsSegnalazione segnalazione, boolean esito){
-        if(esito){
-            segnalazione.setIdCuratore(Long.parseLong(id));
-            //TODO: esito segnalazione? tipo di segnalazione?
-        }
+        //TODO IT4
         return esito;
     }
     public ArrayList<ClsRichiestaAzioneDiContribuzione> getRichieste(){
