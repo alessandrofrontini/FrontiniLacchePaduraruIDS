@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneEliminazioneNodi">
     <children>
         <Text layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ELIMINAZIONE NODI" wrappingWidth="276.15380859375">
@@ -13,7 +15,15 @@
         </Text>
         <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="717.876953125" />
         <Button fx:id="sezioneEliminazioneNodiBTNhome" layoutX="25.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="91.0" text="Home" />
-      <ComboBox layoutX="73.0" layoutY="421.0" prefHeight="26.0" prefWidth="586.0" promptText="ID nodo da eliminare" />
+      <ComboBox fx:id="sezioneEliminazioneNodiComboBox" layoutX="73.0" layoutY="421.0" prefHeight="26.0" prefWidth="586.0" promptText="ID nodo da eliminare" >
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="1" />
+                  <String fx:value="2" />
+                  <String fx:value="3" />
+              </FXCollections>
+          </items>
+      </ComboBox>
       <Button fx:id="sezioneEliminazioneNodiBTNConferma" layoutX="279.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#eliminaNodo" prefHeight="26.0" prefWidth="174.0" text="Conferma" />
       <TableView fx:id="sezioneEliminazioneNodiElenco" layoutX="25.0" layoutY="135.0" prefHeight="271.0" prefWidth="682.0">
         <columns>

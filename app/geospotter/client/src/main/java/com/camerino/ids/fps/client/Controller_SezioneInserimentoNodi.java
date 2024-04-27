@@ -3,6 +3,7 @@ package com.camerino.ids.fps.client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,15 +13,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class Controller_SezioneInserimentoNodi
+public class Controller_SezioneInserimentoNodi implements Initializable
 {
+    boolean flag = false;
+
     @FXML
     TextField sezioneInserimentoNodiNome,sezioneInserimentoNodiComuneAssociato,sezioneInserimentoNodiPosizioneX,sezioneInserimentoNodiPosizioneY,sezioneInserimentoNodiDescrizione,sezioneInserimentoNodiDataInizio,sezioneInserimentoNodiDataFine;
     @FXML
     CheckBox sezioneInserimentoNodiIsTemporizzato;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        this.sezioneInserimentoNodiDataInizio.setVisible(flag);
+        this.sezioneInserimentoNodiDataFine.setVisible(flag);
+    }
     public void inserisciNodo()
     {
         String Nome = this.getNameFromTextField(sezioneInserimentoNodiNome);
@@ -30,16 +41,25 @@ public class Controller_SezioneInserimentoNodi
         String Descrizione = this.getNameFromTextField(sezioneInserimentoNodiDescrizione);
 
         if(this.sezioneInserimentoNodiIsTemporizzato.isSelected())
-            {
-                String DataInizio = this.getNameFromTextField(sezioneInserimentoNodiDataInizio);
-                String DataFine = this.getNameFromTextField(sezioneInserimentoNodiDataFine);
-                boolean isTemporizzato = true;
-            }
+        {
+            String DataInizio = this.getNameFromTextField(sezioneInserimentoNodiDataInizio);
+            String DataFine = this.getNameFromTextField(sezioneInserimentoNodiDataFine);
+            boolean isTemporizzato = true;
+        }
 
         //Creazione oggetto?
 
 
     }
+
+    public void visualizzaDate ()
+    {
+        flag = !flag;
+        this.sezioneInserimentoNodiDataInizio.setVisible(flag);
+        this.sezioneInserimentoNodiDataFine.setVisible(flag);
+
+    }
+
     //region Navigazione
     public void navigateToSezioneNavigazione(MouseEvent mouseEvent) {
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
