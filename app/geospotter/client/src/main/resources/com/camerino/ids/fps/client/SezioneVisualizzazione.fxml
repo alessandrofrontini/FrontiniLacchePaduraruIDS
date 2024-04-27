@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneVisualizzazione">
+   <children>
+      <ToolBar layoutX="44.0" layoutY="531.0" prefHeight="36.0" prefWidth="512.0">
+        <items>
+            <Button fx:id="sezioneVisualizzazioneBTNRegistrati" mnemonicParsing="false" onMouseClicked="#navigateToSezioneRegistrazione" prefHeight="26.0" prefWidth="252.0" text="Registrati" />
+          <Button fx:id="sezioneVisualizzazioneBTNLogIn" mnemonicParsing="false" onMouseClicked="#navigateToSezioneLogin" prefHeight="26.0" prefWidth="243.0" text="Log-In" />
+        </items>
+      </ToolBar>
+      <SubScene fx:id="sezioneVisualizzazioneMappa" height="332.0" layoutX="39.0" layoutY="176.0" width="522.0">
+        <root>
+          <Region />
+        </root>
+         <effect>
+            <Shadow height="0.0" radius="0.0" width="0.0">
+               <input>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </input>
+            </Shadow>
+         </effect>
+         <fill>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </SubScene>
+      <ComboBox fx:id="sezioneVisualizzazioneSceltaAzione" accessibleText="&#10;" editable="true" layoutX="90.0" layoutY="110.0" prefHeight="26.0" prefWidth="323.0" promptText="AzioniDiContribuzione">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Inserisci Nodo" />
+                  <String fx:value="Modifica Nodo" />
+                  <String fx:value="Elimina Nodo" />
+                  <String fx:value="Inserisci Itinerario" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Button fx:id="sezioneNavigazioneBTNConfermaAzione" layoutX="426.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneScelta" prefHeight="26.0" prefWidth="113.0" text="Conferma" />
+      <Text fill="#28bf7b" layoutX="145.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GeoSpotter_Client">
+         <font>
+            <Font name="Franklin Gothic Heavy" size="36.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

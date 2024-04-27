@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneInserimentoNodi">
+   <children>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERIMENTO NODI" wrappingWidth="260.15380859375">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <TextField fx:id="sezioneInserimentoNodiNome" layoutX="20.0" layoutY="172.0" prefHeight="26.0" prefWidth="275.0" promptText="Nome del nodo" />
+      <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="586.876953125" />
+      <TextField fx:id="sezioneInserimentoNodiPosizioneX" layoutX="19.0" layoutY="253.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. X" />
+      <TextField fx:id="sezioneInserimentoNodiPosizioneY" layoutX="163.0" layoutY="253.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. Y" />
+      <TextField fx:id="sezioneInserimentoNodiComuneAssociato" layoutX="20.0" layoutY="210.0" prefHeight="26.0" prefWidth="275.0" promptText="IDComuneAssociato" />
+      <CheckBox fx:id="sezioneInserimentoNodiIsTemporizzato" layoutX="20.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#visualizzaDate" prefHeight="18.0" prefWidth="101.0" text="Temporizzato" />
+      <TextField fx:id="sezioneInserimentoNodiDataInizio" layoutX="19.0" layoutY="395.0" prefHeight="26.0" prefWidth="131.0" promptText="Data di Inizio" />
+      <TextField fx:id="sezioneInserimentoNodiDataFine" layoutX="163.0" layoutY="395.0" prefHeight="26.0" prefWidth="131.0" promptText="Data di Fine" />
+      <ComboBox layoutX="307.0" layoutY="172.0" prefHeight="26.0" prefWidth="275.0" promptText="Tipologia del Nodo" />
+      <TextField fx:id="sezioneInserimentoNodiDescrizione" layoutX="20.0" layoutY="293.0" prefHeight="26.0" prefWidth="275.0" promptText="Descrizione" />
+      <Button fx:id="sezioneInserimentoNodiBTNhome" layoutX="25.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="91.0" text="Home" />
+      <Button layoutX="20.0" layoutY="437.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="275.0" text="Conferma" />
+   </children>
+</AnchorPane>
