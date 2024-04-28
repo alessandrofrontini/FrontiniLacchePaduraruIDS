@@ -49,14 +49,29 @@ public class ClsCuratore extends ClsAnimatore{
     public boolean resetRank(ILoggedUserAction utente){
         return false; //TODO
     }
+
+    //CONTINUARE
     public boolean validaRichiesta(ClsRichiestaAzioneDiContribuzione richiesta, boolean esito){
         if(esito){
             switch (richiesta.geteAzioneDiContribuzione()){
-                case INSERISCI_NODO -> pNodi.insert(richiesta.getDatiNodo());
-                case INSERISCI_IMMAGINE -> pImmagini.insert(richiesta.getDatiImmagine());
+                case INSERISCI_NODO -> validaNodo(richiesta);
+                case INSERISCI_IMMAGINE -> validaImmagine(richiesta);
             }
         }
         return esito;
+    }
+    private void validaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
+        pNodi.insert(richiesta.getDatiNodo());
+        associaCuratoreRichiesta(richiesta);
+    }
+    private void validaImmagine(ClsRichiestaAzioneDiContribuzione richiesta){
+        pImmagini.insert(richiesta.getDatiImmagine());
+        associaCuratoreRichiesta(richiesta);
+    }
+    private void associaCuratoreRichiesta(ClsRichiestaAzioneDiContribuzione richiesta){
+        HashMap<String, Object> curatore = new HashMap<>();
+        curatore.put("idCuratore", this.id);
+        pRDC.update(curatore, richiesta);
     }
     public boolean validaRichiestaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta, boolean esito){
         if(esito){
