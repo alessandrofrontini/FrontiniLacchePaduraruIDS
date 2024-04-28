@@ -55,6 +55,8 @@ public class ClsCuratore extends ClsAnimatore{
         if(esito){
             switch (richiesta.geteAzioneDiContribuzione()){
                 case INSERISCI_NODO -> validaNodo(richiesta);
+                case MODIFICA_NODO -> validaModificaNodo(richiesta);
+                case ELIMINA_NODO -> validaEliminaNodo(richiesta);
                 case INSERISCI_IMMAGINE -> validaImmagine(richiesta);
             }
         }
@@ -68,18 +70,53 @@ public class ClsCuratore extends ClsAnimatore{
         pImmagini.insert(richiesta.getDatiImmagine());
         associaCuratoreRichiesta(richiesta);
     }
+    private void validaModificaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
+        HashMap<String, Object> id = new HashMap<>();
+        id.put("id", richiesta.getDatiNodo().getId());
+        pNodi.update(id, richiesta.getDatiNodo());
+        associaCuratoreRichiesta(richiesta);
+    }
+    private void validaEliminaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
+        HashMap<String, Object> id = new HashMap<>();
+        id.put("id", richiesta.getDatiNodo().getId());
+        pNodi.delete(id);
+        associaCuratoreRichiesta(richiesta);
+    }
     private void associaCuratoreRichiesta(ClsRichiestaAzioneDiContribuzione richiesta){
         HashMap<String, Object> curatore = new HashMap<>();
         curatore.put("idCuratore", this.id);
         pRDC.update(curatore, richiesta);
     }
+    private void associaCuratoreRichiestaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
+        HashMap<String, Object> curatore = new HashMap<>();
+        curatore.put("idCuratore", this.id);
+        pRDCI.update(curatore, richiesta);
+    }
     public boolean validaRichiestaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta, boolean esito){
         if(esito){
             switch (richiesta.geteAzioniDiContribuzione()){
-                case INSERISCI_ITINERARIO -> pItinerari.insert(richiesta.getDatiItinerario());
+                case INSERISCI_ITINERARIO -> validaItinerario(richiesta);
+                case MODIFICA_ITINERARIO -> validaModificaItinerario(richiesta);
+                case ELIMINA_ITINERARIO -> validaEliminaItinerario(richiesta);
             }
         }
         return esito;
+    }
+    private void validaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
+        pItinerari.insert(richiesta.getDatiItinerario());
+        associaCuratoreRichiestaItinerario(richiesta);
+    }
+    private void validaModificaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
+        HashMap<String, Object> id = new HashMap<>();
+        id.put("id", richiesta.getDatiItinerario().getId());
+        pItinerari.update(id, richiesta.getDatiItinerario());
+        associaCuratoreRichiestaItinerario(richiesta);
+    }
+    private void validaEliminaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
+        HashMap<String, Object> id = new HashMap<>();
+        id.put("id", richiesta.getDatiItinerario().getId());
+        pItinerari.delete(id);
+        associaCuratoreRichiestaItinerario(richiesta);
     }
     public boolean validaSegnalazione(ClsSegnalazione segnalazione, boolean esito){
         //TODO IT4

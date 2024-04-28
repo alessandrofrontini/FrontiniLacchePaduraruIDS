@@ -56,11 +56,12 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
     public boolean validaContenutoContest(ClsRichiestaAzioneDiContribuzione richiesta, boolean esito){
         if(esito){
             switch(richiesta.geteAzioneDiContribuzione()){
-                case INSERISCI_NODO -> pNodi.insert(richiesta.getDatiNodo());
-                case INSERISCI_IMMAGINE -> pImmagini.insert(richiesta.getDatiImmagine());
+                case INSERISCI_NODO_CONTEST -> pNodi.insert(richiesta.getDatiNodo());
+                case INSERISCI_FOTO_CONTEST -> pImmagini.insert(richiesta.getDatiImmagine());
             }
         }
         return esito;
     }
+
 
 }
