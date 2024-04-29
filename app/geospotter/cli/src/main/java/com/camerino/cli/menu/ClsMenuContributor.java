@@ -66,7 +66,7 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuModificaNodo(){
-        if(user.visualizzaNodiPosessore()) {
+        if(user.visualizzaNodiPosessore().size()>0) {
             user.visualizzaNodiPosessore();
             println("inserisci l'id del nodo da modificare");
             HashMap<String, Object> tmp = new HashMap<>();
@@ -81,7 +81,7 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuEliminaNodo() { //da mettere su Input
-        if (user.visualizzaNodiPosessore()) {
+        if (user.visualizzaNodiPosessore().size()>0) {
             user.visualizzaNodiPosessore();
             println("inserisci l'id del nodo da eliminare");
             if (user.eliminaNodo((in.nextLine())))

@@ -1,9 +1,6 @@
 package com.camerino.cli.menu;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
@@ -19,6 +16,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
+import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 
 /**
  * Questa classe contiene i menu comuni di input dati
@@ -180,4 +178,34 @@ public class Input
         return partecipanti;
     }
 
+    public static ClsRecensione inserisciRecensione(){
+        ClsRecensione recensione = new ClsRecensione();
+        println("Inserisci l'ID del contenuto da recensire");
+        String idContenuto = in.nextLine();
+        if(idContenuto == null){
+            println("Errore.");
+            return null;
+        }
+        recensione.setIdContenutoAssociato(idContenuto);
+        println("Dai un punteggio da 1 a 5");
+        String punteggio = "+";
+        punteggio += in.nextLine();
+        if(punteggio == "+"){
+            println("Errore.");
+            return null;
+        }
+        recensione.setValutazione(Double.parseDouble(punteggio));
+        println("Scegli un titolo per la recensione");
+        recensione.setOggetto(in.nextLine());
+        println("Aggiungi una descrizione");
+        recensione.setContenuto(in.nextLine());
+        return recensione;
+    }
+    public static ClsRecensione modificaRecensione(ClsRecensione old){
+        println("Scegli una nuova valutazione da 1 a 5");
+        old.setValutazione(Double.parseDouble(in.nextLine()));
+        println("Scegli una nuova descrizione:");
+        old.setContenuto(in.nextLine());
+        return old;
+    }
 }

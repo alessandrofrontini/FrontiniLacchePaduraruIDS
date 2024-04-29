@@ -4,10 +4,9 @@ import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.cli.menu.ClsMenuContributorAuth;
 import com.camerino.cli.menu.ClsMenuGestore;
 import com.camerino.cli.menu.Input;
-import com.camerino.cli.mock.MockComuni;
-import com.camerino.cli.mock.MockLocator;
-import com.camerino.cli.mock.MockSegnalazioni;
-import com.camerino.cli.mock.MockTuristi;
+import com.camerino.cli.mock.*;
+import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
@@ -30,7 +29,7 @@ public class Main {
             print_team();
 
             print_header();
-            //Queste sono le azioni che un turista (non aitenticato) più fare
+            //Queste sono le azioni che un turista (non autenticato) può fare
             ClsConsoleLogger.println("1)Login");
             ClsConsoleLogger.println("2)Lista Comuni");
             ClsConsoleLogger.println("3)Lista nodi di un comune");
@@ -43,8 +42,8 @@ public class Main {
                 }
                 case "1"-> login();
                 case "2"-> listaComuni();
-                case "3"-> ClsConsoleLogger.println("Noop");
-                case "4"-> ClsConsoleLogger.println("Noop");
+                case "3"-> menuListaNodiComune();
+                case "4"-> menuMostraNodo();
                 case "5"-> menuSegnalaNodo();
             }
         }
@@ -53,9 +52,8 @@ public class Main {
     private static void listaComuni()
     {
         MockComuni mockComuni = MockLocator.getMockComuni();
-        for(int i = 0; i < mockComuni.get(null).size(); i++)
-        {
-            System.out.println(mockComuni.get(null).get(i).visualizzaComune());
+        for(ClsComune comune:mockComuni.get(null)){
+            ClsConsoleLogger.println(comune.visualizzaComune());
         }
 
     }
@@ -87,10 +85,27 @@ public class Main {
     private static void menuSegnalaNodo(){
         ClsSegnalazione segnalazione = new ClsSegnalazione();
         ClsConsoleLogger.println("inserisci l'id del nodo");
-        //l'ID del curatore non viene impostato perchè viene inserito quando il curatore prende in carico la richiesta (?)
         segnalazione.setIdContenuto(in.nextLine());
         ClsConsoleLogger.println("fornisci una descrizione");
         segnalazione.setDescrizione(in.nextLine());
+        MockLocator.getMockSegnalazioni().insert(segnalazione);
+        ClsConsoleLogger.println("Segnalazione inserita");
+    }
+
+    private static void menuListaNodiComune(){
+        MockNodi mockNodi = MockLocator.getMockNodi();
+        HashMap<String, Object> filtro = new HashMap<>();
+        ClsConsoleLogger.println("inserisci l'id del comune");
+        filtro.put("idComune", in.nextLine());
+        for(ClsNodo nodo: mockNodi.get(filtro))
+            ClsConsoleLogger.println(nodo.visualizzaNodo());
+    }
+    private static void menuMostraNodo(){
+        MockNodi mockNodi = MockLocator.getMockNodi();
+        HashMap<String, Object> filtro = new HashMap<>();
+        ClsConsoleLogger.println("inserisci l'id del nodo");
+        filtro.put("idComune", in.nextLine());
+        ClsConsoleLogger.println(mockNodi.get(filtro).get(0).visualizzaNodo());
     }
     //region Visualizzazione header e team
     //https://patorjk.com/software/taag/

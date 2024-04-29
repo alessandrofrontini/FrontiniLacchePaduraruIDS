@@ -1,8 +1,10 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.punteggio.IPunteggioManager;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -17,6 +19,7 @@ import java.util.HashMap;
  * E' il ruolo iniziale di un nuovo utente.
  */
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
