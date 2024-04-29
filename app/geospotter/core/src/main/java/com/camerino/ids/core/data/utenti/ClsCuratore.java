@@ -108,7 +108,7 @@ public class ClsCuratore extends ClsAnimatore{
     private void validaModificaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         HashMap<String, Object> id = new HashMap<>();
         id.put("id", richiesta.getDatiItinerarioVecchio().getId());
-        pItinerari.update(id, richiesta.getDatiItinerarioVecchio());
+        pItinerari.update(id, richiesta.getDatiItinerarioNuovo());
         associaCuratoreRichiestaItinerario(richiesta);
     }
     private void validaEliminaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
