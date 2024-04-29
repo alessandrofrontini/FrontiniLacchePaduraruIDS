@@ -4,7 +4,9 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
     String id;
-    ClsItinerario datiItinerario;
+    ClsItinerario datiItinerarioVecchio;
+
+    ClsItinerario datiItinerarioNuovo;
     String usernameCreatore;
 
     public EAzioniDiContribuzione geteAzioniDiContribuzione() {
@@ -25,12 +27,19 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
         this.id = id;
     }
 
-    public ClsItinerario getDatiItinerario() {
-        return datiItinerario;
+    public ClsItinerario getDatiItinerarioVecchio() {
+        return datiItinerarioVecchio;
     }
 
-    public void setDatiItinerario(ClsItinerario datiItinerario) {
-        this.datiItinerario = datiItinerario;
+    public void setDatiItinerarioVecchio(ClsItinerario datiItinerarioVecchio) {
+        this.datiItinerarioVecchio = datiItinerarioVecchio;
+    }
+    public ClsItinerario getDatiItinerarioNuovo() {
+        return datiItinerarioNuovo;
+    }
+
+    public void setDatiItinerarioNuovo(ClsItinerario datiItinerarioNuovo) {
+        this.datiItinerarioNuovo = datiItinerarioNuovo;
     }
 
     public String getUsernameCreatore() {

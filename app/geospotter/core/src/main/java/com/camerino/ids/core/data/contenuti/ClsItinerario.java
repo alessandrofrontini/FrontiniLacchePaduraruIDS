@@ -88,4 +88,9 @@ public class ClsItinerario {
 
         return  dummy;
     }
+
+    public void aggiungiTappa(ClsNodo nodo){
+        this.tappe.add(nodo);
+    }
+    public void rimuoviTappa(ClsNodo nodo){this.tappe.remove(nodo);}
 }

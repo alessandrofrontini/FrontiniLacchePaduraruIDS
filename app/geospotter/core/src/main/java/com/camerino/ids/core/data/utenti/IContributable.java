@@ -13,7 +13,7 @@ public interface IContributable {
     boolean modificaNodo(String id, ClsNodo nodo);
     boolean eliminaNodo(String id);
     boolean inserisciItinerario(ClsItinerario itinerario);
-    boolean modificaItinerario(ClsItinerario itinerario, String id);
+    boolean modificaItinerario(ClsItinerario itinerarionuovo, ClsItinerario itinerariovecchio);
     boolean eliminaItinerario(String id);
     ArrayList<ClsNodo> visualizzaNodiPosessore();
 }

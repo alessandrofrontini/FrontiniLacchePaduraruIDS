@@ -6,7 +6,6 @@ import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -103,18 +102,18 @@ public class ClsCuratore extends ClsAnimatore{
         return esito;
     }
     private void validaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
-        pItinerari.insert(richiesta.getDatiItinerario());
+        pItinerari.insert(richiesta.getDatiItinerarioVecchio());
         associaCuratoreRichiestaItinerario(richiesta);
     }
     private void validaModificaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         HashMap<String, Object> id = new HashMap<>();
-        id.put("id", richiesta.getDatiItinerario().getId());
-        pItinerari.update(id, richiesta.getDatiItinerario());
+        id.put("id", richiesta.getDatiItinerarioVecchio().getId());
+        pItinerari.update(id, richiesta.getDatiItinerarioVecchio());
         associaCuratoreRichiestaItinerario(richiesta);
     }
     private void validaEliminaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         HashMap<String, Object> id = new HashMap<>();
-        id.put("id", richiesta.getDatiItinerario().getId());
+        id.put("id", richiesta.getDatiItinerarioVecchio().getId());
         pItinerari.delete(id);
         associaCuratoreRichiestaItinerario(richiesta);
     }

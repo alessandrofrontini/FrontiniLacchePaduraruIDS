@@ -16,22 +16,12 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
-    //rec segn imm n it
-    IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCD;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDI;
-    IPersistenceModel<ClsContestDiContribuzione> pContest;
-    IPersistenceModel<ClsNodo> pNodi;
-    IPersistenceModel<ClsItinerario> pItinerari;
     Scanner in = new Scanner(System.in);
-    public ClsMenuContributor(ClsContributor contributor){ user = contributor;}
     @Override
     public void menu() {
 //TODO: implementare
         boolean exit = false;
-        user = new ClsContributor(pRecensioni, pSegnalazioni, pRCD, pRCDI, pNodi, pItinerari);
+        user = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
         user.setId("1");
         user.setPunteggio(200); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());
@@ -66,7 +56,7 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuModificaNodo(){
-        if(user.visualizzaNodiPosessore().size()>0) {
+        if(!user.visualizzaNodiPosessore().isEmpty()) {
             user.visualizzaNodiPosessore();
             println("inserisci l'id del nodo da modificare");
             HashMap<String, Object> tmp = new HashMap<>();
@@ -81,8 +71,10 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuEliminaNodo() { //da mettere su Input
-        if (user.visualizzaNodiPosessore().size()>0) {
-            user.visualizzaNodiPosessore();
+        if (!user.visualizzaNodiPosessore().isEmpty()) {
+            for(ClsNodo nodo:user.visualizzaNodiPosessore()){
+                println(nodo.visualizzaNodo());
+            }
             println("inserisci l'id del nodo da eliminare");
             if (user.eliminaNodo((in.nextLine())))
                 println("Nodo eliminato correttamente.");
@@ -95,16 +87,86 @@ public class ClsMenuContributor implements IMenu{
     }
 
     private void menuModificaItinerario(){
-        //TODO: inserire "visualizza itinerari possessore" e mettere su Input
+        for(ClsItinerario itinerario:user.visualizzaItinerariPossessore())
+            println(itinerario.visualizzaItinerario());
         println("inserisci l'id dell'itinerario");
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", in.nextLine());
         ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
         if(itinerario != null)
-            user.modificaItinerario(itinerario, itinerario.getId());
+            sottomenuModificaItinerario(itinerario);
         else println("Errore");
     }
-
+    private void sottomenuModificaItinerario(ClsItinerario itv){
+        ClsItinerario nuovo = itv;
+        boolean exit = false;
+        while(!exit){
+            println("1 - cambia nome");
+            println("2 - aggiungi una tappa");
+            println("3 - rimuovi una tappa");
+            println("4 - attiva/disattiva l'ordinamento");
+            println("0 - Salva ed esci dal menu");
+            switch(in.nextLine()){
+                case "1": print("inserisci il nuovo nome: "); nuovo.setNome(in.nextLine()); break;
+                case "2": {
+                        print("inserisci l'id della nuova tappa");
+                        String idTappa = in.nextLine();
+                        HashMap<String, Object> filtro = new HashMap<>();
+                        filtro.put("id", idTappa);
+                        if(controllaTappaDuplicataItinerario(itv, idTappa)){
+                            nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
+                            break;
+                        }
+                        else{
+                            println("Errore."); break;
+                        }
+                }
+                case "3":{
+                    for(ClsNodo nodo: nuovo.getTappe()){
+                        println(nodo.visualizzaNodo());
+                    }
+                    print("Inserisci l'id della tappa da eliminare");
+                    String idTappa = in.nextLine();
+                    if(!controllaTappaDuplicataItinerario(nuovo, idTappa)){
+                        HashMap<String, Object> filtro = new HashMap<>();
+                        filtro.put("id", idTappa);
+                        nuovo.rimuoviTappa(MockLocator.getMockNodi().get(filtro).get(0));
+                        break;
+                    }
+                    else{
+                        println("Errore.");
+                        break;
+                    }
+                }
+                case "4":{
+                    print("Attualmente l'itinerario è: ");
+                    if(nuovo.isOrdinato())
+                        print("Ordinato.");
+                    else print("Non ordinato.");
+                    println("Vuoi modificare l'ordinamento? Y/N");
+                    String esito = in.nextLine();
+                    if(esito == "Y"){
+                        nuovo.setOrdinato(!nuovo.isOrdinato());
+                        println("L'ordinamento è stato cambiato");
+                    }
+                    else println("non sono state apportate modifiche.");
+                    break;
+                }
+                case "0": {
+                    user.modificaItinerario(nuovo, itv);
+                    exit = true;
+                    break;
+                }
+            }
+        }
+    }
+    private boolean controllaTappaDuplicataItinerario(ClsItinerario itinerario, String idTappa){
+        for(ClsNodo nodo:itinerario.getTappe()){
+            if(nodo.getId() == idTappa)
+                return false;
+        }
+        return true;
+    }
     private void menuEliminaItinerario(){
         println("inserisci l'id dell'itinerario");
         HashMap<String, Object> tmp = new HashMap<>();
@@ -142,11 +204,4 @@ public class ClsMenuContributor implements IMenu{
         //TODO: collegare nodo a contest
     }
 
-    private void menuVisualizzaContestAperti(){
-        for(ClsContestDiContribuzione c:pContest.get(null)){
-            if(c.isAperto()){
-                println("Contest - ID -> " + c.getId() + ", Luogo -> " + c.getLocation().getNome() + ", durata -> " + c.getDataFine());
-            }
-        }
-    }
 }

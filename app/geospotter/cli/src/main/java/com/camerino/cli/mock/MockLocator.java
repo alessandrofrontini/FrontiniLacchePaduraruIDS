@@ -9,6 +9,7 @@ public class MockLocator {
     private static MockRecensioni mockRecensioni = new MockRecensioni();
     private static MockImmagini mockImmagini = new MockImmagini();
     private static MockRCDNodi mockRCD = new MockRCDNodi();
+    private static MockRCDItinerarii mockRCDI = new MockRCDItinerarii();
 
     public static MockNodi getMockNodi() {
         return mockNodi;
@@ -29,4 +30,5 @@ public class MockLocator {
     public static MockRecensioni getMockRecensioni(){return mockRecensioni;}
     public static MockImmagini getMockImmagini(){return mockImmagini;}
     public static MockRCDNodi getMockRCD(){return mockRCD;}
+    public static MockRCDItinerarii getMockRCDI(){return mockRCDI;}
 }

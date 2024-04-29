@@ -69,16 +69,8 @@ public class ClsContributorAutorizzato extends ClsContributor {
         return pItinerari.insert(itinerario);
     }
 
-    /**
-     * Modifica direttamente un itinerario.
-     *
-     * @param itinerario Itinerario modificato
-     * @param id Id dell'itinerario da modificare
-     * @return True se la modifica ha successo,
-     *         False altrimenti.
-     */
     @Override
-    public boolean modificaItinerario(ClsItinerario itinerario, String id) {
+    public boolean modificaItinerario(ClsItinerario itinerario, ClsItinerario itinerariovecchio) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
         return pItinerari.update(tmp, itinerario);

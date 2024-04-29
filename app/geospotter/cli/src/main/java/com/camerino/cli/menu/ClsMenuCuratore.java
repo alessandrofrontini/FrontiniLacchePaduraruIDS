@@ -1,21 +1,17 @@
 package com.camerino.cli.menu;
-import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
-import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
 
 import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.cli.mock.MockNodi;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static com.camerino.cli.actions.ClsCommonActions.*;
-        import static com.camerino.cli.loggers.ClsConsoleLogger.print;
+import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuCuratore implements IMenu{
     IPersistenceModel<ClsRecensione> r;
@@ -83,7 +79,7 @@ public class ClsMenuCuratore implements IMenu{
                     ClsRichiestaAzioneDiContribuzioneItinerario rit = pRCDItinerari.get(filtro).get(0);
                     println("Tipo richiesta -> " + rit.geteAzioniDiContribuzione());
                     println("Tappe itinerario:");
-                    for(ClsNodo n: rit.getDatiItinerario().getTappe()){
+                    for(ClsNodo n: rit.getDatiItinerarioVecchio().getTappe()){
                         println(n.toString());
                     }
                     println("Validare? Y/N");
