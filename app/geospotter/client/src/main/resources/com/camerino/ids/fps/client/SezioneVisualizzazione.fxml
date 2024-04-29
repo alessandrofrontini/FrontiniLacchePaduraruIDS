@@ -55,7 +55,10 @@
       <ComboBox fx:id="sezioneVisualizzazioneSceltaAzione" accessibleText="&#10;" editable="true" layoutX="90.0" layoutY="110.0" prefHeight="26.0" prefWidth="323.0" promptText="AzioniDiContribuzione">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="InserisciNodo" />
+                  <String fx:value="Inserisci Nodo" />
+                  <String fx:value="Modifica Nodo" />
+                  <String fx:value="Elimina Nodo" />
+                  <String fx:value="Inserisci Itinerario" />
               </FXCollections>
           </items>
       </ComboBox>

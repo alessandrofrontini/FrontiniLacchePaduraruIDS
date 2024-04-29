@@ -1,49 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import javafx.collections.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="762.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaNodi">
-    <children>
-        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICA NODI" wrappingWidth="260.15380859375">
-            <font>
-                <Font size="28.0" />
-            </font>
-        </Text>
-        <ComboBox fx:id="sezioneModificaNodiComboBox" layoutX="72.0" layoutY="344.0" prefHeight="26.0" prefWidth="586.0" promptText="ID nodo da eliminare">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="1" />
-                    <String fx:value="2" />
-                    <String fx:value="3" />
-                </FXCollections>
-            </items>
-        </ComboBox>
-        <Button fx:id="sezioneModificaNodiBTNConferma" layoutX="285.0" layoutY="381.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Conferma" />
-        <TableView fx:id="sezioneModificaNodiElenco" layoutX="24.0" layoutY="135.0" prefHeight="199.0" prefWidth="682.0">
-            <columns>
-                <TableColumn prefWidth="75.0" text="ID" />
-                <TableColumn prefWidth="104.19998168945312" text="Nome" />
-                <TableColumn prefWidth="152.5999755859375" text="Comune Associato" />
-                <TableColumn prefWidth="77.39997863769531" text="Tipo" />
-                <TableColumn prefWidth="124.20001220703125" text="Temporizzato" />
-                <TableColumn prefWidth="147.79998779296875" text="Posizione" />
-            </columns>
-        </TableView>
-        <TextField fx:id="sezioneInserimentoNodiNome" layoutX="25.0" layoutY="472.0" prefHeight="26.0" prefWidth="342.0" promptText="Nome del nodo" />
-        <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="717.876953125" />
-        <TextField fx:id="sezioneInserimentoNodiPosizioneX" layoutX="25.0" layoutY="553.0" prefHeight="26.0" prefWidth="162.0" promptText="Coord. X" />
-        <TextField fx:id="sezioneInserimentoNodiPosizioneY" layoutX="195.0" layoutY="553.0" prefHeight="26.0" prefWidth="170.0" promptText="Coord. Y" />
-        <TextField fx:id="sezioneInserimentoNodiComuneAssociato" layoutX="25.0" layoutY="510.0" prefHeight="26.0" prefWidth="342.0" promptText="IDComuneAssociato" />
-        <CheckBox layoutX="25.0" layoutY="637.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="101.0" text="Temporizzato" />
-        <TextField fx:id="sezioneInserimentoNodiDataInizio" layoutX="378.0" layoutY="553.0" prefHeight="26.0" prefWidth="162.0" promptText="Data di Inizio" />
-        <TextField fx:id="sezioneInserimentoNodiDataFine" layoutX="548.0" layoutY="553.0" prefHeight="26.0" prefWidth="170.0" promptText="Data di Fine" />
-        <ComboBox layoutX="386.0" layoutY="472.0" prefHeight="26.0" prefWidth="306.0" promptText="Tipologia del Nodo" />
-        <TextField fx:id="sezioneInserimentoNodiDescrizione" layoutX="25.0" layoutY="593.0" prefHeight="26.0" prefWidth="342.0" promptText="Descrizione" />
-        <Button fx:id="sezioneInserimentoNodiBTNhome" layoutX="27.0" layoutY="703.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="162.0" text="Home" />
-        <Button layoutX="377.0" layoutY="593.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="342.0" text="Conferma" />
-    </children>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaNodi"
+            prefHeight="400.0" prefWidth="600.0">
+
 </AnchorPane>

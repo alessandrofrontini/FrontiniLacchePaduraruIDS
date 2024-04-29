@@ -11,6 +11,7 @@
             <Font size="28.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <TextField layoutX="14.0" layoutY="163.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome del nodo" />
       <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="717.876953125" />
       <TextField layoutX="14.0" layoutY="243.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. X" />
@@ -22,5 +23,19 @@
       <ComboBox layoutX="460.0" layoutY="243.0" prefHeight="26.0" prefWidth="260.0" promptText="Tipologia del Nodo" />
       <TextField layoutX="14.0" layoutY="287.0" prefHeight="26.0" prefWidth="260.0" />
       <Button layoutX="34.0" layoutY="530.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Home" />
+=======
+      <TextField fx:id="sezioneInserimentoNodiNome" layoutX="20.0" layoutY="172.0" prefHeight="26.0" prefWidth="342.0" promptText="Nome del nodo" />
+      <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="717.876953125" />
+      <TextField fx:id="sezioneInserimentoNodiPosizioneX" layoutX="20.0" layoutY="253.0" prefHeight="26.0" prefWidth="162.0" promptText="Coord. X" />
+      <TextField fx:id="sezioneInserimentoNodiPosizioneY" layoutX="190.0" layoutY="253.0" prefHeight="26.0" prefWidth="170.0" promptText="Coord. Y" />
+      <TextField fx:id="sezioneInserimentoNodiComuneAssociato" layoutX="20.0" layoutY="210.0" prefHeight="26.0" prefWidth="342.0" promptText="IDComuneAssociato" />
+      <CheckBox layoutX="20.0" layoutY="337.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="101.0" text="Temporizzato" />
+      <TextField fx:id="sezioneInserimentoNodiDataInizio" layoutX="373.0" layoutY="253.0" prefHeight="26.0" prefWidth="162.0" promptText="Data di Inizio" />
+      <TextField fx:id="sezioneInserimentoNodiDataFine" layoutX="543.0" layoutY="253.0" prefHeight="26.0" prefWidth="170.0" promptText="Data di Fine" />
+      <ComboBox layoutX="381.0" layoutY="172.0" prefHeight="26.0" prefWidth="306.0" promptText="Tipologia del Nodo" />
+      <TextField fx:id="sezioneInserimentoNodiDescrizione" layoutX="20.0" layoutY="293.0" prefHeight="26.0" prefWidth="342.0" promptText="Descrizione" />
+      <Button fx:id="sezioneInserimentoNodiBTNhome" layoutX="25.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="91.0" text="Home" />
+      <Button layoutX="372.0" layoutY="293.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="342.0" text="Conferma" />
+>>>>>>> parent of dec0096 (.)
    </children>
 </AnchorPane>
