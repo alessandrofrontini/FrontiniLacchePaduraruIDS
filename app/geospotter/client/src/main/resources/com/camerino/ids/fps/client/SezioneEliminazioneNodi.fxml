@@ -7,12 +7,15 @@
 <?import javafx.scene.layout.*?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.camerino.ids.fps.client.Controller_SezioneEliminazioneNodi"
             prefHeight="400.0" prefWidth="600.0">
 
 =======
+=======
+>>>>>>> parent of dec0096 (.)
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneEliminazioneNodi">
     <children>
         <Text layoutX="14.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ELIMINAZIONE NODI" wrappingWidth="276.15380859375">

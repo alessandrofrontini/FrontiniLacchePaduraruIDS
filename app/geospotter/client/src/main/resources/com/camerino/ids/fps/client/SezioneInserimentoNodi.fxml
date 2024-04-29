@@ -11,6 +11,7 @@
             <Font size="28.0" />
          </font>
       </Text>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
       <TextField layoutX="14.0" layoutY="163.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome del nodo" />
@@ -25,6 +26,8 @@
       <TextField layoutX="14.0" layoutY="287.0" prefHeight="26.0" prefWidth="260.0" />
       <Button layoutX="34.0" layoutY="530.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="91.0" text="Home" />
 =======
+=======
+>>>>>>> parent of dec0096 (.)
       <TextField fx:id="sezioneInserimentoNodiNome" layoutX="20.0" layoutY="172.0" prefHeight="26.0" prefWidth="342.0" promptText="Nome del nodo" />
       <Text layoutX="14.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. &#10;Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo &#10;prese una cassetta di caratteri e li assemblò per preparare un testo campione. &#10;" wrappingWidth="717.876953125" />
       <TextField fx:id="sezioneInserimentoNodiPosizioneX" layoutX="20.0" layoutY="253.0" prefHeight="26.0" prefWidth="162.0" promptText="Coord. X" />
@@ -37,6 +40,7 @@
       <TextField fx:id="sezioneInserimentoNodiDescrizione" layoutX="20.0" layoutY="293.0" prefHeight="26.0" prefWidth="342.0" promptText="Descrizione" />
       <Button fx:id="sezioneInserimentoNodiBTNhome" layoutX="25.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="91.0" text="Home" />
       <Button layoutX="372.0" layoutY="293.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="342.0" text="Conferma" />
+<<<<<<< HEAD
 >>>>>>> parent of dec0096 (.)
 =======
       <TextField layoutX="12.0" layoutY="208.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome del nodo" />
@@ -52,5 +56,7 @@
       <Button layoutX="34.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="91.0" text="Home" />
       <Button layoutX="211.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#inserisciNodo" prefHeight="26.0" prefWidth="199.0" text="Conferma" />
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of dec0096 (.)
    </children>
 </AnchorPane>

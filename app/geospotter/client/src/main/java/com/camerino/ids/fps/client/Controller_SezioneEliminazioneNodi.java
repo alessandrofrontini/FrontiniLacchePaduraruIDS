@@ -1,9 +1,12 @@
 package com.camerino.ids.fps.client;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
 public class Controller_SezioneEliminazioneNodi {
 =======
+=======
+>>>>>>> parent of dec0096 (.)
 
 import javafx.beans.property.StringProperty;
 =======
@@ -14,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +28,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 >>>>>>> Stashed changes
+=======
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+>>>>>>> parent of dec0096 (.)
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -47,6 +58,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
     @FXML
     TableView sezioneEliminazioneNodiElenco;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
     public void eliminaNodo()
     {
@@ -68,21 +80,28 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
     @FXML
     private TableColumn<Object, String> posizione;
 
+=======
+>>>>>>> parent of dec0096 (.)
     public void eliminaNodo()
     {
-        String azione = this.getValueFromCombobox(sezioneEliminazioneNodiComboBox);
 
+<<<<<<< HEAD
         Alert alert = new Alert (Alert.AlertType.WARNING);
         alert.setTitle(azione);
         alert.setContentText(azione);
         alert.show();
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of dec0096 (.)
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> parent of dec0096 (.)
         ArrayList<String> test = new ArrayList<String>();
 
         test.add("NODO 1");
@@ -93,9 +112,12 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
 
         }
 
+<<<<<<< HEAD
 =======
         //metti tutto qua dentro, si precarica
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of dec0096 (.)
     }
 
     //region Navigazione
@@ -123,6 +145,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
     //endregion
 
     //endregion
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 >>>>>>> parent of dec0096 (.)
 =======
@@ -134,4 +157,6 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
     }
     //endregion
 >>>>>>> Stashed changes
+=======
+>>>>>>> parent of dec0096 (.)
 }

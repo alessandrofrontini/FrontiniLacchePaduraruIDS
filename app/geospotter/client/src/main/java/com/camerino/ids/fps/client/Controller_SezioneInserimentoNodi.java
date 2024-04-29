@@ -39,7 +39,6 @@ public class Controller_SezioneInserimentoNodi
 =======
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,10 +48,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
+<<<<<<< HEAD
 
     public class Controller_SezioneInserimentoNodi implements Initializable
     {
@@ -70,6 +68,29 @@ import java.util.ResourceBundle;
         }
         public void inserisciNodo()
         {
+=======
+public class Controller_SezioneInserimentoNodi
+{
+    @FXML
+    TextField sezioneInserimentoNodiNome,sezioneInserimentoNodiComuneAssociato,sezioneInserimentoNodiPosizioneX,sezioneInserimentoNodiPosizioneY,sezioneInserimentoNodiDescrizione,sezioneInserimentoNodiDataInizio,sezioneInserimentoNodiDataFine;
+    @FXML
+    CheckBox sezioneInserimentoNodiIsTemporizzato;
+
+    public void inserisciNodo()
+    {
+        String Nome = this.getNameFromTextField(sezioneInserimentoNodiNome);
+        String ComuneAssociato = this.getNameFromTextField(sezioneInserimentoNodiComuneAssociato);
+        String PosizioneX = this.getNameFromTextField(sezioneInserimentoNodiPosizioneX);
+        String PosizioneY = this.getNameFromTextField(sezioneInserimentoNodiPosizioneY);
+        String Descrizione = this.getNameFromTextField(sezioneInserimentoNodiDescrizione);
+
+        if(this.sezioneInserimentoNodiIsTemporizzato.isSelected())
+            {
+                String DataInizio = this.getNameFromTextField(sezioneInserimentoNodiDataInizio);
+                String DataFine = this.getNameFromTextField(sezioneInserimentoNodiDataFine);
+                boolean isTemporizzato = true;
+            }
+>>>>>>> parent of dec0096 (.)
 
             String Nome = this.getNameFromTextField(sezioneInserimentoNodiNome);
             String ComuneAssociato = this.getNameFromTextField(sezioneInserimentoNodiComuneAssociato);
