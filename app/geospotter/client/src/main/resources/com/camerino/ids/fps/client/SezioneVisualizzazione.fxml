@@ -58,7 +58,10 @@
                   <String fx:value="Inserisci Nodo" />
                   <String fx:value="Modifica Nodo" />
                   <String fx:value="Elimina Nodo" />
+<<<<<<< Updated upstream
                   <String fx:value="Inserisci Itinerario" />
+=======
+>>>>>>> Stashed changes
               </FXCollections>
           </items>
       </ComboBox>

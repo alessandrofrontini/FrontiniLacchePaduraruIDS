@@ -26,20 +26,34 @@ public class Controller_SezioneVisualizzazione
 
     public void reindirizzaToAzioneScelta(MouseEvent mouseEvent)
     {
-       String azione = this.getValueFromCombobox(sezioneVisualizzazioneSceltaAzione);
+        String azione = this.getValueFromCombobox(sezioneVisualizzazioneSceltaAzione);
 
-        if( azione.equals("InserisciNodo") )
+        if(azione == null)
         {
-            this.navigateToSezioneInserimentoNodi(mouseEvent);
+            azione = "";
         }
 
+        switch (azione)
+        {
+            case "":
+                Alert alert = new Alert (Alert.AlertType.WARNING);
+                alert.setTitle("Attenzione");
+                alert.setContentText("Devi selezionare almeno un' azione");
+                alert.show();
+                break;
 
-//        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-//        alert.setTitle(azione);
-//        alert.setContentText("--"+azione+"--");
-//        alert.show();
+            case "Inserisci Nodo":
+                this.navigateToSezioneInserimentoNodi(mouseEvent);
+                break;
 
+            case "Modifica Nodo":
+                this.navigateToSezioneModificaNodi(mouseEvent);
+                break;
 
+            case "Elimina Nodo":
+                this.navigateToSezioneEliminazioneNodi(mouseEvent);
+                break;
+        }
     }
 
     //region Navigazione
@@ -47,9 +61,17 @@ public class Controller_SezioneVisualizzazione
     {
         this.SwitchScene("SezioneInserimentoNodi.fxml",mouseEvent);
     }
+    public void navigateToSezioneModificaNodi (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneModificaNodi.fxml",mouseEvent);
+    }
+    public void navigateToSezioneEliminazioneNodi (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneEliminazioneNodi.fxml",mouseEvent);
+    }
     public void navigateToSezioneRegistrazione(MouseEvent mouseEvent)
     {
-       this.SwitchScene("SezioneRegistrazione.fxml", mouseEvent);
+        this.SwitchScene("SezioneRegistrazione.fxml", mouseEvent);
     }
 
     public void navigateToSezioneLogin(MouseEvent mouseEvent)
@@ -82,7 +104,7 @@ public class Controller_SezioneVisualizzazione
     //region Utilities
     private String getValueFromCombobox (ComboBox c)
     {
-       return (String) c.getValue();
+        return (String) c.getValue();
     }
     //endregion
 
