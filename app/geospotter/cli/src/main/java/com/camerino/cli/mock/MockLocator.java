@@ -4,12 +4,14 @@ public class MockLocator {
     private static MockNodi mockNodi = new MockNodi();
     private static MockComuni mockComuni = new MockComuni();
     private static MockTuristi mockTuristi = new MockTuristi();
+    private static MockRCDItinerarii mockRCDI = new MockRCDItinerarii();
     private static MockItinerari mockItinerari = new MockItinerari(mockNodi);
     private static MockSegnalazioni mockSegnalazioni = new MockSegnalazioni();
     private static MockRecensioni mockRecensioni = new MockRecensioni();
     private static MockImmagini mockImmagini = new MockImmagini();
+
     private static MockRCDNodi mockRCD = new MockRCDNodi();
-    private static MockRCDItinerarii mockRCDI = new MockRCDItinerarii();
+
 
     public static MockNodi getMockNodi() {
         return mockNodi;

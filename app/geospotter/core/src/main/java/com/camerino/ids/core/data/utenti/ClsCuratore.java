@@ -62,8 +62,8 @@ public class ClsCuratore extends ClsAnimatore{
         return esito;
     }
     private void validaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
-        pNodi.insert(richiesta.getDatiNodo());
         associaCuratoreRichiesta(richiesta);
+        pNodi.insert(richiesta.getDatiNodo());
     }
     private void validaImmagine(ClsRichiestaAzioneDiContribuzione richiesta){
         pImmagini.insert(richiesta.getDatiImmagine());

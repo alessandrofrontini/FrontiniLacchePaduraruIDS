@@ -96,7 +96,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
         req.setUsernameCreatore(this.getCredenziali().getUsername());
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        req.setDatiItinerarioVecchio(itinerario);
+        req.setDatiItinerarioNuovo(itinerario);
         return pRDCI.insert(req);
     }
     @Override

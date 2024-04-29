@@ -5,7 +5,6 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
     String id;
     ClsItinerario datiItinerarioVecchio;
-
     ClsItinerario datiItinerarioNuovo;
     String usernameCreatore;
 
