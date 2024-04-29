@@ -1,10 +1,20 @@
 package com.camerino.ids.core.data.contenuti;
 
+import org.hibernate.annotations.UuidGenerator;
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsInformazione
 {
+    @Id
+    @UuidGenerator
     String id;
     String usernameCreatore;
 

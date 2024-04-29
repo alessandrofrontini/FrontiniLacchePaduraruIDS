@@ -1,9 +1,14 @@
 package com.camerino.ids.core.data.segnalazioni;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsSegnalazione {
+    @Id
     long id;
     long idContenuto;
     long idCuratore;

@@ -2,15 +2,17 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import jakarta.persistence.Entity;
 
 /**
  * Questo ruolo ha potere assoluto.
  * Viene assegnato soltanto ai creatori della piattaforma.
  * Non è possibile diventare Gestore della Piattaforma tramite sistema a punteggi.
  */
+@Entity
 public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator
 {
-    IPersistenceModel<ClsComune> mockComuni;
+    transient IPersistenceModel<ClsComune> mockComuni;
 
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)

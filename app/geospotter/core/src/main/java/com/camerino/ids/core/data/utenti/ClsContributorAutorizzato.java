@@ -3,6 +3,7 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -79,6 +80,10 @@ public class ClsContributorAutorizzato extends ClsContributor {
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
+    }
+
+    public ArrayList<ClsNodo> getNodi(HashMap<String, Object> filters){
+        return pNodi.get(filters);
     }
 //endregion
 }

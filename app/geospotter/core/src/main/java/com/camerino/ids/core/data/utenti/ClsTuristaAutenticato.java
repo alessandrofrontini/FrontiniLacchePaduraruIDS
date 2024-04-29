@@ -2,6 +2,12 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
+import com.camerino.ids.core.persistence.convertors.ConvPosizione;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * Ruolo associato ad un utente autenticato base.
@@ -9,6 +15,7 @@ import com.camerino.ids.core.data.utils.Credenziali;
  * modificare ed eliminare le proprie recensioni nella piattaforma.
  * E' il ruolo iniziale di un nuovo utente.
  */
+@Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
     /**
      * Contiene i diversi ruoli nella piattaforma
@@ -32,8 +39,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             this.value = value;
         }
     }
-
+    @Id
+    @UuidGenerator
     String id;
+    @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;

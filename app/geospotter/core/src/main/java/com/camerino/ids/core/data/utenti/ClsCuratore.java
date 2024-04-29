@@ -1,11 +1,14 @@
 package com.camerino.ids.core.data.utenti;
 
+import jakarta.persistence.Entity;
+
 /**
  * Questo ruolo accetta o respinge le richieste fatte dai vari utenti.
  * Ha anche la possibilità di regolare le autorizzazioni (ruoli) associati ai
  * vari utenti, per governare il loro comportamento.
  * Non è possibile diventare Curatore tramite sistema a punteggi.
  */
+@Entity
 public class ClsCuratore extends ClsAnimatore{
     //TODO: Ha senso? é una relazione molti a molti dovremmo creare una classe
     // che associa comuni e curatori. Se un utente arriva ad essere curatore in pi comuni

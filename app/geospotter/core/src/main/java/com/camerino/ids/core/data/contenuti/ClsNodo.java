@@ -1,8 +1,12 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.Entity;
+import org.springframework.stereotype.Component;
+
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsNodo extends ClsContenuto{
 
     //region Tipologia nodo (enumerazione)

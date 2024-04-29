@@ -1,15 +1,21 @@
 package com.camerino.ids.core.data.contenuti;
 
 import com.camerino.ids.core.data.utenti.ClsCuratore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  * Contiene i dati di un comune
  */
+@Entity
 public class ClsComune extends ClsContenuto
 {
     String usernameCreatore = "ADMIN";
     int abitanti;
     double superficie;
+    @OneToOne
+    @JoinColumn(name="")//TODO: associazione
     ClsCuratore[] curatoriAssociati;
 
     //region Getter e setter

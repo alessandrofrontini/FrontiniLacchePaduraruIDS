@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import jakarta.persistence.Entity;
 
 import java.util.HashMap;
 
@@ -18,12 +19,13 @@ import java.util.HashMap;
  * Si diventa contributor a 50+ punti.
  *
  */
+@Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
-    IPersistenceModel<ClsNodo> pNodi;
-    IPersistenceModel<ClsItinerario> pItinerari;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    transient IPersistenceModel<ClsNodo> pNodi;
+    transient IPersistenceModel<ClsItinerario> pItinerari;
+    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {

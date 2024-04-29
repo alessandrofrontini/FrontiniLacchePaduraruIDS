@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+        ClsNodo a = new ClsNodo();
         launch();
     }
 }
