@@ -37,7 +37,7 @@ public class ClsMenuContributorAuth implements IMenu{
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsContributorAutorizzato(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari);
+        user = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
         user.setId("1");
         user.setPunteggio(666);
         user.setCredenziali(new Credenziali());

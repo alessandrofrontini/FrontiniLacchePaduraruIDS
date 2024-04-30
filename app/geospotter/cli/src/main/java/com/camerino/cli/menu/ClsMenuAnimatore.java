@@ -35,9 +35,9 @@ public class ClsMenuAnimatore implements IMenu{
     public ClsMenuAnimatore(ClsAnimatore animatore){user = animatore;}
     @Override
     public void menu() {
-        //TODO: implementare
         boolean exit = false;
-        user = new ClsAnimatore(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest);
+        //CREARE NUOVA MOCK PER CONTEST e CONTINUARE SOSTITUZIONE CON MOCK
+        user = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), contest);
         user.setId("1");
         user.setPunteggio(500); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());
