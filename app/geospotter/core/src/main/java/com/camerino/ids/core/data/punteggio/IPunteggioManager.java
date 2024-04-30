@@ -8,7 +8,7 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
  */
 public interface IPunteggioManager {
     void guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, String idUtente);
-    void saliDiLivello(String idUtente);
+    boolean saliDiLivello(String idUtente);
     void scendiDiLivello(String idUtente);
     void resetLivello(String idUtente);
 }
