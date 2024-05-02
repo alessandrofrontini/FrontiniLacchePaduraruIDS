@@ -2,16 +2,13 @@ package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.io.FileReader;
-import java.lang.reflect.Array;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * Classe che emula molto semplicemente
@@ -23,7 +20,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     public MockComuni()
     {
-        this.generaComuni();
+        this.leggiComuni();
     }
 
     @Override
@@ -102,7 +99,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
 //SPLITTARE PER \r\n, ; e ,
-    private void generaComuni()
+    private void leggiComuni()
     {
         try {
             FileReader input = new FileReader("comuni.txt");
@@ -135,6 +132,19 @@ public class MockComuni implements IPersistenceModel<ClsComune>
             }
         } catch (Exception e){
             ClsConsoleLogger.println("File non trovato.");
+        }
+
+    }
+
+    private void scriviComuni(){
+        try {
+            FileWriter output = new FileWriter("comuni.txt");
+            StringBuilder daScrivere = new StringBuilder("");
+            for(ClsComune comune:comuni){
+                daScrivere.append(comune.getId());
+            }
+        } catch(Exception e){
+            ClsConsoleLogger.println("Errore");
         }
 
     }
