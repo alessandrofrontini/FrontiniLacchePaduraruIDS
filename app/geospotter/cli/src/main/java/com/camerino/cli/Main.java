@@ -20,10 +20,9 @@ public class Main {
     //Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
     public static void main(String[] args)
     {
+        print_team();
+        print_header();
         while (true) {
-            print_team();
-
-            print_header();
             //Queste sono le azioni che un turista (non autenticato) può fare
             ClsConsoleLogger.println("1)Login");
             ClsConsoleLogger.println("2)Lista Comuni");
@@ -50,6 +49,7 @@ public class Main {
         for(ClsComune comune:mockComuni.get(null)){
             ClsConsoleLogger.println(comune.visualizzaComune());
         }
+
 
     }
 
