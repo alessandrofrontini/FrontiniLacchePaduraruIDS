@@ -62,6 +62,10 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
         }
         return esito;
     }
-
+    public ArrayList<ClsContestDiContribuzione> visualizzaContestPossessore(){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("usernameCreatore", this.credenziali.getUsername());
+        return pContest.get(filtro);
+    }
 
 }

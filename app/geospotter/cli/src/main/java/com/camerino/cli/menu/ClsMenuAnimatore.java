@@ -1,5 +1,6 @@
 package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.*;
@@ -13,6 +14,8 @@ import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.cli.mock.MockNodi;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -22,22 +25,12 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuAnimatore implements IMenu{
     private ClsAnimatore user;
     Scanner in = new Scanner(System.in);
-    IPersistenceModel<ClsContributor> pUtentiContest;
-    IPersistenceModel<ClsRecensione> r;
-    IPersistenceModel<ClsSegnalazione> s;
-    IPersistenceModel<ClsImmagine> i;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari;
-    IPersistenceModel<ClsNodo> nodi;
-    IPersistenceModel<ClsItinerario> itinerari;
-    IPersistenceModel<ClsContestDiContribuzione> contest;
 
     public ClsMenuAnimatore(ClsAnimatore animatore){user = animatore;}
     @Override
     public void menu() {
         boolean exit = false;
-        //CREARE NUOVA MOCK PER CONTEST e CONTINUARE SOSTITUZIONE CON MOCK
-        user = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), contest);
+        user = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest());
         user.setId("1");
         user.setPunteggio(500); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());
@@ -63,9 +56,48 @@ public class ClsMenuAnimatore implements IMenu{
         user.creaContest(Input.creaContest());
     }
     private void menuCreaContestChiuso(){
-        user.creaContestChiuso(Input.creaContest(), Input.invitaUtenti(pUtentiContest));
+        user.creaContestChiuso(Input.creaContest(), Input.invitaUtenti(filtraUtentiContest()));
+    }
+    private ArrayList<ClsContributor> filtraUtentiContest(){
+        ArrayList<ClsContributor> contributors = new ArrayList<>();
+        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
+            if(t.getRuoloUtente() == ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR){
+                contributors.add((ClsContributor) t);
+            }
+        }
+        return contributors;
     }
     private void menuValidaContenutiContest(){
-        //TODO: non fatto perchè manca la diversificazione per le azioni di contribuzione del contest
+        println("ID dei miei contest:");
+        for(ClsContestDiContribuzione c:user.visualizzaContestPossessore()){
+            println(c.getId());
+        }
+        print("Seleziona l'id: ");
+        String input = in.nextLine();
+        if(input != null){
+            println("richieste:");
+            ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = MockLocator.getMockRCD().get(null);
+            int i = 0;
+            for(ClsRichiestaAzioneDiContribuzione r:richieste){
+                if(r.getDatiNodo().getIdContest() == input){
+                    println(i + " - n. " + r.getId());
+                    i++;
+                }
+            }
+            input = in.nextLine();
+            if(input != null){
+                println("richiesta n. " + input);
+                ClsRichiestaAzioneDiContribuzione richiesta = richieste.get(Integer.parseInt(input));
+                richiesta.getDatiNodo().visualizzaNodo();
+                println("Validare?Y/N");
+                input = in.nextLine();
+                if(input == "Y")
+                    user.validaContenutoContest(richiesta, true);
+                else
+                    user.validaContenutoContest(richiesta, true);
+            }
+            else println("Errore.");
+        }
+        else println("Errore.");
     }
 }

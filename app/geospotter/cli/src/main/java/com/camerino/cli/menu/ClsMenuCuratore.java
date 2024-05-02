@@ -1,4 +1,5 @@
 package com.camerino.cli.menu;
+import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.*;
@@ -14,16 +15,6 @@ import java.util.Scanner;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuCuratore implements IMenu{
-    IPersistenceModel<ClsRecensione> r;
-    IPersistenceModel<ClsSegnalazione> s;
-    IPersistenceModel<ClsImmagine> i;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari;
-    IPersistenceModel<ClsNodo> nodi;
-    IPersistenceModel<ClsItinerario> itinerari;
-    IPersistenceModel<ClsContestDiContribuzione> contest;
-    ClsComune c;
-    IPersistenceModel<ILoggedUserAction>utenti;
     private ClsCuratore user;
     private ClsComune comune;
     Scanner in = new Scanner(System.in);
@@ -32,7 +23,7 @@ public class ClsMenuCuratore implements IMenu{
     public void menu() {
         //TODO: implementare
         boolean exit = false;
-        user = new ClsCuratore(r,s,i,pRCDNodo,pRCDItinerari,nodi,itinerari,contest, comune, utenti);
+        user = new ClsCuratore(MockLocator.getMockRecensioni(),MockLocator.getMockSegnalazioni(),MockLocator.getMockImmagini(),MockLocator.getMockRCD(),MockLocator.getMockRCDI(),MockLocator.getMockNodi(),MockLocator.getMockItinerari(),MockLocator.getMockContest(), comune, MockLocator.getMockTuristi());
         user.setId("1");
         user.setPunteggio(1000); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());

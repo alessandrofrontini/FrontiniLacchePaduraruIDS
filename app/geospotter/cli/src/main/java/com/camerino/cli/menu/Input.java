@@ -10,10 +10,7 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import javax.naming.AuthenticationException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
@@ -161,18 +158,19 @@ public class Input
         return contest;
     }
 
-    public static ArrayList<ClsContributor> invitaUtenti(IPersistenceModel<ClsContributor> utenti){
+    public static ArrayList<ClsContributor> invitaUtenti(ArrayList<ClsContributor> utenti){
         ArrayList<ClsContributor> partecipanti = new ArrayList<>();
         boolean exit = false;
         while(!exit){
-            HashMap<String, Object> filtri = new HashMap<>();
             print("Inserisci l'ID dell'utente da invitare o premi 0 per uscire: ");
             String input = in.nextLine();
             if(input == "0")
                 exit = true;
             else{
-                filtri.put("id", in.nextLine());
-                partecipanti.add(utenti.get(filtri).get(0));
+                for(ClsContributor c:utenti){
+                    if(Objects.equals(c.getId(), input))
+                        partecipanti.add(c);
+                }
             }
         }
         return partecipanti;

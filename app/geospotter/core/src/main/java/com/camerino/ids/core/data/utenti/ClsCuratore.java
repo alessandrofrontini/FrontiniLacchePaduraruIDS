@@ -20,36 +20,56 @@ public class ClsCuratore extends ClsAnimatore{
     // che associa comuni e curatori. Se un utente arriva ad essere curatore in pi comuni
     // creaiamo deve creare un'altro account?
     // (modificato id da String a long)
-    IPersistenceModel<ILoggedUserAction> pUtenti;
+    IPersistenceModel<ClsTuristaAutenticato> pUtenti;
     ClsComune comuneAssociato;
-    public ClsCuratore(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ILoggedUserAction>utenti){
+    public ClsCuratore(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
         super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest);
         comuneAssociato = c;
         pUtenti = utenti;
     }
 
-    public boolean registraUtente(ILoggedUserAction utente){
+    public boolean registraUtente(ClsTuristaAutenticato utente){
         return pUtenti.insert(utente);
     }
-    public boolean modificaInformazioniUtente(HashMap<String, Object> filtri, ILoggedUserAction utente){
+    public boolean modificaInformazioniUtente(HashMap<String, Object> filtri, ClsTuristaAutenticato utente){
         return pUtenti.update(filtri, utente);
     }
 
-    public boolean eliminaUtente(ILoggedUserAction utente){
-        //pUtenti.delete(utente); //TODO
+    public boolean eliminaUtente(String idUtente){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", idUtente);
+        return pUtenti.delete(filtro);
+    }
+    public boolean upRank(String idUtente){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", idUtente);
+        ClsTuristaAutenticato utente = pUtenti.get(filtro).get(0);
+        switch (utente.getRuoloUtente()){
+            case TURISTA_AUTENTICATO: ClsContributor contributor = (ClsContributor) utente; eliminaUtente(idUtente); return registraUtente(contributor);
+            case CONTRIBUTOR: ClsContributorAutorizzato contributorAuth = (ClsContributorAutorizzato) utente; eliminaUtente(idUtente); return registraUtente(contributorAuth);
+            case CONTRIBUTOR_AUTORIZZATO: ClsAnimatore animatore = (ClsAnimatore) utente; eliminaUtente(idUtente); return registraUtente(animatore);
+        }
         return false;
     }
-    public boolean upRank(ILoggedUserAction utente){
-        return false; //TODO
+    public boolean downRank(String idUtente){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", idUtente);
+        ClsTuristaAutenticato utente = pUtenti.get(filtro).get(0);
+        switch (utente.getRuoloUtente()){
+            case CONTRIBUTOR: ClsTuristaAutenticato turistaAuth = utente; eliminaUtente(idUtente); return registraUtente(turistaAuth);
+            case CONTRIBUTOR_AUTORIZZATO: ClsContributor contributor = (ClsContributor) utente; eliminaUtente(idUtente); return registraUtente(contributor);
+            case ANIMATORE: ClsContributorAutorizzato contributorAuth = (ClsContributorAutorizzato) utente; eliminaUtente(idUtente); return registraUtente(contributorAuth);
+        }
+        return false;
     }
-    public boolean downRank(ILoggedUserAction utente){
-        return false; //TODO
+    public boolean resetRank(String idUtente){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", idUtente);
+        ClsTuristaAutenticato utente = pUtenti.get(filtro).get(0);
+        ClsTuristaAutenticato turistaAuth = (ClsTuristaAutenticato) utente;
+        eliminaUtente(idUtente);
+        return registraUtente(turistaAuth);
     }
-    public boolean resetRank(ILoggedUserAction utente){
-        return false; //TODO
-    }
-
-    //CONTINUARE
     public boolean validaRichiesta(ClsRichiestaAzioneDiContribuzione richiesta, boolean esito){
         if(esito){
             switch (richiesta.geteAzioneDiContribuzione()){
