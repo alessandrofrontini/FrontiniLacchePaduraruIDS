@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHallAdministrator
 {
     IPersistenceModel<ClsComune> mockComuni;
-    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ILoggedUserAction>utenti){
+    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
         super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest, null, utenti);
     }
     //region Getters and Setters

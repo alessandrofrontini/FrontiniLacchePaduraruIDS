@@ -1,10 +1,8 @@
 package com.camerino.cli.menu;
 
+import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.contenuti.*;
-import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utenti.ILoggedUserAction;
+import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -205,5 +203,59 @@ public class Input
         println("Scegli una nuova descrizione:");
         old.setContenuto(in.nextLine());
         return old;
+    }
+
+    public static ClsTuristaAutenticato registraUtente(){
+        ClsTuristaAutenticato utente = null;
+        println("Inserisci il ruolo:");
+        println("0 > Turista Autenticato");
+        println("1 > Contributor");
+        println("2 > Contributor Autorizzato");
+        println("3 > Animatore");
+        switch(in.nextLine()){
+            case "0": utente = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD()); break;
+            case "1": utente = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
+            case "2": utente = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
+            case "3": utente = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); break;
+            default: println("Errore"); return null;
+        }
+        print("Inserisci l'username > ");
+        Credenziali credenziali = new Credenziali();
+        credenziali.setUsername(in.nextLine());
+        print("Inserisci la password > ");
+        credenziali.setPassword(in.nextLine());
+        utente.setCredenziali(credenziali);
+        return utente;
+    }
+
+    public static void modificaUtente(String idUtente){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", idUtente);
+        ClsTuristaAutenticato utente = MockLocator.getMockTuristi().get(filtro).get(0);
+        println("utente " + idUtente + "\nRuolo: " + utente.getRuoloUtente() + "\nUsername: " + utente.getCredenziali().getUsername() + "\nPassword: " + utente.getCredenziali().getPassword() + "\n\nScegli un'azione:");
+        println("1 > Cambia username\n2 > Cambia password\n0 > Esci");
+        boolean exit = false;
+        while(!exit) {
+            switch (in.nextLine()) {
+                case "1":
+                    print("Scegli un nuovo username: ");
+                    String username = in.nextLine();
+                    if (controllaUsernameDuplicato(username)) utente.getCredenziali().setUsername(username);
+                    else println("Username già esistente."); break;
+                case "2":
+                    print("Scegli una nuova password: ");
+                    utente.getCredenziali().setPassword(in.nextLine());
+                case "0": exit = true;
+            }
+        }
+        MockLocator.getMockTuristi().update(filtro, utente);
+    }
+
+    private static boolean controllaUsernameDuplicato(String username){
+        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
+            if(t.getCredenziali().getUsername() == username)
+                return false;
+        }
+        return true;
     }
 }

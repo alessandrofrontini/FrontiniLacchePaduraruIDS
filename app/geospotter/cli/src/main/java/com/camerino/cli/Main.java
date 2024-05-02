@@ -1,17 +1,12 @@
 package com.camerino.cli;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
-import com.camerino.cli.menu.ClsMenuContributorAuth;
-import com.camerino.cli.menu.ClsMenuGestore;
-import com.camerino.cli.menu.Input;
+import com.camerino.cli.menu.*;
 import com.camerino.cli.mock.*;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
-import com.camerino.ids.core.data.utenti.ClsTurista;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -73,11 +68,11 @@ public class Main {
 
     private static void main_menu(ClsTuristaAutenticato turista) {
         switch (turista.getRuoloUtente()){
-            case TURISTA_AUTENTICATO -> ClsConsoleLogger.println("Noop");
-            case CONTRIBUTOR -> ClsConsoleLogger.println("Noop");
-            case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth((ClsContributorAutorizzato) turista).menu();
-            case ANIMATORE -> ClsConsoleLogger.println("Noop");
-            case CURATORE -> ClsConsoleLogger.println("Noop");
+            case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato().menu();
+            case CONTRIBUTOR -> new ClsMenuContributor().menu();
+            case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth().menu();
+            case ANIMATORE -> new ClsMenuAnimatore().menu();
+            case CURATORE -> new ClsMenuCuratore().menu();
             case GESTORE_DELLA_PIATTAFORMA -> new ClsMenuGestore((ClsGestoreDellaPiattaforma) turista).menu();
         }
     }

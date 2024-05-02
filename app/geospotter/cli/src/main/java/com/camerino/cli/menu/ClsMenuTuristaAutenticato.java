@@ -27,9 +27,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
     IPersistenceModel<ClsRecensione> pRecensioni;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pImmagini;
-    public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
-        this.user = turistaAutenticato;
-    }
+    public ClsMenuTuristaAutenticato(){}
     @Override
     public void menu() {
         boolean exit = false;

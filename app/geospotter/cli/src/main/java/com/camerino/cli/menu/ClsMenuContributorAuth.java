@@ -24,16 +24,7 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributorAuth implements IMenu{
     private ClsContributorAutorizzato user;
     Scanner in = new Scanner(System.in);
-    IPersistenceModel<ClsRecensione> r;
-    IPersistenceModel<ClsSegnalazione> s;
-    IPersistenceModel<ClsImmagine> i;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari;
-    IPersistenceModel<ClsNodo> nodi;
-    IPersistenceModel<ClsItinerario> itinerari;
-    public ClsMenuContributorAuth(ClsContributorAutorizzato user) {
-        this.user = user;
-    }
+    public ClsMenuContributorAuth(){}
     @Override
     public void menu() {
         boolean exit = false;

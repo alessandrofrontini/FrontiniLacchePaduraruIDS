@@ -17,11 +17,11 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
     Scanner in = new Scanner(System.in);
+    public ClsMenuContributor(){}
     @Override
     public void menu() {
 //TODO: implementare
         boolean exit = false;
-        user = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
         user.setId("1");
         user.setPunteggio(200); //punteggio da non prendere seriamente
         user.setCredenziali(new Credenziali());

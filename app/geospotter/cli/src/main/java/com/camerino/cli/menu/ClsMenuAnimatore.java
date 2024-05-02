@@ -26,7 +26,7 @@ public class ClsMenuAnimatore implements IMenu{
     private ClsAnimatore user;
     Scanner in = new Scanner(System.in);
 
-    public ClsMenuAnimatore(ClsAnimatore animatore){user = animatore;}
+    public ClsMenuAnimatore(){}
     @Override
     public void menu() {
         boolean exit = false;
