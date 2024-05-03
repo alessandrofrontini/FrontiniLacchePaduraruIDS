@@ -84,9 +84,9 @@ public class Input
         while (!ok){
             print("Inserisci nome: ");
             comune.setNome(in.nextLine());
-            print("Inserisci coordinata X del nodo: ");
+            print("Inserisci coordinata X: ");
             pos.setX(in.nextDouble());
-            print("Inserisci coordinata Y del nodo: ");
+            print("Inserisci coordinata Y: ");
             pos.setY(in.nextDouble());
             comune.setPosizione(pos);
             print("Inserisci numero abitanti: ");
@@ -95,8 +95,7 @@ public class Input
             comune.setSuperficie(in.nextDouble());
             print("Inserisci descrizione: ");
             comune.setDescrizione(in.nextLine());
-            //TODO: aggiungere inserimento "aTempo" e durata
-            //TODO: aggiungere eventuali controlli sui dati inseriti
+            //inserimento id curatore
             comune.setCuratoriAssociati(null);
             comune.setUsernameCreatore(gdp.getCredenziali().getUsername());
             ok = true;

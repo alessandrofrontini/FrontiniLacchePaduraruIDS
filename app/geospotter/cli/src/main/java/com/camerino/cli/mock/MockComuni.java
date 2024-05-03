@@ -2,6 +2,7 @@ package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -141,8 +142,14 @@ public class MockComuni implements IPersistenceModel<ClsComune>
             FileWriter output = new FileWriter("comuni.txt");
             StringBuilder daScrivere = new StringBuilder("");
             for(ClsComune comune:comuni){
-                daScrivere.append(comune.getId());
+                daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");
+                for(String curatore:comune.getCuratoriAssociati())
+                    daScrivere.append(curatore + ",");
+                daScrivere.deleteCharAt(daScrivere.length()-1);
+                daScrivere.append(";" + "\r\n");
             }
+            output.write(String.valueOf(daScrivere));
+            output.close();
         } catch(Exception e){
             ClsConsoleLogger.println("Errore");
         }
