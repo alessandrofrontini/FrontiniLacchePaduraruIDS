@@ -27,14 +27,6 @@ public class ClsCommonActions {
         return false;
     }
 
-    public static boolean aggiungiComune(ClsGestoreDellaPiattaforma gdp)
-    {
-        ClsComune comune = Input.inserisciComune(gdp);
-        if(comune!= null)
-            return gdp.inserisciComune(comune);
-        return false;
-    }
-
     public static boolean eliminaRecensione(ILoggedUserAction user, String id){
         return user.eliminaRecensione(id);
     }

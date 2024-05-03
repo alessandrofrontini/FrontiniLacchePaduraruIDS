@@ -22,6 +22,13 @@ public class ClsCuratore extends ClsAnimatore{
     // (modificato id da String a long)
     IPersistenceModel<ClsTuristaAutenticato> pUtenti;
     ClsComune comuneAssociato;
+    public ClsComune getComuneAssociato() {
+        return comuneAssociato;
+    }
+
+    public void setComuneAssociato(ClsComune comuneAssociato) {
+        this.comuneAssociato = comuneAssociato;
+    }
     public ClsCuratore(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
         super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest);
         comuneAssociato = c;

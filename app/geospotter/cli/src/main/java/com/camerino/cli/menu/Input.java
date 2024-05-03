@@ -76,30 +76,25 @@ public class Input
     //endregion
 
     //region Input Comuni
-    public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp)
+    //non considera l'associazione con il curatore(fatta dopo)
+    public static ClsComune inserisciComune()
     {
-        boolean ok = false;
         ClsComune comune = new ClsComune();
         Posizione pos = new Posizione();
-        while (!ok){
             print("Inserisci nome: ");
             comune.setNome(in.nextLine());
             print("Inserisci coordinata X: ");
-            pos.setX(in.nextDouble());
+            pos.setX(Double.parseDouble(in.nextLine()));
             print("Inserisci coordinata Y: ");
-            pos.setY(in.nextDouble());
+            pos.setY(Double.parseDouble(in.nextLine()));
             comune.setPosizione(pos);
             print("Inserisci numero abitanti: ");
-            comune.setAbitanti(in.nextInt());
+            comune.setAbitanti(Integer.parseInt(in.nextLine()));
             print("Inserisci superficie: ");
-            comune.setSuperficie(in.nextDouble());
+            comune.setSuperficie(Double.parseDouble(in.nextLine()));
             print("Inserisci descrizione: ");
             comune.setDescrizione(in.nextLine());
-            //inserimento id curatore
-            comune.setCuratoriAssociati(null);
-            comune.setUsernameCreatore(gdp.getCredenziali().getUsername());
-            ok = true;
-        }
+
         return comune;
     }
     //endregion

@@ -21,7 +21,6 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     public MockComuni()
     {
-        this.leggiComuni();
     }
 
     @Override
@@ -100,7 +99,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
 //SPLITTARE PER \r\n, ; e ,
-    private void leggiComuni()
+    public void leggiComuni()
     {
         try {
             FileReader input = new FileReader("comuni.txt");
@@ -137,7 +136,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     }
 
-    private void scriviComuni(){
+    public void scriviComuni(){
         try {
             FileWriter output = new FileWriter("comuni.txt");
             StringBuilder daScrivere = new StringBuilder("");

@@ -10,12 +10,12 @@ import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    IPersistenceModel<ClsSegnalazione> segnalazioni = null;
-    ClsTurista user = new ClsTurista(segnalazioni);
+    ClsTurista user = new ClsTurista(MockLocator.getMockSegnalazioni());
     static Scanner in = new Scanner(System.in);
     //Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
     public static void main(String[] args)
@@ -32,6 +32,7 @@ public class Main {
             ClsConsoleLogger.println("0)Esci");
             switch (in.nextLine()){
                 case "0"-> {
+                    //salvaTutto();
                     return;
                 }
                 case "1"-> login();
@@ -43,10 +44,12 @@ public class Main {
         }
     }
 
+    private static void salvaTutto(){
+        MockLocator.getMockComuni().scriviComuni();
+    }
     private static void listaComuni()
     {
-        MockComuni mockComuni = MockLocator.getMockComuni();
-        for(ClsComune comune:mockComuni.get(null)){
+        for(ClsComune comune:MockLocator.getMockComuni().get(null)){
             ClsConsoleLogger.println(comune.visualizzaComune());
         }
 
@@ -135,4 +138,5 @@ public class Main {
                 "                                                                                                                                              \n");
     }
     //endregion
+
 }

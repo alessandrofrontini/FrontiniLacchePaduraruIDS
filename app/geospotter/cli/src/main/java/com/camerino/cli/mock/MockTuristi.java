@@ -37,7 +37,6 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
        ArrayList<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
         if (filters.containsKey("credenziali"))
         {
-            //return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
             tmp.add(login((Credenziali) filters.get("credenziali")));
             return tmp;
         }
