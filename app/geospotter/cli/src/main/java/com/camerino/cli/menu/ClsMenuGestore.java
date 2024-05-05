@@ -3,6 +3,7 @@ package com.camerino.cli.menu;
 import com.camerino.cli.actions.ClsCommonActions;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
@@ -65,8 +66,10 @@ public class ClsMenuGestore implements IMenu {
         ArrayList<String> curatori = new ArrayList<>();
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("ruoloUtente", ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-        //MANCA "filtra per ruolo" dentro mockturisti, inserire un curatore di prova dentro al metodo per la generazione degli utenti
-        //e continuare questo metodo filtrando solo per curatori e castando gli utenti in curatore
+        ArrayList<ClsTuristaAutenticato> a = MockLocator.getMockTuristi().get(filtro);
+        for(ClsTuristaAutenticato t:a){
+            curatori.add(t.getId());
+        }
         return curatori;
     }
 }

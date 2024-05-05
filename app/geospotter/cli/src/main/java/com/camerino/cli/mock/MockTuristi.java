@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItiner
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -21,7 +22,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodi;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCItinerari;
     IPersistenceModel<ClsContestDiContribuzione> pContest;
-
+    IPersistenceModel<ClsTuristaAutenticato> pUtenti;
     IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
     public MockTuristi(){
@@ -38,6 +39,10 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         if (filters.containsKey("credenziali"))
         {
             tmp.add(login((Credenziali) filters.get("credenziali")));
+            return tmp;
+        }
+        if(filters.containsKey("ruoloUtente")) {
+            tmp.add(findById((ClsTuristaAutenticato.eRUOLO_UTENTE) filters.get("ruoloUtente")));
             return tmp;
         }
 
@@ -73,6 +78,13 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
     //endregion
 
+    private ClsTuristaAutenticato findById(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+        List<ClsTuristaAutenticato> tmp =
+                turisti.stream().filter(n->n.getRuoloUtente().equals(ruolo)).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp.get(0);
+    }
     private void creaTuristi() {
         ClsContributorAutorizzato ca = new ClsContributorAutorizzato(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari);
         Credenziali credenzialiCA = new Credenziali();
@@ -91,5 +103,14 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
         gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         inserisciUtente(gdp);
+
+        ClsCuratore curatore = new ClsCuratore(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari, pContest, null, pUtenti);
+        Credenziali c = new Credenziali();
+        c.setUsername("c");
+        c.setPassword("c");
+        curatore.setCredenziali(c);
+        curatore.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+        curatore.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+        inserisciUtente(curatore);
     }
 }

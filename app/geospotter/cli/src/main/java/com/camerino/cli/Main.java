@@ -22,17 +22,18 @@ public class Main {
     {
         print_team();
         print_header();
+        leggiTutto();
         while (true) {
             //Queste sono le azioni che un turista (non autenticato) può fare
-            ClsConsoleLogger.println("1)Login");
-            ClsConsoleLogger.println("2)Lista Comuni");
+            ClsConsoleLogger.println("1)Login"); //funziona
+            ClsConsoleLogger.println("2)Lista Comuni"); //funziona
             ClsConsoleLogger.println("3)Lista nodi di un comune");
             ClsConsoleLogger.println("4)Mostra Nodo");
             ClsConsoleLogger.println("5)Segnala Nodo");
             ClsConsoleLogger.println("0)Esci");
             switch (in.nextLine()){
                 case "0"-> {
-                    //salvaTutto();
+                    salvaTutto();
                     return;
                 }
                 case "1"-> login();
@@ -47,6 +48,7 @@ public class Main {
     private static void salvaTutto(){
         MockLocator.getMockComuni().scriviComuni();
     }
+    private static void leggiTutto(){MockLocator.getMockComuni().leggiComuni();}
     private static void listaComuni()
     {
         for(ClsComune comune:MockLocator.getMockComuni().get(null)){
