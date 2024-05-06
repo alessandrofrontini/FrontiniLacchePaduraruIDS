@@ -27,8 +27,8 @@ public class Main {
             //Queste sono le azioni che un turista (non autenticato) può fare
             ClsConsoleLogger.println("1)Login"); //funziona
             ClsConsoleLogger.println("2)Lista Comuni"); //funziona
-            ClsConsoleLogger.println("3)Lista nodi di un comune");
-            ClsConsoleLogger.println("4)Mostra Nodo");
+            ClsConsoleLogger.println("3)Lista nodi di un comune"); //funziona
+            ClsConsoleLogger.println("4)Mostra Nodo"); //funziona
             ClsConsoleLogger.println("5)Segnala Nodo");
             ClsConsoleLogger.println("0)Esci");
             switch (in.nextLine()){
@@ -46,9 +46,14 @@ public class Main {
     }
 
     private static void salvaTutto(){
+
         MockLocator.getMockComuni().scriviComuni();
+        MockLocator.getMockNodi().scriviNodi();
     }
-    private static void leggiTutto(){MockLocator.getMockComuni().leggiComuni();}
+    private static void leggiTutto(){
+        MockLocator.getMockComuni().leggiComuni();
+        MockLocator.getMockNodi().leggiNodi();
+    }
     private static void listaComuni()
     {
         for(ClsComune comune:MockLocator.getMockComuni().get(null)){
@@ -104,7 +109,7 @@ public class Main {
         MockNodi mockNodi = MockLocator.getMockNodi();
         HashMap<String, Object> filtro = new HashMap<>();
         ClsConsoleLogger.println("inserisci l'id del nodo");
-        filtro.put("idComune", in.nextLine());
+        filtro.put("id", in.nextLine());
         ClsConsoleLogger.println(mockNodi.get(filtro).get(0).visualizzaNodo());
     }
     //region Visualizzazione header e team

@@ -32,7 +32,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        nodo.setIdUtente(this.id);
+        nodo.setUsernameCreatore(this.credenziali.getUsername());
         return pNodi.insert(nodo);
     }
 

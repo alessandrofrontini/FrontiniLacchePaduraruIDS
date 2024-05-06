@@ -15,7 +15,6 @@ public class ClsNodo extends ClsContenuto{
     private eTologiaNodo eTologiaNodo;
     private boolean aTempo;
     private Date dataFine;
-    private String idUtente;
     private String idContest;
 
     //region Getter e setter
@@ -44,24 +43,26 @@ public class ClsNodo extends ClsContenuto{
     }
     public void setDataFine(Date d){this.dataFine = d;}
     public Date getDataFine(){return this.dataFine;}
-    public void setIdUtente(String i){this.idUtente = i;}
-    public String getIdUtente(){return this.idUtente;}
     public void setIdContest(String idc){this.idContest = idc;}
     public String getIdContest(){return this.idContest;}
     //endregion
 
     public String visualizzaNodo()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "ID: " + this.getId() + "\n";
         dummy += "ID Comune: " + this.getIdComune() + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        if(this.isaTempo()){
+            dummy += "Nodo a tempo: Si, scadenza: " + this.getDataFine() + "\n";
+        }
+        else dummy += "Nodo a tempo: No\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "Tipologia: " + this.getDescrizione() + "\n";
-        dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n\n";
+        dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n";
 
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
         return dummy;
     }

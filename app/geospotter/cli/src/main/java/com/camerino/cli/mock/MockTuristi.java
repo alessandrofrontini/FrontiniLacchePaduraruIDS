@@ -42,7 +42,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
             return tmp;
         }
         if(filters.containsKey("ruoloUtente")) {
-            tmp.add(findById((ClsTuristaAutenticato.eRUOLO_UTENTE) filters.get("ruoloUtente")));
+            tmp.add(findByRuolo((ClsTuristaAutenticato.eRUOLO_UTENTE) filters.get("ruoloUtente")));
             return tmp;
         }
 
@@ -78,7 +78,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
     //endregion
 
-    private ClsTuristaAutenticato findById(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+    private ClsTuristaAutenticato findByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
         List<ClsTuristaAutenticato> tmp =
                 turisti.stream().filter(n->n.getRuoloUtente().equals(ruolo)).toList();
         if(tmp.isEmpty())

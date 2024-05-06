@@ -110,25 +110,22 @@ public class MockComuni implements IPersistenceModel<ClsComune>
             }
             String comuniTotal = String.valueOf(comuniFile);
             String [] comuniACapo = comuniTotal.split("\r\n");
-            for(String comuniUniti:comuniACapo){
-                String [] comune = comuniUniti.split(";");
+            for(String comune:comuniACapo){
                 ClsComune daAggiungere = new ClsComune();
-                for(String daDividere:comune){
-                    String [] dati = daDividere.split(",");
-                    daAggiungere.setId(dati[0]);
-                    daAggiungere.setNome(dati[1]);
-                    daAggiungere.setDescrizione(dati[2]);
-                    Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
-                    daAggiungere.setPosizione(p);
-                    daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
-                    daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
-                    ArrayList<String> curatori = new ArrayList<>();
-                    for(int i = 7; i< dati.length; i++){
-                        curatori.add(dati[i]);
-                    }
-                    daAggiungere.setCuratoriAssociati(curatori);
-                    insert(daAggiungere);
+                String [] dati = comune.split(",");
+                daAggiungere.setId(dati[0]);
+                daAggiungere.setNome(dati[1]);
+                daAggiungere.setDescrizione(dati[2]);
+                Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
+                daAggiungere.setPosizione(p);
+                daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
+                daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
+                ArrayList<String> curatori = new ArrayList<>();
+                for(int i = 7; i< dati.length; i++){
+                    curatori.add(dati[i]);
                 }
+                daAggiungere.setCuratoriAssociati(curatori);
+                insert(daAggiungere);
             }
         } catch (Exception e){
             ClsConsoleLogger.println("File non trovato.");
@@ -145,7 +142,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
                 for(String curatore:comune.getCuratoriAssociati())
                     daScrivere.append(curatore + ",");
                 daScrivere.deleteCharAt(daScrivere.length()-1);
-                daScrivere.append(";" + "\r\n");
+                daScrivere.append("\r\n");
             }
             output.write(String.valueOf(daScrivere));
             output.close();
