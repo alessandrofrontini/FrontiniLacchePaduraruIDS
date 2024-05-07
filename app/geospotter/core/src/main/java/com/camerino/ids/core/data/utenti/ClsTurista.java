@@ -21,6 +21,6 @@ public class ClsTurista implements ISignalable {
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {
         pSegnalazioni.insert(segnalazione);
-        return false;
+        return true;
     }
 }

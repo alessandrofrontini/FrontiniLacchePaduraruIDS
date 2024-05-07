@@ -15,20 +15,17 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    ClsTurista user = new ClsTurista(MockLocator.getMockSegnalazioni());
     static Scanner in = new Scanner(System.in);
-    //Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
     public static void main(String[] args)
     {
-        print_team();
         print_header();
         leggiTutto();
         while (true) {
             //Queste sono le azioni che un turista (non autenticato) può fare
-            ClsConsoleLogger.println("1)Login"); //funziona
-            ClsConsoleLogger.println("2)Lista Comuni"); //funziona
-            ClsConsoleLogger.println("3)Lista nodi di un comune"); //funziona
-            ClsConsoleLogger.println("4)Mostra Nodo"); //funziona
+            ClsConsoleLogger.println("1)Login");
+            ClsConsoleLogger.println("2)Lista Comuni");
+            ClsConsoleLogger.println("3)Lista nodi di un comune");
+            ClsConsoleLogger.println("4)Mostra Nodo");
             ClsConsoleLogger.println("5)Segnala Nodo");
             ClsConsoleLogger.println("0)Esci");
             switch (in.nextLine()){
@@ -46,13 +43,14 @@ public class Main {
     }
 
     private static void salvaTutto(){
-
         MockLocator.getMockComuni().scriviComuni();
         MockLocator.getMockNodi().scriviNodi();
+        MockLocator.getMockSegnalazioni().scriviSegnalazioni();
     }
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
+        MockLocator.getMockSegnalazioni().leggiSegnalazioni();
     }
     private static void listaComuni()
     {
@@ -88,12 +86,14 @@ public class Main {
     }
 
     private static void menuSegnalaNodo(){
+        ClsTurista user = new ClsTurista(MockLocator.getMockSegnalazioni());
         ClsSegnalazione segnalazione = new ClsSegnalazione();
         ClsConsoleLogger.println("inserisci l'id del nodo");
         segnalazione.setIdContenuto(in.nextLine());
         ClsConsoleLogger.println("fornisci una descrizione");
         segnalazione.setDescrizione(in.nextLine());
-        MockLocator.getMockSegnalazioni().insert(segnalazione);
+        segnalazione.setIdUtente("turista");
+        user.segnalaContenuto(segnalazione);
         ClsConsoleLogger.println("Segnalazione inserita");
     }
 
@@ -131,18 +131,6 @@ public class Main {
                 """);
 
 
-    }
-    private static void print_team()
-    {
-        ClsConsoleLogger.print("\n" +
-                "   _____ _____        ______      __  __       _______   _______ ______          __  __   _____  _____  ______  _____ ______ _   _ _______    \n" +
-                "  / ____|  __ \\ /\\   |  ____/\\   |  \\/  |   /\\|__   __| |__   __|  ____|   /\\   |  \\/  | |  __ \\|  __ \\|  ____|/ ____|  ____| \\ | |__   __|   \n" +
-                " | (___ | |__) /  \\  | |__ /  \\  | \\  / |  /  \\  | |       | |  | |__     /  \\  | \\  / | | |__) | |__) | |__  | (___ | |__  |  \\| |  | |      \n" +
-                "  \\___ \\|  ___/ /\\ \\ |  __/ /\\ \\ | |\\/| | / /\\ \\ | |       | |  |  __|   / /\\ \\ | |\\/| | |  ___/|  _  /|  __|  \\___ \\|  __| | . ` |  | |      \n" +
-                "  ____) | |  / ____ \\| | / ____ \\| |  | |/ ____ \\| |       | |  | |____ / ____ \\| |  | | | |    | | \\ \\| |____ ____) | |____| |\\  |  | |_ _ _ \n" +
-                " |_____/|_| /_/    \\_\\_|/_/    \\_\\_|  |_/_/    \\_\\_|       |_|  |______/_/    \\_\\_|  |_| |_|    |_|  \\_\\______|_____/|______|_| \\_|  |_(_|_|_)\n" +
-                "                                                                                                                                              \n" +
-                "                                                                                                                                              \n");
     }
     //endregion
 
