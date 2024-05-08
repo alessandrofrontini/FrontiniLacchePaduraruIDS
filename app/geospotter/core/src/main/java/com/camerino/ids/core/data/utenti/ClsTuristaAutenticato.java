@@ -125,7 +125,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @Override
     public ArrayList<ClsRecensione> visualizzaRecensioniPosessore() {
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("idUtente", this.getId());
+        tmp.put("usernameCreatore", this.getCredenziali().getUsername());
         return pRecensioni.get(tmp);
     }
     @Override

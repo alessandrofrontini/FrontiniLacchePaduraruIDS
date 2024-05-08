@@ -37,8 +37,4 @@ public class MockLocator {
     public static MockContest getMockContest() {
         return mockContest;
     }
-
-    public static void setMockContest(MockContest mockContest) {
-        MockLocator.mockContest = mockContest;
-    }
 }

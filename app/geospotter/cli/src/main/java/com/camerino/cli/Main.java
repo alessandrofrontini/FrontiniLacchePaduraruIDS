@@ -46,11 +46,13 @@ public class Main {
         MockLocator.getMockComuni().scriviComuni();
         MockLocator.getMockNodi().scriviNodi();
         MockLocator.getMockSegnalazioni().scriviSegnalazioni();
+        MockLocator.getMockRecensioni().scriviRecensioni();
     }
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
         MockLocator.getMockSegnalazioni().leggiSegnalazioni();
+        MockLocator.getMockRecensioni().leggiRecensioni();
     }
     private static void listaComuni()
     {
@@ -66,7 +68,6 @@ public class Main {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("credenziali", credenziali);
         ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp).get(0);
-
         if (user == null) {
             ClsConsoleLogger.println("Credenziali errate");
             return;
@@ -76,7 +77,7 @@ public class Main {
 
     private static void main_menu(ClsTuristaAutenticato turista) {
         switch (turista.getRuoloUtente()){
-            case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato().menu();
+            case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato(turista).menu();
             case CONTRIBUTOR -> new ClsMenuContributor().menu();
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth().menu();
             case ANIMATORE -> new ClsMenuAnimatore().menu();

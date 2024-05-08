@@ -4,10 +4,7 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
 
@@ -16,18 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
-    IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodi;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCItinerari;
-    IPersistenceModel<ClsContestDiContribuzione> pContest;
-    IPersistenceModel<ClsTuristaAutenticato> pUtenti;
-    IPersistenceModel<ClsNodo> pNodi;
-    IPersistenceModel<ClsItinerario> pItinerari;
-    public MockTuristi(){
-        creaTuristi();
-    }
 
     private ArrayList<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
     private long idCounter = 0;
@@ -85,32 +70,49 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
             return null;
         return tmp.get(0);
     }
-    private void creaTuristi() {
-        ClsContributorAutorizzato ca = new ClsContributorAutorizzato(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari);
-        Credenziali credenzialiCA = new Credenziali();
-        credenzialiCA.setUsername("CA");
-        credenzialiCA.setPassword("");
-        ca.setCredenziali(credenzialiCA);
-        ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-        inserisciUtente(ca);
 
-        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari, pContest, null, null);
-        Credenziali credenzialiGdP = new Credenziali();
-        credenzialiGdP.setUsername("GDP");
-        credenzialiGdP.setPassword("");
-        gdp.setCredenziali(credenzialiGdP);
-        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
-        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-        inserisciUtente(gdp);
+    public void leggiUtenti(){
+        try{
 
-        ClsCuratore curatore = new ClsCuratore(pRecensioni, pSegnalazioni, pImmagini, pRCDNodi, pRDCItinerari, pNodi, pItinerari, pContest, null, pUtenti);
-        Credenziali c = new Credenziali();
-        c.setUsername("c");
-        c.setPassword("c");
-        curatore.setCredenziali(c);
-        curatore.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-        curatore.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
-        inserisciUtente(curatore);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
+//    private void creaTuristi() {
+//        ClsContributorAutorizzato ca = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
+//        Credenziali credenzialiCA = new Credenziali();
+//        credenzialiCA.setUsername("CA");
+//        credenzialiCA.setPassword("");
+//        ca.setCredenziali(credenzialiCA);
+//        ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+//        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+//        inserisciUtente(ca);
+//
+//        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi());
+//        Credenziali credenzialiGdP = new Credenziali();
+//        credenzialiGdP.setUsername("GDP");
+//        credenzialiGdP.setPassword("");
+//        gdp.setCredenziali(credenzialiGdP);
+//        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+//        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+//        inserisciUtente(gdp);
+//
+//        ClsCuratore curatore = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi());
+//        Credenziali c = new Credenziali();
+//        c.setUsername("c");
+//        c.setPassword("c");
+//        curatore.setCredenziali(c);
+//        curatore.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+//        curatore.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+//        inserisciUtente(curatore);
+//
+//        ClsTuristaAutenticato ta = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD());
+//        Credenziali c3 = new Credenziali();
+//        c3.setUsername("ta");
+//        c3.setPassword("");
+//        ta.setCredenziali(c3);
+//        ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+//        ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+//        inserisciUtente(ta);
+//    }
 }

@@ -8,7 +8,6 @@ public class ClsRecensione extends ClsInformazione{
     double valutazione;
     String oggetto;
     String contenuto;
-    String idUtente;
 
     //region Getter e setter
 
@@ -43,8 +42,7 @@ public class ClsRecensione extends ClsInformazione{
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
     }
-    public void setIdUtente(String id){this.idUtente = id;}
-    public String getIdUtente(){return this.idUtente;}
+
     //endregion
 
     public String visualizzaRecensione()

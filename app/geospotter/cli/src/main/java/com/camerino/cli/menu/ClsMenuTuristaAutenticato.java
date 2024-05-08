@@ -27,17 +27,12 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
     IPersistenceModel<ClsRecensione> pRecensioni;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pImmagini;
-    public ClsMenuTuristaAutenticato(){}
+    public ClsMenuTuristaAutenticato(ClsTuristaAutenticato t){
+        user = t;
+    }
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD());
-        user.setId("1");
-        user.setPunteggio(100);
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("TuristaAuth");
-        user.getCredenziali().setPassword("password");
-
         while (!exit) {
             println("1) Inserisci recensione");
             println("2) Modifica Recensione");
@@ -57,8 +52,10 @@ public class ClsMenuTuristaAutenticato implements IMenu {
 
     private void menuInserisciRecensione() {
         ClsRecensione recensione = Input.inserisciRecensione();
-        if(recensione != null)
+        if(recensione != null) {
+            recensione.setUsernameCreatore(user.getCredenziali().getUsername());
             user.inserisciRecensione(recensione);
+        }
         else ClsConsoleLogger.println("Errore.");
     }
 
