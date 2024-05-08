@@ -20,27 +20,36 @@ public class ClsMenuContributor implements IMenu{
     public ClsMenuContributor(ClsContributor c){user = c;}
     @Override
     public void menu() {
+        ClsMenuTuristaAutenticato menuta = new ClsMenuTuristaAutenticato(user);
+        menuta.menu();
         boolean exit = false;
         while (!exit) {
-            println("1) Inserisci Nodo");
-            println("2) Modifica Nodo");
-            println("3) Elimina Nodo");
-            println("4) Inserisci Itinerario");
-            println("5) Modifica Itinerario");
-            println("6) Elimina Itinerario");
-            println("7) I miei contest");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()) {
-                case "1" -> menuInserisciNodo();
-                case "2" -> menuModificaNodo();
-                case "3" -> menuEliminaNodo();
-                case "4" -> menuInserisciItinerario();
-                case "5" -> menuModificaItinerario();
-                case "6" -> menuEliminaItinerario();
-                case "7" -> sottoMenuContest();
-                case "0" -> exit = true;
+            println("5) Inserisci Nodo");
+            println("6) Modifica Nodo");
+            println("7) Elimina Nodo");
+            println("8) Inserisci Itinerario");
+            println("9) Modifica Itinerario");
+            println("10) Elimina Itinerario");
+            println("11) I miei contest");
+            if (user.getClass().equals(ClsContributor.class)) {
+                println("0) Esci");
+                print(">> ");
+                switch (in.nextLine()) {
+                    case "1" -> menuta.menuInserisciRecensione();
+                    case "2" -> menuta.menuModificaRecensione();
+                    case "3" -> menuta.menuEliminaRecensione();
+                    case "4" -> menuta.menuInserisciFoto();
+                    case "5" -> menuInserisciNodo();
+                    case "6" -> menuModificaNodo();
+                    case "7" -> menuEliminaNodo();
+                    case "8" -> menuInserisciItinerario();
+                    case "9" -> menuModificaItinerario();
+                    case "10" -> menuEliminaItinerario();
+                    case "11" -> sottoMenuContest();
+                    case "0" -> exit = true;
+                }
             }
+            else exit = true;
         }
     }
 

@@ -38,19 +38,22 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             println("2) Modifica Recensione");
             println("3) Elimina Recensione");
             println("4) Inserisci Foto");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()) {
-                case "1" -> menuInserisciRecensione();
-                case "2" -> menuModificaRecensione();
-                case "3" -> menuEliminaRecensione();
-                case "4" -> menuInserisciFoto();
-                case "0" -> exit = true;
+            if (user.getClass().equals(ClsTuristaAutenticato.class)) {
+                println("0) Esci");
+                print(">> ");
+                switch (in.nextLine()) {
+                    case "1" -> menuInserisciRecensione();
+                    case "2" -> menuModificaRecensione();
+                    case "3" -> menuEliminaRecensione();
+                    case "4" -> menuInserisciFoto();
+                    case "0" -> exit = true;
+                }
             }
+            else exit = true;
         }
     }
 
-    private void menuInserisciRecensione() {
+    public void menuInserisciRecensione() {
         ClsRecensione recensione = Input.inserisciRecensione();
         if(recensione != null) {
             recensione.setUsernameCreatore(user.getCredenziali().getUsername());
@@ -59,7 +62,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
         else ClsConsoleLogger.println("Errore.");
     }
 
-    private void menuModificaRecensione() {
+    public void menuModificaRecensione() {
         for(ClsRecensione r:user.visualizzaRecensioniPosessore()){
             println(r.visualizzaRecensione());
         }
@@ -75,13 +78,13 @@ public class ClsMenuTuristaAutenticato implements IMenu {
           user.modificaRecensione(old, newrec);
     }
 
-    private void menuEliminaRecensione() {
+    public void menuEliminaRecensione() {
         print("inserisci l'id della recensione da eliminare: ");
         ClsCommonActions.eliminaRecensione(user, in.nextLine());
         println("recensione eliminata.");
     }
 
-    private void menuInserisciFoto() {
+    public void menuInserisciFoto() {
         print("inserisci l'id del contenuto a cui vuoi aggiungere una foto:");
         String contenuto = in.nextLine();
         boolean exit = false;
@@ -95,7 +98,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
         }
     }
 
-    private void inserisciFotoContenuto(String idContenuto){
+    public void inserisciFotoContenuto(String idContenuto){
         ClsImmagine immagine = new ClsImmagine();
         immagine.setIdCOntenutoAssociato(idContenuto);
         immagine.setUsernameCreatore(user.getCredenziali().getUsername());

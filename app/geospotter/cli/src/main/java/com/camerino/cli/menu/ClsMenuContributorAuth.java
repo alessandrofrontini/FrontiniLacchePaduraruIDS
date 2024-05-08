@@ -24,33 +24,33 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributorAuth implements IMenu{
     private ClsContributorAutorizzato user;
     Scanner in = new Scanner(System.in);
-    public ClsMenuContributorAuth(){}
+    public ClsMenuContributorAuth(ClsContributorAutorizzato c){user = c;}
     @Override
     public void menu() {
+        ClsMenuTuristaAutenticato menuta = new ClsMenuTuristaAutenticato(user);
+        menuta.menu();
         boolean exit = false;
-        user = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
-        user.setId("1");
-        user.setPunteggio(666);
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("contributor autorizzato");
-        user.getCredenziali().setPassword("password");
         while (!exit) {
-            println("1) Aggiungi Nodo");
-            println("2) Modifica Nodo");
-            println("3) Elimina Nodo");
-            println("4) Inserisci Itinerario");
-            println("5) Modifica Itinerario");
-            println("6) Modifica Itinerario");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()){//Gli altri case sono placeholder
-                case "1" -> aggiungiNodo(user);
-                case "2" -> menuModificaNodo();
-                case "3" -> menuEliminaNodo();
-                case "4" -> aggiungiItinerario(user);
-                case "5" -> aggiungiNodo(user);
-                case "6" -> aggiungiNodo(user);
-                case "0" -> exit = true;
+            println("5) Aggiungi Nodo");
+            println("6) Modifica Nodo");
+            println("7) Elimina Nodo");
+            println("8) Inserisci Itinerario");
+            println("9) Modifica Itinerario");
+            println("10) Modifica Itinerario");
+            println("11) I miei contest");
+            if (user.getClass().equals(ClsContributorAutorizzato.class)) {
+                println("0) Esci");
+                print(">> ");
+                switch (in.nextLine()) {//Gli altri case sono placeholder
+                    case "5" -> aggiungiNodo(user);
+                    case "6" -> menuModificaNodo();
+                    case "7" -> menuEliminaNodo();
+                    case "8" -> aggiungiItinerario(user);
+                    case "9" -> aggiungiNodo(user);
+                    case "10" -> aggiungiNodo(user);
+                    case "11" -> exit = false; //I MIEI CONTEST
+                    case "0" -> exit = true;
+                }
             }
         }
     }
