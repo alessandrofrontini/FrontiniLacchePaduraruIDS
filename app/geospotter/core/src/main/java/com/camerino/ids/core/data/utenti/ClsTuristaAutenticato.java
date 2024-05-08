@@ -80,6 +80,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
 
+    public ClsTuristaAutenticato() {
+        super();
+
+    }
+
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
         super(segnalazioni);
         pRecensioni = recensioni;

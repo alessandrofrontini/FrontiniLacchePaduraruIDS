@@ -42,14 +42,14 @@ public class ClsImmagine extends ClsInformazione
 
     public String visualizzaImmagine()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO IMMAGINE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "URL: " + this.getURL() + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
         dummy += "ID Contenuto Associato: " + this.idCOntenutoAssociato + "\n";
 
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO IMMAGINE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "";
 
         return dummy;
     }

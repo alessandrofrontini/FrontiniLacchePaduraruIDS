@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaComuni">
+   <children>
+      <Text fill="RED" layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICA COMUNI">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Signor Gestore della Piattaforma BENTROVATO.&#10;In questa sezione potrai modificare comuni gia esistenti a GeoSpotter. Buon lavoro.&#10;" />
+      <TabPane layoutX="11.0" layoutY="110.0" prefHeight="416.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Seleziona Comune">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                 <TableView fx:id="elencoComuni" layoutX="4.0" layoutY="14.0" prefHeight="321.0" prefWidth="570.0">
+                    <columns>
+                       <TableColumn fx:id="id" prefWidth="35.20001411437988" text="ID" />
+                       <TableColumn fx:id="nome" prefWidth="91.20000457763672" text="NOME" />
+                       <TableColumn fx:id="posizione" prefWidth="86.19998168945312" text="POSIZIONE" />
+                       <TableColumn fx:id="abitanti" prefWidth="75.79998779296875" text="ABITANTI" />
+                       <TableColumn fx:id="superficie" prefWidth="88.20001220703125" text="SUPERFICIE" />
+                       <TableColumn fx:id="curatori" prefWidth="192.79998168945315" text="CURATORI" />
+                    </columns>
+                 </TableView>
+                 <ComboBox fx:id="sceltaComune" editable="true" layoutX="143.0" layoutY="346.0" onMouseClicked="#vediInformazoniAttualiComune" prefHeight="26.0" prefWidth="292.0" promptText="Seleziona qui" />
+              </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Modifica Comune">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                 <TextField fx:id="nomeTF" layoutX="23.0" layoutY="274.0" prefHeight="26.0" prefWidth="250.0" promptText="Nome" />
+                 <TextField fx:id="coordinataYTF" layoutX="153.0" layoutY="341.0" prefHeight="26.0" prefWidth="120.0" promptText="Coordinata Y" />
+                 <TextField fx:id="coordinataXTF" layoutX="22.0" layoutY="341.0" prefHeight="26.0" prefWidth="120.0" promptText="Coordinata X" />
+                 <TextField fx:id="descrizioneTF" layoutX="23.0" layoutY="307.0" prefHeight="26.0" prefWidth="250.0" promptText="Descrizione" />
+                 <TextField fx:id="abitantiTF" layoutX="305.0" layoutY="274.0" prefHeight="26.0" prefWidth="250.0" promptText="Abitanti" />
+                 <TextField fx:id="superficieTF" layoutX="305.0" layoutY="307.0" prefHeight="26.0" prefWidth="250.0" promptText="Superficie (M^2)" />
+                 <TableView fx:id="elencoCuratori" layoutX="22.0" layoutY="14.0" prefHeight="212.0" prefWidth="532.0">
+                    <columns>
+                       <TableColumn fx:id="idCuratore" prefWidth="94.20001411437988" text="ID" />
+                       <TableColumn fx:id="usernameCuratore" minWidth="0.0" prefWidth="476.99999237060547" text="USERNAME" />
+                    </columns>
+                 </TableView>
+                 <TextField fx:id="textFieldCuratori" layoutX="22.0" layoutY="239.0" prefHeight="26.0" prefWidth="533.0" promptText="Curatori Associati (IDcuratore1-IDcuratore2-...-IDcuratoreN)" />
+              </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+  <Button fx:id="homeTF" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="151.0" text="Home" />
+  <Button fx:id="confermaTF" layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#modificaComune" prefHeight="26.0" prefWidth="151.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+   </children>
+</AnchorPane>

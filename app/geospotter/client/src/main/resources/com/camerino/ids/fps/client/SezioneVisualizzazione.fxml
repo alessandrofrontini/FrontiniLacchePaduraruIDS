@@ -2,11 +2,8 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneVisualizzazione">
@@ -17,53 +14,56 @@
           <Button fx:id="sezioneVisualizzazioneBTNLogIn" mnemonicParsing="false" onMouseClicked="#navigateToSezioneLogin" prefHeight="26.0" prefWidth="243.0" text="Log-In" />
         </items>
       </ToolBar>
-      <SubScene fx:id="sezioneVisualizzazioneMappa" height="332.0" layoutX="39.0" layoutY="176.0" width="522.0">
-        <root>
-          <Region />
-        </root>
-         <effect>
-            <Shadow height="0.0" radius="0.0" width="0.0">
-               <input>
-                  <Lighting>
-                     <bumpInput>
-                        <Shadow />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </input>
-            </Shadow>
-         </effect>
-         <fill>
-            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="1.0" blue="1.0" />
-                     </color>
-                  </Stop>
-               </stops>
-            </RadialGradient>
-         </fill>
-      </SubScene>
-      <ComboBox fx:id="sezioneVisualizzazioneSceltaAzione" accessibleText="&#10;" editable="true" layoutX="90.0" layoutY="110.0" prefHeight="26.0" prefWidth="323.0" promptText="AzioniDiContribuzione">
+      <ComboBox fx:id="sceltaAzioneContributor" accessibleText="&#10;" editable="true" layoutX="20.0" layoutY="249.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Contributor / Contributor Auth.">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="InserisciNodo" />
+                  <String fx:value="Inserisci Nodo" />
+                  <String fx:value="Elimina Nodo" />
+                  <String fx:value="Modifica Nodo" />
+                  <String fx:value="Inserisci Itinerario" />
+                  <String fx:value="Elimina Itinerario" />
+                  <String fx:value="Modifica Itinerario" />
+                  <String fx:value="Contest di Contribuzione" />
               </FXCollections>
           </items>
       </ComboBox>
-      <Button fx:id="sezioneNavigazioneBTNConfermaAzione" layoutX="426.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneScelta" prefHeight="26.0" prefWidth="113.0" text="Conferma" />
-      <Text fill="#28bf7b" layoutX="145.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GeoSpotter_Client">
+      <Button fx:id="sezioneNavigazioneBTNConfermaAzione" layoutX="400.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaContributor" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <Text fill="#28bf7b" layoutX="145.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GeoSpotter_Client">
          <font>
             <Font name="Franklin Gothic Heavy" size="36.0" />
          </font>
       </Text>
+      <ComboBox fx:id="sceltaAzioneGestore" editable="true" layoutX="20.0" layoutY="399.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Gestore della Piattaforma ">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Inserisci Comune" />
+                  <String fx:value="Elimina Comune" />
+                  <String fx:value="Modifica Comune" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Button layoutX="399.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaGestore" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <ToolBar layoutX="19.0" layoutY="86.0" prefHeight="51.0" prefWidth="561.0" style="-fx-background-color: #7f7f7f;">
+        <items>
+          <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Mappa" />
+            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Nodi" />
+            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Itinerari" />
+        </items>
+      </ToolBar>
+      <ComboBox fx:id="sceltaAzioneTuristaAutenticato" editable="true" layoutX="21.0" layoutY="211.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Turista Autenticato">
+       <items>
+           <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Inserisci Recensione" />
+               <String fx:value="Elimina Recensione" />
+               <String fx:value="Modifica Recensione" />
+               <String fx:value="Inserisci Immagine" />
+           </FXCollections>
+       </items>
+      </ComboBox>
+      <Button layoutX="400.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaTurista" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <ComboBox fx:id="sceltaAzioneAnimatore" editable="true" layoutX="20.0" layoutY="287.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Animatore" />
+      <Button layoutX="400.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <ComboBox fx:id="sceltaAzioneCuratore" editable="true" layoutX="20.0" layoutY="363.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Curatore" />
+      <Button layoutX="399.0" layoutY="362.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
    </children>
 </AnchorPane>

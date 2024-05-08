@@ -41,7 +41,7 @@ public class ClsComune extends ClsContenuto
     public  String visualizzaComune()
     {
 
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "\nUsernameCreatore: " + this.getUsernameCreatore() + "\n";
@@ -49,9 +49,22 @@ public class ClsComune extends ClsContenuto
         dummy += "\nDescrizione: " + this.getDescrizione() + "\n";
         dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY() + "\n";
         dummy += "Superficie: \n" + this.getSuperficie() + "\n\n";
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "Curatori: " + visualizzaCuratoriComune();
 
         return dummy;
+    }
+
+    private String visualizzaCuratoriComune()
+    {
+
+        String tmp = "";
+
+        for(int i = 0; i<this.curatoriAssociati.length; i++)
+        {
+            tmp += this.curatoriAssociati[i].getCredenziali().getUsername() +", ";
+        }
+
+        return tmp;
     }
 
 }

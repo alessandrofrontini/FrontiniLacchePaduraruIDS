@@ -13,6 +13,13 @@ public class ClsNodo extends ClsContenuto{
     private eTologiaNodo eTologiaNodo;
     private boolean aTempo;
 
+    //dd/mm/yyyy
+    private String dataInizio;
+    //dd/mm/yyyy
+    private String dataFine;
+
+
+
     //region Getter e setter
     public String getIdComune() {
         return idComune;
@@ -30,6 +37,31 @@ public class ClsNodo extends ClsContenuto{
         this.eTologiaNodo = eTologiaNodo;
     }
 
+    public String getTipologiaNodoFormatoStringa(){ return this.eTologiaNodo.toString();}
+
+    public void seteTologiaNodoFormatoStringa (String tipologiaNodo){
+        String tmp = tipologiaNodo.toUpperCase();
+
+        switch (tmp)
+        {
+            case "COMMERCIALE":
+                this.eTologiaNodo = eTologiaNodo.COMMERCIALE;
+                break;
+
+            case "CULINARIO":
+                this.eTologiaNodo = eTologiaNodo.CULINARIO;
+                break;
+
+            case "CULTURALE":
+                this.eTologiaNodo = eTologiaNodo.CULTURALE;
+                break;
+
+            default:
+                this.eTologiaNodo = null;
+                break;
+        }
+    }
+
     public boolean isaTempo() {
         return aTempo;
     }
@@ -37,11 +69,28 @@ public class ClsNodo extends ClsContenuto{
     public void setaTempo(boolean aTempo) {
         this.aTempo = aTempo;
     }
+
+    public String getDataInizio() {
+        return dataInizio;
+    }
+
+    public void setDataInizio(String dataInizio) {
+        this.dataInizio = dataInizio;
+    }
+
+    public String getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(String dataFine) {
+        this.dataFine = dataFine;
+    }
+
     //endregion
 
     public String visualizzaNodo()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "ID Comune: " + this.getIdComune() + "\n";
@@ -49,8 +98,6 @@ public class ClsNodo extends ClsContenuto{
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "Tipologia: " + this.getDescrizione() + "\n";
         dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n\n";
-
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO NODO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
 
         return dummy;
     }

@@ -6,14 +6,14 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneLogin">
    <children>
-      <Text fontSmoothingType="LCD" layoutX="233.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log-In">
+      <Text fontSmoothingType="LCD" layoutX="232.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log-In">
          <font>
             <Font name="Franklin Gothic Medium Cond" size="38.0" />
          </font>
       </Text>
-      <Text layoutX="20.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum." wrappingWidth="559.8251647949219">
+      <Text layoutX="20.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi subito a GeoSpotter e inizia anche tu a viaggiare. &#10;Il tempo del Covid è finito caro il mio Turista." wrappingWidth="496.8251647949219">
          <font>
-            <Font size="10.0" />
+            <Font size="11.0" />
          </font>
       </Text>
       <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0" prefWidth="543.0" promptText="Username">
@@ -26,8 +26,7 @@
             <Font size="22.0" />
          </font>
       </TextField>
-      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="145.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#logga" prefHeight="26.0" prefWidth="262.0" text="Conferma" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="86.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="146.0" text="Home" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAlLogin" layoutX="367.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneRegistrazione" prefHeight="26.0" prefWidth="146.0" text="Registrazione" />
+      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="395.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#logga" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="178.0" text="Home" />
    </children>
 </AnchorPane>

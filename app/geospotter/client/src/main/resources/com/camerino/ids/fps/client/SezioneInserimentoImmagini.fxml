@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneInserimentoImmagini">
+   <children>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERISCI IMMAGINE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <TableView fx:id="ElencoNodi" layoutX="32.0" layoutY="146.0" prefHeight="223.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="idColonna" prefWidth="33.199981689453125" text="ID" />
+            <TableColumn fx:id="idComuneColonna" prefWidth="107.0" text="ID COMUNE" />
+            <TableColumn fx:id="nomeColonna" prefWidth="109.40000915527344" text="NOME" />
+            <TableColumn fx:id="posizioneColonna" prefWidth="108.5999755859375" text="POSIZIONE" />
+            <TableColumn fx:id="tipologiaColonna" prefWidth="82.60003662109375" text="TIPOLOGIA" />
+            <TableColumn fx:id="aTempoColonna" prefWidth="94.199951171875" text="A TEMPO" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="sceltaNodo" editable="true" layoutX="135.0" layoutY="379.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
+      <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+      <Button layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#inserisciImmagine" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+      <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione hai la possibilità di poter inserire ed associare immagini a Nodi presenti in Geospotter.&#10;Attenzione, le immegini che richiederai di inserire saranno sempre sottoposte a supervisione di uno dei nostri Curatori. Se metti la foto del tuo Tasso noi lo sappiamo." wrappingWidth="562.068359375" />
+      <TextField fx:id="urlImmagine" layoutX="23.0" layoutY="443.0" prefHeight="26.0" prefWidth="553.0" promptText="URL" />
+   </children>
+</AnchorPane>

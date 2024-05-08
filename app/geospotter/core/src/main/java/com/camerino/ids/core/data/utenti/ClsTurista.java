@@ -9,6 +9,9 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
  */
 public class ClsTurista implements ISignalable {
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
+    public ClsTurista(){
+
+    }
     public ClsTurista(IPersistenceModel<ClsSegnalazione> segnalazioni){ pSegnalazioni = segnalazioni;}
     /**
      * Crea una segnalazione per il contenuto segnalato (Nodo, Foto, Recensione, Itinerario)

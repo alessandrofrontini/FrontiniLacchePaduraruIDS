@@ -11,7 +11,7 @@
             <Font name="Franklin Gothic Medium Cond" size="38.0" />
          </font>
       </Text>
-      <Text layoutX="20.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum." wrappingWidth="559.8251647949219">
+      <Text layoutX="20.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esplora il nostro bellissimo paese con GeoSpotter! Scopri luoghi nascosti, paesaggi mozzafiato e curiosità locali. &#10;Unisciti a milioni di appassionati di geografia e metti alla prova la tua conoscenza del territorio italiano. &#10;Registrati su GeoSpotter e inizia il tuo viaggio virtuale attraverso le strade, i borghi e le meraviglie d’Italia!" wrappingWidth="559.8251647949219">
          <font>
             <Font size="10.0" />
          </font>
@@ -21,18 +21,17 @@
             <Font size="22.0" />
          </font>
       </TextField>
-      <TextField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="246.0" prefHeight="26.0" prefWidth="543.0" promptText="Password">
+      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="394.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="26.0" prefWidth="191.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="20.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="191.0" text="Home" />
+      <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0" prefWidth="543.0" promptText="Password">
          <font>
             <Font size="22.0" />
          </font>
-      </TextField>
-      <TextField fx:id="sezioneRegistrazioneTextBoxRipetiPassword" layoutX="20.0" layoutY="307.0" prefHeight="26.0" prefWidth="543.0" promptText="Ripeti Password">
+      </PasswordField>
+      <PasswordField fx:id="sezioneRegistrazioneTextBoxRipetiPassword" layoutX="20.0" layoutY="313.0" prefHeight="46.0" prefWidth="543.0" promptText="Ripeti Password">
          <font>
             <Font size="22.0" />
          </font>
-      </TextField>
-      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="148.0" layoutY="368.0" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="26.0" prefWidth="262.0" text="Conferma" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="86.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="146.0" text="Home" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAlLogin" layoutX="367.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneLogIn" prefHeight="26.0" prefWidth="146.0" text="Log-In" />
+      </PasswordField>
    </children>
 </AnchorPane>

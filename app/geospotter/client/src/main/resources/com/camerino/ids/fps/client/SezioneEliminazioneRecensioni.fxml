@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneEliminazioneRecensioni">
+   <children>
+      <Button fx:id="home" layoutX="40.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="175.0" text="Home" />
+      <Button fx:id="conferma" layoutX="384.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#eliminaRecensione" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ELIMINA RECENSIONE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione potrai eliminare recensioni. Sotto puoi vedere una tabella che riporta&#10;tutte le recensioni che puoi eliminare: selezionane una e conferma l'eliminazione." />
+      <TableView fx:id="sezioneEliminazioneRecensioniTableView" layoutX="32.0" layoutY="114.0" prefHeight="304.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnID" prefWidth="69.39999008178711" text="ID" />
+            <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato" prefWidth="146.5999755859375" text="ID ASSOCIAZIONE" />
+            <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnOggetto" prefWidth="77.00004577636719" text="OGGETTO" />
+            <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnValutazione" prefWidth="112.79998779296875" text="VALUTAZIONE" />
+            <TableColumn fx:id="getSezioneEliminazioneRecensioniTableColumnContenuto" prefWidth="127.20000000000005" text="CONTENUTO" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" editable="true" layoutX="113.0" layoutY="431.0" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
+   </children>
+</AnchorPane>
