@@ -8,6 +8,8 @@ import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,8 +75,48 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     public void leggiUtenti(){
         try{
+            FileReader input = new FileReader("turisti.txt");
+            StringBuilder tutti = new StringBuilder();
+            int c;
+            while((c= input.read())!=-1) {
+                tutti.append((char) c);
+            }
+            String [] utenti = String.valueOf(tutti).split("\r\n");
+            for(String utente:utenti){
+                ClsTuristaAutenticato daAggiungere = null;
+                String [] dati = utente.split(",");
+                switch (dati[1]){
+                    case "TURISTA_AUTENTICATO": daAggiungere = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO); break;
+                    case "CONTRIBUTOR": daAggiungere = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR); break;
+                    case "CONTRIBUTOR_AUTORIZZATO": daAggiungere = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO); break;
+                    case "ANIMATORE": daAggiungere = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE); break;
+                    case "CURATORE": daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE); break;
+                    case "GESTORE_DELLA_PIATTAFORMA": daAggiungere = new ClsGestoreDellaPiattaforma(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA); break;
+                }
+                daAggiungere.setId(dati[0]);
+                Credenziali cr = new Credenziali();
+                cr.setUsername(dati[2]);
+                cr.setPassword(dati[3]);
+                daAggiungere.setCredenziali(cr);
+                daAggiungere.setPunteggio(Integer.parseInt(dati[4]));
+                inserisciUtente(daAggiungere);
+            }
 
         } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void scriviUtenti(){
+        try{
+            FileWriter output = new FileWriter("turisti.txt");
+            StringBuilder daScrivere = new StringBuilder();
+            for(ClsTuristaAutenticato c:turisti){
+                daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio() + "\r\n");
+            }
+            output.write(String.valueOf(daScrivere));
+            output.close();
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

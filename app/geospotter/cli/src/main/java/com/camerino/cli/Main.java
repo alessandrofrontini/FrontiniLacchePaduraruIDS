@@ -47,12 +47,14 @@ public class Main {
         MockLocator.getMockNodi().scriviNodi();
         MockLocator.getMockSegnalazioni().scriviSegnalazioni();
         MockLocator.getMockRecensioni().scriviRecensioni();
+        MockLocator.getMockTuristi().scriviUtenti();
     }
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
         MockLocator.getMockSegnalazioni().leggiSegnalazioni();
         MockLocator.getMockRecensioni().leggiRecensioni();
+        MockLocator.getMockTuristi().leggiUtenti();
     }
     private static void listaComuni()
     {
@@ -78,7 +80,7 @@ public class Main {
     private static void main_menu(ClsTuristaAutenticato turista) {
         switch (turista.getRuoloUtente()){
             case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato(turista).menu();
-            case CONTRIBUTOR -> new ClsMenuContributor().menu();
+            case CONTRIBUTOR -> new ClsMenuContributor((ClsContributor) turista).menu();
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth().menu();
             case ANIMATORE -> new ClsMenuAnimatore().menu();
             case CURATORE -> new ClsMenuCuratore().menu();

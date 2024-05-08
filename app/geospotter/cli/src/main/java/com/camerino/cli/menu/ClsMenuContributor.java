@@ -17,17 +17,10 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
     Scanner in = new Scanner(System.in);
-    public ClsMenuContributor(){}
+    public ClsMenuContributor(ClsContributor c){user = c;}
     @Override
     public void menu() {
-//TODO: implementare
         boolean exit = false;
-        user.setId("1");
-        user.setPunteggio(200); //punteggio da non prendere seriamente
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("Contributor");
-        user.getCredenziali().setPassword("password");
-
         while (!exit) {
             println("1) Inserisci Nodo");
             println("2) Modifica Nodo");
