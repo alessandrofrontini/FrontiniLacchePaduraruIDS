@@ -72,7 +72,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 
     public void leggiSegnalazioni(){
         try{
-            FileReader input = new FileReader("segnalazioni.txt");
+            FileReader input = new FileReader("CLIsave/segnalazioni.txt");
             StringBuilder tutte = new StringBuilder();
             int c;
             while((c= input.read())!=-1) {
@@ -97,7 +97,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 
     public void scriviSegnalazioni(){
         try{
-            FileWriter output = new FileWriter("segnalazioni.txt");
+            FileWriter output = new FileWriter("CLIsave/segnalazioni.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsSegnalazione s:segnalazioni){
                 output.append(s.getId() + "," + s.getIdContenuto() + "," + s.getIdCuratore() + "," + s.getDescrizione() + "," + s.getIdUtente() + "\r\n");

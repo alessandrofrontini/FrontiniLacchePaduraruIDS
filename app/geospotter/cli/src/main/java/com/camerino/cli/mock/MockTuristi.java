@@ -75,7 +75,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     public void leggiUtenti(){
         try{
-            FileReader input = new FileReader("turisti.txt");
+            FileReader input = new FileReader("CLIsave/turisti.txt");
             StringBuilder tutti = new StringBuilder();
             int c;
             while((c= input.read())!=-1) {
@@ -109,7 +109,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     public void scriviUtenti(){
         try{
-            FileWriter output = new FileWriter("turisti.txt");
+            FileWriter output = new FileWriter("CLIsave/turisti.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsTuristaAutenticato c:turisti){
                 daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio() + "\r\n");

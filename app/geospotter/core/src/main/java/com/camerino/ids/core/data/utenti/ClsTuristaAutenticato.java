@@ -3,6 +3,7 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.punteggio.IPunteggioManager;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
@@ -119,6 +120,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public boolean inserisciImmagine(ClsImmagine immagine) {
         ClsRichiestaAzioneDiContribuzione richiesta = new ClsRichiestaAzioneDiContribuzione();
         richiesta.setDatiImmagine(immagine);
+        richiesta.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        richiesta.setUsernameCreatoreRichiesta(this.credenziali.getUsername());
         return pRichiestaImmagini.insert(richiesta);
     }
 

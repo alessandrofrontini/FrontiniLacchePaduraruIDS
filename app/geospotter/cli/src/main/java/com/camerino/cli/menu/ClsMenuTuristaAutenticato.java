@@ -63,25 +63,33 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     }
 
     public void menuModificaRecensione() {
-        for(ClsRecensione r:user.visualizzaRecensioniPosessore()){
-            println(r.visualizzaRecensione());
+        if(!user.visualizzaRecensioniPosessore().isEmpty()) {
+            for (ClsRecensione r : user.visualizzaRecensioniPosessore()) {
+                println(r.visualizzaRecensione());
+            }
+            print("Inserisci l'id della recensione da modificare: ");
+            HashMap<String, Object> filtri = new HashMap<>();
+            filtri.put("id", in.nextLine());
+            ClsRecensione old = MockLocator.getMockRecensioni().get(filtri).get(0);
+            if (old == null) {
+                println("Recensione non trovata.");
+                return;
+            }
+            ClsRecensione newrec = Input.modificaRecensione(old);
+            user.modificaRecensione(old, newrec);
         }
-        print("Inserisci l'id della recensione da modificare: ");
-        HashMap<String, Object> filtri = new HashMap<>();
-        filtri.put("id", in.nextLine());
-        ClsRecensione old = MockLocator.getMockRecensioni().get(filtri).get(0);
-         if(old == null){
-             println("Recensione non trovata.");
-             return;
-          }
-          ClsRecensione newrec = Input.modificaRecensione(old);
-          user.modificaRecensione(old, newrec);
+        else println("Non hai ancora aggiunto recensioni");
     }
 
     public void menuEliminaRecensione() {
-        print("inserisci l'id della recensione da eliminare: ");
-        ClsCommonActions.eliminaRecensione(user, in.nextLine());
-        println("recensione eliminata.");
+        if(!user.visualizzaRecensioniPosessore().isEmpty()) {
+            for (ClsRecensione r : user.visualizzaRecensioniPosessore()) {
+                println(r.visualizzaRecensione());
+            }
+            print("inserisci l'id della recensione da eliminare: ");
+            ClsCommonActions.eliminaRecensione(user, in.nextLine());
+            println("recensione eliminata.");
+        } else println("Non hai ancora aggiunto recensioni");
     }
 
     public void menuInserisciFoto() {
@@ -93,7 +101,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             println("0) Esci");
             switch (in.nextLine()) {
                 case "1" -> inserisciFotoContenuto(contenuto);
-                case "2" -> exit = true;
+                case "0" -> exit = true;
             }
         }
     }

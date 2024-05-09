@@ -25,11 +25,21 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
             r.add(getRecensioneByID(filters.get("id").toString()));
             return r;
         }
+        if(filters.containsKey("usernameCreatore")){
+            r.add(getRecensioneByUsername(filters.get("usernameCreatore").toString()));
+            return r;
+        }
         return this.recensioni;
     }
 
     private ClsRecensione getRecensioneByID(String id){
         List<ClsRecensione> tmp =  recensioni.stream().filter(n->n.getId().equals(id)).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp.get(0);
+    }
+    private ClsRecensione getRecensioneByUsername(String username){
+        List<ClsRecensione> tmp =  recensioni.stream().filter(n->n.getUsernameCreatore().equals(username)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
@@ -71,7 +81,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 
     public void leggiRecensioni(){
         try{
-            FileReader input = new FileReader("recensioni.txt");
+            FileReader input = new FileReader("CLIsave/recensioni.txt");
             StringBuilder tutte = new StringBuilder();
             int c;
             while((c= input.read())!=-1) {
@@ -97,7 +107,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 
     public void scriviRecensioni(){
         try{
-            FileWriter output = new FileWriter("recensioni.txt");
+            FileWriter output = new FileWriter("CLIsave/recensioni.txt");
             StringBuilder tutte = new StringBuilder();
             for(ClsRecensione r:recensioni){
                 tutte.append(r.getId() + "," + r.getUsernameCreatore() + "," + r.getIdContenutoAssociato() + "," + r.getValutazione() + "," + r.getOggetto() + "," + r.getContenuto() + "\r\n");

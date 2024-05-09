@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     }
     public void leggiRCD(){
         try{
-            FileReader input = new FileReader("rcd.txt");
+            FileReader input = new FileReader("CLIsave/rcd.txt");
             StringBuilder tutti = new StringBuilder();
             int c;
             while((c= input.read())!=-1) {
@@ -86,6 +87,27 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 rcd.setDatiImmagine(MockLocator.getMockImmagini().get(filtro).get(0));
                 insert(rcd);
             }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void scriviRCD(){
+        try{
+            FileWriter output = new FileWriter("CLIsave/rcd.txt");
+            StringBuilder daScrivere = new StringBuilder();
+            for(ClsRichiestaAzioneDiContribuzione r:rcdi){
+                daScrivere.append(r.getId() + "," + r.getUsernameCreatoreRichiesta() + "," + r.geteAzioneDiContribuzione() + ",");
+                if(r.getDatiNodo()!=null)
+                    daScrivere.append(r.getDatiNodo().getId() + ",");
+                else daScrivere.append("null,");
+                if(r.getDatiImmagine()!=null)
+                    daScrivere.append(r.getDatiImmagine().getId());
+                else daScrivere.append("null");
+                daScrivere.append("\r\n");
+            }
+            output.write(String.valueOf(daScrivere));
+            output.close();
         } catch(Exception e){
             e.printStackTrace();
         }

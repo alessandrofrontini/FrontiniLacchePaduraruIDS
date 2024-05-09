@@ -90,7 +90,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         public void leggiNodi(){
             try{
-                FileReader input = new FileReader("nodi.txt");
+                FileReader input = new FileReader("CLIsave/nodi.txt");
                 StringBuilder nodiFile = new StringBuilder();
                 int c;
                 while((c= input.read())!=-1) {
@@ -130,7 +130,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         public void scriviNodi(){
             try{
-                FileWriter output = new FileWriter("nodi.txt");
+                FileWriter output = new FileWriter("CLIsave/nodi.txt");
                 StringBuilder daScrivere = new StringBuilder("");
                 for(ClsNodo nodo:nodi){
                     SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");

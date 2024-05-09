@@ -102,7 +102,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     public void leggiComuni()
     {
         try {
-            FileReader input = new FileReader("comuni.txt");
+            FileReader input = new FileReader("CLIsave/comuni.txt");
             StringBuilder comuniFile = new StringBuilder();
             int c;
             while((c= input.read())!=-1) {
@@ -135,7 +135,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     public void scriviComuni(){
         try {
-            FileWriter output = new FileWriter("comuni.txt");
+            FileWriter output = new FileWriter("CLIsave/comuni.txt");
             StringBuilder daScrivere = new StringBuilder("");
             for(ClsComune comune:comuni){
                 daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");
