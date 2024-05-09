@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,9 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
@@ -120,27 +119,6 @@ public class Controller_SezioneModificaItinerari implements Initializable
         setNodi(nodi);
 
         //region Creazione itinerari dummy
-        ClsNodo nod1 = new ClsNodo();
-        nod1.setId("2");
-        nod1.setIdComune("1");
-        nod1.setaTempo(true);
-        nod1.setTipologiaNodo(COMMERCIALE);
-        nod1.setUsernameCreatore("");
-        nod1.setDescrizione("Descrizione - Nodo 1");
-        nod1.setNome("Negozio");
-        nod1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nod2 = new ClsNodo();
-        nod2.setId("4");
-        nod2.setIdComune("3");
-        nod2.setaTempo(false);
-        nod2.setTipologiaNodo(CULTURALE);
-        nod2.setUsernameCreatore("");
-        nod2.setDescrizione("Descrizione - Nodo 2");
-        nod2.setNome("Statua");
-        nod2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
 
         ClsItinerario i1 = new ClsItinerario();
         i1.setId("1");
@@ -150,16 +128,6 @@ public class Controller_SezioneModificaItinerari implements Initializable
         i1.setTappe(nodi);
         itinerari.add(i1);
 
-        ClsNodo nod3 = new ClsNodo();
-        nod3.setId("6");
-        nod3.setIdComune("5");
-        nod3.setaTempo(false);
-        nod3.setTipologiaNodo(CULINARIO);
-        nod3.setUsernameCreatore("");
-        nod3.setDescrizione("Descrizione - Nodo 3");
-        nod3.setNome("Ristorante");
-        nod3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
 
         ClsItinerario i2 = new ClsItinerario();
         i2.setId("2");
@@ -169,16 +137,6 @@ public class Controller_SezioneModificaItinerari implements Initializable
         i2.setTappe(nodi);
         itinerari.add(i2);
 
-        ClsNodo nod4 = new ClsNodo();
-        nod3.setId("8");
-        nod3.setIdComune("3");
-        nod3.setaTempo(false);
-        nod3.setTipologiaNodo(CULINARIO);
-        nod3.setUsernameCreatore("");
-        nod3.setDescrizione("Descrizione - Nodo 4");
-        nod3.setNome("Ristorante");
-        nod3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
 
         ClsItinerario i3 = new ClsItinerario();
         i3.setId("3");
@@ -240,22 +198,20 @@ public class Controller_SezioneModificaItinerari implements Initializable
     public void modificaItinerario(MouseEvent mouseEvent)
     {
         ClsItinerario nuovoItinerario = this.inserisciItinerario(mouseEvent);
-        String id = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
+        String IDDaModificare = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
 
-        if(id == null || (
-                        u.getValueFromTextField(this.sezioneInserimentoItinerariNomeItinerario) == null ||
-                        u.getValueFromTextField(this.sezioneInserimentoItinerariElencoTappe) == null))
+        if(nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size()>=2)
         {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Attenzione");
-            alert.setContentText("Controlla le informazioni e riprova");
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("FATTO");
+            alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
             alert.show();
         }
         else
         {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle("FATTO");
-            alert.setContentText("ID: " + id + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Attenzione");
+            alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
@@ -280,15 +236,26 @@ public class Controller_SezioneModificaItinerari implements Initializable
                     }
                 }
             }
+
+            if((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2)
+            {
+                itinerario.setId("");
+                itinerario.setUsernameCreatore("");
+                itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
+                itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
+                itinerario.setTappe(nodiAssociatiToItinerario);
+
+                return itinerario;
+            }
+            else
+            {
+                return null;
+            }
         }
-
-        itinerario.setId("");
-        itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
-        itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
-        itinerario.setTappe(nodiAssociatiToItinerario);
-        itinerario.setUsernameCreatore("");
-
-        return itinerario;
+        else
+        {
+            return null;
+        }
     }
 
     private void setNodi (ArrayList<ClsNodo> nodi)
@@ -329,12 +296,6 @@ public class Controller_SezioneModificaItinerari implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private String[] convertiNodiCoinvoltiInArray(String input)
-    {
-        String[] tmp = input.split("-");
-        return tmp;
-    }
-
     public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent)
     {
         String idItinerarioDaVisualizzare = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
@@ -352,5 +313,58 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
+    private boolean controllaConformitaIDItinerario (String id)
+    {
+        boolean flag = false;
+
+        for(int i = 0; i<itinerari.size();i++)
+        {
+            if(Objects.equals(itinerari.get(i).getId(), id))
+            {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    private String[] convertiNodiCoinvoltiInArray(String input)
+    {
+        String[] tmp = input.split("-");
+        String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);;
+        return nuova;
+    }
+
+    private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsNodo> nodi)
+    {
+        // Create a HashSet from the string values of objects in listA for faster lookup
+        HashSet<String> setAValues = new HashSet<>();
+        for (ClsNodo obj : nodi) {
+            setAValues.add(obj.getId());
+        }
+
+        // Use an Iterator to safely remove elements from listB
+        Iterator<String> iterator = input.iterator();
+        while (iterator.hasNext()) {
+            String element = iterator.next();
+            // If element is not present in setAValues, remove it from listB
+            if (!setAValues.contains(element)) {
+                iterator.remove();
+            }
+        }
+
+        input = this.rimuoviDuplicati(input);
+
+        return input.toArray(new String[input.size()]);
+    }
+
+    private ArrayList<String> rimuoviDuplicati(ArrayList<String> listaOriginale) {
+        // Creiamo un HashSet che conterrà solo elementi unici
+        HashSet<String> setUnici = new HashSet<>(listaOriginale);
+
+        // Ricostruiamo l'ArrayList senza duplicati
+        ArrayList<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
+
+        return listaSenzaDuplicati;
+    }
 
 }

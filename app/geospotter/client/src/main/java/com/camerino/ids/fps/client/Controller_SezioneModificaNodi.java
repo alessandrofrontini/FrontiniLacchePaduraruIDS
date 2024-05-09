@@ -149,20 +149,20 @@ public class Controller_SezioneModificaNodi implements Initializable
     public void modificaNodo(MouseEvent mouseEvent)
     {
         ClsNodo nuovoNodo = this.inserisciNodo(mouseEvent);
-        String id = this.eliminaNodo(mouseEvent);
+        String IDDaModificare = this.eliminaNodo(mouseEvent);
 
-        if(Objects.equals(id,"") || Objects.equals(id,null) || nuovoNodo == null)
+        if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null)
         {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Attenzione");
-            alert.setContentText("Controlla le informazioni e riprova");
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("FATTO");
+            alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoNodo.visualizzaNodo());
             alert.show();
         }
         else
         {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle("FATTO");
-            alert.setContentText("ID: " + id + "\n\n NuovoNodo:" + nuovoNodo.visualizzaNodo());
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Attenzione");
+            alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
 
@@ -182,49 +182,57 @@ public class Controller_SezioneModificaNodi implements Initializable
         }
     }
 
-    private ClsNodo inserisciNodo(MouseEvent mouseEvent)
-    {
+    private ClsNodo inserisciNodo(MouseEvent mouseEvent) {
 
+        ClsNodo nodo = new ClsNodo();
         Posizione posizione = new Posizione();
 
-        if(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX) != null && u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY) != null)
-        {
-            posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
-            posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
-        }
-        else
-        {
-            return null;
-        }
+        try {
+            if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
+                posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
+                posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
+                nodo.setPosizione(posizione);
 
-        if(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo) == null ||
-                Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
-                Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX), "") ||
-                Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY), "") ||
-                Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
-                u.getValueFromCombobox(sezioneEliminazioneNodiComboBoxSceltaNodoID) == null)
-        {
-            return null;
-        }
-        else
-        {
-            ClsNodo nodo = new ClsNodo();
+                if (u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), "") ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
+                    nodo.setId("test"); //??
+                    nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
+                    nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
+                    nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
+                    nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
+                    nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
+                    nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
+                    nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-            nodo.setPosizione(posizione);
-            nodo.setId("test"); //??
-            nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
-            nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
-            nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
-            nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
-            nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
+                    if (!u.checkInfoNodo(nodo)) {
+                        return null;
+                    } else {
+                        return nodo;
+                    }
+                } else {
+                    return null;
+                }
 
-            if(nodo.isaTempo()) {
-                nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
-                nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
+
+            } else {
+                return null;
             }
-            return nodo;
-        }
 
+        }
+        catch (NumberFormatException e)
+        {
+
+        }
+        catch (NullPointerException e)
+        {
+
+        }
+        return null;
     }
 
     private void setNodi (ArrayList<ClsNodo> nodi)
@@ -291,6 +299,20 @@ public class Controller_SezioneModificaNodi implements Initializable
     public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
     {
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    }
+
+    private boolean controllaConformitaID (String id)
+    {
+        boolean flag = false;
+
+        for(int i = 0; i<nodi.size();i++)
+        {
+            if (Objects.equals(nodi.get(i).getId(), id)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 
 }

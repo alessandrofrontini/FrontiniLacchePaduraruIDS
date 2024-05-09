@@ -10,7 +10,7 @@
         <tabs>
           <Tab text="Seleziona Itinerario">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-style: solid black 1px;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <TableView fx:id="sezioneEliminazioneItinerariTableView" layoutX="32.0" layoutY="45.0" prefHeight="299.0" prefWidth="535.0">
                       <columns>
                           <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnID" prefWidth="75.0" text="ID" />
@@ -19,7 +19,7 @@
                           <TableColumn fx:id="sezioneInserimentoItinerariTableColumnTappe" prefWidth="217.59999389648442" text="TAPPE" />
                       </columns>
                   </TableView>
-                  <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" editable="true" layoutX="135.0" layoutY="356.0" onMouseClicked="#vediInformazoniAttualiItinerario" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona Nodo da modificare" />
+                  <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" layoutX="135.0" layoutY="356.0" onMouseExited="#vediInformazoniAttualiItinerario" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
                      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona il nodo di cui desideri modificare il contenuto. Puoi trovare l'elenco di nodi nella tabella sotto." />
 
               </AnchorPane>

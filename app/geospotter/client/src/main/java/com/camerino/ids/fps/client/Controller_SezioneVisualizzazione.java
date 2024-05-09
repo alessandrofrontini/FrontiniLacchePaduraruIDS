@@ -37,113 +37,142 @@ public class Controller_SezioneVisualizzazione implements Initializable
     {
         String azione = u.getValueFromCombobox(sceltaAzioneTuristaAutenticato);
 
-        switch (azione)
+        if(azione != null)
         {
-            case "Inserisci Recensione":
-                this.navigateToSezioneInserimentoRecensioni(mouseEvent);
-                break;
+            switch (azione)
+            {
+                case "Inserisci Recensione":
+                    this.navigateToSezioneInserimentoRecensioni(mouseEvent);
+                    break;
 
-            case "Elimina Recensione":
-                this.navigateToSezioneEliminazioneRecensioni(mouseEvent);
-                break;
+                case "Elimina Recensione":
+                    this.navigateToSezioneEliminazioneRecensioni(mouseEvent);
+                    break;
 
-            case "Modifica Recensione":
-                this.navigateToSezioneModificaRecensioni(mouseEvent);
-                break;
+                case "Modifica Recensione":
+                    this.navigateToSezioneModificaRecensioni(mouseEvent);
+                    break;
 
-            case "Inserisci Immagine":
-                this.navigateToSezioneInserimentoImmagini(mouseEvent);
-                break;
+                case "Inserisci Immagine":
+                    this.navigateToSezioneInserimentoImmagini(mouseEvent);
+                    break;
 
-            default:
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle(azione);
-                alert.setContentText("--"+azione+"--");
-                alert.show();
-                break;
+                default:
+                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                    alert.setTitle("ERRORE");
+                    alert.setContentText("Controlla le informazioni e riprova");
+                    alert.show();
+                    break;
+            }
         }
+        else {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
+
     }
     public void reindirizzaToAzioneSceltaContributor(MouseEvent mouseEvent)
     {
        String azione = u.getValueFromCombobox(sceltaAzioneContributor);
 
-       switch (azione)
+       if(azione != null)
        {
-           case "Inserisci Nodo":
-               this.navigateToSezioneInserimentoNodi(mouseEvent);
-               break;
+           switch (azione)
+           {
+               case "Inserisci Nodo":
+                   this.navigateToSezioneInserimentoNodi(mouseEvent);
+                   break;
 
-           case "Elimina Nodo":
-               this.navigateToSezioneEliminazioneNodi(mouseEvent);
-               break;
+               case "Elimina Nodo":
+                   this.navigateToSezioneEliminazioneNodi(mouseEvent);
+                   break;
 
-           case "Modifica Nodo":
-               this.navigateToSezioneModificaNodi(mouseEvent);
-               break;
+               case "Modifica Nodo":
+                   this.navigateToSezioneModificaNodi(mouseEvent);
+                   break;
 
-           case "Inserisci Itinerario":
-               this.navigateToSezioneInserimentoItinerari(mouseEvent);
-               break;
+               case "Inserisci Itinerario":
+                   this.navigateToSezioneInserimentoItinerari(mouseEvent);
+                   break;
 
-           case "Elimina Itinerario":
-               this.navigateToSezioneEliminazioneItinerari(mouseEvent);
-               break;
+               case "Elimina Itinerario":
+                   this.navigateToSezioneEliminazioneItinerari(mouseEvent);
+                   break;
 
-           case "Modifica Itinerario":
-               this.navigateToSezioneModificaItinerari(mouseEvent);
-               break;
+               case "Modifica Itinerario":
+                   this.navigateToSezioneModificaItinerari(mouseEvent);
+                   break;
 
-           case "Inserisci Recensione":
-               this.navigateToSezioneInserimentoRecensioni(mouseEvent);
-               break;
+               case "Inserisci Recensione":
+                   this.navigateToSezioneInserimentoRecensioni(mouseEvent);
+                   break;
 
-           case "Elimina Recensione":
-               this.navigateToSezioneEliminazioneRecensioni(mouseEvent);
-               break;
+               case "Elimina Recensione":
+                   this.navigateToSezioneEliminazioneRecensioni(mouseEvent);
+                   break;
 
-           case "Modifica Recensione":
-               this.navigateToSezioneModificaRecensioni(mouseEvent);
-               break;
+               case "Modifica Recensione":
+                   this.navigateToSezioneModificaRecensioni(mouseEvent);
+                   break;
 
-           case "Contest di Contribuzione":
-               this.navigateToSezioneContestDiContribuzioneRedirect(mouseEvent);
-               break;
+               case "Contest di Contribuzione":
+                   this.navigateToSezioneContestDiContribuzioneRedirect(mouseEvent);
+                   break;
 
-           default:
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle(azione);
-                alert.setContentText("--"+azione+"--");
-                alert.show();
-                break;
+               default:
+                   Alert alert = new Alert (Alert.AlertType.ERROR);
+                   alert.setTitle("ERRORE");
+                   alert.setContentText("Controlla le informazioni e riprova");
+                   alert.show();
+                   break;
+           }
        }
-    }
+       else {
+           Alert alert = new Alert (Alert.AlertType.ERROR);
+           alert.setTitle("ERRORE");
+           alert.setContentText("Controlla le informazioni e riprova");
+           alert.show();
+       }
 
+    }
 
     public void reindirizzaToAzioneSceltaGestore (MouseEvent mouseEvent)
     {
         String azione = u.getValueFromCombobox(sceltaAzioneGestore);
 
-        switch (azione)
+        if(azione != null)
         {
-            case "Inserisci Comune":
-                this.navigateToSezioneInserimentoComuni(mouseEvent);
-                break;
+            switch (azione)
+            {
+                case "Inserisci Comune":
+                    this.navigateToSezioneInserimentoComuni(mouseEvent);
+                    break;
 
-            case "Elimina Comune":
-                this.navigateToSezioneEliminazioneComuni(mouseEvent);
-                break;
+                case "Elimina Comune":
+                    this.navigateToSezioneEliminazioneComuni(mouseEvent);
+                    break;
 
-            case "Modifica Comune":
-                this.navigateToSezioneModificaComuni(mouseEvent);
-                break;
+                case "Modifica Comune":
+                    this.navigateToSezioneModificaComuni(mouseEvent);
+                    break;
 
-            default:
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle(azione);
-                alert.setContentText("--"+azione+"--");
-                alert.show();
-                break;
+                default:
+                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                    alert.setTitle("ERRORE");
+                    alert.setContentText("Controlla le informazioni e riprova");
+                    alert.show();
+                    break;
+            }
         }
+        else {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
+
     }
 
 

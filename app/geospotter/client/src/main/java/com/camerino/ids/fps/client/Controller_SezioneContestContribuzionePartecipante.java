@@ -425,8 +425,8 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
         else {
             Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("SELEZIONA UN NODO");
-            alert.setContentText("--SELEZIONA UN NODO--");
+            alert.setTitle("Errore");
+            alert.setContentText("Errore");
             alert.show();
         }
     }

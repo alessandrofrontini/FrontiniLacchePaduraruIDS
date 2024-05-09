@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
@@ -19,9 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller_SezioneModificaComuni implements Initializable
 {
@@ -186,16 +185,16 @@ public class Controller_SezioneModificaComuni implements Initializable
         if(Objects.equals(IDDaEliminare, "") || (
                 nuovoComune == null))
         {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Attenzione");
-            alert.setContentText("Controlla le informazioni e riprova");
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("FATTO");
+            alert.setContentText("ID: " + id + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
             alert.show();
         }
         else
         {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle("FATTO");
-            alert.setContentText("ID: " + id + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Attenzione");
+            alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
 
@@ -316,5 +315,7 @@ public class Controller_SezioneModificaComuni implements Initializable
             }
         }
     }
+
+
 
 }
