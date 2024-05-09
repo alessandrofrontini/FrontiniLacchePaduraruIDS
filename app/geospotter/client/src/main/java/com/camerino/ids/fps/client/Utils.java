@@ -21,7 +21,7 @@ public class Utils
         c.setIDComuneAssociato(nodo.getIdComune());
         c.setNome(nodo.getNome());
         c.setTipologia(nodo.getTipologiaNodoFormatoStringa());
-        c.setPosizione(nodo.getPosizione().getX() +"-"+nodo.getPosizione().getY());
+        c.setPosizione(nodo.getPosizione().getX() + "-" + nodo.getPosizione().getY());
         c.setATempo(nodo.isaTempo()+"");
 
         return c;

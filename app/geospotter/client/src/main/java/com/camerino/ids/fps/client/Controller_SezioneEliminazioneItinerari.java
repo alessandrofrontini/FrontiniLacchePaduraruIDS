@@ -190,7 +190,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
 
         for(int i = 0; i<itinerari.size();i++)
         {
-            if(itinerari.get(i).getId() == id)
+            if(Objects.equals(itinerari.get(i).getId(), id))
             {
                 flag = true;
             }

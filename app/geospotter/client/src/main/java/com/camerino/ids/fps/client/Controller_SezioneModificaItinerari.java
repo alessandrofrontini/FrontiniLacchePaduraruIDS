@@ -30,6 +30,8 @@ public class Controller_SezioneModificaItinerari implements Initializable
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
+
+
     @FXML
     TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML

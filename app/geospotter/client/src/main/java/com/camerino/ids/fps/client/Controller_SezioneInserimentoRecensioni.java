@@ -134,6 +134,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
 
     public void inserisciRecensione(MouseEvent mouseEvent)
     {
+
         ClsRecensione r = new ClsRecensione();
 
         String id = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);

@@ -19,6 +19,7 @@ public class Controller_SezioneLogin
     @FXML
     Button sezioneRegistrazioneBTNRegistrazione,sezioneRegistrazioneBTNVaiAllaHome,sezioneRegistrazioneBTNVaiAlLogin;
 
+
     @FXML
     TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
 
