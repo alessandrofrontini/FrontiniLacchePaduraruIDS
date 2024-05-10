@@ -1,9 +1,15 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
+import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
+@Entity
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
+    @Id
+    @UuidGenerator
     String id;
+    @ManyToOne
     ClsItinerario datiItinerario;
     String usernameCreatore;
 

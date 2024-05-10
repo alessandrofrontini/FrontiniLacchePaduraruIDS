@@ -6,10 +6,12 @@ import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
 
 @Configuration
+@Order(2)
 public class DemoNodi {
     @Bean
     public CommandLineRunner aggiungiNodi(RepoNodi repo) {

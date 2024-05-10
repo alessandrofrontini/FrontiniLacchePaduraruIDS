@@ -1,14 +1,20 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsRichiestaAzioneDiContribuzione {
-    String id,
-    usernameCreatoreRichiesta;
+    @Id
+    @UuidGenerator
+    String id;
+    String usernameCreatoreRichiesta;
     EAzioniDiContribuzione eAzioneDiContribuzione;
+    @ManyToOne
     ClsNodo datiNodo;
 
     //region Getters and Setters

@@ -1,8 +1,11 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.Entity;
+
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsRecensione extends ClsInformazione{
     String idContenutoAssociato;
     double valutazione;

@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
 import com.camerino.ids.fps.server.api.v1.services.SNodi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.config.RepositoryConfigurationSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,9 @@ public class CNodi {
     public ResponseEntity<String> postNodi(
             @RequestBody ClsNodo nodo
             ){
-        return ResponseEntity.status(501).build();
+        if(!sNodi.postNodo(nodo))
+            return ResponseEntity.internalServerError().build();
+        return ResponseEntity.ok(null);
     }
 
     /**
@@ -65,9 +68,11 @@ public class CNodi {
      */
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteNodi(
-            @RequestParam(value = "id") String idNodo
+            @RequestParam(value = "idNodo") String idNodo
     ){
-        return ResponseEntity.status(501).build();
+        if(!sNodi.deleteNodoById(idNodo))
+            return ResponseEntity.internalServerError().build();
+        return ResponseEntity.ok(null);
     }
 
     /**
@@ -80,7 +85,8 @@ public class CNodi {
     public ResponseEntity<String> putNodi(
             @RequestBody ClsNodo nodo
     ){
-        return ResponseEntity.status(501).build();
+        if(!sNodi.putNodo(nodo))
+            return ResponseEntity.internalServerError().build();
+        return ResponseEntity.ok(null);
     }
-
 }

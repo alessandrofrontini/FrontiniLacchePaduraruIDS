@@ -12,8 +12,6 @@ import jakarta.persistence.Entity;
 @Entity
 public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator
 {
-    transient IPersistenceModel<ClsComune> mockComuni;
-
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
     {

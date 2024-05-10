@@ -1,15 +1,22 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsItinerario {
     //TODO: idCreatore invece di username(?)
     String usernameCreatore;
+    @OneToMany
     ArrayList<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
+    @Id
     String id;
     //TODO: aggiungere titolo itinerario sulla documentazione
     String nome;

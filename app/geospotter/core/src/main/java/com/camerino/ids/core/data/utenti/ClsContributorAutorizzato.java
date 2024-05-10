@@ -81,9 +81,5 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean visualizzaNodiPosessore() {
         return false;
     }
-
-    public ArrayList<ClsNodo> getNodi(HashMap<String, Object> filters){
-        return pNodi.get(filters);
-    }
 //endregion
 }

@@ -22,8 +22,6 @@ import java.util.HashMap;
 @Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
-    transient IPersistenceModel<ClsNodo> pNodi;
-    transient IPersistenceModel<ClsItinerario> pItinerari;
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
@@ -153,6 +151,12 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
+    }
+
+    public boolean deleteNodo(String idNodo) {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("idNodo", idNodo);
+        return pNodi.delete(tmp);
     }
 
     //endregion

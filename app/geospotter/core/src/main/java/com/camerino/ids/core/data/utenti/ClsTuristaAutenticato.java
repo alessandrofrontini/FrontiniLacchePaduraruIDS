@@ -81,27 +81,22 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
     //region Override ILoggedUserAction
-    //TODO
     @Override
     public boolean inserisciRecensione() {
         return false;
     }
-//TODO
     @Override
     public boolean eliminaRecensione(String id) {
         return false;
     }
-//TODO
     @Override
     public boolean modificaRecensione() {
         return false;
     }
-//TODO
     @Override
     public boolean inserisciImmagine() {
         return false;
     }
-//TODO
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         return null;
