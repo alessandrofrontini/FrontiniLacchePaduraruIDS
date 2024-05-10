@@ -23,6 +23,6 @@
             <TableColumn fx:id="getSezioneEliminazioneRecensioniTableColumnContenuto" prefWidth="127.20000000000005" text="CONTENUTO" />
          </columns>
       </TableView>
-      <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" editable="true" layoutX="113.0" layoutY="431.0" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
+      <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" layoutX="113.0" layoutY="431.0" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
    </children>
 </AnchorPane>

@@ -23,7 +23,7 @@
                           <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="94.199951171875" text="A TEMPO" />
                       </columns>
                   </TableView>
-                  <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="135.0" layoutY="349.0" onMouseClicked="#visualizzaInformazioniAttualiNodo" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona Nodo" />
+                  <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="135.0" layoutY="349.0" onMouseEntered="#visualizzaInformazioniAttualiNodo" onMouseExited="#visualizzaInformazioniAttualiNodo" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona Nodo" />
                   <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="144.0" text="Home" />
                      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona qua sotto il nodo di cui vuoi effettaure una modifica.&#10;Puoi trovare subito sotto l'elenco dei nodi della quale puoi richiedere&#10;l'operazione." />
               </AnchorPane>

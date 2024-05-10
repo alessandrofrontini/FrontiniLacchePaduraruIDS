@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -70,7 +71,7 @@ public class Utils
             }
             else
             {
-                tmp += comune.getCuratoriAssociati()[i].getId() + ", ";
+                tmp += comune.getCuratoriAssociati()[i].getId() + "-";
             }
 
         }
@@ -102,6 +103,28 @@ public class Utils
         u.setUsername(turista.getCredenziali().getUsername());
 
         return u;
+    }
+
+    public ClsRichiestaAzioneDiContribuzioneVisual convertFromRichiestaAzioneContribuzione (ClsRichiestaAzioneDiContribuzione richiesta)
+    {
+        ClsRichiestaAzioneDiContribuzioneVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneVisual();
+
+        richiestaVisual.setId(richiesta.getId());
+        richiestaVisual.setIdContest(richiesta.getIdContest());
+        richiestaVisual.setAzioneDiContribuzione(richiesta.geteAzioneDiContribuzione().toString());
+        richiestaVisual.setUsernameCreatore(richiesta.getUsernameCreatoreRichiesta());
+
+        //Richiesta per nodo
+        if(richiesta.getDatiNodo() != null)
+        {
+            richiestaVisual.setNodo(this.convertFromClsNodo(richiesta.getDatiNodo()));
+        }
+        else
+        {
+            richiestaVisual.setImmagine(richiesta.getDatiImmagine());
+        }
+
+        return richiestaVisual;
     }
 
     public String getValueFromCombobox (ComboBox c)

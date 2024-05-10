@@ -105,7 +105,8 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             comune.setDescrizione(u.getValueFromTextField(descrizione));
             comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitanti)));
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficie)));
-            comune.setCuratoriAssociati(new ClsCuratore[0]);
+
+            comune.setCuratoriAssociati(new ClsCuratore[0]);//todo:aggiungere
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");

@@ -22,7 +22,7 @@
             <TableColumn fx:id="curatori" prefWidth="192.79998168945315" text="CURATORI" />
         </columns>
       </TableView>
-      <ComboBox fx:id="sceltaComune" editable="true" layoutX="154.0" layoutY="470.0" prefHeight="26.0" prefWidth="292.0" promptText="Seleziona qui" />
+      <ComboBox fx:id="sceltaComune" layoutX="154.0" layoutY="470.0" prefHeight="26.0" prefWidth="292.0" promptText="Seleziona qui" />
       <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
       <Button layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#eliminaComune" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
    </children>

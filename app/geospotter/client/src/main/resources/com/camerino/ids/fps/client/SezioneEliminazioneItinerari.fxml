@@ -20,7 +20,7 @@
             <TableColumn fx:id="sezioneInserimentoItinerariTableColumnTappe" prefWidth="217.59999389648442" text="TAPPE" />
          </columns>
     </TableView>
-    <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" editable="true" layoutX="128.0" layoutY="405.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
+    <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" layoutX="128.0" layoutY="405.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
     <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="144.0" text="Home" />
     <Button fx:id="sezioneEliminazioneItinerariButtonConferma" layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#eliminaNodo" prefHeight="26.0" prefWidth="144.0" style="-fx-background-color: #15ad36; color: ;" text="Conferma" textFill="WHITE" />
 

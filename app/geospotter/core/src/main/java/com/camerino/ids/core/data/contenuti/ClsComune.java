@@ -48,8 +48,8 @@ public class ClsComune extends ClsContenuto
         dummy += "\nNome: " + this.getNome() + "\n";
         dummy += "\nDescrizione: " + this.getDescrizione() + "\n";
         dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY() + "\n";
-        dummy += "Superficie: \n" + this.getSuperficie() + "\n\n";
-        dummy += "Curatori: " + visualizzaCuratoriComune();
+        dummy += "\nSuperficie: " + this.getSuperficie() + "\n";
+        dummy += "\nCuratori: " + visualizzaCuratoriComune();
 
         return dummy;
     }
@@ -61,7 +61,15 @@ public class ClsComune extends ClsContenuto
 
         for(int i = 0; i<this.curatoriAssociati.length; i++)
         {
-            tmp += this.curatoriAssociati[i].getCredenziali().getUsername() +", ";
+            if(i == curatoriAssociati.length -1)
+            {
+                tmp += this.curatoriAssociati[i].getCredenziali().getUsername();
+            }
+            else
+            {
+                tmp += this.curatoriAssociati[i].getCredenziali().getUsername() +", ";
+            }
+
         }
 
         return tmp;

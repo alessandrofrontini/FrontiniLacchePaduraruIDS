@@ -6,19 +6,24 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzioneValidazioneRichieste">
    <children>
-      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALIDAZIONE RICHIESTE">
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALIDAZIONE RICHIESTE (Contest)">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
       <Button layoutX="29.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Home" />
-      <Button layoutX="300.0" layoutY="485.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Conferma" />
-      <Button layoutX="166.0" layoutY="485.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Rifiuta" />
-      <TableView layoutX="13.0" layoutY="79.0" prefHeight="373.0" prefWidth="574.0">
+      <Button layoutX="310.0" layoutY="493.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: red;" text="Animatore dice no" textFill="WHITE" />
+      <Button layoutX="163.0" layoutY="493.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #15ad34;" text="Animatore dice si" textFill="WHITE" />
+      <TableView fx:id="elencoRichieste" layoutX="13.0" layoutY="116.0" prefHeight="312.0" prefWidth="582.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="idColonna" prefWidth="78.20001411437988" text="ID" />
+          <TableColumn fx:id="idContestColonna" prefWidth="83.99999237060547" text="CONTEST " />
+            <TableColumn fx:id="azioneColonna" prefWidth="117.60000610351562" text="TIPO AZIONE" />
+            <TableColumn fx:id="tipoContenutoColonna" prefWidth="193.39996337890625" text="TIPO CONTENUTO" />
+            <TableColumn fx:id="idRichiedenteColonna" prefWidth="106.5999755859375" text="RICHIEDENTE" />
         </columns>
       </TableView>
+      <Text layoutX="13.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salve signor Animatore, questo è il suo trono, la sua poltrona di comando dove decide vita &#10;morte e miracoli su quello che i suoi sottoposti possono fare." />
+      <ComboBox fx:id="sceltaAzione" layoutX="161.0" layoutY="438.0" prefHeight="26.0" prefWidth="278.0" promptText="Seleziona qui" />
    </children>
 </AnchorPane>

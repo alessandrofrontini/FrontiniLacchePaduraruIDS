@@ -80,7 +80,7 @@ public class ClsItinerario {
 
         for(int i = 0; i < tappe.size(); i++)
         {
-            dummy += "\t" + i + ")" + tappe.get(i).getNome() + "\n\n";
+            dummy += "\t" + i + ")" + tappe.get(i).getNome() + "\n";
         }
 
         return  dummy;
