@@ -34,4 +34,17 @@ public class ClsPartecipazioneContestDiContribuzione {
     }
 
     //endregion
+
+    public String visualizzaPartecipazione ()
+    {
+
+        String dummy = "";
+
+        dummy += "\n\nID Partecipazione: " + this.getId() + "\n";
+        dummy += "ID Contest: " + this.getIdContest() + "\n";
+        dummy += "Usermame partecipante: " + this.usernamePartecipante + "\n";
+
+        return dummy;
+
+    }
 }

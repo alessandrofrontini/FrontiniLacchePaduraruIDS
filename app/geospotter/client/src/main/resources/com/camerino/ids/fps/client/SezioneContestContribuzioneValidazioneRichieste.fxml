@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzioneValidazioneRichieste">
+   <children>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALIDAZIONE RICHIESTE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button layoutX="29.0" layoutY="551.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Home" />
+      <Button layoutX="300.0" layoutY="485.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Conferma" />
+      <Button layoutX="166.0" layoutY="485.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Rifiuta" />
+      <TableView layoutX="13.0" layoutY="79.0" prefHeight="373.0" prefWidth="574.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

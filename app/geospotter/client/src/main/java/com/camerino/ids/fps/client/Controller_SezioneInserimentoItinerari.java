@@ -125,7 +125,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
 
         ArrayList<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
 
-        if(nodiCoinvoltiInArray.length>1)
+        if(nodiCoinvoltiInArray.length>1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), ""))
         {
             for(int i = 0; i<nodi.size();i++)
             {
@@ -152,7 +152,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         {
             Alert alert = new Alert (Alert.AlertType.ERROR);
             alert.setTitle("Errore");
-            alert.setContentText("Seleziona almeno due tappe");
+            alert.setContentText("Ricontrolla le informazioni");
             alert.show();
         }
 

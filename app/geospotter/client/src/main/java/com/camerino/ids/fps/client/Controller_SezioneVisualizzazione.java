@@ -22,7 +22,7 @@ public class Controller_SezioneVisualizzazione implements Initializable
     @FXML
     Button sezioneNavigazioneBTNConfermaAzione, sezioneVisualizzazioneBTNRegistrati,sezioneVisualizzazioneBTNLogIn;
     @FXML
-    ComboBox sceltaAzioneTuristaAutenticato, sceltaAzioneGestore,sceltaAzioneContributor;
+    ComboBox sceltaAzioneTuristaAutenticato, sceltaAzioneGestore,sceltaAzioneContributor, sceltaAzioneAnimatore, sceltaAzioneCuratore;
 
     Utils u = new Utils();
 
@@ -138,6 +138,67 @@ public class Controller_SezioneVisualizzazione implements Initializable
 
     }
 
+    public void reindirizzaToAzioneSceltaAnimatore (MouseEvent mouseEvent)
+    {
+        String azione = u.getValueFromCombobox(sceltaAzioneAnimatore);
+
+        if(azione != null)
+        {
+            switch (azione)
+            {
+                case "Inserisci Contest Contribuzione":
+                    this.navigateToSezioneContestContribuzioneCreazione(mouseEvent);
+                    break;
+
+                case "Sezione Validazione Richieste":
+                    this.navigateToSezioneValidazioneRichieste(mouseEvent);
+                    break;
+
+                default:
+                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                    alert.setTitle("ERRORE");
+                    alert.setContentText("Controlla le informazioni e riprova");
+                    alert.show();
+                    break;
+            }
+        }
+        else {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
+
+    }
+
+    public void reindirizzaToAzioneSceltaCuratore (MouseEvent mouseEvent)
+    {
+        String azione = u.getValueFromCombobox(sceltaAzioneCuratore);
+
+        if(azione != null)
+        {
+            switch (azione)
+            {
+                case "Visualizza Segnalazioni":
+                    this.navigateToSezioneVisualizzazioneSegnalazioni(mouseEvent);
+                    break;
+
+                default:
+                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                    alert.setTitle("ERRORE");
+                    alert.setContentText("Controlla le informazioni e riprova");
+                    alert.show();
+                    break;
+            }
+        }
+        else {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
+    }
+
     public void reindirizzaToAzioneSceltaGestore (MouseEvent mouseEvent)
     {
         String azione = u.getValueFromCombobox(sceltaAzioneGestore);
@@ -175,10 +236,22 @@ public class Controller_SezioneVisualizzazione implements Initializable
 
     }
 
-
-
-
     //region Navigazione
+
+    public void navigateToSezioneVisualizzazioneSegnalazioni(MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneCuratoreVisualizzazioneSegnalazioni.fxml",mouseEvent);
+    }
+
+    public void navigateToSezioneVisualizzazioneMappa(MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneVisualizzazioneMappa.fxml",mouseEvent);
+    }
+
+    public void navigateToSezioneValidazioneRichieste (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneContestContribuzioneValidazioneRichieste.fxml",mouseEvent);
+    }
 
     public void navigateToSezioneInserimentoImmagini (MouseEvent mouseEvent)
     {
@@ -258,6 +331,11 @@ public class Controller_SezioneVisualizzazione implements Initializable
     public void navigateToSezioneEliminazioneComuni (MouseEvent mouseEvent)
     {
         this.SwitchScene("SezioneEliminazioneComuni.fxml",mouseEvent);
+    }
+
+    public void navigateToSezioneContestContribuzioneCreazione (MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneContestContribuzioneCreazione.fxml",mouseEvent);
     }
 
     //endregion

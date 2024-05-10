@@ -45,9 +45,10 @@
       <Button layoutX="399.0" layoutY="399.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaGestore" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
       <ToolBar layoutX="19.0" layoutY="86.0" prefHeight="51.0" prefWidth="561.0" style="-fx-background-color: #7f7f7f;">
         <items>
-          <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Mappa" />
-            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Nodi" />
-            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="180.0" style="-fx-background-color: #28bf7b;" text="Visualizza Itinerari" />
+          <Button mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazioneMappa" prefHeight="36.0" prefWidth="548.0" style="-fx-background-color: #28bf7b;" text="Visualizza Mappa" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
         </items>
       </ToolBar>
       <ComboBox fx:id="sceltaAzioneTuristaAutenticato" layoutX="21.0" layoutY="211.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Turista Autenticato">
@@ -61,9 +62,22 @@
        </items>
       </ComboBox>
       <Button layoutX="400.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaTurista" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
-      <ComboBox fx:id="sceltaAzioneAnimatore" layoutX="20.0" layoutY="287.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Animatore" />
-      <Button layoutX="400.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
-      <ComboBox fx:id="sceltaAzioneCuratore" layoutX="20.0" layoutY="363.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Curatore" />
-      <Button layoutX="399.0" layoutY="362.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <ComboBox fx:id="sceltaAzioneAnimatore" layoutX="20.0" layoutY="287.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Animatore">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Inserisci Contest Contribuzione" />
+                  <String fx:value="Sezione Validazione Richieste" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Button layoutX="400.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaAnimatore" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
+      <ComboBox fx:id="sceltaAzioneCuratore" layoutX="20.0" layoutY="363.0" prefHeight="26.0" prefWidth="371.0" promptText="Azioni Specifiche Curatore">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Visualizza Segnalazioni" />
+              </FXCollections>
+          </items>
+      </ComboBox>
+      <Button layoutX="399.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#reindirizzaToAzioneSceltaCuratore" prefHeight="26.0" prefWidth="180.0" text="Conferma" />
    </children>
 </AnchorPane>

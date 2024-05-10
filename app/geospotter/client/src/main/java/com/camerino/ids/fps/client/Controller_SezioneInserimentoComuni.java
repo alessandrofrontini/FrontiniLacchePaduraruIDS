@@ -85,6 +85,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     public void inserisciComune(MouseEvent mouseEvent)
     {
         ClsComune comune = new ClsComune();
+
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 

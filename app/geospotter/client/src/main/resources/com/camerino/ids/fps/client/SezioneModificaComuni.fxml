@@ -27,7 +27,7 @@
                        <TableColumn fx:id="curatori" prefWidth="192.79998168945315" text="CURATORI" />
                     </columns>
                  </TableView>
-                 <ComboBox fx:id="sceltaComune" layoutX="143.0" layoutY="346.0" onMouseClicked="#vediInformazoniAttualiComune" prefHeight="26.0" prefWidth="292.0" promptText="Seleziona qui" />
+                 <ComboBox fx:id="sceltaComune" layoutX="143.0" layoutY="346.0" onMouseExited="#vediInformazoniAttualiComune" prefHeight="26.0" prefWidth="292.0" promptText="Seleziona qui" />
               </AnchorPane>
             </content>
           </Tab>

@@ -51,4 +51,19 @@ public class ClsContestDiContribuzione {
     public void setAperto(boolean aperto) {
         isAperto = aperto;
     }
+
+    public String visualizzaContest ()
+    {
+
+            String dummy = "";
+
+            dummy += "\n\nID: " + this.getId() + "\n";
+            dummy += "Durata: " + this.getDurata().toString() + "\n";
+            dummy += "Comune: " + this.getLocation().getId() + "\n";
+            dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+            dummy += "Su invito: " + this.isAperto  + "\n";
+
+            return dummy;
+
+    }
 }

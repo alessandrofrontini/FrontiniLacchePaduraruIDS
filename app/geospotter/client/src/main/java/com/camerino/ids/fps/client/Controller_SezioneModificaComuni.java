@@ -182,8 +182,7 @@ public class Controller_SezioneModificaComuni implements Initializable
         String IDDaEliminare = this.eliminaComune(mouseEvent);
         ClsComune nuovoComune = this.inserisciComune(mouseEvent);
 
-        if(Objects.equals(IDDaEliminare, "") || (
-                nuovoComune == null))
+        if(!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null))
         {
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
@@ -248,7 +247,7 @@ public class Controller_SezioneModificaComuni implements Initializable
     {
         String IDdaEliminare = u.getValueFromCombobox(this.sceltaComune);
 
-        if(!(Objects.equals(IDdaEliminare, "") || Objects.equals(IDdaEliminare, null)))
+        if(!(Objects.equals(IDdaEliminare, "")))
         {
             return IDdaEliminare;
         }
@@ -266,12 +265,23 @@ public class Controller_SezioneModificaComuni implements Initializable
 
         ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
 
-        if(curatoriCoinvoltiArray.length > 0 &&
+        for(int i = 0; i<Curatori.size();i++)
+        {
+            for(int j = 0; j<curatoriCoinvoltiArray.length;j++)
+            {
+                if(Objects.equals(Curatori.get(i).getId(), curatoriCoinvoltiArray[j]))
+                {
+                    curatoriAssociatiToComune.add(Curatori.get(i));
+                }
+            }
+        }
+
+        if(!curatoriAssociatiToComune.isEmpty() &&
                 !Objects.equals(u.getValueFromTextField(coordinataXTF), "") &&
                 !Objects.equals(u.getValueFromTextField(coordinataYTF), "") &&
                 !Objects.equals(u.getValueFromTextField(descrizioneTF), "") &&
                 !Objects.equals(u.getValueFromTextField(nomeTF), "") &&
-                !Objects.equals(u.getValueFromTextField(abitantiTF), null) &&
+                !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
                 !Objects.equals(u.getValueFromTextField(superficieTF), ""))
         {
             comune.setId("test");
@@ -282,11 +292,7 @@ public class Controller_SezioneModificaComuni implements Initializable
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
             comune.setCuratoriAssociati(new ClsCuratore[0]);
 
-            return comune;
-//            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("AGGIUNTO");
-//            alert.setContentText(comune.visualizzaComune());
-//            alert.show();
+          return comune;
         }
         else
         {

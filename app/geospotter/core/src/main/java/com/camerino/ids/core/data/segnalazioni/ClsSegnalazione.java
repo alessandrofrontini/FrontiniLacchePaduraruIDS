@@ -4,34 +4,34 @@ package com.camerino.ids.core.data.segnalazioni;
  * TODO: commentare
  */
 public class ClsSegnalazione {
-    long id;
-    long idContenuto;
-    long idCuratore;
+    String id;
+    String idContenuto;
+    String idCuratore;
     String descrizione;
 
     //region Getters and Setters
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getIdContenuto() {
+    public String getIdContenuto() {
         return idContenuto;
     }
 
-    public void setIdContenuto(long idContenuto) {
+    public void setIdContenuto(String idContenuto) {
         this.idContenuto = idContenuto;
     }
 
-    public long getIdCuratore() {
+    public String getIdCuratore() {
         return idCuratore;
     }
 
-    public void setIdCuratore(long idCuratore) {
+    public void setIdCuratore(String idCuratore) {
         this.idCuratore = idCuratore;
     }
 
@@ -43,5 +43,18 @@ public class ClsSegnalazione {
         this.descrizione = descrizione;
     }
 
+
     //endregion
+
+    public String visualizzaSegnalazione()
+    {
+        String dummy = "";
+
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "ID Contenuto: " + this.getIdContenuto() + "\n";
+        dummy += "ID Curatore: " + this.getIdCuratore() + "\n";
+        dummy += "Descrizione: " + this.getDescrizione() + "\n";
+
+        return dummy;
+    }
 }

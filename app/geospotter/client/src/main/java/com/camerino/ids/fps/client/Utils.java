@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -89,6 +90,18 @@ public class Utils
         c.setIsAperto(contest.isAperto()+"");
 
         return c;
+    }
+
+    public ClsUtenteInvitoContestVisual convertFromTuristaAutenticato (ClsTuristaAutenticato turista)
+    {
+        ClsUtenteInvitoContestVisual u = new ClsUtenteInvitoContestVisual();
+
+        u.setId(turista.getId());
+        u.setPunteggio(turista.getPunteggio()+"");
+        u.setRuolo(turista.getRuoloUtente()+"");
+        u.setUsername(turista.getCredenziali().getUsername());
+
+        return u;
     }
 
     public String getValueFromCombobox (ComboBox c)

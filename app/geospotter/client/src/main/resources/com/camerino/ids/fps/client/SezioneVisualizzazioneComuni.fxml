@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneVisualizzazioneComuni">
+    <children>
+        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VISUALIZZA COMUNI MAPPA" wrappingWidth="431.4189453125">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Text>
+        <Text layoutX="14.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione troverai tutti i Comuni registrati in GeoSpotter.&#10;Viva l'italia. &lt;3" />
+        <TableView fx:id="elencoComuni" layoutX="15.0" layoutY="116.0" prefHeight="309.0" prefWidth="570.0">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="35.20001411437988" text="ID" />
+                <TableColumn fx:id="nome" prefWidth="91.20000457763672" text="NOME" />
+                <TableColumn fx:id="posizione" prefWidth="86.19998168945312" text="POSIZIONE" />
+                <TableColumn fx:id="abitanti" prefWidth="75.79998779296875" text="ABITANTI" />
+                <TableColumn fx:id="superficie" prefWidth="88.20001220703125" text="SUPERFICIE" />
+                <TableColumn fx:id="curatori" prefWidth="192.79998168945315" text="CURATORI" />
+            </columns>
+        </TableView>
+        <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+      <Button layoutX="185.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazioneMappa" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: black;" text="Mappa" textFill="WHITE" />
+      <ComboBox fx:id="selezionaElementoSegnalazione" layoutX="133.0" layoutY="488.0" prefHeight="26.0" prefWidth="100.0" promptText="Seleziona" />
+      <Text layoutX="14.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segnalazione:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="descrizioneTF" layoutX="239.0" layoutY="488.0" prefHeight="26.0" prefWidth="162.0" promptText="Descrizione Segnalazione" />
+      <Text layoutX="14.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizzazione:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="selezionaElementoDettaglio" layoutX="133.0" layoutY="437.0" prefHeight="26.0" prefWidth="100.0" promptText="Seleziona" />
+      <Button layoutX="239.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#visualizzaDettaglio" prefHeight="26.0" prefWidth="162.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+      <Button layoutX="411.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#inserisciSegnalazione" prefHeight="26.0" prefWidth="162.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+    </children>
+
+</AnchorPane>
