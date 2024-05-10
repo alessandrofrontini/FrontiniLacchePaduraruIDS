@@ -49,8 +49,8 @@ public class Main {
         MockLocator.getMockSegnalazioni().scriviSegnalazioni();
         MockLocator.getMockRecensioni().scriviRecensioni();
         MockLocator.getMockTuristi().scriviUtenti();
-        MockLocator.getMockRCD().scriviRCD();
         MockLocator.getMockImmagini().scriviImmagini();
+        MockLocator.getMockRCD().scriviRCD();
     }
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();

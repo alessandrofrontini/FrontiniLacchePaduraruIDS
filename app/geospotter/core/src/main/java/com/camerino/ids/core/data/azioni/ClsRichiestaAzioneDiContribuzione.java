@@ -7,8 +7,10 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
  * TODO: commentare
  */
 public class ClsRichiestaAzioneDiContribuzione {
-    String id,
-    usernameCreatoreRichiesta;
+    String id;
+    String usernameCreatoreRichiesta;
+
+    String idContest;
     EAzioniDiContribuzione eAzioneDiContribuzione;
     ClsNodo datiNodo;
     ClsImmagine datiImmagine;
@@ -38,6 +40,13 @@ public class ClsRichiestaAzioneDiContribuzione {
 
     public void setUsernameCreatoreRichiesta(String usernameCreatoreRichiesta) {
         this.usernameCreatoreRichiesta = usernameCreatoreRichiesta;
+    }
+    public String getIdContest() {
+        return idContest;
+    }
+
+    public void setIdContest(String idContest) {
+        this.idContest = idContest;
     }
 
     public EAzioniDiContribuzione geteAzioneDiContribuzione() {

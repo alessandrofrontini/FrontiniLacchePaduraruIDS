@@ -1,2 +1,1 @@
-1,Alefront,INSERISCI_NODO,1,null
-
+1,Alefront,INSERISCI_NODO,1,1,false,null,commerciale,Alefront,descrizione,nome,
