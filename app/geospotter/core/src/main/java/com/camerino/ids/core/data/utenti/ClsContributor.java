@@ -20,15 +20,14 @@ import java.util.HashMap;
  *
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
-    IPersistenceModel<ClsNodo> pNodi;
     IPersistenceModel<ClsItinerario> pItinerari;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
-        super(s, r, pRCDNodo);
+        super(s, r, pRCDNodo, nodi);
+        this.pRDC = pRCDNodo;
         this.pRDCI = pRCDItinerari;
-        this.pNodi = nodi;
         this.pItinerari = itinerari;
     }
 

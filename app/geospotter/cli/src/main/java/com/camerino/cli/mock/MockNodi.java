@@ -106,17 +106,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                     daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
                         SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
                         daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
-                        switch (datiNodo[4]) {
-                            case "commerciale":
-                                daAggiungere.setTipologiaNodo(COMMERCIALE);
-                                break;
-                            case "culturale":
-                                daAggiungere.setTipologiaNodo(CULTURALE);
-                                break;
-                            case "culinario":
-                                daAggiungere.setTipologiaNodo(CULINARIO);
-                                break;
-                        }
+                        daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
                         daAggiungere.setUsernameCreatore(datiNodo[5]);
                         daAggiungere.setDescrizione(datiNodo[6]);
                         daAggiungere.setNome(datiNodo[7]);

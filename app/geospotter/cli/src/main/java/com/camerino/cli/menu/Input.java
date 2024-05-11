@@ -8,6 +8,7 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import javax.naming.AuthenticationException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -21,10 +22,8 @@ public class Input
     static Scanner in = new Scanner(System.in);
     //region Input Nodi
     public static ClsNodo inserisciNodo(){
-        boolean ok = false;
         ClsNodo nodo = new ClsNodo();
         Posizione pos = new Posizione();
-        while (!ok){
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
             print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
@@ -34,16 +33,33 @@ public class Input
                 case "3" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
             }
             print("Inserisci coordinata X del nodo: ");
-            pos.setX(in.nextDouble());
+            pos.setX(Double.parseDouble(in.nextLine()));
             print("Inserisci coordinata Y del nodo: ");
-            pos.setY(in.nextDouble());
+            pos.setY(Double.parseDouble(in.nextLine()));
             nodo.setPosizione(pos);
             print("Inserisci id del comune di appartenenza: ");
             nodo.setIdComune(in.nextLine());
-            //TODO: aggiungere inserimento "aTempo" e durata
-            //TODO: aggiungere eventuali controlli sui dati inseriti
-            ok = true;
-        }
+            print("Il nodo ha una scadenza temporale? Y/N");
+            String input = in.nextLine();
+            SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+            if((Objects.equals(input, "y"))||(Objects.equals(input, "Y"))){
+                nodo.setaTempo(true);
+                print("Inserisci la data di scadenza in formato yyyy-MM-dd. Ad esempio il 13 luglio 2024 sarà scritto 2024-07-13");
+                try {
+                    nodo.setDataFine(data.parse(in.nextLine()));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+            else{
+                nodo.setaTempo(false);
+                try {
+                    nodo.setDataFine(data.parse("2099-12-31"));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
         return nodo;
     }
 
@@ -207,7 +223,7 @@ public class Input
         println("2 > Contributor Autorizzato");
         println("3 > Animatore");
         switch(in.nextLine()){
-            case "0": utente = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD()); break;
+            case "0": utente = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD(), MockLocator.getMockNodi()); break;
             case "1": utente = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
             case "2": utente = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
             case "3": utente = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); break;

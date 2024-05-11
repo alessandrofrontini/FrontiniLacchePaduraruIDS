@@ -93,17 +93,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 n.setaTempo(Boolean.parseBoolean(dati[5]));
                 SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
                 n.setDataFine(tmp.parse(dati[6]));
-                switch (dati[7]) {
-                    case "commerciale":
-                        n.setTipologiaNodo(COMMERCIALE);
-                        break;
-                    case "culturale":
-                        n.setTipologiaNodo(CULTURALE);
-                        break;
-                    case "culinario":
-                        n.setTipologiaNodo(CULINARIO);
-                        break;
-                }
+                n.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(dati[7]));
                 n.setUsernameCreatore(dati[8]);
                 n.setDescrizione(dati[9]);
                 n.setNome(dati[10]);
@@ -116,6 +106,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 i.setUsernameCreatore(dati[15]);
                 i.setURL(dati[16]);
                 rcd.setDatiImmagine(i);
+                insert(rcd);
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -123,23 +114,18 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     }
 
     public void scriviRCD(){
+        //SEPARARE GLI IMPORT SECONDO IL TIPO DI RICHIESTA: NEI METODI LEGGI E SCRIVI CI SONO LE ISTRUZIONI PER "INSERISCI IMMAGINE", IL PRIMO ELEMENTO DEL FILE è IL TIPO
+        //E DA Lì PARTONO DIVERSE LETTURE(MAGARI METODO PRIVATO)
         try{
             FileWriter output = new FileWriter("CLIsave/rcd.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRichiestaAzioneDiContribuzione r:rcdi){
                 daScrivere.append(r.getId() + "," + r.getUsernameCreatoreRichiesta() + "," + r.geteAzioneDiContribuzione() + ",");
                 //dump del nodo se è stato inserito (non c'è nessun id)
-                if(r.getDatiNodo()!=null){
-                    SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-
-                    daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getDescrizione() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX() + ",");
-                }
-                else daScrivere.append("null,");
+                SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getDescrizione() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX() + ",");
                 //dump dell'immagine se esiste
-                if(r.getDatiImmagine()!=null){
-                    daScrivere.append(r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());
-                }
-                else daScrivere.append("null");
+                daScrivere.append(r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());
                 daScrivere.append("\r\n");
             }
             output.write(String.valueOf(daScrivere));
