@@ -58,5 +58,17 @@ public class ClsRichiestaAzioneDiContribuzione {
     }
   //endregion
 
+    public String visualizzaRichiesta()
+    {
+        String dummy = "";
+
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "ID Contest: " + this.getIdContest() + "\n";
+        dummy += "Username Creatore: " + this.getUsernameCreatoreRichiesta() + "\n";
+        dummy += "Azione: " + this.geteAzioneDiContribuzione() + "\n";
+
+        return dummy;
+    }
+
 
 }

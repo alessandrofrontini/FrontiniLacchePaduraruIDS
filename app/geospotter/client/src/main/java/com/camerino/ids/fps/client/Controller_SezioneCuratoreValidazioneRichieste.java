@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
@@ -27,8 +28,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneContestContribuzioneValidazioneRichieste implements Initializable
+public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
 {
+
     //region Elementi FXML
     @FXML
     TableView<ClsRichiestaAzioneDiContribuzioneVisual> elencoRichieste;
@@ -110,7 +112,6 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         n2.setId("4");
         c4.setDatiNodo(n2);
         richieste.add(c4);
-
         //endregion
 
         setRichieste(richieste);
@@ -285,7 +286,5 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     {
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
-
-
 
 }

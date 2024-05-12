@@ -12,9 +12,7 @@ public class ClsRichiestaAzioneDiContribuzioneVisual
 
     public String azioneDiContribuzione;
 
-    public ClsNodoVisual nodo;
-
-    public ClsImmagine immagine;
+    public String tipoContenuto;
 
     public String getId() {
         return id;
@@ -48,20 +46,11 @@ public class ClsRichiestaAzioneDiContribuzioneVisual
         this.azioneDiContribuzione = azioneDiContribuzione;
     }
 
-    public ClsNodoVisual getNodo() {
-        return nodo;
+    public String getTipoContenuto() {
+        return tipoContenuto;
     }
 
-    public void setNodo(ClsNodoVisual nodo) {
-        this.nodo = nodo;
+    public void setTipoContenuto(String tipoContenuto) {
+        this.tipoContenuto = tipoContenuto;
     }
-
-    public ClsImmagine getImmagine() {
-        return immagine;
-    }
-
-    public void setImmagine(ClsImmagine immagine) {
-        this.immagine = immagine;
-    }
-
 }

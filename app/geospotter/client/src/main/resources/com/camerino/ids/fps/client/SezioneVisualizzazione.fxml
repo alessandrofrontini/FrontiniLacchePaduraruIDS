@@ -66,7 +66,7 @@
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Inserisci Contest Contribuzione" />
-                  <String fx:value="Sezione Validazione Richieste" />
+                  <String fx:value="Validazione Richieste" />
               </FXCollections>
           </items>
       </ComboBox>
@@ -75,6 +75,7 @@
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Visualizza Segnalazioni" />
+                  <String fx:value="Validazione Richieste" />
               </FXCollections>
           </items>
       </ComboBox>

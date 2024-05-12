@@ -117,11 +117,11 @@ public class Utils
         //Richiesta per nodo
         if(richiesta.getDatiNodo() != null)
         {
-            richiestaVisual.setNodo(this.convertFromClsNodo(richiesta.getDatiNodo()));
+            richiestaVisual.setTipoContenuto("NODO");
         }
         else
         {
-            richiestaVisual.setImmagine(richiesta.getDatiImmagine());
+            richiestaVisual.setTipoContenuto("IMMAGINE");
         }
 
         return richiestaVisual;

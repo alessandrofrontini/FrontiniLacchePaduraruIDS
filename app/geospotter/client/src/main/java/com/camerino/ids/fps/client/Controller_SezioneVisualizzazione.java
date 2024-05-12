@@ -150,7 +150,7 @@ public class Controller_SezioneVisualizzazione implements Initializable
                     this.navigateToSezioneContestContribuzioneCreazione(mouseEvent);
                     break;
 
-                case "Sezione Validazione Richieste":
+                case "Validazione Richieste":
                     this.navigateToSezioneValidazioneRichieste(mouseEvent);
                     break;
 
@@ -181,6 +181,10 @@ public class Controller_SezioneVisualizzazione implements Initializable
             {
                 case "Visualizza Segnalazioni":
                     this.navigateToSezioneVisualizzazioneSegnalazioni(mouseEvent);
+                    break;
+
+                case "Validazione Richieste":
+                    this.navigateToSezioneCuratoreValidazioneRichieste(mouseEvent);
                     break;
 
                 default:
@@ -237,6 +241,11 @@ public class Controller_SezioneVisualizzazione implements Initializable
     }
 
     //region Navigazione
+
+    public void navigateToSezioneCuratoreValidazioneRichieste(MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneCuratoreValidazioneRichieste.fxml",mouseEvent);
+    }
 
     public void navigateToSezioneVisualizzazioneSegnalazioni(MouseEvent mouseEvent)
     {
