@@ -18,6 +18,7 @@ import java.io.IOException;
 @Component
 @Order(1)
 public class FiltLogin implements Filter {
+    IperRecensioni iperRecensioni;
     IperNodi iperNodi;
     IperComuni iperComuni;
     IperItinerari iperItinerari;
@@ -30,10 +31,13 @@ public class FiltLogin implements Filter {
             IperComuni iperComuni,
             IperItinerari iperItinerari,
             IperRDC iperRDC,
-            IperRDCI iperRDCI) {
+            IperRDCI iperRDCI,
+            IperRecensioni iperRecensioni) {
+
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
         this.iperItinerari = iperItinerari;
+        this.iperRecensioni = iperRecensioni;
     }
 
     @Override
@@ -49,10 +53,15 @@ public class FiltLogin implements Filter {
         if(authorization == null) {
             return CreaTurista();
         }
-        switch (authorization) {
-            default:
-                throw new RuntimeException("No user");
-        }
+        return switch (authorization) {
+            case "turista_aut" -> CreaTuristaAut();
+            case "contr"-> CreaContributor();
+            case "contr_aut" -> CreaContributorAut();
+            case "curatore" -> CreaCuratore();
+            case "animatore" -> CreaAnimatore();
+            case "gdp" -> CreaGDP();
+            default -> throw new RuntimeException("No user");
+        };
     }
 
 //TODO: possibile nuovo pattern
@@ -61,6 +70,7 @@ public class FiltLogin implements Filter {
         user.setpNodi(this.iperNodi);
         user.setMockComuni(this.iperComuni);
         user.setpItinerari(this.iperItinerari);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -69,6 +79,7 @@ public class FiltLogin implements Filter {
         user.setpNodi(this.iperNodi);
         user.setMockComuni(this.iperComuni);
         user.setpItinerari(this.iperItinerari);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -79,6 +90,7 @@ public class FiltLogin implements Filter {
         user.setpItinerari(this.iperItinerari);
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -89,6 +101,7 @@ public class FiltLogin implements Filter {
         user.setpItinerari(this.iperItinerari);
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -99,6 +112,7 @@ public class FiltLogin implements Filter {
         user.setpItinerari(this.iperItinerari);
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -109,6 +123,7 @@ public class FiltLogin implements Filter {
         user.setpItinerari(this.iperItinerari);
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
@@ -119,6 +134,7 @@ public class FiltLogin implements Filter {
         user.setpItinerari(this.iperItinerari);
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 }

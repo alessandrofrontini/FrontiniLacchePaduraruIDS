@@ -13,14 +13,14 @@ import java.util.ArrayList;
 @RestController
 public class CComuni {
     SComuni sComnuni;
-    public final static String mappin = BaseUrl.baseUrl+"/comuni";
+    public final static String mapping = BaseUrl.baseUrl+"/comuni";
 
     @Autowired
     public CComuni(SComuni sComnuni) {
         this.sComnuni = sComnuni;
     }
 
-    @GetMapping
+    @GetMapping(mapping)
     public ResponseEntity<ArrayList<ClsComune>> getComuni(
             @RequestParam(value = "idComune", required = false) String idComune
     ) {
@@ -28,7 +28,7 @@ public class CComuni {
             return ResponseEntity.ok(sComnuni.getAllComuni());
        return ResponseEntity.ok(sComnuni.getComuneById(idComune));
     }
-    @DeleteMapping
+    @DeleteMapping(mapping)
     public ResponseEntity<String> deleteComune(
             @RequestParam(value = "idComune", required = false) String idComune
     ) {
@@ -36,13 +36,13 @@ public class CComuni {
            return ResponseEntity.ok("Comune deleted");
        return ResponseEntity.status(500).body("Comune not deleted");
     }
-    @PutMapping
+    @PutMapping(mapping)
     public ResponseEntity<String> putComune(
             @RequestBody ClsNodo nodo
     ){
         return ResponseEntity.status(501).build();
     }
-    @PostMapping
+    @PostMapping(mapping)
     public ResponseEntity<String> postComune(
             @RequestBody ClsNodo nodo
     ){

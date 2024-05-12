@@ -1,6 +1,10 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Questo ruolo accetta o respinge le richieste fatte dai vari utenti.
@@ -17,5 +21,10 @@ public class ClsCuratore extends ClsAnimatore{
     String idComuneAssociato;
     public ClsCuratore(){
         this.punteggio = Integer.MAX_VALUE;
+    }
+
+    public ArrayList<ClsSegnalazione> getAllSegnalazioni() {
+        HashMap<String, Object> filters = new HashMap<>();
+        return iperSegnalazioni.get(filters);
     }
 }
