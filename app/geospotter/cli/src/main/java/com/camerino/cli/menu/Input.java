@@ -8,6 +8,7 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import javax.naming.AuthenticationException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -26,7 +27,7 @@ public class Input
         Posizione pos = new Posizione();
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
-            print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
+            print("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
             switch (in.nextLine()){
                 case "1" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
                 case "2" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
@@ -63,34 +64,64 @@ public class Input
         return nodo;
     }
 
-    public static ClsNodo modificaNodo(ClsNodo nodo){
-        boolean ok = false;
-        Posizione pos = nodo.getPosizione();
-        while (!ok){
-            print(String.format("Inserisci nome (old: %s): ", nodo.getNome()));
+    public static ClsNodo modificaNodo(ClsNodo vecchio) {
+        ClsNodo nodo = new ClsNodo();
+        Posizione pos = vecchio.getPosizione();
+        Posizione newpos = new Posizione();
+            print(String.format("Inserisci nome (old: %s): ", vecchio.getNome()));
             nodo.setNome(in.nextLine());
-            print(String.format("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n(old: %s)\n>> ", nodo.getTipologiaNodo()));
-            switch (in.nextLine()){//TODO: nuovo "Input" per selezione tipo nodo
+            print(String.format("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n(old: %s)\n>> ", vecchio.getTipologiaNodo()));
+            switch (in.nextLine()){
                 case "1" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
                 case "2" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
                 case "3" -> nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
             }
             print(String.format("Inserisci coordinata X del nodo (old: %s): ", pos.getX()));
-            pos.setX(in.nextDouble());
+            newpos.setX(Double.parseDouble(in.nextLine()));
             print(String.format("Inserisci coordinata Y del nodo (old: %s): ", pos.getY()));
-            pos.setY(in.nextDouble());
-            nodo.setPosizione(pos);
-            print(String.format("Inserisci id del comune di appartenenza (old: %s): ", nodo.getIdComune()));
+            newpos.setY(Double.parseDouble(in.nextLine()));
+            nodo.setPosizione(newpos);
+            print(String.format("Inserisci id del comune di appartenenza (old: %s): ", vecchio.getIdComune()));
             nodo.setIdComune(in.nextLine());
-            //TODO: aggiungere inserimento "aTempo" e durata
-            //TODO: aggiungere eventuali controlli sui dati inseriti
-            ok = true;
-        }
+            SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+            if(vecchio.isaTempo()){
+                println("Attualmente il nodo è a tempo, con scandenza il " + vecchio.getDataFine());
+                println("Vuoi modificare questa impostazione? Y/N");
+                String input = in.nextLine();
+                if((Objects.equals(input, "y"))||(Objects.equals(input, "Y"))){
+                    println("Ora il nodo non è più a tempo.");
+                    nodo.setaTempo(false);
+                    try {
+                        nodo.setDataFine(data.parse("2099-12-31"));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else{
+                println("Il nodo non è a tempo. Vuoi fissare una scadenza? Y/N");
+                String input = in.nextLine();
+                if((Objects.equals(input, "y"))||(Objects.equals(input, "Y"))){
+                    print("Inserisci la data di scadenza in formato yyyy-MM-dd. Ad esempio il 13 luglio 2024 sarà scritto 2024-07-13 > ");
+                    nodo.setaTempo(true);
+                    try {
+                        nodo.setDataFine(data.parse(in.nextLine()));
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    println("Data impostata.");
+                }
+                println("La scadenza del nodo non è stata impostata");
+                nodo.setaTempo(false);
+                try {
+                    nodo.setDataFine(data.parse("2099-12-31"));
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
         return nodo;
     }
-
     //endregion
-
     //region Input Comuni
     //non considera l'associazione con il curatore(fatta dopo)
     public static ClsComune inserisciComune()

@@ -19,7 +19,7 @@ public class ClsMenuContributor implements IMenu{
     Scanner in = new Scanner(System.in);
     public ClsMenuContributor(ClsContributor c){user = c;}
     @Override
-    public void menu() {
+    public void menu(){
         ClsMenuTuristaAutenticato menuta = new ClsMenuTuristaAutenticato(user);
         menuta.menu();
         boolean exit = false;
@@ -39,9 +39,9 @@ public class ClsMenuContributor implements IMenu{
                     case "2" -> menuta.menuModificaRecensione();
                     case "3" -> menuta.menuEliminaRecensione();
                     case "4" -> menuta.menuInserisciFoto();
-                    case "5" -> menuInserisciNodo();
-                    case "6" -> menuModificaNodo();
-                    case "7" -> menuEliminaNodo();
+                    case "5" -> menuInserisciNodo(); //funziona
+                    case "6" -> menuModificaNodo(); //funziona
+                    case "7" -> menuEliminaNodo(); //testare
                     case "8" -> menuInserisciItinerario();
                     case "9" -> menuModificaItinerario();
                     case "10" -> menuEliminaItinerario();
@@ -59,11 +59,12 @@ public class ClsMenuContributor implements IMenu{
 
     private void menuModificaNodo(){
         if(!user.visualizzaNodiPosessore().isEmpty()) {
-            user.visualizzaNodiPosessore();
+            for(ClsNodo n: user.visualizzaNodiPosessore())
+                println(n.visualizzaNodo());
             println("inserisci l'id del nodo da modificare");
             HashMap<String, Object> tmp = new HashMap<>();
             tmp.put("id", in.nextLine());
-            ClsNodo old = MockLocator.getMockNodi().get(null).get(0);
+            ClsNodo old = MockLocator.getMockNodi().get(tmp).get(0);
             if (old == null) {
                 println("Nessun Nodo Trovato");
                 return;
@@ -74,9 +75,8 @@ public class ClsMenuContributor implements IMenu{
 
     private void menuEliminaNodo() { //da mettere su Input
         if (!user.visualizzaNodiPosessore().isEmpty()) {
-            for(ClsNodo nodo:user.visualizzaNodiPosessore()){
-                println(nodo.visualizzaNodo());
-            }
+            for(ClsNodo n: user.visualizzaNodiPosessore())
+                println(n.visualizzaNodo());
             println("inserisci l'id del nodo da eliminare");
             if (user.eliminaNodo((in.nextLine())))
                 println("Nodo eliminato correttamente.");

@@ -108,9 +108,8 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                         daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
                         daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
                         daAggiungere.setUsernameCreatore(datiNodo[5]);
-                        daAggiungere.setDescrizione(datiNodo[6]);
-                        daAggiungere.setNome(datiNodo[7]);
-                        daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[8]), Double.parseDouble(datiNodo[9])));
+                        daAggiungere.setNome(datiNodo[6]);
+                        daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
                         aggiungiNodo(daAggiungere);
                     }
             } catch(Exception e){
@@ -125,7 +124,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                 for(ClsNodo nodo:nodi){
                     SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 
-                    daScrivere.append(nodo.getId() + "," + nodo.getIdComune() + "," + nodo.isaTempo() + "," + d.format(nodo.getDataFine()) + "," + nodo.getTipologiaNodo() + "," + nodo.getUsernameCreatore() + "," + nodo.getDescrizione() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\r\n");
+                    daScrivere.append(nodo.getId() + "," + nodo.getIdComune() + "," + nodo.isaTempo() + "," + d.format(nodo.getDataFine()) + "," + nodo.getTipologiaNodo() + "," + nodo.getUsernameCreatore() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\r\n");
                 }
                 output.write(String.valueOf(daScrivere));
                 output.close();

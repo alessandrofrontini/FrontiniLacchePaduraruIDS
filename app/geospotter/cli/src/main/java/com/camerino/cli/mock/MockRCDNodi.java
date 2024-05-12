@@ -5,11 +5,13 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItiner
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,49 +85,67 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
             for(String s:rcds){
                 String [] dati = s.split(",");
                 ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
-                rcd.setId(dati[0]);
-                rcd.setUsernameCreatoreRichiesta(dati[1]);
-                rcd.seteAzioneDiContribuzione(EAzioniDiContribuzione.valueOf(dati[2]));
-                //nodo
-                ClsNodo n = new ClsNodo();
-                n.setId(dati[3]);
-                n.setIdComune(dati[4]);
-                n.setaTempo(Boolean.parseBoolean(dati[5]));
-                SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
-                n.setDataFine(tmp.parse(dati[6]));
-                n.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(dati[7]));
-                n.setUsernameCreatore(dati[8]);
-                n.setDescrizione(dati[9]);
-                n.setNome(dati[10]);
-                n.setPosizione(new Posizione(Double.parseDouble(dati[11]), Double.parseDouble(dati[12])));
-                rcd.setDatiNodo(n);
-                //immagine
-                ClsImmagine i = new ClsImmagine();
-                i.setId(dati[13]);
-                i.setIdCOntenutoAssociato(dati[14]);
-                i.setUsernameCreatore(dati[15]);
-                i.setURL(dati[16]);
-                rcd.setDatiImmagine(i);
-                insert(rcd);
+                switch (dati[0]){
+                    case "ELIMINA_NODO":
+                    case "MODIFICA_NODO":
+                        case "INSERISCI_NODO": rcd = leggiRichiestaNodo(dati); break;
+                    case "INSERISCI_IMMAGINE": rcd = leggiRichiestaImmagine(dati); break;
+                }
+                rcdi.add(rcd);
             }
         } catch(Exception e){
             e.printStackTrace();
         }
     }
+    private ClsRichiestaAzioneDiContribuzione leggiRichiestaNodo(String [] dati) throws ParseException {
+        ClsRichiestaAzioneDiContribuzione r = new ClsRichiestaAzioneDiContribuzione();
+        r.seteAzioneDiContribuzione(EAzioniDiContribuzione.valueOf(dati[0]));
+        r.setUsernameCreatoreRichiesta(dati[1]);
+        r.setId(dati[2]);
+        ClsNodo n = new ClsNodo();
+        n.setId(dati[3]);
+        n.setIdComune(dati[4]);
+        n.setaTempo(Boolean.parseBoolean(dati[5]));
+        SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
+        n.setDataFine(tmp.parse(dati[6]));
+        n.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(dati[7]));
+        n.setUsernameCreatore(dati[8]);
+        n.setNome(dati[9]);
+        n.setPosizione(new Posizione(Double.parseDouble(dati[10]), Double.parseDouble(dati[11])));
+        r.setDatiNodo(n);
+        return r;
+    }
+    private ClsRichiestaAzioneDiContribuzione leggiRichiestaImmagine(String [] dati) throws Exception{
+        ClsRichiestaAzioneDiContribuzione rcd = leggiRichiestaNodo(arraySplit(dati, 12));
+        ClsImmagine i = new ClsImmagine();
+        i.setId(dati[12]);
+        i.setIdCOntenutoAssociato(dati[13]);
+        i.setUsernameCreatore(dati[14]);
+        i.setURL(dati[15]);
+        rcd.setDatiImmagine(i);
+        return rcd;
+    }
+    private String[] arraySplit(String [] s, int max){
+        String [] array = new String[max];
+        for(int i = 0; i<max; i++){
+            array[i] = s[i];
+        }
+        return array;
+    }
 
     public void scriviRCD(){
-        //SEPARARE GLI IMPORT SECONDO IL TIPO DI RICHIESTA: NEI METODI LEGGI E SCRIVI CI SONO LE ISTRUZIONI PER "INSERISCI IMMAGINE", IL PRIMO ELEMENTO DEL FILE è IL TIPO
-        //E DA Lì PARTONO DIVERSE LETTURE(MAGARI METODO PRIVATO)
         try{
             FileWriter output = new FileWriter("CLIsave/rcd.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRichiestaAzioneDiContribuzione r:rcdi){
-                daScrivere.append(r.getId() + "," + r.getUsernameCreatoreRichiesta() + "," + r.geteAzioneDiContribuzione() + ",");
-                //dump del nodo se è stato inserito (non c'è nessun id)
+                daScrivere.append(r.geteAzioneDiContribuzione() + "," + r.getUsernameCreatoreRichiesta() + "," + r.getId() + ",");
+                //dump del nodo se
                 SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getDescrizione() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX() + ",");
-                //dump dell'immagine se esiste
-                daScrivere.append(r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());
+                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX());
+                //dump dell'immagine se la richiesta è corretta
+                if(r.geteAzioneDiContribuzione().equals(EAzioniDiContribuzione.INSERISCI_IMMAGINE)) {
+                    daScrivere.append("," + r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());
+                }
                 daScrivere.append("\r\n");
             }
             output.write(String.valueOf(daScrivere));
