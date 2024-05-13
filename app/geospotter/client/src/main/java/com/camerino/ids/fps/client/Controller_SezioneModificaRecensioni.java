@@ -226,15 +226,9 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if((Objects.isNull(id) || id.isEmpty()) || (Objects.isNull(oggetto) || oggetto.isEmpty()) || (Objects.isNull(contenuto) || contenuto.isEmpty()) || (Objects.isNull(valutazione) || valutazione.isEmpty()))
+        if(id != null && !id.isEmpty() && oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), ""))
         {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Inserisci tutte le informazioni necessarie");
-            alert.show();
-        }
-        else
-        {
+
             r.setId("test");//??
             r.setIdContenutoAssociato(id);
             r.setOggetto(oggetto);
@@ -245,6 +239,13 @@ public class Controller_SezioneModificaRecensioni implements Initializable
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText(r.visualizzaRecensione());
+            alert.show();
+        }
+        else
+        {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setContentText("Inserisci tutte le informazioni necessarie");
             alert.show();
         }
     }

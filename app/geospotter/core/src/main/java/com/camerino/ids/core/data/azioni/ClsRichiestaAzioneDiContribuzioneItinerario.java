@@ -40,4 +40,15 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     public void setUsernameCreatore(String usernameCreatore) {
         this.usernameCreatore = usernameCreatore;
     }
+
+    public String visualizzaRichiestaItinerario()
+    {
+        String dummy = "";
+
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Azione: " + this.geteAzioniDiContribuzione() + "\n";
+
+        return dummy;
+    }
 }

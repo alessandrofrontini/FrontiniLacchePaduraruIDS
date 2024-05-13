@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzioneValidazioneRichieste">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneCuratoreValidazioneRichieste">
     <children>
         <TabPane layoutX="12.0" layoutY="117.0" prefHeight="421.0" prefWidth="576.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -20,10 +20,10 @@
                                 <TableView fx:id="elencoRichieste" layoutX="5.0" layoutY="14.0" prefHeight="273.0" prefWidth="568.0">
                                     <columns>
                                         <TableColumn fx:id="idColonna" prefWidth="41.39999198913574" text="ID" />
-                                        <TableColumn fx:id="idContestColonna" prefWidth="101.60001373291016" text="CONTEST " />
-                                        <TableColumn fx:id="azioneColonna" prefWidth="146.39996337890625" text="TIPO AZIONE" />
-                                        <TableColumn fx:id="tipoContenutoColonna" prefWidth="132.4000244140625" text="TIPO CONTENUTO" />
-                                        <TableColumn fx:id="idRichiedenteColonna" prefWidth="163.59994506835938" text="RICHIEDENTE" />
+                                        <TableColumn fx:id="idContestColonna" minWidth="0.0" prefWidth="0.0" text="ID" />
+                                        <TableColumn fx:id="azioneColonna" prefWidth="225.59999465942383" text="TIPO AZIONE" />
+                                        <TableColumn fx:id="tipoContenutoColonna" minWidth="0.0" prefWidth="136.39996337890625" text="TIPO CONTENUTO" />
+                                        <TableColumn fx:id="idRichiedenteColonna" prefWidth="188.800048828125" text="RICHIEDENTE" />
                                     </columns>
                                 </TableView>
                                 <ComboBox fx:id="sceltaAzione" layoutX="124.0" layoutY="295.0" prefHeight="26.0" prefWidth="174.0" promptText="Seleziona qui" />
@@ -56,20 +56,12 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Button layoutX="372.0" layoutY="295.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: red;" text="X" textFill="WHITE">
+                                <Button layoutX="372.0" layoutY="295.0" mnemonicParsing="false" onMouseClicked="#rifiutaAzioneItinerario" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: red;" text="X" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="12.0" />
                                     </font></Button>
-                                <Button layoutX="311.0" layoutY="295.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="54.0" style="-fx-background-color: #15ad34;" text="✔" textFill="WHITE" />
-                                <TableView fx:id="elencoRichiesteItinerari" layoutX="5.0" layoutY="14.0" prefHeight="273.0" prefWidth="568.0">
-                                    <columns>
-                                        <TableColumn fx:id="idColonnaItinerari" prefWidth="41.39999198913574" text="ID" />
-                                        <TableColumn fx:id="idContestColonnaItinerari" prefWidth="101.60001373291016" text="CONTEST " />
-                                        <TableColumn fx:id="azioneColonnaItinerari" prefWidth="146.39996337890625" text="TIPO AZIONE" />
-                                        <TableColumn fx:id="tipoContenutoColonnaItinerari" prefWidth="132.4000244140625" text="TIPO CONTENUTO" />
-                                        <TableColumn fx:id="idRichiedenteColonnaItinerari" prefWidth="163.59994506835938" text="RICHIEDENTE" />
-                                    </columns>
-                                </TableView>
+                                <Button layoutX="311.0" layoutY="295.0" mnemonicParsing="false" onMouseClicked="#accettaRichiestaItinerario" prefHeight="21.0" prefWidth="54.0" style="-fx-background-color: #15ad34;" text="✔" textFill="WHITE" />
+                                
                                 <ComboBox fx:id="sceltaAzioneItinerari" layoutX="124.0" layoutY="295.0" prefHeight="26.0" prefWidth="174.0" promptText="Seleziona qui" />
                                 <Text layoutX="13.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Validazione:">
                                     <font>
@@ -82,7 +74,7 @@
                                     </font>
                                 </Text>
                                 <ComboBox fx:id="selezionaElementoDettaglioItinerari" layoutX="124.0" layoutY="354.0" prefHeight="26.0" prefWidth="175.0" promptText="Seleziona qui" />
-                                <Button layoutX="311.0" layoutY="354.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+                                <Button layoutX="311.0" layoutY="354.0" mnemonicParsing="false" onMouseClicked="#visualizzaDettaglioItinerario" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
                                 <Text layoutX="14.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Validazione:">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
@@ -93,6 +85,15 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Text>
+                        <TableView fx:id="elencoRichiesteItinerari" layoutX="13.0" layoutY="14.0" prefHeight="259.0" prefWidth="558.0">
+                           <columns>
+                              <TableColumn fx:id="idColonnaItinerari" prefWidth="37.19997978210449" text="ID" />
+                              <TableColumn fx:id="usernameRichiedenteItinerari" prefWidth="101.20001983642578" text="RICHIEDENTE" />
+                              <TableColumn fx:id="idItinerarioColonna" prefWidth="104.20001220703125" text="ITINERARIO (ID)" />
+                              <TableColumn fx:id="tappeItinerario" prefWidth="133.20001220703125" text="ITINERARIO (TAPPE)" />
+                              <TableColumn fx:id="azioneContribuzione" prefWidth="180.0000061035156" text="AZIONE RICHIESTA" />
+                           </columns>
+                        </TableView>
                             </children></AnchorPane>
                     </content>
                 </Tab>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneCuratoreGestioneUtenti">
+   <children>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESTIONE UTENTI (Credenziali)">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salve signor Curatore, in questa sezione ha la possibilità di poter modificare&#10;le informazioni relative alle credenziali associate agli utenti di GeoSpotter.&#10;Buonlavoro!&#10;" wrappingWidth="579.8612976074219" />
+      <TabPane layoutX="14.0" layoutY="138.0" prefHeight="399.0" prefWidth="580.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="INSERISCI UTENTE">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="319.0" layoutY="90.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="245.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+                        <TextField layoutX="16.0" layoutY="46.0" prefHeight="26.0" prefWidth="245.0" promptText="Username" />
+                        <TextField layoutX="319.0" layoutY="46.0" prefHeight="26.0" prefWidth="246.0" promptText="Password" />
+                        <ComboBox layoutX="18.0" layoutY="90.0" prefHeight="26.0" prefWidth="250.0" promptText="Ruolo" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="ELIMINA UTENTE">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                         <TableView fx:id="elencoUtenti" layoutX="3.0" layoutY="14.0" prefHeight="258.0" prefWidth="574.0">
+                             <columns>
+                                 <TableColumn fx:id="idColonna" prefWidth="75.0" text="ID" />
+                                 <TableColumn fx:id="usernameColonna" prefWidth="203.2000274658203" text="USERNAME" />
+                                 <TableColumn fx:id="punteggioColonna" prefWidth="296.0" text="PUNTEGGIO" />
+                             </columns>
+                         </TableView>
+                        <Button layoutX="215.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#eliminaUtente" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+                        <ComboBox fx:id="selezionaEliminaUtente" layoutX="160.0" layoutY="282.0" prefHeight="26.0" prefWidth="260.0" promptText="Seleziona qui" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="MODIFICA UTENTE">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <Button layoutX="149.0" layoutY="90.0" mnemonicParsing="false" text="Button" />
+                        </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="22.0" layoutY="552.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+   </children>
+</AnchorPane>

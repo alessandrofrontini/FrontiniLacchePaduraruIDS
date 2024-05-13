@@ -187,6 +187,14 @@ public class Controller_SezioneVisualizzazione implements Initializable
                     this.navigateToSezioneCuratoreValidazioneRichieste(mouseEvent);
                     break;
 
+                case "Gestione Utenti (PUNTEGGIO)":
+                    this.navigateToSezioneCuratorePunteggioUtenti(mouseEvent);
+                    break;
+
+                case "Gestione Utenti (CREDENZIALI)":
+                    this.navigateToSezioneCuratoreGestioneUtenti(mouseEvent);
+                    break;
+
                 default:
                     Alert alert = new Alert (Alert.AlertType.ERROR);
                     alert.setTitle("ERRORE");
@@ -241,6 +249,16 @@ public class Controller_SezioneVisualizzazione implements Initializable
     }
 
     //region Navigazione
+
+    public void navigateToSezioneCuratoreGestioneUtenti(MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneCuratoreGestioneUtenti.fxml",mouseEvent);
+    }
+
+    public void navigateToSezioneCuratorePunteggioUtenti(MouseEvent mouseEvent)
+    {
+        this.SwitchScene("SezioneCuratorePunteggioUtenti.fxml",mouseEvent);
+    }
 
     public void navigateToSezioneCuratoreValidazioneRichieste(MouseEvent mouseEvent)
     {

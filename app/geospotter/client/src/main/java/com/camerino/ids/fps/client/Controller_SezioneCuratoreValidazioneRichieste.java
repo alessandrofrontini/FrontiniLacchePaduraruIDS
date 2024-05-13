@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utils.Posizione;
 import javafx.collections.FXCollections;
@@ -23,10 +24,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.AnnotatedArrayType;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.CULINARIO;
 
 public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
 {
@@ -39,8 +44,6 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     TableColumn<ClsRichiestaAzioneDiContribuzioneVisual,String> idColonna;
 
     @FXML
-    TableColumn<ClsRichiestaAzioneDiContribuzioneVisual,String> idContestColonna;
-    @FXML
     TableColumn<ClsRichiestaAzioneDiContribuzioneVisual,String> azioneColonna;
     @FXML
     TableColumn<ClsRichiestaAzioneDiContribuzioneVisual,String> tipoContenutoColonna;
@@ -49,15 +52,45 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     @FXML
     ComboBox sceltaAzione,selezionaElementoDettaglio;
+
+    @FXML
+    TableView<ClsRichiestaAzioneDiContribuzioneItinerarioVisual> elencoRichiesteItinerari;
+
+    @FXML
+    TableColumn<ClsRichiestaAzioneDiContribuzioneItinerarioVisual, String> idColonnaItinerari;
+
+    @FXML
+    TableColumn<ClsRichiestaAzioneDiContribuzioneItinerarioVisual, String> usernameRichiedenteItinerari;
+
+    @FXML
+    TableColumn<ClsRichiestaAzioneDiContribuzioneItinerarioVisual, String> idItinerarioColonna;
+
+    @FXML
+    TableColumn<ClsRichiestaAzioneDiContribuzioneItinerarioVisual, String> tappeItinerario;
+
+    @FXML
+    TableColumn<ClsRichiestaAzioneDiContribuzioneItinerarioVisual, String> azioneContribuzione;
+
+
+
+    @FXML
+    ComboBox sceltaAzioneItinerari,selezionaElementoDettaglioItinerari;
     //endregion
 
     Utils u = new Utils();
+
     ArrayList<ClsRichiestaAzioneDiContribuzione> richieste;
+    ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> richiesteItinerari;
+
+    ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    ArrayList<ClsItinerario> itinerari = new ArrayList<ClsItinerario>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.richieste = new ArrayList<ClsRichiestaAzioneDiContribuzione>();
+
+        this.richiesteItinerari = new ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario>();
 
         //region Creazione richieste dummy
         ClsRichiestaAzioneDiContribuzione c1 = new ClsRichiestaAzioneDiContribuzione();
@@ -114,7 +147,102 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         richieste.add(c4);
         //endregion
 
+        //region Creazione itinerari dummy
+        ClsNodo nodo1 = new ClsNodo();
+        nodo1.setId("2");
+        nodo1.setIdComune("1");
+        nodo1.setaTempo(true);
+        nodo1.setTipologiaNodo(COMMERCIALE);
+        nodo1.setUsernameCreatore("");
+        nodo1.setDescrizione("Descrizione - Nodo 1");
+        nodo1.setNome("Negozio");
+        nodo1.setPosizione(new Posizione(104,104));
+        nodi.add(nodo1);
+
+        ClsNodo nodo2 = new ClsNodo();
+        nodo2.setId("4");
+        nodo2.setIdComune("3");
+        nodo2.setaTempo(false);
+        nodo2.setTipologiaNodo(CULTURALE);
+        nodo2.setUsernameCreatore("");
+        nodo2.setDescrizione("Descrizione - Nodo 2");
+        nodo2.setNome("Statua");
+        nodo2.setPosizione(new Posizione(114,114));
+        nodi.add(nodo2);
+
+        ClsItinerario itinerario = new ClsItinerario();
+        itinerario.setId("1");
+        itinerario.setUsernameCreatore("test");
+        itinerario.setOrdinato(true);
+        itinerario.setNome("Itinerario1");
+        itinerario.setTappe(nodi);
+        itinerari.add(itinerario);
+
+        ClsNodo nodo3 = new ClsNodo();
+        nodo3.setId("6");
+        nodo3.setIdComune("5");
+        nodo3.setaTempo(false);
+        nodo3.setTipologiaNodo(CULINARIO);
+        nodo3.setUsernameCreatore("");
+        nodo3.setDescrizione("Descrizione - Nodo 3");
+        nodo3.setNome("Ristorante");
+        nodo3.setPosizione(new Posizione(124,124));
+        nodi.add(nodo3);
+
+        ClsItinerario itinerario1 = new ClsItinerario();
+        itinerario1.setId("2");
+        itinerario1.setUsernameCreatore("test");
+        itinerario1.setOrdinato(false);
+        itinerario1.setNome("Itinerario2");
+        itinerario1.setTappe(nodi);
+        itinerari.add(itinerario1);
+
+        ClsNodo nodo4 = new ClsNodo();
+        nodo4.setId("8");
+        nodo4.setIdComune("3");
+        nodo4.setaTempo(false);
+        nodo4.setTipologiaNodo(CULINARIO);
+        nodo4.setUsernameCreatore("");
+        nodo4.setDescrizione("Descrizione - Nodo 4");
+        nodo4.setNome("Ristorante");
+        nodo4.setPosizione(new Posizione(124,124));
+        nodi.add(nodo4);
+
+        ClsItinerario i3 = new ClsItinerario();
+        i3.setId("3");
+        i3.setUsernameCreatore("test");
+        i3.setOrdinato(true);
+        i3.setNome("Itinerario3");
+        i3.setTappe(nodi);
+        itinerari.add(i3);
+        //endregion
+
+        //region creazione richieste itinerari dummy
+        ClsRichiestaAzioneDiContribuzioneItinerario ri1 = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        ri1.setId("1");
+        ri1.setUsernameCreatore("test");
+        ri1.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
+        ri1.setDatiItinerario(itinerario);
+        richiesteItinerari.add(ri1);
+
+        ClsRichiestaAzioneDiContribuzioneItinerario ri2 = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        ri2.setId("2");
+        ri2.setUsernameCreatore("test");
+        ri2.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
+        ri2.setDatiItinerario(itinerario1);
+        richiesteItinerari.add(ri2);
+
+        ClsRichiestaAzioneDiContribuzioneItinerario ri3 = new ClsRichiestaAzioneDiContribuzioneItinerario();
+        ri3.setId("3");
+        ri3.setUsernameCreatore("test");
+        ri3.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
+        ri3.setDatiItinerario(i3);
+        richiesteItinerari.add(ri3);
+        //endregion
+
         setRichieste(richieste);
+
+        setRichiesteItinerari(richiesteItinerari);
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
@@ -138,22 +266,57 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         this.selezionaElementoDettaglio.setItems(itemss);
         //endregion
 
-        //region setting up colonne tabella itinerari
+        //region combobox
+        ObservableList<String> itemsItinerari = FXCollections.observableArrayList();
+
+        for(int i = 0;i<richiesteItinerari.size();i++)
+        {
+            itemsItinerari.add(richiesteItinerari.get(i).getId());
+        }
+
+        this.sceltaAzioneItinerari.setItems(itemsItinerari);
+        //endregion
+
+        //region combobox
+        ObservableList<String> itemssItinerari = FXCollections.observableArrayList();
+
+        for(int i = 0;i < richiesteItinerari.size(); i++)
+        {
+            itemssItinerari.add(richiesteItinerari.get(i).getId());
+        }
+
+        this.selezionaElementoDettaglioItinerari.setItems(itemssItinerari);
+        //endregion
+
+        //region setting up colonne tabella
         idColonna.setCellValueFactory(
                 new PropertyValueFactory<>("id"));
 
         idRichiedenteColonna.setCellValueFactory(
                 new PropertyValueFactory<>("usernameCreatore"));
 
-        idContestColonna.setCellValueFactory(
-                new PropertyValueFactory<>("idContest"));
-
         azioneColonna.setCellValueFactory(
                 new PropertyValueFactory<>("azioneDiContribuzione"));
 
         tipoContenutoColonna.setCellValueFactory(
                 new PropertyValueFactory<>("tipoContenuto"));
+        //endregion
 
+        //region setting up colonne tabella itinerari
+        idColonnaItinerari.setCellValueFactory(
+                new PropertyValueFactory<>("idd"));
+
+        usernameRichiedenteItinerari.setCellValueFactory(
+                new PropertyValueFactory<>("usernameCreatoree"));
+
+        idItinerarioColonna.setCellValueFactory(
+                new PropertyValueFactory<>("idItinerario"));
+
+        tappeItinerario.setCellValueFactory(
+                new PropertyValueFactory<>("tappe"));
+
+        azioneContribuzione.setCellValueFactory(
+                new PropertyValueFactory<>("azione"));
         //endregion
 
     }
@@ -206,6 +369,16 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
+    private void setRichiesteItinerari (ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> richieste)
+    {
+        for(int i = 0; i< richiesteItinerari.size(); i++)
+        {
+            ClsRichiestaAzioneDiContribuzioneItinerarioVisual c = u.convertFromRichiestaAzioneContribuzioneItinerario(richieste.get(i));
+
+            elencoRichiesteItinerari.getItems().add(c);
+        }
+    }
+
     public void visualizzaDettaglio()
     {
         String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglio);
@@ -254,6 +427,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
 
     }
+
     private boolean controllaConformitaID (String id)
     {
         boolean flag = false;
@@ -285,6 +459,79 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
     {
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    }
+
+    public void accettaRichiestaItinerario()
+    {
+        String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerari);
+        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
+        {
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("OK");
+            alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
+            alert.show();
+        }
+        else
+        {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("ERRORE");
+            alert.show();
+        }
+    }
+
+    public void rifiutaAzioneItinerario(MouseEvent mouseEvent)
+    {
+        String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerari);
+        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
+        {
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("OK");
+            alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
+            alert.show();
+        }
+        else
+        {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("ERRORE");
+            alert.show();
+        }
+    }
+
+    public void visualizzaDettaglioItinerario()
+    {
+        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerari);
+
+        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
+        {
+            ClsRichiestaAzioneDiContribuzioneItinerario richiesta = new ClsRichiestaAzioneDiContribuzioneItinerario();
+            for(int i = 0; i<richiesteItinerari.size();i++)
+            {
+                if(IDDaVisualizzare.equals(this.richiesteItinerari.get(i).getId()))
+                {
+                    richiesta.setId(richiesteItinerari.get(i).getId());
+                    richiesta.setUsernameCreatore(richiesteItinerari.get(i).getUsernameCreatore());
+                    richiesta.seteAzioniDiContribuzione(richiesteItinerari.get(i).geteAzioniDiContribuzione());
+                    richiesta.setDatiItinerario(richiesteItinerari.get(i).getDatiItinerario());
+
+                    Alert alert = new Alert (Alert.AlertType.INFORMATION);
+                    alert.setTitle("OK");
+                    alert.setContentText("Richiesta di azione:" + richiesta.visualizzaRichiestaItinerario() + "\nItinerario:" + richiesta.getDatiItinerario().visualizzaItinerario());
+                    alert.show();
+
+                }
+            }
+
+        }
+        else
+        {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
+
     }
 
 }

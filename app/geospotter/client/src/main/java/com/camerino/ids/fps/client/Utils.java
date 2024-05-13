@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -123,6 +124,45 @@ public class Utils
         {
             richiestaVisual.setTipoContenuto("IMMAGINE");
         }
+
+        return richiestaVisual;
+    }
+
+    public ClsUtenteVisual convertFromClsTuristaAutenticato (ClsTuristaAutenticato turista)
+    {
+        ClsUtenteVisual c = new ClsUtenteVisual();
+
+        c.setId(turista.getId());
+        c.setPunteggio(turista.getPunteggio()+"");
+        c.setUsername(turista.getCredenziali().getUsername());
+
+        return c;
+    }
+
+    public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario (ClsRichiestaAzioneDiContribuzioneItinerario richiesta)
+    {
+        ClsRichiestaAzioneDiContribuzioneItinerarioVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneItinerarioVisual();
+
+        richiestaVisual.setIdd(richiesta.getId());
+        richiestaVisual.setIdItinerario(richiesta.getDatiItinerario().getId());
+        richiestaVisual.setUsernameCreatoree(richiesta.getUsernameCreatore());
+        richiestaVisual.setAzione(richiesta.geteAzioniDiContribuzione().toString());
+
+        String tappe = "";
+        for(int i = 0; i < richiesta.getDatiItinerario().getTappe().size(); i++)
+        {
+            if(i == richiesta.getDatiItinerario().getTappe().size() - 1)
+            {
+                tappe += richiesta.getDatiItinerario().getTappe().get(i).getId();
+
+            }
+            else
+            {
+                tappe += richiesta.getDatiItinerario().getTappe().get(i).getId() + "-";
+            }
+
+        }
+        richiestaVisual.setTappe(tappe);
 
         return richiestaVisual;
     }

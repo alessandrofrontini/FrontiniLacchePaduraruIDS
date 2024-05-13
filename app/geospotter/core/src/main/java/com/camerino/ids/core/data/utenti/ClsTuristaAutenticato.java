@@ -14,7 +14,7 @@ import java.util.HashMap;
  * modificare ed eliminare le proprie recensioni nella piattaforma.
  * E' il ruolo iniziale di un nuovo utente.
  */
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction, Cloneable{
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -134,4 +134,28 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return null;
     }
 //endregion
+
+    public String visualizzaUtente()
+    {
+        String tmp = "";
+
+        tmp += "ID: " + this.getId() + "\n";
+        tmp += "Username: " + this.getCredenziali().getUsername() + "\n";
+        tmp += "Punteggio: " + this.getPunteggio() + "\n";
+
+        return tmp;
+
+    }
+
+    @Override
+    public ClsTuristaAutenticato clone() {
+        ClsTuristaAutenticato clone = new ClsTuristaAutenticato();
+
+        clone.setId(this.id);
+        clone.setPunteggio(this.getPunteggio());
+        clone.setCredenziali(this.credenziali);
+        clone.setRuoloUtente(this.ruoloUtente);
+
+        return clone;
+    }
 }
