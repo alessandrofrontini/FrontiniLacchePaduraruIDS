@@ -107,7 +107,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitanti)));
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficie)));
 
-            comune.setCuratoriAssociati(new ClsCuratore[0]);//todo:aggiungere
+            comune.setCuratoriAssociati(this.ottieniCuratori(curatoriCoinvoltiArray));//todo:aggiungere
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");
@@ -191,4 +191,20 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return listaSenzaDuplicati;
     }
 
+    private ClsCuratore[] ottieniCuratori (String[] idCuratori)
+    {
+        ArrayList<ClsCuratore> tmp = new ArrayList<ClsCuratore>();
+        for(int i = 0; i < this.curatori.size(); i++)
+        {
+            for(int k = 0; k< idCuratori.length; k++)
+            {
+                if(curatori.get(i).getId() == idCuratori[k])
+                {
+                    tmp.add(curatori.get(i));
+                }
+            }
+        }
+
+        return tmp.toArray(new ClsCuratore[tmp.size()]);
+    }
 }
