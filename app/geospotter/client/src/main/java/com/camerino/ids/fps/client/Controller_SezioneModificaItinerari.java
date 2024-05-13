@@ -202,6 +202,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
 
         if(nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size()>=2)
         {
+            nuovoItinerario.setId(IDDaModificare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
@@ -240,7 +241,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
             if((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2)
             {
                 itinerario.setId("");
-                itinerario.setUsernameCreatore("");
+                itinerario.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
                 itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
                 itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
                 itinerario.setTappe(nodiAssociatiToItinerario);

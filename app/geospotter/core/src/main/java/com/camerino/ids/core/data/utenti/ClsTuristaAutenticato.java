@@ -142,6 +142,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         tmp += "ID: " + this.getId() + "\n";
         tmp += "Username: " + this.getCredenziali().getUsername() + "\n";
         tmp += "Punteggio: " + this.getPunteggio() + "\n";
+        tmp += "Ruolo: " + this.getRuoloUtente().toString() + "\n";
 
         return tmp;
 
@@ -157,5 +158,31 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         clone.setRuoloUtente(this.ruoloUtente);
 
         return clone;
+    }
+
+    public static eRUOLO_UTENTE convertRuoloFromString (String ruolo)
+    {
+        switch(ruolo)
+        {
+            case "TURISTA_AUTENTICATO":
+                return eRUOLO_UTENTE.TURISTA_AUTENTICATO;
+
+
+            case "CONTRIBUTOR":
+                return eRUOLO_UTENTE.CONTRIBUTOR;
+
+
+            case "CONTRIBUTOR_AUTORIZZATO":
+                return eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO;
+
+            case "ANIMATORE":
+                return eRUOLO_UTENTE.ANIMATORE;
+
+
+            default:
+                return null;
+
+        }
+
     }
 }

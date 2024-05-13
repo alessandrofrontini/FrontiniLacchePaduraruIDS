@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 public class Controller_SezioneVisualizzazione implements Initializable
 {
     @FXML
-    Button sezioneNavigazioneBTNConfermaAzione, sezioneVisualizzazioneBTNRegistrati,sezioneVisualizzazioneBTNLogIn;
+    Button sezioneNavigazioneBTNConfermaAzione, sezioneVisualizzazioneBTNRegistrati,sezioneVisualizzazioneBTNLogIn,BTNta, BTNc, BTNa, BTNcur, BTNgdp;
     @FXML
     ComboBox sceltaAzioneTuristaAutenticato, sceltaAzioneGestore,sceltaAzioneContributor, sceltaAzioneAnimatore, sceltaAzioneCuratore;
 
@@ -30,6 +31,90 @@ public class Controller_SezioneVisualizzazione implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+
+        sceltaAzioneTuristaAutenticato.setVisible(false);
+        BTNta.setVisible(false);
+        sceltaAzioneContributor.setVisible(false);
+        BTNc.setVisible(false);
+        sceltaAzioneAnimatore.setVisible(false);
+        BTNa.setVisible(false);
+        sceltaAzioneCuratore.setVisible(false);
+        BTNcur.setVisible(false);
+        sceltaAzioneGestore.setVisible(false);
+        BTNgdp.setVisible(false);
+
+        if(Controller_SezioneLogin.utente.getRuolo() != null)
+        {
+            switch (Controller_SezioneLogin.utente.getRuolo())
+            {
+                case TURISTA_AUTENTICATO:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    break;
+                }
+
+                case CONTRIBUTOR:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    sceltaAzioneContributor.setVisible(true);
+                    BTNc.setVisible(true);
+                    break;
+                }
+
+                case CONTRIBUTOR_AUTORIZZATO:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    sceltaAzioneContributor.setVisible(true);
+                    BTNc.setVisible(true);
+                    break;
+                }
+
+                case ANIMATORE:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    sceltaAzioneContributor.setVisible(true);
+                    BTNc.setVisible(true);
+                    sceltaAzioneAnimatore.setVisible(true);
+                    BTNa.setVisible(true);
+                    break;
+                }
+
+                case CURATORE:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    sceltaAzioneContributor.setVisible(true);
+                    BTNc.setVisible(true);
+                    sceltaAzioneAnimatore.setVisible(true);
+                    BTNa.setVisible(true);
+                    sceltaAzioneCuratore.setVisible(true);
+                    BTNcur.setVisible(true);
+                    break;
+                }
+
+                case GESTORE_DELLA_PIATTAFORMA:
+                {
+                    sceltaAzioneTuristaAutenticato.setVisible(true);
+                    BTNta.setVisible(true);
+                    sceltaAzioneContributor.setVisible(true);
+                    BTNc.setVisible(true);
+                    sceltaAzioneAnimatore.setVisible(true);
+                    BTNa.setVisible(true);
+                    sceltaAzioneCuratore.setVisible(true);
+                    BTNcur.setVisible(true);
+                    sceltaAzioneGestore.setVisible(true);
+                    BTNgdp.setVisible(true);
+                    break;
+                }
+
+                default:
+                    break;
+            }
+        }
 
     }
 

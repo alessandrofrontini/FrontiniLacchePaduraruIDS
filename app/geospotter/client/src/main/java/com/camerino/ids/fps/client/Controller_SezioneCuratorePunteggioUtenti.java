@@ -25,7 +25,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
 {
     //region Elementi FXML
     @FXML
-    ComboBox sceltaUtente, sceltaAzione;
+    ComboBox sceltaUtente, sceltaAzione, sceltaRuolo;
 
     @FXML
     TextField inserimentoPunteggioTF;
@@ -46,6 +46,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
     ArrayList<ClsTuristaAutenticato> utenti;
 
     ArrayList<String> azioni;
+    ArrayList<String> ruoli;
     Utils u = new Utils();
 
     @Override
@@ -53,6 +54,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
     {
         utenti = new ArrayList<>();
         azioni = new ArrayList<>();
+        ruoli = new ArrayList<>();
 
         inserimentoPunteggioTF.setVisible(false);
 
@@ -60,6 +62,13 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         azioni.add("UP-RANK");
         azioni.add("DOWN-RANK");
         azioni.add("RESET-RANK");
+        //endregion
+
+        //region Creazioni ruoli possibili
+        ruoli.add("TURISTA_AUTENTICATO");
+        ruoli.add("CONTRIBUTOR");
+        ruoli.add("CONTRIBUTOR_AUTORIZZATO");
+        ruoli.add("ANIMATORE");
         //endregion
 
         //region Creazione utenti dummy
@@ -114,6 +123,17 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         }
 
         this.sceltaUtente.setItems(itemes);
+        //endregion
+
+        //region combobox
+        ObservableList<String> tmp = FXCollections.observableArrayList();
+
+        for(int i = 0;i<ruoli.size();i++)
+        {
+            tmp.add(ruoli.get(i));
+        }
+
+        this.sceltaRuolo.setItems(tmp);
         //endregion
 
         setUtenti(utenti);
@@ -254,6 +274,97 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
             alert.show();
         }
 
+    }
+
+    public void modificaRuoloUtente()
+    {
+        if(u.getValueFromCombobox(sceltaUtente) != null && !Objects.equals(u.getValueFromCombobox(sceltaUtente), "") &&
+                u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), ""))
+        {
+            ClsTuristaAutenticato utente = this.ottieniUtente(u.getValueFromCombobox(sceltaUtente));
+            ClsTuristaAutenticato utenteBackUp = utente.clone();
+
+            if(u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), ""))
+            {
+                switch(u.getValueFromCombobox(sceltaRuolo))
+                {
+                    case "TURISTA_AUTENTICATO":
+                        if(true)
+                        {
+                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+
+                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("OK");
+                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
+                            alert.show();
+                        }
+                        break;
+
+                    case "CONTRIBUTOR":
+                        if(true) {
+                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
+                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+
+                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("OK");
+                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
+                            alert.show();
+                        }
+                        break;
+
+                    case "CONTRIBUTOR_AUTORIZZATO":
+                        if(true)
+                        {
+                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+
+                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("OK");
+                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
+                            alert.show();
+                        }
+                        break;
+
+                    case "ANIMATORE":
+                        if(true)
+                        {
+                        utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+                        utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+
+                        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
+                        alert.show();
+                        }
+                        break;
+
+                    default:
+                        Alert alerttttt = new Alert (Alert.AlertType.ERROR);
+                        alerttttt.setTitle("Attenzione");
+                        alerttttt.setContentText("Controlla le informazioni e riprova");
+                        alerttttt.show();
+                        break;
+
+
+                }
+            }
+            else
+            {
+                Alert alert = new Alert (Alert.AlertType.ERROR);
+                alert.setTitle("Attenzione");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
+
+        }
+        else
+        {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Attenzione");
+            alert.setContentText("Controlla le informazioni e riprova");
+            alert.show();
+        }
     }
 
     private ClsTuristaAutenticato ottieniUtente(String username)

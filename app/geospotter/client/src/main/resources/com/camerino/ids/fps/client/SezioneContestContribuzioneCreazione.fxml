@@ -30,7 +30,7 @@
                       </columns>
                   </TableView>
                   <ComboBox fx:id="sceltaComune" layoutX="134.0" layoutY="229.0" prefHeight="26.0" prefWidth="331.0" promptText="Seleziona qui" />
-                     <TextField fx:id="dataFine" layoutX="146.0" layoutY="264.0" prefHeight="26.0" prefWidth="292.0" promptText="data fine (inizierà oggi stesso)" />
+                     <TextField fx:id="dataFine" layoutX="146.0" layoutY="264.0" prefHeight="26.0" prefWidth="292.0" promptText="data fine (ddmmyyyy)" />
                      <CheckBox fx:id="suInvito" layoutX="256.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#visualizzaTabInvitati" text="su Invito?" />
               </AnchorPane>
             </content>

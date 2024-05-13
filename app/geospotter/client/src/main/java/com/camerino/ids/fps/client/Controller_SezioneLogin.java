@@ -1,7 +1,9 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +14,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class Controller_SezioneLogin
 {
@@ -22,18 +26,69 @@ public class Controller_SezioneLogin
     @FXML
     TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
 
+    private String tmpJWT = "DJASIDJIQ09I4902JDIOAR8932";
+   public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
+
     public void logga ()
     {
+
+        //!!!!!! BYPASS
+        utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        utente.setUsername("ERMAGODAAPECORONA69");
+        //!!!!!! BYPASS
         String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
         String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
 
         //Controllo server
         if(password.equals(password))
         {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle("ToString");
-            alert.setHeaderText(username + ":" + password);
-            alert.show();
+            //LOG PER TURISTA AUT = ta:ta
+           if(Objects.equals(username, "ta") && password.equals("ta"))
+           {
+               utente.setJwt(tmpJWT);
+               utente.setUsername(username);
+               utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+           }
+            //LOG PER CONTRIBUTOR = c:c
+            if(Objects.equals(username, "c") && password.equals("c"))
+            {
+                utente.setJwt(tmpJWT);
+                utente.setUsername(username);
+                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+            }
+
+            //LOG PER CONTRIBUTOR AUT = ca:ca
+            if(Objects.equals(username, "ca") && password.equals("ca"))
+            {
+                utente.setJwt(tmpJWT);
+                utente.setUsername(username);
+                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+            }
+
+            //LOG PER ANIMATORE = a:a
+            if(Objects.equals(username, "a") && password.equals("a"))
+            {
+                utente.setJwt(tmpJWT);
+                utente.setUsername(username);
+                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+            }
+
+            //LOG PER CURATORE = cur:cur
+            if(Objects.equals(username, "cur") && password.equals("cur"))
+            {
+                utente.setJwt(tmpJWT);
+                utente.setUsername(username);
+                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+            }
+
+            //LOG PER GDP = gdp:gdp
+            if(Objects.equals(username, "gdp") && password.equals("gdp"))
+            {
+                utente.setJwt(tmpJWT);
+                utente.setUsername(username);
+                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+            }
+
         }
 
         else
@@ -100,6 +155,7 @@ public class Controller_SezioneLogin
         tf.clear();
         return name;
     }
+
     //endregion
 
 

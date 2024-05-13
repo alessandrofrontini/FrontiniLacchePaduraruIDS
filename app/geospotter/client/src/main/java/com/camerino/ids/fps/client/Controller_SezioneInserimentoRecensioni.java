@@ -151,12 +151,13 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         }
         else
         {
-            r.setId("test");//??
+            r.setId("");
+            r.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             r.setIdContenutoAssociato(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
-            r.setUsernameCreatore("test");
+
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");

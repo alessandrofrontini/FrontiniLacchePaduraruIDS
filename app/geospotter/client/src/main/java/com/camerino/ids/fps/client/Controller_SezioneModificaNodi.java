@@ -151,8 +151,11 @@ public class Controller_SezioneModificaNodi implements Initializable
         ClsNodo nuovoNodo = this.inserisciNodo(mouseEvent);
         String IDDaModificare = this.eliminaNodo(mouseEvent);
 
+
+
         if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null)
         {
+            nuovoNodo.setId(IDDaModificare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoNodo.visualizzaNodo());
@@ -200,7 +203,8 @@ public class Controller_SezioneModificaNodi implements Initializable
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
-                    nodo.setId("test"); //??
+                    nodo.setId("");
+                    nodo.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));

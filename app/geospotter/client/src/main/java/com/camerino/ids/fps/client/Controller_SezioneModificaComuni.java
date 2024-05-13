@@ -184,9 +184,10 @@ public class Controller_SezioneModificaComuni implements Initializable
 
         if(!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null))
         {
+            nuovoComune.setId(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
-            alert.setContentText("ID: " + id + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
+            alert.setContentText("ID: " + IDDaEliminare + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
             alert.show();
         }
         else
@@ -284,7 +285,8 @@ public class Controller_SezioneModificaComuni implements Initializable
                 !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
                 !Objects.equals(u.getValueFromTextField(superficieTF), ""))
         {
-            comune.setId("test");
+            comune.setId("");
+            comune.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
             comune.setNome(u.getValueFromTextField(nomeTF));
             comune.setDescrizione(u.getValueFromTextField(descrizioneTF));

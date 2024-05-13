@@ -138,10 +138,11 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
                 }
             }
             itinerario.setId("");
+            itinerario.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
             itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
             itinerario.setTappe(nodiAssociatiToItinerario);
-            itinerario.setUsernameCreatore("");
+
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("informazioni");

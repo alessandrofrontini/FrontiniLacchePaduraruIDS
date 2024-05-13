@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneCuratorePunteggioUtenti">
@@ -20,9 +21,12 @@
             <TableColumn fx:id="punteggioColonna" prefWidth="296.0" text="PUNTEGGIO" />
         </columns>
       </TableView>
-      <ComboBox fx:id="sceltaUtente" layoutX="14.0" layoutY="460.0" prefWidth="150.0" promptText="Seleziona qui" />
-      <ComboBox fx:id="sceltaAzione" layoutX="177.0" layoutY="460.0" onContextMenuRequested="#settaTextField" onMouseClicked="#settaTextField" onMouseExited="#settaTextField" prefWidth="150.0" promptText="Tipo azione" />
-      <TextField fx:id="inserimentoPunteggioTF" layoutX="343.0" layoutY="460.0" prefHeight="26.0" prefWidth="241.0" promptText="Punteggio" />
-      <Button layoutX="342.0" layoutY="496.0" mnemonicParsing="false" onMouseClicked="#modificaInfoUtenti" prefHeight="26.0" prefWidth="242.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+      <ComboBox fx:id="sceltaUtente" layoutX="14.0" layoutY="483.0" prefHeight="26.0" prefWidth="122.0" promptText="Username" />
+      <ComboBox fx:id="sceltaAzione" layoutX="136.0" layoutY="446.0" onContextMenuRequested="#settaTextField" onMouseClicked="#settaTextField" onMouseExited="#settaTextField" prefHeight="26.0" prefWidth="106.0" promptText="Tipo azione" />
+      <TextField fx:id="inserimentoPunteggioTF" layoutX="257.0" layoutY="446.0" prefHeight="26.0" prefWidth="75.0" promptText="Punteggio" />
+      <Button layoutX="352.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#modificaInfoUtenti" prefHeight="26.0" prefWidth="190.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+      <ComboBox fx:id="sceltaRuolo" layoutX="136.0" layoutY="520.0" prefHeight="26.0" prefWidth="189.0" promptText="Ruolo" />
+      <Button layoutX="352.0" layoutY="521.0" mnemonicParsing="false" onMouseClicked="#modificaRuoloUtente" prefHeight="26.0" prefWidth="190.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+      <Line endX="310.5999755859375" layoutX="242.0" layoutY="496.0" opacity="0.44" startX="-100.0" />
    </children>
 </AnchorPane>

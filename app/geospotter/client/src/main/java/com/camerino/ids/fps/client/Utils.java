@@ -197,7 +197,7 @@ public class Utils
 
     public boolean checkInfoNodo (ClsNodo nodo)
     {
-        if(Objects.equals(nodo.getId(), "") ||
+        if(
                 Objects.equals(nodo.getNome(), "") ||
                 Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
                 Objects.equals(nodo.getIdComune(), "") ||
