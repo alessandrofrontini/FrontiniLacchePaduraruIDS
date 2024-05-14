@@ -1,6 +1,7 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
 
@@ -52,5 +53,25 @@ public class ClsCuratore extends ClsAnimatore{
 
     public boolean postRDC(ClsRichiestaAzioneDiContribuzione rdc) {
         return pRDC.insert(rdc);
+    }
+
+    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
+        return pRDCI.get(null);
+    }
+
+    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(String idRDCI) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCI", idRDCI);
+        return pRDCI.get(filters);
+    }
+
+    public boolean putRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCI", rdci.getId());
+        return pRDCI.update(filters, rdci);
+    }
+
+    public boolean postRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci) {
+        return pRDCI.insert(rdci);
     }
 }
