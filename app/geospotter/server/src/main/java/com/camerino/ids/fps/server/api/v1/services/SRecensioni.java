@@ -2,6 +2,7 @@ package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class SRecensioni {
 
     public boolean deleteRecensioneById(String idRecensione) {
         return false;
+    }
+
+    public boolean postRecensione(ClsRecensione recensione) {
+        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
     }
 }

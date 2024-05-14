@@ -24,6 +24,7 @@ public class CComuni {
     public ResponseEntity<ArrayList<ClsComune>> getComuni(
             @RequestParam(value = "idComune", required = false) String idComune
     ) {
+
         if(idComune == null)
             return ResponseEntity.ok(sComnuni.getAllComuni());
        return ResponseEntity.ok(sComnuni.getComuneById(idComune));

@@ -30,7 +30,7 @@ public class CRecensioni {
     public ResponseEntity<String> postRecensioni(
             @RequestBody ClsRecensione recensione
     ){
-        return ResponseEntity.status(501).body(null);
+        return ResponseEntity.ok(Boolean.toString(sRecensioni.postRecensione(recensione)));
     }
 
     @PutMapping(mapping)

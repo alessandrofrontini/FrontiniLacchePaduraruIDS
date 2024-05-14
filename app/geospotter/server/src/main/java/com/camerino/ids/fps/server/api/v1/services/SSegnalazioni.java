@@ -1,6 +1,5 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
-import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
@@ -21,7 +20,7 @@ public class SSegnalazioni {
     public ArrayList<ClsSegnalazione> getAll() {
         //chi visualizza le segnalazione? Il curatore no?
         ClsCuratore user = (ClsCuratore) request.getSession().getAttribute("user");
-        return user.getAllSegnalazioni();
+        return user._getAllSegnalazioni();
     }
 
     public boolean creaSegnalazione(ClsSegnalazione segnalazione) {
