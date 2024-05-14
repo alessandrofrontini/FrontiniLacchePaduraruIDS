@@ -109,6 +109,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
 
             comune.setCuratoriAssociati(this.ottieniCuratori(curatoriCoinvoltiArray));//todo:aggiungere
 
+
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");
             alert.setContentText(comune.visualizzaComune());
@@ -198,7 +199,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         {
             for(int k = 0; k< idCuratori.length; k++)
             {
-                if(curatori.get(i).getId() == idCuratori[k])
+                if(Objects.equals(curatori.get(i).getId(), idCuratori[k]))
                 {
                     tmp.add(curatori.get(i));
                 }

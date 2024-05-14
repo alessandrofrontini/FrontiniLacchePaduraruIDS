@@ -81,6 +81,23 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     @FXML
     TextField urlImmagine;
+
+
+    @FXML
+    TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
+
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    @FXML
+    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
     //endregion
 
     boolean flag = false;
@@ -227,6 +244,25 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                 new PropertyValueFactory<>("ATempo"));
         //endregion
 
+        //region setting up colonne tabella
+        sezioneEliminazioneNodiTableColumnID.setCellValueFactory(
+                new PropertyValueFactory<>("ID"));
+
+        sezioneEliminazioneNodiTableColumnIDComuneAssociato.setCellValueFactory(
+                new PropertyValueFactory<>("IDComuneAssociato"));
+
+        sezioneEliminazioneNodiTableColumnNome.setCellValueFactory(
+                new PropertyValueFactory<>("Nome"));
+
+        sezioneEliminazioneNodiTableColumnPosizione.setCellValueFactory(
+                new PropertyValueFactory<>("Posizione"));
+
+        sezioneEliminazioneNodiTableColumnTipologia.setCellValueFactory(
+                new PropertyValueFactory<>("Tipologia"));
+
+        sezioneEliminazioneNodiTableColumnATempo.setCellValueFactory(
+                new PropertyValueFactory<>("ATempo"));
+        //endregion
 
     }
 
@@ -403,6 +439,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             ElencoNodi.getItems().add(c);
+            sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 

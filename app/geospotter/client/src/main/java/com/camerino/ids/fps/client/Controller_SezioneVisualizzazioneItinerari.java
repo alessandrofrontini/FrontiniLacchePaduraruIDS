@@ -209,7 +209,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
         {
             String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
             ClsSegnalazione segnalazione = new ClsSegnalazione();
-            segnalazione.setId("test"); //
+            segnalazione.setId(""); //
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 

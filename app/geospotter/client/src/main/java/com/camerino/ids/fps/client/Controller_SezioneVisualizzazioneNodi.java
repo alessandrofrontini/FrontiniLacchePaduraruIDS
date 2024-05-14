@@ -189,7 +189,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         {
             String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
             ClsSegnalazione segnalazione = new ClsSegnalazione();
-            segnalazione.setId("test"); //
+            segnalazione.setId("");
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
