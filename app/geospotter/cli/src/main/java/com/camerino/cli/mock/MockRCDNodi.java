@@ -13,9 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
@@ -82,16 +80,23 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
             }
             String rcdstutti = String.valueOf(tutti);
             String [] rcds = rcdstutti.split("\r\n");
-            for(String s:rcds){
-                String [] dati = s.split(",");
-                ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
-                switch (dati[0]){
-                    case "ELIMINA_NODO":
-                    case "MODIFICA_NODO":
-                        case "INSERISCI_NODO": rcd = leggiRichiestaNodo(dati); break;
-                    case "INSERISCI_IMMAGINE": rcd = leggiRichiestaImmagine(dati); break;
+            if(!Objects.equals(rcds[0], "")) {
+                for (String s : rcds) {
+                    String[] dati = s.split(",");
+                    ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
+                    switch (dati[0]) {
+                        case "ELIMINA_NODO":
+                        case "MODIFICA_NODO":
+                        case "INSERISCI_NODO":
+                            rcd = leggiRichiestaNodo(dati);
+                            break;
+                        case "INSERISCI_IMMAGINE":
+                            rcd = leggiRichiestaImmagine(dati);
+                            break;
+                    }
+                    rcdi.add(rcd);
                 }
-                rcdi.add(rcd);
+                maxID(rcdi);
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -152,6 +157,13 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
             output.close();
         } catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    private void maxID(ArrayList<ClsRichiestaAzioneDiContribuzione> r){
+        for(ClsRichiestaAzioneDiContribuzione rc:r){
+            if(this.idCounter<Long.parseLong(rc.getId()))
+                this.idCounter = Long.parseLong(rc.getId());
         }
     }
     //endregion

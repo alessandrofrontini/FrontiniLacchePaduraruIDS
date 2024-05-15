@@ -66,6 +66,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
+        itinerario.setUsernameCreatore(this.credenziali.getUsername());
         return pItinerari.insert(itinerario);
     }
 

@@ -121,7 +121,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
-        req.setDatiItinerarioVecchio(pItinerari.get(tmp).get(0));
+        req.setDatiItinerarioNuovo(pItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
     }
     //TODO: i nodi di chi?

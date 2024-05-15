@@ -97,6 +97,11 @@ public class Input
                         e.printStackTrace();
                     }
                 }
+                else{
+                    nodo.setaTempo(true);
+                    nodo.setDataFine(vecchio.getDataFine());
+                    println("le impostazioni di scadenza non sono state agiornate.");
+                }
             }
             else{
                 println("Il nodo non è a tempo. Vuoi fissare una scadenza? Y/N");
@@ -151,22 +156,22 @@ public class Input
     public static ClsItinerario richiediItinerario(){
         boolean ok = false;
         ClsItinerario itinerario = new ClsItinerario();
+        print("Inserisci nome itinerario: ");
+        itinerario.setNome(in.nextLine());
         String idNodo = "0";
         while (!ok){
-            print("Inserisci nome itinerario: ");
-            itinerario.setNome(in.nextLine());
             print("E' ordinato (s/n)?: ");
             itinerario.setOrdinato(in.nextLine().charAt(0)=='s');
             while (!idNodo.equals("-1")){
                 print("Inserisci id del nodo da aggiungere (-1 per terminare l'inserimento): ");
                 idNodo = in.nextLine();
-                if (idNodo.equals("-1") && itinerario.getTappe().size()==0)
+                if (idNodo.equals("-1") && itinerario.getTappe().isEmpty())
                     print("Non puoi creare un itinerario con 0 tappe");
                 else if (idNodo.equals("-1"))
                     break;
-                ClsNodo nodo = new ClsNodo();
-                nodo.setId(idNodo);
-                itinerario.getTappe().add(nodo);//Ci penserà il Mock a poplare le tappe
+                HashMap<String, Object> filtro = new HashMap<>();
+                filtro.put("id", idNodo);
+                itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
             }
             ok = true;
         }

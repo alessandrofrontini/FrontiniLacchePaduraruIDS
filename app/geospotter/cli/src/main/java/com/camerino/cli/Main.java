@@ -8,10 +8,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.io.Console;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -51,6 +48,8 @@ public class Main {
         MockLocator.getMockTuristi().scriviUtenti();
         MockLocator.getMockImmagini().scriviImmagini();
         MockLocator.getMockRCD().scriviRCD();
+        MockLocator.getMockItinerari().scriviItinerari();
+        MockLocator.getMockRCDI().scriviRCDItinerari();
     }
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();
@@ -60,6 +59,8 @@ public class Main {
         MockLocator.getMockTuristi().leggiUtenti();
         MockLocator.getMockImmagini().leggiImmagini();
         MockLocator.getMockRCD().leggiRCD();
+        MockLocator.getMockItinerari().leggiItinerari();
+        MockLocator.getMockRCDI().leggiRCDItinerari();
     }
     private static void listaComuni()
     {

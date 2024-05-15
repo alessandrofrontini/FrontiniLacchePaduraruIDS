@@ -9,7 +9,9 @@ import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -21,9 +23,9 @@ public class ClsMenuContributor implements IMenu{
     @Override
     public void menu(){
         ClsMenuTuristaAutenticato menuta = new ClsMenuTuristaAutenticato(user);
-        menuta.menu();
         boolean exit = false;
         while (!exit) {
+            menuta.menu();
             println("5) Inserisci Nodo");
             println("6) Modifica Nodo");
             println("7) Elimina Nodo");
@@ -35,17 +37,17 @@ public class ClsMenuContributor implements IMenu{
                 println("0) Esci");
                 print(">> ");
                 switch (in.nextLine()) {
-                    case "1" -> menuta.menuInserisciRecensione();
-                    case "2" -> menuta.menuModificaRecensione();
-                    case "3" -> menuta.menuEliminaRecensione();
-                    case "4" -> menuta.menuInserisciFoto();
+                    case "1" -> menuta.menuInserisciRecensione(); //funziona
+                    case "2" -> menuta.menuModificaRecensione(); //funziona
+                    case "3" -> menuta.menuEliminaRecensione(); //funziona
+                    case "4" -> menuta.menuInserisciFoto(); //funziona
                     case "5" -> menuInserisciNodo(); //funziona
                     case "6" -> menuModificaNodo(); //funziona
-                    case "7" -> menuEliminaNodo(); //testare
-                    case "8" -> menuInserisciItinerario();
-                    case "9" -> menuModificaItinerario();
-                    case "10" -> menuEliminaItinerario();
-                    case "11" -> sottoMenuContest();
+                    case "7" -> menuEliminaNodo(); //funziona
+                    case "8" -> menuInserisciItinerario(); //funziona
+                    case "9" -> menuModificaItinerario(); //funziona
+                    case "10" -> menuEliminaItinerario(); //funziona
+                    case "11" -> sottoMenuContest(); //noimpl
                     case "0" -> exit = true;
                 }
             }
@@ -79,7 +81,7 @@ public class ClsMenuContributor implements IMenu{
                 println(n.visualizzaNodo());
             println("inserisci l'id del nodo da eliminare");
             if (user.eliminaNodo((in.nextLine())))
-                println("Nodo eliminato correttamente.");
+                println("Richiesta di eliminazione inviata.");
             else println("Errore");
         }
     }
@@ -95,12 +97,22 @@ public class ClsMenuContributor implements IMenu{
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", in.nextLine());
         ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
-        if(itinerario != null)
-            sottomenuModificaItinerario(itinerario);
+        if(itinerario != null){
+            ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
+            user.modificaItinerario(nuovo, itinerario);
+        }
         else println("Errore");
     }
-    private void sottomenuModificaItinerario(ClsItinerario itv){
-        ClsItinerario nuovo = itv;
+    private ClsItinerario sottomenuModificaItinerario(ClsItinerario itv){ //sentire chat gpt per doppia modifica in "modifica"
+        ClsItinerario nuovo = new ClsItinerario();
+        nuovo.setId(itv.getId());
+        nuovo.setNome(itv.getNome());
+        nuovo.setUsernameCreatore(itv.getUsernameCreatore());
+        nuovo.setOrdinato(itv.isOrdinato());
+        ArrayList<ClsNodo> tappe = new ArrayList<>();
+        for(ClsNodo n:itv.getTappe())
+            tappe.add(n);
+        nuovo.setTappe(tappe);
         boolean exit = false;
         while(!exit){
             println("1 - cambia nome");
@@ -115,7 +127,7 @@ public class ClsMenuContributor implements IMenu{
                         String idTappa = in.nextLine();
                         HashMap<String, Object> filtro = new HashMap<>();
                         filtro.put("id", idTappa);
-                        if(controllaTappaDuplicataItinerario(itv, idTappa)){
+                        if(controllaTappaDuplicataItinerario(nuovo, idTappa)){
                             nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
                             break;
                         }
@@ -147,7 +159,7 @@ public class ClsMenuContributor implements IMenu{
                     else print("Non ordinato.");
                     println("Vuoi modificare l'ordinamento? Y/N");
                     String esito = in.nextLine();
-                    if(esito == "Y"){
+                    if(Objects.equals(esito, "Y")){
                         nuovo.setOrdinato(!nuovo.isOrdinato());
                         println("L'ordinamento è stato cambiato");
                     }
@@ -155,16 +167,16 @@ public class ClsMenuContributor implements IMenu{
                     break;
                 }
                 case "0": {
-                    user.modificaItinerario(nuovo, itv);
                     exit = true;
                     break;
                 }
             }
         }
+        return nuovo;
     }
     private boolean controllaTappaDuplicataItinerario(ClsItinerario itinerario, String idTappa){
         for(ClsNodo nodo:itinerario.getTappe()){
-            if(nodo.getId() == idTappa)
+            if(Objects.equals(nodo.getId(), idTappa))
                 return false;
         }
         return true;
@@ -174,13 +186,14 @@ public class ClsMenuContributor implements IMenu{
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", in.nextLine());
         ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
-        if(itinerario != null)
+        if(itinerario != null) {
             user.eliminaItinerario(itinerario.getId());
+            println("Richiesta di eliminazione effettuata.");
+        }
         else println("Errore");
     }
 
     private void sottoMenuContest(){
-        //TODO: inserire "Visualizza contest possessore"
         println("inserisci l'id del contest");
         boolean exit = false;
         while (!exit) {
@@ -190,20 +203,16 @@ public class ClsMenuContributor implements IMenu{
             println("0) Esci");
             print(">> ");
             switch (in.nextLine()) {
-                case "1" -> menuInserisciNodoContest();
-                case "2" -> menuInserisciFotoContest();
-                case "3" -> menuEliminaNodo();
-                case "0" -> exit = true;
+                case "1" :
+                case "2" :
+                case "3" : contest(); break;
+                case "0" : exit = true;
             }
         }
     }
 
-    private void menuInserisciNodoContest(){
-        //TODO: collegare nodo a contest
-    }
-
-    private void menuInserisciFotoContest(){
-        //TODO: collegare nodo a contest
+    private void contest(){
+        println("Questa è una funzionalità di Geospotter Desktop.");
     }
 
 }

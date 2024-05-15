@@ -2,11 +2,7 @@ package com.camerino.ids.core.data.contenuti;
 
 import java.util.ArrayList;
 
-/**
- * TODO: commentare
- */
 public class ClsItinerario {
-    //TODO: idCreatore invece di username(?)
     String usernameCreatore;
     ArrayList<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
@@ -58,16 +54,14 @@ public class ClsItinerario {
 
     public String visualizzaItinerario()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
-
-        dummy += "\n\nID: " + this.getId() + "\n";
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n";
+        dummy += "ID: " + this.getId() + "\n";
         dummy += "isOrdered: " + this.ordinato + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
-        dummy += "TAPPE: " + this.tappe + "\n" + this.visualizzaTappe(this.tappe);
+        dummy += "TAPPE: \n" + this.visualizzaTappe(this.tappe);
 
-
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
         return dummy;
     }
@@ -83,7 +77,7 @@ public class ClsItinerario {
 
         for(int i = 0; i < tappe.size(); i++)
         {
-            dummy += "\t" + i + ")" + tappe.get(i).getNome() + " - (" + tappe.get(i).getIdComune() + ")\n\n";
+            dummy += i + ") " + tappe.get(i).getNome() + " - (" + tappe.get(i).getIdComune() + ")\n";
         }
 
         return  dummy;
