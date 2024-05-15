@@ -21,6 +21,8 @@ public class ClsTurista implements ISignalable {
     transient IPersistenceModel<ClsRecensione> iperRecensioni;
     transient IPersistenceModel<ClsSegnalazione> iperSegnalazioni;
 
+    public ClsTurista(){}
+
     /**
      * Crea una segnalazione per il contenuto segnalato (Nodo, Foto, Recensione)
      * che verrà poi vista da un curatore.
@@ -98,6 +100,16 @@ public class ClsTurista implements ISignalable {
 
     public void setIperSegnalazioni(IPersistenceModel<ClsSegnalazione> iperSegnalazioni) {
         this.iperSegnalazioni = iperSegnalazioni;
+    }
+
+    public ArrayList<ClsItinerario> getAllItinerari() {
+        return this.pItinerari.get(null);
+    }
+
+    public ArrayList<ClsItinerario> getItinerarioById() {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idItinerario", pItinerari.get(filters));
+        return this.pItinerari.get(filters);
     }
 
     //endregion

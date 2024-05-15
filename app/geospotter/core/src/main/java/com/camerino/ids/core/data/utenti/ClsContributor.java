@@ -31,6 +31,18 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         pNodi = pNodo;
         this.pItinerari = pItinerari;
     }
+
+    public ClsContributor(ClsTuristaAutenticato usr){
+        this.credenziali = usr.credenziali;
+        this.id = usr.id;
+
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
+
 //region Getters and Setters
 
     public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
@@ -147,17 +159,15 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         req.setDatiItinerario(pItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
     }
-    //TODO: i nodi di chi?
+
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
     }
-
     public boolean deleteNodo(String idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
         return pNodi.delete(tmp);
     }
-
     //endregion
 }

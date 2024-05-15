@@ -16,10 +16,20 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore{
-    //TODO: Ha senso? é una relazione molti a molti dovremmo creare una classe
-    // che associa comuni e curatori. Se un utente arriva ad essere curatore in pi comuni
-    // creaiamo deve creare un'altro account?
-    // (modificato id da String a long)
+    public ClsCuratore(ClsAnimatore usr){
+
+        this.pRDC = usr.pRDC;
+        this.pRDCI = usr.pRDCI;
+
+        this.credenziali = usr.credenziali;
+        this.id = usr.id;
+
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
     String idComuneAssociato;
     public ClsCuratore(){
         this.punteggio = Integer.MAX_VALUE;

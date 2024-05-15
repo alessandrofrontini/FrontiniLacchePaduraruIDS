@@ -3,7 +3,6 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
-import com.camerino.ids.core.persistence.convertors.ConvPosizione;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -46,6 +45,15 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
+
+    public ClsTuristaAutenticato(){}
+    public ClsTuristaAutenticato(ClsTurista usr){
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
 
     //region Getters and Setters
     public String getId() {
