@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 
+import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -33,7 +34,7 @@ public class ClsMenuContributor implements IMenu{
             println("9) Modifica Itinerario");
             println("10) Elimina Itinerario");
             println("11) I miei contest");
-            if (user.getClass().equals(ClsContributor.class)) {
+            if ((user.getClass().equals(ClsContributor.class))||(user.getClass().equals(ClsContributorAutorizzato.class))) {
                 println("0) Esci");
                 print(">> ");
                 switch (in.nextLine()) {
