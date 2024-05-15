@@ -2,16 +2,14 @@ package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
+import com.camerino.ids.core.data.utenti.ClsTurista;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.condition.RequestConditionHolder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-//Le azioni del contributo base saranno mascherate con la creazione di un rdc
+//Le azioni del contributor base saranno mascherate con la creazione di un rdc
 @Service
 public class SNodi {
 
@@ -23,20 +21,23 @@ public class SNodi {
     }
 
     public ArrayList<ClsNodo> findNodoById(String idNodo) {
-        return null;
+        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        return user.getNodoById(idNodo);
     }
 
     public ArrayList<ClsNodo> findNodiByComune(String idComune) {
-        return null;
+        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        return user.getNodiByComune(idComune);
     }
 
     public ArrayList<ClsNodo> getAllNodi() {
-        ClsContributorAutorizzato cont = (ClsContributorAutorizzato) request.getServletContext().getAttribute("user");
-        return cont.getAllNodi();
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
+        return user.getAllNodi();
     }
 
     public boolean postNodo(ClsNodo nodo) {
-        return false;
+        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        return user.inserisciNodo(nodo);
     }
 
     public boolean deleteNodoById(String idNodo) {

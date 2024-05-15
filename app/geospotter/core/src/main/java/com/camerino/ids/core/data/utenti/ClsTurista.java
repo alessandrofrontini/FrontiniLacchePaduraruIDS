@@ -112,6 +112,12 @@ public class ClsTurista implements ISignalable {
         return this.pItinerari.get(filters);
     }
 
+    public ArrayList<ClsNodo> getNodoById(String idNodo) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idNodo", idNodo);
+        return this.pNodi.get(filters);
+    }
+
     //endregion
 
 }
