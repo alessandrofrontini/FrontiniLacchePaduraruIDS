@@ -1,4 +1,7 @@
+
 module com.camerino.ids.core {
+    requires jakarta.persistence;
+    requires org.hibernate.orm.core;
     exports com.camerino.ids.core.data.azioni;
     exports com.camerino.ids.core.data.contenuti;
     exports com.camerino.ids.core.data.punteggio;
