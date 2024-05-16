@@ -4,10 +4,13 @@ import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.fps.server.api.v1.persistence.crud.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.crypto.SecretKey;
 import java.io.IOException;
 
 /**
@@ -17,7 +20,8 @@ import java.io.IOException;
  */
 @Component
 @Order(1)
-public class FiltLogin implements Filter {
+public class FiltLogin extends OncePerRequestFilter {
+
     IperRecensioni iperRecensioni;
     IperNodi iperNodi;
     IperComuni iperComuni;
@@ -41,12 +45,9 @@ public class FiltLogin implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if(servletRequest.getServletContext().getAttribute("user") == null) {
-            HttpServletRequest request = (HttpServletRequest) servletRequest;
-            servletRequest.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
-        }
-        filterChain.doFilter(servletRequest, servletResponse);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        request.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
+        filterChain.doFilter(request, response);
     }
 
     private ClsTurista AuthClient(String authorization) {
@@ -75,66 +76,42 @@ public class FiltLogin implements Filter {
     }
 
     private ClsTuristaAutenticato CreaTuristaAut() {
-        ClsTuristaAutenticato user = new ClsTuristaAutenticato();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
-        user.setIperRecensioni(this.iperRecensioni);
+        ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
         return user;
     }
 
     private ClsContributor CreaContributor() {
-        ClsContributor user = new ClsContributor();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
+        ClsContributor user = new ClsContributor(CreaTuristaAut());
         user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
-        user.setIperRecensioni(this.iperRecensioni);
         return user;
     }
 
     private ClsContributorAutorizzato CreaContributorAut() {
-        ClsContributorAutorizzato user = new ClsContributorAutorizzato();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
-        user.setpRDC(this.iperRDC);
-        user.setpRDCI(this.iperRDCI);
-        user.setIperRecensioni(this.iperRecensioni);
-        return user;
-    }
-
-    private ClsCuratore CreaCuratore() {
-        ClsCuratore user = new ClsCuratore();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
-        user.setpRDC(this.iperRDC);
-        user.setpRDCI(this.iperRDCI);
-        user.setIperRecensioni(this.iperRecensioni);
+        ClsContributorAutorizzato user = new ClsContributorAutorizzato(CreaContributor());
         return user;
     }
 
     private ClsAnimatore CreaAnimatore() {
-        ClsAnimatore user = new ClsAnimatore();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
-        user.setpRDC(this.iperRDC);
-        user.setpRDCI(this.iperRDCI);
-        user.setIperRecensioni(this.iperRecensioni);
+        ClsAnimatore user = new ClsAnimatore(CreaContributorAut());
+        return user;
+    }
+
+    private ClsCuratore CreaCuratore() {
+        ClsCuratore user = new ClsCuratore(CreaAnimatore());
         return user;
     }
 
     private ClsGestoreDellaPiattaforma CreaGDP() {
-        ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
-        user.setpRDC(this.iperRDC);
-        user.setpRDCI(this.iperRDCI);
-        user.setIperRecensioni(this.iperRecensioni);
+        ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma(CreaCuratore());
         return user;
     }
 }
+    /*@Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        if(servletRequest.getServletContext().getAttribute("user") == null) {
+            HttpServletRequest request = (HttpServletRequest) servletRequest;
+            servletRequest.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
+        }
+        filterChain.doFilter(servletRequest, servletResponse);
+    }*/
