@@ -33,7 +33,7 @@ public class Controller_SezioneLogin
     public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
     //region esempio padu TODO
     public static ClsTurista UTENTE = new ClsTurista();
-    {
+    static {
         try {
             UTENTE.setpNodi(new IperNodi());
         } catch (MalformedURLException e) {
