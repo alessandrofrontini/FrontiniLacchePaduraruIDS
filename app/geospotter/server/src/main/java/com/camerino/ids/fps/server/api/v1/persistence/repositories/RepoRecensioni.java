@@ -15,6 +15,5 @@ public interface RepoRecensioni extends JpaRepository<ClsRecensione, String> {
 
     @Modifying
     @Query("update ClsRecensione r set r = ?1 WHERE r.id = ?2")
-    void updateComuneById(ClsComune object, String idComune);
     void updateRecensioneById(ClsRecensione object, String idRecensione);
 }

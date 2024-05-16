@@ -1,10 +1,15 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+
 /**
  * Contiene i dati richiesti per recuperare un immagine
  */
+@Entity
 public class ClsImmagine extends ClsInformazione
 {
+    @Column(name = "idContIm")
     String idCOntenutoAssociato;
     String URL;
 

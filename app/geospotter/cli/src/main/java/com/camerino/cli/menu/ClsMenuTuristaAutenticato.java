@@ -23,11 +23,11 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
     IPersistenceModel<ClsRecensione> pRecensioni;
     IPersistenceModel<ClsImmagine> pImmagini;
+
     public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
         this.user = turistaAutenticato;
     }
 
-public class ClsMenuTuristaAutenticato implements IMenu{
     @Override
     public void menu() {
         boolean exit = false;
@@ -96,7 +96,7 @@ public class ClsMenuTuristaAutenticato implements IMenu{
         }
     }
 
-    private void inserisciFotoContenuto(String idContenuto){
+    private void inserisciFotoContenuto(String idContenuto) {
         //input della foto
         //metodo CommonActions che richiede l'inserimento delle foto
         //metodo User che richiede l'inserimento delle foto
