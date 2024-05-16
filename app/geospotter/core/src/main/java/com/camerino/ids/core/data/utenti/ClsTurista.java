@@ -1,9 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -20,6 +17,7 @@ public class ClsTurista implements ISignalable {
     transient IPersistenceModel<ClsComune> mockComuni;
     transient IPersistenceModel<ClsRecensione> iperRecensioni;
     transient IPersistenceModel<ClsSegnalazione> iperSegnalazioni;
+    transient IPersistenceModel<ClsImmagine> pImmagini;
 
     public ClsTurista(){}
 

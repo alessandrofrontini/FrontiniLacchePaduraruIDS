@@ -1,4 +1,5 @@
 package com.camerino.ids.core.persistence;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 

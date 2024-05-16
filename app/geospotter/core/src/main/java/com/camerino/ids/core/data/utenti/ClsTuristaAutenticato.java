@@ -19,7 +19,6 @@ import java.util.HashMap;
  * modificare ed eliminare le proprie recensioni nella piattaforma.
  * E' il ruolo iniziale di un nuovo utente.
  */
-<<<<<<< HEAD
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
     /**
@@ -51,7 +50,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
-    public ClsTuristaAutenticato(){}
+    
     public ClsTuristaAutenticato(ClsTurista usr){
         this.pNodi = usr.pNodi;
         this.pItinerari = usr.pItinerari;
@@ -98,43 +97,40 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
 
-    public ClsTuristaAutenticato() {
-        super();
-
-    }
+    public ClsTuristaAutenticato() {}
 
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
-        super(segnalazioni);
-        pRecensioni = recensioni;
+//    TODO    super(segnalazioni);
+        iperRecensioni = recensioni;
         pImmagini = immagini;
     }
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
-        super(segnalazioni);
+        //  TODO     super(segnalazioni);
         credenziali = c;
         ruoloUtente = ruolo;
         punteggio = ruolo.getValue();
-        pRecensioni = recensioni;
+        iperRecensioni = recensioni;
         pImmagini = immagini;
     }
     //region Override ILoggedUserAction
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
         //TODO: merge con richiesta azione di conribuzione
-        return pRecensioni.insert(recensione);
+        return iperRecensioni.insert(recensione);
     }
     @Override
     public boolean eliminaRecensione(String id) {
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
-        return pRecensioni.delete(tmp);
+        return iperRecensioni.delete(tmp);
     }
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", old.getId());
-        return pRecensioni.update(tmp, newrec);
+        return iperRecensioni.update(tmp, newrec);
     }
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {

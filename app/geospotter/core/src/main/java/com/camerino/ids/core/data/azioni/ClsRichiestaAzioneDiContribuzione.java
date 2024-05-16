@@ -19,7 +19,9 @@ public class ClsRichiestaAzioneDiContribuzione {
     EAzioniDiContribuzione eAzioneDiContribuzione;
     @ManyToOne
     ClsNodo datiNodo;
+    @ManyToOne
     ClsImmagine datiImmagine;
+    String idContest;
 
     //region Getters and Setters
     public String getId() {

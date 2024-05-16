@@ -1,6 +1,8 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.fps.client.iper.IperNodi;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -27,8 +30,17 @@ public class Controller_SezioneLogin
     TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
 
     private String tmpJWT = "DJASIDJIQ09I4902JDIOAR8932";
-   public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
-
+    public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
+    //region esempio padu TODO
+    public static ClsTurista UTENTE = new ClsTurista();
+    {
+        try {
+            UTENTE.setpNodi(new IperNodi());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //endregion
     public void logga ()
     {
 

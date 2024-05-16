@@ -99,7 +99,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         nodi.add(nodo3);
         //endregion
 
-        setNodi(nodi);
+        setNodi(Controller_SezioneLogin.UTENTE.getAllNodi());
 
         //region setting up colonne tabella
         sezioneEliminazioneNodiTableColumnID.setCellValueFactory(

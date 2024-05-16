@@ -11,8 +11,8 @@ public class ClsSegnalazione {
 
     @Id
     String id;
-    long idContenuto;
-    long idCuratore;
+    String idContenuto;
+    String idCuratore;
     String descrizione;
 
     //region Getters and Setters
