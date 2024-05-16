@@ -19,21 +19,42 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
     }
     @Override
     public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(HashMap<String, Object> filters) {
-        return null;
+        if(filters==null)
+            return new ArrayList<>(repoRDCI.findAll());
+        if(filters.containsKey("idRDCI")) {
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add(filters.get("idRDCI").toString());
+            return new ArrayList<>(repoRDCI.findAllById(ids));
+        }
+        if(filters.containsKey("idUser"))
+            return new ArrayList<>(repoRDCI.getRDCIByUser(filters.get("idUser").toString()));
+
+        return new ArrayList<>(repoRDCI.findAll());
     }
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDCI"))
+            return false;
+        repoRDCI.updateRDCIById(object, filters.get("idRDCI").toString());
+        return true;
     }
 
     @Override
     public boolean insert(ClsRichiestaAzioneDiContribuzioneItinerario object) {
-        return false;
+        repoRDCI.save(object);
+        return true;
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDCI"))
+            return false;
+        repoRDCI.deleteById(filters.get("idRDCI").toString());
+        return true;
     }
 }

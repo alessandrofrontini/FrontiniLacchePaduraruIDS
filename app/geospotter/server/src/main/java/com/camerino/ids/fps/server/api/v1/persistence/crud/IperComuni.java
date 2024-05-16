@@ -21,21 +21,37 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
 
     @Override
     public ArrayList<ClsComune> get(HashMap<String, Object> filters) {
-        return null;
+       if(filters == null)
+           return new ArrayList<>(repoComuni.findAll());
+
+       if (filters.containsKey("idComune")) {
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add((String) filters.get("idComune"));
+            return new ArrayList<>(repoComuni.findAllById(ids));
+        }
+
+        return new ArrayList<>(repoComuni.findAll());
     }
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsComune object) {
-        return false;
+        repoComuni.updateComuneById(object, object.getId());
+        return true;
     }
 
     @Override
     public boolean insert(ClsComune object) {
-        return false;
+        repoComuni.save(object);
+        return true;
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        if(filters == null)
+            return false;
+        if (!filters.containsKey("idComune"))
+            return false;
+        repoComuni.deleteById(filters.get("idComune").toString());
+        return true;
     }
 }

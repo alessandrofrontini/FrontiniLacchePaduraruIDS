@@ -18,21 +18,42 @@ public class IperRDC implements IPersistenceModel<ClsRichiestaAzioneDiContribuzi
     }
     @Override
     public ArrayList<ClsRichiestaAzioneDiContribuzione> get(HashMap<String, Object> filters) {
-        return null;
+        if(filters==null)
+            return new ArrayList<>(repoRDC.findAll());
+        if(filters.containsKey("idRDC")) {
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add(filters.get("idRDC").toString());
+            return new ArrayList<>(repoRDC.findAllById(ids));
+        }
+        if(filters.containsKey("idUser"))
+            return new ArrayList<>(repoRDC.getRDCByUser(filters.get("idUser").toString()));
+
+        return new ArrayList<>(repoRDC.findAll());
     }
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDC"))
+            return false;
+        repoRDC.updateRDCById(object, filters.get("idRDC").toString());
+        return true;
     }
 
     @Override
     public boolean insert(ClsRichiestaAzioneDiContribuzione object) {
-        return false;
+        repoRDC.save(object);
+        return true;
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDC"))
+            return false;
+        repoRDC.deleteById(filters.get("idRDC").toString());
+        return true;
     }
 }

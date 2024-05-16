@@ -22,25 +22,41 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
 
     @Override
     public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
-        if(filters.containsKey("idNodo")){
-            System.out.println(filters.get("idNodo"));
+        if(filters == null)
+            return new ArrayList<>(repoRecensioni.findAll());
+        if(filters.containsKey("idNodo"))
             return new ArrayList<>(repoRecensioni.findRecensioniByNodo(filters.get("idNodo").toString()));
+        if(filters.containsKey("idRecensione")) {
+            ArrayList<String> ids = new ArrayList<>();
+            ids.add(filters.get("idRecensione").toString());
+            return new ArrayList<>(repoRecensioni.findAllById(ids));
         }
-        return new ArrayList<>();
+        return new ArrayList<>(repoRecensioni.findAll());
     }
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsRecensione object) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRecensione"))
+            return false;
+        repoRecensioni.updateRecensioneById(object, filters.get("idRecensione").toString());
+        return true;
     }
 
     @Override
     public boolean insert(ClsRecensione object) {
-        return false;
+        repoRecensioni.save(object);
+        return true;
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRecensione"))
+            return false;
+        repoRecensioni.deleteById(filters.get("idRecensione").toString());
+        return true;
     }
 }

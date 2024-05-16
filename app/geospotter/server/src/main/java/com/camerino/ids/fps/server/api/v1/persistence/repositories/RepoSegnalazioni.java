@@ -5,8 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RepoSegnalazioni extends JpaRepository<ClsSegnalazione, String> {
     @Query("select r from ClsSegnalazione r where r.idContenuto=?1")
-    int filterByContenuto(String idContenuto);
+    List<ClsSegnalazione> filterByContenuto(String idContenuto);
+
+    @Query("select r from ClsSegnalazione r where r.id=?1")
+    List<ClsSegnalazione> getSegnalazioneByUser(String idUtente);
 }

@@ -23,12 +23,15 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     @Override
     public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
         ArrayList<ClsNodo> lNodi = new ArrayList<>();
-        if(filters.containsKey("id")) {
-            Optional<ClsNodo> nodo = repoNodi.findById(filters.get("id").toString());
+        if(filters.containsKey("idNodo")) {
+            Optional<ClsNodo> nodo = repoNodi.findById(filters.get("idNodo").toString());
             if (nodo.isEmpty())
                 return lNodi;
             lNodi.add(nodo.get());
             return lNodi;
+        }
+        if(filters.containsKey("idComune")) {
+            return new ArrayList<>(repoNodi.findNodiByComune(filters.get("idComune").toString()));
         }
         lNodi = new ArrayList<>(repoNodi.findAll());
         return lNodi;
@@ -36,16 +39,19 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsNodo object) {
-        return false;
+        repoNodi.updateNodoById(object, object.getId());
+        return true;
     }
 
     @Override
     public boolean insert(ClsNodo object) {
-        return false;
+        repoNodi.save(object);
+        return true;
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        repoNodi.deleteById(filters.get("idNodo").toString());
+        return true;
     }
 }
