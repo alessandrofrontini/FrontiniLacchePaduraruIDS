@@ -6,4 +6,6 @@ module com.camerino.ids.fps.client {
     exports com.camerino.ids.fps.client;
 
     requires com.camerino.ids.core;
+    requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 }

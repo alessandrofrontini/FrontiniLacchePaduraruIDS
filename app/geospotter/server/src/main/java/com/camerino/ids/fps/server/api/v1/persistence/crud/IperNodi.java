@@ -22,6 +22,8 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
+        if(filters == null)
+            return new ArrayList<>(repoNodi.findAll());
         ArrayList<ClsNodo> lNodi = new ArrayList<>();
         if(filters.containsKey("idNodo")) {
             Optional<ClsNodo> nodo = repoNodi.findById(filters.get("idNodo").toString());
