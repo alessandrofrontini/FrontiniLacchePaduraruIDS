@@ -4,17 +4,14 @@ import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
-<<<<<<< HEAD
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.UuidGenerator;
-=======
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
->>>>>>> origin/merge-front-back
 
 /**
  * Ruolo associato ad un utente autenticato base.
@@ -25,9 +22,6 @@ import java.util.HashMap;
 <<<<<<< HEAD
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
-=======
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction, Cloneable{
->>>>>>> origin/merge-front-back
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -57,8 +51,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
-
-<<<<<<< HEAD
     public ClsTuristaAutenticato(){}
     public ClsTuristaAutenticato(ClsTurista usr){
         this.pNodi = usr.pNodi;
@@ -67,10 +59,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
     }
-=======
-    IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
->>>>>>> origin/merge-front-back
 
     //region Getters and Setters
     public String getId() {

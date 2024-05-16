@@ -7,18 +7,14 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
-<<<<<<< HEAD
-
 import java.util.ArrayList;
 import java.util.HashMap;
-=======
->>>>>>> origin/merge-front-back
 
 /**
  * Rappresenta un utente non autenticato.
  */
 public class ClsTurista implements ISignalable {
-<<<<<<< HEAD
+
     transient IPersistenceModel<ClsNodo> pNodi;
     transient IPersistenceModel<ClsItinerario> pItinerari;
     transient IPersistenceModel<ClsComune> mockComuni;
@@ -27,13 +23,6 @@ public class ClsTurista implements ISignalable {
 
     public ClsTurista(){}
 
-=======
-    IPersistenceModel<ClsSegnalazione> pSegnalazioni;
-    public ClsTurista(){
-
-    }
-    public ClsTurista(IPersistenceModel<ClsSegnalazione> segnalazioni){ pSegnalazioni = segnalazioni;}
->>>>>>> origin/merge-front-back
     /**
      * Crea una segnalazione per il contenuto segnalato (Nodo, Foto, Recensione, Itinerario)
      * che verrà poi vista da un curatore.
@@ -44,13 +33,7 @@ public class ClsTurista implements ISignalable {
 
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {
-<<<<<<< HEAD
         return iperSegnalazioni.insert(segnalazione);
-=======
-        //Contenuti segnalabili: Nodo, Foto, Itinerario, Recensione (fonte: vpp)
-        pSegnalazioni.insert(segnalazione);
-        return false;
->>>>>>> origin/merge-front-back
     }
 
 

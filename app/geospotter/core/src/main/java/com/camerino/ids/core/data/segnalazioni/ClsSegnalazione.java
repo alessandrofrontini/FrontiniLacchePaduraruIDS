@@ -8,16 +8,11 @@ import jakarta.persistence.Id;
  */
 @Entity
 public class ClsSegnalazione {
-<<<<<<< HEAD
+
     @Id
     String id;
     long idContenuto;
     long idCuratore;
-=======
-    String id;
-    String idContenuto;
-    String idCuratore;
->>>>>>> origin/merge-front-back
     String descrizione;
 
     //region Getters and Setters

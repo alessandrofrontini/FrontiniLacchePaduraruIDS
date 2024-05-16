@@ -10,17 +10,12 @@ import org.hibernate.annotations.UuidGenerator;
  */
 @Entity
 public class ClsRichiestaAzioneDiContribuzione {
-<<<<<<< HEAD
+
     @Id
     @UuidGenerator
     String id;
     String usernameCreatoreRichiesta;
-=======
-    String id;
-    String usernameCreatoreRichiesta;
 
-    String idContest;
->>>>>>> origin/merge-front-back
     EAzioniDiContribuzione eAzioneDiContribuzione;
     @ManyToOne
     ClsNodo datiNodo;
