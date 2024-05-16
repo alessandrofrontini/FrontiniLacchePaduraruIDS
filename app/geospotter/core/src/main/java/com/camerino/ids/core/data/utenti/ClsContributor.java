@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import jakarta.persistence.Entity;
 
 import java.util.HashMap;
 
@@ -18,11 +19,11 @@ import java.util.HashMap;
  * Si diventa contributor a 50+ punti.
  *
  */
+@Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
-    IPersistenceModel<ClsNodo> pNodi;
-    IPersistenceModel<ClsItinerario> pItinerari;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+
+    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
@@ -30,6 +31,18 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         pNodi = pNodo;
         this.pItinerari = pItinerari;
     }
+
+    public ClsContributor(ClsTuristaAutenticato usr){
+        this.credenziali = usr.credenziali;
+        this.id = usr.id;
+
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
+
 //region Getters and Setters
 
     public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
@@ -146,11 +159,15 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         req.setDatiItinerario(pItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
     }
-    //TODO: i nodi di chi?
+
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
     }
-
+    public boolean deleteNodo(String idNodo) {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("idNodo", idNodo);
+        return pNodi.delete(tmp);
+    }
     //endregion
 }

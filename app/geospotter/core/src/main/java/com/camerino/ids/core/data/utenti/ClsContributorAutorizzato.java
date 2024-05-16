@@ -1,8 +1,12 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -11,6 +15,23 @@ import java.util.HashMap;
  * Questo ruolo si ottiene avendo 600+ punti.
  */
 public class ClsContributorAutorizzato extends ClsContributor {
+
+    public ClsContributorAutorizzato(){}
+    public ClsContributorAutorizzato(ClsContributor usr){
+
+        this.pRDC = usr.pRDC;
+        this.pRDCI = usr.pRDCI;
+
+        this.credenziali = usr.credenziali;
+        this.id = usr.id;
+
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
+
     //region Override Contributor Autorizzato
 
     /**
@@ -55,13 +76,15 @@ public class ClsContributorAutorizzato extends ClsContributor {
      * Modifica direttamente un itinerario.
      *
      * @param itinerario Itinerario modificato
-     * @param id Id dell'itinerario da modificare
+     * @param idItinerario Id dell'itinerario da modificare
      * @return True se la modifica ha successo,
      *         False altrimenti.
      */
     @Override
-    public boolean modificaItinerario(ClsItinerario itinerario, String id) {
-        return false;
+    public boolean modificaItinerario(ClsItinerario itinerario, String idItinerario) {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("idItinerario", idItinerario);
+        return pItinerari.update(tmp, itinerario);
     }
 
     /**

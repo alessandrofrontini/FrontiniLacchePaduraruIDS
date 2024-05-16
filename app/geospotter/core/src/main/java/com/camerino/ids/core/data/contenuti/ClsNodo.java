@@ -1,14 +1,20 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import org.springframework.stereotype.Component;
+
 /**
  * TODO: commentare
  */
+@Entity
 public class ClsNodo extends ClsContenuto{
 
     //region Tipologia nodo (enumerazione)
     public enum eTologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
-
     private String idComune;
     private eTologiaNodo eTologiaNodo;
     private boolean aTempo;

@@ -1,12 +1,20 @@
 package com.camerino.ids.core.data.contenuti;
 
 import com.camerino.ids.core.data.utils.Posizione;
+import com.camerino.ids.core.persistence.convertors.ConvPosizione;
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Convert;
+import jakarta.persistence.Converter;
+import jakarta.persistence.Entity;
 
 /**
  * Contiene i dati di un Contenuto generico nella piattaforma
  */
+@Entity
 public class ClsContenuto extends ClsInformazione {
-    String id;
+
+    @Convert(converter = ConvPosizione.class)
     Posizione posizione;
     String nome;
     String descrizione;

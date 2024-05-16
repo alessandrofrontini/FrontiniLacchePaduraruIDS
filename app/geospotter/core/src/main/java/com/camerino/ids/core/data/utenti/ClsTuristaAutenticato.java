@@ -4,6 +4,11 @@ import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
@@ -14,7 +19,9 @@ import java.util.HashMap;
  * modificare ed eliminare le proprie recensioni nella piattaforma.
  * E' il ruolo iniziale di un nuovo utente.
  */
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction, Cloneable{
+<<<<<<< HEAD
+@Entity
+public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -37,14 +44,21 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             this.value = value;
         }
     }
-
+    @Id
+    @UuidGenerator
     String id;
+    @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali;
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
-
-    IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
+    public ClsTuristaAutenticato(){}
+    public ClsTuristaAutenticato(ClsTurista usr){
+        this.pNodi = usr.pNodi;
+        this.pItinerari = usr.pItinerari;
+        this.mockComuni = usr.mockComuni;
+        this.iperRecensioni = usr.iperRecensioni;
+        this.iperSegnalazioni = usr.iperSegnalazioni;
+    }
 
     //region Getters and Setters
     public String getId() {
@@ -78,6 +92,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setPunteggio(int punteggio) {
         this.punteggio = punteggio;
     }
+    public boolean pubblicaRecensione(ClsRecensione recensione) {
+        recensione.setUsernameCreatore(this.getCredenziali().getUsername());
+        return iperRecensioni.insert(recensione);
+    }
 //endregion
 
     public ClsTuristaAutenticato() {
@@ -99,13 +117,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         pImmagini = immagini;
     }
     //region Override ILoggedUserAction
-    //TODO
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
         //TODO: merge con richiesta azione di conribuzione
         return pRecensioni.insert(recensione);
     }
-//TODO
     @Override
     public boolean eliminaRecensione(String id) {
         //TODO: merge con richiesta azione di contribuzione
@@ -113,7 +129,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         tmp.put("id", id);
         return pRecensioni.delete(tmp);
     }
-//TODO
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
@@ -121,13 +136,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         tmp.put("id", old.getId());
         return pRecensioni.update(tmp, newrec);
     }
-//TODO
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
         //TODO: merge con richiesta azione di contribuzione
         return pImmagini.insert(immagine);
     }
-//TODO
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         //TODO: manca l'associazione recensione - utente che la scrive
