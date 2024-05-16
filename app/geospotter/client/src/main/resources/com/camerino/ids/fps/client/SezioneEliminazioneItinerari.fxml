@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneEliminazioneItinerari">
+    <children>
+    <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ELIMINAZIONE ITINERARI" wrappingWidth="354.15380859375">
+        <font>
+            <Font size="28.0" />
+        </font>
+    </Text>
+    <Text layoutX="13.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scegli ed elimina un itinerario, sotto troverai l'elenco degli itinerari di cui puoi richiedere l'eliminazione.&#10;Una volta visualizzata la lista, selezionane uno dove leggi &quot;Seleziona Qui&quot; e poi conferma per eliminarlo!&#10;" wrappingWidth="561.1367301940918" />
+    <TableView fx:id="sezioneEliminazioneItinerariTableView" layoutX="32.0" layoutY="146.0" prefHeight="245.0" prefWidth="535.0">
+         <columns>
+            <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnID" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnNome" prefWidth="115.20000457763672" text="NOME" />
+            <TableColumn fx:id="sezioneInserimentoItinerariTableColumnOrdinato" prefWidth="125.0" text="ORDINATO" />
+            <TableColumn fx:id="sezioneInserimentoItinerariTableColumnTappe" prefWidth="217.59999389648442" text="TAPPE" />
+         </columns>
+    </TableView>
+    <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" layoutX="128.0" layoutY="405.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
+    <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="144.0" text="Home" />
+    <Button fx:id="sezioneEliminazioneItinerariButtonConferma" layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#eliminaNodo" prefHeight="26.0" prefWidth="144.0" style="-fx-background-color: #15ad36; color: ;" text="Conferma" textFill="WHITE" />
+
+</children>
+</AnchorPane>

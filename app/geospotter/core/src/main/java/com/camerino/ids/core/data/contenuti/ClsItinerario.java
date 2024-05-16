@@ -65,16 +65,13 @@ public class ClsItinerario {
 
     public String visualizzaItinerario()
     {
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "isOrdered: " + this.ordinato + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
-        dummy += "TAPPE: " + this.tappe + "\n" + this.visualizzaTappe(this.tappe);
-
-
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "TAPPE: " + "\n" + this.visualizzaTappe(this.tappe);
 
         return dummy;
     }
@@ -90,7 +87,7 @@ public class ClsItinerario {
 
         for(int i = 0; i < tappe.size(); i++)
         {
-            dummy += "\t" + i + ")" + tappe.get(i).getNome() + " - (" + tappe.get(i).getIdComune() + ")\n\n";
+            dummy += "\t" + i + ")" + tappe.get(i).getNome() + "\n";
         }
 
         return  dummy;

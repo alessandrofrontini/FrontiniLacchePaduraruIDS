@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzioneRedirect">
+   <children>
+      <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sezione Contest Contribuzione (redirect)">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Button layoutX="14.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneContestContribuzionePartecipazione" style="-fx-background-color: #1e09bd;" text="Partecipa a nuovo Contest di Contribuzione" textFill="WHITE" />
+      <Text layoutX="14.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Per partecipare ad un nuovo contest di Contribuzione premi sul bottone &quot;Partecipa a nuovo Contest di Contribuzione&quot;.&#10;Visualizzerai tutti i contest di contribuzione alla quale puoi partecipare (aperti o su invito alla quale sei stato invitato). &#10;Grazie del tuo contributo." wrappingWidth="476.400030517578" />
+      <Text layoutX="14.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Per inserire nodi o immagini a contest di Contribuzione di cui sei partecipante premi sul bottone &quot;Contribuisci a Contest di Contribuzione Partecipante&quot;.&#10;Grazie del tuo contributo." wrappingWidth="476.40003051757805" />
+      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneContestContribuzionePartecipante" style="-fx-background-color: #1e09bd;" text="Contribuisci a Contest di Contribuzione Partecipante" textFill="WHITE" />
+      <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+   </children>
+</AnchorPane>

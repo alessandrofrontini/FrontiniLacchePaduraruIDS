@@ -21,9 +21,16 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
+<<<<<<< HEAD
 
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+=======
+    IPersistenceModel<ClsNodo> pNodi;
+    IPersistenceModel<ClsItinerario> pItinerari;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+>>>>>>> origin/merge-front-back
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {

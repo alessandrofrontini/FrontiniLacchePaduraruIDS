@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneVisualizzazioneItinerari">
+    <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VISUALIZZAZIONE ITINERARI MAPPA" wrappingWidth="473.15380859375">
+        <font>
+            <Font size="28.0" />
+        </font>
+    </Text>
+    <Text layoutX="13.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ecco a te l'elenco di tutti gli itinerari di GeoSpotter.&#10;Rifatte ll'occhi che qua ce il mondo.&#10;" wrappingWidth="561.1367301940918" />
+    <TableView fx:id="sezioneEliminazioneItinerariTableView" layoutX="6.0" layoutY="117.0" prefHeight="304.0" prefWidth="590.0">
+        <columns>
+            <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnID" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnNome" prefWidth="115.20000457763672" text="NOME" />
+            <TableColumn fx:id="sezioneInserimentoItinerariTableColumnOrdinato" prefWidth="125.0" text="ORDINATO" />
+            <TableColumn fx:id="sezioneInserimentoItinerariTableColumnTappe" prefWidth="271.9999938964844" text="TAPPE" />
+        </columns>
+    </TableView>
+    <ComboBox fx:id="selezionaElementoSegnalazione" layoutX="133.0" layoutY="488.0" prefHeight="26.0" prefWidth="100.0" promptText="Seleziona" />
+    <Text layoutX="14.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segnalazione:">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Text>
+    <TextField fx:id="descrizioneTF" layoutX="239.0" layoutY="488.0" prefHeight="26.0" prefWidth="162.0" promptText="Descrizione Segnalazione" />
+    <Text layoutX="14.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizzazione:">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Text>
+    <ComboBox fx:id="selezionaElementoDettaglio" layoutX="133.0" layoutY="437.0" prefHeight="26.0" prefWidth="100.0" promptText="Seleziona" />
+    <Button layoutX="239.0" layoutY="437.0" mnemonicParsing="false" onMouseClicked="#visualizzaDettaglio" prefHeight="26.0" prefWidth="162.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+    <Button layoutX="411.0" layoutY="488.0" mnemonicParsing="false" onMouseClicked="#inserisciSegnalazione" prefHeight="26.0" prefWidth="162.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+    <Button layoutX="214.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazioneMappa" prefHeight="26.0" prefWidth="159.0" style="-fx-background-color: black;" text="Mappa" textFill="WHITE" />
+    <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="159.0" text="Home" />
+</AnchorPane>

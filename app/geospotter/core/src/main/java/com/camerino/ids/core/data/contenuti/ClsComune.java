@@ -47,17 +47,38 @@ public class ClsComune extends ClsContenuto
     public  String visualizzaComune()
     {
 
-        String dummy = "-<-<-<-<-<-<-< DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "\nUsernameCreatore: " + this.getUsernameCreatore() + "\n";
         dummy += "\nNome: " + this.getNome() + "\n";
         dummy += "\nDescrizione: " + this.getDescrizione() + "\n";
         dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY() + "\n";
-        dummy += "Superficie: \n" + this.getSuperficie() + "\n\n";
-        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO COMUNE -<-<-<-<-<-<-<"+this.getId()+ "-<-<-<-<-<-<-<\n\n";
+        dummy += "\nSuperficie: " + this.getSuperficie() + "\n";
+        dummy += "\nCuratori: " + visualizzaCuratoriComune();
 
         return dummy;
+    }
+
+    private String visualizzaCuratoriComune()
+    {
+
+        String tmp = "";
+
+        for(int i = 0; i<this.curatoriAssociati.length; i++)
+        {
+            if(i == curatoriAssociati.length -1)
+            {
+                tmp += this.curatoriAssociati[i].getCredenziali().getUsername();
+            }
+            else
+            {
+                tmp += this.curatoriAssociati[i].getCredenziali().getUsername() +", ";
+            }
+
+        }
+
+        return tmp;
     }
 
 }

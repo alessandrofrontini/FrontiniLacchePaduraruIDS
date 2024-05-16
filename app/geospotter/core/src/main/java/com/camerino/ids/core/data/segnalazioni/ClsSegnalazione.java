@@ -8,10 +8,16 @@ import jakarta.persistence.Id;
  */
 @Entity
 public class ClsSegnalazione {
+<<<<<<< HEAD
     @Id
     String id;
     long idContenuto;
     long idCuratore;
+=======
+    String id;
+    String idContenuto;
+    String idCuratore;
+>>>>>>> origin/merge-front-back
     String descrizione;
 
     //region Getters and Setters
@@ -24,19 +30,19 @@ public class ClsSegnalazione {
         this.id = id;
     }
 
-    public long getIdContenuto() {
+    public String getIdContenuto() {
         return idContenuto;
     }
 
-    public void setIdContenuto(long idContenuto) {
+    public void setIdContenuto(String idContenuto) {
         this.idContenuto = idContenuto;
     }
 
-    public long getIdCuratore() {
+    public String getIdCuratore() {
         return idCuratore;
     }
 
-    public void setIdCuratore(long idCuratore) {
+    public void setIdCuratore(String idCuratore) {
         this.idCuratore = idCuratore;
     }
 
@@ -48,5 +54,18 @@ public class ClsSegnalazione {
         this.descrizione = descrizione;
     }
 
+
     //endregion
+
+    public String visualizzaSegnalazione()
+    {
+        String dummy = "";
+
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "ID Contenuto: " + this.getIdContenuto() + "\n";
+        dummy += "ID Curatore: " + this.getIdCuratore() + "\n";
+        dummy += "Descrizione: " + this.getDescrizione() + "\n";
+
+        return dummy;
+    }
 }

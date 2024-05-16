@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ComboBox?>
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzioneValidazioneRichieste">
+    <children>
+        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VALIDAZIONE RICHIESTE (Contest)">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <Button layoutX="29.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+        <Button layoutX="370.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#rifiutaAzione" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: red;" text="X" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button layoutX="305.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#accettaAzione" prefHeight="21.0" prefWidth="54.0" style="-fx-background-color: #15ad34;" text="✔" textFill="WHITE" />
+        <TableView fx:id="elencoRichieste" layoutX="13.0" layoutY="116.0" prefHeight="293.0" prefWidth="582.0">
+            <columns>
+                <TableColumn fx:id="idColonna" prefWidth="78.20001411437988" text="ID" />
+                <TableColumn fx:id="idContestColonna" prefWidth="83.99999237060547" text="CONTEST " />
+                <TableColumn fx:id="azioneColonna" prefWidth="117.60000610351562" text="TIPO AZIONE" />
+                <TableColumn fx:id="tipoContenutoColonna" prefWidth="193.39996337890625" text="TIPO CONTENUTO" />
+                <TableColumn fx:id="idRichiedenteColonna" prefWidth="106.5999755859375" text="RICHIEDENTE" />
+            </columns>
+        </TableView>
+        <Text layoutX="13.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salve signor Animatore, questo è il suo trono, la sua poltrona di comando dove decide vita &#10;morte e miracoli su quello che i suoi sottoposti possono fare." />
+        <ComboBox fx:id="sceltaAzione" layoutX="114.0" layoutY="425.0" prefHeight="26.0" prefWidth="174.0" promptText="Seleziona qui" />
+        <Text layoutX="13.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Validazione:">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Text>
+        <Text layoutX="14.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizzazione:">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Text>
+        <ComboBox fx:id="selezionaElementoDettaglio" layoutX="139.0" layoutY="495.0" prefWidth="150.0" promptText="Seleziona qui" />
+        <Button layoutX="305.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#visualizzaDettaglio" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #15ad34;" text="Conferma" textFill="WHITE" />
+    </children>
+</AnchorPane>
