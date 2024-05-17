@@ -1,2 +1,2 @@
 1,Alefront,1,3.5,oggetto,desccambiata1
-2,Alefrontab,6,2.0,titolota,descta
+2,Alefrontab,6,3.0,titolota,desccambiata

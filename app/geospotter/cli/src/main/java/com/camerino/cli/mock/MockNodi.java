@@ -32,6 +32,10 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                 nodi.addAll(filterByIdComune(filters.get("idComune")));
                 return nodi;
             }
+            if (filters.containsKey("usernameCreatore")) {
+                nodi.addAll(filterByUsername(filters.get("usernameCreatore")));
+                return nodi;
+            }
             return this.nodi;
         }
         private List<ClsNodo> filterByIdComune(Object id)
@@ -47,6 +51,12 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                 return null;
             return tmp.get(0);
         }
+        private List<ClsNodo> filterByUsername(Object user)
+        {
+            List<ClsNodo> tmp =
+                    nodi.stream().filter(n->n.getUsernameCreatore().equals(user.toString())).toList();
+            return tmp;
+        }
 
         @Override
         public boolean update(HashMap<String, Object> filters, ClsNodo object) {
@@ -56,7 +66,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
 
         private boolean modificaNodo(String id, ClsNodo nodo){
-            ClsNodo tmp = getNodoById(nodo.getId());
+            ClsNodo tmp = getNodoById(id);
             int index = nodi.indexOf(tmp);
             if(index<0)
                 return false;

@@ -48,6 +48,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean modificaNodo(String id, ClsNodo nodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
+        nodo.setUsernameCreatore(this.getCredenziali().getUsername());
         return pNodi.update(tmp, nodo);
     }
 
@@ -73,7 +74,8 @@ public class ClsContributorAutorizzato extends ClsContributor {
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, ClsItinerario itinerariovecchio) {
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
+        tmp.put("id", itinerariovecchio.getId());
+        itinerario.setUsernameCreatore(this.getCredenziali().getUsername());
         return pItinerari.update(tmp, itinerario);
     }
 

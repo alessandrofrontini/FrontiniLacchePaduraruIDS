@@ -26,7 +26,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
             return r;
         }
         if(filters.containsKey("usernameCreatore")){
-            r.add(getRecensioneByUsername(filters.get("usernameCreatore").toString()));
+            r.addAll(getRecensioneByUsername((String) filters.get("usernameCreatore")));
             return r;
         }
         return this.recensioni;
@@ -38,11 +38,11 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
             return null;
         return tmp.get(0);
     }
-    private ClsRecensione getRecensioneByUsername(String username){
+    private List<ClsRecensione> getRecensioneByUsername(String username){
         List<ClsRecensione> tmp =  recensioni.stream().filter(n->n.getUsernameCreatore().equals(username)).toList();
         if(tmp.isEmpty())
             return null;
-        return tmp.get(0);
+        return tmp;
     }
     @Override
     public boolean update(HashMap<String, Object> filters, ClsRecensione object) {

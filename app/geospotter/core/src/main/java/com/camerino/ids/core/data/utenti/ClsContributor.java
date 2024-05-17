@@ -128,7 +128,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public ArrayList<ClsNodo> visualizzaNodiPosessore() {
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("idUtente", this.id);
+        tmp.put("usernameCreatore", this.credenziali.getUsername());
         return pNodi.get(tmp);
     }
     public ArrayList<ClsItinerario> visualizzaItinerariPossessore(){

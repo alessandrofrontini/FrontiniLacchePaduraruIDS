@@ -160,7 +160,7 @@ public class ClsMenuContributor implements IMenu{
                     else print("Non ordinato.");
                     println("Vuoi modificare l'ordinamento? Y/N");
                     String esito = in.nextLine();
-                    if(Objects.equals(esito, "Y")){
+                    if(Objects.equals(esito, "Y")||(Objects.equals(esito, "y"))){
                         nuovo.setOrdinato(!nuovo.isOrdinato());
                         println("L'ordinamento è stato cambiato");
                     }

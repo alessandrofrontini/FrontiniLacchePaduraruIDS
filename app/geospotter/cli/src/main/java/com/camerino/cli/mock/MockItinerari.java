@@ -77,7 +77,9 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
     @Override
     public boolean insert(ClsItinerario object) {
-        return false;
+        idCounter++;
+        object.setId(""+idCounter);
+        return itinerari.add(object);
     }
 
     @Override
@@ -141,9 +143,10 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
                     daScrivere.append(n.getId() + ",");
                 }
                 daScrivere.deleteCharAt(daScrivere.length()-1);
-                output.write(String.valueOf(daScrivere));
-                output.close();
+                daScrivere.append("\r\n");
             }
+            output.write(String.valueOf(daScrivere));
+            output.close();
         } catch (Exception e){
             e.printStackTrace();
         }

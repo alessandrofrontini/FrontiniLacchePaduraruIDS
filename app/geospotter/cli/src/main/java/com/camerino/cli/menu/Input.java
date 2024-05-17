@@ -67,6 +67,7 @@ public class Input
     public static ClsNodo modificaNodo(ClsNodo vecchio) {
         ClsNodo nodo = new ClsNodo();
         Posizione pos = vecchio.getPosizione();
+        nodo.setId(vecchio.getId());
         Posizione newpos = new Posizione();
             print(String.format("Inserisci nome (old: %s): ", vecchio.getNome()));
             nodo.setNome(in.nextLine());
