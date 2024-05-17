@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
 
@@ -26,6 +28,9 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
             tmp.add(findById((String) filters.get("id")));
             return tmp;
         }
+        if(findLibere() != null)
+            tmp.addAll(findLibere());
+        else return null;
         return rcdi;
     }
 
@@ -67,6 +72,13 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
             return null;
         return tmp.get(0);
     }
+    private List<ClsRichiestaAzioneDiContribuzioneItinerario> findLibere() {
+        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
+                rcdi.stream().filter(n-> Objects.equals(n.getUsernameCuratore(), "null")).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp;
+    }
     public void scriviRCDItinerari(){
         try{
             FileWriter output = new FileWriter("CLIsave/rcdi.csv");
@@ -78,6 +90,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
                     case INSERISCI_ITINERARIO: daScrivere = scriviNuovoItinerario(r, daScrivere); break;
                     case MODIFICA_ITINERARIO: daScrivere.append(r.getDatiItinerarioVecchio().getId() + ","); daScrivere = scriviNuovoItinerario(r, daScrivere); break;
                 }
+                daScrivere.append(r.getUsernameCuratore() + "\r\n");
             }
             output.write(String.valueOf(daScrivere));
             output.close();
@@ -108,15 +121,16 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
                         switch (dati[0]) {
                             case "INSERISCI_ITINERARIO":
                                 case "ELIMINA_ITINERARIO":
-                                    r.setDatiItinerarioNuovo(leggiItinerarioNuovo(3, dati.length, dati)); break;
+                                    r.setDatiItinerarioNuovo(leggiItinerarioNuovo(3, dati.length-1, dati)); break;
                             case "MODIFICA_ITINERARIO": {
                                 HashMap<String, Object> filtro = new HashMap<>();
                                 filtro.put("id", dati[3]);
                                 r.setDatiItinerarioVecchio(MockLocator.getMockItinerari().get(filtro).get(0));
-                                r.setDatiItinerarioNuovo(leggiItinerarioNuovo(4, dati.length, dati));
+                                r.setDatiItinerarioNuovo(leggiItinerarioNuovo(4, dati.length-1, dati));;
                                 break;
                             }
                         }
+                        r.setUsernameCuratore(dati[dati.length-1]);
                         rcdi.add(r);
                     }
                 }
@@ -149,8 +163,6 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
         for(ClsNodo n:r.getDatiItinerarioNuovo().getTappe()){
             daScrivere.append(n.getId() + ",");
         }
-        daScrivere.deleteCharAt(daScrivere.length()-1);
-        daScrivere.append("\r\n");
         return daScrivere;
     }
 

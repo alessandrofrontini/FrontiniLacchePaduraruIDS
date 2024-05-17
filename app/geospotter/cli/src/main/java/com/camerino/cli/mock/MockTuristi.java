@@ -90,7 +90,11 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                     case "CONTRIBUTOR": daAggiungere = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR); break;
                     case "CONTRIBUTOR_AUTORIZZATO": daAggiungere = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO); break;
                     case "ANIMATORE": daAggiungere = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE); break;
-                    case "CURATORE": daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE); break;
+                    case "CURATORE": {
+                        HashMap<String, Object> filtro = new HashMap<>();
+                        filtro.put("id", dati[5]);
+                        daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), MockLocator.getMockComuni().get(filtro).get(0), MockLocator.getMockTuristi());
+                    } daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE); break;
                     case "GESTORE_DELLA_PIATTAFORMA": daAggiungere = new ClsGestoreDellaPiattaforma(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA); break;
                 }
                 daAggiungere.setId(dati[0]);
@@ -112,7 +116,12 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
             FileWriter output = new FileWriter("CLIsave/turisti.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsTuristaAutenticato c:turisti){
-                daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio() + "\r\n");
+                daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio());
+                if(c.getRuoloUtente().equals(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE)){
+                    ClsCuratore cur = (ClsCuratore) c;
+                    daScrivere.append("," + cur.getComuneAssociato().getId());
+                }
+                daScrivere.append("\r\n");
             }
             output.write(String.valueOf(daScrivere));
             output.close();
@@ -120,41 +129,4 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
             e.printStackTrace();
         }
     }
-//    private void creaTuristi() {
-//        ClsContributorAutorizzato ca = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari());
-//        Credenziali credenzialiCA = new Credenziali();
-//        credenzialiCA.setUsername("CA");
-//        credenzialiCA.setPassword("");
-//        ca.setCredenziali(credenzialiCA);
-//        ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-//        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-//        inserisciUtente(ca);
-//
-//        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi());
-//        Credenziali credenzialiGdP = new Credenziali();
-//        credenzialiGdP.setUsername("GDP");
-//        credenzialiGdP.setPassword("");
-//        gdp.setCredenziali(credenzialiGdP);
-//        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
-//        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-//        inserisciUtente(gdp);
-//
-//        ClsCuratore curatore = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi());
-//        Credenziali c = new Credenziali();
-//        c.setUsername("c");
-//        c.setPassword("c");
-//        curatore.setCredenziali(c);
-//        curatore.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-//        curatore.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
-//        inserisciUtente(curatore);
-//
-//        ClsTuristaAutenticato ta = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD());
-//        Credenziali c3 = new Credenziali();
-//        c3.setUsername("ta");
-//        c3.setPassword("");
-//        ta.setCredenziali(c3);
-//        ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-//        ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
-//        inserisciUtente(ta);
-//    }
 }

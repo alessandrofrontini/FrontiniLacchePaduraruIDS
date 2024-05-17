@@ -29,6 +29,13 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
             tmp.add(findById(filters.get("id").toString()));
             return tmp;
         }
+        if(filters.containsKey("usernameCuratore")) {
+            if(findLibere() != null){
+                tmp.addAll(findLibere());
+                return tmp;
+            }
+            else return null;
+        }
         return rcdi;
     }
 
@@ -69,6 +76,14 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
+    }
+
+    private List<ClsRichiestaAzioneDiContribuzione> findLibere() {
+        List<ClsRichiestaAzioneDiContribuzione> tmp =
+                rcdi.stream().filter(n-> Objects.equals(n.getUsernameCuratore(), "null")).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp;
     }
     public void leggiRCD(){
         try{
@@ -118,15 +133,16 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         n.setNome(dati[9]);
         n.setPosizione(new Posizione(Double.parseDouble(dati[10]), Double.parseDouble(dati[11])));
         r.setDatiNodo(n);
+        r.setUsernameCuratore(dati[12]);
         return r;
     }
     private ClsRichiestaAzioneDiContribuzione leggiRichiestaImmagine(String [] dati) throws Exception{
-        ClsRichiestaAzioneDiContribuzione rcd = leggiRichiestaNodo(arraySplit(dati, 12));
+        ClsRichiestaAzioneDiContribuzione rcd = leggiRichiestaNodo(arraySplit(dati, 13));
         ClsImmagine i = new ClsImmagine();
-        i.setId(dati[12]);
-        i.setIdCOntenutoAssociato(dati[13]);
-        i.setUsernameCreatore(dati[14]);
-        i.setURL(dati[15]);
+        i.setId(dati[13]);
+        i.setIdCOntenutoAssociato(dati[14]);
+        i.setUsernameCreatore(dati[15]);
+        i.setURL(dati[16]);
         rcd.setDatiImmagine(i);
         return rcd;
     }
@@ -146,7 +162,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 daScrivere.append(r.geteAzioneDiContribuzione() + "," + r.getUsernameCreatoreRichiesta() + "," + r.getId() + ",");
                 //dump del nodo se
                 SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX());
+                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX() + "," + r.getUsernameCuratore());
                 //dump dell'immagine se la richiesta è corretta
                 if(r.geteAzioneDiContribuzione().equals(EAzioniDiContribuzione.INSERISCI_IMMAGINE)) {
                     daScrivere.append("," + r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());

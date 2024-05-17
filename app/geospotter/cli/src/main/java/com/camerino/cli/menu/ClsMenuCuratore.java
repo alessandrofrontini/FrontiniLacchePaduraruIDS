@@ -10,53 +10,61 @@ import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuCuratore implements IMenu{
     private ClsCuratore user;
-    private ClsComune comune;
     Scanner in = new Scanner(System.in);
-    public ClsMenuCuratore(){}
+    public ClsMenuCuratore(ClsCuratore c){user = c;}
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsCuratore(MockLocator.getMockRecensioni(),MockLocator.getMockSegnalazioni(),MockLocator.getMockImmagini(),MockLocator.getMockRCD(),MockLocator.getMockRCDI(),MockLocator.getMockNodi(),MockLocator.getMockItinerari(),MockLocator.getMockContest(), comune, MockLocator.getMockTuristi());
-        user.setId("1");
-        user.setPunteggio(1000); //punteggio da non prendere seriamente
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("Curatore");
-        user.getCredenziali().setPassword("password");
-
+        ClsMenuAnimatore menuAnimatore = new ClsMenuAnimatore(user);
         while (!exit) {
-            println("1) Visualizza richieste");
-            println("2) Visualizza segnalazioni");
-            println("3) Uprank utente");
-            println("4) Downrank utente");
-            println("5) Reset Rank utente");
-            println("6) Registra nuovo utente");
-            println("7) Modifica utente");
-            println("8) Elimina utente");
-            println("9) Pubblica contenuto sui social");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()){
-                case "1": menuVisualizzaRichieste();
-                case "2": menuVisualizzaSegnalazioni();
-                case "3": menuUprank();
-                case "4": menuDownRank();
-                case "5": menuResetRank();
-                case "6": menuRegistraUtente();
-                case "7": menuModificaUtente();
-                case "8": menuEliminaUtente();
-                case "9": menuPubblicaSocial();
-                case "0": exit = true;
+            menuAnimatore.menu();
+            println("15) Visualizza richieste");
+            println("16) Visualizza segnalazioni");
+            println("17) Uprank utente");
+            println("18) Downrank utente");
+            println("19) Reset Rank utente");
+            println("20) Registra nuovo utente");
+            println("21) Modifica utente");
+            println("22) Elimina utente");
+            println("23) Pubblica contenuto sui social");
+            if (user.getClass().equals(ClsCuratore.class)) {
+                println("0) Esci");
+                print(">> ");
+                switch (in.nextLine()) {
+                    case "15":
+                        menuVisualizzaRichieste(); break;
+                    case "16":
+                        menuVisualizzaSegnalazioni(); break;
+                    case "17":
+                        menuUprank(); break;
+                    case "18":
+                        menuDownRank(); break;
+                    case "19":
+                        menuResetRank(); break;
+                    case "20":
+                        menuRegistraUtente(); break;
+                    case "21":
+                        menuModificaUtente(); break;
+                    case "22":
+                        menuEliminaUtente(); break;
+                    case "23":
+                        menuPubblicaSocial(); break;
+                    case "0":
+                        exit = true; break;
+                }
             }
+            else exit = true;
         }
 
     }
-    private void menuVisualizzaRichieste(){
+    private void menuVisualizzaRichieste(){ //dividere per richieste nodo e itinerario, e richiamare il menu solamente se getrichieste() non è vuoto
         for(ClsRichiestaAzioneDiContribuzione r:user.getRichieste()){
             println("richiesta n. " + r.getId() + ", tipologia: nodo");
         }
@@ -72,10 +80,10 @@ public class ClsMenuCuratore implements IMenu{
             HashMap<String, Object> filtro = new HashMap<>();
             filtro.put("id", idr);
             println("Richiesta " + idr);
+            String esito;
             if(MockLocator.getMockRCD().get(filtro).isEmpty()){
                 if(MockLocator.getMockRCDI().get(filtro).isEmpty()){
                     println("Errore");
-                    return;
                 }
                 else {
                     ClsRichiestaAzioneDiContribuzioneItinerario rit = MockLocator.getMockRCDI().get(filtro).get(0);
@@ -85,20 +93,16 @@ public class ClsMenuCuratore implements IMenu{
                         println(n.toString());
                     }
                     println("Validare? Y/N");
-                    if(in.nextLine() == "Y"){
-                        user.validaRichiestaItinerario(rit, true);
-                    }
-                    else user.validaRichiestaItinerario(rit, false);
+                    esito = in.nextLine();
+                    user.validaRichiestaItinerario(rit, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
                 }
             }
             else{
                 ClsRichiestaAzioneDiContribuzione r = MockLocator.getMockRCD().get(filtro).get(0);
                 println("Tipo richiesta -> " + r.geteAzioneDiContribuzione());
                 println("Validare? Y/N");
-                if(in.nextLine() == "Y"){
-                    user.validaRichiesta(r, true);
-                }
-                else user.validaRichiesta(r, false);
+                esito = in.nextLine();
+                user.validaRichiesta(r, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
             }
         }
     }

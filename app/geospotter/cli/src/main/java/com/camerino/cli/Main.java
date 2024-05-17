@@ -88,8 +88,8 @@ public class Main {
             case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato(turista).menu();
             case CONTRIBUTOR -> new ClsMenuContributor((ClsContributor) turista).menu();
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth((ClsContributorAutorizzato) turista).menu();
-            case ANIMATORE -> new ClsMenuAnimatore().menu();
-            case CURATORE -> new ClsMenuCuratore().menu();
+            case ANIMATORE -> new ClsMenuAnimatore((ClsAnimatore) turista).menu();
+            case CURATORE -> new ClsMenuCuratore((ClsCuratore) turista).menu();
             case GESTORE_DELLA_PIATTAFORMA -> new ClsMenuGestore((ClsGestoreDellaPiattaforma) turista).menu();
         }
     }

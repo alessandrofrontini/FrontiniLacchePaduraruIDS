@@ -26,29 +26,27 @@ public class ClsMenuAnimatore implements IMenu{
     private ClsAnimatore user;
     Scanner in = new Scanner(System.in);
 
-    public ClsMenuAnimatore(){}
+    public ClsMenuAnimatore(ClsAnimatore a){user = a;}
     @Override
     public void menu() {
         boolean exit = false;
-        user = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest());
-        user.setId("1");
-        user.setPunteggio(500); //punteggio da non prendere seriamente
-        user.setCredenziali(new Credenziali());
-        user.getCredenziali().setUsername("Animatore");
-        user.getCredenziali().setPassword("password");
-
-        while (!exit) {
-            println("1) Crea Contest aperto");
-            println("2) Crea Contest su invito");
-            println("3) Valida contenuti del contest");
-            println("0) Esci");
-            print(">> ");
-            switch (in.nextLine()) {
-                case "1" -> menuCreaContestAperto();
-                case "2" -> menuCreaContestChiuso();
-                case "3" -> menuValidaContenutiContest();
-                case "0" -> exit = true;
-            }
+        ClsMenuContributorAuth menuca = new ClsMenuContributorAuth(user);
+            while (!exit) {
+                menuca.menu();
+                println("12) Crea Contest aperto");
+                println("13) Crea Contest su invito");
+                println("14) Valida contenuti del contest");
+                if (user.getClass().equals(ClsAnimatore.class)) {
+                    println("0) Esci");
+                    print(">> ");
+                    switch (in.nextLine()) {
+                        case "12" -> menuCreaContestAperto();
+                        case "13" -> menuCreaContestChiuso();
+                        case "14" -> menuValidaContenutiContest();
+                        case "0" -> exit = true;
+                    }
+                }
+                else exit = true;
         }
     }
 

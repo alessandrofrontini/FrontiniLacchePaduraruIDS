@@ -7,6 +7,7 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     ClsItinerario datiItinerarioVecchio;
     ClsItinerario datiItinerarioNuovo;
     String usernameCreatore;
+    String usernameCuratore;
 
     public EAzioniDiContribuzione geteAzioniDiContribuzione() {
         return eAzioniDiContribuzione;
@@ -48,4 +49,6 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     public void setUsernameCreatore(String usernameCreatore) {
         this.usernameCreatore = usernameCreatore;
     }
+    public void setUsernameCuratore(String s){usernameCuratore = s;}
+    public String getUsernameCuratore(){return usernameCuratore;}
 }
