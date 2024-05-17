@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.IContributable;
+import com.camerino.ids.core.data.utenti.ILoggedUserAction;
 
 public class ClsCommonActions {
     public static boolean aggiungiNodo(IContributable user){
@@ -26,11 +27,7 @@ public class ClsCommonActions {
         return false;
     }
 
-    public static boolean aggiungiComune(ClsGestoreDellaPiattaforma gdp)
-    {
-        ClsComune comune = Input.inserisciComune(gdp);
-        if(comune!= null)
-            return gdp.inserisciComune(comune);
-        return false;
+    public static boolean eliminaRecensione(ILoggedUserAction user, String id){
+        return user.eliminaRecensione(id);
     }
 }

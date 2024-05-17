@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 @Entity
 public class ClsItinerario {
-    //TODO: idCreatore invece di username(?)
     String usernameCreatore;
     @OneToMany
     ArrayList<ClsNodo> tappe = new ArrayList<>();
@@ -65,13 +64,14 @@ public class ClsItinerario {
 
     public String visualizzaItinerario()
     {
-        String dummy = "";
-
-        dummy += "\n\nID: " + this.getId() + "\n";
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n";
+        dummy += "ID: " + this.getId() + "\n";
         dummy += "isOrdered: " + this.ordinato + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
-        dummy += "TAPPE: " + "\n" + this.visualizzaTappe(this.tappe);
+        dummy += "TAPPE: \n" + this.visualizzaTappe(this.tappe);
+
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO ITINERARIO "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
         return dummy;
     }
@@ -87,9 +87,14 @@ public class ClsItinerario {
 
         for(int i = 0; i < tappe.size(); i++)
         {
-            dummy += "\t" + i + ")" + tappe.get(i).getNome() + "\n";
+            dummy += i + ") " + tappe.get(i).getNome() + " - (" + tappe.get(i).getIdComune() + ")\n";
         }
 
         return  dummy;
     }
+
+    public void aggiungiTappa(ClsNodo nodo){
+        this.tappe.add(nodo);
+    }
+    public void rimuoviTappa(ClsNodo nodo){this.tappe.remove(nodo);}
 }

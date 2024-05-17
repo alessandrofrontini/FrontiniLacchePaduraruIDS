@@ -1,7 +1,13 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import jakarta.persistence.Entity;
 
 /**
@@ -26,6 +32,8 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+    }    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
+        super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest, null, utenti);
     }
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
@@ -68,12 +76,14 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      */
     @Override
     public boolean eliminaComune(String id){
-        return false;
+        HashMap<String, Object> idc = new HashMap<>();
+        idc.put("id", id);
+        return this.mockComuni.delete(idc);
     }
     //TODO
     @Override
-    public ClsComune[] visualizzaComuni(){
-        return null;
+    public ArrayList<ClsComune> visualizzaComuni(){
+        return mockComuni.get(null);        
     }
 //endregion
 }

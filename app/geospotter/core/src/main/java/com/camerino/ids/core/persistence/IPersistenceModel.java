@@ -38,5 +38,6 @@ public interface IPersistenceModel<E> {
      *         False altrimenti.
      */
     boolean delete(HashMap<String,Object> filters);
+
 }
 

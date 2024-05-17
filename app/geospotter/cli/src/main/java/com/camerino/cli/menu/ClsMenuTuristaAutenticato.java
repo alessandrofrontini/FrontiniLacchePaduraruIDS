@@ -1,5 +1,8 @@
 package com.camerino.cli.menu;
+import com.camerino.cli.actions.ClsCommonActions;
+import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.cli.mock.MockLocator;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
@@ -18,31 +21,24 @@ import static com.camerino.cli.actions.ClsCommonActions.*;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuTuristaAutenticato implements IMenu {
+
     private ClsTuristaAutenticato user;
     Scanner in = new Scanner(System.in);
     IPersistenceModel<ClsSegnalazione> pSegnalazioni;
     IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsImmagine> pImmagini;
-
-    public ClsMenuTuristaAutenticato(ClsTuristaAutenticato turistaAutenticato) {
-        this.user = turistaAutenticato;
+    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pImmagini;
+    public ClsMenuTuristaAutenticato(ClsTuristaAutenticato t){
+        user = t;
     }
-
-        @Override
-        public void menu() {
-            boolean exit = false;
-            user = new ClsTuristaAutenticato(pSegnalazioni, pRecensioni, pImmagini);
-            user.setId("1");
-            user.setPunteggio(100); //punteggio da non prendere seriamente
-            user.setCredenziali(new Credenziali());
-            user.getCredenziali().setUsername("TuristaAuth");
-            user.getCredenziali().setPassword("password");
-
-            while (!exit) {
-                println("1) Inserisci recensione");
-                println("2) Modifica Recensione");
-                println("3) Elimina Recensione");
-                println("4) Inserisci Foto");
+    @Override
+    public void menu() {
+        boolean exit = false;
+        while (!exit) {
+            println("1) Inserisci recensione");
+            println("2) Modifica Recensione");
+            println("3) Elimina Recensione");
+            println("4) Inserisci Foto");
+            if (user.getClass().equals(ClsTuristaAutenticato.class)) {
                 println("0) Esci");
                 print(">> ");
                 switch (in.nextLine()) {
@@ -53,52 +49,69 @@ public class ClsMenuTuristaAutenticato implements IMenu {
                     case "0" -> exit = true;
                 }
             }
+            else exit = true;
         }
+    }
 
-        private void menuInserisciRecensione() {
+    public void menuInserisciRecensione() {
+        ClsRecensione recensione = Input.inserisciRecensione();
+        if(recensione != null) {
+            recensione.setUsernameCreatore(user.getCredenziali().getUsername());
+            user.inserisciRecensione(recensione);
         }
+        else ClsConsoleLogger.println("Errore.");
+    }
 
-        private void menuModificaRecensione() {
-            //immagina che il turista autenticato trova l'elenco delle sue recensioni (visualizzaRecensioniPossessore)
-            //poi seleziona la recensione da modificare
+    public void menuModificaRecensione() {
+        if(!user.visualizzaRecensioniPosessore().isEmpty()) {
+            for (ClsRecensione r : user.visualizzaRecensioniPosessore()) {
+                println(r.visualizzaRecensione());
+            }
             print("Inserisci l'id della recensione da modificare: ");
             HashMap<String, Object> filtri = new HashMap<>();
             filtri.put("id", in.nextLine());
-            /*ClsRecensione old = MockLocator.getMockRecensioni.get(filtri).get(0); Metodo non presente
-             * if(old == null){
-             *    println("Recensione non trovata.");
-             *    return;
-             * }
-             * ClsRecensione new = Input.modificaRecensione(old);
-             * if(new == null) return;
-             * user.modificaRecensione(new.getId(), new);
-             *
-             * */
+            ClsRecensione old = MockLocator.getMockRecensioni().get(filtri).get(0);
+            if (old == null) {
+                println("Recensione non trovata.");
+                return;
+            }
+            ClsRecensione newrec = Input.modificaRecensione(old);
+            user.modificaRecensione(old, newrec);
         }
+        else println("Non hai ancora aggiunto recensioni");
+    }
 
-        private void menuEliminaRecensione() {
+    public void menuEliminaRecensione() {
+        if(!user.visualizzaRecensioniPosessore().isEmpty()) {
+            for (ClsRecensione r : user.visualizzaRecensioniPosessore()) {
+                println(r.visualizzaRecensione());
+            }
             print("inserisci l'id della recensione da eliminare: ");
-            //eliminaRecensione(user, in.nextLine()); -> aggiungere su CommonActions
+            ClsCommonActions.eliminaRecensione(user, in.nextLine());
             println("recensione eliminata.");
-        }
+        } else println("Non hai ancora aggiunto recensioni");
+    }
 
-        private void menuInserisciFoto() {
-            print("inserisci l'id del contenuto a cui vuoi aggiungere una foto:");
-            String contenuto = in.nextLine();
-            boolean exit = false;
-            while (!exit) {
-                println("1) Inserisci Foto");
-                println("0) Esci");
-                switch (in.nextLine()) {
-                    case "1" -> menuInserisciRecensione();
-                    case "2" -> exit = true;
-                }
+    public void menuInserisciFoto() {
+        print("inserisci l'id del contenuto a cui vuoi aggiungere una foto:");
+        String contenuto = in.nextLine();
+        boolean exit = false;
+        while (!exit) {
+            println("1) Inserisci Foto");
+            println("0) Esci");
+            switch (in.nextLine()) {
+                case "1" -> inserisciFotoContenuto(contenuto);
+                case "0" -> exit = true;
             }
         }
-
-        private void inserisciFotoContenuto(String idContenuto) {
-            //input della foto
-            //metodo CommonActions che richiede l'inserimento delle foto
-            //metodo User che richiede l'inserimento delle foto
-        }
     }
+
+    public void inserisciFotoContenuto(String idContenuto){
+        ClsImmagine immagine = new ClsImmagine();
+        immagine.setIdCOntenutoAssociato(idContenuto);
+        immagine.setUsernameCreatore(user.getCredenziali().getUsername());
+        println("Inserisci l'URL dell'immagine");
+        immagine.setURL(in.nextLine());
+        user.inserisciImmagine(immagine);
+    }
+}

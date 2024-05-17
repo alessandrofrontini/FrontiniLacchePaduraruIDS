@@ -3,11 +3,12 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import jakarta.persistence.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -25,11 +26,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
-    public ClsContributor() {super();}
-    public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
-        super();
-        pNodi = pNodo;
-        this.pItinerari = pItinerari;
+    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
+        super(s, r, pRCDNodo, nodi);
+        this.pRDC = pRCDNodo;
+        this.pRDCI = pRCDItinerari;
+        this.pItinerari = itinerari;
     }
 
     public ClsContributor(ClsTuristaAutenticato usr){
@@ -44,22 +45,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 
 //region Getters and Setters
-
-    public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
-        this.pNodi = pNodi;
-    }
-
-    public void setpItinerari(IPersistenceModel<ClsItinerario> pItinerari) {
-        this.pItinerari = pItinerari;
-    }
-
-    public void setpRDC(IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC) {
-        this.pRDC = pRDC;
-    }
-
-    public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
-        this.pRDCI = pRDCI;
-    }
 //endregion
     //Region Override IContributable
 
@@ -123,23 +108,16 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
         req.setUsernameCreatore(this.getCredenziali().getUsername());
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        req.setDatiItinerario(itinerario);
+        req.setDatiItinerarioNuovo(itinerario);
         return pRDCI.insert(req);
     }
-
-    /**
-     * Crea una richiesta di modifica di un itinerario di sua proprietà.
-     * @param itinerario Itinerario modificato
-     * @param id Id dell'itinerario da modificare
-     * @return True se la modifica o la creazione della rihiesta ha successo,
-     *         False altrimenti,
-     */
     @Override
-    public boolean modificaItinerario(ClsItinerario itinerario, String id) {
+    public boolean modificaItinerario(ClsItinerario itinerario, ClsItinerario itinerariovecchio) {
         ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
         req.setUsernameCreatore(this.getCredenziali().getUsername());
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
-        req.setDatiItinerario(itinerario);
+        req.setDatiItinerarioVecchio(itinerariovecchio);
+        req.setDatiItinerarioNuovo(itinerario);
         return pRDCI.insert(req);
     }
 
@@ -156,7 +134,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
-        req.setDatiItinerario(pItinerari.get(tmp).get(0));
+        req.setDatiItinerarioNuovo(pItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
     }
 
@@ -164,10 +142,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public boolean visualizzaNodiPosessore() {
         return false;
     }
-    public boolean deleteNodo(String idNodo) {
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("idNodo", idNodo);
-        return pNodi.delete(tmp);
-    }
+
     //endregion
 }

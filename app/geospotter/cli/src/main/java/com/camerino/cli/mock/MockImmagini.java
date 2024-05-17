@@ -1,10 +1,15 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 //TODO:implementare
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
@@ -15,17 +20,41 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     //region CRUD metodi
     @Override
     public ArrayList<ClsImmagine> get(HashMap<String, Object> filters) {
-        return this.immagini;
+        ArrayList<ClsImmagine> tmp = new ArrayList<>();
+        if(filters.containsKey("id")) {
+            tmp.add(findById(filters.get("id").toString()));
+            return tmp;
+        }
+        return immagini;
     }
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsImmagine object) {
+        if(filters.containsKey("id"))
+            return updateImmagini(filters.get("id").toString(), object);
         return false;
+    }
+    private boolean updateImmagini(String id, ClsImmagine object) {
+        ClsImmagine tmp = findById(id);
+        int index = immagini.indexOf(tmp);
+        if(index<0)
+            return false;
+        immagini.set(index, object);
+        return true;
+    }
+    private ClsImmagine findById(String id) {
+        List<ClsImmagine> tmp =
+                immagini.stream().filter(n->n.getId().equals(id)).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp.get(0);
     }
 
     @Override
     public boolean insert(ClsImmagine object) {
-        return false;
+        idCounter++;
+        object.setId(""+idCounter);
+        return immagini.add(object);
     }
 
     @Override
@@ -34,30 +63,42 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     }
     //endregion
 
-    private void generaImmagini()
-    {
-        ClsImmagine immagine1 = new ClsImmagine();
-        immagine1.setId("1");
-        immagine1.setURL("https://picsum.photos/200");
-        immagine1.setIdCOntenutoAssociato("1");//Comune
-        immagine1.setUsernameCreatore("");
+    public void leggiImmagini(){
+        try{
+            FileReader input = new FileReader("CLIsave/immagini.txt");
+            StringBuilder file = new StringBuilder();
+            int c;
+            while((c= input.read())!=-1) {
+                file.append((char) c);
+            }
+            String[] immagini = String.valueOf(file).split("\r\n");
+            for(String immagine:immagini){
+                String [] dati = immagine.split(",");
+                ClsImmagine daInserire = new ClsImmagine();
+                daInserire.setId(dati[0]);
+                daInserire.setIdCOntenutoAssociato(dati[1]);
+                daInserire.setUsernameCreatore(dati[2]);
+                daInserire.setURL(dati[3]);
+                insert(daInserire);
+            }
 
-        ClsImmagine immagine2 = new ClsImmagine();
-        immagine2.setId("2");
-        immagine2.setURL("https://picsum.photos/200");
-        immagine2.setIdCOntenutoAssociato("2");//Nodo
-        immagine2.setUsernameCreatore("");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
-        ClsImmagine immagine3 = new ClsImmagine();
-        immagine3.setId("3");
-        immagine3.setURL("https://picsum.photos/200");
-        immagine3.setIdCOntenutoAssociato("3");
-        immagine3.setUsernameCreatore("");
-
-        ClsImmagine immagine4 = new ClsImmagine();
-        immagine4.setId("4");
-        immagine4.setURL("https://picsum.photos/200");
-        immagine4.setIdCOntenutoAssociato(" ");
-        immagine4.setUsernameCreatore("");
+    public void scriviImmagini(){
+        try{
+            FileWriter output = new FileWriter("CLIsave/immagini.txt");
+            StringBuilder daScrivere = new StringBuilder();
+            for(ClsImmagine i:immagini){
+                daScrivere.append(i.getId() + "," + i.getIdCOntenutoAssociato() + "," + i.getUsernameCreatore() + "," + i.getURL() + "\r\n");
+            }
+            output.write(String.valueOf(daScrivere));
+            output.close();
+        } catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

@@ -16,6 +16,7 @@ public class ClsContestDiContribuzione {
     @Id
     @UuidGenerator
     String id;
+    String nome;
     String usernameCreatore;
     Date durata;
     @OneToOne

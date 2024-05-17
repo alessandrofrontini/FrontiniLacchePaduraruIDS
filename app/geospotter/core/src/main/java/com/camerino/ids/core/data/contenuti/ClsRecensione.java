@@ -49,19 +49,20 @@ public class ClsRecensione extends ClsInformazione{
     public void setContenuto(String contenuto) {
         this.contenuto = contenuto;
     }
+
     //endregion
 
     public String visualizzaRecensione()
     {
-        String dummy = "";
+        String dummy = "-<-<-<-<-<-<-< DETTAGLIO RECENSIONE "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "ID: " + this.getId() + "\n";
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
         dummy += "Contenuto: " + this.getContenuto()+ "\n";
         dummy += "Contenuto Associato: " + this.getIdContenutoAssociato()+ "\n";
 
+        dummy += "-<-<-<-<-<-<-< FINE DETTAGLIO RECENSIONE "+this.getId()+ "-<-<-<-<-<-<-<\n";
 
         return dummy;
     }

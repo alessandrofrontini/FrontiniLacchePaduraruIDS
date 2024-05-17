@@ -1,7 +1,11 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.punteggio.IPunteggioManager;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
@@ -11,6 +15,7 @@ import jakarta.persistence.Id;
 import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,6 +26,7 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -120,27 +126,38 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
     @Override
     public boolean eliminaRecensione(String id) {
-        //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
         return iperRecensioni.delete(tmp);
     }
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
-        //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", old.getId());
         return iperRecensioni.update(tmp, newrec);
     }
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
-        //TODO: merge con richiesta azione di contribuzione
-        return pImmagini.insert(immagine);
+        ClsRichiestaAzioneDiContribuzione richiesta = new ClsRichiestaAzioneDiContribuzione();
+        richiesta.setDatiImmagine(immagine);
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", immagine.getIdCOntenutoAssociato());
+        richiesta.setDatiNodo(pNodi.get(filtro).get(0));
+        richiesta.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        richiesta.setUsernameCreatoreRichiesta(this.credenziali.getUsername());
+        return pRichiestaImmagini.insert(richiesta);
+    }
+
+    @Override
+    public ArrayList<ClsRecensione> visualizzaRecensioniPosessore() {
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("usernameCreatore", this.getCredenziali().getUsername());
+        return pRecensioni.get(tmp);
     }
     @Override
-    public ClsRecensione[] visualizzaRecensioniPosessore() {
-        //TODO: manca l'associazione recensione - utente che la scrive
-        return null;
+    public boolean segnalaContenuto(ClsSegnalazione segnalazione){
+        segnalazione.setIdUtente(this.id);
+        return pSegnalazioni.insert(segnalazione);
     }
 //endregion
 

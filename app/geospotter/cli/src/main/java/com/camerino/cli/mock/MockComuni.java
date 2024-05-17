@@ -1,10 +1,13 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,16 +16,12 @@ import java.util.HashMap;
  */
 public class MockComuni implements IPersistenceModel<ClsComune>
 {
-    ArrayList<ClsComune> comuni = new ArrayList<ClsComune>();
+    ArrayList<ClsComune> comuni = new ArrayList<>();
     long id = 0;
 
     public MockComuni()
     {
-        this.generaComuni();
     }
-
-    //region CRUD metodi
-
 
     @Override
     public ArrayList<ClsComune> get(HashMap<String, Object> filters)
@@ -99,40 +98,57 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 //endregion
 
 
-
-    private void generaComuni()
+//SPLITTARE PER \r\n, ; e ,
+    public void leggiComuni()
     {
-        //ID numeri dispari
+        try {
+            FileReader input = new FileReader("CLIsave/comuni.txt");
+            StringBuilder comuniFile = new StringBuilder();
+            int c;
+            while((c= input.read())!=-1) {
+                comuniFile.append((char) c);
+            }
+            String comuniTotal = String.valueOf(comuniFile);
+            String [] comuniACapo = comuniTotal.split("\r\n");
+            for(String comune:comuniACapo){
+                ClsComune daAggiungere = new ClsComune();
+                String [] dati = comune.split(",");
+                daAggiungere.setId(dati[0]);
+                daAggiungere.setNome(dati[1]);
+                daAggiungere.setDescrizione(dati[2]);
+                Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
+                daAggiungere.setPosizione(p);
+                daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
+                daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
+                ArrayList<String> curatori = new ArrayList<>();
+                for(int i = 7; i< dati.length; i++){
+                    curatori.add(dati[i]);
+                }
+                daAggiungere.setCuratoriAssociati(curatori);
+                insert(daAggiungere);
+            }
+        } catch (Exception e){
+            ClsConsoleLogger.println("File non trovato.");
+        }
 
+    }
 
-        ClsComune comune1 = new ClsComune();
-        comune1.setId("1");
-        comune1.setCuratoriAssociati(null);
-        comune1.setNome("Lezzano");
-        comune1.setAbitanti(20000);
-        comune1.setSuperficie(49900.94);
-        comune1.setDescrizione("Comune#1 autogenerato per testing.");
-        comune1.setPosizione(new Posizione(50,20));
-        this.comuni.add(comune1);
+    public void scriviComuni(){
+        try {
+            FileWriter output = new FileWriter("CLIsave/comuni.txt");
+            StringBuilder daScrivere = new StringBuilder("");
+            for(ClsComune comune:comuni){
+                daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");
+                for(String curatore:comune.getCuratoriAssociati())
+                    daScrivere.append(curatore + ",");
+                daScrivere.deleteCharAt(daScrivere.length()-1);
+                daScrivere.append("\r\n");
+            }
+            output.write(String.valueOf(daScrivere));
+            output.close();
+        } catch(Exception e){
+            ClsConsoleLogger.println("Errore");
+        }
 
-        ClsComune comune2 = new ClsComune();
-        comune2.setId("3");
-        comune2.setCuratoriAssociati(null);
-        comune2.setNome("Rombazzo");
-        comune2.setAbitanti(65600);
-        comune2.setSuperficie(903400.94);
-        comune2.setDescrizione("Comune#2 autogenerato per testing.");
-        comune2.setPosizione(new Posizione(60,50));
-        this.comuni.add(comune2);
-
-        ClsComune comune3 = new ClsComune();
-        comune3.setId("5");
-        comune3.setCuratoriAssociati(null);
-        comune3.setNome("Pililla");
-        comune3.setAbitanti(54432);
-        comune3.setSuperficie(120344.94);
-        comune3.setDescrizione("Comune#3 autogenerato per testing.");
-        comune3.setPosizione(new Posizione(102,456));
-        this.comuni.add(comune3);
     }
 }

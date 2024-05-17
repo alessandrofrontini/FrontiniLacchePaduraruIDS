@@ -1,12 +1,17 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.loggers.ClsConsoleLogger;
+import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
@@ -18,9 +23,26 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
     //region CRUD metodi
         @Override
         public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
-    //        if(filters.containsKey("id"))
-    //            return new ArrayList<ClsNodo>().{getNodoById(filters.get("id").toString())};
+            ArrayList<ClsNodo> nodi = new ArrayList<>();
+            if(filters.containsKey("id")){
+                nodi.add(getNodoById(filters.get("id").toString()));
+                return nodi;
+            }
+            if (filters.containsKey("idComune")) {
+                nodi.addAll(filterByIdComune(filters.get("idComune")));
+                return nodi;
+            }
+            if (filters.containsKey("usernameCreatore")) {
+                nodi.addAll(filterByUsername(filters.get("usernameCreatore")));
+                return nodi;
+            }
             return this.nodi;
+        }
+        private List<ClsNodo> filterByIdComune(Object id)
+        {
+            List<ClsNodo> tmp =
+                    nodi.stream().filter(n->n.getIdComune().equals(id.toString())).toList();
+            return tmp;
         }
 
         private ClsNodo getNodoById(String id){
@@ -28,6 +50,12 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
             if(tmp.isEmpty())
                 return null;
             return tmp.get(0);
+        }
+        private List<ClsNodo> filterByUsername(Object user)
+        {
+            List<ClsNodo> tmp =
+                    nodi.stream().filter(n->n.getUsernameCreatore().equals(user.toString())).toList();
+            return tmp;
         }
 
         @Override
@@ -38,7 +66,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
 
         private boolean modificaNodo(String id, ClsNodo nodo){
-            ClsNodo tmp = getNodoById(nodo.getId());
+            ClsNodo tmp = getNodoById(id);
             int index = nodi.indexOf(tmp);
             if(index<0)
                 return false;
@@ -70,42 +98,48 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
         //endregion
 
+        public void leggiNodi(){
+            try{
+                FileReader input = new FileReader("CLIsave/nodi.txt");
+                StringBuilder nodiFile = new StringBuilder();
+                int c;
+                while((c= input.read())!=-1) {
+                    nodiFile.append((char) c);
+                }
+                String tuttiNodi = String.valueOf(nodiFile);
+                String [] nodiSingoli = tuttiNodi.split("\r\n");
+                for(String nodoSingolo:nodiSingoli) {
+                    ClsNodo daAggiungere = new ClsNodo();
+                    String[] datiNodo = nodoSingolo.split(",");
+                    daAggiungere.setId(datiNodo[0]);
+                    daAggiungere.setIdComune(datiNodo[1]);
+                    daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
+                        SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
+                        daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
+                        daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
+                        daAggiungere.setUsernameCreatore(datiNodo[5]);
+                        daAggiungere.setNome(datiNodo[6]);
+                        daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
+                        aggiungiNodo(daAggiungere);
+                    }
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
 
-    private void generaNodi()
-    {
-        //ID numeri pari
+        public void scriviNodi(){
+            try{
+                FileWriter output = new FileWriter("CLIsave/nodi.txt");
+                StringBuilder daScrivere = new StringBuilder("");
+                for(ClsNodo nodo:nodi){
+                    SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setId("2");
-        nodo1.setIdComune("1");
-        nodo1.setaTempo(false);
-        nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
-        nodo1.setDescrizione("Descrizione - Nodo 1");
-        nodo1.setNome("Negozio");
-        nodo1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nodo2 = new ClsNodo();
-        nodo2.setId("4");
-        nodo2.setIdComune("3");
-        nodo2.setaTempo(false);
-        nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
-        nodo2.setDescrizione("Descrizione - Nodo 2");
-        nodo2.setNome("Statua");
-        nodo2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
-
-        ClsNodo nodo3 = new ClsNodo();
-        nodo3.setId("6");
-        nodo3.setIdComune("5");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 3");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
-    }
+                    daScrivere.append(nodo.getId() + "," + nodo.getIdComune() + "," + nodo.isaTempo() + "," + d.format(nodo.getDataFine()) + "," + nodo.getTipologiaNodo() + "," + nodo.getUsernameCreatore() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\r\n");
+                }
+                output.write(String.valueOf(daScrivere));
+                output.close();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
 }

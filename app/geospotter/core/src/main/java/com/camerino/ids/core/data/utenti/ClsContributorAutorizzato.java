@@ -2,10 +2,17 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,7 +40,11 @@ public class ClsContributorAutorizzato extends ClsContributor {
     }
 
     //region Override Contributor Autorizzato
-
+    IPersistenceModel<ClsImmagine> pImmagini;
+    public ClsContributorAutorizzato(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari){
+        super(r, s, pRCDNodo, pRCDItinerari, nodi, itinerari);
+        pImmagini = i;
+    }
     /**
      * Inserisce direttamente il nodo creato.
      * @param nodo Il nodo da aggiungere
@@ -42,6 +53,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
+        nodo.setUsernameCreatore(this.credenziali.getUsername());
         return pNodi.insert(nodo);
     }
 
@@ -57,7 +69,14 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean modificaNodo(String id, ClsNodo nodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
+        nodo.setUsernameCreatore(this.getCredenziali().getUsername());
         return pNodi.update(tmp, nodo);
+    }
+
+    public boolean eliminaNodo(String id){
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pNodi.delete(tmp);
     }
 
     /**
@@ -69,6 +88,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
+        itinerario.setUsernameCreatore(this.credenziali.getUsername());
         return pItinerari.insert(itinerario);
     }
 
@@ -96,12 +116,9 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean eliminaItinerario(String id) {
-        return false;
-    }
-    //TODO
-    @Override
-    public boolean visualizzaNodiPosessore() {
-        return false;
+        HashMap<String, Object> tmp = new HashMap<>();
+        tmp.put("id", id);
+        return pItinerari.delete(tmp);
     }
 //endregion
 }

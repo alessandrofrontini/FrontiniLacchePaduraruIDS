@@ -7,6 +7,8 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
  * TODO: come dovrebbe essere usata?
  */
 public interface IPunteggioManager {
-    boolean guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, String idUtente);
+    void guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, String idUtente);
     boolean saliDiLivello(String idUtente);
+    void scendiDiLivello(String idUtente);
+    void resetLivello(String idUtente);
 }

@@ -1,6 +1,7 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -41,6 +42,8 @@ public class ClsRichiestaAzioneDiContribuzione {
     }
     public void setDatiImmagine(ClsImmagine i){this.datiImmagine = i;}
     public ClsImmagine getDatiImmagine(){return this.datiImmagine;}
+    public void setDatiImmagine(ClsImmagine i){this.datiImmagine = i;}
+    public ClsImmagine getDatiImmagine(){return this.datiImmagine;}
 
     public String getUsernameCreatoreRichiesta() {
         return usernameCreatoreRichiesta;
@@ -48,6 +51,13 @@ public class ClsRichiestaAzioneDiContribuzione {
 
     public void setUsernameCreatoreRichiesta(String usernameCreatoreRichiesta) {
         this.usernameCreatoreRichiesta = usernameCreatoreRichiesta;
+    }
+    public String getIdContest() {
+        return idContest;
+    }
+
+    public void setIdContest(String idContest) {
+        this.idContest = idContest;
     }
     public String getIdContest() {
         return idContest;

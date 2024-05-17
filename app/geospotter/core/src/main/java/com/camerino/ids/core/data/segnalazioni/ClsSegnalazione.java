@@ -49,7 +49,6 @@ public class ClsSegnalazione {
         this.descrizione = descrizione;
     }
 
-
     //endregion
 
     public String visualizzaSegnalazione()
