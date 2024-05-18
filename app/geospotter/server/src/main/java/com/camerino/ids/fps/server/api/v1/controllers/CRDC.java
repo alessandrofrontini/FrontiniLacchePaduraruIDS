@@ -23,7 +23,6 @@ public class CRDC {
     public ResponseEntity<ArrayList<ClsRichiestaAzioneDiContribuzione>> getRDC(
             @RequestParam(value = "idRDC", required = false) String idRDC
     ) {
-
         if(idRDC == null)
             return ResponseEntity.ok(sRDC.getAllRDC());
         return ResponseEntity.ok(sRDC.getRDCById(idRDC));

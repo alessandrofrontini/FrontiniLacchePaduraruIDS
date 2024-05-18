@@ -1,5 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,6 +23,10 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+
+
+
+
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -193,5 +199,17 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
         }
 
+    }
+
+    public ArrayList<ClsImmagine> getAllImmagini()
+    {
+        return pImmagini.get(null);
+    }
+    public ArrayList<ClsImmagine> getImmagineById(String idImmagine)
+    {
+        HashMap <String,Object> tmp = new HashMap<>();
+        tmp.put("test",idImmagine);
+
+        return pImmagini.get(tmp);
     }
 }
