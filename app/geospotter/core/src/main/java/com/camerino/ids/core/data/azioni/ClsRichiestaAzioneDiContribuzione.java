@@ -8,6 +8,7 @@ import org.hibernate.annotations.UuidGenerator;
 /**
  * TODO: commentare
  */
+@Deprecated
 @Entity
 public class ClsRichiestaAzioneDiContribuzione {
 

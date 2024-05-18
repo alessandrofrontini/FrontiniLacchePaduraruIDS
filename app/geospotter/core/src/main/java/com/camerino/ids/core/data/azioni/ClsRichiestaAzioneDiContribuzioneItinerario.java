@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
+@Deprecated
 @Entity
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
     @Id
