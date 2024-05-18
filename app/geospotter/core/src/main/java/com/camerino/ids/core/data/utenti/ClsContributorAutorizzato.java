@@ -56,7 +56,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
+        tmp.put("idNodo", id);
         return pNodi.update(tmp, nodo);
     }
 
@@ -102,6 +102,12 @@ public class ClsContributorAutorizzato extends ClsContributor {
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
+    }
+    @Override
+    public boolean eliminaNodo(String id) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idNodo", id);
+        return pNodi.delete(filters);
     }
 //endregion
 }

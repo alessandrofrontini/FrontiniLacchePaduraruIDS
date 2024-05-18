@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 @MappedSuperclass
@@ -17,7 +18,7 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     EStatusRDC stato = EStatusRDC.NUOVO;
 
     @ManyToOne
-    ClsContributor creatore;
+    ClsTuristaAutenticato creatore;
     @ManyToOne
     ClsCuratore responsabile;
     @ManyToOne
@@ -78,7 +79,7 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
         this.stato = stato;
     }
 
-    public ClsContributor getCreatore() {
+    public ClsTuristaAutenticato getCreatore() {
         return creatore;
     }
 

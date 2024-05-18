@@ -33,6 +33,7 @@ public class ClsCuratore extends ClsAnimatore{
     String idComuneAssociato;
     public ClsCuratore(){
         this.punteggio = Integer.MAX_VALUE;
+        this.ruoloUtente = eRUOLO_UTENTE.CURATORE;
     }
 
     public ArrayList<ClsSegnalazione> _getAllSegnalazioni() {
@@ -84,4 +85,6 @@ public class ClsCuratore extends ClsAnimatore{
     public boolean postRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci) {
         return pRDCI.insert(rdci);
     }
+
+
 }
