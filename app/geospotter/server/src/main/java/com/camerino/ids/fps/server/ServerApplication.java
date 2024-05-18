@@ -3,6 +3,7 @@ package com.camerino.ids.fps.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(
         scanBasePackages = {
@@ -17,6 +18,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan(basePackages = {
         "com.camerino.ids.fps.server.**",
         "com.camerino.ids.core.**"
+})
+@EnableJpaRepositories(basePackages = {
+        "com.camerino.ids.fps.server.**"
 })
 public class ServerApplication {
 

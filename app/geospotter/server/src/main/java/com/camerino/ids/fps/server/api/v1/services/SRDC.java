@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
+@Deprecated
 public class SRDC {
     HttpServletRequest request;
     @Autowired

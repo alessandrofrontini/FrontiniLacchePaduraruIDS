@@ -1,13 +1,12 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
-import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import jakarta.persistence.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -22,8 +21,12 @@ import java.util.HashMap;
 @Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
+    @Deprecated
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
+    @Deprecated
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    transient IPersistenceModel<ClsItinerario> iperRDCItinerari;
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
@@ -45,18 +48,26 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
 //region Getters and Setters
 
-    public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
-        this.pNodi = pNodi;
+    public IPersistenceModel<ClsRDCNodo> _getIperRDCNodi() {
+        return iperRDCNodi;
     }
 
-    public void setpItinerari(IPersistenceModel<ClsItinerario> pItinerari) {
-        this.pItinerari = pItinerari;
+    public void _setIperRDCNodi(IPersistenceModel<ClsRDCNodo> iperRDCNodi) {
+        this.iperRDCNodi = iperRDCNodi;
     }
 
+    public IPersistenceModel<ClsItinerario> _getIperRDCItinerari() {
+        return iperRDCItinerari;
+    }
+
+    public void _setIperRDCItinerari(IPersistenceModel<ClsItinerario> iperRDCItinerari) {
+        this.iperRDCItinerari = iperRDCItinerari;
+    }
+@Deprecated
     public void setpRDC(IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC) {
         this.pRDC = pRDC;
     }
-
+@Deprecated
     public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
         this.pRDCI = pRDCI;
     }
@@ -71,11 +82,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_NODO);
-        req.setDatiNodo(nodo);
-        return pRDC.insert(req);
+        ClsRDCNodo rdc = new ClsRDCNodo(null, nodo);
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
+        return iperRDCNodi.insert(rdc);
     }
 
     /**
@@ -87,11 +97,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.MODIFICA_NODO);
-        req.setDatiNodo(nodo);
-        return pRDC.insert(req);
+        ArrayList<ClsNodo> old = getNodoById(nodo.getId());
+        if(old.size() != 1)
+            return false;
+        ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), nodo);
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.MODIFICA_NODO);
+        return iperRDCNodi.insert(rdc);
     }
 
     /**
@@ -102,13 +114,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean eliminaNodo(String id) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.ELIMINA_NODO);
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
-        req.setDatiNodo(pNodi.get(tmp).get(0));
-        return pRDC.insert(req);
+        ArrayList<ClsNodo> old = getNodoById(id);
+        if(old.size() != 1)
+            return false;
+        ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), null);
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        return iperRDCNodi.insert(rdc);
     }
 
     /**

@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
-public class CRDC {
+public class CRDCN {
     SRDC sRDC;
-    public final static String mapping = BaseUrl.baseUrl+"/rdc";
+    public final static String mapping = BaseUrl.baseUrl+"/rdcn";
 
     @Autowired
-    public CRDC(SRDC sRDC) {
+    public CRDCN(SRDC sRDC) {
         this.sRDC = sRDC;
     }
 
