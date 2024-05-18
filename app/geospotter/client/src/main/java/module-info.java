@@ -4,6 +4,8 @@ module com.camerino.ids.fps.client {
 
     opens com.camerino.ids.fps.client to javafx.fxml;
     exports com.camerino.ids.fps.client;
+    exports com.camerino.ids.fps.client.visual;
+    opens com.camerino.ids.fps.client.visual to javafx.fxml;
 
     requires com.camerino.ids.core;
     requires java.net.http;
