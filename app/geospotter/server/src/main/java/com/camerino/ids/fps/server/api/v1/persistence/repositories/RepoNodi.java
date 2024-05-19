@@ -13,7 +13,7 @@ import java.util.List;
 public interface RepoNodi extends JpaRepository<ClsNodo, String> {
     @Query(value = "select n from ClsNodo n WHERE n.idComune=?1")
     List<ClsNodo> findNodiByComune(String idComune);
-    @Modifying
-    @Query("update ClsNodo n set n = ?1 where n.idComune= ?2")
+    @Modifying/*(flushAutomatically = true, clearAutomatically = true)*/
+    @Query("update ClsNodo n set n = ?1 where n.id= ?2")
     void updateNodoById(ClsNodo object, String idComune);
 }

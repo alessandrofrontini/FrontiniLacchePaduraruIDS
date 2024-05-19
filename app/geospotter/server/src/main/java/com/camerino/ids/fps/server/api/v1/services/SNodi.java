@@ -36,7 +36,7 @@ public class SNodi {
     }
 
     public boolean postNodo(ClsNodo nodo) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.inserisciNodo(nodo);
     }
 

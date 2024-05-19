@@ -61,7 +61,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
     {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
-        setNodi(Controller_SezioneLogin.UTENTE.getAllNodi());
+        setNodi(nodi);
 
         //region setting up colonne tabella
         sezioneEliminazioneNodiTableColumnID.setCellValueFactory(

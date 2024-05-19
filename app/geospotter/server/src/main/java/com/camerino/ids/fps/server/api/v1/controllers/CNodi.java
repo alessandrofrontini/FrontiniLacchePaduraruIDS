@@ -3,6 +3,8 @@ package com.camerino.ids.fps.server.api.v1.controllers;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
 import com.camerino.ids.fps.server.api.v1.services.SNodi;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.config.RepositoryConfigurationSource;
 import org.springframework.http.MediaType;
@@ -85,6 +87,12 @@ public class CNodi {
     public ResponseEntity<String> putNodi(
             @RequestBody ClsNodo nodo
     ){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            System.out.println(mapper.writeValueAsString(nodo));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         if(!sNodi.putNodo(nodo))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);

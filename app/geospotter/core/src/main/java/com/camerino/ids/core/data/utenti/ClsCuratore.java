@@ -2,6 +2,7 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
 
@@ -86,5 +87,10 @@ public class ClsCuratore extends ClsAnimatore{
         return pRDCI.insert(rdci);
     }
 
-
+    @Override
+    public boolean modificaNodo(String id, ClsNodo nodo) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idNodo", id);
+        return pNodi.update(filters, nodo);
+    }
 }

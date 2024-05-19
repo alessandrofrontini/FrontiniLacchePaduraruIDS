@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
@@ -75,42 +76,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
-        nodi = new ArrayList<ClsNodo>(); //TODO: Import from Spring
-
-        //region Creazione nodi dummy
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setId("2");
-        nodo1.setIdComune("1");
-        nodo1.setaTempo(true);
-        nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
-        nodo1.setDescrizione("Descrizione - Nodo 1");
-        nodo1.setNome("Negozio");
-        nodo1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nodo2 = new ClsNodo();
-        nodo2.setId("4");
-        nodo2.setIdComune("3");
-        nodo2.setaTempo(false);
-        nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
-        nodo2.setDescrizione("Descrizione - Nodo 2");
-        nodo2.setNome("Statua");
-        nodo2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
-
-
-        ClsNodo nodo3 = new ClsNodo();
-        nodo3.setId("6");
-        nodo3.setIdComune("5");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 3");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
+        nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
         //endregion
         setNodi(nodi);
 
@@ -158,6 +124,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null)
         {
             nuovoNodo.setId(IDDaModificare);
+            ((ClsContributor)Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoNodo.visualizzaNodo());

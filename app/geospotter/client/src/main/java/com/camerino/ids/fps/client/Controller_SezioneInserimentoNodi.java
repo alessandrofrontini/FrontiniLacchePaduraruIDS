@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import javafx.fxml.FXML;
@@ -84,6 +85,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                     }
                     else
                     {
+                        ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciNodo(nodo);
                         Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info Nodo");
                         alert.setContentText(nodo.visualizzaNodo());

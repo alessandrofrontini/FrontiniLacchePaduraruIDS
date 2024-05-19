@@ -3,6 +3,7 @@ package com.camerino.ids.fps.server.api.v1.persistence.crud;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +40,10 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
         return lNodi;
     }
 
+    @Transactional
     @Override
     public boolean update(HashMap<String, Object> filters, ClsNodo object) {
-        repoNodi.updateNodoById(object, object.getId());
+        repoNodi.save(object);
         return true;
     }
 
