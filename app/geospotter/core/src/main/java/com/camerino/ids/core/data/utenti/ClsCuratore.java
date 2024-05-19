@@ -121,18 +121,20 @@ public class ClsCuratore extends ClsAnimatore{
     }
     private void validaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        pItinerari.insert(richiesta.getDatiItinerarioVecchio());
+        richiesta.getDatiItinerarioNuovo().setUsernameCreatore(richiesta.getUsernameCreatore());
+        pItinerari.insert(richiesta.getDatiItinerarioNuovo());
     }
     private void validaModificaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
         HashMap<String, Object> id = new HashMap<>();
         id.put("id", richiesta.getDatiItinerarioVecchio().getId());
+        richiesta.getDatiItinerarioNuovo().setUsernameCreatore(richiesta.getUsernameCreatore());
         pItinerari.update(id, richiesta.getDatiItinerarioNuovo());
     }
     private void validaEliminaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
         richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
         HashMap<String, Object> id = new HashMap<>();
-        id.put("id", richiesta.getDatiItinerarioVecchio().getId());
+        id.put("id", richiesta.getDatiItinerarioNuovo().getId());
         pItinerari.delete(id);
     }
     public boolean validaSegnalazione(ClsSegnalazione segnalazione, boolean esito){

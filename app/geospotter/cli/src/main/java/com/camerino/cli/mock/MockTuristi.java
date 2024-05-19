@@ -23,16 +23,20 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     @Override
     public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters) {
        ArrayList<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
-        if (filters.containsKey("credenziali"))
-        {
-            tmp.add(login((Credenziali) filters.get("credenziali")));
-            return tmp;
-        }
-        if(filters.containsKey("ruoloUtente")) {
-            tmp.add(findByRuolo((ClsTuristaAutenticato.eRUOLO_UTENTE) filters.get("ruoloUtente")));
-            return tmp;
-        }
-
+       if(filters!=null) {
+           if (filters.containsKey("credenziali")) {
+               tmp.add(login((Credenziali) filters.get("credenziali")));
+               return tmp;
+           }
+           if (filters.containsKey("ruoloUtente")) {
+               tmp.addAll(findByRuolo(filters.get("ruoloUtente").toString()));
+               return tmp;
+           }
+           if (filters.containsKey("username")) {
+               tmp.addAll(findByUsername(filters.get("username").toString()));
+               return tmp;
+           }
+       }
         return this.turisti;
     }
 
@@ -43,9 +47,19 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         return  tmp.get(0);
     }
 
-    @Override
     public boolean update(HashMap<String, Object> filters, ClsTuristaAutenticato object) {
-        return false;//TODO
+        if(filters.containsKey("username"))
+            return modificaUtente(filters.get("username").toString(), object);
+        return false;
+    }
+
+    private boolean modificaUtente(String user, ClsTuristaAutenticato newuser){
+        ClsTuristaAutenticato tmp = findByUsername(user).get(0);
+        int index = turisti.indexOf(tmp);
+        if(index<0)
+            return false;
+        turisti.set(index, newuser);
+        return true;
     }
 
     @Override
@@ -61,16 +75,30 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;//TODO
+        if(filters.containsKey("username"))
+            return elmiminaUtente(filters.get("username").toString());
+
+        return false;
+    }
+
+    private boolean elmiminaUtente(String user){
+        return turisti.remove(findByUsername(user).get(0));
     }
     //endregion
 
-    private ClsTuristaAutenticato findByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+    private List<ClsTuristaAutenticato> findByRuolo(String ruolo) {
         List<ClsTuristaAutenticato> tmp =
-                turisti.stream().filter(n->n.getRuoloUtente().equals(ruolo)).toList();
+                turisti.stream().filter(n->n.getRuoloUtente().equals(ClsTuristaAutenticato.eRUOLO_UTENTE.valueOf(ruolo))).toList();
         if(tmp.isEmpty())
             return null;
-        return tmp.get(0);
+        return tmp;
+    }
+    private List<ClsTuristaAutenticato> findByUsername(String user) {
+        List<ClsTuristaAutenticato> tmp =
+                turisti.stream().filter(n->n.getCredenziali().getUsername().equals(user)).toList();
+        if(tmp.isEmpty())
+            return null;
+        return tmp;
     }
 
     public void leggiUtenti(){

@@ -9,6 +9,7 @@ import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
@@ -64,16 +65,28 @@ public class ClsMenuCuratore implements IMenu{
         }
 
     }
-    private void menuVisualizzaRichieste(){ //dividere per richieste nodo e itinerario, e richiamare il menu solamente se getrichieste() non è vuoto
-        for(ClsRichiestaAzioneDiContribuzione r:user.getRichieste()){
-            println("richiesta n. " + r.getId() + ", tipologia: nodo");
+    private void menuVisualizzaRichieste(){
+        println("1) richieste dei nodi\n2) richieste itinerari");
+        if(Objects.equals(in.nextLine(), "1")){
+            ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = user.getRichieste();
+            if(!richieste.isEmpty()) {
+                for (ClsRichiestaAzioneDiContribuzione r : richieste) {
+                    println("richiesta n. " + r.getId() + ", tipologia: nodo");
+                }
+                sottomenuRichieste(false);
+            }
         }
-        for(ClsRichiestaAzioneDiContribuzioneItinerario r: user.getRichiesteItinerari()){
-            println("richiesta n. " + r.getId() + ", tipologia: itinerario");
+        else{
+            ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> richieste = user.getRichiesteItinerari();
+            if(!richieste.isEmpty()) {
+                for (ClsRichiestaAzioneDiContribuzioneItinerario r : richieste) {
+                    println("richiesta n. " + r.getId() + ", tipologia: itinerario");
+                }
+                sottomenuRichieste(true);
+            }
         }
-        sottomenuRichieste();
     }
-    private void sottomenuRichieste() {
+    private void sottomenuRichieste(boolean itinerario) {
         println("seleziona l'ID della richiesta da validare");
         String idr = in.nextLine();
         if(idr != null) {
@@ -81,29 +94,25 @@ public class ClsMenuCuratore implements IMenu{
             filtro.put("id", idr);
             println("Richiesta " + idr);
             String esito;
-            if(MockLocator.getMockRCD().get(filtro).isEmpty()){
-                if(MockLocator.getMockRCDI().get(filtro).isEmpty()){
-                    println("Errore");
+            if(itinerario) {
+                ClsRichiestaAzioneDiContribuzioneItinerario rit = MockLocator.getMockRCDI().get(filtro).get(0);
+                println("Tipo richiesta -> " + rit.geteAzioniDiContribuzione());
+                println("Tappe itinerario:");
+                for (ClsNodo n : rit.getDatiItinerarioNuovo().getTappe()) {
+                    println(n.toString());
                 }
-                else {
-                    ClsRichiestaAzioneDiContribuzioneItinerario rit = MockLocator.getMockRCDI().get(filtro).get(0);
-                    println("Tipo richiesta -> " + rit.geteAzioniDiContribuzione());
-                    println("Tappe itinerario:");
-                    for(ClsNodo n: rit.getDatiItinerarioVecchio().getTappe()){
-                        println(n.toString());
-                    }
-                    println("Validare? Y/N");
-                    esito = in.nextLine();
-                    user.validaRichiestaItinerario(rit, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
-                }
+                println("Validare? Y/N");
+                esito = in.nextLine();
+                user.validaRichiestaItinerario(rit, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
             }
-            else{
+            else {
                 ClsRichiestaAzioneDiContribuzione r = MockLocator.getMockRCD().get(filtro).get(0);
                 println("Tipo richiesta -> " + r.geteAzioneDiContribuzione());
                 println("Validare? Y/N");
                 esito = in.nextLine();
                 user.validaRichiesta(r, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
             }
+
         }
     }
 
@@ -165,7 +174,7 @@ public class ClsMenuCuratore implements IMenu{
     private void menuEliminaUtente(){
         stampaUtenti();
         HashMap<String, Object> filtro = new HashMap<>();
-        filtro.put("id", in.nextLine());
+        filtro.put("username", in.nextLine());
         MockLocator.getMockTuristi().delete(filtro);
     }
     private void menuPubblicaSocial(){
@@ -173,7 +182,7 @@ public class ClsMenuCuratore implements IMenu{
     }
     private void stampaUtenti(){
        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
-           println("Utente " + t.getId());
+           println("Utente " + t.getCredenziali().getUsername());
        }
        print("Seleziona un utente");
     }

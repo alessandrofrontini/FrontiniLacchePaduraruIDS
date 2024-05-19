@@ -28,9 +28,13 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
             tmp.add(findById((String) filters.get("id")));
             return tmp;
         }
-        if(findLibere() != null)
-            tmp.addAll(findLibere());
-        else return null;
+        if(filters.containsKey("usernameCuratore")){
+            if(findLibere() != null){
+                tmp.addAll(findLibere());
+                return tmp;
+            }
+            else return null;
+        }
         return rcdi;
     }
 

@@ -253,19 +253,20 @@ public class Input
     }
 
     public static ClsTuristaAutenticato registraUtente(){
-        ClsTuristaAutenticato utente = null;
+        ClsTuristaAutenticato utente;
         println("Inserisci il ruolo:");
         println("0 > Turista Autenticato");
         println("1 > Contributor");
         println("2 > Contributor Autorizzato");
         println("3 > Animatore");
         switch(in.nextLine()){
-            case "0": utente = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD(), MockLocator.getMockNodi()); break;
-            case "1": utente = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
-            case "2": utente = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); break;
-            case "3": utente = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); break;
+            case "0": utente = new ClsTuristaAutenticato(MockLocator.getMockSegnalazioni(), MockLocator.getMockRecensioni(), MockLocator.getMockRCD(), MockLocator.getMockNodi()); utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO); break;
+            case "1": utente = new ClsContributor(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR); break;
+            case "2": utente = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO); break;
+            case "3": utente = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE); break;
             default: println("Errore"); return null;
         }
+        utente.setPunteggio(utente.getRuoloUtente().getValue());
         print("Inserisci l'username > ");
         Credenziali credenziali = new Credenziali();
         credenziali.setUsername(in.nextLine());
@@ -275,14 +276,14 @@ public class Input
         return utente;
     }
 
-    public static void modificaUtente(String idUtente){
+    public static void modificaUtente(String user){
         HashMap<String, Object> filtro = new HashMap<>();
-        filtro.put("id", idUtente);
+        filtro.put("username", user);
         ClsTuristaAutenticato utente = MockLocator.getMockTuristi().get(filtro).get(0);
-        println("utente " + idUtente + "\nRuolo: " + utente.getRuoloUtente() + "\nUsername: " + utente.getCredenziali().getUsername() + "\nPassword: " + utente.getCredenziali().getPassword() + "\n\nScegli un'azione:");
-        println("1 > Cambia username\n2 > Cambia password\n0 > Esci");
+        println("ruolo: " + utente.getRuoloUtente() + "\nUsername: " + utente.getCredenziali().getUsername() + "\nPassword: " + utente.getCredenziali().getPassword() + "\n\nScegli un'azione:");
         boolean exit = false;
         while(!exit) {
+            println("1 > Cambia username\n2 > Cambia password\n0 > Esci");
             switch (in.nextLine()) {
                 case "1":
                     print("Scegli un nuovo username: ");
@@ -291,16 +292,15 @@ public class Input
                     else println("Username già esistente."); break;
                 case "2":
                     print("Scegli una nuova password: ");
-                    utente.getCredenziali().setPassword(in.nextLine());
-                case "0": exit = true;
+                    utente.getCredenziali().setPassword(in.nextLine()); break;
+                case "0": exit = true; break;
             }
         }
-        MockLocator.getMockTuristi().update(filtro, utente);
     }
 
     private static boolean controllaUsernameDuplicato(String username){
         for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
-            if(t.getCredenziali().getUsername() == username)
+            if(Objects.equals(t.getCredenziali().getUsername(), username))
                 return false;
         }
         return true;
