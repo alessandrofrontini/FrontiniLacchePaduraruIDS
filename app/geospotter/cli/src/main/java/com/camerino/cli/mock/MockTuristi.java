@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
@@ -95,11 +96,12 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
     private List<ClsTuristaAutenticato> findByUsername(String user) {
         List<ClsTuristaAutenticato> tmp =
-                turisti.stream().filter(n->n.getCredenziali().getUsername().equals(user)).toList();
-        if(tmp.isEmpty())
+                turisti.stream().filter(n -> n.getCredenziali().getUsername().equals(user)).toList();
+        if (tmp.isEmpty())
             return null;
         return tmp;
     }
+
 
     public void leggiUtenti(){
         try{
@@ -119,10 +121,15 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                     case "CONTRIBUTOR_AUTORIZZATO": daAggiungere = new ClsContributorAutorizzato(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO); break;
                     case "ANIMATORE": daAggiungere = new ClsAnimatore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE); break;
                     case "CURATORE": {
-                        HashMap<String, Object> filtro = new HashMap<>();
-                        filtro.put("id", dati[5]);
-                        daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), MockLocator.getMockComuni().get(filtro).get(0), MockLocator.getMockTuristi());
-                    } daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE); break;
+                        if(!Objects.equals(dati[5], "null")) {
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", dati[5]);
+                            daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), MockLocator.getMockComuni().get(filtro).get(0), MockLocator.getMockTuristi());
+                        }
+                        else
+                            daAggiungere = new ClsCuratore(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi());
+                        daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE); break;
+                    }
                     case "GESTORE_DELLA_PIATTAFORMA": daAggiungere = new ClsGestoreDellaPiattaforma(MockLocator.getMockRecensioni(), MockLocator.getMockSegnalazioni(), MockLocator.getMockImmagini(), MockLocator.getMockRCD(), MockLocator.getMockRCDI(), MockLocator.getMockNodi(), MockLocator.getMockItinerari(), MockLocator.getMockContest(), null, MockLocator.getMockTuristi()); daAggiungere.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA); break;
                 }
                 daAggiungere.setId(dati[0]);
@@ -147,7 +154,9 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                 daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio());
                 if(c.getRuoloUtente().equals(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE)){
                     ClsCuratore cur = (ClsCuratore) c;
-                    daScrivere.append("," + cur.getComuneAssociato().getId());
+                    if(cur.getComuneAssociato()!=null)
+                        daScrivere.append("," + cur.getComuneAssociato().getId());
+                    else daScrivere.append(",null");
                 }
                 daScrivere.append("\r\n");
             }

@@ -49,7 +49,9 @@ public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHall
      */
     @Override
     public boolean modificaComune(ClsComune comune, String id){
-        return  false;
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", id);
+        return mockComuni.update(filtro, comune);
     }
 
     /**

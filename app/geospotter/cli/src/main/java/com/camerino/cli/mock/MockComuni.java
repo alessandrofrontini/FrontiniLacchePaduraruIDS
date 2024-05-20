@@ -9,6 +9,7 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -121,9 +122,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
                 daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
                 daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
                 ArrayList<String> curatori = new ArrayList<>();
-                for(int i = 7; i< dati.length; i++){
-                    curatori.add(dati[i]);
-                }
+                curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
                 daAggiungere.setCuratoriAssociati(curatori);
                 insert(daAggiungere);
             }

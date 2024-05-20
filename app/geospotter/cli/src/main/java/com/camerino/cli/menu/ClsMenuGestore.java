@@ -35,14 +35,11 @@ public class ClsMenuGestore implements IMenu {
             println("1) Aggiungi Comune");
             println("2) Modifica Comune");
             println("3) Elimina Comune");
-            println("4) Inserisci Itinerario");
-            println("5) Modifica Itinerario");
-            println("6) Modifica Itinerario");
             println("0) Esci");
             print(">> ");
             switch (in.nextLine()) {
-                case "1": menuAggiungiComune();
-                case "0": exit = true;
+                case "1": menuAggiungiComune(); break;
+                case "0": exit = true; break;
             }
         }
     }
@@ -50,26 +47,43 @@ public class ClsMenuGestore implements IMenu {
     private void menuAggiungiComune(){
         ClsComune comune = Input.inserisciComune();
         comune.setUsernameCreatore("ADMIN");
-        ArrayList<String> curatoriDisponibili = getCuratoriLiberi();
-        println("Curatori disponibili (id)");
+        ArrayList<ClsCuratore> curatoriDisponibili = curatoriLiberi(getCuratoriLiberi());
+        println("Curatori disponibili (username)");
         for(int i = 0; i<curatoriDisponibili.size(); i++){
-            println(i + "> Curatore " + curatoriDisponibili.get(i));
+            println(i + "> " + curatoriDisponibili.get(i).getCredenziali().getUsername());
         }
         print("Seleziona una voce dal menu > ");
         String idc = in.nextLine();
-        ArrayList<String> curatoriass = new ArrayList<>();
-        curatoriass.add(idc);
-        comune.setCuratoriAssociati(curatoriass);
-        MockLocator.getMockComuni().insert(comune);
+        if(comune.getCuratoriAssociati()==null){
+            ArrayList<String> curatori = new ArrayList<>();
+            curatori.add((curatoriDisponibili.get(Integer.parseInt(idc)).getCredenziali().getUsername()));
+            comune.setCuratoriAssociati(curatori);
+        }
+        else
+            comune.getCuratoriAssociati().add(curatoriDisponibili.get(Integer.parseInt(idc)).getCredenziali().getUsername());
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("username", curatoriDisponibili.get(Integer.parseInt(idc)).getCredenziali().getUsername());
+        ClsCuratore c = (ClsCuratore)(MockLocator.getMockTuristi().get(filtro).get(0));
+        c.setComuneAssociato(comune);
+        user.inserisciComune(comune);
     }
-    private ArrayList<String> getCuratoriLiberi(){
-        ArrayList<String> curatori = new ArrayList<>();
+    private ArrayList<ClsCuratore> getCuratoriLiberi(){
+        ArrayList<ClsCuratore> curatori = new ArrayList<>();
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("ruoloUtente", ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-        ArrayList<ClsTuristaAutenticato> a = MockLocator.getMockTuristi().get(filtro);
+        ArrayList<ClsTuristaAutenticato> a =  MockLocator.getMockTuristi().get(filtro);
         for(ClsTuristaAutenticato t:a){
-            curatori.add(t.getId());
+            curatori.add((ClsCuratore) t);
         }
         return curatori;
     }
+
+    private ArrayList<ClsCuratore> curatoriLiberi(ArrayList<ClsCuratore> cur){
+        for(ClsCuratore c:cur){
+            if(c.getComuneAssociato() != null)
+                cur.remove(c);
+        }
+        return cur;
+    }
+
 }
