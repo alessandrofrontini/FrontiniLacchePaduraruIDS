@@ -69,7 +69,7 @@ public class Controller_SezioneModificaComuni implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.Curatori = new ArrayList<ClsCuratore>();
-        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
+        this.comuni = new ArrayList<>();//Controller_SezioneLogin.UTENTE.getAllComuni();
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
@@ -211,7 +211,6 @@ public class Controller_SezioneModificaComuni implements Initializable
                 !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
                 !Objects.equals(u.getValueFromTextField(superficieTF), ""))
         {
-            comune.setId("");
             comune.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
             comune.setNome(u.getValueFromTextField(nomeTF));

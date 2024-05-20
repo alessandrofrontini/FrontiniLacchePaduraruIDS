@@ -37,7 +37,7 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
             return false;
         if(!filters.containsKey("idItinerario"))
             return false;
-        repoItinerari.updateItinerarioById(object, filters.get("idItinerario").toString());
+        repoItinerari.save(object);
         return true;
     }
 

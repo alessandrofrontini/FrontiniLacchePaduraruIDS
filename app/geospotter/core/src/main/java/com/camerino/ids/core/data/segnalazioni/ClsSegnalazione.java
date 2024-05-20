@@ -1,9 +1,10 @@
 package com.camerino.ids.core.data.segnalazioni;
 
 import com.camerino.ids.core.data.contenuti.ClsContenuto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 /**
  * TODO: commentare
@@ -12,7 +13,8 @@ import jakarta.persistence.OneToMany;
 public class ClsSegnalazione {
 
     @Id
-    String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id = 0L;
     String idContenuto;
     String idCuratore;
     String descrizione;
@@ -20,11 +22,11 @@ public class ClsSegnalazione {
     //region Getters and Setters
 
     public String getId() {
-        return id;
+        return Objects.toString(id);
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public String getIdContenuto() {

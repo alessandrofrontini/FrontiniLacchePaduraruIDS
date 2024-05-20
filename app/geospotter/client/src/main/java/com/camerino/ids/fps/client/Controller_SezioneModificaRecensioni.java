@@ -230,8 +230,6 @@ public class Controller_SezioneModificaRecensioni implements Initializable
 
         if(id != null && !id.isEmpty() && oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), ""))
         {
-
-            r.setId("");//??
             r.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             r.setIdContenutoAssociato(id);
             r.setOggetto(oggetto);

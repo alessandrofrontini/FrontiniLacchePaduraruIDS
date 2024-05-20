@@ -5,11 +5,12 @@ import com.camerino.ids.core.persistence.convertors.ConvPosizione;
 
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * Contiene i dati di un Contenuto generico nella piattaforma
  */
-@Entity
+@MappedSuperclass
 public class ClsContenuto extends ClsInformazione {
 
     @Convert(converter = ConvPosizione.class)

@@ -1,29 +1,23 @@
 package com.camerino.ids.fps.client.api;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.utenti.ClsTurista;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.camerino.ids.fps.client.api.BaseURL.BASE_URL;
 
-public class ApiNodi implements IApi<ClsNodo>{
-    static final URI endpoint = URI.create(BASE_URL+"/nodi");
+public class ApiItinerari implements IApi<ClsItinerario> {
+    static final URI endpoint = URI.create(BASE_URL+"/itinerari");
 
     @Override
-    public ArrayList<ClsNodo> Get(ClsTurista user, String query){
+    public ArrayList<ClsItinerario> Get(ClsTurista user, String query){
         if(query==null)
             query = "";
         HttpRequest request = HttpRequest.newBuilder()
@@ -40,7 +34,7 @@ public class ApiNodi implements IApi<ClsNodo>{
         return deserialize(response.body(), new TypeReference<>(){});
     }
     @Override
-    public boolean Post(ClsTurista user, ClsNodo nodo){
+    public boolean Post(ClsTurista user, ClsItinerario nodo){
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
@@ -51,7 +45,7 @@ public class ApiNodi implements IApi<ClsNodo>{
         return execute(request).statusCode() == 200;
     }
     @Override
-    public boolean Put(ClsTurista user, ClsNodo nodo){
+    public boolean Put(ClsTurista user, ClsItinerario nodo){
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")

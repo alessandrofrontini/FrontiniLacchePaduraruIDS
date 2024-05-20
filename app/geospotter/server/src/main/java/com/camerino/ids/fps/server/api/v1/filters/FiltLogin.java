@@ -28,6 +28,7 @@ public class FiltLogin extends OncePerRequestFilter {
     IperItinerari iperItinerari;
     IperRDC iperRDC;
     IperRDCI iperRDCI;
+    IperSegnalazioni iperSegnalazioni;
 
     @Autowired
     public FiltLogin(
@@ -36,12 +37,14 @@ public class FiltLogin extends OncePerRequestFilter {
             IperItinerari iperItinerari,
             IperRDC iperRDC,
             IperRDCI iperRDCI,
-            IperRecensioni iperRecensioni) {
+            IperRecensioni iperRecensioni,
+            IperSegnalazioni iperSegnalazioni) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
         this.iperItinerari = iperItinerari;
         this.iperRecensioni = iperRecensioni;
+        this.iperSegnalazioni = iperSegnalazioni;
     }
 
     @Override
@@ -72,6 +75,7 @@ public class FiltLogin extends OncePerRequestFilter {
         user.setMockComuni(this.iperComuni);
         user.setpItinerari(this.iperItinerari);
         user.setIperRecensioni(this.iperRecensioni);
+        user.setIperSegnalazioni(this.iperSegnalazioni);
         return user;
     }
 

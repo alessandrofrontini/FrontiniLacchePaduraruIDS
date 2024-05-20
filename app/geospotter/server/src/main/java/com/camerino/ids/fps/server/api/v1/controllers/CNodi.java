@@ -87,12 +87,6 @@ public class CNodi {
     public ResponseEntity<String> putNodi(
             @RequestBody ClsNodo nodo
     ){
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            System.out.println(mapper.writeValueAsString(nodo));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
         if(!sNodi.putNodo(nodo))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);

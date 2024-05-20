@@ -293,7 +293,6 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
                         Objects.equals(u.getValueFromCombobox(sceltaContest), null))
                 {
-                    nodo.setId(""); //??
                     nodo.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
@@ -454,7 +453,6 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
         {
-            i.setId("");
             i.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             i.setIdCOntenutoAssociato(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));

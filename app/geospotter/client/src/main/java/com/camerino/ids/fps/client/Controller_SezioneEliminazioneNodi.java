@@ -138,7 +138,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
         for(int i = 0; i<nodi.size();i++)
         {
-            if(nodi.get(i).getId() == id)
+            if(Objects.equals(nodi.get(i).getId(), id))
             {
                 flag = true;
             }

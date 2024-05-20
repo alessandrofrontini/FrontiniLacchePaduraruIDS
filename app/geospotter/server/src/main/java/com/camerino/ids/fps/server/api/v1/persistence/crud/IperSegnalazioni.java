@@ -19,6 +19,8 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
 
     @Override
     public ArrayList<ClsSegnalazione> get(HashMap<String, Object> filters) {
+        if(filters == null)
+            return new ArrayList<>(repoSegnalazioni.findAll());
         if(filters.containsKey("idContenuto"))
             return new ArrayList<>(repoSegnalazioni.filterByContenuto(filters.get("idContenuto").toString()));
         if(filters.containsKey("idUtente"))

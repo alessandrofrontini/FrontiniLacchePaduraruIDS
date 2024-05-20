@@ -20,7 +20,7 @@ public class CItinerari {
         this.sItinerari = sItinerari;
     }
 
-    @GetMapping
+    @GetMapping(mapping)
     public ResponseEntity<ArrayList<ClsItinerario>> getItinerari(
             @RequestParam(name = "idItinerario", required = false)  String idItinerario
     ) {
@@ -29,7 +29,7 @@ public class CItinerari {
         return ResponseEntity.ok(sItinerari.getItinerarioById(idItinerario));
     }
 
-    @PostMapping
+    @PostMapping(mapping)
     public ResponseEntity<String> postItinerari(
             @RequestBody ClsItinerario itinerario
     ){
@@ -38,7 +38,7 @@ public class CItinerari {
         return ResponseEntity.ok("ERROR");
     }
 
-    @PutMapping
+    @PutMapping(mapping)
     public ResponseEntity<String> putItinerari(
             @RequestBody ClsItinerario itinerario
     ){
@@ -47,7 +47,7 @@ public class CItinerari {
         return ResponseEntity.ok("ERROR");
     }
 
-    @DeleteMapping
+    @DeleteMapping(mapping)
     public ResponseEntity<String> deleteItinerari(
             @RequestParam(name = "idItinerario", required = false)  String idItinerario
     ){

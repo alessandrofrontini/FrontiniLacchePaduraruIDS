@@ -153,7 +153,6 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         }
         else
         {
-            r.setId("");
             r.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             r.setIdContenutoAssociato(id);
             r.setOggetto(oggetto);

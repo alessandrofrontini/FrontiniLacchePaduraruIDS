@@ -1,10 +1,9 @@
 package com.camerino.ids.core.data.contenuti;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * TODO: commentare
@@ -13,11 +12,12 @@ import java.util.ArrayList;
 public class ClsItinerario {
     //TODO: idCreatore invece di username(?)
     String usernameCreatore;
-    @OneToMany
-    ArrayList<ClsNodo> tappe = new ArrayList<>();
+    @ManyToMany
+    List<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
     @Id
-    String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id = 0L;
     //TODO: aggiungere titolo itinerario sulla documentazione
     String nome;
 
@@ -31,11 +31,11 @@ public class ClsItinerario {
     }
 
     public String getId() {
-        return id;
+        return id.toString();
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public String getUsernameCreatore() {
@@ -46,11 +46,11 @@ public class ClsItinerario {
         this.usernameCreatore = usernameCreatore;
     }
 
-    public ArrayList<ClsNodo> getTappe() {
+    public List<ClsNodo> getTappe() {
         return tappe;
     }
 
-    public void setTappe(ArrayList<ClsNodo> tappe) {
+    public void setTappe(List<ClsNodo> tappe) {
         this.tappe = tappe;
     }
 
@@ -81,7 +81,7 @@ public class ClsItinerario {
      * @param tappe elenco tappe
      * @return
      */
-    private String visualizzaTappe(ArrayList<ClsNodo> tappe)
+    private String visualizzaTappe(List<ClsNodo> tappe)
     {
         String dummy = "";
 

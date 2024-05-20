@@ -19,17 +19,17 @@ public class SSegnalazioni {
 
     public ArrayList<ClsSegnalazione> getAll() {
         //chi visualizza le segnalazione? Il curatore no?
-        ClsCuratore user = (ClsCuratore) request.getSession().getAttribute("user");
+        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
         return user._getAllSegnalazioni();
     }
 
     public boolean creaSegnalazione(ClsSegnalazione segnalazione) {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.segnalaContenuto(segnalazione);
     }
 
     public boolean deleteSgnalazione(String idSegnalazione) {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return false;
     }
 }

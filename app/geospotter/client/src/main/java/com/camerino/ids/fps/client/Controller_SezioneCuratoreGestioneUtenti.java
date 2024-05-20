@@ -190,7 +190,6 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             ta.setCredenziali(cta);
-                            ta.setId("");
                             ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
                             ta.setPunteggio(Integer.parseInt(punteggio));
 
@@ -209,7 +208,6 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             c.setCredenziali(cta);
-                            c.setId("");
                             c.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
                             c.setPunteggio(Integer.parseInt(punteggio));
 
@@ -228,7 +226,6 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             ca.setCredenziali(cta);
-                            ca.setId("");
                             ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
                             ca.setPunteggio(Integer.parseInt(punteggio));
 
@@ -247,7 +244,6 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             a.setCredenziali(cta);
-                            a.setId("");
                             a.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
                             a.setPunteggio(Integer.parseInt(punteggio));
 

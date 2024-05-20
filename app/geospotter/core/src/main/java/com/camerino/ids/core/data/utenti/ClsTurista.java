@@ -26,7 +26,7 @@ public class ClsTurista implements ISignalable {
      * che verrà poi vista da un curatore.
      * @param segnalazione Segnalazione fatta
      * @return True se la creazione della segnalazione ha successo,
-     *         False altrimenti.
+     *         False altrimenti.a
      */
 
     @Override
@@ -115,6 +115,10 @@ public class ClsTurista implements ISignalable {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
         return this.pNodi.get(filters);
+    }
+
+    public ArrayList<ClsSegnalazione> GetAllSegnalazioni() {
+        return this.iperSegnalazioni.get(null);
     }
 
     //endregion

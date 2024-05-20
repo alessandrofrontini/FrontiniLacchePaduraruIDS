@@ -15,15 +15,26 @@ import java.util.ArrayList;
 public class DemoNodi {
     @Bean
     public CommandLineRunner aggiungiNodi(RepoNodi repo) {
-        ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
-        ClsNodo nodo = new ClsNodo();
-        nodo.setNome("Centro Camerino");
-        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
-        nodo.setIdComune("Camerino");
-        nodo.setaTempo(true);
-        nodo.setDescrizione("Ciao");
-        nodo.setPosizione(new Posizione(12,23));
-        nodi.add(nodo);
+        ArrayList<ClsNodo> nodi = new ArrayList<>();
+
+        ClsNodo nodo1 = new ClsNodo();
+        nodo1.setNome("Centro Camerino");
+        nodo1.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+        nodo1.setIdComune("Camerino");
+        nodo1.setaTempo(true);
+        nodo1.setDescrizione("Ciao");
+        nodo1.setPosizione(new Posizione(12,23));
+        nodi.add(nodo1);
+
+        ClsNodo nodo2 = new ClsNodo();
+        nodo2.setNome("Porchettaro");
+        nodo2.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+        nodo2.setIdComune("Camerino");
+        nodo2.setaTempo(true);
+        nodo2.setDescrizione("Ciao");
+        nodo2.setPosizione(new Posizione(12,23));
+        nodi.add(nodo2);
+
         return args -> repo.saveAll(nodi);
     }
 }

@@ -20,27 +20,27 @@ public class SItinerari {
     }
 
     public ArrayList<ClsItinerario> getAllItinerari() {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getAllItinerari();
     }
 
     public ArrayList<ClsItinerario> getItinerarioById(String idItinerario) {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getItinerarioById();
     }
 
     public boolean postItinerario(ClsItinerario itinerario) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.inserisciItinerario(itinerario);
     }
 
     public boolean putItinerario(ClsItinerario itinerario) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.modificaItinerario(itinerario, itinerario.getId());
     }
 
     public boolean deleteItinerario(String idItinerario) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.eliminaItinerario(idItinerario);
     }
 }

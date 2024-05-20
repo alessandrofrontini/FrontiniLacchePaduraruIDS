@@ -258,8 +258,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
         if(data != null && u.getValueFromCombobox(this.sceltaComune) != null)
         {
-            contest.setId("");
-
             contest.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();

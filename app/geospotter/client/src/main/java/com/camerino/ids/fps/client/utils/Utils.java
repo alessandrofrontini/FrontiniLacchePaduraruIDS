@@ -13,7 +13,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Utils
@@ -177,7 +177,7 @@ public class Utils
 
     public boolean getValueFromCheckBox (CheckBox c) { return c.isSelected();}
 
-    private String convertTappe(ArrayList<ClsNodo> tappe)
+    private String convertTappe(List<ClsNodo> tappe)
     {
         String tmp = "";
 
@@ -203,7 +203,7 @@ public class Utils
                 Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
                 Objects.equals(nodo.getIdComune(), "") ||
                 Objects.equals(nodo.getDescrizione(), "") ||
-                Objects.equals(nodo.getId(), null) ||
+                //Objects.equals(nodo.getId(), null) ||
                 Objects.equals(nodo.getNome(), null) ||
                 Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
                 Objects.equals(nodo.getIdComune(), null) ||

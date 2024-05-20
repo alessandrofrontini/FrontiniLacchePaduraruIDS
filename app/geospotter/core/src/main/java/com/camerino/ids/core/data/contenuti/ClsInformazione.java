@@ -1,31 +1,30 @@
 package com.camerino.ids.core.data.contenuti;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import java.util.Objects;
 
 /**
  * TODO: commentare
  */
-@Entity
+@MappedSuperclass
 public class ClsInformazione
 {
     @Id
-    @UuidGenerator
-    String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id = 0L;
     String usernameCreatore;
 
     //region Getters and setters
 
     public String getId() {
-        return id;
+        return Objects.toString(id);
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public String getUsernameCreatore() {

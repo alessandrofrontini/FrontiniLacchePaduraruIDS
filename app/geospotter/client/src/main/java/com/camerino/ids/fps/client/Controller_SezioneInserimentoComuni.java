@@ -100,7 +100,6 @@ public class Controller_SezioneInserimentoComuni implements Initializable
                 !Objects.equals(u.getValueFromTextField(abitanti), null) &&
                 !Objects.equals(u.getValueFromTextField(superficie), ""))
         {
-            comune.setId("");
             comune.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataX)), Double.parseDouble(u.getValueFromTextField(coordinataY))));
             comune.setNome(u.getValueFromTextField(nome));

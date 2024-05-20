@@ -17,7 +17,6 @@ public class DemoComuni {
     public CommandLineRunner aggiungiComuni(RepoComuni repo) {
         ArrayList<ClsComune> comuni = new ArrayList<>();
         ClsComune comune = new ClsComune();
-        comune.setId("SE MI VEDI NON FUNZIONA");
         comune.setNome("Camerino");
         comune.setDescrizione("Comune di Camerino");
         comune.setPosizione(new Posizione(13,24));

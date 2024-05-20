@@ -151,7 +151,6 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         {
             String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
             ClsSegnalazione segnalazione = new ClsSegnalazione();
-            segnalazione.setId("");
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
@@ -162,6 +161,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
                     segnalazione.setIdCuratore("AGGIUNGERE"); //todo:aggiungere chiamata per ottenere curatore
                 }
             }
+            Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert (Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(segnalazione.visualizzaSegnalazione());

@@ -56,80 +56,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        itinerari = new ArrayList<ClsItinerario>();
-        ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
-
-        nodi = new ArrayList<ClsNodo>();
-
-        //region Creazione itinerari dummy
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setId("2");
-        nodo1.setIdComune("1");
-        nodo1.setaTempo(true);
-        nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
-        nodo1.setDescrizione("Descrizione - Nodo 1");
-        nodo1.setNome("Negozio");
-        nodo1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nodo2 = new ClsNodo();
-        nodo2.setId("4");
-        nodo2.setIdComune("3");
-        nodo2.setaTempo(false);
-        nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
-        nodo2.setDescrizione("Descrizione - Nodo 2");
-        nodo2.setNome("Statua");
-        nodo2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
-
-        ClsItinerario i1 = new ClsItinerario();
-        i1.setId("1");
-        i1.setUsernameCreatore("test");
-        i1.setOrdinato(true);
-        i1.setNome("Itinerario1");
-        i1.setTappe(nodi);
-        itinerari.add(i1);
-
-        ClsNodo nodo3 = new ClsNodo();
-        nodo3.setId("6");
-        nodo3.setIdComune("5");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 3");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
-
-        ClsItinerario i2 = new ClsItinerario();
-        i2.setId("2");
-        i2.setUsernameCreatore("test");
-        i2.setOrdinato(false);
-        i2.setNome("Itinerario2");
-        i2.setTappe(nodi);
-        itinerari.add(i2);
-
-        ClsNodo nodo4 = new ClsNodo();
-        nodo3.setId("8");
-        nodo3.setIdComune("3");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 4");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
-
-        ClsItinerario i3 = new ClsItinerario();
-        i3.setId("3");
-        i3.setUsernameCreatore("test");
-        i3.setOrdinato(true);
-        i3.setNome("Itinerario3");
-        i3.setTappe(nodi);
-        itinerari.add(i3);
-        //endregion
+        itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
 
         this.setItinerari(itinerari);
 
@@ -210,7 +137,6 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
         {
             String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
             ClsSegnalazione segnalazione = new ClsSegnalazione();
-            segnalazione.setId(""); //
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
@@ -221,6 +147,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
                     segnalazione.setIdCuratore(itinerari.get(i).getTappe().get(0).getIdComune()); //todo: ottenere da spring
                 }
             }
+            Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert (Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(segnalazione.visualizzaSegnalazione());
