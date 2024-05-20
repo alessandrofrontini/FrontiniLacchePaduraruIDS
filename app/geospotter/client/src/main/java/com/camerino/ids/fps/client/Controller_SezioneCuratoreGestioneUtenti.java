@@ -383,7 +383,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
     private boolean controllaConformitaID (String id)
     {
-        boolean flag = false;
+        /*boolean flag = false;
 
         for(int i = 0; i<utenti.size();i++)
         {
@@ -392,7 +392,8 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     public String eliminaUtenteCUSTOM()

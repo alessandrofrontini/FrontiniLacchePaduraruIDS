@@ -134,6 +134,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
     private boolean controllaConformitaID (String id)
     {
+        /*
         boolean flag = false;
 
         for(int i = 0; i<nodi.size();i++)
@@ -143,7 +144,8 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private void SwitchScene (String nomeScena, MouseEvent mouseEvent)

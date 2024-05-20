@@ -432,7 +432,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     private boolean controllaConformitaID (String id)
     {
-        boolean flag = false;
+        /*boolean flag = false;
 
         for(int i = 0; i<richieste.size();i++)
         {
@@ -441,7 +441,8 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private void SwitchScene (String nomeScena, MouseEvent mouseEvent)

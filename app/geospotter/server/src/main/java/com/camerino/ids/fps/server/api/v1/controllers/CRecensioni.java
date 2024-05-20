@@ -21,9 +21,10 @@ public class CRecensioni {
 
     @GetMapping(mapping)
     public ResponseEntity<ArrayList<ClsRecensione>> getRecensioni(
-            @RequestParam(value = "idNodo") String idNodo
+            @RequestParam(value = "idNodo", required = false) String idNodo
     ){
-        return ResponseEntity.ok(sRecensioni.getRecensioniNodo(idNodo));
+        //return ResponseEntity.ok(sRecensioni.getRecensioniNodo(idNodo));
+        return ResponseEntity.ok(sRecensioni.getAllRecensioni());
     }
 
     @PostMapping(mapping)

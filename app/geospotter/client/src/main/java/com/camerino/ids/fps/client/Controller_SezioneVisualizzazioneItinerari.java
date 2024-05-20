@@ -198,7 +198,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
     }
 
     private boolean controllaConformitaID (String id)
-    {
+    {/*
         boolean flag = false;
 
         for(int i = 0; i<itinerari.size();i++)
@@ -208,7 +208,8 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
 

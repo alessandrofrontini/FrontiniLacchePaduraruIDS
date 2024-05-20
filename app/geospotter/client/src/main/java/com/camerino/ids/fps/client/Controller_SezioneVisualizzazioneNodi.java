@@ -212,7 +212,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
     private boolean controllaConformitaID (String id)
     {
-        boolean flag = false;
+        /*boolean flag = false;
 
         for(int i = 0; i<nodi.size();i++)
         {
@@ -221,7 +221,8 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
 

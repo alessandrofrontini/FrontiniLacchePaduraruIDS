@@ -393,6 +393,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     private boolean controllaConformitaID (String id)
     {
+        /*
         boolean flag = false;
 
         for(int i = 0; i<contests.size();i++)
@@ -402,11 +403,12 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private boolean controllaConformitaIDNodi (String id)
-    {
+    {/*
         if(id==null)
             return false;
         else{
@@ -420,8 +422,8 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                 }
             }
             return flag;
-        }
-
+        }*/
+        return true;
     }
 
     private void setContest (ArrayList<ClsContestDiContribuzione> contests)

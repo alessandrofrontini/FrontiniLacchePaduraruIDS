@@ -250,7 +250,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
     }
 
     private boolean controllaConformitaIDItinerario (String id)
-    {
+    {/*
         boolean flag = false;
 
         for(int i = 0; i<itinerari.size();i++)
@@ -260,7 +260,8 @@ public class Controller_SezioneModificaItinerari implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private String[] convertiNodiCoinvoltiInArray(String input)

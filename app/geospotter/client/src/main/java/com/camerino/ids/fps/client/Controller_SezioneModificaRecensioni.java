@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
@@ -82,36 +83,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
-        recensioni = new ArrayList<ClsRecensione>();
-
-        //region Creazione nodi dummy
-        ClsRecensione r1 = new ClsRecensione();
-        r1.setId("1");
-        r1.setUsernameCreatore("test");
-        r1.setOggetto("Oggetto1");
-        r1.setContenuto("Contenuto1");
-        r1.setValutazione(1);
-        r1.setIdContenutoAssociato("ContenutoAssociato1");
-        recensioni.add(r1);
-
-        ClsRecensione r2 = new ClsRecensione();
-        r2.setId("2");
-        r2.setUsernameCreatore("test");
-        r2.setOggetto("Oggetto2");
-        r2.setContenuto("Contenuto2");
-        r2.setValutazione(2);
-        r2.setIdContenutoAssociato("ContenutoAssociato2");
-        recensioni.add(r2);
-
-        ClsRecensione r3 = new ClsRecensione();
-        r3.setId("3");
-        r3.setUsernameCreatore("test");
-        r3.setOggetto("Oggetto3");
-        r3.setContenuto("Contenuto3");
-        r3.setValutazione(3);
-        r3.setIdContenutoAssociato("ContenutoAssociato3");
-        recensioni.add(r3);
-        //endregion
+        recensioni = ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getAllRecensioni();
 
         setRecensioni(recensioni);
 
@@ -146,43 +118,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
 
         //--
 
-        nodi = new ArrayList<ClsNodo>();
-
-        //region Creazione nodi dummy
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setId("2");
-        nodo1.setIdComune("1");
-        nodo1.setaTempo(true);
-        nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
-        nodo1.setDescrizione("Descrizione - Nodo 1");
-        nodo1.setNome("Negozio");
-        nodo1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nodo2 = new ClsNodo();
-        nodo2.setId("4");
-        nodo2.setIdComune("3");
-        nodo2.setaTempo(false);
-        nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
-        nodo2.setDescrizione("Descrizione - Nodo 2");
-        nodo2.setNome("Statua");
-        nodo2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
-
-
-        ClsNodo nodo3 = new ClsNodo();
-        nodo3.setId("6");
-        nodo3.setIdComune("5");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 3");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
-        //endregion
+        nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         setNodi(nodi);
 
@@ -236,6 +172,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
 
+            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).modificaRecensione(r,r);
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");

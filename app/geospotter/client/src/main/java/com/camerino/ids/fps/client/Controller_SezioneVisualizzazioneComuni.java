@@ -281,7 +281,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
     }
 
     private boolean controllaConformitaID (String id)
-    {
+    {/*
         boolean flag = false;
 
         for(int i = 0; i<comuni.size();i++)
@@ -291,6 +291,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 }

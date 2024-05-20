@@ -121,6 +121,10 @@ public class ClsTurista implements ISignalable {
         return this.iperSegnalazioni.get(null);
     }
 
+    public ArrayList<ClsRecensione> getAllRecensioni() {
+        return this.iperRecensioni.get(null);
+    }
+
     //endregion
 
 }

@@ -47,7 +47,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @UuidGenerator
     String id;
     @Convert(converter = ConvCredenziali.class)
-    Credenziali credenziali;
+    Credenziali credenziali = new Credenziali();
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
     
@@ -120,16 +120,15 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
     @Override
     public boolean eliminaRecensione(String id) {
-        //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
+        tmp.put("idRecensione", id);
         return iperRecensioni.delete(tmp);
     }
     @Override
     public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", old.getId());
+        tmp.put("idRecensione", old.getId());
         return iperRecensioni.update(tmp, newrec);
     }
     @Override
@@ -192,6 +191,5 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
                 return null;
 
         }
-
     }
 }

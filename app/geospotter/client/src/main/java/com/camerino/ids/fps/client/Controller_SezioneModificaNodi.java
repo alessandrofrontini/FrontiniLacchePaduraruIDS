@@ -275,7 +275,7 @@ public class Controller_SezioneModificaNodi implements Initializable
     }
 
     private boolean controllaConformitaID (String id)
-    {
+    {/*
         boolean flag = false;
 
         for(int i = 0; i<nodi.size();i++)
@@ -285,7 +285,8 @@ public class Controller_SezioneModificaNodi implements Initializable
                 break;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
 }

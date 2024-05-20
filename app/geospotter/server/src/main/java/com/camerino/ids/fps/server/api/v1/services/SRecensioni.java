@@ -22,10 +22,14 @@ public class SRecensioni {
     }
 
     public boolean deleteRecensioneById(String idRecensione) {
-        return false;
+        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).eliminaRecensione(idRecensione);
     }
 
     public boolean postRecensione(ClsRecensione recensione) {
         return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
+    }
+
+    public ArrayList<ClsRecensione> getAllRecensioni() {
+        return ((ClsTurista)request.getServletContext().getAttribute("user")).getAllRecensioni();
     }
 }

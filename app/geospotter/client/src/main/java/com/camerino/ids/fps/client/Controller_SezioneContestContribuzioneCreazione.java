@@ -373,7 +373,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     private boolean controllaConformitaID (String id)
     {
-        boolean flag = false;
+        /*boolean flag = false;
 
         for(int i = 0; i<comuni.size();i++)
         {
@@ -382,7 +382,8 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private void SwitchScene (String nomeScena, MouseEvent mouseEvent)

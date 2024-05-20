@@ -189,7 +189,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
 
     private boolean controllaConformitaID (String id)
     {
-        if(id==null)
+        /*if(id==null)
             return false;
         else{
             boolean flag = false;
@@ -202,7 +202,8 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
                 }
             }
             return flag;
-        }
+        }*/
+        return true;
 
     }
 

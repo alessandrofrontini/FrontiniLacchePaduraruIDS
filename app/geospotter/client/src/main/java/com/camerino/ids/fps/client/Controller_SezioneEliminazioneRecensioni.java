@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,36 +57,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        recensioni = new ArrayList<ClsRecensione>();
-
-        //region Creazione nodi dummy
-        ClsRecensione r1 = new ClsRecensione();
-        r1.setId("1");
-        r1.setUsernameCreatore("test");
-        r1.setOggetto("Oggetto1");
-        r1.setContenuto("Contenuto1");
-        r1.setValutazione(1);
-        r1.setIdContenutoAssociato("ContenutoAssociato1");
-        recensioni.add(r1);
-
-        ClsRecensione r2 = new ClsRecensione();
-        r2.setId("2");
-        r2.setUsernameCreatore("test");
-        r2.setOggetto("Oggetto2");
-        r2.setContenuto("Contenuto2");
-        r2.setValutazione(2);
-        r2.setIdContenutoAssociato("ContenutoAssociato2");
-        recensioni.add(r2);
-
-        ClsRecensione r3 = new ClsRecensione();
-        r3.setId("3");
-        r3.setUsernameCreatore("test");
-        r3.setOggetto("Oggetto3");
-        r3.setContenuto("Contenuto3");
-        r3.setValutazione(3);
-        r3.setIdContenutoAssociato("ContenutoAssociato3");
-        recensioni.add(r3);
-        //endregion
+        recensioni = Controller_SezioneLogin.UTENTE.getAllRecensioni();
 
         setRecensioni(recensioni);
 
@@ -125,6 +97,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
 
         if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
         {
+            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(IDDaEliminare);
@@ -149,7 +122,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
 
     private boolean controllaConformitaID (String id)
     {
-        boolean flag = false;
+        /*boolean flag = false;
 
         for(int i = 0; i<recensioni.size();i++)
         {
@@ -158,7 +131,8 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
                 flag = true;
             }
         }
-        return flag;
+        return flag;*/
+        return true;
     }
 
     private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
