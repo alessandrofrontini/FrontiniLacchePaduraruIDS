@@ -28,6 +28,8 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+
+        this.iperUtenti = usr.iperUtenti;
     }
 
     public ArrayList<ClsRDCImmagine> _getAllRDCImmagini() {

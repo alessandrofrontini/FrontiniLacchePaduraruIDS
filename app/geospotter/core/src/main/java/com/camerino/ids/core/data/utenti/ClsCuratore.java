@@ -32,6 +32,7 @@ public class ClsCuratore extends ClsAnimatore{
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+        this.iperUtenti = usr.iperUtenti;
     }
     String idComuneAssociato;
     public ClsCuratore(){

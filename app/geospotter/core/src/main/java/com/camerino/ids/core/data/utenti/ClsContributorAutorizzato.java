@@ -32,6 +32,8 @@ public class ClsContributorAutorizzato extends ClsContributor {
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+
+        this.iperUtenti = usr.iperUtenti;
     }
 
     //region Override Contributor Autorizzato

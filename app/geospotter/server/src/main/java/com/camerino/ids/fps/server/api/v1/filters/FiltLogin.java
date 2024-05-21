@@ -29,6 +29,7 @@ public class FiltLogin extends OncePerRequestFilter {
     IperRDC iperRDC;
     IperRDCI iperRDCI;
     IperSegnalazioni iperSegnalazioni;
+    IperUtenti iperUtenti;
 
     @Autowired
     public FiltLogin(
@@ -38,18 +39,21 @@ public class FiltLogin extends OncePerRequestFilter {
             IperRDC iperRDC,
             IperRDCI iperRDCI,
             IperRecensioni iperRecensioni,
-            IperSegnalazioni iperSegnalazioni) {
+            IperSegnalazioni iperSegnalazioni,
+            IperUtenti iperUtenti) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
         this.iperItinerari = iperItinerari;
         this.iperRecensioni = iperRecensioni;
         this.iperSegnalazioni = iperSegnalazioni;
+        this.iperUtenti = iperUtenti;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         request.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
+        System.out.println(iperUtenti);
         filterChain.doFilter(request, response);
     }
 
@@ -81,6 +85,7 @@ public class FiltLogin extends OncePerRequestFilter {
 
     private ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
+        user.setIperUtenti(this.iperUtenti);
         return user;
     }
 

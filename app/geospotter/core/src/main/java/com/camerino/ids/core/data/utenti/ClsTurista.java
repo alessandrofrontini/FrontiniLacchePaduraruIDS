@@ -4,6 +4,8 @@ import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import jakarta.persistence.Transient;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,14 +13,19 @@ import java.util.HashMap;
  * Rappresenta un utente non autenticato.
  */
 public class ClsTurista implements ISignalable {
-
+    @Transient
     transient IPersistenceModel<ClsNodo> pNodi;
+    @Transient
     transient IPersistenceModel<ClsItinerario> pItinerari;
+    @Transient
     transient IPersistenceModel<ClsComune> mockComuni;
+    @Transient
     transient IPersistenceModel<ClsRecensione> iperRecensioni;
+    @Transient
     transient IPersistenceModel<ClsSegnalazione> iperSegnalazioni;
+    @Transient
     transient IPersistenceModel<ClsImmagine> pImmagini;
-
+@Transient
     transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
 
     public ClsTurista(){}
@@ -138,6 +145,14 @@ public class ClsTurista implements ISignalable {
     public void setpImmagini(IPersistenceModel<ClsImmagine> pImmagini) {
         this.pImmagini = pImmagini;
     }
-//endregion
+
+    public IPersistenceModel<ClsTuristaAutenticato> getIperUtenti() {
+        return iperUtenti;
+    }
+
+    public void setIperUtenti(IPersistenceModel<ClsTuristaAutenticato> iperUtenti) {
+        this.iperUtenti = iperUtenti;
+    }
+    //endregion
 
 }

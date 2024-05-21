@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +23,14 @@ import java.util.HashMap;
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
 
     @Deprecated
+    @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    @Transient
     transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
     @Deprecated
+    @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    @Transient
     transient IPersistenceModel<ClsItinerario> iperRDCItinerari;
 
     public ClsContributor() {super();}
@@ -44,6 +49,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+
+        this.iperUtenti = usr.iperUtenti;
     }
 
 //region Getters and Setters
