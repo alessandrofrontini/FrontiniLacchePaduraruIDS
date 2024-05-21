@@ -1,9 +1,11 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -71,30 +73,41 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
     }
 
     public void leggiSegnalazioni(){
-        try{
-            FileReader input = new FileReader("CLIsave/segnalazioni.txt");
-            StringBuilder tutte = new StringBuilder();
-            int c;
-            while((c= input.read())!=-1) {
-                tutte.append((char) c);
+        File f = new File("CLIsave/segnalazioni.txt");
+        if(f.exists()) {
+            try {
+                FileReader input = new FileReader(f);
+                StringBuilder tutte = new StringBuilder();
+                int c;
+                while ((c = input.read()) != -1) {
+                    tutte.append((char) c);
+                }
+                if(tutte.length()>1) {
+                    String tuttesegnalazioni = String.valueOf(tutte);
+                    String[] segnalazioni = tuttesegnalazioni.split("\r\n");
+                    for (String segnalazione : segnalazioni) {
+                        String[] dati = segnalazione.split(",");
+                        ClsSegnalazione daAggiungere = new ClsSegnalazione();
+                        daAggiungere.setId(dati[0]);
+                        daAggiungere.setIdContenuto(dati[1]);
+                        daAggiungere.setIdCuratore(dati[2]);
+                        daAggiungere.setDescrizione(dati[3]);
+                        daAggiungere.setIdUtente(dati[4]);
+                        aggiungiSegnalazione(daAggiungere);
+                    }
+                    maxID();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            String tuttesegnalazioni = String.valueOf(tutte);
-            String [] segnalazioni = tuttesegnalazioni.split("\r\n");
-            for(String segnalazione:segnalazioni){
-                String [] dati = segnalazione.split(",");
-                ClsSegnalazione daAggiungere = new ClsSegnalazione();
-                daAggiungere.setId(dati[0]);
-                daAggiungere.setIdContenuto(dati[1]);
-                daAggiungere.setIdCuratore(dati[2]);
-                daAggiungere.setDescrizione(dati[3]);
-                daAggiungere.setIdUtente(dati[4]);
-                aggiungiSegnalazione(daAggiungere);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
-
+    private void maxID(){
+        for(ClsSegnalazione i:segnalazioni){
+            if(Long.parseLong(i.getId())>this.idCounter)
+                this.idCounter = Long.parseLong(i.getId());
+        }
+    }
     public void scriviSegnalazioni(){
         try{
             FileWriter output = new FileWriter("CLIsave/segnalazioni.txt");

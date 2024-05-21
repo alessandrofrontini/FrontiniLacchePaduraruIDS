@@ -20,10 +20,12 @@ public class ClsMenuCuratore implements IMenu{
     private ClsCuratore user;
     Scanner in = new Scanner(System.in);
     public ClsMenuCuratore(ClsCuratore c){user = c;}
+    private ClsMenuAnimatore menuAnimatore;
+    public ClsMenuAnimatore getMenuAnimatore(){return menuAnimatore;}
     @Override
     public void menu() {
         boolean exit = false;
-        ClsMenuAnimatore menuAnimatore = new ClsMenuAnimatore(user);
+        menuAnimatore = new ClsMenuAnimatore(user);
         while (!exit) {
             menuAnimatore.menu();
             println("15) Visualizza richieste");
@@ -39,16 +41,40 @@ public class ClsMenuCuratore implements IMenu{
                 println("0) Esci");
                 print(">> ");
                 switch (in.nextLine()) {
+                    case "1":
+                        menuAnimatore.getMenuca().getMenuc().getMenuta().menuInserisciRecensione(); break;
+                    case "2":
+                        menuAnimatore.getMenuca().getMenuc().getMenuta().menuModificaRecensione(); break;
+                    case "3":
+                        menuAnimatore.getMenuca().getMenuc().getMenuta().menuEliminaRecensione(); break;
+                    case "4":
+                        menuAnimatore.getMenuca().getMenuc().getMenuta().menuInserisciFoto(); break;
+                    case "5":
+                        menuAnimatore.getMenuca().getMenuc().menuInserisciNodo(); break;
+                    case "6":
+                        menuAnimatore.getMenuca().getMenuc().menuModificaNodo(); break;
+                    case "7":
+                        menuAnimatore.getMenuca().getMenuc().menuEliminaNodo(); break;
+                    case "8":
+                        menuAnimatore.getMenuca().getMenuc().menuInserisciItinerario(); break;
+                    case "9":
+                        menuAnimatore.getMenuca().getMenuc().menuModificaItinerario(); break;
+                    case "10":
+                        menuAnimatore.getMenuca().getMenuc().menuEliminaItinerario(); break;
+                    case "11":
+                        menuAnimatore.getMenuca().getMenuc().sottoMenuContest(); break;
+                    case "12":
+                    case "13":
+                    case "14":
+                        menuAnimatore.menuContest(); break;
                     case "15":
                         menuVisualizzaRichieste(); break;
                     case "16":
                         menuVisualizzaSegnalazioni(); break;
                     case "17":
-                        menuUprank(); break;
                     case "18":
-                        menuDownRank(); break;
                     case "19":
-                        menuResetRank(); break;
+                        menuRank(); break;
                     case "20":
                         menuRegistraUtente(); break;
                     case "21":
@@ -65,7 +91,7 @@ public class ClsMenuCuratore implements IMenu{
         }
 
     }
-    private void menuVisualizzaRichieste(){
+    public void menuVisualizzaRichieste(){
         println("1) richieste dei nodi\n2) richieste itinerari");
         if(Objects.equals(in.nextLine(), "1")){
             ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = user.getRichieste();
@@ -116,7 +142,7 @@ public class ClsMenuCuratore implements IMenu{
         }
     }
 
-    private void menuVisualizzaSegnalazioni(){
+    public void menuVisualizzaSegnalazioni(){
         for(ClsSegnalazione seg:MockLocator.getMockSegnalazioni().get(null)){
             if(seg.getIdCuratore() == null){
                 println("Segnalazione n. " + seg.getId());
@@ -139,45 +165,24 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
     }
-    private void menuUprank(){
-        stampaUtenti();
-        String idu = in.nextLine();
-        if(idu != null){
-            user.upRank(idu);
-        }
-        else println("Errore");
+    public void menuRank(){
+        println("Questa è una funzionalità di Geospotter Desktop.");
     }
-    private void menuDownRank(){
-        stampaUtenti();
-        String idu = in.nextLine();
-        if(idu != null){
-            user.downRank(idu);
-        }
-        else println("Errore");
-    }
-    private void menuResetRank(){
-        stampaUtenti();
-        String idu = in.nextLine();
-        if(idu != null){
-            user.resetRank(idu);
-        }
-        else println("Errore");
-    }
-    private void menuRegistraUtente(){
+    public void menuRegistraUtente(){
         user.registraUtente(Input.registraUtente());
     }
-    private void menuModificaUtente(){
+    public void menuModificaUtente(){
         stampaUtenti();
         String idu = in.nextLine();
         Input.modificaUtente(idu);
     }
-    private void menuEliminaUtente(){
+    public void menuEliminaUtente(){
         stampaUtenti();
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("username", in.nextLine());
         MockLocator.getMockTuristi().delete(filtro);
     }
-    private void menuPubblicaSocial(){
+    public void menuPubblicaSocial(){
 
     }
     private void stampaUtenti(){

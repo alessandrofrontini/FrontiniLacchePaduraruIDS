@@ -113,24 +113,26 @@ public class MockComuni implements IPersistenceModel<ClsComune>
                 while ((c = input.read()) != -1) {
                     comuniFile.append((char) c);
                 }
-                String comuniTotal = String.valueOf(comuniFile);
-                String[] comuniACapo = comuniTotal.split("\r\n");
-                for (String comune : comuniACapo) {
-                    ClsComune daAggiungere = new ClsComune();
-                    String[] dati = comune.split(",");
-                    daAggiungere.setId(dati[0]);
-                    daAggiungere.setNome(dati[1]);
-                    daAggiungere.setDescrizione(dati[2]);
-                    Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
-                    daAggiungere.setPosizione(p);
-                    daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
-                    daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
-                    ArrayList<String> curatori = new ArrayList<>();
-                    curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
-                    daAggiungere.setCuratoriAssociati(curatori);
-                    comuni.add(daAggiungere);
+                if(comuniFile.length()>1) {
+                    String comuniTotal = String.valueOf(comuniFile);
+                    String[] comuniACapo = comuniTotal.split("\r\n");
+                    for (String comune : comuniACapo) {
+                        ClsComune daAggiungere = new ClsComune();
+                        String[] dati = comune.split(",");
+                        daAggiungere.setId(dati[0]);
+                        daAggiungere.setNome(dati[1]);
+                        daAggiungere.setDescrizione(dati[2]);
+                        Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
+                        daAggiungere.setPosizione(p);
+                        daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
+                        daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
+                        ArrayList<String> curatori = new ArrayList<>();
+                        curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
+                        daAggiungere.setCuratoriAssociati(curatori);
+                        comuni.add(daAggiungere);
+                    }
+                    maxID();
                 }
-                maxID();
             } catch (Exception e) {
                 e.printStackTrace();
             }

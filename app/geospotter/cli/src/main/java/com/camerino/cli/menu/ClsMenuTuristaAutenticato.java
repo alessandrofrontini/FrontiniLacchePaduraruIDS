@@ -14,8 +14,10 @@ import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.cli.mock.MockNodi;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static com.camerino.cli.actions.ClsCommonActions.*;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -59,7 +61,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             recensione.setUsernameCreatore(user.getCredenziali().getUsername());
             user.inserisciRecensione(recensione);
         }
-        else ClsConsoleLogger.println("Errore.");
+        else ClsConsoleLogger.println("Errore. Riprova.");
     }
 
     public void menuModificaRecensione() {
@@ -69,14 +71,18 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             }
             print("Inserisci l'id della recensione da modificare: ");
             HashMap<String, Object> filtri = new HashMap<>();
-            filtri.put("id", in.nextLine());
-            ClsRecensione old = MockLocator.getMockRecensioni().get(filtri).get(0);
-            if (old == null) {
-                println("Recensione non trovata.");
-                return;
+            String input = in.nextLine();
+            if(checkValore(input, (ArrayList<String>) user.visualizzaRecensioniPosessore().stream().map(ClsRecensione::getId).collect(Collectors.toList()))) {
+                filtri.put("id", input);
+                ClsRecensione old = MockLocator.getMockRecensioni().get(filtri).get(0);
+                if (old == null) {
+                    println("Recensione non trovata.");
+                    return;
+                }
+                ClsRecensione newrec = Input.modificaRecensione(old);
+                user.modificaRecensione(old, newrec);
             }
-            ClsRecensione newrec = Input.modificaRecensione(old);
-            user.modificaRecensione(old, newrec);
+            else println("Recensione non esistente. Riprova.");
         }
         else println("Non hai ancora aggiunto recensioni");
     }
@@ -87,23 +93,30 @@ public class ClsMenuTuristaAutenticato implements IMenu {
                 println(r.visualizzaRecensione());
             }
             print("inserisci l'id della recensione da eliminare: ");
-            ClsCommonActions.eliminaRecensione(user, in.nextLine());
-            println("recensione eliminata.");
+            String input = in.nextLine();
+            if(checkValore(input, (ArrayList<String>) user.visualizzaRecensioniPosessore().stream().map(ClsRecensione::getId).collect(Collectors.toList()))) {
+                ClsCommonActions.eliminaRecensione(user, input);
+                println("recensione eliminata.");
+            }
+            else println("Recensione inesistente");
         } else println("Non hai ancora aggiunto recensioni");
     }
 
     public void menuInserisciFoto() {
-        print("inserisci l'id del contenuto a cui vuoi aggiungere una foto:");
+        print("inserisci l'id del nodo a cui vuoi aggiungere una foto:");
         String contenuto = in.nextLine();
-        boolean exit = false;
-        while (!exit) {
-            println("1) Inserisci Foto");
-            println("0) Esci");
-            switch (in.nextLine()) {
-                case "1" -> inserisciFotoContenuto(contenuto);
-                case "0" -> exit = true;
+        if(checkValore(contenuto, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+            boolean exit = false;
+            while (!exit) {
+                println("1) Inserisci Foto");
+                println("0) Esci");
+                switch (in.nextLine()) {
+                    case "1" -> inserisciFotoContenuto(contenuto);
+                    case "0" -> exit = true;
+                }
             }
         }
+        else println("Il nodo non esiste. Riprova");
     }
 
     public void inserisciFotoContenuto(String idContenuto){
@@ -113,5 +126,9 @@ public class ClsMenuTuristaAutenticato implements IMenu {
         println("Inserisci l'URL dell'immagine");
         immagine.setURL(in.nextLine());
         user.inserisciImmagine(immagine);
+    }
+
+    private static boolean checkValore(String input, ArrayList<String> range){
+        return range.contains(input);
     }
 }

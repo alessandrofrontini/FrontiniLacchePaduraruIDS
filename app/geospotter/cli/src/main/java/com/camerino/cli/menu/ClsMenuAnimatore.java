@@ -25,12 +25,13 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 public class ClsMenuAnimatore implements IMenu{
     private ClsAnimatore user;
     Scanner in = new Scanner(System.in);
-
     public ClsMenuAnimatore(ClsAnimatore a){user = a;}
+    private ClsMenuContributorAuth menuca;
+    public ClsMenuContributorAuth getMenuca(){return menuca;}
     @Override
     public void menu() {
         boolean exit = false;
-        ClsMenuContributorAuth menuca = new ClsMenuContributorAuth(user);
+            menuca = new ClsMenuContributorAuth(user);
             while (!exit) {
                 menuca.menu();
                 println("12) Crea Contest aperto");
@@ -40,6 +41,17 @@ public class ClsMenuAnimatore implements IMenu{
                     println("0) Esci");
                     print(">> ");
                     switch (in.nextLine()) {
+                        case "1" : menuca.getMenuc().getMenuta().menuInserisciRecensione(); break;
+                        case "2" : menuca.getMenuc().getMenuta().menuModificaRecensione(); break;
+                        case "3" : menuca.getMenuc().getMenuta().menuEliminaRecensione(); break;
+                        case "4" : menuca.getMenuc().getMenuta().menuInserisciFoto(); break;
+                        case "5" : menuca.getMenuc().menuInserisciNodo(); break;
+                        case "6" : menuca.getMenuc().menuModificaNodo(); break;
+                        case "7" : menuca.getMenuc().menuEliminaNodo(); break;
+                        case "8" : menuca.getMenuc().menuInserisciItinerario(); break;
+                        case "9" : menuca.getMenuc().menuModificaItinerario(); break;
+                        case "10" : menuca.getMenuc().menuEliminaItinerario(); break;
+                        case "11" : menuca.getMenuc().sottoMenuContest(); break;
                         case "12" :
                         case "13" :
                         case "14" : menuContest(); break;
@@ -49,7 +61,7 @@ public class ClsMenuAnimatore implements IMenu{
                 else exit = true;
         }
     }
-    private void menuContest(){
+    public void menuContest(){
         println("Questa è una funzionalità presente su Geospotter Desktop.");
     }
 

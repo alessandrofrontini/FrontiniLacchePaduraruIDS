@@ -94,20 +94,22 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
                 while ((c = input.read()) != -1) {
                     tutte.append((char) c);
                 }
-                String tutteRecensioni = String.valueOf(tutte);
-                String[] recensioni = tutteRecensioni.split("\r\n");
-                for (String recensione : recensioni) {
-                    String[] dati = recensione.split(",");
-                    ClsRecensione nuova = new ClsRecensione();
-                    nuova.setId(dati[0]);
-                    nuova.setUsernameCreatore(dati[1]);
-                    nuova.setIdContenutoAssociato(dati[2]);
-                    nuova.setValutazione(Double.parseDouble(dati[3]));
-                    nuova.setOggetto(dati[4]);
-                    nuova.setContenuto(dati[5]);
-                    aggiungiRecensione(nuova);
+                if(tutte.length()>1) {
+                    String tutteRecensioni = String.valueOf(tutte);
+                    String[] recensioni = tutteRecensioni.split("\r\n");
+                    for (String recensione : recensioni) {
+                        String[] dati = recensione.split(",");
+                        ClsRecensione nuova = new ClsRecensione();
+                        nuova.setId(dati[0]);
+                        nuova.setUsernameCreatore(dati[1]);
+                        nuova.setIdContenutoAssociato(dati[2]);
+                        nuova.setValutazione(Double.parseDouble(dati[3]));
+                        nuova.setOggetto(dati[4]);
+                        nuova.setContenuto(dati[5]);
+                        aggiungiRecensione(nuova);
+                    }
+                    maxID();
                 }
-                maxID();
             } catch (Exception e) {
                 e.printStackTrace();
             }

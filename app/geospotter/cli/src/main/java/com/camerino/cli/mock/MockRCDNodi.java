@@ -96,6 +96,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 while ((c = input.read()) != -1) {
                     tutti.append((char) c);
                 }
+                if(tutti.length()>1){
                 String rcdstutti = String.valueOf(tutti);
                 String[] rcds = rcdstutti.split("\r\n");
                 if (!Objects.equals(rcds[0], "")) {
@@ -115,6 +116,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                         rcdi.add(rcd);
                     }
                     maxID(rcdi);
+                }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

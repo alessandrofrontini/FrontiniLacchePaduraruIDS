@@ -26,10 +26,12 @@ public class ClsMenuGestore implements IMenu {
         this.user = gdp;
         gdp.setMockComuni(MockLocator.getMockComuni());
     }
+    private ClsMenuCuratore menuc;
+    public ClsMenuCuratore getMenuc(){return menuc;}
 
     @Override
     public void menu() {
-        ClsMenuCuratore menuc = new ClsMenuCuratore(user);
+        menuc = new ClsMenuCuratore(user);
         boolean exit = false;
         while (!exit)
         {
@@ -40,6 +42,29 @@ public class ClsMenuGestore implements IMenu {
             println("0) Esci");
             print(">> ");
             switch (in.nextLine()) {
+                case "1": menuc.getMenuAnimatore().getMenuca().getMenuc().getMenuta().menuInserisciRecensione(); break;
+                case "2": menuc.getMenuAnimatore().getMenuca().getMenuc().getMenuta().menuModificaRecensione(); break;
+                case "3": menuc.getMenuAnimatore().getMenuca().getMenuc().getMenuta().menuEliminaRecensione(); break;
+                case "4": menuc.getMenuAnimatore().getMenuca().getMenuc().getMenuta().menuInserisciFoto(); break;
+                case "5": menuc.getMenuAnimatore().getMenuca().getMenuc().menuInserisciNodo(); break;
+                case "6": menuc.getMenuAnimatore().getMenuca().getMenuc().menuModificaNodo(); break;
+                case "7": menuc.getMenuAnimatore().getMenuca().getMenuc().menuEliminaNodo(); break;
+                case "8": menuc.getMenuAnimatore().getMenuca().getMenuc().menuInserisciItinerario(); break;
+                case "9": menuc.getMenuAnimatore().getMenuca().getMenuc().menuModificaItinerario(); break;
+                case "10": menuc.getMenuAnimatore().getMenuca().getMenuc().menuEliminaItinerario(); break;
+                case "11": menuc.getMenuAnimatore().getMenuca().getMenuc().sottoMenuContest(); break;
+                case "12":
+                case "13":
+                case "14": menuc.getMenuAnimatore().menuContest(); break;
+                case "15": menuc.menuVisualizzaRichieste(); break;
+                case "16": menuc.menuVisualizzaSegnalazioni(); break;
+                case "17":
+                case "18":
+                case "19": menuc.menuRank(); break;
+                case "20": menuc.menuRegistraUtente(); break;
+                case "21": menuc.menuModificaUtente(); break;
+                case "22": menuc.menuEliminaUtente(); break;
+                case "23": menuc.menuPubblicaSocial(); break;
                 case "24": menuAggiungiComune(); break;
                 case "25": menuModificaComune(); break;
                 case "26": menuEliminaComune(); break;

@@ -21,9 +21,11 @@ public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
     Scanner in = new Scanner(System.in);
     public ClsMenuContributor(ClsContributor c){user = c;}
+    private ClsMenuTuristaAutenticato menuta;
+    public ClsMenuTuristaAutenticato getMenuta(){return menuta;}
     @Override
     public void menu(){
-        ClsMenuTuristaAutenticato menuta = new ClsMenuTuristaAutenticato(user);
+        menuta = new ClsMenuTuristaAutenticato(user);
         boolean exit = false;
         while (!exit) {
             menuta.menu();
@@ -56,11 +58,11 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
-    private void menuInserisciNodo(){
+    public void menuInserisciNodo(){
         user.inserisciNodo(Input.inserisciNodo());
     }
 
-    private void menuModificaNodo(){
+    public void menuModificaNodo(){
         if(!user.visualizzaNodiPosessore().isEmpty()) {
             for(ClsNodo n: user.visualizzaNodiPosessore())
                 println(n.visualizzaNodo());
@@ -76,7 +78,7 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
-    private void menuEliminaNodo() { //da mettere su Input
+    public void menuEliminaNodo() { //da mettere su Input
         if (!user.visualizzaNodiPosessore().isEmpty()) {
             for(ClsNodo n: user.visualizzaNodiPosessore())
                 println(n.visualizzaNodo());
@@ -87,11 +89,11 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
-    private void menuInserisciItinerario(){
+    public void menuInserisciItinerario(){
         user.inserisciItinerario(Input.richiediItinerario());
     }
 
-    private void menuModificaItinerario(){
+    public void menuModificaItinerario(){
         for(ClsItinerario itinerario:user.visualizzaItinerariPossessore())
             println(itinerario.visualizzaItinerario());
         println("inserisci l'id dell'itinerario");
@@ -182,7 +184,7 @@ public class ClsMenuContributor implements IMenu{
         }
         return true;
     }
-    private void menuEliminaItinerario(){
+    public void menuEliminaItinerario(){
         println("inserisci l'id dell'itinerario");
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", in.nextLine());
@@ -194,7 +196,7 @@ public class ClsMenuContributor implements IMenu{
         else println("Errore");
     }
 
-    private void sottoMenuContest(){
+    public void sottoMenuContest(){
         println("inserisci l'id del contest");
         boolean exit = false;
         while (!exit) {

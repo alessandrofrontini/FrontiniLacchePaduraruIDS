@@ -9,8 +9,12 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 
 public class Main {
     static Scanner in = new Scanner(System.in);
@@ -20,12 +24,12 @@ public class Main {
         leggiTutto();
         while (true) {
             //Queste sono le azioni che un turista (non autenticato) può fare
-            ClsConsoleLogger.println("1)Login");
-            ClsConsoleLogger.println("2)Lista Comuni");
-            ClsConsoleLogger.println("3)Lista nodi di un comune");
-            ClsConsoleLogger.println("4)Mostra Nodo");
-            ClsConsoleLogger.println("5)Segnala Nodo");
-            ClsConsoleLogger.println("0)Esci");
+            println("1)Login");
+            println("2)Lista Comuni");
+            println("3)Lista nodi di un comune");
+            println("4)Mostra Nodo");
+            println("5)Segnala Nodo");
+            println("0)Esci");
             switch (in.nextLine()){
                 case "0"-> {
                     salvaTutto();
@@ -65,10 +69,8 @@ public class Main {
     private static void listaComuni()
     {
         for(ClsComune comune:MockLocator.getMockComuni().get(null)){
-            ClsConsoleLogger.println(comune.visualizzaComune());
+            println(comune.visualizzaComune());
         }
-
-
     }
 
     private static void login() {
@@ -77,7 +79,7 @@ public class Main {
         tmp.put("credenziali", credenziali);
         ClsTuristaAutenticato user = MockLocator.getMockTuristi().get(tmp).get(0);
         if (user == null) {
-            ClsConsoleLogger.println("Credenziali errate");
+            println("Credenziali errate");
             return;
         }
         main_menu(user);
@@ -97,29 +99,45 @@ public class Main {
     private static void menuSegnalaNodo(){
         ClsTurista user = new ClsTurista(MockLocator.getMockSegnalazioni());
         ClsSegnalazione segnalazione = new ClsSegnalazione();
-        ClsConsoleLogger.println("inserisci l'id del nodo");
-        segnalazione.setIdContenuto(in.nextLine());
-        ClsConsoleLogger.println("fornisci una descrizione");
-        segnalazione.setDescrizione(in.nextLine());
-        segnalazione.setIdUtente("turista");
-        user.segnalaContenuto(segnalazione);
-        ClsConsoleLogger.println("Segnalazione inserita");
+        println("inserisci l'id del nodo");
+        String input = in.nextLine();
+        if(checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+            segnalazione.setIdContenuto(input);
+            println("fornisci una descrizione");
+            segnalazione.setDescrizione(in.nextLine());
+            segnalazione.setIdUtente("turista");
+            user.segnalaContenuto(segnalazione);
+            println("Segnalazione inserita");
+        }
+        else println("Nodo non esistente.");
     }
 
     private static void menuListaNodiComune(){
         MockNodi mockNodi = MockLocator.getMockNodi();
         HashMap<String, Object> filtro = new HashMap<>();
-        ClsConsoleLogger.println("inserisci l'id del comune");
-        filtro.put("idComune", in.nextLine());
-        for(ClsNodo nodo: mockNodi.get(filtro))
-            ClsConsoleLogger.println(nodo.visualizzaNodo());
+        println("inserisci l'id del comune");
+        String input = in.nextLine();
+        if(checkValore(input, (ArrayList<String>) MockLocator.getMockComuni().get(null).stream().map(ClsComune::getId).collect(Collectors.toList()))) {
+            filtro.put("idComune", input);
+            for (ClsNodo nodo : mockNodi.get(filtro))
+                println(nodo.visualizzaNodo());
+        }
+        else println("Comune non esistente.");
     }
     private static void menuMostraNodo(){
         MockNodi mockNodi = MockLocator.getMockNodi();
         HashMap<String, Object> filtro = new HashMap<>();
-        ClsConsoleLogger.println("inserisci l'id del nodo");
-        filtro.put("id", in.nextLine());
-        ClsConsoleLogger.println(mockNodi.get(filtro).get(0).visualizzaNodo());
+        println("inserisci l'id del nodo");
+        String input = in.nextLine();
+        if(checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+            filtro.put("id", input);
+            println(mockNodi.get(filtro).get(0).visualizzaNodo());
+        }
+        else println("nodo non esistente.");
+    }
+
+    private static boolean checkValore(String input, ArrayList<String> range){
+        return range.contains(input);
     }
     //region Visualizzazione header e team
     //https://patorjk.com/software/taag/

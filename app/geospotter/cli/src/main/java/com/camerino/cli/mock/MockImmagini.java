@@ -76,18 +76,19 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
                 while ((c = input.read()) != -1) {
                     file.append((char) c);
                 }
-                String[] immagini = String.valueOf(file).split("\r\n");
-                for (String immagine : immagini) {
-                    String[] dati = immagine.split(",");
-                    ClsImmagine daInserire = new ClsImmagine();
-                    daInserire.setId(dati[0]);
-                    daInserire.setIdCOntenutoAssociato(dati[1]);
-                    daInserire.setUsernameCreatore(dati[2]);
-                    daInserire.setURL(dati[3]);
-                    this.immagini.add(daInserire);
+                if(file.length()>1) {
+                    String[] immagini = String.valueOf(file).split("\r\n");
+                    for (String immagine : immagini) {
+                        String[] dati = immagine.split(",");
+                        ClsImmagine daInserire = new ClsImmagine();
+                        daInserire.setId(dati[0]);
+                        daInserire.setIdCOntenutoAssociato(dati[1]);
+                        daInserire.setUsernameCreatore(dati[2]);
+                        daInserire.setURL(dati[3]);
+                        this.immagini.add(daInserire);
+                    }
+                    maxID();
                 }
-                maxID();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

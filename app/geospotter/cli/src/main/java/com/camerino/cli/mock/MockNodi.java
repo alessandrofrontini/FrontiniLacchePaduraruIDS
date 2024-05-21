@@ -112,23 +112,25 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                     while ((c = input.read()) != -1) {
                         nodiFile.append((char) c);
                     }
-                    String tuttiNodi = String.valueOf(nodiFile);
-                    String[] nodiSingoli = tuttiNodi.split("\r\n");
-                    for (String nodoSingolo : nodiSingoli) {
-                        ClsNodo daAggiungere = new ClsNodo();
-                        String[] datiNodo = nodoSingolo.split(",");
-                        daAggiungere.setId(datiNodo[0]);
-                        daAggiungere.setIdComune(datiNodo[1]);
-                        daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
-                        SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
-                        daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
-                        daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
-                        daAggiungere.setUsernameCreatore(datiNodo[5]);
-                        daAggiungere.setNome(datiNodo[6]);
-                        daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
-                        aggiungiNodo(daAggiungere);
+                    if(nodiFile.length()>1) {
+                        String tuttiNodi = String.valueOf(nodiFile);
+                        String[] nodiSingoli = tuttiNodi.split("\r\n");
+                        for (String nodoSingolo : nodiSingoli) {
+                            ClsNodo daAggiungere = new ClsNodo();
+                            String[] datiNodo = nodoSingolo.split(",");
+                            daAggiungere.setId(datiNodo[0]);
+                            daAggiungere.setIdComune(datiNodo[1]);
+                            daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
+                            SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
+                            daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
+                            daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
+                            daAggiungere.setUsernameCreatore(datiNodo[5]);
+                            daAggiungere.setNome(datiNodo[6]);
+                            daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
+                            aggiungiNodo(daAggiungere);
+                        }
+                        maxID();
                     }
-                    maxID();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

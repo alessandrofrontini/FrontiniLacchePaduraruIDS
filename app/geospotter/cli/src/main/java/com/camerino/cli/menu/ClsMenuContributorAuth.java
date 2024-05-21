@@ -23,12 +23,14 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 
 public class ClsMenuContributorAuth implements IMenu{
     private ClsContributorAutorizzato user;
+    private ClsMenuContributor menuc;
+    public ClsMenuContributor getMenuc(){return menuc;}
     Scanner in = new Scanner(System.in);
     public ClsMenuContributorAuth(ClsContributorAutorizzato c){user = c;}
     @Override
     public void menu() {
-       ClsMenuContributor menuc = new ClsMenuContributor(user);
-        menuc.menu();
+       menuc = new ClsMenuContributor(user);
+       menuc.menu();
     }
 
 }

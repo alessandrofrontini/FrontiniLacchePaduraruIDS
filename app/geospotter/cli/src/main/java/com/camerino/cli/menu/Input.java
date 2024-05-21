@@ -11,6 +11,7 @@ import javax.naming.AuthenticationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
@@ -223,21 +224,17 @@ public class Input
 
     public static ClsRecensione inserisciRecensione(){
         ClsRecensione recensione = new ClsRecensione();
-        println("Inserisci l'ID del contenuto da recensire");
-        String idContenuto = in.nextLine();
-        if(idContenuto == null){
-            println("Errore.");
-            return null;
+        println("Inserisci l'ID del nodo da recensire");
+        String input = in.nextLine();
+        if(checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+            recensione.setIdContenutoAssociato(input);
         }
-        recensione.setIdContenutoAssociato(idContenuto);
+        else return null;
         println("Dai un punteggio da 1 a 5");
-        String punteggio = "+";
-        punteggio += in.nextLine();
-        if(punteggio == "+"){
-            println("Errore.");
-            return null;
-        }
-        recensione.setValutazione(Double.parseDouble(punteggio));
+        String punteggio = in.nextLine();
+        if((Double.parseDouble(punteggio)<1)||(Double.parseDouble(punteggio)>5))
+            recensione.setValutazione(Double.parseDouble(punteggio));
+        else return null;
         println("Scegli un titolo per la recensione");
         recensione.setOggetto(in.nextLine());
         println("Aggiungi una descrizione");
@@ -304,5 +301,8 @@ public class Input
                 return false;
         }
         return true;
+    }
+    private static boolean checkValore(String input, ArrayList<String> range){
+        return range.contains(input);
     }
 }
