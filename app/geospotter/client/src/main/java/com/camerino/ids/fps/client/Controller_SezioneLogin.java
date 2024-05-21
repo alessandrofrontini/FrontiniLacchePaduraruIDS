@@ -3,10 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.fps.client.iper.IperItinerari;
-import com.camerino.ids.fps.client.iper.IperNodi;
-import com.camerino.ids.fps.client.iper.IperRecensioni;
-import com.camerino.ids.fps.client.iper.IperSegnalazioni;
+import com.camerino.ids.fps.client.iper.*;
 import com.camerino.ids.fps.client.visual.ClsUtenteJWTDecode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +36,8 @@ public class Controller_SezioneLogin
         UTENTE.setIperSegnalazioni(new IperSegnalazioni());
         UTENTE.setpItinerari(new IperItinerari());
         UTENTE.setIperRecensioni(new IperRecensioni());
+        UTENTE.setpImmagini(new IperImmagini());
+        ((ClsTuristaAutenticato)UTENTE).setIperRDCImmagini(new IperRCDImmagini());
     }
     //endregion
     public void logga ()

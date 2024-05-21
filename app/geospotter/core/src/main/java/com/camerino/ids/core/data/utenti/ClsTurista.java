@@ -127,6 +127,17 @@ public class ClsTurista implements ISignalable {
         return this.iperRecensioni.get(null);
     }
 
-    //endregion
+    public ArrayList<ClsImmagine> getAllImmagini() {
+        return this.pImmagini.get(null);
+    }
+
+    public IPersistenceModel<ClsImmagine> getpImmagini() {
+        return pImmagini;
+    }
+
+    public void setpImmagini(IPersistenceModel<ClsImmagine> pImmagini) {
+        this.pImmagini = pImmagini;
+    }
+//endregion
 
 }

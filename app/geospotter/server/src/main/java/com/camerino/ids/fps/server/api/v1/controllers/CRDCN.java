@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@Deprecated
 public class CRDCN {
     SRDC sRDC;
     public final static String mapping = BaseUrl.baseUrl+"/rdcn";
@@ -23,10 +24,9 @@ public class CRDCN {
     public ResponseEntity<ArrayList<ClsRichiestaAzioneDiContribuzione>> getRDC(
             @RequestParam(value = "idRDC", required = false) String idRDC
     ) {
-
-        if(idRDC == null)
-            return ResponseEntity.ok(sRDC.getAllRDC());
-        return ResponseEntity.ok(sRDC.getRDCById(idRDC));
+        if(idRDC != null)
+            return ResponseEntity.ok(sRDC.getRDCById(idRDC));
+        return ResponseEntity.ok(sRDC.getAllRDC());
     }
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(

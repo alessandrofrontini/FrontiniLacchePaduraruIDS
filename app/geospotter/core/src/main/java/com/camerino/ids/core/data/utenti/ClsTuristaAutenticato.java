@@ -1,5 +1,7 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
@@ -22,6 +24,12 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+    public boolean postRDCImmagine(ClsRDCImmagine rdc) {
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        return iperRDCImmagini.insert(rdc);
+    }
+
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -44,6 +52,9 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             this.value = value;
         }
     }
+
+    transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;
+
     @Id
     @UuidGenerator
     String id;
@@ -51,8 +62,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali = new Credenziali();
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
-
-    String ruoloString;
     
     public ClsTuristaAutenticato(ClsTurista usr){
         this.pNodi = usr.pNodi;
@@ -77,7 +86,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
     public void setRuoloUtente(eRUOLO_UTENTE ruoloUtente) {
         this.ruoloUtente = ruoloUtente;
-        this.ruoloString = ruoloUtente.toString();
     }
 
     public Credenziali getCredenziali() {
@@ -197,6 +205,14 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
                 return null;
 
         }
+    }
+
+    public IPersistenceModel<ClsRDCImmagine> getIperRDCImmagini() {
+        return iperRDCImmagini;
+    }
+
+    public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
+        this.iperRDCImmagini = iperRDCImmagini;
     }
 
     public ArrayList<ClsTuristaAutenticato> getAllUtenti()

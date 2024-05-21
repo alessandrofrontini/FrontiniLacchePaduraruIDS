@@ -83,7 +83,7 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
         return creatore;
     }
 
-    public void setCreatore(ClsContributor creatore) {
+    public void setCreatore(ClsTuristaAutenticato creatore) {
         this.creatore = creatore;
     }
 

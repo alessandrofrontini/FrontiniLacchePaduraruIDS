@@ -1,5 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -93,5 +94,10 @@ public class ClsCuratore extends ClsAnimatore{
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", id);
         return pNodi.update(filters, nodo);
+    }
+
+    @Override
+    public boolean putRDCImmagine(ClsRDCImmagine rdci) {
+        return iperRDCImmagini.update(null, rdci);
     }
 }
