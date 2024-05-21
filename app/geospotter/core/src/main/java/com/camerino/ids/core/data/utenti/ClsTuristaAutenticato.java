@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -50,6 +51,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali = new Credenziali();
     int punteggio;
     eRUOLO_UTENTE ruoloUtente;
+
+    String ruoloString;
     
     public ClsTuristaAutenticato(ClsTurista usr){
         this.pNodi = usr.pNodi;
@@ -74,6 +77,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
     public void setRuoloUtente(eRUOLO_UTENTE ruoloUtente) {
         this.ruoloUtente = ruoloUtente;
+        this.ruoloString = ruoloUtente.toString();
     }
 
     public Credenziali getCredenziali() {
@@ -99,10 +103,12 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
     public ClsTuristaAutenticato() {}
 
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini, IPersistenceModel<ClsTuristaAutenticato> utenti)
+    {
 //    TODO    super(segnalazioni);
         iperRecensioni = recensioni;
         pImmagini = immagini;
+        iperUtenti = utenti;
     }
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
         //  TODO     super(segnalazioni);
@@ -192,4 +198,17 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
         }
     }
+
+    public ArrayList<ClsTuristaAutenticato> getAllUtenti()
+    {
+        return iperUtenti.get(null);
+    }
+
+    public ArrayList<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
+    {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("ruolo", ruolo);
+        return iperUtenti.get(filters);
+    }
+
 }

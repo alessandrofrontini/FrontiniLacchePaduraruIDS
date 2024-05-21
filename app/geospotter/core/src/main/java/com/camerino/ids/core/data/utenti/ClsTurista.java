@@ -19,6 +19,8 @@ public class ClsTurista implements ISignalable {
     transient IPersistenceModel<ClsSegnalazione> iperSegnalazioni;
     transient IPersistenceModel<ClsImmagine> pImmagini;
 
+    transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
+
     public ClsTurista(){}
 
     /**

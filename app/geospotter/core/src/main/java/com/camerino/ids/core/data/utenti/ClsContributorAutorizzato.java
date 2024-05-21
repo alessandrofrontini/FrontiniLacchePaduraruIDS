@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItiner
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import jakarta.persistence.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.HashMap;
  * Nodi e Itinerari direttamente senza creare richieste.
  * Questo ruolo si ottiene avendo 600+ punti.
  */
+@Entity
 public class ClsContributorAutorizzato extends ClsContributor {
 
     public ClsContributorAutorizzato(){}
