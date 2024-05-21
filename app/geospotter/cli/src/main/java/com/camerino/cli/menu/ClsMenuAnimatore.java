@@ -40,62 +40,17 @@ public class ClsMenuAnimatore implements IMenu{
                     println("0) Esci");
                     print(">> ");
                     switch (in.nextLine()) {
-                        case "12" -> menuCreaContestAperto();
-                        case "13" -> menuCreaContestChiuso();
-                        case "14" -> menuValidaContenutiContest();
-                        case "0" -> exit = true;
+                        case "12" :
+                        case "13" :
+                        case "14" : menuContest(); break;
+                        case "0" : exit = true;
                     }
                 }
                 else exit = true;
         }
     }
+    private void menuContest(){
+        println("Questa è una funzionalità presente su Geospotter Desktop.");
+    }
 
-    private void menuCreaContestAperto(){
-        user.creaContest(Input.creaContest());
-    }
-    private void menuCreaContestChiuso(){
-        user.creaContestChiuso(Input.creaContest(), Input.invitaUtenti(filtraUtentiContest()));
-    }
-    private ArrayList<ClsContributor> filtraUtentiContest(){
-        ArrayList<ClsContributor> contributors = new ArrayList<>();
-        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
-            if(t.getRuoloUtente() == ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR){
-                contributors.add((ClsContributor) t);
-            }
-        }
-        return contributors;
-    }
-    private void menuValidaContenutiContest(){
-        println("ID dei miei contest:");
-        for(ClsContestDiContribuzione c:user.visualizzaContestPossessore()){
-            println(c.getId());
-        }
-        print("Seleziona l'id: ");
-        String input = in.nextLine();
-        if(input != null){
-            println("richieste:");
-            ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = MockLocator.getMockRCD().get(null);
-            int i = 0;
-            for(ClsRichiestaAzioneDiContribuzione r:richieste){
-                if(r.getDatiNodo().getIdContest() == input){
-                    println(i + " - n. " + r.getId());
-                    i++;
-                }
-            }
-            input = in.nextLine();
-            if(input != null){
-                println("richiesta n. " + input);
-                ClsRichiestaAzioneDiContribuzione richiesta = richieste.get(Integer.parseInt(input));
-                richiesta.getDatiNodo().visualizzaNodo();
-                println("Validare?Y/N");
-                input = in.nextLine();
-                if(input == "Y")
-                    user.validaContenutoContest(richiesta, true);
-                else
-                    user.validaContenutoContest(richiesta, true);
-            }
-            else println("Errore.");
-        }
-        else println("Errore.");
-    }
 }

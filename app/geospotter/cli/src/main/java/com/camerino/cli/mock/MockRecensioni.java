@@ -1,9 +1,11 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -20,14 +22,17 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     //region CRUD metodi
     @Override
     public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
-        ArrayList<ClsRecensione> r = new ArrayList<>();
-        if(filters.containsKey("id")){
-            r.add(getRecensioneByID(filters.get("id").toString()));
-            return r;
-        }
-        if(filters.containsKey("usernameCreatore")){
-            r.addAll(getRecensioneByUsername((String) filters.get("usernameCreatore")));
-            return r;
+        if(filters!=null) {
+            ArrayList<ClsRecensione> r = new ArrayList<>();
+            if (filters.containsKey("id")) {
+                r.add(getRecensioneByID(filters.get("id").toString()));
+                return r;
+            }
+            if (filters.containsKey("usernameCreatore")) {
+                r.addAll(getRecensioneByUsername((String) filters.get("usernameCreatore")));
+                return r;
+            }
+
         }
         return this.recensioni;
     }
@@ -80,34 +85,44 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     }
 
     public void leggiRecensioni(){
-        try{
-            FileReader input = new FileReader("CLIsave/recensioni.txt");
-            StringBuilder tutte = new StringBuilder();
-            int c;
-            while((c= input.read())!=-1) {
-                tutte.append((char) c);
+        File f = new File("CLIsave/recensioni.csv");
+        if(f.exists()) {
+            try {
+                FileReader input = new FileReader(f);
+                StringBuilder tutte = new StringBuilder();
+                int c;
+                while ((c = input.read()) != -1) {
+                    tutte.append((char) c);
+                }
+                String tutteRecensioni = String.valueOf(tutte);
+                String[] recensioni = tutteRecensioni.split("\r\n");
+                for (String recensione : recensioni) {
+                    String[] dati = recensione.split(",");
+                    ClsRecensione nuova = new ClsRecensione();
+                    nuova.setId(dati[0]);
+                    nuova.setUsernameCreatore(dati[1]);
+                    nuova.setIdContenutoAssociato(dati[2]);
+                    nuova.setValutazione(Double.parseDouble(dati[3]));
+                    nuova.setOggetto(dati[4]);
+                    nuova.setContenuto(dati[5]);
+                    aggiungiRecensione(nuova);
+                }
+                maxID();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            String tutteRecensioni = String.valueOf(tutte);
-            String [] recensioni = tutteRecensioni.split("\r\n");
-            for(String recensione:recensioni){
-                String [] dati = recensione.split(",");
-                ClsRecensione nuova = new ClsRecensione();
-                nuova.setId(dati[0]);
-                nuova.setUsernameCreatore(dati[1]);
-                nuova.setIdContenutoAssociato(dati[2]);
-                nuova.setValutazione(Double.parseDouble(dati[3]));
-                nuova.setOggetto(dati[4]);
-                nuova.setContenuto(dati[5]);
-                aggiungiRecensione(nuova);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
+        }
+    }
+    private void maxID(){
+        for(ClsRecensione i:recensioni){
+            if(Long.parseLong(i.getId())>this.idCounter)
+                this.idCounter = Long.parseLong(i.getId());
         }
     }
 
     public void scriviRecensioni(){
         try{
-            FileWriter output = new FileWriter("CLIsave/recensioni.txt");
+            FileWriter output = new FileWriter("CLIsave/recensioni.csv");
             StringBuilder tutte = new StringBuilder();
             for(ClsRecensione r:recensioni){
                 tutte.append(r.getId() + "," + r.getUsernameCreatore() + "," + r.getIdContenutoAssociato() + "," + r.getValutazione() + "," + r.getOggetto() + "," + r.getContenuto() + "\r\n");

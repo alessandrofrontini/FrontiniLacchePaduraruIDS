@@ -2,11 +2,13 @@ package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Array;
@@ -23,18 +25,20 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
     //region CRUD metodi
         @Override
         public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
-            ArrayList<ClsNodo> nodi = new ArrayList<>();
-            if(filters.containsKey("id")){
-                nodi.add(getNodoById(filters.get("id").toString()));
-                return nodi;
-            }
-            if (filters.containsKey("idComune")) {
-                nodi.addAll(filterByIdComune(filters.get("idComune")));
-                return nodi;
-            }
-            if (filters.containsKey("usernameCreatore")) {
-                nodi.addAll(filterByUsername(filters.get("usernameCreatore")));
-                return nodi;
+            if(filters!=null) {
+                ArrayList<ClsNodo> nodi = new ArrayList<>();
+                if (filters.containsKey("id")) {
+                    nodi.add(getNodoById(filters.get("id").toString()));
+                    return nodi;
+                }
+                if (filters.containsKey("idComune")) {
+                    nodi.addAll(filterByIdComune(filters.get("idComune")));
+                    return nodi;
+                }
+                if (filters.containsKey("usernameCreatore")) {
+                    nodi.addAll(filterByUsername(filters.get("usernameCreatore")));
+                    return nodi;
+                }
             }
             return this.nodi;
         }
@@ -99,21 +103,23 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         //endregion
 
         public void leggiNodi(){
-            try{
-                FileReader input = new FileReader("CLIsave/nodi.txt");
-                StringBuilder nodiFile = new StringBuilder();
-                int c;
-                while((c= input.read())!=-1) {
-                    nodiFile.append((char) c);
-                }
-                String tuttiNodi = String.valueOf(nodiFile);
-                String [] nodiSingoli = tuttiNodi.split("\r\n");
-                for(String nodoSingolo:nodiSingoli) {
-                    ClsNodo daAggiungere = new ClsNodo();
-                    String[] datiNodo = nodoSingolo.split(",");
-                    daAggiungere.setId(datiNodo[0]);
-                    daAggiungere.setIdComune(datiNodo[1]);
-                    daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
+            File f = new File("CLIsave/nodi.csv");
+            if(f.exists()) {
+                try {
+                    FileReader input = new FileReader(f);
+                    StringBuilder nodiFile = new StringBuilder();
+                    int c;
+                    while ((c = input.read()) != -1) {
+                        nodiFile.append((char) c);
+                    }
+                    String tuttiNodi = String.valueOf(nodiFile);
+                    String[] nodiSingoli = tuttiNodi.split("\r\n");
+                    for (String nodoSingolo : nodiSingoli) {
+                        ClsNodo daAggiungere = new ClsNodo();
+                        String[] datiNodo = nodoSingolo.split(",");
+                        daAggiungere.setId(datiNodo[0]);
+                        daAggiungere.setIdComune(datiNodo[1]);
+                        daAggiungere.setaTempo(Boolean.parseBoolean(datiNodo[2]));
                         SimpleDateFormat tmp = new SimpleDateFormat("yyyy-MM-dd");
                         daAggiungere.setDataFine(tmp.parse(datiNodo[3]));
                         daAggiungere.setTipologiaNodo(ClsNodo.eTologiaNodo.valueOf(datiNodo[4]));
@@ -122,15 +128,22 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                         daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
                         aggiungiNodo(daAggiungere);
                     }
-            } catch(Exception e){
-                e.printStackTrace();
+                    maxID();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-
+        private void maxID(){
+            for(ClsNodo i:nodi){
+                if(Long.parseLong(i.getId())>this.idCounter)
+                    this.idCounter = Long.parseLong(i.getId());
+            }
+        }
         public void scriviNodi(){
             try{
-                FileWriter output = new FileWriter("CLIsave/nodi.txt");
-                StringBuilder daScrivere = new StringBuilder("");
+                FileWriter output = new FileWriter("CLIsave/nodi.csv");
+                StringBuilder daScrivere = new StringBuilder();
                 for(ClsNodo nodo:nodi){
                     SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 

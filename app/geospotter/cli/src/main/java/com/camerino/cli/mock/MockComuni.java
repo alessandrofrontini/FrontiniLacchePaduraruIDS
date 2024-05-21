@@ -1,11 +1,13 @@
 package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -102,39 +104,47 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 //SPLITTARE PER \r\n, ; e ,
     public void leggiComuni()
     {
-        try {
-            FileReader input = new FileReader("CLIsave/comuni.txt");
-            StringBuilder comuniFile = new StringBuilder();
-            int c;
-            while((c= input.read())!=-1) {
-                comuniFile.append((char) c);
+        File f = new File("CLIsave/comuni.csv");
+        if(f.exists()) {
+            try {
+                FileReader input = new FileReader(f);
+                StringBuilder comuniFile = new StringBuilder();
+                int c;
+                while ((c = input.read()) != -1) {
+                    comuniFile.append((char) c);
+                }
+                String comuniTotal = String.valueOf(comuniFile);
+                String[] comuniACapo = comuniTotal.split("\r\n");
+                for (String comune : comuniACapo) {
+                    ClsComune daAggiungere = new ClsComune();
+                    String[] dati = comune.split(",");
+                    daAggiungere.setId(dati[0]);
+                    daAggiungere.setNome(dati[1]);
+                    daAggiungere.setDescrizione(dati[2]);
+                    Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
+                    daAggiungere.setPosizione(p);
+                    daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
+                    daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
+                    ArrayList<String> curatori = new ArrayList<>();
+                    curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
+                    daAggiungere.setCuratoriAssociati(curatori);
+                    comuni.add(daAggiungere);
+                }
+                maxID();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            String comuniTotal = String.valueOf(comuniFile);
-            String [] comuniACapo = comuniTotal.split("\r\n");
-            for(String comune:comuniACapo){
-                ClsComune daAggiungere = new ClsComune();
-                String [] dati = comune.split(",");
-                daAggiungere.setId(dati[0]);
-                daAggiungere.setNome(dati[1]);
-                daAggiungere.setDescrizione(dati[2]);
-                Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
-                daAggiungere.setPosizione(p);
-                daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
-                daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
-                ArrayList<String> curatori = new ArrayList<>();
-                curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
-                daAggiungere.setCuratoriAssociati(curatori);
-                insert(daAggiungere);
-            }
-        } catch (Exception e){
-            ClsConsoleLogger.println("File non trovato.");
         }
-
     }
-
+    private void maxID(){
+        for(ClsComune rc:comuni){
+            if(this.id<Long.parseLong(rc.getId()))
+                this.id = Long.parseLong(rc.getId());
+        }
+    }
     public void scriviComuni(){
         try {
-            FileWriter output = new FileWriter("CLIsave/comuni.txt");
+            FileWriter output = new FileWriter("CLIsave/comuni.csv");
             StringBuilder daScrivere = new StringBuilder("");
             for(ClsComune comune:comuni){
                 daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");

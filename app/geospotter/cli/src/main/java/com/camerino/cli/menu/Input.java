@@ -130,29 +130,29 @@ public class Input
     //endregion
     //region Input Comuni
     //non considera l'associazione con il curatore(fatta dopo)
-    public static ClsComune inserisciComune()
+    public static ClsComune inserisciComune(boolean o, ClsComune old)
     {
         ClsComune comune = new ClsComune();
+        if(o)
+            comune = old;
         Posizione pos = new Posizione();
-            print("Inserisci nome: ");
+            print("Inserisci nome" + (o? " (Old: " + old.getNome() + "): ":": "));
             comune.setNome(in.nextLine());
-            print("Inserisci coordinata X: ");
+            print("Inserisci coordinata X: " + (o? " (Old: " + old.getPosizione().getX() + "): ":": "));
             pos.setX(Double.parseDouble(in.nextLine()));
-            print("Inserisci coordinata Y: ");
+            print("Inserisci coordinata Y: "+ (o? " (Old: " + old.getPosizione() .getY()+ "): ":": "));
             pos.setY(Double.parseDouble(in.nextLine()));
             comune.setPosizione(pos);
-            print("Inserisci numero abitanti: ");
+            print("Inserisci numero abitanti: "+ (o? " (Old: " + old.getAbitanti() + "): ":": "));
             comune.setAbitanti(Integer.parseInt(in.nextLine()));
-            print("Inserisci superficie: ");
+            print("Inserisci superficie: "+ (o? " (Old: " + old.getSuperficie() + "): ":": "));
             comune.setSuperficie(Double.parseDouble(in.nextLine()));
-            print("Inserisci descrizione: ");
+            print("Inserisci descrizione: "+ (o? " (Old: " + old.getDescrizione() + "): ":": "));
             comune.setDescrizione(in.nextLine());
 
         return comune;
     }
     //endregion
-
-
 
     public static ClsItinerario richiediItinerario(){
         boolean ok = false;

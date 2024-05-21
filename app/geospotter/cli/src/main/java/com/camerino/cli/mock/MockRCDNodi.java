@@ -9,6 +9,7 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.ParseException;
@@ -86,35 +87,38 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         return tmp;
     }
     public void leggiRCD(){
-        try{
-            FileReader input = new FileReader("CLIsave/rcd.txt");
-            StringBuilder tutti = new StringBuilder();
-            int c;
-            while((c= input.read())!=-1) {
-                tutti.append((char) c);
-            }
-            String rcdstutti = String.valueOf(tutti);
-            String [] rcds = rcdstutti.split("\r\n");
-            if(!Objects.equals(rcds[0], "")) {
-                for (String s : rcds) {
-                    String[] dati = s.split(",");
-                    ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
-                    switch (dati[0]) {
-                        case "ELIMINA_NODO":
-                        case "MODIFICA_NODO":
-                        case "INSERISCI_NODO":
-                            rcd = leggiRichiestaNodo(dati);
-                            break;
-                        case "INSERISCI_IMMAGINE":
-                            rcd = leggiRichiestaImmagine(dati);
-                            break;
-                    }
-                    rcdi.add(rcd);
+        File f = new File("CLIsave/rcd.csv");
+        if(f.exists()) {
+            try {
+                FileReader input = new FileReader(f);
+                StringBuilder tutti = new StringBuilder();
+                int c;
+                while ((c = input.read()) != -1) {
+                    tutti.append((char) c);
                 }
-                maxID(rcdi);
+                String rcdstutti = String.valueOf(tutti);
+                String[] rcds = rcdstutti.split("\r\n");
+                if (!Objects.equals(rcds[0], "")) {
+                    for (String s : rcds) {
+                        String[] dati = s.split(",");
+                        ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
+                        switch (dati[0]) {
+                            case "ELIMINA_NODO":
+                            case "MODIFICA_NODO":
+                            case "INSERISCI_NODO":
+                                rcd = leggiRichiestaNodo(dati);
+                                break;
+                            case "INSERISCI_IMMAGINE":
+                                rcd = leggiRichiestaImmagine(dati);
+                                break;
+                        }
+                        rcdi.add(rcd);
+                    }
+                    maxID(rcdi);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch(Exception e){
-            e.printStackTrace();
         }
     }
     private ClsRichiestaAzioneDiContribuzione leggiRichiestaNodo(String [] dati) throws ParseException {
@@ -156,7 +160,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
 
     public void scriviRCD(){
         try{
-            FileWriter output = new FileWriter("CLIsave/rcd.txt");
+            FileWriter output = new FileWriter("CLIsave/rcd.csv");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRichiestaAzioneDiContribuzione r:rcdi){
                 daScrivere.append(r.geteAzioneDiContribuzione() + "," + r.getUsernameCreatoreRichiesta() + "," + r.getId() + ",");

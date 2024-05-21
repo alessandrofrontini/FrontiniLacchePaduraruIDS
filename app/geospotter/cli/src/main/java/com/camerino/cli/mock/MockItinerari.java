@@ -34,14 +34,16 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
     @Override
     public ArrayList<ClsItinerario> get(HashMap<String, Object> filters) {
-        ArrayList<ClsItinerario> tmp = new ArrayList<>();
-        if(filters.containsKey("id")) {
-            tmp.add(getItinerarioById(filters.get("id").toString()));
-            return tmp;
-        }
-        if(filters.containsKey("usernameCreatore")) {
-            tmp.add(getItinerarioByCreatore(filters.get("usernameCreatore").toString()));
-            return tmp;
+        if(filters!=null) {
+            ArrayList<ClsItinerario> tmp = new ArrayList<>();
+            if (filters.containsKey("id")) {
+                tmp.add(getItinerarioById(filters.get("id").toString()));
+                return tmp;
+            }
+            if (filters.containsKey("usernameCreatore")) {
+                tmp.add(getItinerarioByCreatore(filters.get("usernameCreatore").toString()));
+                return tmp;
+            }
         }
         return itinerari;
     }
@@ -129,7 +131,6 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
             }
         }
     }
-
     public void scriviItinerari(){
         try {
             FileWriter output = new FileWriter("CLIsave/itinerari.csv");

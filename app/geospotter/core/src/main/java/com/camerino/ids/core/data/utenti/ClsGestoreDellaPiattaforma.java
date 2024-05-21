@@ -72,5 +72,16 @@ public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHall
     public ArrayList<ClsComune> visualizzaComuni(){
         return mockComuni.get(null);        
     }
+
+    public ArrayList<ClsRichiestaAzioneDiContribuzione> getRichieste(){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("usernameCuratore",  "null");
+        return pRDC.get(filtro);
+    }
+    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRichiesteItinerari(){
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("usernameCuratore",  "null");
+        return pRDCI.get(filtro);
+    }
 //endregion
 }
