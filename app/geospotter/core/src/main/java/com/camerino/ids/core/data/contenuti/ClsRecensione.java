@@ -17,7 +17,6 @@ public class ClsRecensione extends ClsInformazione{
     String contenuto;
 
     //region Getter e setter
-
     public String getIdContenutoAssociato() {
         return idContenutoAssociato;
     }

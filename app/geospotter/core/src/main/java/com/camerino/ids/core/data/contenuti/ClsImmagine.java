@@ -27,7 +27,6 @@ public class ClsImmagine extends ClsInformazione
     public String getURL() {
         return URL;
     }
-
     public void setURL(String URL) {
         this.URL = URL;
     }
