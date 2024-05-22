@@ -12,8 +12,4 @@ import java.util.List;
 public interface RepoRecensioni extends JpaRepository<ClsRecensione, String> {
     @Query(value = "Select r from ClsRecensione r WHERE r.idContenutoAssociato= ?1")
     List<ClsRecensione> findRecensioniByNodo(String idNodo);
-
-    @Modifying
-    @Query("update ClsRecensione r set r = ?1 WHERE r.id = ?2")
-    void updateRecensioneById(ClsRecensione object, String idRecensione);
 }

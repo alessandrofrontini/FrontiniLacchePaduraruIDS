@@ -53,7 +53,6 @@ public class FiltLogin extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         request.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
-        System.out.println(iperUtenti);
         filterChain.doFilter(request, response);
     }
 

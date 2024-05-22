@@ -10,6 +10,7 @@ import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -24,6 +25,9 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini) {
+    }
+
     public boolean postRDCImmagine(ClsRDCImmagine rdc) {
         rdc.setCreatore(this);
         rdc.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
@@ -206,11 +210,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
         }
     }
-
+    @Transient
     public IPersistenceModel<ClsRDCImmagine> getIperRDCImmagini() {
         return iperRDCImmagini;
     }
-
+    @Transient
     public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
         this.iperRDCImmagini = iperRDCImmagini;
     }

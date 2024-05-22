@@ -28,7 +28,7 @@ public class CSegnalazioni {
     @PostMapping(mapping)
     public ResponseEntity<Boolean> postSegnalazioni(
             @RequestBody ClsSegnalazione segnalazione) {
-        System.out.println("Segnalazione ricevuta "+segnalazione.visualizzaSegnalazione());
+        //System.out.println("Segnalazione ricevuta "+segnalazione.visualizzaSegnalazione());
 
         return ResponseEntity.ok(sSegnalazioni.creaSegnalazione(segnalazione));
     }

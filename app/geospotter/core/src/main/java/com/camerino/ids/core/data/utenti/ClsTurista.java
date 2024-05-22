@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ClsTurista implements ISignalable {
     @Transient
     transient IPersistenceModel<ClsImmagine> pImmagini;
     @Transient
+@JsonIgnore
     transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
 
     public ClsTurista(){}
@@ -70,6 +72,7 @@ public class ClsTurista implements ISignalable {
     }
 
 //region Getters and Settera
+@Transient
     public IPersistenceModel<ClsNodo> getpNodi() {
         return pNodi;
     }
@@ -77,7 +80,7 @@ public class ClsTurista implements ISignalable {
     public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
         this.pNodi = pNodi;
     }
-
+    @Transient
     public IPersistenceModel<ClsItinerario> getpItinerari() {
         return pItinerari;
     }
@@ -85,7 +88,7 @@ public class ClsTurista implements ISignalable {
     public void setpItinerari(IPersistenceModel<ClsItinerario> pItinerari) {
         this.pItinerari = pItinerari;
     }
-
+    @Transient
     public IPersistenceModel<ClsComune> getMockComuni() {
         return mockComuni;
     }
@@ -93,7 +96,7 @@ public class ClsTurista implements ISignalable {
     public void setMockComuni(IPersistenceModel<ClsComune> mockComuni) {
         this.mockComuni = mockComuni;
     }
-
+    @Transient
     public IPersistenceModel<ClsRecensione> getIperRecensioni() {
         return iperRecensioni;
     }
@@ -101,7 +104,7 @@ public class ClsTurista implements ISignalable {
     public void setIperRecensioni(IPersistenceModel<ClsRecensione> iperRecensioni) {
         this.iperRecensioni = iperRecensioni;
     }
-
+    @Transient
     public IPersistenceModel<ClsSegnalazione> getIperSegnalazioni() {
         return iperSegnalazioni;
     }
@@ -145,7 +148,8 @@ public class ClsTurista implements ISignalable {
     public void setpImmagini(IPersistenceModel<ClsImmagine> pImmagini) {
         this.pImmagini = pImmagini;
     }
-
+    @JsonIgnore
+    @Transient
     public IPersistenceModel<ClsTuristaAutenticato> getIperUtenti() {
         return iperUtenti;
     }
