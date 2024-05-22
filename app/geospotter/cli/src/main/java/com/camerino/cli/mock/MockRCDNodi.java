@@ -25,17 +25,18 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     //region Implements IPersistance
     @Override
     public ArrayList<ClsRichiestaAzioneDiContribuzione> get(HashMap<String, Object> filters) {
-        ArrayList<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
-        if(filters.containsKey("id")) {
-            tmp.add(findById(filters.get("id").toString()));
-            return tmp;
-        }
-        if(filters.containsKey("usernameCuratore")) {
-            if(findLibere() != null){
-                tmp.addAll(findLibere());
+        if(filters!=null) {
+            ArrayList<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
+            if (filters.containsKey("id")) {
+                tmp.add(findById(filters.get("id").toString()));
                 return tmp;
             }
-            else return null;
+            if (filters.containsKey("usernameCuratore")) {
+                if (findLibere() != null) {
+                    tmp.addAll(findLibere());
+                    return tmp;
+                } else return null;
+            }
         }
         return rcdi;
     }

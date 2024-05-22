@@ -14,9 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
+import static com.camerino.cli.menu.Input.checkValore;
+
 public class ClsMenuContributor implements IMenu{
     private ClsContributor user;
     Scanner in = new Scanner(System.in);
@@ -78,14 +81,24 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
-    public void menuEliminaNodo() { //da mettere su Input
+    public void menuEliminaNodo() {
         if (!user.visualizzaNodiPosessore().isEmpty()) {
             for(ClsNodo n: user.visualizzaNodiPosessore())
                 println(n.visualizzaNodo());
-            println("inserisci l'id del nodo da eliminare");
-            if (user.eliminaNodo((in.nextLine())))
-                println("Richiesta di eliminazione inviata.");
-            else println("Errore");
+            boolean exit = false;
+            while(!exit) {
+                println("inserisci l'id del nodo da eliminare");
+                String input = in.nextLine();
+                if (checkValore(input, (ArrayList<String>) user.visualizzaNodiPosessore().stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+                    if (user.eliminaNodo((input))) {
+                        println("Richiesta di eliminazione inviata.");
+                        exit = true;
+                    }
+                } else{
+                    println("Nodo non presente. Riprova");
+                    in.nextLine();
+                }
+            }
         }
     }
 
@@ -96,15 +109,29 @@ public class ClsMenuContributor implements IMenu{
     public void menuModificaItinerario(){
         for(ClsItinerario itinerario:user.visualizzaItinerariPossessore())
             println(itinerario.visualizzaItinerario());
-        println("inserisci l'id dell'itinerario");
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", in.nextLine());
-        ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
-        if(itinerario != null){
-            ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
-            user.modificaItinerario(nuovo, itinerario);
+        boolean exit = false;
+        while(!exit) {
+            println("inserisci l'id dell'itinerario");
+            String input = in.nextLine();
+            if (checkValore(input, (ArrayList<String>) user.visualizzaItinerariPossessore().stream().map(ClsItinerario::getId).collect(Collectors.toList()))) {
+                HashMap<String, Object> tmp = new HashMap<>();
+                tmp.put("id", input);
+                ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
+                if (itinerario != null) {
+                    ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
+                    user.modificaItinerario(nuovo, itinerario);
+                    println("Richiesta di modifica effettuata correttamente.");
+                    in.nextLine();
+                    exit = true;
+                } else{
+                    println("Errore nella richiesta. Riprova.");
+                    in.nextLine();
+                }
+            } else {
+                println("Itinerario non presente. Riprova");
+                in.nextLine();
+            }
         }
-        else println("Errore");
     }
     private ClsItinerario sottomenuModificaItinerario(ClsItinerario itv){ //sentire chat gpt per doppia modifica in "modifica"
         ClsItinerario nuovo = new ClsItinerario();
@@ -113,8 +140,8 @@ public class ClsMenuContributor implements IMenu{
         nuovo.setUsernameCreatore(itv.getUsernameCreatore());
         nuovo.setOrdinato(itv.isOrdinato());
         ArrayList<ClsNodo> tappe = new ArrayList<>();
-        for(ClsNodo n:itv.getTappe())
-            tappe.add(n);
+        tappe.addAll(itv.getTappe());
+        String input;
         nuovo.setTappe(tappe);
         boolean exit = false;
         while(!exit){
@@ -126,33 +153,43 @@ public class ClsMenuContributor implements IMenu{
             switch(in.nextLine()){
                 case "1": print("inserisci il nuovo nome: "); nuovo.setNome(in.nextLine()); break;
                 case "2": {
+                    while(!exit) {
                         print("inserisci l'id della nuova tappa");
-                        String idTappa = in.nextLine();
-                        HashMap<String, Object> filtro = new HashMap<>();
-                        filtro.put("id", idTappa);
-                        if(controllaTappaDuplicataItinerario(nuovo, idTappa)){
-                            nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
-                            break;
+                        input = in.nextLine();
+                        if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", input);
+                            if (controllaTappaDuplicataItinerario(nuovo, input)) {
+                                nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
+                                exit = true;
+                                break;
+                            } else {
+                                println("Errore.");
+                                break;
+                            }
+                        } else {
+                            println("Nodo non esistente. Riprova");
+                            in.nextLine();
                         }
-                        else{
-                            println("Errore."); break;
-                        }
+                    }
                 }
                 case "3":{
                     for(ClsNodo nodo: nuovo.getTappe()){
                         println(nodo.visualizzaNodo());
                     }
-                    print("Inserisci l'id della tappa da eliminare");
-                    String idTappa = in.nextLine();
-                    if(!controllaTappaDuplicataItinerario(nuovo, idTappa)){
-                        HashMap<String, Object> filtro = new HashMap<>();
-                        filtro.put("id", idTappa);
-                        nuovo.rimuoviTappa(MockLocator.getMockNodi().get(filtro).get(0));
-                        break;
-                    }
-                    else{
-                        println("Errore.");
-                        break;
+                    while(exit) {
+                        print("Inserisci l'id della tappa da eliminare");
+                        String idTappa = in.nextLine();
+                        if (!controllaTappaDuplicataItinerario(nuovo, idTappa)) {
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", idTappa);
+                            nuovo.rimuoviTappa(MockLocator.getMockNodi().get(filtro).get(0));
+                            exit = false;
+                            break;
+                        } else {
+                            println("Errore.");
+                            break;
+                        }
                     }
                 }
                 case "4":{
@@ -175,6 +212,7 @@ public class ClsMenuContributor implements IMenu{
                 }
             }
         }
+        in.nextLine();
         return nuovo;
     }
     private boolean controllaTappaDuplicataItinerario(ClsItinerario itinerario, String idTappa){
@@ -185,15 +223,22 @@ public class ClsMenuContributor implements IMenu{
         return true;
     }
     public void menuEliminaItinerario(){
-        println("inserisci l'id dell'itinerario");
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", in.nextLine());
-        ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
-        if(itinerario != null) {
-            user.eliminaItinerario(itinerario.getId());
-            println("Richiesta di eliminazione effettuata.");
+        boolean exit = false;
+        while(!exit) {
+            println("inserisci l'id dell'itinerario");
+            String input = in.nextLine();
+            if (checkValore(input, (ArrayList<String>) MockLocator.getMockItinerari().get(null).stream().map(ClsItinerario::getId).collect(Collectors.toList()))) {
+                HashMap<String, Object> tmp = new HashMap<>();
+                tmp.put("id", in.nextLine());
+                ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
+                if (itinerario != null) {
+                    user.eliminaItinerario(itinerario.getId());
+                    println("Richiesta di eliminazione effettuata.");
+                    exit = true;
+                } else println("Errore. Riprova");
+                in.nextLine();
+            }
         }
-        else println("Errore");
     }
 
     public void sottoMenuContest(){
@@ -217,5 +262,4 @@ public class ClsMenuContributor implements IMenu{
     private void contest(){
         println("Questa è una funzionalità di Geospotter Desktop.");
     }
-
 }

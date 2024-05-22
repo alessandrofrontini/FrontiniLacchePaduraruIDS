@@ -23,17 +23,18 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     //region Implements IPersistance
     @Override
     public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(HashMap<String, Object> filters) {
-        ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
-        if(filters.containsKey("id")) {
-            tmp.add(findById((String) filters.get("id")));
-            return tmp;
-        }
-        if(filters.containsKey("usernameCuratore")){
-            if(findLibere() != null){
-                tmp.addAll(findLibere());
+        if(filters!=null) {
+            ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
+            if (filters.containsKey("id")) {
+                tmp.add(findById((String) filters.get("id")));
                 return tmp;
             }
-            else return null;
+            if (filters.containsKey("usernameCuratore")) {
+                if (findLibere() != null) {
+                    tmp.addAll(findLibere());
+                    return tmp;
+                } else return null;
+            }
         }
         return rcdi;
     }

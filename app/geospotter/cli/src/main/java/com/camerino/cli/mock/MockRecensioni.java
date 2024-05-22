@@ -23,6 +23,8 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     @Override
     public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
         if(filters!=null) {
+            if(recensioni.isEmpty())
+                return null;
             ArrayList<ClsRecensione> r = new ArrayList<>();
             if (filters.containsKey("id")) {
                 r.add(getRecensioneByID(filters.get("id").toString()));

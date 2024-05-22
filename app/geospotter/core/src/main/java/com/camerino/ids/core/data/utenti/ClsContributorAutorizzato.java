@@ -36,6 +36,12 @@ public class ClsContributorAutorizzato extends ClsContributor {
         return pNodi.insert(nodo);
     }
 
+    @Override
+    public boolean inserisciImmagine(ClsImmagine immagine) {
+        immagine.setUsernameCreatore(this.credenziali.getUsername());
+        return pImmagini.insert(immagine);
+    }
+
     /**
      * Modifica direttamente un qualsiasi nodo.
      *

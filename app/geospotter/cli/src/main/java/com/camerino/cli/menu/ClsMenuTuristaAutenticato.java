@@ -65,7 +65,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
     }
 
     public void menuModificaRecensione() {
-        if(!user.visualizzaRecensioniPosessore().isEmpty()) {
+        if(user.visualizzaRecensioniPosessore() != null) {
             for (ClsRecensione r : user.visualizzaRecensioniPosessore()) {
                 println(r.visualizzaRecensione());
             }

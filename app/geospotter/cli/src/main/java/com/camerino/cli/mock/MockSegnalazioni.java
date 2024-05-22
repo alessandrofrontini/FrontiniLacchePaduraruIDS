@@ -23,10 +23,12 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
     //region CRUD metodi
     @Override
     public ArrayList<ClsSegnalazione> get(HashMap<String, Object> filters) {
-        ArrayList<ClsSegnalazione> s = new ArrayList<>();
-        if(filters.containsKey("id")){
-            s.add(getSegnalazioneByID(filters.get("id").toString()));
-            return s;
+        if(filters!=null) {
+            ArrayList<ClsSegnalazione> s = new ArrayList<>();
+            if (filters.containsKey("id")) {
+                s.add(getSegnalazioneByID(filters.get("id").toString()));
+                return s;
+            }
         }
         return this.segnalazioni;
     }
