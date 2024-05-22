@@ -28,5 +28,10 @@
             <Font size="22.0" />
          </font>
       </PasswordField>
+      <Button layoutX="395.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#loggaBypass" prefHeight="26.0" prefWidth="178.0" text=":-)" textFill="#15ad34">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

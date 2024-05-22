@@ -26,7 +26,7 @@
                             <TableColumn fx:id="getSezioneEliminazioneRecensioniTableColumnContenuto" prefWidth="127.20000000000005" text="CONTENUTO" />
                         </columns>
                     </TableView>
-                    <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" layoutX="112.0" layoutY="378.0" onMouseExited="#visualizzaInformazioniAttualiRecensione" onMouseMoved="#visualizzaInformazioniAttualiRecensione" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
+                    <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" layoutX="112.0" layoutY="378.0" onMouseEntered="#visualizzaInformazioniAttualiRecensione" onMouseExited="#visualizzaInformazioniAttualiRecensione" onMouseMoved="#visualizzaInformazioniAttualiRecensione" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
                      <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione potrai modificare delle recensioni, sotto puoi trovare l'elenco&#10;delle recensioni della quale puoi richiedere una modifica. Selezionane una, aggiornane il contenuto e &#10;conferma la tua operazione.&#10;" />
                 </AnchorPane>
             </content>

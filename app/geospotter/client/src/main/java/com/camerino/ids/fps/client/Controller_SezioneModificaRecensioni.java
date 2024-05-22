@@ -130,7 +130,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
             itemes.add(nodi.get(i).getId());
         }
 
-        this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(items);
+        this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(itemes);
         //endregion
 
         //region setting up colonne tabella
@@ -233,7 +233,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         {
             for(int i = 0; i<recensioni.size();i++)
             {
-                if(recensioni.get(i).getId() == tmp)
+                if(Objects.equals(recensioni.get(i).getId(), tmp))
                 {
                     this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId());
                     this.oggetto.setText(recensioni.get(i).getOggetto());

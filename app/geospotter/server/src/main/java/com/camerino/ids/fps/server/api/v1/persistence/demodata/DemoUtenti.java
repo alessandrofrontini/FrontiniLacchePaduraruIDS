@@ -18,111 +18,92 @@ import java.util.ArrayList;
 public class DemoUtenti
 {
     @Bean
-    public CommandLineRunner aggiungiUtenti(RepoUtenti repo) {
+    public CommandLineRunner aggiungiUtenti(RepoUtenti repo)
+    {
+        //Stessi utenti lato client, copy-paste
         ArrayList<ClsTuristaAutenticato> utenti = new ArrayList<>();
 
-        //region turisti autenticati
-        for (int i = 1; i <= 10; i++) {
-            ClsTuristaAutenticato t = new ClsTuristaAutenticato();
-
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i); // Password univoca per ogni oggetto
-
-            t.setCredenziali(c);
-
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue() - 5 - i);
-
-            utenti.add(t);
-        }
-        //endregion
-
         //region contributor
-        for (int i = 1; i <= 10; i++) {
-            ClsContributor t = new ClsContributor();
+        ClsContributor con = new ClsContributor();
 
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i*2); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i*2); // Password univoca per ogni oggetto
+        Credenziali c1 = new Credenziali();
+        c1.setUsername("c"); // Username univoco per ogni oggetto
+        c1.setPassword("c"); // Password univoca per ogni oggetto
 
-            t.setCredenziali(c);
+        con.setCredenziali(c1);
 
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() - 5 - i);
-
-            utenti.add(t);
-        }
+        con.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+        con.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() - 5);
+        utenti.add(con);
         //endregion
 
         //region contributor auth
-        for (int i = 1; i <= 10; i++) {
-            ClsContributorAutorizzato t = new ClsContributorAutorizzato();
 
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i*3); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i*3); // Password univoca per ogni oggetto
+        ClsContributorAutorizzato conAuth = new ClsContributorAutorizzato();
 
-            t.setCredenziali(c);
+        Credenziali c2 = new Credenziali();
+        c2.setUsername("ca"); // Username univoco per ogni oggetto
+        c2.setPassword("ca"); // Password univoca per ogni oggetto
 
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 5 - i*2);
+        conAuth.setCredenziali(c2);
 
-            utenti.add(t);
-        }
+        conAuth.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        conAuth.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 150);
+
+        utenti.add(conAuth);
+
         //endregion
 
         //region animatore
-        for (int i = 1; i <= 10; i++) {
-            ClsAnimatore t = new ClsAnimatore();
 
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i*4); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i*4); // Password univoca per ogni oggetto
+        ClsAnimatore anim = new ClsAnimatore();
 
-            t.setCredenziali(c);
+        Credenziali c3 = new Credenziali();
+        c3.setUsername("a"); // Username univoco per ogni oggetto
+        c3.setPassword("a"); // Password univoca per ogni oggetto
 
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue() - 5 - i*4);
+        anim.setCredenziali(c3);
 
-            utenti.add(t);
-        }
+        anim.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+        anim.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue() - 380);
+
+        utenti.add(anim);
+
         //endregion
 
         //region curatore
-        for (int i = 1; i <= 10; i++) {
-            ClsCuratore t = new ClsCuratore();
 
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i*4); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i*4); // Password univoca per ogni oggetto
+        ClsCuratore cur = new ClsCuratore();
 
-            t.setCredenziali(c);
+        Credenziali c4 = new Credenziali();
+        c4.setUsername("cur"); // Username univoco per ogni oggetto
+        c4.setPassword("cur"); // Password univoca per ogni oggetto
 
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+        cur.setCredenziali(c4);
 
-            utenti.add(t);
-        }
+        cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+        cur.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+
+        utenti.add(cur);
+
         //endregion
 
         //region gestore
-        for (int i = 1; i <= 10; i++) {
-            ClsGestoreDellaPiattaforma t = new ClsGestoreDellaPiattaforma();
 
-            Credenziali c = new Credenziali();
-            c.setUsername("Username" + i*4); // Username univoco per ogni oggetto
-            c.setPassword("Password" + i*4); // Password univoca per ogni oggetto
+        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
 
-            t.setCredenziali(c);
+        Credenziali c8 = new Credenziali();
+        c8.setUsername("gdp"); // Username univoco per ogni oggetto
+        c8.setPassword("gdp"); // Password univoca per ogni oggetto
 
-            t.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-            t.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+        gdp.setCredenziali(c8);
 
-            utenti.add(t);
-        }
+        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+
+        utenti.add(gdp);
+
         //endregion
-
 
         return args -> repo.saveAll(utenti);
     }

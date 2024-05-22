@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.fps.client.utils.TMP_ServizioAutenticazione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsUtenteVisual;
 import javafx.collections.FXCollections;
@@ -25,6 +26,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static com.camerino.ids.fps.client.utils.TMP_ServizioAutenticazione.utentiLegit;
 
 public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 {
@@ -68,46 +71,14 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
     Utils u = new Utils();
     ArrayList<ClsTuristaAutenticato> utenti;
-    ArrayList<String> ruoli;
+    ArrayList<String> ruoli; //Statico
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
 
-        utenti = new ArrayList<>();
+        utenti = utentiLegit;
         ruoli = new ArrayList<>();
-
-        //region Creazione utenti dummy
-        ClsTuristaAutenticato u1 = new ClsTuristaAutenticato();
-        u1.setId("1");
-        u1.setPunteggio(49);
-        u1.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-        Credenziali c1 = new Credenziali();
-        c1.setUsername("utente1");
-        c1.setPassword("password1");
-        u1.setCredenziali(c1);
-        utenti.add(u1);
-
-        ClsTuristaAutenticato u2 = new ClsTuristaAutenticato();
-        u2.setId("2");
-        u2.setPunteggio(192);
-        u2.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-        Credenziali c2 = new Credenziali();
-        c2.setUsername("utente2");
-        c2.setPassword("password2");
-        u2.setCredenziali(c2);
-        utenti.add(u2);
-
-        ClsTuristaAutenticato u3 = new ClsTuristaAutenticato();
-        u3.setId("3");
-        u3.setPunteggio(999);
-        u3.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-        Credenziali c3 = new Credenziali();
-        c3.setUsername("utente3");
-        c3.setPassword("password3");
-        u3.setCredenziali(c3);
-        utenti.add(u3);
-        //endregion
 
         //region Creazioni ruoli possibili
         ruoli.add("TURISTA_AUTENTICATO");
@@ -191,10 +162,29 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setPassword(password);
                             ta.setCredenziali(cta);
                             ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-                            ta.setPunteggio(Integer.parseInt(punteggio));
+
+                            if(Integer.parseInt(punteggio) < 0)
+                            {
+                                ta.setPunteggio(0);
+                            }
+                            else
+                            {
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                                {
+                                    ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+                                }
+                                else
+                                {
+                                    ta.setPunteggio(Integer.parseInt(punteggio));
+                                }
+                            }
+
+
+                            ta.setId(utentiLegit.size() + 1 + "");
+                            TMP_ServizioAutenticazione.inserisciUtente(ta);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
+                            alert.setTitle("Ok");
                             alert.setContentText(ta.visualizzaUtente());
                             alert.show();
                         }
@@ -209,10 +199,29 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setPassword(password);
                             c.setCredenziali(cta);
                             c.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-                            c.setPunteggio(Integer.parseInt(punteggio));
+
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                            {
+                                c.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
+                            }
+                            else
+                            {
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                                {
+                                    c.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
+                                }
+                                else
+                                {
+                                    c.setPunteggio(Integer.parseInt(punteggio));
+                                }
+                            }
+
+
+                            c.setId(utentiLegit.size() + 1 + "");
+                            utentiLegit.add(c);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
+                            alert.setTitle("Ok");
                             alert.setContentText(c.visualizzaUtente());
                             alert.show();
                         }
@@ -227,10 +236,31 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setPassword(password);
                             ca.setCredenziali(cta);
                             ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-                            ca.setPunteggio(Integer.parseInt(punteggio));
+
+
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                            {
+                                ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() + 1);
+                            }
+                            else
+                            {
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                                {
+                                    ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+                                }
+                                else
+                                {
+                                    ca.setPunteggio(Integer.parseInt(punteggio));
+                                }
+                            }
+
+
+
+                            ca.setId(utentiLegit.size() + 1 + "");
+                            utentiLegit.add(ca);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
+                            alert.setTitle("Ok");
                             alert.setContentText(ca.visualizzaUtente());
                             alert.show();
                         }
@@ -245,7 +275,25 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setPassword(password);
                             a.setCredenziali(cta);
                             a.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-                            a.setPunteggio(Integer.parseInt(punteggio));
+
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                            {
+                                a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
+                            }
+                            else
+                            {
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue())
+                                {
+                                    a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+                                }
+                                else
+                                {
+                                    a.setPunteggio(Integer.parseInt(punteggio));
+                                }
+                            }
+
+                            a.setId(utentiLegit.size() + 1 + "");
+                            utentiLegit.add(a);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
                             alert.setTitle("OK");
@@ -283,11 +331,11 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
     {
         String IDDaEliminare = u.getValueFromCombobox(this.selezionaEliminaUtente);
 
-        if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
+        if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare) && TMP_ServizioAutenticazione.eliminaUtente(IDDaEliminare))
         {
+            TMP_ServizioAutenticazione.eliminaUtente(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle(IDDaEliminare);
-            alert.setContentText("--"+IDDaEliminare+"--");
+            alert.setTitle("Eliminato: " + IDDaEliminare);
             alert.show();
         }
         else {
@@ -312,18 +360,189 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
              u.getValueFromCombobox(selezionaModificaUtente) != null && !Objects.equals(u.getValueFromCombobox(selezionaModificaUtente), "") &&
              u.getValueFromCombobox(ruoloMOD) != null && !Objects.equals(u.getValueFromCombobox(ruoloMOD), ""))
      {
+         String username = u.getValueFromTextField(usernameMODTF);
+         String password = u.getValueFromTextField(passwordMODTF);
+         String punteggio = u.getValueFromTextField(punteggioMODTF);
+         String scelta = u.getValueFromCombobox(selezionaModificaUtente);
+         String ruolo = u.getValueFromCombobox(ruoloMOD);
+
          Credenziali c = new Credenziali();
          c.setUsername(u.getValueFromTextField(usernameMODTF));
          c.setPassword(u.getValueFromTextField(passwordMODTF));
 
          utente.setCredenziali(c);
          utente.setRuoloUtente(ClsTuristaAutenticato.convertRuoloFromString(u.getValueFromCombobox(ruoloMOD)));
-         utente.setPunteggio(Integer.parseInt(u.getValueFromTextField(punteggioMODTF)));
+         switch (ruolo)
+         {
+             case "TURISTA_AUTENTICATO":
+                 if(true)
+                 {
+                     ClsTuristaAutenticato ta = new ClsTuristaAutenticato();
+                     Credenziali cta = new Credenziali();
+                     cta.setUsername(username);
+                     cta.setPassword(password);
+                     ta.setCredenziali(cta);
+                     ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
 
-         Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-         alert.setTitle("OK");
-         alert.setContentText(utente.visualizzaUtente());
-         alert.show();
+                     if(Integer.parseInt(punteggio) < 0)
+                     {
+                         ta.setPunteggio(0);
+                     }
+                     else
+                     {
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                         {
+                             ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+                         }
+                         else
+                         {
+                             ta.setPunteggio(Integer.parseInt(punteggio));
+                         }
+                     }
+                     ta.setId(utente.getId());
+
+                     if(TMP_ServizioAutenticazione.modificaUtente(ta, IDDaModificare))
+                     {
+                         TMP_ServizioAutenticazione.modificaUtente(ta, IDDaModificare);
+                     }
+
+                     Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                     alert.setTitle("Ok");
+                     alert.setContentText(ta.visualizzaUtente());
+                     alert.show();
+                 }
+                 break;
+
+             case "CONTRIBUTOR":
+                 if(true)
+                 {
+                     ClsContributor contr = new ClsContributor();
+                     Credenziali cta = new Credenziali();
+                     cta.setUsername(username);
+                     cta.setPassword(password);
+                     contr.setCredenziali(cta);
+                     contr.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                     {
+                         contr.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
+                     }
+                     else
+                     {
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                         {
+                             contr.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
+                         }
+                         else
+                         {
+                             contr.setPunteggio(Integer.parseInt(punteggio));
+                         }
+                     }
+
+                     contr.setId(utente.getId());
+
+                     if(TMP_ServizioAutenticazione.modificaUtente(contr, IDDaModificare))
+                     {
+                         TMP_ServizioAutenticazione.modificaUtente(contr, IDDaModificare);
+                     }
+
+                     Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                     alert.setTitle("Ok");
+                     alert.setContentText(contr.visualizzaUtente());
+                     alert.show();
+                 }
+                 break;
+
+             case "CONTRIBUTOR_AUTORIZZATO":
+                 if(true)
+                 {
+                     ClsContributorAutorizzato ca = new ClsContributorAutorizzato();
+                     Credenziali cta = new Credenziali();
+                     cta.setUsername(username);
+                     cta.setPassword(password);
+                     ca.setCredenziali(cta);
+                     ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+
+
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                     {
+                         ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() + 1);
+                     }
+                     else
+                     {
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                         {
+                             ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+                         }
+                         else
+                         {
+                             ca.setPunteggio(Integer.parseInt(punteggio));
+                         }
+                     }
+                     ca.setId(utente.getId());
+
+                     if(TMP_ServizioAutenticazione.modificaUtente(ca, IDDaModificare))
+                     {
+                         TMP_ServizioAutenticazione.modificaUtente(ca, IDDaModificare);
+                     }
+
+                     Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                     alert.setTitle("Ok");
+                     alert.setContentText(ca.visualizzaUtente());
+                     alert.show();
+                 }
+                 break;
+
+             case "ANIMATORE":
+                 if(true)
+                 {
+                     ClsAnimatore a = new ClsAnimatore();
+                     Credenziali cta = new Credenziali();
+                     cta.setUsername(username);
+                     cta.setPassword(password);
+                     a.setCredenziali(cta);
+                     a.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                     {
+                         a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
+                     }
+                     else
+                     {
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue())
+                         {
+                             a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+                         }
+                         else
+                         {
+                             a.setPunteggio(Integer.parseInt(punteggio));
+                         }
+                     }
+
+                     a.setId(utente.getId());
+
+                     if(TMP_ServizioAutenticazione.modificaUtente(a, IDDaModificare))
+                     {
+                         TMP_ServizioAutenticazione.modificaUtente(a, IDDaModificare);
+                     }
+
+                     Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                     alert.setTitle("OK");
+                     alert.setContentText(a.visualizzaUtente());
+                     alert.show();
+                 }
+                 break;
+
+             default:
+                 Alert alert = new Alert (Alert.AlertType.ERROR);
+                 alert.setTitle("ERRORE");
+                 alert.setContentText("ERRORE");
+                 alert.show();
+         }
+
+
+
+
      }
      else
      {
@@ -332,7 +551,6 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
          alert.setContentText("ERRORE");
          alert.show();
      }
-
     }
 
     private void SwitchScene (String nomeScena, MouseEvent mouseEvent)

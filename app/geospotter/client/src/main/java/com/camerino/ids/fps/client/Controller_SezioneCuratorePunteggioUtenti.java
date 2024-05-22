@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.fps.client.utils.TMP_ServizioAutenticazione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsUtenteVisual;
 import javafx.collections.FXCollections;
@@ -54,7 +55,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        utenti = new ArrayList<>();
+        utenti = TMP_ServizioAutenticazione.utentiLegit;
         azioni = new ArrayList<>();
         ruoli = new ArrayList<>();
 
@@ -71,38 +72,6 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         ruoli.add("CONTRIBUTOR");
         ruoli.add("CONTRIBUTOR_AUTORIZZATO");
         ruoli.add("ANIMATORE");
-        //endregion
-
-        //region Creazione utenti dummy
-        ClsTuristaAutenticato u1 = new ClsTuristaAutenticato();
-        u1.setId("1");
-        u1.setPunteggio(49);
-        u1.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-        Credenziali c1 = new Credenziali();
-        c1.setUsername("utente1");
-        c1.setPassword("password1");
-        u1.setCredenziali(c1);
-        utenti.add(u1);
-
-        ClsTuristaAutenticato u2 = new ClsTuristaAutenticato();
-        u2.setId("2");
-        u2.setPunteggio(192);
-        u2.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-        Credenziali c2 = new Credenziali();
-        c2.setUsername("utente2");
-        c2.setPassword("password2");
-        u2.setCredenziali(c2);
-        utenti.add(u2);
-
-        ClsTuristaAutenticato u3 = new ClsTuristaAutenticato();
-        u3.setId("3");
-        u3.setPunteggio(999);
-        u3.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-        Credenziali c3 = new Credenziali();
-        c3.setUsername("utente3");
-        c3.setPassword("password3");
-        u3.setCredenziali(c3);
-        utenti.add(u3);
         //endregion
 
         //region combobox
@@ -196,75 +165,13 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
 
             if(u.getValueFromCombobox(sceltaAzione) != null && !Objects.equals(u.getValueFromCombobox(sceltaAzione), ""))
             {
-                //todo:Cambio ruolo by spring
-                switch(u.getValueFromCombobox(sceltaAzione))
-                {
+                TMP_ServizioAutenticazione.modificaPunteggioByNumero(utente,u.getValueFromTextField(inserimentoPunteggioTF),u.getValueFromCombobox(sceltaAzione));
 
-
-                    case "UP-RANK":
-                        if(u.getValueFromTextField(inserimentoPunteggioTF) != null && !Objects.equals(u.getValueFromTextField(inserimentoPunteggioTF), ""))
-                        {
-                            utente.setPunteggio(utente.getPunteggio() + Integer.parseInt(u.getValueFromTextField(inserimentoPunteggioTF)));
-                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
-                            alert.setContentText("Prima: \n" + utenteBackUp.visualizzaUtente() + "\nDopo: \n" + utente.visualizzaUtente());
-                            alert.show();
-                            break;
-                        }
-                        else
-                        {
-                            Alert alert = new Alert (Alert.AlertType.ERROR);
-                            alert.setTitle("Attenzione");
-                            alert.setContentText("Controlla le informazioni e riprova");
-                            alert.show();
-                            break;
-                        }
-
-
-                    case "DOWN-RANK":
-                        if(u.getValueFromTextField(inserimentoPunteggioTF) != null && !Objects.equals(u.getValueFromTextField(inserimentoPunteggioTF), ""))
-                        {
-                            utente.setPunteggio(utente.getPunteggio() - Integer.parseInt(u.getValueFromTextField(inserimentoPunteggioTF)));
-                            Alert alertt = new Alert (Alert.AlertType.CONFIRMATION);
-                            alertt.setTitle("OK");
-                            alertt.setContentText("Prima: \n" + utenteBackUp.visualizzaUtente() + "\nDopo: \n" + utente.visualizzaUtente());
-                            alertt.show();
-                            break;
-                        }
-                        else
-                        {
-                            Alert alert = new Alert (Alert.AlertType.ERROR);
-                            alert.setTitle("Attenzione");
-                            alert.setContentText("Controlla le informazioni e riprova");
-                            alert.show();
-                            break;
-                        }
-
-
-                    case "RESET-RANK":
-                        utente.setPunteggio(0);
-
-                        Alert alerttt = new Alert (Alert.AlertType.CONFIRMATION);
-                        alerttt.setTitle("OK");
-                        alerttt.setContentText("Prima: \n" + utenteBackUp.visualizzaUtente() + "\nDopo: \n" + utente.visualizzaUtente());
-                        alerttt.show();
-                        break;
-
-                    default:
-                        Alert alerttttt = new Alert (Alert.AlertType.ERROR);
-                        alerttttt.setTitle("Attenzione");
-                        alerttttt.setContentText("Controlla le informazioni e riprova");
-                        alerttttt.show();
-                        break;
-
-
-                }
             }
             else
             {
                 Alert alert = new Alert (Alert.AlertType.ERROR);
                 alert.setTitle("Attenzione");
-                alert.setContentText("Controlla le informazioni e riprova");
                 alert.show();
             }
         }
@@ -293,51 +200,28 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
                     case "TURISTA_AUTENTICATO":
                         if(true)
                         {
-                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
-                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-
-                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
-                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
-                            alert.show();
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
                         }
                         break;
 
                     case "CONTRIBUTOR":
-                        if(true) {
-                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
-                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-
-                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
-                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
-                            alert.show();
+                        if(true)
+                        {
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
                         }
                         break;
 
                     case "CONTRIBUTOR_AUTORIZZATO":
                         if(true)
                         {
-                            utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-                            utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-
-                            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                            alert.setTitle("OK");
-                            alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
-                            alert.show();
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
                         }
                         break;
 
                     case "ANIMATORE":
                         if(true)
                         {
-                        utente.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
-                        utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-
-                        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("OK");
-                        alert.setContentText("Prima:" +utenteBackUp.visualizzaUtente() + "\nDopo:" + utente.visualizzaUtente());
-                        alert.show();
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
                         }
                         break;
 

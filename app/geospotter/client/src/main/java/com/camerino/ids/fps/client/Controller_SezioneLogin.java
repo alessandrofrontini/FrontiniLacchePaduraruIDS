@@ -3,7 +3,9 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.fps.client.iper.*;
+import com.camerino.ids.fps.client.utils.TMP_ServizioAutenticazione;
 import com.camerino.ids.fps.client.visual.ClsUtenteJWTDecode;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +29,7 @@ public class Controller_SezioneLogin
     @FXML
     TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
 
-    private String tmpJWT = "DJASIDJIQ09I4902JDIOAR8932";
+
     public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
     //region esempio padu TODO
     public static ClsTurista UTENTE = new ClsCuratore();
@@ -40,64 +42,32 @@ public class Controller_SezioneLogin
         ((ClsTuristaAutenticato)UTENTE).setIperRDCImmagini(new IperRCDImmagini());
     }
     //endregion
+
+
     public void logga ()
     {
-
-        //!!!!!! BYPASS
-        utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-        utente.setUsername("ERMAGODAAPECORONA69");
-        //!!!!!! BYPASS
         String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
         String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
 
+        Credenziali c = new Credenziali();
+        c.setUsername(username);
+        c.setPassword(password);
+
         //Controllo server
-        if(password.equals(password))
+        if(TMP_ServizioAutenticazione.login(c))
         {
-            //LOG PER TURISTA AUT = ta:ta
-           if(Objects.equals(username, "ta") && password.equals("ta"))
-           {
-               utente.setJwt(tmpJWT);
-               utente.setUsername(username);
-               utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
-           }
-            //LOG PER CONTRIBUTOR = c:c
-            if(Objects.equals(username, "c") && password.equals("c"))
+            if(TMP_ServizioAutenticazione.retrieveUtente(c) != null)
             {
-                utente.setJwt(tmpJWT);
-                utente.setUsername(username);
-                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+                utente = TMP_ServizioAutenticazione.retrieveUtente(c);
+                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Benvenuto");
+                alert.show();
             }
-
-            //LOG PER CONTRIBUTOR AUT = ca:ca
-            if(Objects.equals(username, "ca") && password.equals("ca"))
+            else
             {
-                utente.setJwt(tmpJWT);
-                utente.setUsername(username);
-                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-            }
-
-            //LOG PER ANIMATORE = a:a
-            if(Objects.equals(username, "a") && password.equals("a"))
-            {
-                utente.setJwt(tmpJWT);
-                utente.setUsername(username);
-                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-            }
-
-            //LOG PER CURATORE = cur:cur
-            if(Objects.equals(username, "cur") && password.equals("cur"))
-            {
-                utente.setJwt(tmpJWT);
-                utente.setUsername(username);
-                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-            }
-
-            //LOG PER GDP = gdp:gdp
-            if(Objects.equals(username, "gdp") && password.equals("gdp"))
-            {
-                utente.setJwt(tmpJWT);
-                utente.setUsername(username);
-                utente.setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+                Alert alert = new Alert (Alert.AlertType.ERROR);
+                alert.setTitle("Credenziali invalide");
+                alert.show();
             }
 
         }
@@ -106,6 +76,21 @@ public class Controller_SezioneLogin
         {
             Alert alert = new Alert (Alert.AlertType.ERROR);
             alert.setTitle("Reinserisci password");
+            alert.show();
+        }
+
+    }
+
+    public void loggaBypass()
+    {
+        Credenziali c = new Credenziali();
+        c.setUsername("gdp");
+        c.setPassword("gdp");
+        if(TMP_ServizioAutenticazione.retrieveUtente(c) != null)
+        {
+            utente = TMP_ServizioAutenticazione.retrieveUtente(c);
+            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Benvenuto");
             alert.show();
         }
 
