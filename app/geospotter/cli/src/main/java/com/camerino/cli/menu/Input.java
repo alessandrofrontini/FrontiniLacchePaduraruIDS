@@ -21,18 +21,31 @@ public class Input
     static Scanner in = new Scanner(System.in);
     //region Input Nodi
     public static ClsNodo inserisciNodo(){
+        boolean exit = false;
+        boolean fine = false;
         ClsNodo nodo = new ClsNodo();
-        Posizione pos = new Posizione();
+        while(!fine) {
+            Posizione pos = new Posizione();
             print("Inserisci nome: ");
-            boolean exit = false;
             nodo.setNome(in.nextLine());
-            while(!exit) {
+            while (!exit) {
                 print("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
                 switch (in.nextLine()) {
-                    case "1" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE); exit = true; break;
-                    case "2" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE); exit = true; break;
-                    case "3" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO); exit = true; break;
-                    default : println("Seleziona una voce presente nel menu."); break;
+                    case "1":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
+                        exit = true;
+                        break;
+                    case "2":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+                        exit = true;
+                        break;
+                    case "3":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
+                        exit = true;
+                        break;
+                    default:
+                        println("Seleziona una voce presente nel menu.");
+                        break;
                 }
             }
             print("Inserisci coordinata X del nodo: ");
@@ -41,18 +54,17 @@ public class Input
             pos.setY(Double.parseDouble(in.nextLine()));
             nodo.setPosizione(pos);
             String input;
-            while(exit) {
+            while (exit) {
                 print("Inserisci id del comune di appartenenza: ");
                 input = in.nextLine();
                 if (checkValore(input, (ArrayList<String>) MockLocator.getMockComuni().get(null).stream().map(ClsComune::getId).collect(Collectors.toList()))) {
                     nodo.setIdComune(input);
                     exit = false;
-                }
-                else println("Comune non esistente. Riprova.");
+                } else println("Comune non esistente. Riprova.");
             }
             print("Il nodo ha una scadenza temporale? Y/N");
             input = in.nextLine();
-            while(!exit) {
+            while (!exit) {
                 SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
                 if ((Objects.equals(input, "y")) || (Objects.equals(input, "Y"))) {
                     nodo.setaTempo(true);
@@ -73,25 +85,44 @@ public class Input
                     }
                 }
             }
-
+            if (checkNodoDuplicato(nodo))
+                fine = true;
+            else{
+                println("Il nodo che vuoi inserire esiste già nella piattaforma. Riprova");
+                in.nextLine();
+            }
+        }
         return nodo;
     }
 
     public static ClsNodo modificaNodo(ClsNodo vecchio) {
         ClsNodo nodo = new ClsNodo();
-        Posizione pos = vecchio.getPosizione();
-        nodo.setId(vecchio.getId());
-        Posizione newpos = new Posizione();
+        boolean fine = false;
+        while(!fine) {
+            Posizione pos = vecchio.getPosizione();
+            nodo.setId(vecchio.getId());
+            Posizione newpos = new Posizione();
             print(String.format("Inserisci nome (old: %s): ", vecchio.getNome()));
             nodo.setNome(in.nextLine());
             boolean exit = false;
-            while(!exit) {
+            while (!exit) {
                 print(String.format("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n(old: %s)\n>> ", vecchio.getTipologiaNodo()));
                 switch (in.nextLine()) {
-                    case "1" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE); exit = true; break;
-                    case "2" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE); exit = true; break;
-                    case "3" : nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);exit = true; break;
-                    default: println("Seleziona una voce presente nel menu."); break;
+                    case "1":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.COMMERCIALE);
+                        exit = true;
+                        break;
+                    case "2":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULTURALE);
+                        exit = true;
+                        break;
+                    case "3":
+                        nodo.setTipologiaNodo(ClsNodo.eTologiaNodo.CULINARIO);
+                        exit = true;
+                        break;
+                    default:
+                        println("Seleziona una voce presente nel menu.");
+                        break;
                 }
             }
 
@@ -101,7 +132,7 @@ public class Input
             newpos.setY(Double.parseDouble(in.nextLine()));
             nodo.setPosizione(newpos);
             String input;
-            while(exit) {
+            while (exit) {
                 print(String.format("Inserisci id del comune di appartenenza (old: %s): ", vecchio.getIdComune()));
                 input = in.nextLine();
                 if (checkValore(input, (ArrayList<String>) MockLocator.getMockComuni().get(null).stream().map(ClsComune::getId).collect(Collectors.toList()))) {
@@ -110,30 +141,28 @@ public class Input
                 }
             }
             SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
-            if(vecchio.isaTempo()){
+            if (vecchio.isaTempo()) {
                 println("Attualmente il nodo è a tempo, con scandenza il " + vecchio.getDataFine());
                 println("Vuoi modificare questa impostazione? Y/N");
                 input = in.nextLine();
-                if((Objects.equals(input, "y"))||(Objects.equals(input, "Y"))){
+                if ((Objects.equals(input, "y")) || (Objects.equals(input, "Y"))) {
                     println("Ora il nodo non è più a tempo.");
                     nodo.setaTempo(false);
                     try {
                         nodo.setDataFine(data.parse("2099-12-31"));
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     nodo.setaTempo(true);
                     nodo.setDataFine(vecchio.getDataFine());
                     println("le impostazioni di scadenza non sono state agiornate.");
                 }
-            }
-            else{
+            } else {
                 println("Il nodo non è a tempo. Vuoi fissare una scadenza? Y/N");
                 input = in.nextLine();
-                if((Objects.equals(input, "y"))||(Objects.equals(input, "Y"))){
-                    while(!exit) {
+                if ((Objects.equals(input, "y")) || (Objects.equals(input, "Y"))) {
+                    while (!exit) {
                         print("Inserisci la data di scadenza in formato yyyy-MM-dd. Ad esempio il 13 luglio 2024 sarà scritto 2024-07-13 > ");
                         nodo.setaTempo(true);
                         try {
@@ -149,11 +178,26 @@ public class Input
                 nodo.setaTempo(false);
                 try {
                     nodo.setDataFine(data.parse("2099-12-31"));
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+            if(checkNodoDuplicato(nodo))
+                fine = true;
+            else{
+                println("Il nodo che vuoi inserire esiste già nella piattaforma. Riprova");
+                in.nextLine();
+            }
+        }
         return nodo;
+    }
+
+    private static boolean checkNodoDuplicato(ClsNodo nodo){
+        for(ClsNodo n:MockLocator.getMockNodi().get(null)){
+            if((n.getPosizione().getX()==nodo.getPosizione().getY())&&(n.getPosizione().getY() == nodo.getPosizione().getY())&&(Objects.equals(n.getIdComune(), nodo.getIdComune())))
+                return false;
+        }
+        return true;
     }
     //endregion
     //region Input Comuni
@@ -183,29 +227,38 @@ public class Input
     //endregion
 
     public static ClsItinerario richiediItinerario(){
+        boolean exit = false;
         ClsItinerario itinerario = new ClsItinerario();
-        print("Inserisci nome itinerario: ");
-        itinerario.setNome(in.nextLine());
-        String idNodo = "";
-        print("E' ordinato (s/n)?: ");
-        itinerario.setOrdinato(in.nextLine().charAt(0)=='s');
-        while (!idNodo.equals("0")){
-            print("Inserisci id del nodo da aggiungere (0 per terminare l'inserimento): ");
-            idNodo = in.nextLine();
-            if (idNodo.equals("0") && itinerario.getTappe().isEmpty())
-                print("Non puoi creare un itinerario con 0 tappe");
-            if (idNodo.equals("0") && itinerario.getTappe().size()==1)
-                print("Un itinerario deve avere almeno 2 tappe");
-            else if (idNodo.equals("0"))
-                break;
-            if (checkValore(idNodo, (ArrayList<String>) itinerario.getTappe().stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
-                println("Tappa già presente. seleziona un altro nodo.");
-                in.nextLine();
+        while(!exit) {
+            itinerario.setTappe(new ArrayList<>());
+            print("Inserisci nome itinerario: ");
+            itinerario.setNome(in.nextLine());
+            String idNodo = "";
+            print("E' ordinato (s/n)?: ");
+            itinerario.setOrdinato(in.nextLine().charAt(0) == 's');
+            while (!idNodo.equals("0")) {
+                print("Inserisci id del nodo da aggiungere (0 per terminare l'inserimento): ");
+                idNodo = in.nextLine();
+                if (idNodo.equals("0") && itinerario.getTappe().isEmpty())
+                    print("Non puoi creare un itinerario con 0 tappe");
+                if (idNodo.equals("0") && itinerario.getTappe().size() == 1)
+                    print("Un itinerario deve avere almeno 2 tappe");
+                else if (idNodo.equals("0"))
+                    break;
+                if (checkValore(idNodo, (ArrayList<String>) itinerario.getTappe().stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+                    println("Tappa già presente. seleziona un altro nodo.");
+                    in.nextLine();
+                } else {
+                    HashMap<String, Object> filtro = new HashMap<>();
+                    filtro.put("id", idNodo);
+                    itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
+                }
             }
-            else {
-                HashMap<String, Object> filtro = new HashMap<>();
-                filtro.put("id", idNodo);
-                itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
+            if(checkItinerarioDuplicato(itinerario))
+                exit = true;
+            else{
+                println("Questo itinerario è già presente. Riprova");
+                in.nextLine();
             }
         }
         return itinerario;
@@ -224,33 +277,21 @@ public class Input
         return credenziali;
     }
 
-    public static ClsContestDiContribuzione creaContest(){
-        ClsContestDiContribuzione contest = new ClsContestDiContribuzione();
-        print("Inserisci un nome per il contest: ");
-        contest.setNome(in.nextLine());
-        print("Inserisci la data di fine contest: ");
-        contest.setDataFine(new Date(in.nextLine()));
-        print("Il contest è a numero chiuso? Y/N: ");
-        String chiuso = in.nextLine();
-        return contest;
-    }
-
-    public static ArrayList<ClsContributor> invitaUtenti(ArrayList<ClsContributor> utenti){
-        ArrayList<ClsContributor> partecipanti = new ArrayList<>();
-        boolean exit = false;
-        while(!exit){
-            print("Inserisci l'ID dell'utente da invitare o premi 0 per uscire: ");
-            String input = in.nextLine();
-            if(input == "0")
-                exit = true;
-            else{
-                for(ClsContributor c:utenti){
-                    if(Objects.equals(c.getId(), input))
-                        partecipanti.add(c);
-                }
-            }
+    public static boolean checkItinerarioDuplicato(ClsItinerario itinerario){
+        for(ClsItinerario i:MockLocator.getMockItinerari().get(null)){
+            if((!checkTappe(i, itinerario))&&(itinerario.isOrdinato()==i.isOrdinato()))
+                return false;
         }
-        return partecipanti;
+        return true;
+    }
+    private static boolean checkTappe(ClsItinerario it1, ClsItinerario it2){
+        if(it1.getTappe().size() != it2.getTappe().size())
+            return true;
+        for(int i = 0; i<it1.getTappe().size(); i++){
+            if(it1.getTappe().get(i) != it2.getTappe().get(i))
+                return true;
+        }
+        return false;
     }
 
     public static ClsRecensione inserisciRecensione(){

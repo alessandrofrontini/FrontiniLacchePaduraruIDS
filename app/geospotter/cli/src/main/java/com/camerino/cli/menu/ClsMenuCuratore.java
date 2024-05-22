@@ -6,10 +6,7 @@ import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -131,7 +128,9 @@ public class ClsMenuCuratore implements IMenu{
                         }
                         println("Validare? Y/N");
                         esito = in.nextLine();
+                        scartaRichiesteDuplicateItinerari(rit);
                         user.validaRichiestaItinerario(rit, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
+                        println("Richiesta validata");
                         exit = true;
                     } else {
                         println("Richiesta non esistente. Riprova.");
@@ -143,7 +142,9 @@ public class ClsMenuCuratore implements IMenu{
                         println("Tipo richiesta -> " + r.geteAzioneDiContribuzione());
                         println("Validare? Y/N");
                         esito = in.nextLine();
+                        scartaRichiesteDuplicate(r);
                         user.validaRichiesta(r, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
+                        println("Richiesta validata");
                         exit = true;
                     }
                     else println("Richiesta non esistente. Riprova.");
@@ -153,7 +154,49 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
     }
-
+    private void scartaRichiesteDuplicate(ClsRichiestaAzioneDiContribuzione richiesta){
+        ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = MockLocator.getMockRCD().get(null);
+        Iterator<ClsRichiestaAzioneDiContribuzione> richiestaIterator = richieste.iterator();
+        while(richiestaIterator.hasNext()){
+            ClsRichiestaAzioneDiContribuzione r = richiestaIterator.next();
+            if((r.geteAzioneDiContribuzione() == richiesta.geteAzioneDiContribuzione())&&(!Objects.equals(r.getId(), richiesta.getId()))) {
+                switch (r.geteAzioneDiContribuzione()) {
+                    case INSERISCI_NODO:
+                    case MODIFICA_NODO:
+                    case ELIMINA_NODO:{
+                        if(((r.getDatiNodo().getPosizione().getX()==richiesta.getDatiNodo().getPosizione().getY())&&(r.getDatiNodo().getPosizione().getY() == richiesta.getDatiNodo().getPosizione().getY())&&(Objects.equals(r.getDatiNodo().getIdComune(), richiesta.getDatiNodo().getIdComune())))){
+                            richiestaIterator.remove(); break;
+                        }
+                    }
+                    case INSERISCI_IMMAGINE:{
+                        if((r.getDatiNodo()==richiesta.getDatiNodo())&&(r.getDatiImmagine()==richiesta.getDatiImmagine())){
+                            richiestaIterator.remove(); break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void scartaRichiesteDuplicateItinerari(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
+        ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = MockLocator.getMockRCDI().get(null);
+        for(ClsRichiestaAzioneDiContribuzioneItinerario r:rcdi){
+            if(r.geteAzioniDiContribuzione() == richiesta.geteAzioniDiContribuzione()){
+                switch(r.geteAzioniDiContribuzione()){
+                    case INSERISCI_ITINERARIO:
+                    case ELIMINA_ITINERARIO:{
+                        if(r.getDatiItinerarioNuovo()==richiesta.getDatiItinerarioNuovo()){
+                            rcdi.remove(r); break;
+                        }
+                    }
+                    case MODIFICA_ITINERARIO:{
+                        if((r.getDatiItinerarioNuovo()==richiesta.getDatiItinerarioNuovo())&&(r.getDatiItinerarioVecchio()==richiesta.getDatiItinerarioVecchio())&&(r.getDatiItinerarioNuovo().isOrdinato() == richiesta.getDatiItinerarioNuovo().isOrdinato())){
+                            rcdi.remove(r); break;
+                        }
+                    }
+                }
+            }
+        }
+    }
     public void menuVisualizzaSegnalazioni(){
         for(ClsSegnalazione seg:MockLocator.getMockSegnalazioni().get(null)){
             if(seg.getIdCuratore() == null){

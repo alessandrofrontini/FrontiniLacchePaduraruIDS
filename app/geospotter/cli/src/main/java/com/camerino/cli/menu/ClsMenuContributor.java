@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
+import static com.camerino.cli.menu.Input.checkItinerarioDuplicato;
 import static com.camerino.cli.menu.Input.checkValore;
 
 public class ClsMenuContributor implements IMenu{
@@ -134,85 +135,95 @@ public class ClsMenuContributor implements IMenu{
         }
     }
     private ClsItinerario sottomenuModificaItinerario(ClsItinerario itv){ //sentire chat gpt per doppia modifica in "modifica"
-        ClsItinerario nuovo = new ClsItinerario();
-        nuovo.setId(itv.getId());
-        nuovo.setNome(itv.getNome());
-        nuovo.setUsernameCreatore(itv.getUsernameCreatore());
-        nuovo.setOrdinato(itv.isOrdinato());
-        ArrayList<ClsNodo> tappe = new ArrayList<>();
-        tappe.addAll(itv.getTappe());
-        String input;
-        nuovo.setTappe(tappe);
-        boolean exit = false;
-        while(!exit){
-            println("1 - cambia nome");
-            println("2 - aggiungi una tappa");
-            println("3 - rimuovi una tappa");
-            println("4 - attiva/disattiva l'ordinamento");
-            println("0 - Salva ed esci dal menu");
-            switch(in.nextLine()){
-                case "1": print("inserisci il nuovo nome: "); nuovo.setNome(in.nextLine()); break;
-                case "2": {
-                    while(!exit) {
-                        print("inserisci l'id della nuova tappa");
-                        input = in.nextLine();
-                        if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
-                            HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", input);
-                            if (controllaTappaDuplicataItinerario(nuovo, input)) {
-                                nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
+        boolean fine = false;
+            ClsItinerario nuovo = new ClsItinerario();
+            while(!fine) {
+            nuovo.setId(itv.getId());
+            nuovo.setNome(itv.getNome());
+            nuovo.setUsernameCreatore(itv.getUsernameCreatore());
+            nuovo.setOrdinato(itv.isOrdinato());
+            ArrayList<ClsNodo> tappe = new ArrayList<>();
+            tappe.addAll(itv.getTappe());
+            String input;
+            nuovo.setTappe(tappe);
+            boolean exit = false;
+            while (!exit) {
+                println("1 - cambia nome");
+                println("2 - aggiungi una tappa");
+                println("3 - rimuovi una tappa");
+                println("4 - attiva/disattiva l'ordinamento");
+                println("0 - Salva ed esci dal menu");
+                switch (in.nextLine()) {
+                    case "1":
+                        print("inserisci il nuovo nome: ");
+                        nuovo.setNome(in.nextLine());
+                        break;
+                    case "2": {
+                        while (!exit) {
+                            print("inserisci l'id della nuova tappa");
+                            input = in.nextLine();
+                            if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
+                                HashMap<String, Object> filtro = new HashMap<>();
+                                filtro.put("id", input);
+                                if (controllaTappaDuplicataItinerario(nuovo, input)) {
+                                    nuovo.aggiungiTappa(MockLocator.getMockNodi().get(filtro).get(0));
+                                    exit = true;
+                                    break;
+                                } else {
+                                    println("Errore.");
+                                    break;
+                                }
+                            } else {
+                                println("Nodo non esistente. Riprova");
+                                in.nextLine();
+                            }
+                        }
+                        break;
+                    }
+                    case "3": {
+                        for (ClsNodo nodo : nuovo.getTappe()) {
+                            println(nodo.visualizzaNodo());
+                        }
+                        while (!exit) {
+                            print("Inserisci l'id della tappa da eliminare");
+                            String idTappa = in.nextLine();
+                            if (!controllaTappaDuplicataItinerario(nuovo, idTappa)) {
+                                HashMap<String, Object> filtro = new HashMap<>();
+                                filtro.put("id", idTappa);
+                                nuovo.rimuoviTappa(MockLocator.getMockNodi().get(filtro).get(0));
                                 exit = true;
-                                break;
                             } else {
                                 println("Errore.");
-                                break;
                             }
-                        } else {
-                            println("Nodo non esistente. Riprova");
-                            in.nextLine();
                         }
+                        break;
                     }
-                }
-                case "3":{
-                    for(ClsNodo nodo: nuovo.getTappe()){
-                        println(nodo.visualizzaNodo());
+                    case "4": {
+                        print("Attualmente l'itinerario è: ");
+                        if (nuovo.isOrdinato())
+                            print("Ordinato.");
+                        else print("Non ordinato.");
+                        println("Vuoi modificare l'ordinamento? Y/N");
+                        String esito = in.nextLine();
+                        if (Objects.equals(esito, "Y") || (Objects.equals(esito, "y"))) {
+                            nuovo.setOrdinato(!nuovo.isOrdinato());
+                            println("L'ordinamento è stato cambiato");
+                        } else println("non sono state apportate modifiche.");
+                        break;
                     }
-                    while(exit) {
-                        print("Inserisci l'id della tappa da eliminare");
-                        String idTappa = in.nextLine();
-                        if (!controllaTappaDuplicataItinerario(nuovo, idTappa)) {
-                            HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", idTappa);
-                            nuovo.rimuoviTappa(MockLocator.getMockNodi().get(filtro).get(0));
-                            exit = false;
-                            break;
-                        } else {
-                            println("Errore.");
-                            break;
-                        }
+                    case "0": {
+                        exit = true; break;
                     }
-                }
-                case "4":{
-                    print("Attualmente l'itinerario è: ");
-                    if(nuovo.isOrdinato())
-                        print("Ordinato.");
-                    else print("Non ordinato.");
-                    println("Vuoi modificare l'ordinamento? Y/N");
-                    String esito = in.nextLine();
-                    if(Objects.equals(esito, "Y")||(Objects.equals(esito, "y"))){
-                        nuovo.setOrdinato(!nuovo.isOrdinato());
-                        println("L'ordinamento è stato cambiato");
-                    }
-                    else println("non sono state apportate modifiche.");
-                    break;
-                }
-                case "0": {
-                    exit = true;
-                    break;
                 }
             }
+            if (checkItinerarioDuplicato(nuovo)) {
+                fine = true;
+            }
+            else{
+                println("Itinerario già esistente. Riprova");
+                in.nextLine();
+            }
         }
-        in.nextLine();
         return nuovo;
     }
     private boolean controllaTappaDuplicataItinerario(ClsItinerario itinerario, String idTappa){

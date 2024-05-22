@@ -41,7 +41,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
                 return tmp;
             }
             if (filters.containsKey("usernameCreatore")) {
-                tmp.add(getItinerarioByCreatore(filters.get("usernameCreatore").toString()));
+                tmp.addAll(getItinerarioByCreatore(filters.get("usernameCreatore").toString()));
                 return tmp;
             }
         }
@@ -54,11 +54,11 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
             return null;
         return tmp.get(0);
     }
-    private ClsItinerario getItinerarioByCreatore(String username){
+    private List<ClsItinerario> getItinerarioByCreatore(String username){
         List<ClsItinerario> tmp =  itinerari.stream().filter(n->n.getUsernameCreatore().equals(username)).toList();
         if(tmp.isEmpty())
             return null;
-        return tmp.get(0);
+        return tmp;
     }
 
     @Override
