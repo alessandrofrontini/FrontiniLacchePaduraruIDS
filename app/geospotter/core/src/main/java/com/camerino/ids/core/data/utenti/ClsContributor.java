@@ -54,7 +54,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 
 //region Getters and Setters
-
+@Transient
     public IPersistenceModel<ClsRDCNodo> _getIperRDCNodi() {
         return iperRDCNodi;
     }
@@ -62,7 +62,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public void _setIperRDCNodi(IPersistenceModel<ClsRDCNodo> iperRDCNodi) {
         this.iperRDCNodi = iperRDCNodi;
     }
-
+    @Transient
     public IPersistenceModel<ClsItinerario> _getIperRDCItinerari() {
         return iperRDCItinerari;
     }

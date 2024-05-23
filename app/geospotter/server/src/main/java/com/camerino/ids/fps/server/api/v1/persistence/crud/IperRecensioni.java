@@ -40,7 +40,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
             return false;
         if(!filters.containsKey("idRecensione"))
             return false;
-        repoRecensioni.updateRecensioneById(object, filters.get("idRecensione").toString());
+        repoRecensioni.save(object);
         return true;
     }
 
