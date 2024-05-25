@@ -1,9 +1,8 @@
 module com.camerino.ids.core {
     requires org.hibernate.orm.core;
-    requires spring.context;
     requires jakarta.persistence;
-    requires com.fasterxml.jackson.annotation;
     requires java.desktop;
+    requires com.fasterxml.jackson.annotation;
     exports com.camerino.ids.core.data.azioni;
     exports com.camerino.ids.core.data.contenuti;
     exports com.camerino.ids.core.data.punteggio;

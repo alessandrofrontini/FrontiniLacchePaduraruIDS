@@ -7,6 +7,7 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -210,15 +211,12 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
         }
     }
-    @Transient
-    public IPersistenceModel<ClsRDCImmagine> getIperRDCImmagini() {
-        return iperRDCImmagini;
-    }
+
     @Transient
     public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
         this.iperRDCImmagini = iperRDCImmagini;
     }
-
+    @JsonIgnore
     public ArrayList<ClsTuristaAutenticato> getAllUtenti()
     {
         return iperUtenti.get(null);

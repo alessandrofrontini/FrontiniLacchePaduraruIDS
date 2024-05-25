@@ -1,9 +1,6 @@
 package com.camerino.ids.core.data.segnalazioni;
 
-import com.camerino.ids.core.data.contenuti.ClsContenuto;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 /**

@@ -1,10 +1,6 @@
 package com.camerino.ids.core.data.contenuti;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import org.springframework.stereotype.Component;
 
 /**
  * TODO: commentare

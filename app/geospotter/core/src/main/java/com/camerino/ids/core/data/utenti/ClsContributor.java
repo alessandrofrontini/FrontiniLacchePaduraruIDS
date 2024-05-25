@@ -183,10 +183,33 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public boolean visualizzaNodiPosessore() {
         return false;
     }
+
     public boolean deleteNodo(String idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
         return pNodi.delete(tmp);
+    }
+
+    public ArrayList<ClsRDCNodo> getRDCNodiById(String idRDC) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDC", idRDC);
+        return iperRDCNodi.get(filters);
+    }
+
+    public boolean deleteRDCById(String idRDC) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDC", idRDC);
+        return pRDC.delete(filters);
+    }
+
+    public boolean putRDCNodo(ClsRDCNodo rdc) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCNodo", rdc.getIdRichiesta());
+        return iperRDCNodi.update(filters, rdc);
+    }
+
+    public boolean postRDCNodo(ClsRDCNodo rdc) {
+        return iperRDCNodi.insert(rdc);
     }
     //endregion
 }

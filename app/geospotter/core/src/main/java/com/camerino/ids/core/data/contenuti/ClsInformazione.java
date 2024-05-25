@@ -1,9 +1,6 @@
 package com.camerino.ids.core.data.contenuti;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
 /**

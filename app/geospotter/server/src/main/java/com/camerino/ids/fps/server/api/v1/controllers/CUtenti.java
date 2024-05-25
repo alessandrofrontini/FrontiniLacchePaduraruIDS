@@ -3,6 +3,7 @@ package com.camerino.ids.fps.server.api.v1.controllers;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
+import com.camerino.ids.fps.server.api.v1.persistence.crud.IperUtenti;
 import com.camerino.ids.fps.server.api.v1.services.SUtenti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,7 +24,7 @@ public class CUtenti {
         this.sUtenti = sUtenti;
     }
 
-    @GetMapping(value = mapping, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = mapping)
     public ResponseEntity<ArrayList<ClsTuristaAutenticato>> getUtenti(
             @RequestParam(value = "ruolo", required = false) String ruolo
     ){
@@ -37,7 +38,12 @@ public class CUtenti {
 //        else
 //        {
 
-            body = sUtenti.getAllUtenti();
+            //body = sUtenti.getAllUtenti();
+        body = new ArrayList<>();
+        var tmp = new ClsTuristaAutenticato();
+        tmp.setIperUtenti(new IperUtenti(null));
+        body.add(new ClsTuristaAutenticato());
+
             return ResponseEntity.ok(body);
 //        }
 

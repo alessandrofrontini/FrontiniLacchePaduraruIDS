@@ -1,50 +1,52 @@
 package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCI;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCNodi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 @Component
-@Deprecated
-public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
-    RepoRDCI repoRDCI;
+public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
+    RepoRDCNodi repoRDCNodi;
 
     @Autowired
-    public IperRDCI(final RepoRDCI repoRDCI) {
-        this.repoRDCI = repoRDCI;
+    public IperRDCNodi(final RepoRDCNodi repoRDCI) {
+        this.repoRDCNodi = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRDCNodo> get(HashMap<String, Object> filters) {
         if(filters==null)
-            return new ArrayList<>(repoRDCI.findAll());
+            return new ArrayList<>(repoRDCNodi.findAll());
         if(filters.containsKey("idRDCI")) {
             ArrayList<String> ids = new ArrayList<>();
             ids.add(filters.get("idRDCI").toString());
-            return new ArrayList<>(repoRDCI.findAllById(ids));
+            return new ArrayList<>(repoRDCNodi.findAllById(ids));
         }
         if(filters.containsKey("idUser"))
-            return new ArrayList<>(repoRDCI.getRDCIByUser(filters.get("idUser").toString()));
+            return new ArrayList<>(repoRDCNodi.getRDCIByUser(filters.get("idUser").toString()));
 
-        return new ArrayList<>(repoRDCI.findAll());
+        return new ArrayList<>(repoRDCNodi.findAll());
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
+    public boolean update(HashMap<String, Object> filters, ClsRDCNodo object) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCI"))
             return false;
-        repoRDCI.updateRDCIById(object, filters.get("idRDCI").toString());
+        repoRDCNodi.updateRDCIById(object, filters.get("idRDCI").toString());
         return true;
     }
 
     @Override
-    public boolean insert(ClsRichiestaAzioneDiContribuzioneItinerario object) {
-        repoRDCI.save(object);
+    public boolean insert(ClsRDCNodo object) {
+        repoRDCNodi.save(object);
         return true;
     }
 
@@ -54,7 +56,7 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
             return false;
         if(!filters.containsKey("idRDCI"))
             return false;
-        repoRDCI.deleteById(filters.get("idRDCI").toString());
+        repoRDCNodi.deleteById(filters.get("idRDCI").toString());
         return true;
     }
 }

@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
+import jakarta.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
 
 
     @Override
+    @Transient
     public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters)
     {
         ArrayList<ClsTuristaAutenticato> utenti = new ArrayList<>(repoUtenti.findAll());

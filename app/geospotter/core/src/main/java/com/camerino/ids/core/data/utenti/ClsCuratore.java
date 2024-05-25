@@ -1,9 +1,9 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
@@ -43,31 +43,8 @@ public class ClsCuratore extends ClsAnimatore{
     public ArrayList<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
     }
-
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> _getAllRDC() {
-        return new ArrayList<>(pRDC.get(null));
-    }
-
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> getRDCById(String idRDC) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDC", idRDC);
-        return pRDC.get(filters);
-    }
-
-    public boolean deleteRDCById(String idRDC) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDC", idRDC);
-        return pRDC.delete(filters);
-    }
-
-    public boolean putRDC(ClsRichiestaAzioneDiContribuzione rdc) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDC", rdc.getId());
-        return pRDC.update(filters, rdc);
-    }
-
-    public boolean postRDC(ClsRichiestaAzioneDiContribuzione rdc) {
-        return pRDC.insert(rdc);
+    public ArrayList<ClsRDCNodo> _getAllRDCNodi() {
+        return new ArrayList<>(iperRDCNodi.get(null));
     }
 
     public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
