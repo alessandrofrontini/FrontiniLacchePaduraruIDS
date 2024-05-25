@@ -21,7 +21,9 @@ import java.util.HashMap;
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
     IPersistenceModel<ClsItinerario> pItinerari;
+    @Deprecated
     IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
+    @Deprecated
     IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {

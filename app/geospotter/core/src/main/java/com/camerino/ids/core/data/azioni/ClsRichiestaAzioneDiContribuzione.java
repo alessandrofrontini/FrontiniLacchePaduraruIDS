@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 /**
  * TODO: commentare
  */
+@Deprecated
 public class ClsRichiestaAzioneDiContribuzione {
     String id;
     String usernameCreatoreRichiesta;

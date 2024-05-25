@@ -1,7 +1,7 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
-
+@Deprecated
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
     String id;
     ClsItinerario datiItinerarioVecchio;
