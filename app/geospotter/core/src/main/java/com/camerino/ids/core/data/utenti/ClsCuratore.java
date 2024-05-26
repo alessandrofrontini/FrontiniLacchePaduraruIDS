@@ -1,7 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -17,10 +16,6 @@ import java.util.Objects;
  * Non è possibile diventare Curatore tramite sistema a punteggi.
  */
 public class ClsCuratore extends ClsAnimatore{
-    //TODO: Ha senso? é una relazione molti a molti dovremmo creare una classe
-    // che associa comuni e curatori. Se un utente arriva ad essere curatore in pi comuni
-    // creaiamo deve creare un'altro account?
-    // (modificato id da String a long)
     IPersistenceModel<ClsTuristaAutenticato> pUtenti;
     ClsComune comuneAssociato;
     public ClsComune getComuneAssociato() {
@@ -29,8 +24,8 @@ public class ClsCuratore extends ClsAnimatore{
     public void setComuneAssociato(ClsComune comuneAssociato) {
         this.comuneAssociato = comuneAssociato;
     }
-    public ClsCuratore(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
-        super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest);
+    public ClsCuratore(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRDCImmagine> pRCDImmagini, IPersistenceModel<ClsRDCNodo> pRCDNodo, IPersistenceModel<ClsRDCItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
+        super(r, s, i, pRCDImmagini,pRCDNodo, pRCDItinerari, nodi, itinerari, contest);
         comuneAssociato = c;
         pUtenti = utenti;
     }
@@ -42,10 +37,10 @@ public class ClsCuratore extends ClsAnimatore{
         return pUtenti.update(filtri, utente);
     }
 
-    public boolean eliminaUtente(String idUtente){
+    public void eliminaUtente(String idUtente){
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("id", idUtente);
-        return pUtenti.delete(filtro);
+        pUtenti.delete(filtro);
     }
     public boolean upRank(String idUtente){
         HashMap<String, Object> filtro = new HashMap<>();
@@ -77,9 +72,9 @@ public class ClsCuratore extends ClsAnimatore{
         eliminaUtente(idUtente);
         return registraUtente(turistaAuth);
     }
-    public void validaRichiesta(ClsRichiestaAzioneDiContribuzione richiesta, boolean esito){
+    public void validaRichiesta(AbsDefaultAction richiesta, boolean esito){
         if(esito){
-            switch (richiesta.geteAzioneDiContribuzione()){
+            switch (richiesta.getTipo()){
                 case INSERISCI_NODO -> validaNodo(richiesta);
                 case MODIFICA_NODO -> validaModificaNodo(richiesta);
                 case ELIMINA_NODO -> validaEliminaNodo(richiesta);
@@ -87,31 +82,42 @@ public class ClsCuratore extends ClsAnimatore{
             }
         }
     }
-    private void validaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        richiesta.getDatiNodo().setUsernameCreatore(richiesta.getUsernameCreatoreRichiesta());
-        pNodi.insert(richiesta.getDatiNodo());
+    private void validaNodo(AbsDefaultAction richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsNodo n = (ClsNodo) richiesta.getNewData();
+        n.setUsernameCreatore(richiesta.getCreatore().getCredenziali().getUsername());
+        pNodi.insert(n);
     }
-    private void validaImmagine(ClsRichiestaAzioneDiContribuzione richiesta){
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        richiesta.getDatiImmagine().setUsernameCreatore(richiesta.getUsernameCreatoreRichiesta());
-        pImmagini.insert(richiesta.getDatiImmagine());
+    private void validaImmagine(AbsDefaultAction richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsImmagine i = (ClsImmagine)richiesta.getNewData();
+        i.setUsernameCreatore(richiesta.getCreatore().getCredenziali().getUsername());
+        pImmagini.insert(i);
     }
-    private void validaModificaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
+    private void validaModificaNodo(AbsDefaultAction richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsNodo nodoold = (ClsNodo) richiesta.getOldData();
+        ClsNodo nodonew = (ClsNodo) richiesta.getNewData();
+        nodonew.setUsernameCreatore(richiesta.getCreatore().getCredenziali().getUsername());
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", nodoold.getId());
+        pNodi.update(filtro, nodonew);
+    }
+    private void validaEliminaNodo(AbsDefaultAction richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
         HashMap<String, Object> id = new HashMap<>();
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        id.put("id", richiesta.getDatiNodo().getId());
-        pNodi.update(id, richiesta.getDatiNodo());
-    }
-    private void validaEliminaNodo(ClsRichiestaAzioneDiContribuzione richiesta){
-        HashMap<String, Object> id = new HashMap<>();
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        id.put("id", richiesta.getDatiNodo().getId());
+        richiesta.setResponsabile(this);
+        ClsNodo n = (ClsNodo) richiesta.getNewData();
+        id.put("id", n.getId());
         pNodi.delete(id);
     }
-    public boolean validaRichiestaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta, boolean esito){
+    public boolean validaRichiestaItinerario(ClsRDCItinerario richiesta, boolean esito){
         if(esito){
-            switch (richiesta.geteAzioniDiContribuzione()){
+            switch (richiesta.getTipo()){
                 case INSERISCI_ITINERARIO -> validaItinerario(richiesta);
                 case MODIFICA_ITINERARIO -> validaModificaItinerario(richiesta);
                 case ELIMINA_ITINERARIO -> validaEliminaItinerario(richiesta);
@@ -119,34 +125,49 @@ public class ClsCuratore extends ClsAnimatore{
         }
         return esito;
     }
-    private void validaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
-        richiesta.getDatiItinerarioNuovo().setUsernameCreatore(richiesta.getUsernameCreatore());
-        pItinerari.insert(richiesta.getDatiItinerarioNuovo());
+    private void validaItinerario(ClsRDCItinerario richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsItinerario i = richiesta.getNewData();
+        i.setUsernameCreatore(richiesta.getCreatore().getCredenziali().getUsername());
+        pItinerari.insert(i);
     }
-    private void validaModificaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
+    private void validaModificaItinerario(ClsRDCItinerario richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsItinerario itold = richiesta.getOldData();
+        ClsItinerario itnew = richiesta.getNewData();
         HashMap<String, Object> id = new HashMap<>();
-        id.put("id", richiesta.getDatiItinerarioVecchio().getId());
-        richiesta.getDatiItinerarioNuovo().setUsernameCreatore(richiesta.getUsernameCreatore());
-        pItinerari.update(id, richiesta.getDatiItinerarioNuovo());
+        id.put("id", itold.getId());
+        itnew.setUsernameCreatore(richiesta.getCreatore().getCredenziali().getUsername());
+        pItinerari.update(id, itnew);
     }
-    private void validaEliminaItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
-        richiesta.setUsernameCuratore(this.getCredenziali().getUsername());
+    private void validaEliminaItinerario(ClsRDCItinerario richiesta){
+        richiesta.setResponsabile(this);
+        richiesta.setStato(EStatusRDC.ACCETTATO);
+        ClsItinerario itnew = richiesta.getNewData();
         HashMap<String, Object> id = new HashMap<>();
-        id.put("id", richiesta.getDatiItinerarioNuovo().getId());
+        id.put("id", itnew.getId());
         pItinerari.delete(id);
     }
     public boolean validaSegnalazione(ClsSegnalazione segnalazione, boolean esito){
-        //TODO IT4
         return esito;
     }
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> getRichieste(){
+    public ArrayList<ClsRDCNodo> getRichieste(){
+        ArrayList<ClsRDCNodo> richieste = new ArrayList<>();
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("usernameCuratore",  "null");
-        return filtraComune(pRDC.get(filtro));
+        richieste.addAll(filtraComuneNodi(pRDC.get(filtro)));
+        return richieste;
     }
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRichiesteItinerari(){
+    public ArrayList<ClsRDCImmagine> getRichiesteImmagini(){
+        ArrayList<ClsRDCImmagine> richieste = new ArrayList<>();
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("usernameCuratore",  "null");
+        richieste.addAll(filtraComuneImmagini(pRichiestaImmagini.get(filtro)));
+        return richieste;
+    }
+    public ArrayList<ClsRDCItinerario> getRichiesteItinerari(){
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("usernameCuratore",  "null");
         return filtraComuneItinerario(pRDCI.get(filtro));
@@ -157,21 +178,37 @@ public class ClsCuratore extends ClsAnimatore{
         filtri.put("idComune", comuneAssociato.getId());
         return pSegnalazioni.get(filtri);
     }
-    private ArrayList<ClsRichiestaAzioneDiContribuzione> filtraComune(ArrayList<ClsRichiestaAzioneDiContribuzione> richieste){
-        ArrayList<ClsRichiestaAzioneDiContribuzione> finale = new ArrayList<>();
+    private ArrayList<ClsRDCNodo> filtraComuneNodi(ArrayList<ClsRDCNodo> richieste){
+        ArrayList<ClsRDCNodo> finale = new ArrayList<>();
         if(richieste!=null) {
-            for (ClsRichiestaAzioneDiContribuzione r : richieste) {
-                if (Objects.equals(r.getDatiNodo().getIdComune(), this.getComuneAssociato().getId()))
+            for (ClsRDCNodo r : richieste) {
+                ClsNodo n = r.getNewData();
+                if (Objects.equals(n.getIdComune(), this.getComuneAssociato().getId()))
                     finale.add(r);
             }
         }
         return finale;
     }
-    private ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> filtraComuneItinerario(ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> richieste){
-        ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> finale = new ArrayList<>();
+    private ArrayList<ClsRDCImmagine> filtraComuneImmagini(ArrayList<ClsRDCImmagine> richieste){
+        ArrayList<ClsRDCImmagine> finale = new ArrayList<>();
         if(richieste!=null) {
-            for (ClsRichiestaAzioneDiContribuzioneItinerario r : richieste) {
-                if (Objects.equals(r.getDatiItinerarioNuovo().getTappe().get(0).getIdComune(), comuneAssociato.getId()))
+            for (ClsRDCImmagine r : richieste) {
+                ClsImmagine n = r.getNewData();
+                HashMap<String, Object> filtro = new HashMap<>();
+                filtro.put("id", n.getIdCOntenutoAssociato());
+                if (Objects.equals(pNodi.get(filtro).get(0).getIdComune(), this.getComuneAssociato().getId()))
+                    finale.add(r);
+            }
+        }
+        return finale;
+    }
+
+    private ArrayList<ClsRDCItinerario> filtraComuneItinerario(ArrayList<ClsRDCItinerario> richieste){
+        ArrayList<ClsRDCItinerario> finale = new ArrayList<>();
+        if(richieste!=null) {
+            for (ClsRDCItinerario r : richieste) {
+                ClsItinerario it = r.getNewData();
+                if (Objects.equals(it.getTappe().get(0).getIdComune(), comuneAssociato.getId()))
                     finale.add(r);
             }
         }

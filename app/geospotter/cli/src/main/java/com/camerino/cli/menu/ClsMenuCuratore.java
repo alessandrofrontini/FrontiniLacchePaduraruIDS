@@ -1,7 +1,6 @@
 package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
@@ -19,6 +18,12 @@ public class ClsMenuCuratore implements IMenu{
     public ClsMenuCuratore(ClsCuratore c){user = c;}
     private ClsMenuAnimatore menuAnimatore;
     public ClsMenuAnimatore getMenuAnimatore(){return menuAnimatore;}
+
+    /**
+     * Il Curatore ha accesso a tutti i menu dei ruoli sottostanti, pertanto tutte le azioni di Turista Autenticato, Contributor, Contributor Autorizzato e Animatore sono disponibili.
+     * Il metodo fornisce un menu di azioni; se la classe di riferimento è Curatore il menu termina qua, altrimenti poi continua con il menu del Gestore della Piattaforma.
+     */
+
     @Override
     public void menu() {
         boolean exit = false;
@@ -87,28 +92,51 @@ public class ClsMenuCuratore implements IMenu{
         }
 
     }
+    /**
+     * Il metodo fornisce un sottomenu per gestire le richieste relative ai nodi, alle immagini o agli itinerari.
+     * L'utente, scegliendo una voce dal menu, viene indirizzato al menu corretto.
+     */
+
     public void menuVisualizzaRichieste(){
-        println("1) richieste dei nodi\n2) richieste itinerari\n0) esci");
-        if(Objects.equals(in.nextLine(), "1")){
-            ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = user.getRichieste();
+        println("1) richieste dei nodi\n2) richieste itinerari\n3)Richieste Immagini\n0) esci");
+        String input = in.nextLine();
+        if(Objects.equals(input, "1")){
+            ArrayList<ClsRDCNodo> richieste =user.getRichieste();
             if(!richieste.isEmpty()) {
-                for (ClsRichiestaAzioneDiContribuzione r : richieste) {
-                    println("richiesta n. " + r.getId() + ", tipologia: nodo");
+                for (ClsRDCNodo r : richieste) {
+                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: nodo");
                 }
-                sottomenuRichieste(false);
+                sottomenuRichieste(1);
             }
         }
-        else if(Objects.equals(in.nextLine(), "2")){
-            ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> richieste = user.getRichiesteItinerari();
+        else if(Objects.equals(input, "2")){
+            ArrayList<ClsRDCItinerario> richieste = user.getRichiesteItinerari();
             if(!richieste.isEmpty()) {
-                for (ClsRichiestaAzioneDiContribuzioneItinerario r : richieste) {
-                    println("richiesta n. " + r.getId() + ", tipologia: itinerario");
+                for (ClsRDCItinerario r : richieste) {
+                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: itinerario");
                 }
-                sottomenuRichieste(true);
+                sottomenuRichieste(2);
             }
+        }
+        else{
+            ArrayList<ClsRDCImmagine> richieste = user.getRichiesteImmagini();
+            if(!richieste.isEmpty()){
+                for(ClsRDCImmagine r:richieste){
+                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: immagine");
+                }
+            }
+            sottomenuRichieste(3);
         }
     }
-    private void sottomenuRichieste(boolean itinerario) {
+    /**
+     * Il metodo mette a disposizione un pannello in cui l'utente, dopo aver visualizzato l'elenco delle richieste, seleziona una richiesta e sceglie se validarla o meno.
+     * In caso di validazione la richiesta viene inserita, ma prima vengono automaticamente eliminate tutte le richieste duplicate, quindi tutte le richieste il cui contenuto
+     * è uguale a quello della richiesta appena accettata.
+     * Successivamente il contenuto associato alla richiesta viene caricato ufficialmente nella piattaforma.
+     * Sia che la richiesta venga accettata, sia che la richiesta venga rifiutata, viene associato alla richiesta l'username del curatore.
+     * @param tipo valore che indica quale pannello usare: 1 per i nodi, 2 per gli itinerari e 3 per le immagini.
+     */
+    private void sottomenuRichieste(int tipo) {
         boolean exit = false;
         while(!exit) {
             println("seleziona l'ID della richiesta da validare");
@@ -118,12 +146,13 @@ public class ClsMenuCuratore implements IMenu{
                 filtro.put("id", idr);
                 println("Richiesta " + idr);
                 String esito;
-                if (itinerario) {
-                    if (checkValore(idr, (ArrayList<String>) MockLocator.getMockRCDI().get(null).stream().map(ClsRichiestaAzioneDiContribuzioneItinerario::getId).collect(Collectors.toList()))) {
-                        ClsRichiestaAzioneDiContribuzioneItinerario rit = MockLocator.getMockRCDI().get(filtro).get(0);
-                        println("Tipo richiesta -> " + rit.geteAzioniDiContribuzione());
+                if (tipo==2) {
+                    if (checkValore(idr, (ArrayList<String>) MockLocator.getMockRCDI().get(null).stream().map(ClsRDCItinerario::getIdRichiesta).collect(Collectors.toList()))) {
+                        ClsRDCItinerario rit = MockLocator.getMockRCDI().get(filtro).get(0);
+                        println("Tipo richiesta -> " + rit.getTipo());
                         println("Tappe itinerario:");
-                        for (ClsNodo n : rit.getDatiItinerarioNuovo().getTappe()) {
+                        ClsItinerario itnuovo = rit.getNewData();
+                        for (ClsNodo n : itnuovo.getTappe()) {
                             println(n.toString());
                         }
                         println("Validare? Y/N");
@@ -136,10 +165,10 @@ public class ClsMenuCuratore implements IMenu{
                         println("Richiesta non esistente. Riprova.");
                         in.nextLine();
                     }
-                } else {
-                    if (checkValore(idr, (ArrayList<String>) MockLocator.getMockRCD().get(null).stream().map(ClsRichiestaAzioneDiContribuzione::getId).collect(Collectors.toList()))) {
-                        ClsRichiestaAzioneDiContribuzione r = MockLocator.getMockRCD().get(filtro).get(0);
-                        println("Tipo richiesta -> " + r.geteAzioneDiContribuzione());
+                } else if(tipo==1) {
+                    if (checkValore(idr, (ArrayList<String>) MockLocator.getMockRCD().get(null).stream().map(ClsRDCNodo::getIdRichiesta).collect(Collectors.toList()))) {
+                        ClsRDCNodo r = MockLocator.getMockRCD().get(filtro).get(0);
+                        println("Tipo richiesta -> " + r.getTipo());
                         println("Validare? Y/N");
                         esito = in.nextLine();
                         scartaRichiesteDuplicate(r);
@@ -150,46 +179,76 @@ public class ClsMenuCuratore implements IMenu{
                     else println("Richiesta non esistente. Riprova.");
                     in.nextLine();
                 }
+                else {
+                    if (checkValore(idr, (ArrayList<String>) MockLocator.getMockRCDImmagini().get(null).stream().map(ClsRDCImmagine::getIdRichiesta).collect(Collectors.toList()))) {
+                        ClsRDCImmagine r = MockLocator.getMockRCDImmagini().get(filtro).get(0);
+                        println("Tipo richiesta -> " + r.getTipo());
+                        println("Validare? Y/N");
+                        esito = in.nextLine();
+                        scartaRichiesteDuplicateImmagini(r);
+                        user.validaRichiesta(r, (Objects.equals(esito, "Y")) || (Objects.equals(esito, "y")));
+                        exit = true;
+                        println("Richiesta validata");
+                    }
+                    else println("Richiesta non esistente. Riprova.");
+                    in.nextLine();
+                }
 
             }
         }
     }
-    private void scartaRichiesteDuplicate(ClsRichiestaAzioneDiContribuzione richiesta){
-        ArrayList<ClsRichiestaAzioneDiContribuzione> richieste = MockLocator.getMockRCD().get(null);
-        Iterator<ClsRichiestaAzioneDiContribuzione> richiestaIterator = richieste.iterator();
+
+    /**
+     * Il metodo elimina dalla Mock le richieste duplicate, qunidi le richieste con lo stesso contenuto, a partire da una richiesta.
+     * Se la richiesta è dello stesso tipo di quella di partenza e contiene gli stessi valori, viene rimossa tramite un Iterator.
+     * Le richieste devono avere ID diversi da quella passata, altrimenti verrebbe cancellata anche quest'ultima.
+     * @param richiesta la richiesta appena validata, che quindi andrà inserita: ogni richiesta con lo stesso contenuto verrà eliminata.
+     */
+    private void scartaRichiesteDuplicate(ClsRDCNodo richiesta){
+        ArrayList<ClsRDCNodo> richieste = MockLocator.getMockRCD().get(null);
+        Iterator<ClsRDCNodo> richiestaIterator = richieste.iterator();
         while(richiestaIterator.hasNext()){
-            ClsRichiestaAzioneDiContribuzione r = richiestaIterator.next();
-            if((r.geteAzioneDiContribuzione() == richiesta.geteAzioneDiContribuzione())&&(!Objects.equals(r.getId(), richiesta.getId()))) {
-                switch (r.geteAzioneDiContribuzione()) {
+            ClsRDCNodo r = richiestaIterator.next();
+            ClsNodo nodor = r.getNewData();
+            if((r.getTipo() == richiesta.getTipo())&&(!Objects.equals(r.getIdRichiesta(), richiesta.getIdRichiesta()))) {
+                switch (r.getTipo()) {
                     case INSERISCI_NODO:
                     case MODIFICA_NODO:
                     case ELIMINA_NODO:{
-                        if(((r.getDatiNodo().getPosizione().getX()==richiesta.getDatiNodo().getPosizione().getY())&&(r.getDatiNodo().getPosizione().getY() == richiesta.getDatiNodo().getPosizione().getY())&&(Objects.equals(r.getDatiNodo().getIdComune(), richiesta.getDatiNodo().getIdComune())))){
+                        ClsNodo nodorichiesta = richiesta.getNewData();
+                        if(((nodor.getPosizione().getX()==nodorichiesta.getPosizione().getY())&&(nodor.getPosizione().getY() == nodorichiesta.getPosizione().getY())&&(Objects.equals(nodor.getIdComune(), nodorichiesta.getIdComune())))){
                             richiestaIterator.remove(); break;
                         }
                     }
-                    case INSERISCI_IMMAGINE:{
-                        if((r.getDatiNodo()==richiesta.getDatiNodo())&&(r.getDatiImmagine()==richiesta.getDatiImmagine())){
-                            richiestaIterator.remove(); break;
-                        }
-                    }
+
                 }
             }
         }
     }
-    private void scartaRichiesteDuplicateItinerari(ClsRichiestaAzioneDiContribuzioneItinerario richiesta){
-        ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = MockLocator.getMockRCDI().get(null);
-        for(ClsRichiestaAzioneDiContribuzioneItinerario r:rcdi){
-            if(r.geteAzioniDiContribuzione() == richiesta.geteAzioniDiContribuzione()){
-                switch(r.geteAzioniDiContribuzione()){
+    /**
+     * Il metodo elimina dalla Mock le richieste duplicate, qunidi le richieste con lo stesso contenuto, a partire da una richiesta.
+     * Se la richiesta è dello stesso tipo di quella di partenza e contiene gli stessi valori, viene rimossa tramite un Iterator.
+     * Si prende come valore da controllare l'itinerario nuovo, perchè nel caso di richieste di modifica itinerario, quello vecchio sarebbe sempre uguale.
+     * Le richieste devono avere ID diversi da quella passata, altrimenti verrebbe cancellata anche quest'ultima.
+     * @param richiesta la richiesta appena validata, che quindi andrà inserita: ogni richiesta con lo stesso contenuto verrà eliminata.
+     */
+    private void scartaRichiesteDuplicateItinerari(ClsRDCItinerario richiesta){
+        ClsItinerario itro = richiesta.getOldData();
+        ClsItinerario itrn = richiesta.getNewData();
+        ArrayList<ClsRDCItinerario> rcdi = MockLocator.getMockRCDI().get(null);
+        for(ClsRDCItinerario r:rcdi){
+            ClsItinerario itold = r.getOldData();
+            ClsItinerario itnew = r.getNewData();
+            if(r.getTipo() == richiesta.getTipo()){
+                switch(r.getTipo()){
                     case INSERISCI_ITINERARIO:
                     case ELIMINA_ITINERARIO:{
-                        if(r.getDatiItinerarioNuovo()==richiesta.getDatiItinerarioNuovo()){
+                        if(itnew==itrn){
                             rcdi.remove(r); break;
                         }
                     }
                     case MODIFICA_ITINERARIO:{
-                        if((r.getDatiItinerarioNuovo()==richiesta.getDatiItinerarioNuovo())&&(r.getDatiItinerarioVecchio()==richiesta.getDatiItinerarioVecchio())&&(r.getDatiItinerarioNuovo().isOrdinato() == richiesta.getDatiItinerarioNuovo().isOrdinato())){
+                        if((itnew==itrn)&&(itold==itro)&&(itnew.isOrdinato() == itrn.isOrdinato())){
                             rcdi.remove(r); break;
                         }
                     }
@@ -197,6 +256,30 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
     }
+
+    /**
+     * Il metodo elimina dalle Mock le richieste di contribuzione relative alle immagini duplicate, cioè tutte le richieste aventi lo stesso URL dell'immagine nello stesso nodo.
+     * Tramite un iteratore si scorre la totalità delle richieste di immagini, ed escludendo la richiesta da controllare, ogni richiesta duplicata viene eliminata
+     * @param richiesta la richiesta da controllare ma non eliminare
+     */
+    private void scartaRichiesteDuplicateImmagini(ClsRDCImmagine richiesta){
+        ClsImmagine i = richiesta.getNewData();
+        ArrayList<ClsRDCImmagine> richiesteImmagini = MockLocator.getMockRCDImmagini().get(null);
+        Iterator<ClsRDCImmagine> iteratorrdc = richiesteImmagini.iterator();
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("id", i.getIdCOntenutoAssociato());
+        while(iteratorrdc.hasNext()){
+            ClsRDCImmagine r = iteratorrdc.next();
+            ClsImmagine immaginer = r.getNewData();
+            if((Objects.equals(i.getIdCOntenutoAssociato(), immaginer.getIdCOntenutoAssociato()))&&(Objects.equals(i.getURL(), immaginer.getURL()))&&(!Objects.equals(richiesta.getIdRichiesta(), r.getIdRichiesta()))){
+                iteratorrdc.remove();
+            }
+        }
+    }
+    /**
+     * Il metodo stampa la lista delle segnalazioni presenti nella piattaforma.
+     */
+
     public void menuVisualizzaSegnalazioni(){
         for(ClsSegnalazione seg:MockLocator.getMockSegnalazioni().get(null)){
             if(seg.getIdCuratore() == null){
@@ -204,9 +287,14 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
     }
+
     public void menuRank(){
         println("Questa è una funzionalità di Geospotter Desktop.");
     }
+
+    /**
+     * Il metodo richiede in input un utente e lo inserisce nella piattaforma.
+     */
     public void menuRegistraUtente(){
         ClsTuristaAutenticato t = Input.menuRegistraUtente();
         while(t==null){
@@ -214,6 +302,11 @@ public class ClsMenuCuratore implements IMenu{
         }
         user.registraUtente(t);
     }
+
+    /**
+     * Il metodo richiede in input l'ID dell'utente che si vuole modificare, successivamente si richiedono in input le modifiche da effettuare
+     * all'utente selezionato. Infine l'utente modificato viene salvato nella piattaforma.
+     */
     public void menuModificaUtente(){
         stampaUtenti();
         boolean exit = false;
@@ -230,6 +323,12 @@ public class ClsMenuCuratore implements IMenu{
         }
 
     }
+
+    /**
+     * Il metodo inizialmente stampa tutti gli utenti presenti nella piattaforma, successivamente richiede al curatore l'ID dell'utente da eliminare.
+     * Infine l'utente viene eliminato dalla piattaforma, dopo un controllo sull'input.
+     */
+
     public void menuEliminaUtente(){
         stampaUtenti();
         boolean exit = false;
@@ -250,6 +349,10 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
     }
+
+    /**
+     * Il metodo stampa a video l'elenco di tutti gli utenti presenti nella piattaforma.
+     */
     private void stampaUtenti(){
        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
            println("Utente " + t.getCredenziali().getUsername());

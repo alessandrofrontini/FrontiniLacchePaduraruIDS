@@ -1,10 +1,10 @@
 package com.camerino.cli.mock;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.ClsRDCItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.io.File;
@@ -15,16 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
+public class MockRCDItinerari implements IPersistenceModel<ClsRDCItinerario> {
 
-    ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = new ArrayList<>();
+    ArrayList<ClsRDCItinerario> rcdi = new ArrayList<>();
     long idCounter = 0;
 
     //region Implements IPersistance
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRDCItinerario> get(HashMap<String, Object> filters) {
         if(filters!=null) {
-            ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
+            ArrayList<ClsRDCItinerario> tmp = new ArrayList<>();
             if (filters.containsKey("id")) {
                 tmp.add(findById((String) filters.get("id")));
                 return tmp;
@@ -40,29 +40,29 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
+    public boolean update(HashMap<String, Object> filters, ClsRDCItinerario object) {
         if(filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
     }
 
     @Override
-    public boolean insert(ClsRichiestaAzioneDiContribuzioneItinerario object) {
+    public boolean insert(ClsRDCItinerario object) {
         idCounter++;
-        object.setId(""+idCounter);
+        object.setIdRichiesta(""+idCounter);
         return rcdi.add(object);
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(filters.get("id").toString());
+        ClsRDCItinerario tmp = findById(filters.get("id").toString());
         return rcdi.remove(tmp);
     }
     //endregion
 
     //region Utility
-    private boolean updateRCDI(String id, ClsRichiestaAzioneDiContribuzioneItinerario object) {
-        ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(id);
+    private boolean updateRCDI(String id, ClsRDCItinerario object) {
+        ClsRDCItinerario tmp = findById(id);
         int index = rcdi.indexOf(tmp);
         if(index<0)
             return false;
@@ -70,16 +70,16 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
         return true;
     }
 
-    private ClsRichiestaAzioneDiContribuzioneItinerario findById(String id) {
-        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
-                rcdi.stream().filter(n->n.getId().equals(id)).toList();
+    private ClsRDCItinerario findById(String id) {
+        List<ClsRDCItinerario> tmp =
+                rcdi.stream().filter(n->n.getIdRichiesta().equals(id)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
     }
-    private List<ClsRichiestaAzioneDiContribuzioneItinerario> findLibere() {
-        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
-                rcdi.stream().filter(n-> Objects.equals(n.getUsernameCuratore(), "null")).toList();
+    private List<ClsRDCItinerario> findLibere() {
+        List<ClsRDCItinerario> tmp =
+                rcdi.stream().filter(n-> Objects.equals(n.getResponsabile().getCredenziali().getUsername(), "null")).toList();
         if(tmp.isEmpty())
             return null;
         return tmp;
@@ -88,14 +88,17 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
         try{
             FileWriter output = new FileWriter("CLIsave/rcdi.csv");
             StringBuilder daScrivere = new StringBuilder();
-            for(ClsRichiestaAzioneDiContribuzioneItinerario r:rcdi){
-                daScrivere.append(r.geteAzioniDiContribuzione() +","+ r.getId() + "," + r.getUsernameCreatore() + ",");
-                switch (r.geteAzioniDiContribuzione()){
+            for(ClsRDCItinerario r:rcdi){
+                daScrivere.append(r.getTipo() +","+ r.getIdRichiesta() + "," + r.getResponsabile().getCredenziali().getUsername() + ",");
+                switch (r.getTipo()){
                     case ELIMINA_ITINERARIO:
-                    case INSERISCI_ITINERARIO: daScrivere = scriviNuovoItinerario(r, daScrivere); break;
-                    case MODIFICA_ITINERARIO: daScrivere.append(r.getDatiItinerarioVecchio().getId() + ","); daScrivere = scriviNuovoItinerario(r, daScrivere); break;
+                    case INSERISCI_ITINERARIO: daScrivere = scriviNuovoItinerario(r.getNewData(), daScrivere); break;
+                    case MODIFICA_ITINERARIO: {
+                        ClsItinerario i = r.getOldData();
+                        daScrivere.append(i.getId() + ",");
+                        daScrivere = scriviNuovoItinerario(r.getNewData(), daScrivere); break;}
                 }
-                daScrivere.append(r.getUsernameCuratore() + "\r\n");
+                daScrivere.append(r.getResponsabile().getCredenziali().getUsername() + "\r\n");
             }
             output.write(String.valueOf(daScrivere));
             output.close();
@@ -118,24 +121,34 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
 
                     String[] acapo = String.valueOf(tutti).split("\r\n");
                     for (String richiesta : acapo) {
+                        HashMap<String, Object> filtro = new HashMap<>();
                         String[] dati = richiesta.split(",");
-                        ClsRichiestaAzioneDiContribuzioneItinerario r = new ClsRichiestaAzioneDiContribuzioneItinerario();
-                        r.seteAzioniDiContribuzione(EAzioniDiContribuzione.valueOf(dati[0]));
-                        r.setId(dati[1]);
-                        r.setUsernameCreatore(dati[2]);
+                        ClsRDCItinerario r = new ClsRDCItinerario();
+                        r.setTipo(EAzioniDiContribuzione.valueOf(dati[0]));
+                        r.setIdRichiesta(dati[1]);
+                        filtro.put("username", dati[2]);
+                        r.setResponsabile((ClsCuratore) MockLocator.getMockTuristi().get(filtro).get(0));
                         switch (dati[0]) {
                             case "INSERISCI_ITINERARIO":
-                                case "ELIMINA_ITINERARIO":
-                                    r.setDatiItinerarioNuovo(leggiItinerarioNuovo(3, dati.length-1, dati)); break;
+                                case "ELIMINA_ITINERARIO": {
+                                    ClsItinerario i = leggiItinerarioNuovo(3, dati.length - 1, dati);
+                                    ClsRDCItinerario tmp = new ClsRDCItinerario(null,i);
+                                    r = tmp;
+                                    break;
+                                }
                             case "MODIFICA_ITINERARIO": {
-                                HashMap<String, Object> filtro = new HashMap<>();
+                                filtro = new HashMap<>();
                                 filtro.put("id", dati[3]);
-                                r.setDatiItinerarioVecchio(MockLocator.getMockItinerari().get(filtro).get(0));
-                                r.setDatiItinerarioNuovo(leggiItinerarioNuovo(4, dati.length-1, dati));;
+                                ClsItinerario itnew = leggiItinerarioNuovo(4, dati.length-1, dati);
+                                ClsItinerario itold = MockLocator.getMockItinerari().get(filtro).get(0);
+                                ClsRDCItinerario tmp = new ClsRDCItinerario(itold, itnew);
+                                r = tmp;
                                 break;
                             }
                         }
-                        r.setUsernameCuratore(dati[dati.length-1]);
+                        filtro = new HashMap<>();
+                        filtro.put("username", dati[dati.length-1]);
+                        r.setResponsabile((ClsCuratore) MockLocator.getMockTuristi().get(filtro).get(0));
                         rcdi.add(r);
                     }
                 }
@@ -160,21 +173,21 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
             it.setTappe(tappe);
         return it;
     }
-    private StringBuilder scriviNuovoItinerario(ClsRichiestaAzioneDiContribuzioneItinerario r, StringBuilder daScrivere){
-        daScrivere.append(r.getDatiItinerarioNuovo().getId() + ",");
-        daScrivere.append(r.getDatiItinerarioNuovo().getNome() + ",");
-        daScrivere.append(r.getDatiItinerarioNuovo().isOrdinato() + ",");
-        daScrivere.append(r.getDatiItinerarioNuovo().getUsernameCreatore() + ",");
-        for(ClsNodo n:r.getDatiItinerarioNuovo().getTappe()){
+    private StringBuilder scriviNuovoItinerario(ClsItinerario itinerario, StringBuilder daScrivere){
+        daScrivere.append(itinerario.getId() + ",");
+        daScrivere.append(itinerario.getNome() + ",");
+        daScrivere.append(itinerario.isOrdinato() + ",");
+        daScrivere.append(itinerario.getUsernameCreatore() + ",");
+        for(ClsNodo n:itinerario.getTappe()){
             daScrivere.append(n.getId() + ",");
         }
         return daScrivere;
     }
 
     private void maxID(){
-        for(ClsRichiestaAzioneDiContribuzioneItinerario r:rcdi){
-            if(Long.parseLong(r.getId())>this.idCounter)
-                this.idCounter = Long.parseLong(r.getId());
+        for(ClsRDCItinerario r:rcdi){
+            if(Long.parseLong(r.getIdRichiesta())>this.idCounter)
+                this.idCounter = Long.parseLong(r.getIdRichiesta());
         }
     }
     //endregion

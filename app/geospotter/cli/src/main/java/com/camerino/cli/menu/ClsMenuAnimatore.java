@@ -28,6 +28,10 @@ public class ClsMenuAnimatore implements IMenu{
     public ClsMenuAnimatore(ClsAnimatore a){user = a;}
     private ClsMenuContributorAuth menuca;
     public ClsMenuContributorAuth getMenuca(){return menuca;}
+    /**
+     * L'Animatore ha accesso a tutti i menu dei ruoli sottostanti, pertanto tutte le azioni di Turista Autenticato, Contributor e Contributor Autorizzato sono disponibili.
+     * Il metodo fornisce un menu di azioni; se la classe di riferimento è Animatore il menu termina qua, altrimenti poi continua con il menu del Curatore.
+     */
     @Override
     public void menu() {
         boolean exit = false;
@@ -61,6 +65,9 @@ public class ClsMenuAnimatore implements IMenu{
                 else exit = true;
         }
     }
+    /**
+     * Il metodo è pronto a fornire un sottomenu per la creazione di contest. Tuttavia i contest sono una funzionalità di Geospotter Desktop.
+     */
     public void menuContest(){
         println("Questa è una funzionalità presente su Geospotter Desktop.");
     }

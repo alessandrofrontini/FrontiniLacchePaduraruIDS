@@ -8,6 +8,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
+import static com.camerino.cli.menu.Input.checkValore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,9 @@ public class Main {
             }
         }
     }
-
+    /**
+     * Il metodo scrive su file CSV tutti i dati salvati alla chiusura dell'app.
+     */
     private static void salvaTutto(){
         MockLocator.getMockComuni().scriviComuni();
         MockLocator.getMockNodi().scriviNodi();
@@ -54,7 +57,11 @@ public class Main {
         MockLocator.getMockRCD().scriviRCD();
         MockLocator.getMockItinerari().scriviItinerari();
         MockLocator.getMockRCDI().scriviRCDItinerari();
+        MockLocator.getMockRCDImmagini().ScriviRCDImmagini();
     }
+    /**
+     * Il metodo legge da file tutti i dati salvati e riempie le Mock
+     */
     private static void leggiTutto(){
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
@@ -65,7 +72,12 @@ public class Main {
         MockLocator.getMockRCD().leggiRCD();
         MockLocator.getMockItinerari().leggiItinerari();
         MockLocator.getMockRCDI().leggiRCDItinerari();
+        MockLocator.getMockRCDImmagini().LeggiRCDImmagini();
     }
+
+    /**
+     * Il metodo stampa a video l'elenco di tutti i comuni
+     */
     private static void listaComuni()
     {
         for(ClsComune comune:MockLocator.getMockComuni().get(null)){
@@ -73,6 +85,9 @@ public class Main {
         }
     }
 
+    /**
+     * Il metodo prende in input le credenziali dell'utente e, se possibile, effettua il login e il reindirizzamento al menu di competenza.
+     */
     private static void login() {
         Credenziali credenziali = Input.richiediCredenziali();
         HashMap<String, Object> tmp = new HashMap<>();
@@ -85,6 +100,10 @@ public class Main {
         main_menu(user);
     }
 
+    /**
+     * Il metodo associa il menu corrispondente al ruolo dell'utente passato come parametro
+     * @param turista l'utente che, in base al ruolo, avrà accesso ad un menu diverso
+     */
     private static void main_menu(ClsTuristaAutenticato turista) {
         switch (turista.getRuoloUtente()){
             case TURISTA_AUTENTICATO -> new ClsMenuTuristaAutenticato(turista).menu();
@@ -96,6 +115,10 @@ public class Main {
         }
     }
 
+    /**
+     * Il metodo inserisce una segnalazione al nodo scelto. L'utente prima seleziona un nodo da segnalare, poi fornisce una descrizione della segnalazione
+     * e infine la segnalazione viene salvata.
+     */
     private static void menuSegnalaNodo(){
         ClsTurista user = new ClsTurista(MockLocator.getMockSegnalazioni());
         ClsSegnalazione segnalazione = new ClsSegnalazione();
@@ -112,6 +135,9 @@ public class Main {
         else println("Nodo non esistente.");
     }
 
+    /**
+     * Il metodo stampa a video tutti i nodi di un comune, preso in input dall'utente tramite l'id.
+     */
     private static void menuListaNodiComune(){
         MockNodi mockNodi = MockLocator.getMockNodi();
         HashMap<String, Object> filtro = new HashMap<>();
@@ -124,6 +150,9 @@ public class Main {
         }
         else println("Comune non esistente.");
     }
+    /**
+     * Il metodo stampa a video le informazioni di un nodo, scelto dall'utente inserendo in input l'ID
+     */
     private static void menuMostraNodo(){
         MockNodi mockNodi = MockLocator.getMockNodi();
         HashMap<String, Object> filtro = new HashMap<>();
@@ -136,9 +165,6 @@ public class Main {
         else println("nodo non esistente.");
     }
 
-    private static boolean checkValore(String input, ArrayList<String> range){
-        return range.contains(input);
-    }
     //region Visualizzazione header e team
     //https://patorjk.com/software/taag/
     private static void print_header() {

@@ -1,11 +1,10 @@
 package com.camerino.cli.mock;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
-import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -18,15 +17,15 @@ import java.util.*;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
-public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContribuzione> {
-    ArrayList<ClsRichiestaAzioneDiContribuzione> rcdi = new ArrayList<>();
+public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
+    ArrayList<ClsRDCNodo> rcdi = new ArrayList<>();
     long idCounter = 0;
 
     //region Implements IPersistance
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRDCNodo> get(HashMap<String, Object> filters) {
         if(filters!=null) {
-            ArrayList<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
+            ArrayList<ClsRDCNodo> tmp = new ArrayList<>();
             if (filters.containsKey("id")) {
                 tmp.add(findById(filters.get("id").toString()));
                 return tmp;
@@ -42,29 +41,29 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
+    public boolean update(HashMap<String, Object> filters, ClsRDCNodo object) {
         if(filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
     }
 
     @Override
-    public boolean insert(ClsRichiestaAzioneDiContribuzione object) {
+    public boolean insert(ClsRDCNodo object) {
         idCounter++;
-        object.setId(""+idCounter);
+        object.setIdRichiesta(""+idCounter);
         return rcdi.add(object);
     }
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        ClsRichiestaAzioneDiContribuzione tmp = findById(filters.get("id").toString());
+        ClsRDCNodo tmp = findById(filters.get("id").toString());
         return rcdi.remove(tmp);
     }
     //endregion
 
     //region Utility
-    private boolean updateRCDI(String id, ClsRichiestaAzioneDiContribuzione object) {
-        ClsRichiestaAzioneDiContribuzione tmp = findById(id);
+    private boolean updateRCDI(String id, ClsRDCNodo object) {
+        ClsRDCNodo tmp = findById(id);
         int index = rcdi.indexOf(tmp);
         if(index<0)
             return false;
@@ -72,17 +71,17 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         return true;
     }
 
-    private ClsRichiestaAzioneDiContribuzione findById(String id) {
-        List<ClsRichiestaAzioneDiContribuzione> tmp =
-                rcdi.stream().filter(n->n.getId().equals(id)).toList();
+    private ClsRDCNodo findById(String id) {
+        List<ClsRDCNodo> tmp =
+                rcdi.stream().filter(n->n.getIdRichiesta().equals(id)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
     }
 
-    private List<ClsRichiestaAzioneDiContribuzione> findLibere() {
-        List<ClsRichiestaAzioneDiContribuzione> tmp =
-                rcdi.stream().filter(n-> Objects.equals(n.getUsernameCuratore(), "null")).toList();
+    private List<ClsRDCNodo> findLibere() {
+        List<ClsRDCNodo> tmp =
+                rcdi.stream().filter(n-> Objects.equals(n.getResponsabile(), null)).toList();
         if(tmp.isEmpty())
             return null;
         return tmp;
@@ -103,20 +102,10 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
                 if (!Objects.equals(rcds[0], "")) {
                     for (String s : rcds) {
                         String[] dati = s.split(",");
-                        ClsRichiestaAzioneDiContribuzione rcd = new ClsRichiestaAzioneDiContribuzione();
-                        switch (dati[0]) {
-                            case "ELIMINA_NODO":
-                            case "MODIFICA_NODO":
-                            case "INSERISCI_NODO":
-                                rcd = leggiRichiestaNodo(dati);
-                                break;
-                            case "INSERISCI_IMMAGINE":
-                                rcd = leggiRichiestaImmagine(dati);
-                                break;
-                        }
+                        ClsRDCNodo rcd = leggiRichiestaNodo(dati);
                         rcdi.add(rcd);
                     }
-                    maxID(rcdi);
+                    maxID();
                 }
                 }
             } catch (Exception e) {
@@ -124,12 +113,9 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
             }
         }
     }
-    private ClsRichiestaAzioneDiContribuzione leggiRichiestaNodo(String [] dati) throws ParseException {
-        ClsRichiestaAzioneDiContribuzione r = new ClsRichiestaAzioneDiContribuzione();
-        r.seteAzioneDiContribuzione(EAzioniDiContribuzione.valueOf(dati[0]));
-        r.setUsernameCreatoreRichiesta(dati[1]);
-        r.setId(dati[2]);
+    private ClsRDCNodo leggiRichiestaNodo(String [] dati) throws ParseException {
         ClsNodo n = new ClsNodo();
+        ClsRDCNodo r = new ClsRDCNodo();
         n.setId(dati[3]);
         n.setIdComune(dati[4]);
         n.setaTempo(Boolean.parseBoolean(dati[5]));
@@ -139,40 +125,39 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         n.setUsernameCreatore(dati[8]);
         n.setNome(dati[9]);
         n.setPosizione(new Posizione(Double.parseDouble(dati[10]), Double.parseDouble(dati[11])));
-        r.setDatiNodo(n);
-        r.setUsernameCuratore(dati[12]);
-        return r;
-    }
-    private ClsRichiestaAzioneDiContribuzione leggiRichiestaImmagine(String [] dati) throws Exception{
-        ClsRichiestaAzioneDiContribuzione rcd = leggiRichiestaNodo(arraySplit(dati, 13));
-        ClsImmagine i = new ClsImmagine();
-        i.setId(dati[13]);
-        i.setIdCOntenutoAssociato(dati[14]);
-        i.setUsernameCreatore(dati[15]);
-        i.setURL(dati[16]);
-        rcd.setDatiImmagine(i);
-        return rcd;
-    }
-    private String[] arraySplit(String [] s, int max){
-        String [] array = new String[max];
-        for(int i = 0; i<max; i++){
-            array[i] = s[i];
+        if(!Objects.equals(dati[0], "MODIFICA_NODO"))
+            r = new ClsRDCNodo(null, n);
+        else{
+            HashMap<String, Object> filtro2 = new HashMap<>();
+            filtro2.put("id", dati[14]);
+            r = new ClsRDCNodo(MockLocator.getMockNodi().get(filtro2).get(0), n);
         }
-        return array;
+        r.setTipo(EAzioniDiContribuzione.valueOf(dati[0]));
+        HashMap<String, Object> filtro = new HashMap<>();
+        filtro.put("username", dati[1]);
+        r.setCreatore(MockLocator.getMockTuristi().get(filtro).get(0));
+        r.setIdRichiesta(dati[2]);
+        if(!Objects.equals(dati[12], "null")) {
+            filtro.replace("username", dati[1], dati[12]);
+            r.setResponsabile((ClsCuratore) MockLocator.getMockTuristi().get(filtro).get(0));
+        }
+        else r.setResponsabile(null);
+        r.setStato(EStatusRDC.valueOf(dati[13]));
+        return r;
     }
 
     public void scriviRCD(){
         try{
             FileWriter output = new FileWriter("CLIsave/rcd.csv");
             StringBuilder daScrivere = new StringBuilder();
-            for(ClsRichiestaAzioneDiContribuzione r:rcdi){
-                daScrivere.append(r.geteAzioneDiContribuzione() + "," + r.getUsernameCreatoreRichiesta() + "," + r.getId() + ",");
-                //dump del nodo se
+            for(ClsRDCNodo r:rcdi){
+                daScrivere.append(r.getTipo() + "," + r.getCreatore().getCredenziali().getUsername() + "," + r.getIdRichiesta() + ",");
                 SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-                daScrivere.append(r.getDatiNodo().getId() + "," + r.getDatiNodo().getIdComune() + "," + r.getDatiNodo().isaTempo() + "," + d.format(r.getDatiNodo().getDataFine()) + "," + r.getDatiNodo().getTipologiaNodo() + "," + r.getDatiNodo().getUsernameCreatore() + "," + r.getDatiNodo().getNome() + "," + r.getDatiNodo().getPosizione().getY() + "," + r.getDatiNodo().getPosizione().getX() + "," + r.getUsernameCuratore());
-                //dump dell'immagine se la richiesta è corretta
-                if(r.geteAzioneDiContribuzione().equals(EAzioniDiContribuzione.INSERISCI_IMMAGINE)) {
-                    daScrivere.append("," + r.getDatiImmagine().getId() + "," + r.getDatiImmagine().getIdCOntenutoAssociato() + "," + r.getDatiImmagine().getUsernameCreatore() + "," + r.getDatiImmagine().getURL());
+                ClsNodo n = r.getNewData();
+                daScrivere.append(n.getId() + "," + n.getIdComune() + "," + n.isaTempo() + "," + d.format(n.getDataFine()) + "," + n.getTipologiaNodo() + "," + n.getUsernameCreatore() + "," + n.getNome() + "," + n.getPosizione().getY() + "," + n.getPosizione().getX() + "," + (r.getResponsabile()!=null? r.getResponsabile().getCredenziali().getUsername() : "null") + "," + r.getStato());
+                if(r.getTipo()==EAzioniDiContribuzione.MODIFICA_NODO){
+                    ClsNodo nodoold = r.getOldData();
+                    daScrivere.append("," + nodoold.getId());
                 }
                 daScrivere.append("\r\n");
             }
@@ -183,10 +168,10 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         }
     }
 
-    private void maxID(ArrayList<ClsRichiestaAzioneDiContribuzione> r){
-        for(ClsRichiestaAzioneDiContribuzione rc:r){
-            if(this.idCounter<Long.parseLong(rc.getId()))
-                this.idCounter = Long.parseLong(rc.getId());
+    private void maxID(){
+        for(ClsRDCNodo rc:rcdi){
+            if(this.idCounter<Long.parseLong(rc.getIdRichiesta()))
+                this.idCounter = Long.parseLong(rc.getIdRichiesta());
         }
     }
     //endregion

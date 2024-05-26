@@ -1,7 +1,9 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.EStatusRDC;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
@@ -50,7 +52,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     eRUOLO_UTENTE ruoloUtente;
 
     IPersistenceModel<ClsRecensione> pRecensioni;
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione>  pRichiestaImmagini;
+    IPersistenceModel<ClsRDCImmagine>  pRichiestaImmagini;
     IPersistenceModel<ClsNodo> pNodi;
 
     //region Getters and Setters
@@ -87,13 +89,13 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
 
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> immagini, IPersistenceModel<ClsNodo> nodi){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRDCImmagine> immagini, IPersistenceModel<ClsNodo> nodi){
         super(segnalazioni);
         pRecensioni = recensioni;
         pRichiestaImmagini = immagini;
         pNodi = nodi;
     }
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> immagini){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsRDCImmagine> immagini){
         super(segnalazioni);
         credenziali = c;
         ruoloUtente = ruolo;
@@ -120,13 +122,13 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
-        ClsRichiestaAzioneDiContribuzione richiesta = new ClsRichiestaAzioneDiContribuzione();
-        richiesta.setDatiImmagine(immagine);
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("id", immagine.getIdCOntenutoAssociato());
-        richiesta.setDatiNodo(pNodi.get(filtro).get(0));
-        richiesta.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        richiesta.setUsernameCreatoreRichiesta(this.credenziali.getUsername());
+        ClsRDCImmagine richiesta = new ClsRDCImmagine(null, immagine);
+        richiesta.setNodoAssociato(pNodi.get(filtro).get(0));
+        richiesta.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        richiesta.setStato(EStatusRDC.ASSEGNATO);
+        richiesta.setCreatore(this);
         return pRichiestaImmagini.insert(richiesta);
     }
 

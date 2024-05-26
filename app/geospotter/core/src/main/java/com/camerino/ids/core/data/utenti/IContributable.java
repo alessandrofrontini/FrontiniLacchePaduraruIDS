@@ -10,10 +10,10 @@ import java.util.ArrayList;
  */
 public interface IContributable {
     boolean inserisciNodo(ClsNodo nodo);
-    boolean modificaNodo(String id, ClsNodo nodo);
-    boolean eliminaNodo(String id);
+    boolean modificaNodo(ClsNodo oldnodo, ClsNodo nodo);
+    boolean eliminaNodo(ClsNodo nodo);
     boolean inserisciItinerario(ClsItinerario itinerario);
     boolean modificaItinerario(ClsItinerario itinerarionuovo, ClsItinerario itinerariovecchio);
-    boolean eliminaItinerario(String id);
+    boolean eliminaItinerario(ClsItinerario itinerario);
     ArrayList<ClsNodo> visualizzaNodiPosessore();
 }

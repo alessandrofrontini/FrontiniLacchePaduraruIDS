@@ -16,9 +16,6 @@ public class ClsCommonActions {
         return false;
     }
 
-    public static boolean eliminaNodo(IContributable user, String id){
-        return user.eliminaNodo(id);
-    }
 
     public static boolean aggiungiItinerario(IContributable user){
         ClsItinerario itinerario = Input.richiediItinerario();

@@ -1,11 +1,11 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,8 +17,8 @@ import java.util.HashMap;
 public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHallAdministrator
 {
     IPersistenceModel<ClsComune> mockComuni;
-    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
-        super(r, s, i, pRCDNodo, pRCDItinerari, nodi, itinerari, contest, null, utenti);
+    public ClsGestoreDellaPiattaforma(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsImmagine> i, IPersistenceModel<ClsRDCImmagine> pRCDImmagini, IPersistenceModel<ClsRDCNodo> pRCDNodo, IPersistenceModel<ClsRDCItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari, IPersistenceModel<ClsContestDiContribuzione> contest, ClsComune c, IPersistenceModel<ClsTuristaAutenticato>utenti){
+        super(r, s, i, pRCDImmagini, pRCDNodo, pRCDItinerari, nodi, itinerari, contest, null, utenti);
     }
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
@@ -74,10 +74,12 @@ public class ClsGestoreDellaPiattaforma extends ClsCuratore implements ITownHall
     }
 
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> getRichieste(){
-        return pRDC.get(null);
+    public ArrayList<ClsRDCNodo> getRichieste(){
+        ArrayList<ClsRDCNodo> richieste = new ArrayList<>();
+        richieste.addAll(pRDC.get(null));
+        return richieste;
     }
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRichiesteItinerari(){
+    public ArrayList<ClsRDCItinerario> getRichiesteItinerari(){
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("usernameCuratore",  "null");
         return pRDCI.get(filtro);

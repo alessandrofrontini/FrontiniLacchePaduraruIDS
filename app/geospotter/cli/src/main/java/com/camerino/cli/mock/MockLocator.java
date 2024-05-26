@@ -4,10 +4,11 @@ public class MockLocator {
     private static MockNodi mockNodi = new MockNodi();
     private static MockComuni mockComuni = new MockComuni();
     private static MockTuristi mockTuristi = new MockTuristi();
-    private static MockRCDItinerarii mockRCDI = new MockRCDItinerarii();
+    private static MockRCDItinerari mockRCDI = new MockRCDItinerari();
     private static MockItinerari mockItinerari = new MockItinerari(mockNodi);
     private static MockSegnalazioni mockSegnalazioni = new MockSegnalazioni();
     private static MockRecensioni mockRecensioni = new MockRecensioni();
+    private static MockRCDImmagini mockRCDImmagini = new MockRCDImmagini();
     private static MockImmagini mockImmagini = new MockImmagini();
 
     private static MockContest mockContest = new MockContest();
@@ -33,8 +34,9 @@ public class MockLocator {
     public static MockRecensioni getMockRecensioni(){return mockRecensioni;}
     public static MockImmagini getMockImmagini(){return mockImmagini;}
     public static MockRCDNodi getMockRCD(){return mockRCD;}
-    public static MockRCDItinerarii getMockRCDI(){return mockRCDI;}
+    public static MockRCDItinerari getMockRCDI(){return mockRCDI;}
     public static MockContest getMockContest() {
         return mockContest;
     }
+    public static MockRCDImmagini getMockRCDImmagini(){ return mockRCDImmagini;}
 }

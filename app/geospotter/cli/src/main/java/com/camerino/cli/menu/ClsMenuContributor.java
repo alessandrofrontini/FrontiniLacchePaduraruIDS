@@ -27,6 +27,12 @@ public class ClsMenuContributor implements IMenu{
     public ClsMenuContributor(ClsContributor c){user = c;}
     private ClsMenuTuristaAutenticato menuta;
     public ClsMenuTuristaAutenticato getMenuta(){return menuta;}
+
+    /**
+     * Il metodo stampa a video le azioni effettuabili dal Turista Autenticato.
+     * Siccome il menù viene utilizzato dal Turista Autenticato e da tutti i ruoli superiori, viene effettuato un controllo sull'utente:
+     * se si tratta di un Turista Autenticato allora il menu si ferma qua, altrimenti proseguirà con i successivi menu.
+     */
     @Override
     public void menu(){
         menuta = new ClsMenuTuristaAutenticato(user);
@@ -61,11 +67,19 @@ public class ClsMenuContributor implements IMenu{
             else exit = true;
         }
     }
-
+    /**
+     * Il metodo si occupa di prendere in input un nodo e di inserirlo, tramite richiesta o meno a seconda dell'utente
+     */
     public void menuInserisciNodo(){
         user.inserisciNodo(Input.inserisciNodo());
     }
 
+    /**
+     * Il metodo inizialmente stampa tutti i nodi di proprietà dell'utente loggato, se presenti.
+     * Successivamente viene chiesto di inserire l'id del nodo da inserire, e dopo un controllo sull'input vengono richieste in input
+     * le modifiche da effettuare al nodo.
+     * Infine il nodo viene modificato, su richiesta o meno a seconda del tipo di utente.
+     */
     public void menuModificaNodo(){
         if(!user.visualizzaNodiPosessore().isEmpty()) {
             for(ClsNodo n: user.visualizzaNodiPosessore())
@@ -78,10 +92,15 @@ public class ClsMenuContributor implements IMenu{
                 println("Nessun Nodo Trovato");
                 return;
             }
-            user.modificaNodo(old.getId(), Input.modificaNodo(old));
+            user.modificaNodo(old, Input.modificaNodo(old));
         }
     }
 
+    /**
+     * Il metodo inizialmente stampa l'elenco dei nodi di cui l'utente loggato è possessore, se esistente.
+     * Successivamente si chiede all'utente l'id del nodo da eliminare, e dopo aver controllato la correttezza del valore in input
+     * si elimina il nodo selezionato, su richiesta o meno in base al tipo di utente.
+     */
     public void menuEliminaNodo() {
         if (!user.visualizzaNodiPosessore().isEmpty()) {
             for(ClsNodo n: user.visualizzaNodiPosessore())
@@ -91,7 +110,9 @@ public class ClsMenuContributor implements IMenu{
                 println("inserisci l'id del nodo da eliminare");
                 String input = in.nextLine();
                 if (checkValore(input, (ArrayList<String>) user.visualizzaNodiPosessore().stream().map(ClsNodo::getId).collect(Collectors.toList()))) {
-                    if (user.eliminaNodo((input))) {
+                    HashMap<String, Object> filtro = new HashMap<>();
+                    filtro.put("id", input);
+                    if (user.eliminaNodo((MockLocator.getMockNodi().get(filtro).get(0)))) {
                         println("Richiesta di eliminazione inviata.");
                         exit = true;
                     }
@@ -103,10 +124,19 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
+    /**
+     * Il metodo inserisce l'itinerario creato in input dall'utente, su richiesta o meno in base al tipo di utente.
+     */
+
     public void menuInserisciItinerario(){
         user.inserisciItinerario(Input.richiediItinerario());
     }
 
+    /**
+     * Il metodo inizialmente stampa a video gli itinerari di cui l'utente loggato è possessore, se esistono.
+     * Successivamente si richiedono in input le modifiche e il nuovo itinerario viene salvato, tramite richiesta o mano in base
+     * al tipo di utente.
+     */
     public void menuModificaItinerario(){
         for(ClsItinerario itinerario:user.visualizzaItinerariPossessore())
             println(itinerario.visualizzaItinerario());
@@ -134,6 +164,18 @@ public class ClsMenuContributor implements IMenu{
             }
         }
     }
+
+    /**
+     * Il metodo fornisce un sottomenu per la modifica degli itinerari.
+     * Di un itinerario è possibile modificare:
+     * - il nome
+     * - le tappe: è possibile aggiungerne e toglierne
+     * - l'ordinamento: l'itinerario può passare da ordinato a non ordinato
+     * Non è possibile modificare un itinerario per renderlo uguale ad uno già esistente, pertanto in caso questa situazione si verificasse
+     * l'utente viene invitato a modificare nuovamente l'itinerario e le attuali modifiche non vengono salvate.
+     * @param itv l'itinerario da modificare, "itv" sta per Itinerario Vecchio
+     * @return l'itinerario modificato
+     */
     private ClsItinerario sottomenuModificaItinerario(ClsItinerario itv){ //sentire chat gpt per doppia modifica in "modifica"
         boolean fine = false;
             ClsItinerario nuovo = new ClsItinerario();
@@ -226,6 +268,13 @@ public class ClsMenuContributor implements IMenu{
         }
         return nuovo;
     }
+
+    /**
+     * Il metodo controlla che una tappa non sia già presente in un itinerario.
+     * @param itinerario l'itinerario su cui effettuare il controllo
+     * @param idTappa la tappa da controllare
+     * @return true se la tappa non viene trovata, false se l'itinerario contiene già la tappa
+     */
     private boolean controllaTappaDuplicataItinerario(ClsItinerario itinerario, String idTappa){
         for(ClsNodo nodo:itinerario.getTappe()){
             if(Objects.equals(nodo.getId(), idTappa))
@@ -233,6 +282,11 @@ public class ClsMenuContributor implements IMenu{
         }
         return true;
     }
+
+    /**
+     * Il metodo si occupa di eliminare un itineraio, tramite richiesta o meno in base al tipo di utente.
+     * Inizialmente si chiede all'utente di inserire l'ID dell'itinerario poi, dopo un controllo sull'input, viene effettuata l'eliminazione.
+     */
     public void menuEliminaItinerario(){
         boolean exit = false;
         while(!exit) {
@@ -243,7 +297,7 @@ public class ClsMenuContributor implements IMenu{
                 tmp.put("id", in.nextLine());
                 ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
                 if (itinerario != null) {
-                    user.eliminaItinerario(itinerario.getId());
+                    user.eliminaItinerario(itinerario);
                     println("Richiesta di eliminazione effettuata.");
                     exit = true;
                 } else println("Errore. Riprova");
@@ -252,6 +306,9 @@ public class ClsMenuContributor implements IMenu{
         }
     }
 
+    /**
+     * Il metodo fornisce un sottomenu per la gestione dei contest. Tuttavia i contest sono una funzionalità presente su Geospotter Desktop.
+     */
     public void sottoMenuContest(){
         println("inserisci l'id del contest");
         boolean exit = false;

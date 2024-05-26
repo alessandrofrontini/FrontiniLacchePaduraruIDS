@@ -4,8 +4,7 @@ import com.camerino.cli.actions.ClsCommonActions;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.cli.mock.MockTuristi;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.*;
@@ -31,6 +30,10 @@ public class ClsMenuGestore implements IMenu {
     private ClsMenuCuratore menuc;
     public ClsMenuCuratore getMenuc(){return menuc;}
 
+    /**
+     * Il metodo fornisce un menu contenente tutte le azioni effettuabili dal Gestore della Piattaforma.
+     * Siccome il Gestore della Piattaforma è il ruolo più alto in Geospotter, si ha il completo accesso a tutte le funzionalità dei ruoli sottostanti
+     */
     @Override
     public void menu() {
         menuc = new ClsMenuCuratore(user);
@@ -75,6 +78,9 @@ public class ClsMenuGestore implements IMenu {
         }
     }
 
+    /**
+     * Il metoodo richiede in input un nuovo Comune e il curatore da associare, infine effettua il salvataggio.
+     */
     private void menuAggiungiComune(){
         ClsComune comune = Input.inserisciComune(false, null);
         comune.setUsernameCreatore("ADMIN");
@@ -109,6 +115,13 @@ public class ClsMenuGestore implements IMenu {
 
     }
 
+    /**
+     * Il metodo, dopo aver stampato a video l'elenco di tutti i comuni, richiede al gestore della piattaforma l'ID del comune da modificare.
+     * Dopo un controllo sull'input viene stampato un sottomenu per le modifiche effettuabili al comune.
+     * Di un comune è possibile modificare:
+     * - le informazioni (nome, superficie, ecc.)
+     * - il numero dei curatori
+     */
     private void menuModificaComune(){
         for(ClsComune c:user.visualizzaComuni()){
             println("Comune (" + c.getId() + "), nome: " + c.getNome());
@@ -163,6 +176,16 @@ public class ClsMenuGestore implements IMenu {
         }
     }
 
+    /**
+     * Il metodo, dopo aver stampato a video l'elenco dei comuni presenti nella Piattaforma, richiede in input al Gestore l'ID del comune da eliminare.
+     * Dopo un controllo sull'input si procede all'eliminazione a cascata di tutto ciò che è legato al comune, infine all'eliminazione del comune stesso.
+     * Si eliminano:
+     * - tutte le tappe di tutti gli itinerari rappresentate da un nodo all'interno del comune (se l'itinerario rimane con solo una tappa viene anch'esso eliminato)
+     * - tutte le immagini, recensioni e segnalazioni connesse ad un nodo all'interno del comune
+     * - tutte le richieste di contribuzione che trattano nodi all'interno di quel comune
+     * - tutti i nodi del comune
+     * - il comune stesso.
+     */
     private void menuEliminaComune(){ //test
         for(ClsComune c:user.visualizzaComuni()){
             println(c.getId() + "> " + c.getNome());
@@ -181,8 +204,9 @@ public class ClsMenuGestore implements IMenu {
                 ArrayList<ClsImmagine> immagini = MockLocator.getMockImmagini().get(null);
                 ArrayList<ClsRecensione> recensioni = MockLocator.getMockRecensioni().get(null);
                 ArrayList<ClsSegnalazione> segnalazioni = MockLocator.getMockSegnalazioni().get(null);
-                ArrayList<ClsRichiestaAzioneDiContribuzione> rcd = MockLocator.getMockRCD().get(null);
-                ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = MockLocator.getMockRCDI().get(null);
+                ArrayList<ClsRDCNodo> rcd = MockLocator.getMockRCD().get(null);
+                ArrayList<ClsRDCItinerario> rcdi = MockLocator.getMockRCDI().get(null);
+                ArrayList<ClsRDCImmagine> rcdimmagini = MockLocator.getMockRCDImmagini().get(null);
                 ArrayList<ClsItinerario> itinerari = MockLocator.getMockItinerari().get(null);
 
                 Iterator<ClsNodo> nodoIterator = nodi.iterator();
@@ -192,28 +216,26 @@ public class ClsMenuGestore implements IMenu {
                         recensioni.removeIf(recensione -> Objects.equals(recensione.getIdContenutoAssociato(), nodo.getId()));
                         segnalazioni.removeIf(segnalazione -> Objects.equals(segnalazione.getIdContenuto(), nodo.getId()));
                         immagini.removeIf(immagine -> Objects.equals(immagine.getIdCOntenutoAssociato(), nodo.getId()));
-                        rcd.removeIf(r -> Objects.equals(r.getDatiNodo().getId(), nodo.getId()));
+                        rcd.removeIf(r -> Objects.equals((r.getNewData()), nodo));
 
-                        for (ClsRichiestaAzioneDiContribuzioneItinerario r : rcdi) {
-                            Iterator<ClsNodo> tappaIterator = r.getDatiItinerarioNuovo().getTappe().iterator();
-                            while (tappaIterator.hasNext()) {
-                                ClsNodo tappa = tappaIterator.next();
-                                if (Objects.equals(tappa.getId(), nodo.getId())) {
-                                    tappaIterator.remove();
-                                }
+                        for (ClsRDCItinerario r : rcdi) {
+                            ClsItinerario itnuovo = r.getNewData();
+                            itnuovo.getTappe().removeIf(tappa -> Objects.equals(tappa.getId(), nodo.getId()));
+                        }
+
+                        Iterator<ClsRDCImmagine> rcdimmaginiiterator= rcdimmagini.iterator();
+                        while(rcdimmaginiiterator.hasNext()){
+                            ClsRDCImmagine richiesta = rcdimmaginiiterator.next();
+                            ClsImmagine i = richiesta.getNewData();
+                            if(Objects.equals(i.getIdCOntenutoAssociato(), nodo.getId())){
+                                rcdimmaginiiterator.remove();
                             }
                         }
 
                         Iterator<ClsItinerario> itinerarioIterator = itinerari.iterator();
                         while (itinerarioIterator.hasNext()) {
                             ClsItinerario i = itinerarioIterator.next();
-                            Iterator<ClsNodo> tappaIterator = i.getTappe().iterator();
-                            while (tappaIterator.hasNext()) {
-                                ClsNodo tappa = tappaIterator.next();
-                                if (Objects.equals(tappa.getId(), nodo.getId())) {
-                                    tappaIterator.remove();
-                                }
-                            }
+                            i.getTappe().removeIf(tappa -> Objects.equals(tappa.getId(), nodo.getId()));
                             if(i.getTappe().size()<2)
                                 itinerarioIterator.remove();
                         }
@@ -232,6 +254,10 @@ public class ClsMenuGestore implements IMenu {
             }
         }
 
+    /**
+     * Il metodo estrae la lista di tutti i curatori presenti nella Piattaforma.
+     * @return l'insieme dei curatori
+     */
     private ArrayList<ClsCuratore> getCuratori(){
         ArrayList<ClsCuratore> curatori = new ArrayList<>();
         HashMap<String, Object> filtro = new HashMap<>();
@@ -243,6 +269,11 @@ public class ClsMenuGestore implements IMenu {
         return curatori;
     }
 
+    /**
+     * Il metodo restituisce l'elenco dei curatori liberi.
+     * @param cur l'elenco di tutti i curatori presenti nella Piattaforma.
+     * @return l'elenco di tutti i curatori liberi
+     */
     private ArrayList<ClsCuratore> curatoriLiberi(ArrayList<ClsCuratore> cur){
         cur.removeIf(c -> c.getComuneAssociato() != null);
         return cur;

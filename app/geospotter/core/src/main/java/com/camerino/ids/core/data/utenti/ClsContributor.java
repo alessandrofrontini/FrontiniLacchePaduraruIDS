@@ -1,8 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
-import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -21,13 +19,11 @@ import java.util.HashMap;
  */
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
     IPersistenceModel<ClsItinerario> pItinerari;
-    @Deprecated
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
-    @Deprecated
-    IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    IPersistenceModel<ClsRDCNodo> pRDC;
+    IPersistenceModel<ClsRDCItinerario> pRDCI;
 
-    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRCDNodo, IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
-        super(s, r, pRCDNodo, nodi);
+    public ClsContributor(IPersistenceModel<ClsRecensione> r, IPersistenceModel<ClsSegnalazione> s, IPersistenceModel<ClsRDCImmagine> pRCDImmagini,IPersistenceModel<ClsRDCNodo> pRCDNodo,  IPersistenceModel<ClsRDCItinerario> pRCDItinerari, IPersistenceModel<ClsNodo> nodi, IPersistenceModel<ClsItinerario> itinerari) {
+        super(s, r, pRCDImmagini, nodi);
         this.pRDC = pRCDNodo;
         this.pRDCI = pRCDItinerari;
         this.pItinerari = itinerari;
@@ -45,43 +41,41 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.INSERISCI_NODO);
-        req.setDatiNodo(nodo);
+        ClsRDCNodo req = new ClsRDCNodo(null, nodo);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDC.insert(req);
     }
 
     /**
      * Crea una richiesta di modifica di un nodo in suo possesso.
-     * @param id Id del nodo dal modificare
+     * @param oldnodo nodo da modificare
      * @param nodo Il nodo contenente i dati modificati
      * @return True se la creazione della richiesta o la modifica ha avuto successo,
      *         False altrimenti.
      */
     @Override
-    public boolean modificaNodo(String id, ClsNodo nodo) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.MODIFICA_NODO);
-        req.setDatiNodo(nodo);
+    public boolean modificaNodo(ClsNodo oldnodo, ClsNodo nodo) {
+        ClsRDCNodo req = new ClsRDCNodo(oldnodo, nodo);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.MODIFICA_NODO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDC.insert(req);
     }
 
     /**
      * Crea una richiesta di eliminazione di un nodo in suo possesso.
-     * @param id Id del nodo da eliminare
+     * @param nodo nodo da eliminare
      * @return True se la creazione della richiesta o l'eliminazione ha avuto successo,
      *         False altrimenti.
      */
     @Override
-    public boolean eliminaNodo(String id) {
-        ClsRichiestaAzioneDiContribuzione req = new ClsRichiestaAzioneDiContribuzione();
-        req.setUsernameCreatoreRichiesta(this.getCredenziali().getUsername());
-        req.seteAzioneDiContribuzione(EAzioniDiContribuzione.ELIMINA_NODO);
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
-        req.setDatiNodo(pNodi.get(tmp).get(0));
+    public boolean eliminaNodo(ClsNodo nodo) {
+        ClsRDCNodo req = new ClsRDCNodo(null, nodo);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDC.insert(req);
     }
 
@@ -94,36 +88,33 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        req.setDatiItinerarioNuovo(itinerario);
+        ClsRDCItinerario req = new ClsRDCItinerario(null, itinerario);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDCI.insert(req);
     }
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, ClsItinerario itinerariovecchio) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
-        req.setDatiItinerarioVecchio(itinerariovecchio);
-        req.setDatiItinerarioNuovo(itinerario);
+        ClsRDCItinerario req = new ClsRDCItinerario(itinerariovecchio, itinerario);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDCI.insert(req);
     }
 
     /**
      * Crea una richiesta di eliminazione di un proprio itinerario.
-     * @param id Id dell'itinerario da eliminare.
+     * @param itinerario l'itinerario da eliminare.
      * @return True se l'eliminazione o la creazione della richiesta ha successo,
      *         False altirmenti.
      */
     @Override
-    public boolean eliminaItinerario(String id) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
-        req.setDatiItinerarioNuovo(pItinerari.get(tmp).get(0));
+    public boolean eliminaItinerario(ClsItinerario itinerario) {
+        ClsRDCItinerario req = new ClsRDCItinerario(null, itinerario);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
+        req.setStato(EStatusRDC.ASSEGNATO);
         return pRDCI.insert(req);
     }
     //TODO: i nodi di chi?
@@ -137,11 +128,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         HashMap<String, Object> filtro = new HashMap<>();
         filtro.put("usernameCreatore", this.credenziali.getUsername());
         return pItinerari.get(filtro);
-    }
-    public void partecipaContest(ClsContestDiContribuzione c){
-        ClsPartecipazioneContestDiContribuzione partecipazione = new ClsPartecipazioneContestDiContribuzione();
-        partecipazione.setIdContest(c.getId());
-        partecipazione.setUsernamePartecipante(this.credenziali.getUsername());
     }
 
     //endregion
