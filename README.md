@@ -3,7 +3,6 @@ Ciao!
 Il progetto che hai aperto è un sample di una piattaforma di digitalizzazione e valorizzazione del territorio italiano chiamata **GeoSpotter**.
 GeoSpotter è stata, pensata, documentata e implementata dal team _**SPAFAMAT**_ composto da:
 
-![Alt text](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...)
 <a img="https://github.com/alessandrofrontini/FrontiniLacchePaduraruIDS/assets/150078516/28ad6a5d-129e-4289-a194-53348dcd0719"></a>
 
 - Frontini Alessandro: alessandro.frontini@studenti.unicam.it
