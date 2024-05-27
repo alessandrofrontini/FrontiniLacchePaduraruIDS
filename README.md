@@ -18,8 +18,8 @@ La documentazione descrive graficamente diversi aspetti riguardanti il "come il 
 
 ## Documentazione
 All'interno della cartella Documentazione troverai dei file utili alla comprensione di come GeoSpotter è stato strutturato e quali componenti logiche esso si serve per il suo funzionamento:
-- Documentazione/README - Sistema a Punteggi.pdf: documento breve e coinciso che mira a chiarire, in maniera colloquiale e schematica, una funzionalità messa a disposizione dal software: la gestione dei ruoli tramite punteggi.
-- Documentazione/UML/GeoSpotter.vpp: documento completo e esaustivo relativo al progetto. Dentro questo file troverai i vari diagrammi (UML) che descrivono GeoSpotter.   
+- _Documentazione/**README - Sistema a Punteggi.pdf**_: documento breve e coinciso che mira a chiarire, in maniera colloquiale e schematica, una funzionalità messa a disposizione dal software: la gestione dei ruoli tramite punteggi.
+-_ Documentazione/UML/**GeoSpotter.vpp**_: documento completo e esaustivo relativo al progetto. Dentro questo file troverai i vari diagrammi (UML) che descrivono GeoSpotter.   
   
 ## Codice
 Dentro la cartella relativa al codice sono presenti diversi moduli ognuno dei quali ha un preciso scopo
