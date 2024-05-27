@@ -249,9 +249,12 @@ public class Input
                     println("Tappa già presente. seleziona un altro nodo.");
                     in.nextLine();
                 } else {
-                    HashMap<String, Object> filtro = new HashMap<>();
-                    filtro.put("id", idNodo);
-                    itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
+                    if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(ClsNodo::getId).collect(Collectors.toList())))){
+                        HashMap<String, Object> filtro = new HashMap<>();
+                        filtro.put("id", idNodo);
+                        itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
+                    }
+                    else println("Nodo inesistente. Riprova.");
                 }
             }
             if(checkItinerarioDuplicato(itinerario))

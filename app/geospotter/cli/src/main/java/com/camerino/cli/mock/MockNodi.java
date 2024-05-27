@@ -1,9 +1,11 @@
 package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
-import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCItinerario;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.contenuti.*;
+import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -91,8 +93,10 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         @Override
         public boolean delete(HashMap<String, Object> filters) {
-            if(filters.containsKey("id"))
+            if(filters.containsKey("id")) {
+                cascadeNodo(getNodoById(filters.get("id").toString()));
                 return eliminaNodo(filters.get("id").toString());
+            }
 
             return false;
         }
@@ -127,7 +131,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                             daAggiungere.setUsernameCreatore(datiNodo[5]);
                             daAggiungere.setNome(datiNodo[6]);
                             daAggiungere.setPosizione(new Posizione(Double.parseDouble(datiNodo[7]), Double.parseDouble(datiNodo[8])));
-                            aggiungiNodo(daAggiungere);
+                            nodi.add(daAggiungere);
                         }
                         maxID();
                     }
@@ -157,4 +161,82 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                 e.printStackTrace();
             }
         }
+
+    /**
+     * Il metodo effettua un'eliminazione a cascata di tutto ciò che è connesso al nodo da eliminare.
+     * In ordine, si eliminano:
+     * - tutte le Richieste di Contribuzione aventi come oggetto quel nodo
+     * - tutte le Richieste di Contribuzione Immagini aventi come target quel nodo
+     * - tutte le Richieste di Contribuzione Itinerari aventi come tappa quel nodo: il nodo viene rimosso dalle tappe, e se l'itinerario rimane con meno di 2 tappe, l'intera richiesta viene eliminata
+     * - tutti gli Itinerari aventi come tappa quel nodo: se l'itinerario rimane con meno di 2 tappe, l'itinerario stesso viene eliminato
+     * - tutte le Immagini aventi come nodo target quel nodo
+     * - tutte le Recensioni aventi come nodo target quel nodo
+     * - tutte le Segnalazioni aventi come nodo target quel nodo
+     * @param nodo il nodo da eliminare
+     */
+    private void cascadeNodo(ClsNodo nodo){
+        ArrayList<ClsRDCNodo> rcdnodi = MockLocator.getMockRCD().get(null);
+        Iterator<ClsRDCNodo> itrcd = rcdnodi.iterator();
+        ArrayList<ClsRDCImmagine> rcdimmagini = MockLocator.getMockRCDImmagini().get(null);
+        Iterator<ClsRDCImmagine> itrrcdimmagini = rcdimmagini.iterator();
+        ArrayList<ClsRDCItinerario> rcdItinerari = MockLocator.getMockRCDI().get(null);
+        Iterator<ClsRDCItinerario> itrrcdi = rcdItinerari.iterator();
+        ArrayList<ClsImmagine> immagini = MockLocator.getMockImmagini().get(null);
+        Iterator<ClsImmagine> itrimmagini = immagini.iterator();
+        ArrayList<ClsRecensione> recensioni = MockLocator.getMockRecensioni().get(null);
+        Iterator<ClsRecensione> itrecensioni = recensioni.iterator();
+        ArrayList<ClsSegnalazione> segnalazioni = MockLocator.getMockSegnalazioni().get(null);
+        Iterator<ClsSegnalazione> itsegnalazioni = segnalazioni.iterator();
+        ArrayList<ClsItinerario> itinerari = MockLocator.getMockItinerari().get(null);
+        Iterator<ClsItinerario> itritinerari = itinerari.iterator();
+
+        //RCD Nodo
+        while(itrcd.hasNext()){
+            ClsRDCNodo r = itrcd.next();
+            if((Objects.equals(r.getNewData(), nodo))||((r.getOldData()!=null)&&(Objects.equals(r.getOldData(), nodo)))){
+                itrcd.remove();
+            }
+        }
+        //RCD Immagini
+        while(itrrcdimmagini.hasNext()){
+            ClsRDCImmagine r = itrrcdimmagini.next();
+            if(Objects.equals(r.getNodoAssociato(), nodo)){
+                itrcd.remove();
+            }
+        }
+        //RCD Itinerari
+        while(itrrcdi.hasNext()){
+            ClsRDCItinerario r = itrrcdi.next();
+            ClsItinerario it = r.getNewData();
+            it.getTappe().remove(nodo);
+            if(it.getTappe().size()<2)
+                itrrcdi.remove();
+        }
+        //Itinerari
+        while(itritinerari.hasNext()){
+            ClsItinerario i = itritinerari.next();
+            i.getTappe().remove(nodo);
+            if(i.getTappe().size()<2)
+                itritinerari.remove();
+        }
+        //Immagini
+        while(itrimmagini.hasNext()){
+            ClsImmagine i = itrimmagini.next();
+            if(Objects.equals(i.getIdCOntenutoAssociato(), nodo.getId())){
+                itrimmagini.remove();
+            }
+        }
+        //Recensioni
+        while(itrecensioni.hasNext()){
+            ClsRecensione r = itrecensioni.next();
+            if(Objects.equals(r.getIdContenutoAssociato(), nodo.getId()))
+                itrecensioni.remove();
+        }
+        //Segnalazioni
+        while(itsegnalazioni.hasNext()){
+            ClsSegnalazione s = itsegnalazioni.next();
+            if(Objects.equals(s.getIdContenuto(), nodo.getId()))
+                itsegnalazioni.remove();
+        }
+    }
 }

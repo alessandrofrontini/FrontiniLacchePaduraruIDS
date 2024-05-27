@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 //TODO: implementare
 public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
@@ -29,6 +30,10 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
                 s.add(getSegnalazioneByID(filters.get("id").toString()));
                 return s;
             }
+            if (filters.containsKey("idComune")) {
+                s.addAll(getSegnalazioneByIDComune(filters.get("idComune").toString()));
+                return s;
+            }
         }
         return this.segnalazioni;
     }
@@ -37,6 +42,20 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
         if(tmp.isEmpty())
             return null;
         return tmp.get(0);
+    }
+
+    private List<ClsSegnalazione>getSegnalazioneByIDComune(String id){
+        HashMap<String, Object> filtro = new HashMap<>();
+        List<ClsSegnalazione> tmp = new ArrayList<>();
+        for(ClsSegnalazione s:segnalazioni){
+            filtro.put("id", s.getIdContenuto());
+            if(Objects.equals(MockLocator.getMockNodi().get(filtro).get(0).getIdComune(), id)){
+                tmp.add(s);
+            }
+        }
+        if(tmp.isEmpty())
+            return null;
+        return tmp;
     }
     @Override
     public boolean update(HashMap<String, Object> filters, ClsSegnalazione object) {

@@ -236,20 +236,22 @@ public class ClsMenuCuratore implements IMenu{
         ClsItinerario itro = richiesta.getOldData();
         ClsItinerario itrn = richiesta.getNewData();
         ArrayList<ClsRDCItinerario> rcdi = MockLocator.getMockRCDI().get(null);
-        for(ClsRDCItinerario r:rcdi){
+        Iterator<ClsRDCItinerario> rcdIterator = rcdi.iterator();
+        while (rcdIterator.hasNext()){
+            ClsRDCItinerario r = rcdIterator.next();
             ClsItinerario itold = r.getOldData();
             ClsItinerario itnew = r.getNewData();
-            if(r.getTipo() == richiesta.getTipo()){
+            if((r.getTipo() == richiesta.getTipo())&&(!Objects.equals(r.getIdRichiesta(), richiesta.getIdRichiesta()))){
                 switch(r.getTipo()){
                     case INSERISCI_ITINERARIO:
                     case ELIMINA_ITINERARIO:{
                         if(itnew==itrn){
-                            rcdi.remove(r); break;
+                            rcdIterator.remove(); break;
                         }
                     }
                     case MODIFICA_ITINERARIO:{
                         if((itnew==itrn)&&(itold==itro)&&(itnew.isOrdinato() == itrn.isOrdinato())){
-                            rcdi.remove(r); break;
+                            rcdIterator.remove(); break;
                         }
                     }
                 }
@@ -281,11 +283,14 @@ public class ClsMenuCuratore implements IMenu{
      */
 
     public void menuVisualizzaSegnalazioni(){
-        for(ClsSegnalazione seg:MockLocator.getMockSegnalazioni().get(null)){
-            if(seg.getIdCuratore() == null){
-                println("Segnalazione n. " + seg.getId());
+        if(user.getSegnalazioni()!=null){
+            for(ClsSegnalazione s:user.getSegnalazioni()){
+                if(Objects.equals(s.getIdCuratore(), "null")){
+                    println("Segnalazione " + s.getId() + "\nNodo associato: " + s.getIdContenuto() + "\nDescrizione: " + s.getDescrizione() + "\n");
+                }
             }
         }
+        in.nextLine();
     }
 
     public void menuRank(){

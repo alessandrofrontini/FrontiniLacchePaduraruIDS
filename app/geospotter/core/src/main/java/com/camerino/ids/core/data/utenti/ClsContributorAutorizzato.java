@@ -56,10 +56,10 @@ public class ClsContributorAutorizzato extends ClsContributor {
         nodo.setUsernameCreatore(this.getCredenziali().getUsername());
         return pNodi.update(tmp, nodo);
     }
-
-    public boolean eliminaNodo(String id){
+    @Override
+    public boolean eliminaNodo(ClsNodo n){
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
+        tmp.put("id", n.getId());
         return pNodi.delete(tmp);
     }
 

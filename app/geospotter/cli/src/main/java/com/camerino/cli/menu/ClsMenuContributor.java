@@ -1,19 +1,14 @@
 package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
-import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.utenti.*;
 
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
@@ -288,13 +283,18 @@ public class ClsMenuContributor implements IMenu{
      * Inizialmente si chiede all'utente di inserire l'ID dell'itinerario poi, dopo un controllo sull'input, viene effettuata l'eliminazione.
      */
     public void menuEliminaItinerario(){
+        if(user.visualizzaItinerariPossessore()!=null){
+            for(ClsItinerario i:user.visualizzaItinerariPossessore()){
+                println(i.visualizzaItinerario());
+            }
+        }
         boolean exit = false;
         while(!exit) {
             println("inserisci l'id dell'itinerario");
             String input = in.nextLine();
-            if (checkValore(input, (ArrayList<String>) MockLocator.getMockItinerari().get(null).stream().map(ClsItinerario::getId).collect(Collectors.toList()))) {
+            if (checkValore(input, (ArrayList<String>) user.visualizzaItinerariPossessore().stream().map(ClsItinerario::getId).collect(Collectors.toList()))) {
                 HashMap<String, Object> tmp = new HashMap<>();
-                tmp.put("id", in.nextLine());
+                tmp.put("id", input);
                 ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
                 if (itinerario != null) {
                     user.eliminaItinerario(itinerario);
@@ -330,4 +330,5 @@ public class ClsMenuContributor implements IMenu{
     private void contest(){
         println("Questa è una funzionalità di Geospotter Desktop.");
     }
+
 }

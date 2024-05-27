@@ -1,8 +1,7 @@
 package com.camerino.cli.menu;
 
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
@@ -14,8 +13,7 @@ import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.cli.mock.MockNodi;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.camerino.cli.actions.ClsCommonActions.*;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
