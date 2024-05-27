@@ -39,6 +39,7 @@ public class Controller_SezioneLogin
         UTENTE.setpItinerari(new IperItinerari());
         UTENTE.setIperRecensioni(new IperRecensioni());
         UTENTE.setpImmagini(new IperImmagini());
+        UTENTE.setMockComuni(new IperComuni());
         ((ClsTuristaAutenticato)UTENTE).setIperRDCImmagini(new IperRCDImmagini());
     }
     //endregion

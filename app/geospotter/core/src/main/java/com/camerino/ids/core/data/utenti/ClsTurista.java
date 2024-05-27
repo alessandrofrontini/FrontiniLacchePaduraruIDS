@@ -24,8 +24,6 @@ public class ClsTurista implements ISignalable {
     transient IPersistenceModel<ClsImmagine> pImmagini;
     transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
 
-    public ClsTurista(){}
-
     /**
      * Crea una segnalazione per il contenuto segnalato (Nodo, Foto, Recensione, Itinerario)
      * che verrà poi vista da un curatore.
@@ -33,6 +31,8 @@ public class ClsTurista implements ISignalable {
      * @return True se la creazione della segnalazione ha successo,
      *         False altrimenti.a
      */
+
+
 
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {

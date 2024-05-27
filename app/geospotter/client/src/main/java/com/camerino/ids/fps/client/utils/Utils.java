@@ -65,18 +65,18 @@ public class Utils
         c.setAbitanti(comune.getAbitanti());
 
         String tmp = "";
-        for(int i = 0; i< comune.getCuratoriAssociati().length;i++)
-        {
-            if(i == comune.getCuratoriAssociati().length-1)
-            {
-                tmp += comune.getCuratoriAssociati()[i].getId();
-            }
-            else
-            {
-                tmp += comune.getCuratoriAssociati()[i].getId() + "-";
-            }
-
-        }
+//        for(int i = 0; i< comune.getCuratoriAssociati().length;i++)
+//        {
+//            if(i == comune.getCuratoriAssociati().length-1)
+//            {
+//                tmp += comune.getCuratoriAssociati()[i].getId();
+//            }
+//            else
+//            {
+//                tmp += comune.getCuratoriAssociati()[i].getId() + "-";
+//            }
+//
+//        }
 
         c.setCuratori(tmp);
         return c;
