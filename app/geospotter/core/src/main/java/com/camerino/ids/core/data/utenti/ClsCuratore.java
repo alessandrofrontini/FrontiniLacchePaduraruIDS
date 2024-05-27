@@ -30,6 +30,7 @@ public class ClsCuratore extends ClsAnimatore{
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
         this.iperUtenti = usr.iperUtenti;
+        this.iperRDCImmagini = usr.iperRDCImmagini;
     }
     String idComuneAssociato;
     public ClsCuratore(){

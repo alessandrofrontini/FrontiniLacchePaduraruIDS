@@ -29,9 +29,9 @@ public class CRDCImmagini {
     }
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(
-            @RequestParam(value = "idRDCImmagini", required = false) String idRDCI
+            @RequestParam(value = "idRDCImmagini") String idRDCI
     ) {
-        if(sRDCImmagini.deleteRDCIById(idRDCI))
+        if(sRDCImmagini.deleteRDCImmagineById(idRDCI))
             return ResponseEntity.ok("RDC deleted");
         return ResponseEntity.status(500).body("RDC not deleted");
     }

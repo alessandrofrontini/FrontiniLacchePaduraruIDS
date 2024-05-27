@@ -30,10 +30,10 @@ public class SRDCImmagini {
         return null;
     }
 
-    public boolean deleteRDCIById(String idRDCImmagine) {
-        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
-        //return user.deleteRDCImmagineById(idRDCImmagine);
-        return false;
+    public boolean deleteRDCImmagineById(String idRDCImmagine) {
+        ClsTuristaAutenticato user = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
+        return user.deleteRDCImmagineById(idRDCImmagine);
+        //return false;
     }
 
     public boolean putRDCI(ClsRDCImmagine rdci) {

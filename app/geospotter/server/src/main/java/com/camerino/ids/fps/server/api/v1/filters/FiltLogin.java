@@ -29,6 +29,9 @@ public class FiltLogin extends OncePerRequestFilter {
     IperRDCI iperRDCI;
     IperSegnalazioni iperSegnalazioni;
     IperUtenti iperUtenti;
+    IperImmagini iperImmagini;
+    IperRDCImmagini iperRDCImmagini;
+
 
     @Autowired
     public FiltLogin(
@@ -38,7 +41,9 @@ public class FiltLogin extends OncePerRequestFilter {
             IperRDCI iperRDCI,
             IperRecensioni iperRecensioni,
             IperSegnalazioni iperSegnalazioni,
-            IperUtenti iperUtenti) {
+            IperUtenti iperUtenti,
+    IperImmagini iperImmagini,
+            IperRDCImmagini iperRDCImmagini) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
@@ -46,6 +51,8 @@ public class FiltLogin extends OncePerRequestFilter {
         this.iperRecensioni = iperRecensioni;
         this.iperSegnalazioni = iperSegnalazioni;
         this.iperUtenti = iperUtenti;
+        this.iperImmagini = iperImmagini;
+        this.iperRDCImmagini = iperRDCImmagini;
     }
 
     @Override
@@ -77,12 +84,15 @@ public class FiltLogin extends OncePerRequestFilter {
         user.setpItinerari(this.iperItinerari);
         user.setIperRecensioni(this.iperRecensioni);
         user.setIperSegnalazioni(this.iperSegnalazioni);
+        user.setpImmagini(this.iperImmagini);
+
         return user;
     }
 
     private ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
         user.setIperUtenti(this.iperUtenti);
+        user.setIperRDCImmagini(this.iperRDCImmagini);
         return user;
     }
 

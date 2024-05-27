@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @RestController
 public class CRDCItinerari {
     SRDCItinerari sRDCItinerari;
-    public final static String mapping = BaseUrl.baseUrl+"/rdcimmagini";
+    public final static String mapping = BaseUrl.baseUrl+"/rdcitinerari";
 
     @Autowired
     public CRDCItinerari(SRDCItinerari sRDCItinerari) {

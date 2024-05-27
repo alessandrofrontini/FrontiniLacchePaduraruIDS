@@ -14,7 +14,7 @@ import org.springframework.core.annotation.Order;
 import java.util.ArrayList;
 
 @Configuration
-@Order(3)
+@Order(1)
 public class DemoUtenti
 {
     @Bean

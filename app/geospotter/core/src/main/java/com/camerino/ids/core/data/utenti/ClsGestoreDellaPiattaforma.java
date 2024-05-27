@@ -28,6 +28,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
         this.iperUtenti = usr.iperUtenti;
+        this.iperRDCImmagini = usr.iperRDCImmagini;
     }
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)

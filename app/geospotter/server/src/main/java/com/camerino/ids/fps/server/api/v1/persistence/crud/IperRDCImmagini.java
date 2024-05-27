@@ -23,7 +23,12 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsRDCImmagine object) {
-        return false;
+        /*if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDCImmagini"))
+            return false;*/
+        repoRDCIimmagini.save(object);
+        return true;
     }
 
     @Override
@@ -34,6 +39,11 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public boolean delete(HashMap<String, Object> filters) {
-        return false;
+        if(filters==null)
+            return false;
+        if(!filters.containsKey("idRDCImmagini"))
+            return false;
+        repoRDCIimmagini.deleteById(filters.get("idRDCImmagini").toString());
+        return true;
     }
 }

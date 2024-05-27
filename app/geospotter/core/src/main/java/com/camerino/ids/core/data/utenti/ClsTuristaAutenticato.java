@@ -8,10 +8,7 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -30,9 +27,17 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 
     public boolean postRDCImmagine(ClsRDCImmagine rdc) {
-        rdc.setCreatore(this);
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idUtente", this.id);
+        rdc.setCreatore(this.iperUtenti.get(filters).get(0));
         rdc.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
         return iperRDCImmagini.insert(rdc);
+    }
+
+    public boolean deleteRDCImmagineById(String idRDCImmagine) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCImmagini", idRDCImmagine);
+        return iperRDCImmagini.delete(filters);
     }
 
     /**
@@ -61,8 +66,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;
 
     @Id
-    @UuidGenerator
-    String id;
+    @GeneratedValue
+    Long id;
     @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali = new Credenziali();
     int punteggio;
@@ -74,15 +79,16 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.mockComuni = usr.mockComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
+        this.pImmagini = usr.pImmagini;
     }
 
     //region Getters and Setters
     public String getId() {
-        return id;
+        return id.toString();
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public eRUOLO_UTENTE getRuoloUtente() {
@@ -179,7 +185,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public ClsTuristaAutenticato clone() {
         ClsTuristaAutenticato clone = new ClsTuristaAutenticato();
 
-        clone.setId(this.id);
+        clone.setId(this.id.toString());
         clone.setPunteggio(this.getPunteggio());
         clone.setCredenziali(this.credenziali);
         clone.setRuoloUtente(this.ruoloUtente);

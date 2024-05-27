@@ -51,6 +51,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
         this.iperUtenti = usr.iperUtenti;
+        this.iperRDCImmagini = usr.iperRDCImmagini;
     }
 
 //region Getters and Setters

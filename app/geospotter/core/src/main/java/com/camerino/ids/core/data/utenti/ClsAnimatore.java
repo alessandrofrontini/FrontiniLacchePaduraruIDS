@@ -30,6 +30,7 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
         this.iperUtenti = usr.iperUtenti;
+        this.iperRDCImmagini = usr.iperRDCImmagini;
     }
 
     public ArrayList<ClsRDCImmagine> _getAllRDCImmagini() {

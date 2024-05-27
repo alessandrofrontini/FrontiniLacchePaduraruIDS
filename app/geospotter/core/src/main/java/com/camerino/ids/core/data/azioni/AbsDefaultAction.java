@@ -12,21 +12,24 @@ import org.hibernate.annotations.UuidGenerator;
 @MappedSuperclass
 public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @Id
-    @UuidGenerator
-    String idRichiesta;
+    @GeneratedValue
+    Long idRichiesta;
+    @Enumerated(EnumType.STRING)
     EAzioniDiContribuzione tipo;
+    @Enumerated(EnumType.STRING)
     EStatusRDC stato = EStatusRDC.NUOVO;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "id")
     ClsTuristaAutenticato creatore;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     ClsCuratore responsabile;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     ClsContestDiContribuzione idContest;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     E oldData;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     E newData;
 
     public AbsDefaultAction(E oldData, E newData) {
@@ -56,11 +59,11 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     //region G&S
 
     public String getIdRichiesta() {
-        return idRichiesta;
+        return idRichiesta.toString();
     }
 
     public void setIdRichiesta(String idRichiesta) {
-        this.idRichiesta = idRichiesta;
+        this.idRichiesta = Long.valueOf(idRichiesta);
     }
 
     public EAzioniDiContribuzione getTipo() {

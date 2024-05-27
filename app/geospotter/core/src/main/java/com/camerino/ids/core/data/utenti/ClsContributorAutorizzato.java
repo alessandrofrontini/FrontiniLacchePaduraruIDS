@@ -34,6 +34,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
         this.iperUtenti = usr.iperUtenti;
+        this.iperRDCImmagini = usr.iperRDCImmagini;
     }
 
     //region Override Contributor Autorizzato
