@@ -26,7 +26,6 @@ public class FiltLogin extends OncePerRequestFilter {
     IperNodi iperNodi;
     IperComuni iperComuni;
     IperItinerari iperItinerari;
-    IperRDC iperRDC;
     IperRDCI iperRDCI;
     IperSegnalazioni iperSegnalazioni;
     IperUtenti iperUtenti;
@@ -36,7 +35,6 @@ public class FiltLogin extends OncePerRequestFilter {
             IperNodi iperNodi,
             IperComuni iperComuni,
             IperItinerari iperItinerari,
-            IperRDC iperRDC,
             IperRDCI iperRDCI,
             IperRecensioni iperRecensioni,
             IperSegnalazioni iperSegnalazioni,
@@ -90,7 +88,7 @@ public class FiltLogin extends OncePerRequestFilter {
 
     private ClsContributor CreaContributor() {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
-        user.setpRDC(this.iperRDC);
+        //user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
         return user;
     }

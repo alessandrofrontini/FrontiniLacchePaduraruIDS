@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public interface RepoRDCI extends JpaRepository<ClsRichiestaAzioneDiContribuzioneItinerario, String> {
 
     @Query("select r from ClsRichiestaAzioneDiContribuzioneItinerario r where r.usernameCreatore = ?1")

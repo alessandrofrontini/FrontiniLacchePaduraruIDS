@@ -31,7 +31,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
     @Transient
-    transient IPersistenceModel<ClsItinerario> iperRDCItinerari;
+    transient IPersistenceModel<ClsRdcItinerario> iperRDCItinerari;
 
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
@@ -63,11 +63,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.iperRDCNodi = iperRDCNodi;
     }
     @Transient
-    public IPersistenceModel<ClsItinerario> _getIperRDCItinerari() {
+    public IPersistenceModel<ClsRdcItinerario> _getIperRDCItinerari() {
         return iperRDCItinerari;
     }
 
-    public void _setIperRDCItinerari(IPersistenceModel<ClsItinerario> iperRDCItinerari) {
+    public void _setIperRDCItinerari(IPersistenceModel<ClsRdcItinerario> iperRDCItinerari) {
         this.iperRDCItinerari = iperRDCItinerari;
     }
 @Deprecated
@@ -210,6 +210,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     public boolean postRDCNodo(ClsRDCNodo rdc) {
         return iperRDCNodi.insert(rdc);
+    }
+
+    public boolean postRDCItinerario(ClsRdcItinerario rdc) {
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
+        rdc.setStato(EStatusRDC.NUOVO);
+        return iperRDCItinerari.insert(rdc);
     }
     //endregion
 }

@@ -23,13 +23,13 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     public ArrayList<ClsRDCNodo> get(HashMap<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoRDCNodi.findAll());
-        if(filters.containsKey("idRDCI")) {
+        if(filters.containsKey("idRDCNodo")) {
             ArrayList<String> ids = new ArrayList<>();
-            ids.add(filters.get("idRDCI").toString());
+            ids.add(filters.get("idRDCNodo").toString());
             return new ArrayList<>(repoRDCNodi.findAllById(ids));
         }
-        if(filters.containsKey("idUser"))
-            return new ArrayList<>(repoRDCNodi.getRDCIByUser(filters.get("idUser").toString()));
+        //if(filters.containsKey("idUser"))
+        //   return new ArrayList<>(repoRDCNodi.getRDCIByUser(filters.get("idUser").toString()));
 
         return new ArrayList<>(repoRDCNodi.findAll());
     }
@@ -38,9 +38,9 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     public boolean update(HashMap<String, Object> filters, ClsRDCNodo object) {
         if(filters==null)
             return false;
-        if(!filters.containsKey("idRDCI"))
+        if(!filters.containsKey("idRDCNodo"))
             return false;
-        repoRDCNodi.updateRDCIById(object, filters.get("idRDCI").toString());
+        repoRDCNodi.save(object);
         return true;
     }
 
@@ -54,9 +54,9 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     public boolean delete(HashMap<String, Object> filters) {
         if(filters==null)
             return false;
-        if(!filters.containsKey("idRDCI"))
+        if(!filters.containsKey("idRDCNodo"))
             return false;
-        repoRDCNodi.deleteById(filters.get("idRDCI").toString());
+        repoRDCNodi.deleteById(filters.get("idRDCNodo").toString());
         return true;
     }
 }

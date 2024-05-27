@@ -1,9 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
-import com.camerino.ids.core.data.azioni.ClsRDCNodo;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
@@ -77,5 +74,25 @@ public class ClsCuratore extends ClsAnimatore{
     @Override
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return iperRDCImmagini.update(null, rdci);
+    }
+
+    public ArrayList<ClsRdcItinerario> _getAllRDCItinerari() {
+        return iperRDCItinerari.get(null);
+    }
+
+    public ArrayList<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCItinerario", idRDCItinerario);
+        return iperRDCItinerari.get(filters);
+    }
+
+    public boolean deleteRDCItinerario(String idRDCItinerario) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCItinerario", idRDCItinerario);
+        return iperRDCItinerari.delete(filters);
+    }
+
+    public boolean putRDCItinerario(ClsRdcItinerario rdc) {
+        return iperRDCItinerari.update(null, rdc);
     }
 }
