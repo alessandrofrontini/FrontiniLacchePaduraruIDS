@@ -1,4 +1,4 @@
-![image](https://github.com/alessandrofrontini/FrontiniLacchePaduraruIDS/assets/150078516/b8f97117-f976-47ee-adec-6f2c3f875f57)# Presentazione
+# Presentazione
 Ciao!
 Il progetto che hai aperto è un sample di una piattaforma di digitalizzazione e valorizzazione del territorio italiano chiamata **GeoSpotter**.
 GeoSpotter è stata, pensata, documentata e implementata dal team _**SPAFAMAT**_ composto da:
