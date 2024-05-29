@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.utils;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -138,6 +137,54 @@ public class Utils
         c.setUsername(turista.getCredenziali().getUsername());
 
         return c;
+    }
+
+    public ClsRDCVisual convertFromRDCImmagine (ClsRDCImmagine rdcImmagine)
+    {
+        ClsRDCVisual tmp = new ClsRDCVisual();
+
+        tmp.setIdRichiesta(rdcImmagine.getIdRichiesta());
+        tmp.setAzioneDiContribuzione(rdcImmagine.getTipo().toString());
+        tmp.setStato(rdcImmagine.getStato().toString());
+        tmp.setRichiedente(rdcImmagine.getCreatore().getId());
+        tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
+        tmp.setIdContest(rdcImmagine.getIdContest().getId());
+        tmp.setOldData("Dettaglio...");
+        tmp.setNewData("Dettaglio...");
+
+        return tmp;
+    }
+
+    public ClsRDCVisual convertFromRDCNodo (ClsRDCNodo rdcNodo)
+    {
+        ClsRDCVisual tmp = new ClsRDCVisual();
+
+        tmp.setIdRichiesta(rdcNodo.getIdRichiesta());
+        tmp.setAzioneDiContribuzione(rdcNodo.getTipo().toString());
+        tmp.setStato(rdcNodo.getStato().toString());
+        tmp.setRichiedente(rdcNodo.getCreatore().getId());
+        tmp.setResponsabile(rdcNodo.getResponsabile().getId());
+        tmp.setIdContest(rdcNodo.getIdContest().getId());
+        tmp.setOldData("Dettaglio...");
+        tmp.setNewData("Dettaglio...");
+
+        return tmp;
+    }
+
+    public ClsRDCVisual convertFromRDCItinerario (ClsRdcItinerario rdcItinerario)
+    {
+        ClsRDCVisual tmp = new ClsRDCVisual();
+
+        tmp.setIdRichiesta(rdcItinerario.getIdRichiesta());
+        tmp.setAzioneDiContribuzione(rdcItinerario.getTipo().toString());
+        tmp.setStato(rdcItinerario.getStato().toString());
+        tmp.setRichiedente(rdcItinerario.getCreatore().getId());
+        tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
+        tmp.setIdContest(rdcItinerario.getIdContest().getId());
+        tmp.setOldData("Dettaglio...");
+        tmp.setNewData("Dettaglio...");
+
+        return tmp;
     }
 
     public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario (ClsRichiestaAzioneDiContribuzioneItinerario richiesta)

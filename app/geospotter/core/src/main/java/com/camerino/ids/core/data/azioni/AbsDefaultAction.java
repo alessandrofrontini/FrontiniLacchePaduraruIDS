@@ -41,6 +41,14 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
 
     }
 
+    public void setOldData(E oldData) {
+        this.oldData = oldData;
+    }
+
+    public void setNewData(E newData) {
+        this.newData = newData;
+    }
+
     @Override
     public E getOldData() {
         return oldData;

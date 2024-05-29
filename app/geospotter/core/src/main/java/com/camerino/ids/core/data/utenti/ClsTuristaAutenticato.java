@@ -22,7 +22,9 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini) {
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini)
+    {
+
     }
 
     public boolean postRDCImmagine(ClsRDCImmagine rdc) {
