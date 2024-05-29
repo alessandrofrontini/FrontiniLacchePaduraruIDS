@@ -12,4 +12,7 @@ import java.util.List;
 public interface RepoRecensioni extends JpaRepository<ClsRecensione, String> {
     @Query(value = "Select r from ClsRecensione r WHERE r.idNodo= ?1")
     List<ClsRecensione> findRecensioniByNodo(String idNodo);
+
+    @Query("SELECT r from ClsRecensione r where r.idCreatore=?1")
+    List<ClsRecensione> findRecensioniByUtente(Long idUtente);
 }

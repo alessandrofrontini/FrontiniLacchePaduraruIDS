@@ -96,7 +96,7 @@ public class ClsNodo extends ClsContenuto{
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "ID Comune: " + this.getIdComune() + "\n";
-        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "Tipologia: " + this.getDescrizione() + "\n";
         dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n\n";

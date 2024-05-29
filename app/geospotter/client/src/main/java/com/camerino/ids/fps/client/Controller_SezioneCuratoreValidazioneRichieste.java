@@ -155,7 +155,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         nodo1.setIdComune("1");
         nodo1.setaTempo(true);
         nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
+        nodo1.setIdCreatore("");
         nodo1.setDescrizione("Descrizione - Nodo 1");
         nodo1.setNome("Negozio");
         nodo1.setPosizione(new Posizione(104,104));
@@ -166,7 +166,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         nodo2.setIdComune("3");
         nodo2.setaTempo(false);
         nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
+        nodo2.setIdCreatore("");
         nodo2.setDescrizione("Descrizione - Nodo 2");
         nodo2.setNome("Statua");
         nodo2.setPosizione(new Posizione(114,114));
@@ -185,7 +185,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         nodo3.setIdComune("5");
         nodo3.setaTempo(false);
         nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
+        nodo3.setIdCreatore("");
         nodo3.setDescrizione("Descrizione - Nodo 3");
         nodo3.setNome("Ristorante");
         nodo3.setPosizione(new Posizione(124,124));
@@ -204,7 +204,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         nodo4.setIdComune("3");
         nodo4.setaTempo(false);
         nodo4.setTipologiaNodo(CULINARIO);
-        nodo4.setUsernameCreatore("");
+        nodo4.setIdCreatore("");
         nodo4.setDescrizione("Descrizione - Nodo 4");
         nodo4.setNome("Ristorante");
         nodo4.setPosizione(new Posizione(124,124));

@@ -19,7 +19,7 @@ public class DemoRecensioni {
         recensione.setOggetto("Bello, Carino, Avventuroso");
         recensione.setValutazione(2);
         recensione.setIdNodo("0");
-        recensione.setUsernameCreatore("Turista Aut");
+        recensione.setIdCreatore("Turista Aut");
         recensioni.add(recensione);
         return args -> repo.saveAll(recensioni);
     }

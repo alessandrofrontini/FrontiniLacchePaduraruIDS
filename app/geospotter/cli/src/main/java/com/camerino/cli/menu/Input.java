@@ -99,7 +99,7 @@ public class Input
             //TODO: aggiungere inserimento "aTempo" e durata
             //TODO: aggiungere eventuali controlli sui dati inseriti
             comune.setCuratoriAssociati(null);
-            comune.setUsernameCreatore(gdp.getCredenziali().getUsername());
+            comune.setIdCreatore(gdp.getCredenziali().getUsername());
             ok = true;
         }
         return comune;

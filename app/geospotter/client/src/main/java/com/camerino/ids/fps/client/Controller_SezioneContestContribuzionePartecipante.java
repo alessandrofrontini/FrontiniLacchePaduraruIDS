@@ -155,7 +155,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         nodo1.setIdComune("1");
         nodo1.setaTempo(true);
         nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setUsernameCreatore("");
+        nodo1.setIdCreatore("");
         nodo1.setDescrizione("Descrizione - Nodo 1");
         nodo1.setNome("Negozio");
         nodo1.setPosizione(new Posizione(104,104));
@@ -166,7 +166,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         nodo2.setIdComune("3");
         nodo2.setaTempo(false);
         nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setUsernameCreatore("");
+        nodo2.setIdCreatore("");
         nodo2.setDescrizione("Descrizione - Nodo 2");
         nodo2.setNome("Statua");
         nodo2.setPosizione(new Posizione(114,114));
@@ -178,7 +178,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         nodo3.setIdComune("5");
         nodo3.setaTempo(false);
         nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setUsernameCreatore("");
+        nodo3.setIdCreatore("");
         nodo3.setDescrizione("Descrizione - Nodo 3");
         nodo3.setNome("Ristorante");
         nodo3.setPosizione(new Posizione(124,124));
@@ -293,7 +293,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
                         Objects.equals(u.getValueFromCombobox(sceltaContest), null))
                 {
-                    nodo.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+                    nodo.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
@@ -455,7 +455,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
         {
-            i.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
 

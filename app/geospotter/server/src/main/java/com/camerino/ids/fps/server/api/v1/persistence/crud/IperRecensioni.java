@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 @Component
 public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
@@ -30,9 +31,10 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
             ArrayList<String> ids = new ArrayList<>();
             ids.add(filters.get("idRecensione").toString());
             return new ArrayList<>(repoRecensioni.findAllById(ids));
-        }//else if (filters.containsKey("idUtente"))
-            //return new ArrayList<>(repoRecensioni.findRecensioniByUtente(filters.get("idUtente")));
-
+        }else if (filters.containsKey("idUtente"))
+            return new ArrayList<>(repoRecensioni.findRecensioniByUtente(Long.valueOf(Objects.toString(filters.get("idUtente")))));
+        else if(filters.containsKey("owner"))
+            return new ArrayList<>(repoRecensioni.findRecensioniByUtente(Long.valueOf(Objects.toString(filters.get("owner")))));
         return new ArrayList<>(repoRecensioni.findAll());
     }
 

@@ -55,7 +55,7 @@ public class ClsRecensione extends ClsInformazione{
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
         dummy += "Contenuto: " + this.getContenuto()+ "\n";

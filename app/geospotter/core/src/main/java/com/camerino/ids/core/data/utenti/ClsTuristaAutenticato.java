@@ -9,7 +9,6 @@ import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
     public ArrayList<ClsRecensione> getRecensioniPosessore() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idUtente", this.id);
+        filters.put("owner", this.id);
         return iperRecensioni.get(filters);
     }
 
@@ -73,7 +72,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
 
     @Id
     @GeneratedValue
-    Long id;
+    Long id=0L;
     @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali = new Credenziali();
     int punteggio;
@@ -121,7 +120,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.punteggio = punteggio;
     }
     public boolean pubblicaRecensione(ClsRecensione recensione) {
-        recensione.setUsernameCreatore(this.getCredenziali().getUsername());
+        recensione.setIdCreatore(this.getCredenziali().getUsername());
         return iperRecensioni.insert(recensione);
     }
 //endregion
@@ -147,6 +146,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
         //TODO: merge con richiesta azione di conribuzione
+        recensione.setIdCreatore(this.id.toString());
         return iperRecensioni.insert(recensione);
     }
     @Override

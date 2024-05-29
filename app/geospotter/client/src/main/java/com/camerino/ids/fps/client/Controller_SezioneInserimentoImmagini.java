@@ -103,7 +103,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
 
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine))
         {
-            i.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
             ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciImmagine(i);

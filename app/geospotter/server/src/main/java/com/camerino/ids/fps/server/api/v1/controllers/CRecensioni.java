@@ -22,10 +22,10 @@ public class CRecensioni {
     @GetMapping(mapping)
     public ResponseEntity<ArrayList<ClsRecensione>> getRecensioni(
             @RequestParam(value = "idNodo", required = false) String idNodo,
-            @RequestParam(value = "owner", required = false) Boolean idUtente
+            @RequestParam(value = "owner", required = false) Long owner
     ){
         //return ResponseEntity.ok(sRecensioni.getRecensioniNodo(idNodo));
-        if(idUtente)
+        if(owner!=null)
             return ResponseEntity.ok(sRecensioni.getRecensioniPossesore());
         return ResponseEntity.ok(sRecensioni.getAllRecensioni());
     }

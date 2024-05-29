@@ -36,11 +36,7 @@ public class ClsImmagine extends ClsInformazione
     public void setId(String id) {
         super.setId(id);
     }
-    public String getUsernameCreatore() {return super.getUsernameCreatore();}
-    public void setUsernameCreatore(String usernameCreatore)
-    {
-        super.setUsernameCreatore(usernameCreatore);
-    }
+    public String getUsernameCreatore() {return super.getIdCreatore();}
     //endregion
     //endregion
 
@@ -50,7 +46,7 @@ public class ClsImmagine extends ClsInformazione
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "URL: " + this.getURL() + "\n";
-        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "ID Contenuto Associato: " + this.idNodo + "\n";
 
         dummy += "";

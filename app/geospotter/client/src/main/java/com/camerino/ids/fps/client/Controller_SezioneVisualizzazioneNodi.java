@@ -126,7 +126,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
                     nodo.setDataFine(nodi.get(i).getDataFine());
                     nodo.setIdComune(nodi.get(i).getIdComune());
                     nodo.setTipologiaNodo(nodi.get(i).getTipologiaNodo());
-                    nodo.setUsernameCreatore(nodi.get(i).getUsernameCreatore());
+                    nodo.setIdCreatore(nodi.get(i).getIdCreatore());
                 }
             }
             Alert alert = new Alert (Alert.AlertType.INFORMATION);

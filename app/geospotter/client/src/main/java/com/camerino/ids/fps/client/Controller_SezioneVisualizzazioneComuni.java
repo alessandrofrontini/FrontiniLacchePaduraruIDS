@@ -3,8 +3,6 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
 import javafx.collections.FXCollections;
@@ -166,7 +164,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
                     c.setCuratoriAssociati(comuni.get(i).getCuratoriAssociati());
                     c.setSuperficie(comuni.get(i).getSuperficie());
                     c.setDescrizione(comuni.get(i).getDescrizione());
-                    c.setUsernameCreatore(comuni.get(i).getUsernameCreatore());
+                    c.setIdCreatore(comuni.get(i).getIdCreatore());
                     c.setAbitanti(comuni.get(i).getAbitanti());
                     c.setPosizione(comuni.get(i).getPosizione());
                 }

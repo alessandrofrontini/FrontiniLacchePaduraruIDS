@@ -66,7 +66,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null))
                 {
-                    nodo.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+                    nodo.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));

@@ -2,7 +2,6 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
@@ -211,7 +210,7 @@ public class Controller_SezioneModificaComuni implements Initializable
                 !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
                 !Objects.equals(u.getValueFromTextField(superficieTF), ""))
         {
-            comune.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            comune.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
             comune.setNome(u.getValueFromTextField(nomeTF));
             comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
