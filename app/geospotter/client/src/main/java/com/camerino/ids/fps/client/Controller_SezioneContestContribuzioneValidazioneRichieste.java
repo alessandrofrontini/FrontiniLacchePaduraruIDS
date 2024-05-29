@@ -123,14 +123,14 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         ClsImmagine im1 = new ClsImmagine();
         im1.setId("1");
         im1.setURL("testURLOld");
-        im1.setUsernameCreatore("testCreatoreOld");
+        im1.setIdCreatore("testCreatoreOld");
         im1.setIdNodo("testIDNodoOld");
         img1.setOldData(im1);
 
         ClsImmagine im2 = new ClsImmagine();
         im2.setId("1");
         im2.setURL("testURLNew");
-        im2.setUsernameCreatore("testCreatoreNew");
+        im2.setIdCreatore("testCreatoreNew");
         im2.setIdNodo("testIDNodoNew");
         img1.setNewData(im2);
         richiesteImmagini.add(img1);
