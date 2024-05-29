@@ -57,7 +57,8 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        recensioni = Controller_SezioneLogin.UTENTE.getAllRecensioni();
+        //recensioni = Controller_SezioneLogin.UTENTE.getAllRecensioni();
+        recensioni = ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getRecensioniPosessore();
 
         setRecensioni(recensioni);
 

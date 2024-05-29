@@ -1,10 +1,8 @@
 package com.camerino.ids.fps.client;
 
-import com.camerino.ids.core.data.contenuti.ClsContenuto;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
 import javafx.fxml.FXML;
@@ -21,8 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
 public class Controller_SezioneInserimentoItinerari implements Initializable
 {

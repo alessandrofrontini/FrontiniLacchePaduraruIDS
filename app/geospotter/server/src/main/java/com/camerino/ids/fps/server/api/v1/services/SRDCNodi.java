@@ -18,27 +18,27 @@ public class SRDCNodi {
     }
 
     public ArrayList<ClsRDCNodo> getAllRDCNodi() {
-        ClsCuratore user = (ClsCuratore) request.getSession().getAttribute("user");
+        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
         return user._getAllRDCNodi();
     }
 
     public ArrayList<ClsRDCNodo> getRDCNodiById(String idRDCNodo) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.getRDCNodiById(idRDCNodo);
     }
 
     public boolean deleteRDCNodiById(String idRDCNodo) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.deleteRDCById(idRDCNodo);
     }
 
     public boolean putRDCNodi(ClsRDCNodo rdc) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.putRDCNodo(rdc);
     }
 
     public boolean postRDCNodi(ClsRDCNodo rdc) {
-        ClsContributor user = (ClsContributor) request.getSession().getAttribute("user");
+        ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.postRDCNodo(rdc);
     }
 }

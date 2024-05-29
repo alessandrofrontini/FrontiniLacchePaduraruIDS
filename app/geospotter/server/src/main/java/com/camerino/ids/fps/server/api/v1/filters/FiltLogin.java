@@ -31,6 +31,7 @@ public class FiltLogin extends OncePerRequestFilter {
     IperUtenti iperUtenti;
     IperImmagini iperImmagini;
     IperRDCImmagini iperRDCImmagini;
+    IperRDCNodi iperRDCNodi;
 
 
     @Autowired
@@ -43,7 +44,8 @@ public class FiltLogin extends OncePerRequestFilter {
             IperSegnalazioni iperSegnalazioni,
             IperUtenti iperUtenti,
     IperImmagini iperImmagini,
-            IperRDCImmagini iperRDCImmagini) {
+            IperRDCImmagini iperRDCImmagini,
+            IperRDCNodi iperRDCNodi) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
@@ -53,6 +55,7 @@ public class FiltLogin extends OncePerRequestFilter {
         this.iperUtenti = iperUtenti;
         this.iperImmagini = iperImmagini;
         this.iperRDCImmagini = iperRDCImmagini;
+        this.iperRDCNodi = iperRDCNodi;
     }
 
     @Override
@@ -100,6 +103,7 @@ public class FiltLogin extends OncePerRequestFilter {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
         //user.setpRDC(this.iperRDC);
         user.setpRDCI(this.iperRDCI);
+        user._setIperRDCNodi(this.iperRDCNodi);
         return user;
     }
 

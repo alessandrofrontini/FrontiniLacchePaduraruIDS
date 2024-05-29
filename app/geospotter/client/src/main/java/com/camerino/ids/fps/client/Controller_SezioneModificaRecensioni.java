@@ -3,7 +3,6 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
 import javafx.collections.FXCollections;
@@ -24,8 +23,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
 public class Controller_SezioneModificaRecensioni implements Initializable
 {
@@ -168,7 +165,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         {
             r.setId(id);
             r.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdContenutoAssociato(id);
+            r.setIdNodo(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));

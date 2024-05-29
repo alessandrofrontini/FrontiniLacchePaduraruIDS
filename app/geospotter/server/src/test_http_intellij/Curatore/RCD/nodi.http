@@ -1,0 +1,53 @@
+GET http://localhost:8080/api/v1/rdcnodi
+Authorization:{{tkCuratore}}
+
+###
+GET http://localhost:8080/api/v1/immagini
+Authorization:{{tkContributor}}
+
+###
+POST http://localhost:8080/api/v1/rdcnodi
+Content-Type: application/json
+Authorization:{{tkContributor}}
+
+{
+  "idRichiesta": "0",
+  "tipo": "INSERISCI_NODO",
+  "stato": "NUOVO",
+  "creatore": null,
+  "responsabile": null,
+  "idContest": null,
+  "oldData": null,
+  "newData": null
+}
+
+###
+PUT http://localhost:8080/api/v1/rdcnodi
+Content-Type: application/json
+Authorization:{{tkContributor}}
+
+{
+  "idRichiesta": "1",
+  "tipo": "ELIMINA_ITINERARIO",
+  "stato": "NUOVO",
+  "creatore": null,
+  "responsabile": null,
+  "idContest": null,
+  "oldData":  {
+    "id": 1,
+    "idCOntenutoAssociato": 1,
+    "URL": "1",
+    "usernameCreatore": "1"
+  },
+  "newData":  {
+    "id": 0,
+    "idCOntenutoAssociato": 1,
+    "URL": "aaaaa",
+    "usernameCreatore": "2"
+  }
+}
+
+###
+DELETE http://localhost:8080/api/v1/rdcnodi?
+    idRDCNodi=1
+Authorization:{{tkContributor}}

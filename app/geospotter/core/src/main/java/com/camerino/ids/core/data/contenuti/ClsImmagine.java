@@ -2,8 +2,6 @@ package com.camerino.ids.core.data.contenuti;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.UuidGenerator;
 
 /**
  * Contiene i dati richiesti per recuperare un immagine
@@ -12,16 +10,16 @@ import org.hibernate.annotations.UuidGenerator;
 public class ClsImmagine extends ClsInformazione
 {
     @Column(name = "idCon1")
-    String idCOntenutoAssociato;
+    String idNodo;
     String URL;
 
     //region Getter e setter
-    public String getIdCOntenutoAssociato() {
-        return idCOntenutoAssociato;
+    public String getIdNodo() {
+        return idNodo;
     }
 
-    public void setIdCOntenutoAssociato(String idCOntenutoAssociato) {
-        this.idCOntenutoAssociato = idCOntenutoAssociato;
+    public void setIdNodo(String idCOntenutoAssociato) {
+        this.idNodo = idCOntenutoAssociato;
     }
 
     public String getURL() {
@@ -53,7 +51,7 @@ public class ClsImmagine extends ClsInformazione
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "URL: " + this.getURL() + "\n";
         dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
-        dummy += "ID Contenuto Associato: " + this.idCOntenutoAssociato + "\n";
+        dummy += "ID Contenuto Associato: " + this.idNodo + "\n";
 
         dummy += "";
 

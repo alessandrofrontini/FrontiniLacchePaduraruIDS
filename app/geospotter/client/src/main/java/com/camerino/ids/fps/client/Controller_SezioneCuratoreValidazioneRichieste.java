@@ -32,8 +32,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.CULINARIO;
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.CULINARIO;
 
 public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
 {

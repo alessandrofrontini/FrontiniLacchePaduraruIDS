@@ -1,9 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsItinerarioVisual;
 import javafx.collections.FXCollections;
@@ -24,8 +22,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
 public class Controller_SezioneEliminazioneItinerari implements Initializable
 {

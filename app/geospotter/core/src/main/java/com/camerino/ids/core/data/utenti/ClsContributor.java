@@ -91,9 +91,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
         ClsRDCNodo rdc = new ClsRDCNodo(null, nodo);
-        rdc.setCreatore(this);
-        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
-        return iperRDCNodi.insert(rdc);
+        return this.postRDCNodo(rdc);
     }
 
     /**
@@ -210,6 +208,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 
     public boolean postRDCNodo(ClsRDCNodo rdc) {
+        HashMap<String, Object> filters = new HashMap<>();
+        //filters.put("idUtente", this.id);
+        filters.put("idUtente", "1");
+        rdc.setCreatore(iperUtenti.get(filters).get(0));
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
         return iperRDCNodi.insert(rdc);
     }
 

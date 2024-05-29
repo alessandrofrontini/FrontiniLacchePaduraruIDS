@@ -24,13 +24,15 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoRecensioni.findAll());
-        if(filters.containsKey("idNodo"))
+        else if(filters.containsKey("idNodo"))
             return new ArrayList<>(repoRecensioni.findRecensioniByNodo(filters.get("idNodo").toString()));
-        if(filters.containsKey("idRecensione")) {
+        else if(filters.containsKey("idRecensione")) {
             ArrayList<String> ids = new ArrayList<>();
             ids.add(filters.get("idRecensione").toString());
             return new ArrayList<>(repoRecensioni.findAllById(ids));
-        }
+        }//else if (filters.containsKey("idUtente"))
+            //return new ArrayList<>(repoRecensioni.findRecensioniByUtente(filters.get("idUtente")));
+
         return new ArrayList<>(repoRecensioni.findAll());
     }
 

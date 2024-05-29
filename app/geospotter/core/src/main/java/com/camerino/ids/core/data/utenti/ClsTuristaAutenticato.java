@@ -40,6 +40,12 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperRDCImmagini.delete(filters);
     }
 
+    public ArrayList<ClsRecensione> getRecensioniPosessore() {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idUtente", this.id);
+        return iperRecensioni.get(filters);
+    }
+
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.

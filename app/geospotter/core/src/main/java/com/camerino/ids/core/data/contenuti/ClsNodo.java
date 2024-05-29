@@ -9,10 +9,10 @@ import jakarta.persistence.Entity;
 public class ClsNodo extends ClsContenuto{
 
     //region Tipologia nodo (enumerazione)
-    public enum eTologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
+    public enum eTipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
     private String idComune;
-    private eTologiaNodo eTologiaNodo;
+    private eTipologiaNodo eTipologiaNodo;
     private boolean aTempo;
 
     //dd/mm/yyyy
@@ -31,15 +31,15 @@ public class ClsNodo extends ClsContenuto{
         this.idComune = idComune;
     }
 
-    public eTologiaNodo getTipologiaNodo() {
-        return eTologiaNodo;
+    public eTipologiaNodo getTipologiaNodo() {
+        return eTipologiaNodo;
     }
 
-    public void setTipologiaNodo(eTologiaNodo eTologiaNodo) {
-        this.eTologiaNodo = eTologiaNodo;
+    public void setTipologiaNodo(eTipologiaNodo eTipologiaNodo) {
+        this.eTipologiaNodo = eTipologiaNodo;
     }
 
-    public String getTipologiaNodoFormatoStringa(){ return this.eTologiaNodo.toString();}
+    public String getTipologiaNodoFormatoStringa(){ return this.eTipologiaNodo.toString();}
 
     public void seteTologiaNodoFormatoStringa (String tipologiaNodo){
         String tmp = tipologiaNodo.toUpperCase();
@@ -47,19 +47,19 @@ public class ClsNodo extends ClsContenuto{
         switch (tmp)
         {
             case "COMMERCIALE":
-                this.eTologiaNodo = eTologiaNodo.COMMERCIALE;
+                this.eTipologiaNodo = eTipologiaNodo.COMMERCIALE;
                 break;
 
             case "CULINARIO":
-                this.eTologiaNodo = eTologiaNodo.CULINARIO;
+                this.eTipologiaNodo = eTipologiaNodo.CULINARIO;
                 break;
 
             case "CULTURALE":
-                this.eTologiaNodo = eTologiaNodo.CULTURALE;
+                this.eTipologiaNodo = eTipologiaNodo.CULTURALE;
                 break;
 
             default:
-                this.eTologiaNodo = null;
+                this.eTipologiaNodo = null;
                 break;
         }
     }

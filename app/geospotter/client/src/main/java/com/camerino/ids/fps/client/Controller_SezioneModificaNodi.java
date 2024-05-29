@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
-
 public class Controller_SezioneModificaNodi implements Initializable
 {
     //region Elementi FXML

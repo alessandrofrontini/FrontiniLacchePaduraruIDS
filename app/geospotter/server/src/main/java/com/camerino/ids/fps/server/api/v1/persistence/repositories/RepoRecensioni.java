@@ -10,6 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface RepoRecensioni extends JpaRepository<ClsRecensione, String> {
-    @Query(value = "Select r from ClsRecensione r WHERE r.idContenutoAssociato= ?1")
+    @Query(value = "Select r from ClsRecensione r WHERE r.idNodo= ?1")
     List<ClsRecensione> findRecensioniByNodo(String idNodo);
 }

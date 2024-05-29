@@ -10,19 +10,19 @@ import jakarta.persistence.Entity;
 public class ClsRecensione extends ClsInformazione{
     //Ho errore referring to multiple physical column names: [idcontenuto_associato], [id_contenuto_associato]
     //perchè esiste anche in ClsImmagine
-    @Column(name = "idContenuto2")
-    String idContenutoAssociato;
+    @Column(name = "idNodo2")
+    String idNodo;
     double valutazione;
     String oggetto;
     String contenuto;
 
     //region Getter e setter
-    public String getIdContenutoAssociato() {
-        return idContenutoAssociato;
+    public String getIdNodo() {
+        return idNodo;
     }
 
-    public void setIdContenutoAssociato(String idContenutoAssociato) {
-        this.idContenutoAssociato = idContenutoAssociato;
+    public void setIdNodo(String idContenutoAssociato) {
+        this.idNodo = idContenutoAssociato;
     }
 
     public double getValutazione() {
@@ -59,7 +59,7 @@ public class ClsRecensione extends ClsInformazione{
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
         dummy += "Contenuto: " + this.getContenuto()+ "\n";
-        dummy += "Contenuto Associato: " + this.getIdContenutoAssociato()+ "\n";
+        dummy += "Contenuto Associato: " + this.getIdNodo()+ "\n";
 
 
         return dummy;

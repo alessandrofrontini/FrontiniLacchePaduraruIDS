@@ -7,7 +7,7 @@ import java.util.Objects;
  * TODO: commentare
  */
 @MappedSuperclass
-public class ClsInformazione
+public abstract class ClsInformazione
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

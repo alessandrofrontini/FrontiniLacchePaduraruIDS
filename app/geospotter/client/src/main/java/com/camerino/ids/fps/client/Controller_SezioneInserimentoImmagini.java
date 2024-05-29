@@ -3,8 +3,6 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
 import javafx.collections.FXCollections;
@@ -25,8 +23,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTologiaNodo.*;
 
 public class Controller_SezioneInserimentoImmagini implements Initializable
 {
@@ -108,7 +104,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine))
         {
             i.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
-            i.setIdCOntenutoAssociato(u.getValueFromCombobox(this.sceltaNodo));
+            i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
             ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);

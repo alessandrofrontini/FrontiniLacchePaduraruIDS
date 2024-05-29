@@ -14,8 +14,11 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
 
     @Override
     public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
+        String query = "";
+        if(filters.containsKey("idUtente"))
+            query = "idUtente="+filters.get("idUtente").toString();
         return api.Get(
-                Controller_SezioneLogin.UTENTE, null);
+                Controller_SezioneLogin.UTENTE, query);
     }
 
     @Override

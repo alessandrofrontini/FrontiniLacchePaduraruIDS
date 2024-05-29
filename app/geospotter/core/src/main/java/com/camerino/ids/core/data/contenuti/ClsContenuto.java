@@ -11,7 +11,7 @@ import jakarta.persistence.MappedSuperclass;
  * Contiene i dati di un Contenuto generico nella piattaforma
  */
 @MappedSuperclass
-public class ClsContenuto extends ClsInformazione {
+public abstract class ClsContenuto extends ClsInformazione {
 
     @Convert(converter = ConvPosizione.class)
     Posizione posizione;
