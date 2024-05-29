@@ -94,6 +94,7 @@ public class FiltLogin extends OncePerRequestFilter {
 
     private ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
+        user.setId(1+"");
         user.setIperUtenti(this.iperUtenti);
         user.setIperRDCImmagini(this.iperRDCImmagini);
         return user;

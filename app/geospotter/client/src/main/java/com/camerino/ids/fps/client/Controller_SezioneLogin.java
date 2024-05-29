@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.hibernate.sql.ast.tree.from.UnionTableReference;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -34,6 +35,7 @@ public class Controller_SezioneLogin
     //region esempio padu TODO
     public static ClsTurista UTENTE = new ClsCuratore();
     static {
+        ((ClsTuristaAutenticato)UTENTE).setId(1+"");
         UTENTE.setpNodi(new IperNodi());
         UTENTE.setIperSegnalazioni(new IperSegnalazioni());
         UTENTE.setpItinerari(new IperItinerari());

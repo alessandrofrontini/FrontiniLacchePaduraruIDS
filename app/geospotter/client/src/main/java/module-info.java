@@ -13,4 +13,5 @@ module com.camerino.ids.fps.client {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
+    requires org.hibernate.orm.core;
 }

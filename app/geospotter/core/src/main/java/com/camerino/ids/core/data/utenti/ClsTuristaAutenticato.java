@@ -120,7 +120,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.punteggio = punteggio;
     }
     public boolean pubblicaRecensione(ClsRecensione recensione) {
-        recensione.setIdCreatore(this.getCredenziali().getUsername());
+        recensione.setIdCreatore(this.id+"");
         return iperRecensioni.insert(recensione);
     }
 //endregion
