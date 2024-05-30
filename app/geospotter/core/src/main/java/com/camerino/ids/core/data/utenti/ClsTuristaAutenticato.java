@@ -40,7 +40,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         filters.put("idRDCImmagini", idRDCImmagine);
         return iperRDCImmagini.delete(filters);
     }
-
+@JsonIgnore
     public ArrayList<ClsRecensione> getRecensioniPosessore() {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("owner", this.id);

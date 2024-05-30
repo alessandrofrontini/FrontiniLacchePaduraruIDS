@@ -44,7 +44,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        curatori = new ArrayList<ClsCuratore>();
+        curatori = new ArrayList<>();
 
         //region Creazione Curatori Dummy
         ClsCuratore c1 = new ClsCuratore();
@@ -90,7 +90,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
-        ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
+        ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<>();
 
         if(curatoriCoinvoltiArray.length > 0 &&
                 !Objects.equals(u.getValueFromTextField(coordinataX), "") &&

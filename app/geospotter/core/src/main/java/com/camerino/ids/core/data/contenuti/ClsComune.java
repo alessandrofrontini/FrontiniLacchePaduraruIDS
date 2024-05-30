@@ -15,7 +15,7 @@ public class ClsComune extends ClsContenuto
     int abitanti;
     double superficie;
     @OneToOne
-    @JoinColumn(name="")//TODO: associazione
+    @JoinColumn(name="assCurCom")//TODO: associazione
     ClsCuratore[] curatoriAssociati;
 
     //region Getter e setter

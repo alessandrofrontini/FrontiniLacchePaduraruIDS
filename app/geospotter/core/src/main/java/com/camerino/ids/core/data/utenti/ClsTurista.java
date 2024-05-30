@@ -59,7 +59,7 @@ public class ClsTurista implements ISignalable {
         filters.put("idComune", idComune);
         return mockComuni.get(filters);
     }
-
+@JsonIgnore
     public ArrayList<ClsRecensione> getRecensioniNodo(String idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
@@ -96,7 +96,7 @@ public class ClsTurista implements ISignalable {
         filters.put("idItinerario", pItinerari.get(filters));
         return this.pItinerari.get(filters);
     }
-
+@JsonIgnore
     public ArrayList<ClsNodo> getNodoById(String idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
@@ -106,6 +106,7 @@ public class ClsTurista implements ISignalable {
     public ArrayList<ClsSegnalazione> GetAllSegnalazioni() {
         return this.iperSegnalazioni.get(null);
     }
+
     @JsonIgnore
     public ArrayList<ClsRecensione> getAllRecensioni() {
         return this.iperRecensioni.get(null);

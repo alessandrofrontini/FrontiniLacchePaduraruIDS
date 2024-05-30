@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
 
@@ -184,18 +185,18 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return false;
     }
 
+    @JsonIgnore
     public List<ClsNodo> getNodiPossessore(){
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("owner", this.id);
         return this.pNodi.get(filters);
     }
-
     public boolean deleteNodo(String idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
         return pNodi.delete(tmp);
     }
-
+@JsonIgnore
     public ArrayList<ClsRDCNodo> getRDCNodiById(String idRDC) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);

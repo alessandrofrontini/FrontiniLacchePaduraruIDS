@@ -136,8 +136,6 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
             alert.setTitle("OK");
             alert.setContentText(segnalazione.visualizzaSegnalazione());
             alert.show();
-
-
         }
         else
         {
