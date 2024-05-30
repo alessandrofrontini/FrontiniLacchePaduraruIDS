@@ -2,6 +2,7 @@ package com.camerino.ids.fps.server.api.v1.filters;
 
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.fps.server.api.v1.persistence.crud.*;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,7 +11,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.crypto.SecretKey;
 import java.io.IOException;
 
 /**
@@ -32,7 +32,7 @@ public class FiltLogin extends OncePerRequestFilter {
     IperImmagini iperImmagini;
     IperRDCImmagini iperRDCImmagini;
     IperRDCNodi iperRDCNodi;
-
+    RepoUtenti repoUtenti;
 
     @Autowired
     public FiltLogin(
@@ -45,7 +45,8 @@ public class FiltLogin extends OncePerRequestFilter {
             IperUtenti iperUtenti,
     IperImmagini iperImmagini,
             IperRDCImmagini iperRDCImmagini,
-            IperRDCNodi iperRDCNodi) {
+            IperRDCNodi iperRDCNodi,
+            RepoUtenti repoUtenti) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
@@ -56,12 +57,59 @@ public class FiltLogin extends OncePerRequestFilter {
         this.iperImmagini = iperImmagini;
         this.iperRDCImmagini = iperRDCImmagini;
         this.iperRDCNodi = iperRDCNodi;
+        this.repoUtenti = repoUtenti;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        request.getServletContext().setAttribute("user", AuthClient(request.getHeader("Authorization")));
+        //request.getServletContext().setAttribute("user", AuthClient());
+        ClsTurista user = CreaTurista();
+        if(request.getHeader("Authorization")==null){
+            request.getServletContext().setAttribute("user", user);
+        }else
+        {
+            String[] parts = request.getHeader("Authorization").split(" ");
+            if (parts.length == 2)
+                user = repoUtenti.getReferenceById(parts[1]);
+            InitializeUser(user);
+            request.getServletContext().setAttribute("user", user);
+        }
         filterChain.doFilter(request, response);
+    }
+
+    private void InitializeUser(ClsTurista user) {
+        user.setpNodi(this.iperNodi);
+        user.setMockComuni(this.iperComuni);
+        user.setpItinerari(this.iperItinerari);
+        user.setIperRecensioni(this.iperRecensioni);
+        user.setIperSegnalazioni(this.iperSegnalazioni);
+        user.setpImmagini(this.iperImmagini);
+
+        if(user instanceof ClsTuristaAutenticato tmp){
+            tmp.setIperUtenti(this.iperUtenti);
+            tmp.setIperRDCImmagini(this.iperRDCImmagini);
+        }
+
+        if(user instanceof ClsContributor tmp){
+            tmp.setpRDCI(this.iperRDCI);
+            tmp._setIperRDCNodi(this.iperRDCNodi);
+        }
+
+        if(user instanceof ClsContributorAutorizzato tmp){
+            //noop
+        }
+
+        if(user instanceof ClsAnimatore tmp){
+            //noop
+        }
+
+        if(user instanceof ClsCuratore tmp){
+            //noop
+        }
+
+        if(user instanceof ClsGestoreDellaPiattaforma tmp){
+            //noop
+        }
     }
 
     private ClsTurista AuthClient(String authorization) {

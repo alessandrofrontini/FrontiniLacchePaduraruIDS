@@ -21,7 +21,7 @@ public class FakeTokens {
                 case CONTRIBUTOR_AUTORIZZATO -> TK_CONTRIBUTOR_AUTOTRIZZATO;
                 case CURATORE -> TK_CURATORE;
                 default -> null;
-            };
+            } + " "+((ClsTuristaAutenticato) user).getId();
         }
 
         private FakeTokens(){}

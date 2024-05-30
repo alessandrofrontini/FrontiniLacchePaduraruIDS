@@ -38,7 +38,7 @@ public class Controller_SezioneLogin
 
     public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
     //region esempio padu TODO
-    public static ClsTurista UTENTE = new ClsTurista();
+    public static ClsTurista UTENTE = CreaTurista();
 
     //endregion
 
@@ -136,7 +136,7 @@ public class Controller_SezioneLogin
     }
 
     //region CREA X
-    private ClsTurista CreaTurista() {
+    private static ClsTurista CreaTurista() {
         ClsTurista user = new ClsTurista();
         user.setpNodi(new IperNodi());
         user.setMockComuni(new IperComuni());
@@ -148,7 +148,7 @@ public class Controller_SezioneLogin
         return user;
     }
 
-    private ClsTuristaAutenticato CreaTuristaAut() {
+    private static ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
         user.setId(1+"");
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
@@ -157,7 +157,7 @@ public class Controller_SezioneLogin
         return user;
     }
 
-    private ClsContributor CreaContributor() {
+    private static ClsContributor CreaContributor() {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
         //user.setpRDC(this.iperRDC);
@@ -166,25 +166,25 @@ public class Controller_SezioneLogin
         return user;
     }
 
-    private ClsContributorAutorizzato CreaContributorAut() {
+    private static ClsContributorAutorizzato CreaContributorAut() {
         ClsContributorAutorizzato user = new ClsContributorAutorizzato(CreaContributor());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         return user;
     }
 
-    private ClsAnimatore CreaAnimatore() {
+    private static ClsAnimatore CreaAnimatore() {
         ClsAnimatore user = new ClsAnimatore(CreaContributorAut());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
         return user;
     }
 
-    private ClsCuratore CreaCuratore() {
+    private static ClsCuratore CreaCuratore() {
         ClsCuratore user = new ClsCuratore(CreaAnimatore());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
         return user;
     }
 
-    private ClsGestoreDellaPiattaforma CreaGDP() {
+    private static ClsGestoreDellaPiattaforma CreaGDP() {
         ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma(CreaCuratore());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         return user;
