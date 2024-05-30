@@ -162,6 +162,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idRecensione", old.getId());
+        newrec.setIdCreatore(this.id+"");
         return iperRecensioni.update(tmp, newrec);
     }
     @Override
