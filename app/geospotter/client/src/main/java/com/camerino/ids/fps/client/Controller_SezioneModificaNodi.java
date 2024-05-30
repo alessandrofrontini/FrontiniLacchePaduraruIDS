@@ -74,7 +74,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
-        nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
+        nodi = (ArrayList<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
         //endregion
         setNodi(nodi);
 

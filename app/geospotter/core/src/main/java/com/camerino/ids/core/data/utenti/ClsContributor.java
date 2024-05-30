@@ -9,6 +9,7 @@ import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Questo ruolo può effettuare Richieste Di Contribuzione
@@ -181,6 +182,12 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
+    }
+
+    public List<ClsNodo> getNodiPossessore(){
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("owner", this.id);
+        return this.pNodi.get(filters);
     }
 
     public boolean deleteNodo(String idNodo) {

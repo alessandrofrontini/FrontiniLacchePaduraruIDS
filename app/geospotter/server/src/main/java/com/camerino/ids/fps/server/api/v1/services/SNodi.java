@@ -49,4 +49,8 @@ public class SNodi {
         ClsContributor cont = (ClsContributor) request.getServletContext().getAttribute("user");
         return cont.modificaNodo(nodo.getId(), nodo);
     }
+
+    public ArrayList<ClsNodo> getNodiPosessore() {
+        return (ArrayList<ClsNodo>) ((ClsContributor)request.getServletContext().getAttribute("user")).getNodiPossessore();
+    }
 }

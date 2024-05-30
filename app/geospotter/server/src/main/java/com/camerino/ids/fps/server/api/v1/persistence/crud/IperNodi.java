@@ -36,6 +36,8 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
         if(filters.containsKey("idComune")) {
             return new ArrayList<>(repoNodi.findNodiByComune(filters.get("idComune").toString()));
         }
+        if(filters.containsKey("owner"))
+            return new ArrayList<>(repoNodi.findNodoByUtente(Long.valueOf(filters.get("owner").toString())));
         lNodi = new ArrayList<>(repoNodi.findAll());
         return lNodi;
     }

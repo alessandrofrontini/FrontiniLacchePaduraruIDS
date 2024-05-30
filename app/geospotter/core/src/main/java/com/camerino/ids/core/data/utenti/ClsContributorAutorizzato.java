@@ -48,6 +48,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
+        nodo.setIdCreatore(this.id+"");
         return pNodi.insert(nodo);
     }
 

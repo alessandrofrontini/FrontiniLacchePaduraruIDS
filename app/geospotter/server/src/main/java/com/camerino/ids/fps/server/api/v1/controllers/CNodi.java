@@ -35,16 +35,16 @@ public class CNodi {
     @GetMapping(value = mapping, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArrayList<ClsNodo>> getNodi(
             @RequestParam(value = "idNodo", required = false) String idNodo,
-            @RequestParam(value = "idComune", required = false) String idComune
+            @RequestParam(value = "idComune", required = false) String idComune,
+            @RequestParam(value = "owner", required = false) Long owner
     ){
-        ArrayList<ClsNodo> body;
+        if(owner!=null)
+            return ResponseEntity.ok(sNodi.getNodiPosessore());
         if(idNodo != null)
-           body = sNodi.findNodoById(idNodo);
+            return ResponseEntity.ok(sNodi.findNodoById(idNodo));
         else if(idComune != null)
-            body = sNodi.findNodiByComune(idComune);
-        else body = sNodi.getAllNodi();
-
-        return ResponseEntity.ok(body);
+            return ResponseEntity.ok(sNodi.findNodiByComune(idComune));
+        return ResponseEntity.ok(sNodi.getAllNodi());
     }
 
     /**

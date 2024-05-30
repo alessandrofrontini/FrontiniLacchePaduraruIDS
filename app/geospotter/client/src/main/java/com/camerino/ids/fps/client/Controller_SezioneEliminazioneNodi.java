@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
 import javafx.collections.FXCollections;
@@ -55,7 +56,8 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
+        //nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
+        nodi = (ArrayList<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
 
         setNodi(nodi);
 

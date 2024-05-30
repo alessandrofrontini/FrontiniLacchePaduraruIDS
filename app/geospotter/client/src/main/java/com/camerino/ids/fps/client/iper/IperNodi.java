@@ -18,6 +18,11 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
+        if(filters==null)
+            return api.Get(
+                    Controller_SezioneLogin.UTENTE, null);
+        if(filters.containsKey("owner"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "owner="+filters.get("owner"));
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }
