@@ -133,6 +133,29 @@ public class Controller_SezioneLogin
             case ANIMATORE -> CreaAnimatore();
             case GESTORE_DELLA_PIATTAFORMA -> CreaGDP();
         };
+        if(UTENTE instanceof ClsTuristaAutenticato tmp){
+            tmp.setId(1+"");
+        }
+
+        if(UTENTE instanceof ClsContributor tmp){
+            tmp.setId(1+"");
+        }
+
+        if(UTENTE instanceof ClsContributorAutorizzato tmp){
+            tmp.setId(2+"");
+        }
+
+        if(UTENTE instanceof ClsAnimatore tmp){
+            tmp.setId(3+"");
+        }
+
+        if(UTENTE instanceof ClsCuratore tmp){
+            tmp.setId(4+"");
+        }
+
+        if(UTENTE instanceof ClsGestoreDellaPiattaforma tmp){
+            tmp.setId(5+"");
+        }
     }
 
     //region CREA X
@@ -150,7 +173,6 @@ public class Controller_SezioneLogin
 
     private static ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
-        user.setId(1+"");
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
         //user.setIperUtenti(new IperUtenti());
         user.setIperRDCImmagini(new IperRCDImmagini());
@@ -181,6 +203,7 @@ public class Controller_SezioneLogin
     private static ClsCuratore CreaCuratore() {
         ClsCuratore user = new ClsCuratore(CreaAnimatore());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+
         return user;
     }
 

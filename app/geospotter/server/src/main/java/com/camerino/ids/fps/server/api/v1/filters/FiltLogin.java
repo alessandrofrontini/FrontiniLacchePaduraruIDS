@@ -6,6 +6,7 @@ import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -71,6 +72,8 @@ public class FiltLogin extends OncePerRequestFilter {
             String[] parts = request.getHeader("Authorization").split(" ");
             if (parts.length == 2)
                 user = repoUtenti.getReferenceById(parts[1]);
+            user = (ClsTurista) ((HibernateProxy) user).getHibernateLazyInitializer()
+                    .getImplementation();
             InitializeUser(user);
             request.getServletContext().setAttribute("user", user);
         }
@@ -142,7 +145,6 @@ public class FiltLogin extends OncePerRequestFilter {
 
     private ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
-        user.setId(1+"");
         user.setIperUtenti(this.iperUtenti);
         user.setIperRDCImmagini(this.iperRDCImmagini);
         return user;
