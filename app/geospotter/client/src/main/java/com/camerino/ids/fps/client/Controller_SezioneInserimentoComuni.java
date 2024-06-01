@@ -2,6 +2,8 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
@@ -38,39 +40,18 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     Button home, conferma;
     //endregion
 
-    ArrayList<ClsCuratore> curatori;
+    List<ClsCuratore> curatori;
     Utils u = new Utils();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        curatori = new ArrayList<>();
-
-        //region Creazione Curatori Dummy
-        ClsCuratore c1 = new ClsCuratore();
-        c1.setId("1");
-        Credenziali cred1 = new Credenziali();
-        cred1.setUsername("USERNAME1");
-        cred1.setPassword("1");
-        c1.setCredenziali(cred1);
-        curatori.add(c1);
-
-        ClsCuratore c2 = new ClsCuratore();
-        c2.setId("2");
-        Credenziali cred2 = new Credenziali();
-        cred2.setUsername("USERNAME2");
-        cred2.setPassword("2");
-        c2.setCredenziali(cred2);
-        curatori.add(c2);
-
-        ClsCuratore c3 = new ClsCuratore();
-        c3.setId("3");
-        Credenziali cred3 = new Credenziali();
-        cred3.setUsername("USERNAME3");
-        cred3.setPassword("3");
-        c3.setCredenziali(cred3);
-        curatori.add(c3);
-        //endregion
+        curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR)
+                .stream().map(u->{
+                    ClsCuratore tmp = new ClsCuratore();
+                    tmp.setId(u.getId());
+                    return tmp;
+                }).toList();
 
         setCuratori(curatori);
 
@@ -109,7 +90,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
 
             comune.setCuratoriAssociati(this.ottieniCuratori(curatoriCoinvoltiArray));//todo:aggiungere
 
-
+            ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).inserisciComune(comune);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");
             alert.setContentText(comune.visualizzaComune());
@@ -124,7 +105,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         }
     }
 
-    private void setCuratori (ArrayList<ClsCuratore> curatori)
+    private void setCuratori (List<ClsCuratore> curatori)
     {
         for(int i = 0; i<curatori.size();i++)
         {
@@ -159,7 +140,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsCuratore> Curatori)
+    private String[] pulisciIDnonPresenti (ArrayList<String> input, List<ClsCuratore> Curatori)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
@@ -192,7 +173,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return listaSenzaDuplicati;
     }
 
-    private ClsCuratore[] ottieniCuratori (String[] idCuratori)
+    private ArrayList<ClsCuratore> ottieniCuratori (String[] idCuratori)
     {
         ArrayList<ClsCuratore> tmp = new ArrayList<ClsCuratore>();
         for(int i = 0; i < this.curatori.size(); i++)
@@ -206,6 +187,6 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             }
         }
 
-        return tmp.toArray(new ClsCuratore[tmp.size()]);
+        return tmp;
     }
 }

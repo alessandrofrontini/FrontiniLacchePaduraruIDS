@@ -60,7 +60,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
 
     Utils u = new Utils();
     ArrayList<ClsComune> comuni;
-    ArrayList<ClsCuratore> Curatori = new ArrayList<>();
+//    ArrayList<ClsCuratore> Curatori = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -71,9 +71,9 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<Curatori.size();i++)
+        for(int i = 0;i<comuni.size();i++)
         {
-            items.add(Curatori.get(i).getId());
+            items.add(comuni.get(i).getId());
         }
 
         this.sceltaComune.setItems(items);

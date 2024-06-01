@@ -2,8 +2,10 @@ package com.camerino.ids.core.data.contenuti;
 
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contiene i dati di un comune
@@ -14,9 +16,8 @@ public class ClsComune extends ClsContenuto
     String usernameCreatore = "ADMIN";
     int abitanti;
     double superficie;
-    @OneToOne
-    @JoinColumn(name="assCurCom")//TODO: associazione
-    ClsCuratore[] curatoriAssociati;
+    @OneToMany(mappedBy = "id")
+    List<ClsCuratore> curatoriAssociati;
 
     //region Getter e setter
     public int getAbitanti() {
@@ -35,11 +36,11 @@ public class ClsComune extends ClsContenuto
         this.superficie = superficie;
     }
 
-    public ClsCuratore[] getCuratoriAssociati() {
+    public List<ClsCuratore> getCuratoriAssociati() {
         return curatoriAssociati;
     }
 
-    public void setCuratoriAssociati(ClsCuratore[] curatoriAssociati) {
+    public void setCuratoriAssociati(List<ClsCuratore> curatoriAssociati) {
         this.curatoriAssociati = curatoriAssociati;
     }
     //endregion
@@ -65,15 +66,15 @@ public class ClsComune extends ClsContenuto
 
         String tmp = "";
 
-        for(int i = 0; i<this.curatoriAssociati.length; i++)
+        for(int i = 0; i< this.curatoriAssociati.size(); i++)
         {
-            if(i == curatoriAssociati.length -1)
+            if(i == curatoriAssociati.size() -1)
             {
-                tmp += this.curatoriAssociati[i].getCredenziali().getUsername();
+                tmp += this.curatoriAssociati.get(i).getCredenziali().getUsername();
             }
             else
             {
-                tmp += this.curatoriAssociati[i].getCredenziali().getUsername() +", ";
+                tmp += this.curatoriAssociati.get(i).getCredenziali().getUsername() +", ";
             }
 
         }

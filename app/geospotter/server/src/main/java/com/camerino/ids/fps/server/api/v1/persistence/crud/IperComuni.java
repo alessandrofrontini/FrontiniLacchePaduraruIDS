@@ -35,7 +35,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
 
     @Override
     public boolean update(HashMap<String, Object> filters, ClsComune object) {
-        repoComuni.updateComuneById(object, object.getId());
+        repoComuni.save(object);
         return true;
     }
 

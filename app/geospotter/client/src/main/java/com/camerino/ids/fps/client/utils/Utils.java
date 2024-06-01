@@ -42,7 +42,7 @@ public class Utils
         return i;
     }
 
-    public ClsCuratoreVisual convertFromClsCuratore (ClsCuratore curatore)
+    public ClsCuratoreVisual convertFromClsCuratore (ClsTuristaAutenticato curatore)
     {
         ClsCuratoreVisual c = new ClsCuratoreVisual();
 

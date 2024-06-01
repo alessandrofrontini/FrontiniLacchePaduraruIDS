@@ -29,4 +29,12 @@ public class SComuni {
     public boolean deleteComuneById(String idComune) {
         return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
     }
+
+    public boolean postComune(ClsComune comune) {
+        return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).inserisciComune(comune);
+    }
+
+    public boolean putComune(ClsComune comune) {
+        return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).modificaComune(comune, comune.getId());
+    }
 }

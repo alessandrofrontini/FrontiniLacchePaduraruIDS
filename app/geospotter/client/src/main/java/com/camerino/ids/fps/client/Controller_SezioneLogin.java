@@ -167,6 +167,8 @@ public class Controller_SezioneLogin
         user.setIperRecensioni(new IperRecensioni());
         user.setIperSegnalazioni(new IperSegnalazioni());
         user.setpImmagini(new IperImmagini());
+        user.setMockComuni(new IperComuni());
+        user.setIperUtenti(new IperUtenti());
 
         return user;
     }

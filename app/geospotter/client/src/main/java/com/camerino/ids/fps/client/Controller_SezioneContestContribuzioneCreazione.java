@@ -137,7 +137,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         p1.setX(1);
         p1.setY(2);
         com1.setPosizione(p1);
-        com1.setCuratoriAssociati(Curatori.toArray(new ClsCuratore[Curatori.size()]));
+        com1.setCuratoriAssociati(Curatori);
         comuni.add(com1);
 
         ClsComune com2 = new ClsComune();
@@ -149,7 +149,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         p2.setX(2);
         p2.setY(2);
         com2.setPosizione(p2);
-        com2.setCuratoriAssociati(Curatori.toArray(new ClsCuratore[Curatori.size()]));
+        com2.setCuratoriAssociati(Curatori);
         comuni.add(com2);
 
         ClsComune com3 = new ClsComune();
@@ -161,7 +161,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         p3.setX(3);
         p3.setY(3);
         com3.setPosizione(p3);
-        com3.setCuratoriAssociati(Curatori.toArray(new ClsCuratore[Curatori.size()]));
+        com3.setCuratoriAssociati(Curatori);
         comuni.add(com3);
         //endregion
 

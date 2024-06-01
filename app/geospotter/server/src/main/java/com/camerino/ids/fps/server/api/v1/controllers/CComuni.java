@@ -39,14 +39,14 @@ public class CComuni {
     }
     @PutMapping(mapping)
     public ResponseEntity<String> putComune(
-            @RequestBody ClsNodo nodo
+            @RequestBody ClsComune comune
     ){
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(Boolean.toString(sComnuni.putComune(comune)));
     }
     @PostMapping(mapping)
     public ResponseEntity<String> postComune(
-            @RequestBody ClsNodo nodo
+            @RequestBody ClsComune comune
     ){
-        return ResponseEntity.status(501).build();
+        return ResponseEntity.ok(Boolean.toString(sComnuni.postComune(comune)));
     }
 }

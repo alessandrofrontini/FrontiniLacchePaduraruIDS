@@ -128,7 +128,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
             {
                 if(Objects.equals(comuni.get(i).getId(), IDDaSegnalare))
                 {
-                    segnalazione.setIdCuratore(comuni.get(i).getCuratoriAssociati()[0].getId());
+                    segnalazione.setIdCuratore(comuni.get(i).getCuratoriAssociati().get(0).getId());
                 }
             }
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);

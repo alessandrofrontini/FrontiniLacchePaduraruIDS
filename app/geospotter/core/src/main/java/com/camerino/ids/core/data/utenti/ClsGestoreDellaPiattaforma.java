@@ -2,7 +2,13 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Questo ruolo ha potere assoluto.
@@ -29,6 +35,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
 
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
+
     }
     //region Getters and Setters
     public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
@@ -59,7 +66,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      */
     @Override
     public boolean modificaComune(ClsComune comune, String id){
-        return  false;
+        return this.mockComuni.update(null,comune);
     }
 
     /**
@@ -71,12 +78,25 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      */
     @Override
     public boolean eliminaComune(String id){
-        return false;
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idComune", id);
+        return this.mockComuni.delete(filters);
     }
     //TODO
     @Override
     public ClsComune[] visualizzaComuni(){
         return null;
+    }
+/*@JsonIgnore
+    public List<ClsCuratore> getAllCuratori() {
+        ArrayList tmp = getUtentiByRuolo(eRUOLO_UTENTE.CURATORE);
+        return tmp.stream().map(c->new ClsCuratore((ClsTuristaAutenticato)c)).toList();
+    }*/
+@JsonIgnore
+    public ArrayList<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLO_UTENTE ruolo) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("ruolo", eRUOLO_UTENTE.CURATORE);
+        return iperUtenti.get(filters);
     }
 //endregion
 }

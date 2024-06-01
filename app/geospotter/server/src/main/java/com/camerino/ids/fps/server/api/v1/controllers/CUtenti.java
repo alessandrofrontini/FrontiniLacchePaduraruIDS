@@ -1,12 +1,10 @@
 package com.camerino.ids.fps.server.api.v1.controllers;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLO_UTENTE;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
-import com.camerino.ids.fps.server.api.v1.persistence.crud.IperUtenti;
 import com.camerino.ids.fps.server.api.v1.services.SUtenti;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,26 +24,10 @@ public class CUtenti {
 
     @GetMapping(value = mapping)
     public ResponseEntity<ArrayList<ClsTuristaAutenticato>> getUtenti(
-            @RequestParam(value = "ruolo", required = false) String ruolo
+            @RequestParam(value = "ruolo", required = false) eRUOLO_UTENTE ruolo
     ){
-        ArrayList<ClsTuristaAutenticato> body;
-//        if(ruolo != null)
-//        {
-//            body = sUtenti.getUtentiPerGestionePunteggio(ruolo);
-//            return ResponseEntity.ok(body);
-//        }
-//
-//        else
-//        {
-
-            //body = sUtenti.getAllUtenti();
-        body = new ArrayList<>();
-        var tmp = new ClsTuristaAutenticato();
-        tmp.setIperUtenti(new IperUtenti(null));
-        body.add(new ClsTuristaAutenticato());
-
-            return ResponseEntity.ok(body);
-//        }
-
+        if(ruolo!= null)
+            return ResponseEntity.ok(sUtenti.getUtentiByRuolo(ruolo));
+        return ResponseEntity.ok(sUtenti.getAllUtenti());
     }
 }

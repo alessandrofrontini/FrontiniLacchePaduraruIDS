@@ -2,6 +2,8 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
@@ -60,15 +62,20 @@ public class Controller_SezioneModificaComuni implements Initializable
     TextField textFieldCuratori,nomeTF,descrizioneTF,coordinataXTF,coordinataYTF,abitantiTF,superficieTF;
     //endregion
 
-    ArrayList<ClsCuratore> Curatori;
+    List<ClsCuratore> Curatori;
     ArrayList<ClsComune> comuni;
     Utils u = new Utils();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.Curatori = new ArrayList<ClsCuratore>();
-        this.comuni = new ArrayList<>();//Controller_SezioneLogin.UTENTE.getAllComuni();
+        this.Curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR)
+                .stream().map(u->{
+                    ClsCuratore tmp = new ClsCuratore();
+                    tmp.setId(u.getId());
+                    return tmp;
+                }).toList();
+        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
@@ -109,6 +116,7 @@ public class Controller_SezioneModificaComuni implements Initializable
 
         if(!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null))
         {
+            ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
             nuovoComune.setId(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
@@ -216,7 +224,7 @@ public class Controller_SezioneModificaComuni implements Initializable
             comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
             comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitantiTF)));
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
-            comune.setCuratoriAssociati(new ClsCuratore[0]);
+            comune.setCuratoriAssociati(new ArrayList<>());
 
           return comune;
         }

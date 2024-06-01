@@ -87,6 +87,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
         this.pImmagini = usr.pImmagini;
+        this.iperUtenti = usr.iperUtenti;
     }
 
     //region Getters and Setters

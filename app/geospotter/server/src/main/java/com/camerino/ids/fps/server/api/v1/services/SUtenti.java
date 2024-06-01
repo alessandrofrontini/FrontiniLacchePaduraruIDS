@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +28,7 @@ public class SUtenti
     }
 
 
+    public ArrayList<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+        return ((ClsGestoreDellaPiattaforma)request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
+    }
 }
