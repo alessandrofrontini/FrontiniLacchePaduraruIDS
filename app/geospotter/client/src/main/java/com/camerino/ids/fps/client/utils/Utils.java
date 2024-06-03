@@ -65,18 +65,25 @@ public class Utils
         c.setAbitanti(comune.getAbitanti());
 
         String tmp = "";
-        for(int i = 0; i< comune.getCuratoriAssociati().size() ;i++)
+        if(comune.getCuratoriAssociati().isEmpty() || comune.getCuratoriAssociati() == null)
         {
-            if(i == comune.getCuratoriAssociati().size()-1)
-            {
-                tmp += comune.getCuratoriAssociati().get(i).getId();
-            }
-            else
-            {
-                tmp += comune.getCuratoriAssociati().get(i).getId() + "-";
-            }
-
+            tmp = "non gestito";
         }
+        else
+        {
+            for(int i = 0; i< comune.getCuratoriAssociati().size() ;i++)
+            {
+                if(i == comune.getCuratoriAssociati().size()-1)
+                {
+                    tmp += comune.getCuratoriAssociati().get(i).getId();
+                }
+                else
+                {
+                    tmp += comune.getCuratoriAssociati().get(i).getId() + "-";
+                }
+            }
+        }
+
         c.setDescrizione(comune.getDescrizione());
         c.setCuratori(tmp);
         return c;

@@ -77,12 +77,15 @@ public class Controller_SezioneModificaComuni implements Initializable
                 }).toList();
         this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
+        this.setComuni(comuni);
+        this.setCuratori(new ArrayList<>(Curatori));
+
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<Curatori.size();i++)
+        for(int i = 0;i<comuni.size();i++)
         {
-            items.add(Curatori.get(i).getId());
+            items.add(comuni.get(i).getId());
         }
 
         this.sceltaComune.setItems(items);
@@ -106,6 +109,14 @@ public class Controller_SezioneModificaComuni implements Initializable
 
         curatori.setCellValueFactory(
                 new PropertyValueFactory<>("curatori"));
+        //endregion
+
+        //region setting up colonne tabella
+        idCuratore.setCellValueFactory(
+                new PropertyValueFactory<>("id"));
+
+        usernameCuratore.setCellValueFactory(
+                new PropertyValueFactory<>("username"));
         //endregion
     }
 
