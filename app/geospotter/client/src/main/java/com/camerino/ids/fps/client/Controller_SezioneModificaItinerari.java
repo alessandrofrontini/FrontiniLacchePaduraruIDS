@@ -79,7 +79,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
         itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
         this.setItinerari(itinerari);
-
+        this.setNodi(nodi);
         //region setting up colonne tabella nodi
         sezioneEliminazioneNodiTableColumnID.setCellValueFactory(
                 new PropertyValueFactory<>("ID"));

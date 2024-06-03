@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.client;
 
+import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Posizione;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -38,11 +40,14 @@ public class Controller_SezioneInserimentoNodi implements Initializable
     boolean flag = false;
     Utils u = new Utils();
 
+    ArrayList<ClsComune> comuni;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
+        comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
     }
 
     public void inserisciNodo()
@@ -75,7 +80,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if(!u.checkInfoNodo(nodo))
+                    if(!u.checkInfoNodo(nodo) || !this.CheckValidita(nodo, comuni))
                     {
                         Alert alert = new Alert (Alert.AlertType.ERROR);
                         alert.setTitle("Errore");
@@ -151,4 +156,17 @@ public class Controller_SezioneInserimentoNodi implements Initializable
     {
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
+
+  public boolean CheckValidita (ClsNodo nodo, ArrayList<ClsComune> comuni)
+  {
+      boolean flagComuni = false;
+      for(int i = 0; i < comuni.size(); i++)
+      {
+          if(Objects.equals(nodo.getIdComune(), comuni.get(i).getId()))
+          {
+              flagComuni = true;
+          }
+      }
+      return flagComuni;
+  }
 }
