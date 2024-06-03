@@ -88,7 +88,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitanti)));
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficie)));
 
-            comune.setCuratoriAssociati(this.ottieniCuratori(curatoriCoinvoltiArray));//todo:aggiungere
+            comune.setCuratoriAssociati(this.ottieniCuratoriAssociati(new ArrayList<>(curatori),curatoriCoinvoltiArray));//todo:aggiungere
 
             ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).inserisciComune(comune);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -103,6 +103,22 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             alert.setContentText("Devi inserire tutte le informazioni");
             alert.show();
         }
+    }
+
+    public ArrayList<ClsCuratore> ottieniCuratoriAssociati (ArrayList<ClsCuratore> curatori, String[] idCuratori)
+    {
+        ArrayList<ClsCuratore> tmp = new ArrayList<>();
+        for(int i = 0; i < curatori.size();i++)
+        {
+            for(int j = 0; j < idCuratori.length; j++)
+            {
+                if(Objects.equals(curatori.get(i).getId(), idCuratori[j]))
+                {
+                    tmp.add(curatori.get(i));
+                }
+            }
+        }
+        return tmp;
     }
 
     private void setCuratori (List<ClsCuratore> curatori)

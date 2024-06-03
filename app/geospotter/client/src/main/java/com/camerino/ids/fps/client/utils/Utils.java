@@ -47,7 +47,8 @@ public class Utils
         ClsCuratoreVisual c = new ClsCuratoreVisual();
 
         c.setId(curatore.getId());
-        c.setUsername(curatore.getCredenziali().getUsername());
+        c.setUsername("Punteggio: " + curatore.getPunteggio()+""+" \nUsername: "+curatore.getCredenziali().getUsername());
+
 
         return c;
     }
@@ -64,19 +65,19 @@ public class Utils
         c.setAbitanti(comune.getAbitanti());
 
         String tmp = "";
-//        for(int i = 0; i< comune.getCuratoriAssociati().length;i++)
-//        {
-//            if(i == comune.getCuratoriAssociati().length-1)
-//            {
-//                tmp += comune.getCuratoriAssociati()[i].getId();
-//            }
-//            else
-//            {
-//                tmp += comune.getCuratoriAssociati()[i].getId() + "-";
-//            }
-//
-//        }
+        for(int i = 0; i< comune.getCuratoriAssociati().size() ;i++)
+        {
+            if(i == comune.getCuratoriAssociati().size()-1)
+            {
+                tmp += comune.getCuratoriAssociati().get(i).getId();
+            }
+            else
+            {
+                tmp += comune.getCuratoriAssociati().get(i).getId() + "-";
+            }
 
+        }
+        c.setDescrizione(comune.getDescrizione());
         c.setCuratori(tmp);
         return c;
     }
@@ -90,6 +91,7 @@ public class Utils
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
         c.setIsAperto(contest.isAperto()+"");
+
 
         return c;
     }

@@ -70,11 +70,11 @@ public class ClsComune extends ClsContenuto
         {
             if(i == curatoriAssociati.size() -1)
             {
-                tmp += this.curatoriAssociati.get(i).getCredenziali().getUsername();
+                tmp += this.curatoriAssociati.get(i).getId();
             }
             else
             {
-                tmp += this.curatoriAssociati.get(i).getCredenziali().getUsername() +", ";
+                tmp += this.curatoriAssociati.get(i).getId();
             }
 
         }
