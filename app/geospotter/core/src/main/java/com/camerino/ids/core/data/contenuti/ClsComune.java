@@ -50,12 +50,12 @@ public class ClsComune extends ClsContenuto
 
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "\nUsernameCreatore: " + this.getIdCreatore() + "\n";
-        dummy += "\nNome: " + this.getNome() + "\n";
-        dummy += "\nDescrizione: " + this.getDescrizione() + "\n";
-        dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY() + "\n";
-        dummy += "\nSuperficie: " + this.getSuperficie() + "\n";
+        dummy += "\nID: " + this.getId() ;
+        dummy += "\nUsernameCreatore: " + this.getIdCreatore();
+        dummy += "\nNome: " + this.getNome();
+        dummy += "\nDescrizione: " + this.getDescrizione();
+        dummy += "\nPosizione: " + this.getPosizione().getX() + " - " +this.getPosizione().getY();
+        dummy += "\nSuperficie: " + this.getSuperficie();
         dummy += "\nCuratori: " + visualizzaCuratoriComune();
 
         return dummy;
