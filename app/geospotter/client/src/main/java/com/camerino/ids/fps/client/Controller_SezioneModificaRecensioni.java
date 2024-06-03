@@ -171,7 +171,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).modificaRecensione(r,r);
+            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).modificaRecensione(id,r);
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");

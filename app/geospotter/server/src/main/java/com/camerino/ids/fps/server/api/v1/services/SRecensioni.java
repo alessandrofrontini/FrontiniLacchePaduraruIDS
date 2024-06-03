@@ -34,7 +34,7 @@ public class SRecensioni {
     }
 
     public boolean putRecensione(ClsRecensione recensione) {
-        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).modificaRecensione(recensione,recensione);
+        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).modificaRecensione(recensione.getId(),recensione);
     }
 
     public ArrayList<ClsRecensione> getRecensioniPossesore() {

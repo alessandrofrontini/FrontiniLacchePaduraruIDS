@@ -159,10 +159,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperRecensioni.delete(tmp);
     }
     @Override
-    public boolean modificaRecensione(ClsRecensione old, ClsRecensione newrec) {
+    public boolean modificaRecensione(String IDDaModificare, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("idRecensione", old.getId());
+        tmp.put("idRecensione", IDDaModificare);
         newrec.setIdCreatore(this.id+"");
         return iperRecensioni.update(tmp, newrec);
     }
