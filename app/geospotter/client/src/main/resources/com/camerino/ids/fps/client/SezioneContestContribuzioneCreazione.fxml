@@ -31,24 +31,7 @@
                   </TableView>
                   <ComboBox fx:id="sceltaComune" layoutX="134.0" layoutY="229.0" prefHeight="26.0" prefWidth="331.0" promptText="Seleziona qui" />
                      <TextField fx:id="dataFine" layoutX="146.0" layoutY="264.0" prefHeight="26.0" prefWidth="292.0" promptText="data fine (ddmmyyyy)" />
-                     <CheckBox fx:id="suInvito" layoutX="256.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#visualizzaTabInvitati" text="su Invito?" />
               </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="tabPartecipanti" text="Invita Partecipanti">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="elencoInvitati" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="561.0">
-                          <columns>
-                            <TableColumn fx:id="idInvitato" prefWidth="47.19999313354492" text="ID" />
-                            <TableColumn fx:id="usernameInvitato" prefWidth="166.1999969482422" text="USERNAME" />
-                              <TableColumn fx:id="punteggioInvitato" prefWidth="154.19998168945312" text="PUNTEGGIO" />
-                              <TableColumn fx:id="ruoloInvitato" prefWidth="193.800048828125" text="RUOLO UTENTE" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="invitatiContestTF" layoutX="12.0" layoutY="226.0" prefHeight="29.0" prefWidth="563.0" promptText="Invitati al contest" />
-                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

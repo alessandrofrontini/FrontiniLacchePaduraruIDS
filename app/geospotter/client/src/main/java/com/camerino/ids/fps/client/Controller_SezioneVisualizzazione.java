@@ -272,13 +272,13 @@ public class Controller_SezioneVisualizzazione implements Initializable
                     this.navigateToSezioneCuratoreValidazioneRichieste(mouseEvent);
                     break;
 
-                case "Gestione Utenti (PUNTEGGIO)":
-                    this.navigateToSezioneCuratorePunteggioUtenti(mouseEvent);
-                    break;
-
-                case "Gestione Utenti (CREDENZIALI)":
-                    this.navigateToSezioneCuratoreGestioneUtenti(mouseEvent);
-                    break;
+//                case "Gestione Utenti (PUNTEGGIO)":
+//                    this.navigateToSezioneCuratorePunteggioUtenti(mouseEvent);
+//                    break;
+//
+//                case "Gestione Utenti (CREDENZIALI)":
+//                    this.navigateToSezioneCuratoreGestioneUtenti(mouseEvent);
+//                    break;
 
                 default:
                     Alert alert = new Alert (Alert.AlertType.ERROR);

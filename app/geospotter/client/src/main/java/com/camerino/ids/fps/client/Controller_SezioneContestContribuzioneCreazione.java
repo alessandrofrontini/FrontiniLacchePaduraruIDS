@@ -62,23 +62,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     @FXML
     CheckBox suInvito;
 
-
-
-    @FXML
-    TableView<ClsUtenteInvitoContestVisual> elencoInvitati;
-
-    @FXML
-    TableColumn<ClsUtenteInvitoContestVisual, String> idInvitato;
-
-    @FXML
-    TableColumn<ClsUtenteInvitoContestVisual, String> usernameInvitato;
-
-    @FXML
-    TableColumn<ClsUtenteInvitoContestVisual, String> punteggioInvitato;
-
-    @FXML
-    TableColumn<ClsUtenteInvitoContestVisual, String> ruoloInvitato;
-
     @FXML
     Tab tabPartecipanti;
 
@@ -96,7 +79,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.tabPartecipanti.setDisable(true);
         this.comuni = new ArrayList<ClsComune>();
 
         this.utenti = new ArrayList<ClsTuristaAutenticato>();
@@ -198,8 +180,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 new PropertyValueFactory<>("curatori"));
         //endregion
 
-
-
         //region Creazione Utenti dummy
         ClsTuristaAutenticato ta1 = new ClsTuristaAutenticato();
         ta1.setId("1");
@@ -229,22 +209,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         utenti.add(ta3);
         //endregion
 
-        setUtenti(utenti);
-
-        //region setting up colonne tabella
-        idInvitato.setCellValueFactory(
-                new PropertyValueFactory<>("id"));
-
-        usernameInvitato.setCellValueFactory(
-                new PropertyValueFactory<>("username"));
-
-        punteggioInvitato.setCellValueFactory(
-                new PropertyValueFactory<>("punteggio"));
-
-        ruoloInvitato.setCellValueFactory(
-                new PropertyValueFactory<>("ruolo"));
-        //endregion
-
     }
 
     public void inserisciContest(MouseEvent mouseEvent)
@@ -264,10 +228,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
             comune.setId(u.getValueFromCombobox(this.sceltaComune));
             contest.setLocation(comune);
 
-            //non su invito
-            if(!u.getValueFromCheckBox(this.suInvito))
-            {
-                contest.setAperto(false);
+           contest.setAperto(true);
 
                 for(int i = 0; i<utenti.size();i++)
                 {
@@ -288,55 +249,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 alert.setTitle("OK");
                 alert.setContentText(contest.visualizzaContest());
                 alert.show();
-
-            }
-            //su invito
-            else
-            {
-
-                contest.setAperto(true);
-                String IDUtentiDaInvitare = u.getValueFromTextField(this.invitatiContestTF);
-                String[] IDUtentiDaInvitareArray = this.convertiUtentiCoinvoltiInArray(IDUtentiDaInvitare);
-
-                if(IDUtentiDaInvitareArray.length > 0)
-                {
-                    for(int j = 0; j < this.utenti.size(); j++)
-                    {
-                        for(int i = 0; i < IDUtentiDaInvitareArray.length ; i++)
-                        {
-                            if(Objects.equals(IDUtentiDaInvitareArray[i], utenti.get(j).getId()))
-                            {
-                                ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
-                                p.setId("test");
-                                p.setUsernamePartecipante(utenti.get(j).getCredenziali().getUsername());
-                                p.setIdContest(contest.getId());
-
-                                this.partecipazioni.add(p);
-                            }
-
-                        }
-
-                    }
-
-
-                    for(int i = 0 ; i < this.partecipazioni.size(); i++)
-                    {
-                        System.out.println(this.partecipazioni.get(i).visualizzaPartecipazione());
-                    }
-
-                    Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText(contest.visualizzaContest());
-                    alert.show();
-                }
-                else{
-                    Alert alert = new Alert (Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setContentText("Ricontrolla le informazioni e riprova");
-                    alert.show();
-                }
-
-            }
 
 
         }
@@ -361,15 +273,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         }
     }
 
-    private void setUtenti (ArrayList<ClsTuristaAutenticato> utenti)
-    {
-        for(int i = 0; i<utenti.size();i++)
-        {
-            ClsUtenteInvitoContestVisual c = u.convertFromTuristaAutenticato(utenti.get(i));
-
-            elencoInvitati.getItems().add(c);
-        }
-    }
 
     private boolean controllaConformitaID (String id)
     {
