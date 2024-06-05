@@ -3,9 +3,9 @@ package com.camerino.ids.fps.client.visual;
 public class ClsNodoVisual
 {
     public String ID;
-    public Long IDComuneAssociato;
+    public String IDComuneAssociato;
     public String Posizione;
-    public Long Nome;
+    public String Nome;
     public String Tipologia;
     public String ATempo;
 
@@ -19,11 +19,11 @@ public class ClsNodoVisual
         this.ID = ID;
     }
 
-    public Long getIDComuneAssociato() {
+    public String getIDComuneAssociato() {
         return IDComuneAssociato;
     }
 
-    public void setIDComuneAssociato(Long IDComuneAssociato) {
+    public void setIDComuneAssociato(String IDComuneAssociato) {
         this.IDComuneAssociato = IDComuneAssociato;
     }
 
@@ -35,11 +35,11 @@ public class ClsNodoVisual
         Posizione = posizione;
     }
 
-    public Long getNome() {
+    public String getNome() {
         return Nome;
     }
 
-    public void setNome(Long nome) {
+    public void setNome(String nome) {
         Nome = nome;
     }
 

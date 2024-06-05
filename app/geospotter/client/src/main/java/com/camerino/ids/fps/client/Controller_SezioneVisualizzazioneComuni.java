@@ -115,7 +115,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
     public void inserisciSegnalazione()
     {
-        Long descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
+        String descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
 
         if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
         {

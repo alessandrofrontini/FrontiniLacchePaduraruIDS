@@ -5,7 +5,7 @@ package com.camerino.ids.core.data.contenuti;
  */
 public class ClsPartecipazioneContestDiContribuzione {
     String id;
-    Long usernamePartecipante;
+    String usernamePartecipante;
     String idContest;
     //region Getters and Setters
 
@@ -17,11 +17,11 @@ public class ClsPartecipazioneContestDiContribuzione {
         this.id = id;
     }
 
-    public Long getUsernamePartecipante() {
+    public String getUsernamePartecipante() {
         return usernamePartecipante;
     }
 
-    public void setUsernamePartecipante(Long usernamePartecipante) {
+    public void setUsernamePartecipante(String usernamePartecipante) {
         this.usernamePartecipante = usernamePartecipante;
     }
 

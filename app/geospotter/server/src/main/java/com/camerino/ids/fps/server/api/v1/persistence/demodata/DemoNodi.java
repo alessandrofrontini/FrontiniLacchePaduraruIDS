@@ -24,7 +24,6 @@ public class DemoNodi {
         nodo1.setaTempo(true);
         nodo1.setDescrizione("Ciao");
         nodo1.setPosizione(new Posizione(12,23));
-        nodo1.setIdCreatore("1");
         nodi.add(nodo1);
 
         ClsNodo nodo2 = new ClsNodo();

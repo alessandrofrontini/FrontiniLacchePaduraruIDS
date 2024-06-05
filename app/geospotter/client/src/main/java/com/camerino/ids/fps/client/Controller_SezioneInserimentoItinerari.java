@@ -84,7 +84,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
     public void inserisciItinerario(MouseEvent mouseEvent)
     {
         ClsItinerario itinerario = new ClsItinerario();
-        Long nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
+        String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
         ArrayList<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
@@ -158,7 +158,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private String[] convertiNodiCoinvoltiInArray(Long input)
+    private String[] convertiNodiCoinvoltiInArray(String input)
     {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);

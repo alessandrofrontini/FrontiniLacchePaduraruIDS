@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.convertors.ConvPosizione;
 
 import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
 
 /**
@@ -14,10 +15,11 @@ public abstract class ClsContenuto extends ClsInformazione {
 
     @Convert(converter = ConvPosizione.class)
     Posizione posizione;
-    Long nome;
-    Long descrizione;
+    String nome;
+    String descrizione;
 
     //region Getter e setter
+
     public Posizione getPosizione() {
         return posizione;
     }
@@ -26,19 +28,19 @@ public abstract class ClsContenuto extends ClsInformazione {
         this.posizione = posizione;
     }
 
-    public Long getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Long nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public Long getDescrizione() {
+    public String getDescrizione() {
         return descrizione;
     }
 
-    public void setDescrizione(Long descrizione) {
+    public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
     //endregion

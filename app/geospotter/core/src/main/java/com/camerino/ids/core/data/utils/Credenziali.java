@@ -3,22 +3,22 @@ package com.camerino.ids.core.data.utils;
 import java.util.Objects;
 
 public class Credenziali {
-    private Long username;
-    private Long password;
+    private String username;
+    private String password;
 
-    public Long getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Long username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public Long getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

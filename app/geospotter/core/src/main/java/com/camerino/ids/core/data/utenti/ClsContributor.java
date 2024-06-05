@@ -1,7 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.*;
-import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -91,20 +90,9 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      * @return True se la creazione della richiesta ha avuto successo,
      *         False altrimenti
      */
+    @Override
     public boolean inserisciNodo(ClsNodo nodo) {
         ClsRDCNodo rdc = new ClsRDCNodo(null, nodo);
-        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
-        rdc.setCreatore(this);
-        rdc.setStato(EStatusRDC.NUOVO);
-        return this.postRDCNodo(rdc);
-    }
-
-    public boolean inserisciNodo(ClsNodo nodo, ClsContestDiContribuzione contest) {
-        ClsRDCNodo rdc = new ClsRDCNodo(null, nodo);
-        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
-        rdc.setCreatore(this);
-        rdc.setStato(EStatusRDC.NUOVO);
-        rdc.setIdContest(contest);
         return this.postRDCNodo(rdc);
     }
 
@@ -118,7 +106,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
         ArrayList<ClsNodo> old = getNodoById(nodo.getId());
-        nodo.setId(0+"");
         if(old.size() != 1)
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), nodo);
@@ -133,6 +120,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      * @return True se la creazione della richiesta o l'eliminazione ha avuto successo,
      *         False altrimenti.
      */
+    @Override
     public boolean eliminaNodo(String id) {
         ArrayList<ClsNodo> old = getNodoById(id);
         if(old.size() != 1)
@@ -140,7 +128,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), null);
         rdc.setCreatore(this);
         rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
-        rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCNodi.insert(rdc);
     }
 
@@ -230,8 +217,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     public boolean postRDCNodo(ClsRDCNodo rdc) {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idUtente", this.id);
+        //filters.put("idUtente", this.id);
+        filters.put("idUtente", "1");
         rdc.setCreatore(iperUtenti.get(filters).get(0));
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
         return iperRDCNodi.insert(rdc);
     }
 

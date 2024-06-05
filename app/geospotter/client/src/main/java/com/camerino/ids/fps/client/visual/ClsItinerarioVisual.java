@@ -4,7 +4,7 @@ public class ClsItinerarioVisual
 {
     String id;
 
-    Long nome;
+    String nome;
 
     String ordinato;
 
@@ -18,11 +18,11 @@ public class ClsItinerarioVisual
         this.id = id;
     }
 
-    public Long getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Long nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 

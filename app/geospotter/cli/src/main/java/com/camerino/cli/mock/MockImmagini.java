@@ -39,25 +39,25 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
         ClsImmagine immagine1 = new ClsImmagine();
         immagine1.setId("1");
         immagine1.setURL("https://picsum.photos/200");
-        immagine1.setIdNodoAssociato("1");//Comune
+        immagine1.setIdNodo("1");//Comune
         immagine1.setIdCreatore("");
 
         ClsImmagine immagine2 = new ClsImmagine();
         immagine2.setId("2");
         immagine2.setURL("https://picsum.photos/200");
-        immagine2.setIdNodoAssociato("2");//Nodo
+        immagine2.setIdNodo("2");//Nodo
         immagine2.setIdCreatore("");
 
         ClsImmagine immagine3 = new ClsImmagine();
         immagine3.setId("3");
         immagine3.setURL("https://picsum.photos/200");
-        immagine3.setIdNodoAssociato("3");
+        immagine3.setIdNodo("3");
         immagine3.setIdCreatore("");
 
         ClsImmagine immagine4 = new ClsImmagine();
         immagine4.setId("4");
         immagine4.setURL("https://picsum.photos/200");
-        immagine4.setIdNodoAssociato(" ");
+        immagine4.setIdNodo(" ");
         immagine4.setIdCreatore("");
     }
 }

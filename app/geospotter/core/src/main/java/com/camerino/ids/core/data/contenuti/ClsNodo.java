@@ -11,23 +11,23 @@ public class ClsNodo extends ClsContenuto{
     //region Tipologia nodo (enumerazione)
     public enum eTipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
-    private Long idComune;
+    private String idComune;
     private eTipologiaNodo eTipologiaNodo;
     private boolean aTempo;
 
     //dd/mm/yyyy
-    private Long dataInizio;
+    private String dataInizio;
     //dd/mm/yyyy
-    private Long dataFine;
+    private String dataFine;
 
 
 
     //region Getter e setter
-    public Long getIdComune() {
+    public String getIdComune() {
         return idComune;
     }
 
-    public void setIdComune(Long idComune) {
+    public void setIdComune(String idComune) {
         this.idComune = idComune;
     }
 
@@ -72,19 +72,19 @@ public class ClsNodo extends ClsContenuto{
         this.aTempo = aTempo;
     }
 
-    public Long getDataInizio() {
+    public String getDataInizio() {
         return dataInizio;
     }
 
-    public void setDataInizio(Long dataInizio) {
+    public void setDataInizio(String dataInizio) {
         this.dataInizio = dataInizio;
     }
 
-    public Long getDataFine() {
+    public String getDataFine() {
         return dataFine;
     }
 
-    public void setDataFine(Long dataFine) {
+    public void setDataFine(String dataFine) {
         this.dataFine = dataFine;
     }
 

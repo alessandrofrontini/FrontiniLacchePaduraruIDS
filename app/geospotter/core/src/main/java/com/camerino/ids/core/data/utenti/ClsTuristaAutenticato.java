@@ -8,8 +8,6 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.convertors.ConvCredenziali;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -23,21 +21,10 @@ import java.util.HashMap;
  * E' il ruolo iniziale di un nuovo utente.
  */
 @Entity
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "ruoloUtente", visible = true)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = ClsTuristaAutenticato.class, name = "TURISTA_AUTENTICATO"),
-        @JsonSubTypes.Type(value = ClsContributor.class, name = "CONTRIBUTOR"),
-        @JsonSubTypes.Type(value = ClsContributorAutorizzato.class, name = "CONTRIBUTOR_AUTORIZZATO"),
-        @JsonSubTypes.Type(value = ClsAnimatore.class, name = "ANIMATORE"),
-        @JsonSubTypes.Type(value = ClsCuratore.class, name = "CURATORE"),
-        @JsonSubTypes.Type(value = ClsGestoreDellaPiattaforma.class, name = "GESTORE_DELLA_PIATTAFORMA"),
-})
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini)
     {
+
     }
 
     public boolean postRDCImmagine(ClsRDCImmagine rdc) {
@@ -104,11 +91,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 
     //region Getters and Setters
-    public Long getId() {
+    public String getId() {
         return id.toString();
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = Long.valueOf(id);
     }
 

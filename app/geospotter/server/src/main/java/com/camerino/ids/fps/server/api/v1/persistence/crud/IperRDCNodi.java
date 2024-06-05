@@ -1,7 +1,9 @@
 package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCI;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCNodi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

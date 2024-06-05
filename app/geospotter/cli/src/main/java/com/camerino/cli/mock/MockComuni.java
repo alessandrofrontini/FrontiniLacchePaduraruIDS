@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 

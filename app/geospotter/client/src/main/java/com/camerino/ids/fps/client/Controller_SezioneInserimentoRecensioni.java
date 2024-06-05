@@ -102,9 +102,9 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         ClsRecensione r = new ClsRecensione();
 
         String id = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);
-        Long oggetto = u.getValueFromTextField(this.oggetto);
-        Long contenuto = u.getValueFromTextField(this.contenuto);
-        Long valutazione = u.getValueFromTextField(this.valutazione);
+        String oggetto = u.getValueFromTextField(this.oggetto);
+        String contenuto = u.getValueFromTextField(this.contenuto);
+        String valutazione = u.getValueFromTextField(this.valutazione);
 
         if((Objects.isNull(id) || id.isEmpty()) || (Objects.isNull(oggetto) || oggetto.isEmpty()) || (Objects.isNull(contenuto) || contenuto.isEmpty()) || (Objects.isNull(valutazione) || valutazione.isEmpty()))
         {

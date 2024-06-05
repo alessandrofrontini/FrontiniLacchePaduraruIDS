@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsCuratoreVisual;
@@ -46,8 +47,11 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR)
-                .stream().map(u->(ClsCuratore)u)
-                .toList();
+                .stream().map(u->{
+                    ClsCuratore tmp = new ClsCuratore();
+                    tmp.setId(u.getId());
+                    return tmp;
+                }).toList();
 
         setCuratori(curatori);
 
@@ -64,7 +68,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     {
         ClsComune comune = new ClsComune();
 
-        Long curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
+        String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
         ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<>();
@@ -145,7 +149,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private String[] convertiCuratoriCoinvoltiInArray(Long input)
+    private String[] convertiCuratoriCoinvoltiInArray(String input)
     {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), curatori);;
@@ -155,7 +159,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     private String[] pulisciIDnonPresenti (ArrayList<String> input, List<ClsCuratore> Curatori)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
-        HashSet<Long> setAValues = new HashSet<>();
+        HashSet<String> setAValues = new HashSet<>();
         for (ClsCuratore obj : Curatori) {
             setAValues.add(obj.getId());
         }

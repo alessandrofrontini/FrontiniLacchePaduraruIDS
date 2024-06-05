@@ -5,8 +5,8 @@ public class ClsRDCVisual
     public String idRichiesta;
     public String azioneDiContribuzione;
     public String stato;
-    public Long richiedente;
-    public Long responsabile;
+    public String richiedente;
+    public String responsabile;
     public String idContest;
     public String oldData;
     public String newData;
@@ -51,19 +51,19 @@ public class ClsRDCVisual
         this.stato = stato;
     }
 
-    public Long getRichiedente() {
+    public String getRichiedente() {
         return richiedente;
     }
 
-    public void setRichiedente(Long richiedente) {
+    public void setRichiedente(String richiedente) {
         this.richiedente = richiedente;
     }
 
-    public Long getResponsabile() {
+    public String getResponsabile() {
         return responsabile;
     }
 
-    public void setResponsabile(Long responsabile) {
+    public void setResponsabile(String responsabile) {
         this.responsabile = responsabile;
     }
 

@@ -10,24 +10,34 @@ import jakarta.persistence.Entity;
 public class ClsImmagine extends ClsInformazione
 {
     @Column(name = "idCon1")
-    String idNodoAssociato;
-    Long URL;
+    String idNodo;
+    String URL;
 
     //region Getter e setter
-    public String getIdNodoAssociato() {
-        return idNodoAssociato;
+    public String getIdNodo() {
+        return idNodo;
     }
 
-    public void setIdNodoAssociato(String idCOntenutoAssociato) {
-        this.idNodoAssociato = idCOntenutoAssociato;
+    public void setIdNodo(String idCOntenutoAssociato) {
+        this.idNodo = idCOntenutoAssociato;
     }
 
-    public Long getURL() {
+    public String getURL() {
         return URL;
     }
-    public void setURL(Long URL) {
+    public void setURL(String URL) {
         this.URL = URL;
     }
+    //region Getter e setter (ClsInformazione)
+    public String getId()
+    {
+        return super.getId() ;
+    }
+    public void setId(String id) {
+        super.setId(id);
+    }
+    public String getUsernameCreatore() {return super.getIdCreatore();}
+    //endregion
     //endregion
 
     public String visualizzaImmagine()
@@ -37,7 +47,7 @@ public class ClsImmagine extends ClsInformazione
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "URL: " + this.getURL() + "\n";
         dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
-        dummy += "ID Contenuto Associato: " + this.idNodoAssociato + "\n";
+        dummy += "ID Contenuto Associato: " + this.idNodo + "\n";
 
         dummy += "";
 

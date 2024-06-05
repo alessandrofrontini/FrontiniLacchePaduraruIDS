@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.visual.*;
 import javafx.scene.control.CheckBox;
@@ -93,7 +94,7 @@ public class Utils
         ClsContestDiContribuzioneVisual c = new ClsContestDiContribuzioneVisual();
 
         c.setId(contest.getId());
-        c.setUsernameCreatore(contest.getIdCreatore());
+        c.setUsernameCreatore(contest.getUsernameCreatore());
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
         c.setIsAperto(contest.isAperto()+"");
@@ -228,7 +229,7 @@ public class Utils
         return (String) c.getValue();
     }
 
-    public Long getValueFromTextField (TextField t) { return (String)  t.getText(); }
+    public String getValueFromTextField (TextField t) { return (String)  t.getText(); }
 
     public boolean getValueFromCheckBox (CheckBox c) { return c.isSelected();}
 

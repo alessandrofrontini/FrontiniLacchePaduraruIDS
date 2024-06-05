@@ -182,7 +182,7 @@ public class Controller_SezioneModificaComuni implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private String[] convertiCuratoriCoinvoltiInArray(Long input)
+    private String[] convertiCuratoriCoinvoltiInArray(String input)
     {
         String[] tmp = input.split("-");
         return tmp;
@@ -205,7 +205,7 @@ public class Controller_SezioneModificaComuni implements Initializable
     public ClsComune inserisciComune(MouseEvent mouseEvent)
     {
         ClsComune comune = new ClsComune();
-        Long curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
+        String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
         ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();

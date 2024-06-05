@@ -126,7 +126,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
 
     public void inserisciSegnalazione(MouseEvent mouseEvent)
     {
-        Long descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
+        String descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
 
         if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
         {

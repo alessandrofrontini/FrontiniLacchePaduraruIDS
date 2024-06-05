@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.utenti.ClsCuratore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,25 +13,26 @@ import java.util.List;
 @Entity
 public class ClsComune extends ClsContenuto
 {
-    Integer abitanti;
-    Double superficie;
+    String usernameCreatore = "ADMIN";
+    int abitanti;
+    double superficie;
     @OneToMany(mappedBy = "id")
     List<ClsCuratore> curatoriAssociati;
 
     //region Getter e setter
-    public Integer getAbitanti() {
+    public int getAbitanti() {
         return abitanti;
     }
 
-    public void setAbitanti(Integer abitanti) {
+    public void setAbitanti(int abitanti) {
         this.abitanti = abitanti;
     }
 
-    public Double getSuperficie() {
+    public double getSuperficie() {
         return superficie;
     }
 
-    public void setSuperficie(Double superficie) {
+    public void setSuperficie(double superficie) {
         this.superficie = superficie;
     }
 

@@ -4,8 +4,8 @@ public class ClsComuneVisual
 {
 
     public String id;
-    public Long nome;
-    public Long descrizione;
+    public String nome;
+    public String descrizione;
     public Double superficie;
     public String posizione;
     public String curatori;
@@ -27,19 +27,19 @@ public class ClsComuneVisual
         this.id = id;
     }
 
-    public Long getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(Long nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public Long getDescrizione() {
+    public String getDescrizione() {
         return descrizione;
     }
 
-    public void setDescrizione(Long descrizione) {
+    public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
 

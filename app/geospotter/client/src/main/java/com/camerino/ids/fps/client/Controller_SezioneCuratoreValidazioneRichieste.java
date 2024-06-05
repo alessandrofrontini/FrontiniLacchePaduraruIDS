@@ -5,11 +5,14 @@ import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsRDCVisual;
+import com.camerino.ids.fps.client.visual.ClsRichiestaAzioneDiContribuzioneItinerarioVisual;
+import com.camerino.ids.fps.client.visual.ClsRichiestaAzioneDiContribuzioneVisual;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.CULINARIO;
 
 public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
@@ -150,14 +154,14 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         im1.setId("1");
         im1.setURL("testURLOld");
         im1.setIdCreatore("testCreatoreOld");
-        im1.setIdNodoAssociato("testIDNodoOld");
+        im1.setIdNodo("testIDNodoOld");
         img1.setOldData(im1);
 
         ClsImmagine im2 = new ClsImmagine();
         im2.setId("1");
         im2.setURL("testURLNew");
         im2.setIdCreatore("testCreatoreNew");
-        im2.setIdNodoAssociato("testIDNodoNew");
+        im2.setIdNodo("testIDNodoNew");
         img1.setNewData(im2);
         richiesteImmagini.add(img1);
         /****/

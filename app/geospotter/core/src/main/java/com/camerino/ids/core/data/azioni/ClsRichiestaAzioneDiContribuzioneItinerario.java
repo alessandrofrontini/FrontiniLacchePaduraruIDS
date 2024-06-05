@@ -12,7 +12,7 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     String id;
     @ManyToOne
     ClsItinerario datiItinerario;
-    Long usernameCreatore;
+    String usernameCreatore;
 
     public EAzioniDiContribuzione geteAzioniDiContribuzione() {
         return eAzioniDiContribuzione;
@@ -40,11 +40,11 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
         this.datiItinerario = datiItinerario;
     }
 
-    public Long getUsernameCreatore() {
+    public String getUsernameCreatore() {
         return usernameCreatore;
     }
 
-    public void setUsernameCreatore(Long usernameCreatore) {
+    public void setUsernameCreatore(String usernameCreatore) {
         this.usernameCreatore = usernameCreatore;
     }
 

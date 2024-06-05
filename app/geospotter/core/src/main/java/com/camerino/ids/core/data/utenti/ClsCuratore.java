@@ -67,6 +67,13 @@ public class ClsCuratore extends ClsAnimatore{
     }
 
     @Override
+    public boolean modificaNodo(String id, ClsNodo nodo) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idNodo", id);
+        return pNodi.update(filters, nodo);
+    }
+
+    @Override
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return iperRDCImmagini.update(null, rdci);
     }

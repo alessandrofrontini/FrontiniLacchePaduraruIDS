@@ -64,7 +64,6 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean modificaNodo(String id, ClsNodo nodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", id);
-        nodo.setIdCreatore(this.getId());
         return pNodi.update(tmp, nodo);
     }
 
