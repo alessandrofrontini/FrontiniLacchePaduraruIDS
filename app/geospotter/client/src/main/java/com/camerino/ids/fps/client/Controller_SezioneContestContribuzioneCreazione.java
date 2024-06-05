@@ -3,8 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsPartecipazioneContestDiContribuzione;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
@@ -73,79 +72,17 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     Utils u = new Utils();
     ArrayList<ClsComune> comuni;
     ArrayList<ClsTuristaAutenticato> utenti;
+
+    ArrayList<ClsContributor> contributors;
+
+    ArrayList<ClsContributorAutorizzato> contributorAutorizzatos;
     ArrayList<ClsCuratore> Curatori = new ArrayList<ClsCuratore>();
     ArrayList<ClsPartecipazioneContestDiContribuzione> partecipazioni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.comuni = new ArrayList<ClsComune>();
-
-        this.utenti = new ArrayList<ClsTuristaAutenticato>();
-
-        //region Creazione Curatori dummy
-        ClsCuratore c1 = new ClsCuratore();
-        c1.setId("1");
-        Credenziali cred1 = new Credenziali();
-        cred1.setUsername("USERNAME1");
-        cred1.setPassword("1");
-        c1.setCredenziali(cred1);
-        Curatori.add(c1);
-
-        ClsCuratore c2 = new ClsCuratore();
-        c2.setId("2");
-        Credenziali cred2 = new Credenziali();
-        cred2.setUsername("USERNAME2");
-        cred2.setPassword("2");
-        c2.setCredenziali(cred2);
-        Curatori.add(c2);
-
-        ClsCuratore c3 = new ClsCuratore();
-        c3.setId("3");
-        Credenziali cred3 = new Credenziali();
-        cred3.setUsername("USERNAME3");
-        cred3.setPassword("3");
-        c3.setCredenziali(cred3);
-        Curatori.add(c3);
-        //endregion
-
-        //region Creazione Comuni dummy
-        ClsComune com1 = new ClsComune();
-        com1.setId("1");
-        com1.setNome("COMUNE1");
-        com1.setDescrizione("DESCRIZIONE1");
-        com1.setSuperficie(1000);
-        Posizione p1 = new Posizione();
-        p1.setX(1);
-        p1.setY(2);
-        com1.setPosizione(p1);
-        com1.setCuratoriAssociati(Curatori);
-        comuni.add(com1);
-
-        ClsComune com2 = new ClsComune();
-        com2.setId("2");
-        com2.setNome("COMUNE2");
-        com2.setDescrizione("DESCRIZIONE2");
-        com2.setSuperficie(2000);
-        Posizione p2 = new Posizione();
-        p2.setX(2);
-        p2.setY(2);
-        com2.setPosizione(p2);
-        com2.setCuratoriAssociati(Curatori);
-        comuni.add(com2);
-
-        ClsComune com3 = new ClsComune();
-        com3.setId("3");
-        com3.setNome("COMUNE3");
-        com3.setDescrizione("DESCRIZIONE3");
-        com3.setSuperficie(3000);
-        Posizione p3 = new Posizione();
-        p3.setX(3);
-        p3.setY(3);
-        com3.setPosizione(p3);
-        com3.setCuratoriAssociati(Curatori);
-        comuni.add(com3);
-        //endregion
+        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         setComuni(comuni);
 
@@ -374,4 +311,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         }
 
 }
+
+
 }

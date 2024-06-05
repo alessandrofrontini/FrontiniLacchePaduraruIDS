@@ -106,13 +106,14 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     boolean flag = false;
     ArrayList<ClsContestDiContribuzione> contests;
     ArrayList<ClsNodo> nodi;
+    ArrayList<ClsNodo> nodiParsati;
     Utils u = new Utils();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         contests = new ArrayList<ClsContestDiContribuzione>();
-        nodi = new ArrayList<ClsNodo>();
+        nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
@@ -147,42 +148,6 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         c3.setLocation(com3);
         c3.setAperto(true);
         contests.add(c3);
-        //endregion
-
-        //region Creazione nodi dummy
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setId("2");
-        nodo1.setIdComune("1");
-        nodo1.setaTempo(true);
-        nodo1.setTipologiaNodo(COMMERCIALE);
-        nodo1.setIdCreatore("");
-        nodo1.setDescrizione("Descrizione - Nodo 1");
-        nodo1.setNome("Negozio");
-        nodo1.setPosizione(new Posizione(104,104));
-        nodi.add(nodo1);
-
-        ClsNodo nodo2 = new ClsNodo();
-        nodo2.setId("4");
-        nodo2.setIdComune("3");
-        nodo2.setaTempo(false);
-        nodo2.setTipologiaNodo(CULTURALE);
-        nodo2.setIdCreatore("");
-        nodo2.setDescrizione("Descrizione - Nodo 2");
-        nodo2.setNome("Statua");
-        nodo2.setPosizione(new Posizione(114,114));
-        nodi.add(nodo2);
-
-
-        ClsNodo nodo3 = new ClsNodo();
-        nodo3.setId("6");
-        nodo3.setIdComune("5");
-        nodo3.setaTempo(false);
-        nodo3.setTipologiaNodo(CULINARIO);
-        nodo3.setIdCreatore("");
-        nodo3.setDescrizione("Descrizione - Nodo 3");
-        nodo3.setNome("Ristorante");
-        nodo3.setPosizione(new Posizione(124,124));
-        nodi.add(nodo3);
         //endregion
 
         setContest(contests);
@@ -351,6 +316,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
     }
 
+
     public void visualizzaInformazioniNodoTemporizzato()
     {
         flag = !flag;
@@ -442,10 +408,22 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
-            ElencoNodi.getItems().add(c);
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
+
+    private void setNodiImmagine (ArrayList<ClsNodo> nodi)
+    {
+        for(int i = 0; i<nodi.size();i++)
+        {
+            ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
+
+            ElencoNodi.getItems().add(c);
+
+        }
+    }
+
+
 
     public void inserisciImmagine(MouseEvent mouseEvent)
     {
@@ -458,6 +436,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
             i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
+
 
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
