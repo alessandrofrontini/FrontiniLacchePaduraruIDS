@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.hibernate.sql.ast.tree.from.UnionTableReference;
 
 import java.io.IOException;
 import java.net.URI;
@@ -45,8 +44,8 @@ public class Controller_SezioneLogin
 
     public void logga ()
     {
-        String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
-        String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
+        Long username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
+        Long password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
 
         Credenziali c = new Credenziali();
         c.setUsername(username);
@@ -187,6 +186,7 @@ public class Controller_SezioneLogin
         //user.setpRDC(this.iperRDC);
         //user.setpRDCI(this.iperRDCI);
         //user._setIperRDCNodi(this.iperRDCNodi);
+        user._setIperRDCNodi(new IperRDCNodi());
         return user;
     }
 
@@ -280,9 +280,9 @@ public class Controller_SezioneLogin
      * @param tf textField
      * @return Contenuto
      */
-    private String getNameFromTextField (TextField tf)
+    private Long getNameFromTextField (TextField tf)
     {
-        String name = tf.getText();
+        Long name = tf.getText();
         tf.clear();
         return name;
     }

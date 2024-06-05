@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class ClsItinerario {
     //TODO: idCreatore invece di username(?)
-    String usernameCreatore;
+    Long usernameCreatore;
     @ManyToMany
     List<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
@@ -19,14 +19,14 @@ public class ClsItinerario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
     //TODO: aggiungere titolo itinerario sulla documentazione
-    String nome;
+    Long nome;
 
     //region Getter e setter
-    public String getNome() {
+    public Long getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(Long nome) {
         this.nome = nome;
     }
 
@@ -38,11 +38,11 @@ public class ClsItinerario {
         this.id = Long.valueOf(id);
     }
 
-    public String getUsernameCreatore() {
+    public Long getUsernameCreatore() {
         return usernameCreatore;
     }
 
-    public void setUsernameCreatore(String usernameCreatore) {
+    public void setUsernameCreatore(Long usernameCreatore) {
         this.usernameCreatore = usernameCreatore;
     }
 

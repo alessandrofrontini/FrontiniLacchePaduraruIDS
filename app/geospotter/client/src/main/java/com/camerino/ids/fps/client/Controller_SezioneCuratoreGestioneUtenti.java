@@ -139,9 +139,9 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
     public void inserisciUtente()
     {
-        String username = u.getValueFromTextField(usernameTF);
-        String password = u.getValueFromTextField(passwordTF);
-        String punteggio = u.getValueFromTextField(punteggioTF);
+        Long username = u.getValueFromTextField(usernameTF);
+        Long password = u.getValueFromTextField(passwordTF);
+        Long punteggio = u.getValueFromTextField(punteggioTF);
         String ruolo = u.getValueFromCombobox(sceltaRuoloInserimento);
 
         if(username != null && !username.isEmpty() &&
@@ -360,9 +360,9 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
              u.getValueFromCombobox(selezionaModificaUtente) != null && !Objects.equals(u.getValueFromCombobox(selezionaModificaUtente), "") &&
              u.getValueFromCombobox(ruoloMOD) != null && !Objects.equals(u.getValueFromCombobox(ruoloMOD), ""))
      {
-         String username = u.getValueFromTextField(usernameMODTF);
-         String password = u.getValueFromTextField(passwordMODTF);
-         String punteggio = u.getValueFromTextField(punteggioMODTF);
+         Long username = u.getValueFromTextField(usernameMODTF);
+         Long password = u.getValueFromTextField(passwordMODTF);
+         Long punteggio = u.getValueFromTextField(punteggioMODTF);
          String scelta = u.getValueFromCombobox(selezionaModificaUtente);
          String ruolo = u.getValueFromCombobox(ruoloMOD);
 
@@ -587,7 +587,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
         }
     }
 
-    private boolean controllaValiditaCredenziali(String username)
+    private boolean controllaValiditaCredenziali(Long username)
     {
             for(int i = 0; i < utenti.size(); i++)
             {

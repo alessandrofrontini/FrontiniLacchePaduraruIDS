@@ -1,0 +1,47 @@
+###
+POST http://localhost:8080/api/v1/rdcnodi
+Content-Type: application/json
+Authorization: {{tkContributor}}
+
+{
+  "idRichiesta":"0",
+  "tipo":"INSERISCI_NODO",
+  "stato":"NUOVO",
+  "creatore":{
+    "id":"1",
+    "credenziali":{
+      "password":"c"
+    },
+    "punteggio":594,
+    "ruoloUtente":"CONTRIBUTOR"
+  },
+  "oldData":{
+    "id":"1",
+    "posizione":{
+      "x":12.0,
+      "y":23.0
+    },
+    "nome":"Centro Camerino",
+    "descrizione":"Ciao",
+    "idComune":"Camerino",
+    "aTempo":true,
+    "tipologiaNodo":"CULTURALE",
+    "tipologiaNodoFormatoStringa":"CULTURALE"
+  },
+  "newData":{
+    "id":"0",
+    "idCreatore":"c",
+    "posizione":{
+      "x":12.0,
+      "y":12.0
+    },
+    "nome":"TEST",
+    "descrizione":"12",
+    "idComune":"12",
+    "aTempo":false,
+    "dataInizio":"",
+    "dataFine":"",
+    "tipologiaNodo":"COMMERCIALE",
+    "tipologiaNodoFormatoStringa":"COMMERCIALE"
+  }
+}

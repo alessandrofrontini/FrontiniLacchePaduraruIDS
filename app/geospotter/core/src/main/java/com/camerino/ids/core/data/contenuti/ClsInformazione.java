@@ -12,7 +12,7 @@ public abstract class ClsInformazione
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
-    String idCreatore;
+    Long idCreatore;
 
     //region Getters and setters
 
@@ -24,11 +24,11 @@ public abstract class ClsInformazione
         this.id = Long.valueOf(id);
     }
 
-    public String getIdCreatore() {
+    public Long getIdCreatore() {
         return idCreatore;
     }
 
-    public void setIdCreatore(String usernameCreatore) {
+    public void setIdCreatore(Long usernameCreatore) {
         this.idCreatore = usernameCreatore;
     }
 

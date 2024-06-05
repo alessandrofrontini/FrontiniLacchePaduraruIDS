@@ -6,7 +6,7 @@ public class ClsUtenteJWTDecode
 {
     private String jwt;
 
-    private String username;
+    private Long username;
 
     private ClsTuristaAutenticato.eRUOLO_UTENTE ruolo;
 
@@ -18,11 +18,11 @@ public class ClsUtenteJWTDecode
         this.jwt = jwt;
     }
 
-    public String getUsername() {
+    public Long getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(Long username) {
         this.username = username;
     }
 

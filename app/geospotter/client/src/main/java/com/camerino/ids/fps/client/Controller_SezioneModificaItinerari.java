@@ -152,7 +152,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
     public ClsItinerario inserisciItinerario(MouseEvent mouseEvent)
     {
         ClsItinerario itinerario = new ClsItinerario();
-        String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
+        Long nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
         ArrayList<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
@@ -261,7 +261,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         return true;
     }
 
-    private String[] convertiNodiCoinvoltiInArray(String input)
+    private String[] convertiNodiCoinvoltiInArray(Long input)
     {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);;

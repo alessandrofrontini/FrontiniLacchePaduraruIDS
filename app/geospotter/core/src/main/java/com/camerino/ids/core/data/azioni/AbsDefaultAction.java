@@ -9,11 +9,14 @@ import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
+
+import java.util.Objects;
+
 @MappedSuperclass
 public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @Id
     @GeneratedValue
-    Long idRichiesta;
+    Long idRichiesta=0L;
     @Enumerated(EnumType.STRING)
     EAzioniDiContribuzione tipo;
     @Enumerated(EnumType.STRING)
@@ -27,7 +30,7 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @ManyToOne(cascade = CascadeType.ALL)
     ClsContestDiContribuzione idContest;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     E oldData;
     @ManyToOne(cascade = CascadeType.ALL)
     E newData;
@@ -67,7 +70,7 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     //region G&S
 
     public String getIdRichiesta() {
-        return idRichiesta.toString();
+        return Objects.toString(idRichiesta);
     }
 
     public void setIdRichiesta(String idRichiesta) {

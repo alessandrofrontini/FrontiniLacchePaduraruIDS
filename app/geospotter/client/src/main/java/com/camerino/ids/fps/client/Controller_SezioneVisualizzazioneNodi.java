@@ -145,7 +145,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
     public void inserisciSegnalazione(MouseEvent mouseEvent)
     {
-        String descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
+        Long descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
 
         if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
         {

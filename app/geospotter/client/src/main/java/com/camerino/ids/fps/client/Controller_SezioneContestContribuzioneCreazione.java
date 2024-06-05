@@ -3,7 +3,8 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsPartecipazioneContestDiContribuzione;
-import com.camerino.ids.core.data.utenti.*;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
@@ -61,6 +62,23 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     @FXML
     CheckBox suInvito;
 
+
+
+    @FXML
+    TableView<ClsUtenteInvitoContestVisual> elencoInvitati;
+
+    @FXML
+    TableColumn<ClsUtenteInvitoContestVisual, String> idInvitato;
+
+    @FXML
+    TableColumn<ClsUtenteInvitoContestVisual, String> usernameInvitato;
+
+    @FXML
+    TableColumn<ClsUtenteInvitoContestVisual, String> punteggioInvitato;
+
+    @FXML
+    TableColumn<ClsUtenteInvitoContestVisual, String> ruoloInvitato;
+
     @FXML
     Tab tabPartecipanti;
 
@@ -72,17 +90,80 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     Utils u = new Utils();
     ArrayList<ClsComune> comuni;
     ArrayList<ClsTuristaAutenticato> utenti;
-
-    ArrayList<ClsContributor> contributors;
-
-    ArrayList<ClsContributorAutorizzato> contributorAutorizzatos;
     ArrayList<ClsCuratore> Curatori = new ArrayList<ClsCuratore>();
     ArrayList<ClsPartecipazioneContestDiContribuzione> partecipazioni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
+        this.tabPartecipanti.setDisable(true);
+        this.comuni = new ArrayList<ClsComune>();
+
+        this.utenti = new ArrayList<ClsTuristaAutenticato>();
+
+        //region Creazione Curatori dummy
+        ClsCuratore c1 = new ClsCuratore();
+        c1.setId("1");
+        Credenziali cred1 = new Credenziali();
+        cred1.setUsername("USERNAME1");
+        cred1.setPassword("1");
+        c1.setCredenziali(cred1);
+        Curatori.add(c1);
+
+        ClsCuratore c2 = new ClsCuratore();
+        c2.setId("2");
+        Credenziali cred2 = new Credenziali();
+        cred2.setUsername("USERNAME2");
+        cred2.setPassword("2");
+        c2.setCredenziali(cred2);
+        Curatori.add(c2);
+
+        ClsCuratore c3 = new ClsCuratore();
+        c3.setId("3");
+        Credenziali cred3 = new Credenziali();
+        cred3.setUsername("USERNAME3");
+        cred3.setPassword("3");
+        c3.setCredenziali(cred3);
+        Curatori.add(c3);
+        //endregion
+
+        //region Creazione Comuni dummy
+        ClsComune com1 = new ClsComune();
+        com1.setId("1");
+        com1.setNome("COMUNE1");
+        com1.setDescrizione("DESCRIZIONE1");
+        com1.setSuperficie(1000);
+        Posizione p1 = new Posizione();
+        p1.setX(1);
+        p1.setY(2);
+        com1.setPosizione(p1);
+        com1.setCuratoriAssociati(Curatori);
+        comuni.add(com1);
+
+        ClsComune com2 = new ClsComune();
+        com2.setId("2");
+        com2.setNome("COMUNE2");
+        com2.setDescrizione("DESCRIZIONE2");
+        com2.setSuperficie(2000);
+        Posizione p2 = new Posizione();
+        p2.setX(2);
+        p2.setY(2);
+        com2.setPosizione(p2);
+        com2.setCuratoriAssociati(Curatori);
+        comuni.add(com2);
+
+        ClsComune com3 = new ClsComune();
+        com3.setId("3");
+        com3.setNome("COMUNE3");
+        com3.setDescrizione("DESCRIZIONE3");
+        com3.setSuperficie(3000);
+        Posizione p3 = new Posizione();
+        p3.setX(3);
+        p3.setY(3);
+        com3.setPosizione(p3);
+        com3.setCuratoriAssociati(Curatori);
+        comuni.add(com3);
+        //endregion
 
         setComuni(comuni);
 
@@ -117,6 +198,8 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 new PropertyValueFactory<>("curatori"));
         //endregion
 
+
+
         //region Creazione Utenti dummy
         ClsTuristaAutenticato ta1 = new ClsTuristaAutenticato();
         ta1.setId("1");
@@ -146,6 +229,22 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         utenti.add(ta3);
         //endregion
 
+        setUtenti(utenti);
+
+        //region setting up colonne tabella
+        idInvitato.setCellValueFactory(
+                new PropertyValueFactory<>("id"));
+
+        usernameInvitato.setCellValueFactory(
+                new PropertyValueFactory<>("username"));
+
+        punteggioInvitato.setCellValueFactory(
+                new PropertyValueFactory<>("punteggio"));
+
+        ruoloInvitato.setCellValueFactory(
+                new PropertyValueFactory<>("ruolo"));
+        //endregion
+
     }
 
     public void inserisciContest(MouseEvent mouseEvent)
@@ -159,13 +258,16 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
         if(data != null && u.getValueFromCombobox(this.sceltaComune) != null)
         {
-            contest.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            contest.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();
             comune.setId(u.getValueFromCombobox(this.sceltaComune));
             contest.setLocation(comune);
 
-           contest.setAperto(true);
+            //non su invito
+            if(!u.getValueFromCheckBox(this.suInvito))
+            {
+                contest.setAperto(false);
 
                 for(int i = 0; i<utenti.size();i++)
                 {
@@ -186,6 +288,55 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 alert.setTitle("OK");
                 alert.setContentText(contest.visualizzaContest());
                 alert.show();
+
+            }
+            //su invito
+            else
+            {
+
+                contest.setAperto(true);
+                Long IDUtentiDaInvitare = u.getValueFromTextField(this.invitatiContestTF);
+                String[] IDUtentiDaInvitareArray = this.convertiUtentiCoinvoltiInArray(IDUtentiDaInvitare);
+
+                if(IDUtentiDaInvitareArray.length > 0)
+                {
+                    for(int j = 0; j < this.utenti.size(); j++)
+                    {
+                        for(int i = 0; i < IDUtentiDaInvitareArray.length ; i++)
+                        {
+                            if(Objects.equals(IDUtentiDaInvitareArray[i], utenti.get(j).getId()))
+                            {
+                                ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
+                                p.setId("test");
+                                p.setUsernamePartecipante(utenti.get(j).getCredenziali().getUsername());
+                                p.setIdContest(contest.getId());
+
+                                this.partecipazioni.add(p);
+                            }
+
+                        }
+
+                    }
+
+
+                    for(int i = 0 ; i < this.partecipazioni.size(); i++)
+                    {
+                        System.out.println(this.partecipazioni.get(i).visualizzaPartecipazione());
+                    }
+
+                    Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("OK");
+                    alert.setContentText(contest.visualizzaContest());
+                    alert.show();
+                }
+                else{
+                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                    alert.setTitle("Errore");
+                    alert.setContentText("Ricontrolla le informazioni e riprova");
+                    alert.show();
+                }
+
+            }
 
 
         }
@@ -210,6 +361,15 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         }
     }
 
+    private void setUtenti (ArrayList<ClsTuristaAutenticato> utenti)
+    {
+        for(int i = 0; i<utenti.size();i++)
+        {
+            ClsUtenteInvitoContestVisual c = u.convertFromTuristaAutenticato(utenti.get(i));
+
+            elencoInvitati.getItems().add(c);
+        }
+    }
 
     private boolean controllaConformitaID (String id)
     {
@@ -253,7 +413,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     }
 
 
-    private String[] convertiUtentiCoinvoltiInArray(String input)
+    private String[] convertiUtentiCoinvoltiInArray(Long input)
     {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), utenti);
@@ -264,7 +424,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsTuristaAutenticato> utenti)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
-        HashSet<String> setAValues = new HashSet<>();
+        HashSet<Long> setAValues = new HashSet<>();
         for (ClsTuristaAutenticato obj : utenti) {
             setAValues.add(obj.getId());
         }
@@ -294,7 +454,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         return listaSenzaDuplicati;
     }
 
-    private Date parseStringToDate(String dateString) {
+    private Date parseStringToDate(Long dateString) {
         // Rimuovi tutti i caratteri non numerici dalla stringa
         String numericString = dateString.replaceAll("[^0-9]", "");
 
@@ -311,6 +471,4 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         }
 
 }
-
-
 }

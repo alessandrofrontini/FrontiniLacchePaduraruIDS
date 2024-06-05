@@ -87,11 +87,10 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
     public ClsComune[] visualizzaComuni(){
         return null;
     }
-/*@JsonIgnore
+@JsonIgnore
     public List<ClsCuratore> getAllCuratori() {
-        ArrayList tmp = getUtentiByRuolo(eRUOLO_UTENTE.CURATORE);
-        return tmp.stream().map(c->new ClsCuratore((ClsTuristaAutenticato)c)).toList();
-    }*/
+        return getUtentiByRuolo(eRUOLO_UTENTE.CURATORE).stream().map(c->(ClsCuratore)c).toList();
+    }
 @JsonIgnore
     public ArrayList<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLO_UTENTE ruolo) {
         HashMap<String, Object> filters = new HashMap<>();

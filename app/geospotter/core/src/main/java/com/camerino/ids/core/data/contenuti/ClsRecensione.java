@@ -13,8 +13,8 @@ public class ClsRecensione extends ClsInformazione{
     @Column(name = "idNodo2")
     String idNodo;
     double valutazione;
-    String oggetto;
-    String contenuto;
+    Long oggetto;
+    Long contenuto;
 
     //region Getter e setter
     public String getIdNodo() {
@@ -33,19 +33,19 @@ public class ClsRecensione extends ClsInformazione{
         this.valutazione = valutazione;
     }
 
-    public String getOggetto() {
+    public Long getOggetto() {
         return oggetto;
     }
 
-    public void setOggetto(String oggetto) {
+    public void setOggetto(Long oggetto) {
         this.oggetto = oggetto;
     }
 
-    public String getContenuto() {
+    public Long getContenuto() {
         return contenuto;
     }
 
-    public void setContenuto(String contenuto) {
+    public void setContenuto(Long contenuto) {
         this.contenuto = contenuto;
     }
     //endregion

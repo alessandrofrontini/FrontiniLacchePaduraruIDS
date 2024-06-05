@@ -122,7 +122,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         ClsContestDiContribuzione c1 = new ClsContestDiContribuzione();
         c1.setId("1");
         c1.setDurata(new Date("01/01/2024"));
-        c1.setUsernameCreatore("test1");
+        c1.setIdCreatore("test1");
         ClsComune com1 = new ClsComune();
         com1.setNome("Comune1");
         c1.setLocation(com1);
@@ -132,7 +132,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         ClsContestDiContribuzione c2 = new ClsContestDiContribuzione();
         c2.setId("2");
         c2.setDurata(new Date("02/02/2024"));
-        c2.setUsernameCreatore("test2");
+        c2.setIdCreatore("test2");
         ClsComune com2 = new ClsComune();
         com2.setNome("Comune2");
         c2.setLocation(com2);
@@ -142,7 +142,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         ClsContestDiContribuzione c3 = new ClsContestDiContribuzione();
         c3.setId("3");
         c3.setDurata(new Date("03/03/2024"));
-        c3.setUsernameCreatore("test3");
+        c3.setIdCreatore("test3");
         ClsComune com3 = new ClsComune();
         com3.setNome("Comune3");
         c3.setLocation(com3);
@@ -434,7 +434,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
         {
             i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
+            i.setIdNodoAssociato(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
 

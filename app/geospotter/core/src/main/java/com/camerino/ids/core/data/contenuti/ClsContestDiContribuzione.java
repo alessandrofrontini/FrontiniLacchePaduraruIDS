@@ -16,12 +16,13 @@ public class ClsContestDiContribuzione {
     @Id
     @UuidGenerator
     String id;
-    String usernameCreatore;
+    Long idCreatore;
     Date durata;
     @OneToOne
-    @JoinColumn(name="")//TODO finire associazione
+    @JoinColumn
     ClsComune location;
-    boolean isAperto;
+    @Deprecated
+    Boolean isAperto;
 
     public String getId() {
         return id;
@@ -31,12 +32,12 @@ public class ClsContestDiContribuzione {
         this.id = id;
     }
 
-    public String getUsernameCreatore() {
-        return usernameCreatore;
+    public Long getIdCreatore() {
+        return idCreatore;
     }
 
-    public void setUsernameCreatore(String usernameCreatore) {
-        this.usernameCreatore = usernameCreatore;
+    public void setIdCreatore(Long usernameCreatore) {
+        this.idCreatore = usernameCreatore;
     }
 
     public Date getDurata() {
@@ -71,7 +72,7 @@ public class ClsContestDiContribuzione {
             dummy += "\n\nID: " + this.getId() + "\n";
             dummy += "Durata: " + this.getDurata().toString() + "\n";
             dummy += "Comune: " + this.getLocation().getId() + "\n";
-            dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+            dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
             dummy += "Su invito: " + this.isAperto  + "\n";
 
             return dummy;

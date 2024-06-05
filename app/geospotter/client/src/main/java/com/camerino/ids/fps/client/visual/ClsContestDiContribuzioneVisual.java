@@ -3,11 +3,11 @@ package com.camerino.ids.fps.client.visual;
 public class ClsContestDiContribuzioneVisual
 {
     public String id;
-    public String usernameCreatore;
+    public Long usernameCreatore;
 
     public String durata;
 
-    public String locationComune;
+    public Long locationComune;
 
     public String isAperto;
 
@@ -19,11 +19,11 @@ public class ClsContestDiContribuzioneVisual
         this.id = id;
     }
 
-    public String getUsernameCreatore() {
+    public Long getUsernameCreatore() {
         return usernameCreatore;
     }
 
-    public void setUsernameCreatore(String usernameCreatore) {
+    public void setUsernameCreatore(Long usernameCreatore) {
         this.usernameCreatore = usernameCreatore;
     }
 
@@ -35,11 +35,11 @@ public class ClsContestDiContribuzioneVisual
         this.durata = durata;
     }
 
-    public String getLocationComune() {
+    public Long getLocationComune() {
         return locationComune;
     }
 
-    public void setLocationComune(String locationComune) {
+    public void setLocationComune(Long locationComune) {
         this.locationComune = locationComune;
     }
 

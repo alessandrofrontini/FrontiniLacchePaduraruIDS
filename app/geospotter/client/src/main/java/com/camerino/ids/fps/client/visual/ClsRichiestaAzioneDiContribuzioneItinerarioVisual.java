@@ -4,7 +4,7 @@ public class ClsRichiestaAzioneDiContribuzioneItinerarioVisual
 {
     public String idd;
 
-    public String usernameCreatoree;
+    public Long usernameCreatoree;
 
     public String idItinerario;
 
@@ -28,11 +28,11 @@ public class ClsRichiestaAzioneDiContribuzioneItinerarioVisual
         this.idd = idd;
     }
 
-    public String getUsernameCreatoree() {
+    public Long getUsernameCreatoree() {
         return usernameCreatoree;
     }
 
-    public void setUsernameCreatoree(String usernameCreatoree) {
+    public void setUsernameCreatoree(Long usernameCreatoree) {
         this.usernameCreatoree = usernameCreatoree;
     }
 

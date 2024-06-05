@@ -249,7 +249,7 @@ public class TMP_ServizioAutenticazione
         return false;
     }
 
-    public static void modificaPunteggioByNumero (ClsTuristaAutenticato utente, String punteggio, String sceltaAzione)
+    public static void modificaPunteggioByNumero (ClsTuristaAutenticato utente, Long punteggio, String sceltaAzione)
     {
         ClsTuristaAutenticato utenteBackUp = utente.clone();
 

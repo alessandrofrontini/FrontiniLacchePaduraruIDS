@@ -13,8 +13,8 @@ public class ClsSegnalazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
     String idContenuto;
-    String idCuratore;
-    String descrizione;
+    Long idCuratore;
+    Long descrizione;
 
     //region Getters and Setters
 
@@ -34,19 +34,19 @@ public class ClsSegnalazione {
         this.idContenuto = idContenuto;
     }
 
-    public String getIdCuratore() {
+    public Long getIdCuratore() {
         return idCuratore;
     }
 
-    public void setIdCuratore(String idCuratore) {
+    public void setIdCuratore(Long idCuratore) {
         this.idCuratore = idCuratore;
     }
 
-    public String getDescrizione() {
+    public Long getDescrizione() {
         return descrizione;
     }
 
-    public void setDescrizione(String descrizione) {
+    public void setDescrizione(Long descrizione) {
         this.descrizione = descrizione;
     }
 

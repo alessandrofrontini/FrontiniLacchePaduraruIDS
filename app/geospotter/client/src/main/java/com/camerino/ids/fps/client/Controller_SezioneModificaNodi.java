@@ -1,6 +1,5 @@
 package com.camerino.ids.fps.client;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Posizione;
@@ -68,7 +67,6 @@ public class Controller_SezioneModificaNodi implements Initializable
     Utils u = new Utils();
     ObservableList<String> itemsComboBox;
     ArrayList<ClsNodo> nodi;
-    ArrayList<ClsComune> comuni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -77,8 +75,6 @@ public class Controller_SezioneModificaNodi implements Initializable
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
         nodi = (ArrayList<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
-        comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
-
         //endregion
         setNodi(nodi);
 
@@ -123,7 +119,7 @@ public class Controller_SezioneModificaNodi implements Initializable
 
 
 
-        if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null && this.CheckValidita(nuovoNodo,comuni))
+        if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null)
         {
             nuovoNodo.setId(IDDaModificare);
             ((ClsContributor)Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);
@@ -175,7 +171,6 @@ public class Controller_SezioneModificaNodi implements Initializable
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
 
-                    //nodo.setIdCreatore();
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
@@ -184,7 +179,7 @@ public class Controller_SezioneModificaNodi implements Initializable
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if (!u.checkInfoNodo(nodo) && this.checkInfoNodo(nodo,comuni)) {
+                    if (!u.checkInfoNodo(nodo)) {
                         return null;
                     } else {
                         return nodo;
@@ -208,38 +203,6 @@ public class Controller_SezioneModificaNodi implements Initializable
 
         }
         return null;
-    }
-
-    public boolean checkInfoNodo (ClsNodo nodo, ArrayList<ClsComune> comuni)
-    {
-        boolean flag = false;
-        if(
-                Objects.equals(nodo.getNome(), "") ||
-                        Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
-                        Objects.equals(nodo.getIdComune(), "") ||
-                        Objects.equals(nodo.getDescrizione(), "") ||
-                        //Objects.equals(nodo.getId(), null) ||
-                        Objects.equals(nodo.getNome(), null) ||
-                        Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
-                        Objects.equals(nodo.getIdComune(), null) ||
-                        Objects.equals(nodo.getDescrizione(), null))
-        {
-            return flag;
-        }
-        else
-        {
-            flag = true;
-            boolean flagComuni = false;
-            for(int i = 0; i < comuni.size(); i++)
-            {
-                if(Objects.equals(nodo.getId(), comuni.get(i).getId()))
-                {
-                    flagComuni = true;
-                }
-            }
-                return flagComuni;
-        }
-
     }
 
     private void setNodi (ArrayList<ClsNodo> nodi)
@@ -321,19 +284,6 @@ public class Controller_SezioneModificaNodi implements Initializable
         }
         return flag;*/
         return true;
-    }
-
-    public boolean CheckValidita (ClsNodo nodo, ArrayList<ClsComune> comuni)
-    {
-        boolean flagComuni = false;
-        for(int i = 0; i < comuni.size(); i++)
-        {
-            if(Objects.equals(nodo.getIdComune(), comuni.get(i).getId()))
-            {
-                flagComuni = true;
-            }
-        }
-        return flagComuni;
     }
 
 }

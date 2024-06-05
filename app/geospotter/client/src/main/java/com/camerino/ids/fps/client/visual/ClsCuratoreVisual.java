@@ -2,22 +2,22 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsCuratoreVisual
 {
-    public String id;
-    public String username;
+    public Long id;
+    public Long username;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getUsername() {
+    public Long getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(Long username) {
         this.username = username;
     }
 }
