@@ -5,7 +5,6 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsGDP;
-import com.camerino.ids.core.data.utenti.IContributable;
 
 public class ClsCommonActions {
     public static boolean aggiungiNodo(IContributable user) {

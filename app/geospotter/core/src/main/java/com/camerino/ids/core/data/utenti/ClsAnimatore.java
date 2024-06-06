@@ -12,7 +12,7 @@ import java.util.List;
  * Per diventare animatore bisogna raggiungere più di 1000 punti.
  */
 @Entity
-public class ClsAnimatore extends ClsContributorAutorizzato {
+public class ClsAnimatore extends ClsContributorAutorizzato implements IAzioniAnimatore {
     //region Constructors
     public ClsAnimatore() {
     }

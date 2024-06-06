@@ -14,7 +14,7 @@ import java.util.List;
  * Non è possibile diventare Gestore della Piattaforma tramite sistema a punteggi.
  */
 @Entity
-public class ClsGDP extends ClsAnimatore implements ITownHallAdministrator {
+public class ClsGDP extends ClsAnimatore implements IAzioniGDP {
     public ClsGDP() {
     }
 
@@ -82,12 +82,6 @@ public class ClsGDP extends ClsAnimatore implements ITownHallAdministrator {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", id);
         return this.iperComuni.delete(filters);
-    }
-
-    //TODO
-    @Override
-    public ClsComune[] visualizzaComuni() {
-        return null;
     }
 
     @JsonIgnore

@@ -38,8 +38,29 @@ import java.util.List;
         @JsonSubTypes.Type(value = ClsCuratore.class, name = "CURATORE"),
         @JsonSubTypes.Type(value = ClsGDP.class, name = "GESTORE_DELLA_PIATTAFORMA"),
 })
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction {
-    transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;
+public class ClsTuristaAutenticato extends ClsTurista implements IAzioniTuristaAutenticato {
+    /**
+     * Contiene i diversi ruoli nella piattaforma
+     * e il loro punteggio massimo per appartenere a quel ruolo.
+     */
+    public enum eRUOLI_UTENTE {
+        TURISTA_AUTENTICATO(49),
+        CONTRIBUTOR(599),
+        CONTRIBUTOR_AUTORIZZATO(999),
+        ANIMATORE(1000),
+        CURATORE(Integer.MAX_VALUE),
+        GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
+
+        private Integer value;
+
+        eRUOLI_UTENTE(Integer value) {
+            this.value = value;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+    }
     @Id
     @GeneratedValue
     Long id = 0L;
@@ -47,6 +68,9 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Credenziali credenziali = new Credenziali();
     Integer punteggio;
     eRUOLI_UTENTE ruoloUtente;
+
+    transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;
+
     //region Constructors
     public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini) {
     }
@@ -127,8 +151,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setCredenziali(Credenziali credenziali) {
         this.credenziali = credenziali;
     }
-//endregion
 
+    public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
+        this.iperRDCImmagini = iperRDCImmagini;
+    }
     public Integer getPunteggio() {
         return punteggio;
     }
@@ -136,15 +162,15 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setPunteggio(Integer punteggio) {
         this.punteggio = punteggio;
     }
+//endregion
+
+    //region Override IAzioniTuristaAutenticato
 
     public boolean pubblicaRecensione(ClsRecensione recensione) {
         recensione.setIdCreatore(this.id);
         return iperRecensioni.insert(recensione);
     }
-    //endregion
 
-    //region Override ILoggedUserAction
-    @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
         //TODO: merge con richiesta azione di conribuzione
         recensione.setIdCreatore(this.id);
@@ -171,12 +197,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public boolean inserisciImmagine(ClsImmagine immagine) {
         //TODO: merge con richiesta azione di contribuzione
         return iperImmagini.insert(immagine);
-    }
-
-    @Override
-    public ClsRecensione[] visualizzaRecensioniPosessore() {
-        //TODO: manca l'associazione recensione - utente che la scrive
-        return null;
     }
 //endregion
 
@@ -225,10 +245,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return clone;
     }
 
-    public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
-        this.iperRDCImmagini = iperRDCImmagini;
-    }
-
     @JsonIgnore
     public List<ClsTuristaAutenticato> getAllUtenti() {
         return iperUtenti.get(null);
@@ -241,28 +257,4 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         filters.put("ruolo", ruolo);
         return iperUtenti.get(filters);
     }
-
-    /**
-     * Contiene i diversi ruoli nella piattaforma
-     * e il loro punteggio massimo per appartenere a quel ruolo.
-     */
-    public enum eRUOLI_UTENTE {
-        TURISTA_AUTENTICATO(49),
-        CONTRIBUTOR(599),
-        CONTRIBUTOR_AUTORIZZATO(999),
-        ANIMATORE(1000),
-        CURATORE(Integer.MAX_VALUE),
-        GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
-
-        private Integer value;
-
-        eRUOLI_UTENTE(Integer value) {
-            this.value = value;
-        }
-
-        public Integer getValue() {
-            return value;
-        }
-    }
-
 }

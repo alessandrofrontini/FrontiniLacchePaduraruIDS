@@ -17,7 +17,7 @@ import java.util.List;
  * Non è possibile diventare Curatore tramite sistema a punteggi.
  */
 @Entity
-public class ClsCuratore extends ClsAnimatore {
+public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     Long idComuneAssociato;
 
     //region Constructors

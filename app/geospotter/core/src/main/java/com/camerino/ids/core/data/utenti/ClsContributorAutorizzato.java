@@ -107,12 +107,6 @@ public class ClsContributorAutorizzato extends ClsContributor {
         return false;
     }
 
-    //TODO
-    @Override
-    public boolean visualizzaNodiPosessore() {
-        return false;
-    }
-
     @Override
     public boolean eliminaNodo(Long id) {
         HashMap<String, Object> filters = new HashMap<>();

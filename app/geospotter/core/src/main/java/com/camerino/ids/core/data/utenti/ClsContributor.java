@@ -21,12 +21,11 @@ import java.util.List;
  * Si diventa contributor a 50+ punti.
  */
 @Entity
-public class ClsContributor extends ClsTuristaAutenticato implements IContributable {
+public class ClsContributor extends ClsTuristaAutenticato implements IAzioniContributor {
     @Transient
     transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
     @Transient
     transient IPersistenceModel<ClsRdcItinerario> iperRDCItinerari;
-
     @Deprecated
     @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
@@ -204,11 +203,6 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         tmp.put("id", id);
         req.setDatiItinerario(iperItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
-    }
-
-    @Override
-    public boolean visualizzaNodiPosessore() {
-        return false;
     }
 
     @JsonIgnore
