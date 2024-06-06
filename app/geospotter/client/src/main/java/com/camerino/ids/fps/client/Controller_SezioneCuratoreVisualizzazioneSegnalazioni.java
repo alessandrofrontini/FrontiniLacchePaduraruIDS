@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements Initializable
-{
+public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsSegnalazione> elencoSegnalazioni;
@@ -41,8 +40,7 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
     List<ClsSegnalazione> segnalazioni;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         segnalazioni = Controller_SezioneLogin.UTENTE.GetAllSegnalazioni();
 
         setSegnalazioni(segnalazioni);
@@ -58,16 +56,14 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
                 new PropertyValueFactory<>("descrizione"));
         //endregion
     }
-    private void setSegnalazioni (List<ClsSegnalazione> segnalazioni)
-    {
-        for(int i = 0; i<segnalazioni.size();i++)
-        {
+
+    private void setSegnalazioni(List<ClsSegnalazione> segnalazioni) {
+        for (int i = 0; i < segnalazioni.size(); i++) {
             elencoSegnalazioni.getItems().add(segnalazioni.get(i));
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -80,8 +76,7 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 }

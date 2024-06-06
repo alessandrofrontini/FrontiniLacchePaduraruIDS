@@ -12,10 +12,10 @@ import java.util.List;
 @RestController
 public class CRecensioni {
     private final SRecensioni sRecensioni;
-    private final String mapping = BaseUrl.baseUrl+"/recensioni";
+    private final String mapping = BaseUrl.baseUrl + "/recensioni";
 
     @Autowired
-    public CRecensioni(SRecensioni sRecensioni){
+    public CRecensioni(SRecensioni sRecensioni) {
         this.sRecensioni = sRecensioni;
     }
 
@@ -23,9 +23,9 @@ public class CRecensioni {
     public ResponseEntity<List<ClsRecensione>> getRecensioni(
             @RequestParam(value = "idNodo", required = false) Long idNodo,
             @RequestParam(value = "owner", required = false) Long owner
-    ){
+    ) {
         //return ResponseEntity.ok(sRecensioni.getRecensioniNodo(idNodo));
-        if(owner!=null)
+        if (owner != null)
             return ResponseEntity.ok(sRecensioni.getRecensioniPossesore());
         return ResponseEntity.ok(sRecensioni.getAllRecensioni());
     }
@@ -33,22 +33,22 @@ public class CRecensioni {
     @PostMapping(mapping)
     public ResponseEntity<String> postRecensioni(
             @RequestBody ClsRecensione recensione
-    ){
+    ) {
         return ResponseEntity.ok(Boolean.toString(sRecensioni.postRecensione(recensione)));
     }
 
     @PutMapping(mapping)
     public ResponseEntity<String> putRecensioni(
             @RequestBody ClsRecensione recensione
-    ){
+    ) {
         return ResponseEntity.ok(Boolean.toString(sRecensioni.putRecensione(recensione)));
     }
 
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRecensioni(
             @RequestParam(value = "idRecensione") Long idRecensione
-    ){
-        if(!sRecensioni.deleteRecensioneById(idRecensione))
+    ) {
+        if (!sRecensioni.deleteRecensioneById(idRecensione))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);
     }

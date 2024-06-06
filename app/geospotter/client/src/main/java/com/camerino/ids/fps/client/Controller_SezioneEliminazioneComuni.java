@@ -26,30 +26,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneEliminazioneComuni implements Initializable
-
-{
+public class Controller_SezioneEliminazioneComuni implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsComuneVisual> elencoComuni;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> id;
+    TableColumn<ClsComuneVisual, String> id;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> nome;
+    TableColumn<ClsComuneVisual, String> nome;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> posizione;
+    TableColumn<ClsComuneVisual, String> posizione;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> abitanti;
+    TableColumn<ClsComuneVisual, String> abitanti;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> superficie;
+    TableColumn<ClsComuneVisual, String> superficie;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> curatori;
+    TableColumn<ClsComuneVisual, String> curatori;
 
     @FXML
     ComboBox sceltaComune;
@@ -57,10 +55,10 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
 
     Utils u = new Utils();
     List<ClsComune> comuni;
-//    List<ClsCuratore> Curatori = new ArrayList<>();
+
+    //    List<ClsCuratore> Curatori = new ArrayList<>();
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         setComuni(comuni);
@@ -68,8 +66,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<comuni.size();i++)
-        {
+        for (int i = 0; i < comuni.size(); i++) {
             items.add(comuni.get(i).getId().toString());
         }
 
@@ -98,39 +95,32 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
 
     }
 
-    public void eliminaComune(MouseEvent mouseEvent)
-    {
+    public void eliminaComune(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sceltaComune));
 
-        if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
-        {
-            ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(IDDaEliminare.toString());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
         }
     }
 
-    private void setComuni (List<ClsComune> comuni)
-    {
-        for(int i = 0; i<comuni.size();i++)
-        {
+    private void setComuni(List<ClsComune> comuni) {
+        for (int i = 0; i < comuni.size(); i++) {
             ClsComuneVisual c = u.convertFromClsComune(comuni.get(i));
 
             elencoComuni.getItems().add(c);
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {/*
+    private boolean controllaConformitaID(Long id) {/*
         boolean flag = false;
 
         for(int i = 0; i<comuni.size();i++)
@@ -144,8 +134,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -158,9 +147,8 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 }

@@ -51,6 +51,6 @@ public class SNodi {
     }
 
     public List<ClsNodo> getNodiPosessore() {
-        return (List<ClsNodo>) ((ClsContributor)request.getServletContext().getAttribute("user")).getNodiPossessore();
+        return (List<ClsNodo>) ((ClsContributor) request.getServletContext().getAttribute("user")).getNodiPossessore();
     }
 }

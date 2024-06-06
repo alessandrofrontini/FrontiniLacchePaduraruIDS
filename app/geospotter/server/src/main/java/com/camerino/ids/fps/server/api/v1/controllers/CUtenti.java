@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class CUtenti {
     private final SUtenti sUtenti;
-    private final String mapping = BaseUrl.baseUrl+"/utenti";
+    private final String mapping = BaseUrl.baseUrl + "/utenti";
 
     @Autowired
     public CUtenti(SUtenti sUtenti) {
@@ -25,8 +25,8 @@ public class CUtenti {
     @GetMapping(value = mapping)
     public ResponseEntity<List<ClsTuristaAutenticato>> getUtenti(
             @RequestParam(value = "ruolo", required = false) eRUOLI_UTENTE ruolo
-    ){
-        if(ruolo!= null)
+    ) {
+        if (ruolo != null)
             return ResponseEntity.ok(sUtenti.getUtentiByRuolo(ruolo));
         return ResponseEntity.ok(sUtenti.getAllUtenti());
     }

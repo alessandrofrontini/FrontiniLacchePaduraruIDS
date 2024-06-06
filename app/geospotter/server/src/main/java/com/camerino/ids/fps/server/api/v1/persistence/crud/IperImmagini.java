@@ -15,13 +15,13 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     RepoImmagini repoImmagini;
 
     @Autowired
-    public IperImmagini(final RepoImmagini repoImmagini){
+    public IperImmagini(final RepoImmagini repoImmagini) {
         this.repoImmagini = repoImmagini;
     }
 
     @Override
     public List<ClsImmagine> get(Map<String, Object> filters) {
-        if(filters == null)
+        if (filters == null)
             return new ArrayList<>(repoImmagini.findAll());
 
         return new ArrayList<>(repoImmagini.findAll());

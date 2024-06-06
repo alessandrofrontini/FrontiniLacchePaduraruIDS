@@ -7,8 +7,7 @@ import jakarta.persistence.Entity;
  * Contiene i dati richiesti per recuperare un immagine
  */
 @Entity
-public class ClsImmagine extends ClsInformazione
-{
+public class ClsImmagine extends ClsInformazione {
     @Column(name = "idNodoAssImm")
     Long idNodoAssociato;
     String URL;
@@ -25,13 +24,13 @@ public class ClsImmagine extends ClsInformazione
     public String getURL() {
         return URL;
     }
+
     public void setURL(String URL) {
         this.URL = URL;
     }
     //endregion
 
-    public String visualizzaImmagine()
-    {
+    public String visualizzaImmagine() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";

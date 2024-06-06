@@ -8,14 +8,16 @@ import java.util.List;
 /**
  * Il suo ruolo è quello di aggiungere contest sulla piattaforma.
  * I contenuti del contest sono moderati da questo ruolo,
- *
+ * <p>
  * Per diventare animatore bisogna raggiungere più di 1000 punti.
  */
 @Entity
-public class ClsAnimatore extends ClsContributorAutorizzato{
+public class ClsAnimatore extends ClsContributorAutorizzato {
     //region Constructors
-    public ClsAnimatore(){}
-    public ClsAnimatore(ClsContributorAutorizzato usr){
+    public ClsAnimatore() {
+    }
+
+    public ClsAnimatore(ClsContributorAutorizzato usr) {
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
 
@@ -37,6 +39,7 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
     public List<ClsRDCImmagine> _getAllRDCImmagini() {
         return this.iperRDCImmagini.get(null);
     }
+
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return false;
     }

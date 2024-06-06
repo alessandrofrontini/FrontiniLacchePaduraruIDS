@@ -4,7 +4,8 @@ public class Posizione {
     Double x;
     Double y;
 
-    public Posizione(){}
+    public Posizione() {
+    }
 
     public Posizione(double x, double y) {
         this.x = x;

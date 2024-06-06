@@ -23,19 +23,19 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
     @Override
     public boolean update(Map<String, Object> filters, ClsItinerario object) {
         return api.Put(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsItinerario object) {
         return api.Post(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
         return api.Delete(
-                (ClsContributor)Controller_SezioneLogin.UTENTE,
+                (ClsContributor) Controller_SezioneLogin.UTENTE,
                 new Pair<>("idItinerario", filters.get("idItinerario").toString()));
     }
 }

@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 public class CNodi {
-    
+
     private final SNodi sNodi;
-    private final String mapping = BaseUrl.baseUrl+"/nodi";
+    private final String mapping = BaseUrl.baseUrl + "/nodi";
 
     @Autowired
     public CNodi(SNodi sNodi) {
@@ -25,7 +25,8 @@ public class CNodi {
      * Questo metodo filtra tutti i nodi in base ai parametri passati.
      * Se non vengono passati parametri, saranno restituiti tutti i nodi.
      * //TODO: Ruoli ammessi:
-     * @param idNodo (Opzionale)
+     *
+     * @param idNodo   (Opzionale)
      * @param idComune (Opzionale)
      * @return
      */
@@ -34,12 +35,12 @@ public class CNodi {
             @RequestParam(value = "idNodo", required = false) Long idNodo,
             @RequestParam(value = "idComune", required = false) Long idComune,
             @RequestParam(value = "owner", required = false) Long owner
-    ){
-        if(owner!=null)
+    ) {
+        if (owner != null)
             return ResponseEntity.ok(sNodi.getNodiPosessore());
-        if(idNodo != null)
+        if (idNodo != null)
             return ResponseEntity.ok(sNodi.findNodoById(idNodo));
-        else if(idComune != null)
+        else if (idComune != null)
             return ResponseEntity.ok(sNodi.findNodiByComune(idComune));
         return ResponseEntity.ok(sNodi.getAllNodi());
     }
@@ -47,14 +48,15 @@ public class CNodi {
     /**
      * Questo metodo aggiunge un nodo.
      * //TODO: Ruoli ammessi:
+     *
      * @param nodo Dati del nodo da aggiungere. L'id è ignorato.
      * @return
      */
     @PostMapping(mapping)
     public ResponseEntity<String> postNodi(
             @RequestBody ClsNodo nodo
-            ){
-        if(!sNodi.postNodo(nodo))
+    ) {
+        if (!sNodi.postNodo(nodo))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);
     }
@@ -62,14 +64,15 @@ public class CNodi {
     /**
      * Elimina un nodo dato l'ID.
      * //TODO: Ruoli Ammessi:
+     *
      * @param idNodo L'id del nodo da eliminare
      * @return
      */
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteNodi(
             @RequestParam(value = "idNodo") Long idNodo
-    ){
-        if(!sNodi.deleteNodoById(idNodo))
+    ) {
+        if (!sNodi.deleteNodoById(idNodo))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);
     }
@@ -77,14 +80,15 @@ public class CNodi {
     /**
      * Modifica un nodo.
      * //TODO: Ruoli Ammessi:
+     *
      * @param nodo Il nodo con i dati modificati.
      * @return
      */
     @PutMapping(mapping)
     public ResponseEntity<String> putNodi(
             @RequestBody ClsNodo nodo
-    ){
-        if(!sNodi.putNodo(nodo))
+    ) {
+        if (!sNodi.putNodo(nodo))
             return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok(null);
     }

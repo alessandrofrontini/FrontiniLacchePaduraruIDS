@@ -21,12 +21,12 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
 
     @Override
     public List<ClsSegnalazione> get(Map<String, Object> filters) {
-        if(filters == null)
+        if (filters == null)
             return new ArrayList<>(repoSegnalazioni.findAll());
-        if(filters.containsKey("idContenuto"))
-            return new ArrayList<>(repoSegnalazioni.filterByContenuto((Long)filters.get("idContenuto")));
-        if(filters.containsKey("idUtente"))
-            return new ArrayList<>(repoSegnalazioni.getSegnalazioneByUser((Long)filters.get("idUtente")));
+        if (filters.containsKey("idContenuto"))
+            return new ArrayList<>(repoSegnalazioni.filterByContenuto((Long) filters.get("idContenuto")));
+        if (filters.containsKey("idUtente"))
+            return new ArrayList<>(repoSegnalazioni.getSegnalazioneByUser((Long) filters.get("idUtente")));
 
         return new ArrayList<>(repoSegnalazioni.findAll());
     }

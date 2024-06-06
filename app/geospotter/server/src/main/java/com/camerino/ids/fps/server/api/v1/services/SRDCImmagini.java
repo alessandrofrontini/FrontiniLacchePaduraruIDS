@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 public class SRDCImmagini {
     HttpServletRequest request;
+
     @Autowired
     public SRDCImmagini(HttpServletRequest request) {
         this.request = request;

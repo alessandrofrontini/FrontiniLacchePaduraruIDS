@@ -24,27 +24,26 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneInserimentoRecensioni implements Initializable
-{
+public class Controller_SezioneInserimentoRecensioni implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
-    Button  sezioneEliminazioneNodiButtonHomePage, sezioneInserimentoRecensioniConferma;
+    Button sezioneEliminazioneNodiButtonHomePage, sezioneInserimentoRecensioniConferma;
 
     @FXML
     ComboBox sezioneEliminazioneNodiComboBoxSceltaNodoID;
@@ -57,8 +56,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         setNodi(nodi);
@@ -66,8 +64,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             items.add(nodi.get(i).getId().toString());
         }
 
@@ -96,8 +93,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
 
     }
 
-    public void inserisciRecensione(MouseEvent mouseEvent)
-    {
+    public void inserisciRecensione(MouseEvent mouseEvent) {
 
         ClsRecensione r = new ClsRecensione();
 
@@ -106,41 +102,35 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if(Objects.isNull(oggetto) || oggetto.isEmpty() || Objects.isNull(contenuto) || contenuto.isEmpty() || Objects.isNull(valutazione) || valutazione.isEmpty())
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        if (Objects.isNull(oggetto) || oggetto.isEmpty() || Objects.isNull(contenuto) || contenuto.isEmpty() || Objects.isNull(valutazione) || valutazione.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Inserisci tutte le informazioni necessarie");
             alert.show();
-        }
-        else
-        {
+        } else {
             r.setIdCreatore(1l);
             r.setIdNodoAssociato(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).inserisciRecensione(r);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).inserisciRecensione(r);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText(r.visualizzaRecensione());
             alert.show();
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -153,11 +143,9 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
-
 
 
 }

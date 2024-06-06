@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import org.hibernate.annotations.UuidGenerator;
 
 /**
  * TODO: commentare
@@ -43,8 +42,14 @@ public class ClsRichiestaAzioneDiContribuzione {
     public void setDatiNodo(ClsNodo datiNodo) {
         this.datiNodo = datiNodo;
     }
-    public void setDatiImmagine(ClsImmagine i){this.datiImmagine = i;}
-    public ClsImmagine getDatiImmagine(){return this.datiImmagine;}
+
+    public ClsImmagine getDatiImmagine() {
+        return this.datiImmagine;
+    }
+
+    public void setDatiImmagine(ClsImmagine i) {
+        this.datiImmagine = i;
+    }
 
     public String getUsernameCreatoreRichiesta() {
         return usernameCreatoreRichiesta;
@@ -53,6 +58,7 @@ public class ClsRichiestaAzioneDiContribuzione {
     public void setUsernameCreatoreRichiesta(String usernameCreatoreRichiesta) {
         this.usernameCreatoreRichiesta = usernameCreatoreRichiesta;
     }
+
     public Long getIdContest() {
         return idContest;
     }
@@ -68,10 +74,9 @@ public class ClsRichiestaAzioneDiContribuzione {
     public void seteAzioneDiContribuzione(EAzioniDiContribuzione eAzioneDiContribuzione) {
         this.eAzioneDiContribuzione = eAzioneDiContribuzione;
     }
-  //endregion
+    //endregion
 
-    public String visualizzaRichiesta()
-    {
+    public String visualizzaRichiesta() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";

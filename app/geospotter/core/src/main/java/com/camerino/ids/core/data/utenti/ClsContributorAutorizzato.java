@@ -13,9 +13,11 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsContributorAutorizzato extends ClsContributor {
-//region Constructors
-    public ClsContributorAutorizzato(){}
-    public ClsContributorAutorizzato(ClsContributor usr){
+    //region Constructors
+    public ClsContributorAutorizzato() {
+    }
+
+    public ClsContributorAutorizzato(ClsContributor usr) {
 
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
@@ -39,9 +41,10 @@ public class ClsContributorAutorizzato extends ClsContributor {
 
     /**
      * Inserisce direttamente il nodo creato.
+     *
      * @param nodo Il nodo da aggiungere
      * @return True se l'inserimento ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
@@ -52,10 +55,10 @@ public class ClsContributorAutorizzato extends ClsContributor {
     /**
      * Modifica direttamente un qualsiasi nodo.
      *
-     * @param id Id del nodo dal modificare
+     * @param id   Id del nodo dal modificare
      * @param nodo Il nodo contenente i dati modificati
      * @return True se la modifica ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean modificaNodo(Long id, ClsNodo nodo) {
@@ -70,7 +73,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *
      * @param itinerario L'itinerario da aggiungere
      * @return True se l'eliminazione ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
@@ -80,10 +83,10 @@ public class ClsContributorAutorizzato extends ClsContributor {
     /**
      * Modifica direttamente un itinerario.
      *
-     * @param itinerario Itinerario modificato
+     * @param itinerario   Itinerario modificato
      * @param idItinerario Id dell'itinerario da modificare
      * @return True se la modifica ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, Long idItinerario) {
@@ -97,17 +100,19 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *
      * @param id Id dell'itinerario da eliminare.
      * @return True se l'eliminazione ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean eliminaItinerario(Long id) {
         return false;
     }
+
     //TODO
     @Override
     public boolean visualizzaNodiPosessore() {
         return false;
     }
+
     @Override
     public boolean eliminaNodo(Long id) {
         HashMap<String, Object> filters = new HashMap<>();

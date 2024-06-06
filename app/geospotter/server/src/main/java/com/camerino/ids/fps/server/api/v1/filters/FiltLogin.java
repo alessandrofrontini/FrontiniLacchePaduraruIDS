@@ -45,7 +45,7 @@ public class FiltLogin extends OncePerRequestFilter {
             IperRecensioni iperRecensioni,
             IperSegnalazioni iperSegnalazioni,
             IperUtenti iperUtenti,
-    IperImmagini iperImmagini,
+            IperImmagini iperImmagini,
             IperRDCImmagini iperRDCImmagini,
             IperRDCNodi iperRDCNodi,
             RepoUtenti repoUtenti) {
@@ -66,10 +66,9 @@ public class FiltLogin extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //request.getServletContext().setAttribute("user", AuthClient());
         ClsTurista user = CreaTurista();
-        if(request.getHeader("Authorization")==null){
+        if (request.getHeader("Authorization") == null) {
             request.getServletContext().setAttribute("user", user);
-        }else
-        {
+        } else {
             String[] parts = request.getHeader("Authorization").split(" ");
             if (parts.length == 2)
                 user = repoUtenti.getReferenceById(parts[1]);
@@ -89,40 +88,40 @@ public class FiltLogin extends OncePerRequestFilter {
         user.setIperSegnalazioni(this.iperSegnalazioni);
         user.setpIperImmagini(this.iperImmagini);
 
-        if(user instanceof ClsTuristaAutenticato tmp){
+        if (user instanceof ClsTuristaAutenticato tmp) {
             tmp.setIperUtenti(this.iperUtenti);
             tmp.setIperRDCImmagini(this.iperRDCImmagini);
         }
 
-        if(user instanceof ClsContributor tmp){
+        if (user instanceof ClsContributor tmp) {
             tmp.setpRDCI(this.iperRDCI);
             tmp._setIperRDCNodi(this.iperRDCNodi);
         }
 
-        if(user instanceof ClsContributorAutorizzato tmp){
+        if (user instanceof ClsContributorAutorizzato tmp) {
             //noop
         }
 
-        if(user instanceof ClsAnimatore tmp){
+        if (user instanceof ClsAnimatore tmp) {
             //noop
         }
 
-        if(user instanceof ClsCuratore tmp){
+        if (user instanceof ClsCuratore tmp) {
             //noop
         }
 
-        if(user instanceof ClsGestoreDellaPiattaforma tmp){
+        if (user instanceof ClsGestoreDellaPiattaforma tmp) {
             //noop
         }
     }
 
     private ClsTurista AuthClient(String authorization) {
-        if(authorization == null) {
+        if (authorization == null) {
             return CreaTurista();
         }
         return switch (authorization) {
             case "turista_aut" -> CreaTuristaAut();
-            case "contr"-> CreaContributor();
+            case "contr" -> CreaContributor();
             case "contr_aut" -> CreaContributorAut();
             case "curatore" -> CreaCuratore();
             case "animatore" -> CreaAnimatore();
@@ -131,7 +130,7 @@ public class FiltLogin extends OncePerRequestFilter {
         };
     }
 
-//TODO: possibile nuovo pattern
+    //TODO: possibile nuovo pattern
     private ClsTurista CreaTurista() {
         ClsTurista user = new ClsTurista();
         user.setIperNodi(this.iperNodi);

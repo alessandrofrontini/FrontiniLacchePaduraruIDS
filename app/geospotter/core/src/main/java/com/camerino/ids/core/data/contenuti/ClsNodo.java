@@ -6,21 +6,16 @@ import jakarta.persistence.Entity;
  * TODO: commentare
  */
 @Entity
-public class ClsNodo extends ClsContenuto{
+public class ClsNodo extends ClsContenuto {
 
-    //region Tipologia nodo (enumerazione)
-    public enum eTipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
     private Long idComuneAssociato;
     private eTipologiaNodo eTipologiaNodo;
     private Boolean aTempo;
-
     //dd/mm/yyyy
     private String dataInizio;
     //dd/mm/yyyy
     private String dataFine;
-
-
 
     //region Getter e setter
     public Long getIdComuneAssociato() {
@@ -39,13 +34,14 @@ public class ClsNodo extends ClsContenuto{
         this.eTipologiaNodo = eTipologiaNodo;
     }
 
-    public String getTipologiaNodoFormatoStringa(){ return this.eTipologiaNodo.toString();}
+    public String getTipologiaNodoFormatoStringa() {
+        return this.eTipologiaNodo.toString();
+    }
 
-    public void seteTologiaNodoFormatoStringa (String tipologiaNodo){
+    public void seteTologiaNodoFormatoStringa(String tipologiaNodo) {
         String tmp = tipologiaNodo.toUpperCase();
 
-        switch (tmp)
-        {
+        switch (tmp) {
             case "COMMERCIALE":
                 this.eTipologiaNodo = eTipologiaNodo.COMMERCIALE;
                 break;
@@ -88,10 +84,7 @@ public class ClsNodo extends ClsContenuto{
         this.dataFine = dataFine;
     }
 
-    //endregion
-
-    public String visualizzaNodo()
-    {
+    public String visualizzaNodo() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
@@ -103,4 +96,9 @@ public class ClsNodo extends ClsContenuto{
 
         return dummy;
     }
+
+    //endregion
+
+    //region Tipologia nodo (enumerazione)
+    public enum eTipologiaNodo {COMMERCIALE, CULTURALE, CULINARIO}
 }

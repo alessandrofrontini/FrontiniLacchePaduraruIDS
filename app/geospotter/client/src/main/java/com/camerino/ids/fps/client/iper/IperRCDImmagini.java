@@ -23,19 +23,19 @@ public class IperRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
     @Override
     public boolean update(Map<String, Object> filters, ClsRDCImmagine object) {
         return api.Put(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsRDCImmagine object) {
         return api.Post(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
         return api.Delete(
-                (ClsContributor)Controller_SezioneLogin.UTENTE,
+                (ClsContributor) Controller_SezioneLogin.UTENTE,
                 new Pair<>("idRDCImmagine", filters.get("idRDCImmagine").toString()));
     }
 }

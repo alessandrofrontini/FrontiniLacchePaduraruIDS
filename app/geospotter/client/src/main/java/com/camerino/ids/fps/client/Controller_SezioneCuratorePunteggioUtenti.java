@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
-{
+public class Controller_SezioneCuratorePunteggioUtenti implements Initializable {
     //region Elementi FXML
     @FXML
     ComboBox sceltaUtente, sceltaAzione, sceltaRuolo;
@@ -53,8 +52,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         utenti = TMP_ServizioAutenticazione.utentiLegit;
         azioni = new ArrayList<>();
         ruoli = new ArrayList<>();
@@ -77,8 +75,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<azioni.size();i++)
-        {
+        for (int i = 0; i < azioni.size(); i++) {
             items.add(azioni.get(i));
         }
 
@@ -88,8 +85,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         //region combobox
         ObservableList<String> itemes = FXCollections.observableArrayList();
 
-        for(int i = 0;i<utenti.size();i++)
-        {
+        for (int i = 0; i < utenti.size(); i++) {
             itemes.add(utenti.get(i).getCredenziali().getUsername());
         }
 
@@ -99,8 +95,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         //region combobox
         ObservableList<String> tmp = FXCollections.observableArrayList();
 
-        for(int i = 0;i<ruoli.size();i++)
-        {
+        for (int i = 0; i < ruoli.size(); i++) {
             tmp.add(ruoli.get(i));
         }
 
@@ -121,21 +116,16 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         //endregion
     }
 
-    private void setUtenti (List<ClsTuristaAutenticato> utenti)
-    {
-        for(int i = 0; i< utenti.size(); i++)
-        {
+    private void setUtenti(List<ClsTuristaAutenticato> utenti) {
+        for (int i = 0; i < utenti.size(); i++) {
             ClsUtenteVisual c = u.convertFromClsTuristaAutenticato(utenti.get(i));
             elencoUtenti.getItems().add(c);
         }
     }
 
-    public void settaTextField()
-    {
-        if(u.getValueFromCombobox(sceltaAzione) != null && u.getValueFromCombobox(sceltaAzione) != "")
-        {
-            switch (u.getValueFromCombobox(sceltaAzione))
-            {
+    public void settaTextField() {
+        if (u.getValueFromCombobox(sceltaAzione) != null && u.getValueFromCombobox(sceltaAzione) != "") {
+            switch (u.getValueFromCombobox(sceltaAzione)) {
                 case ("UP-RANK"):
                     inserimentoPunteggioTF.setVisible(true);
                     break;
@@ -155,29 +145,22 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         }
     }
 
-    public void modificaInfoUtenti()
-    {
-        if(u.getValueFromCombobox(sceltaUtente) != null && !Objects.equals(u.getValueFromCombobox(sceltaUtente), "") &&
-                u.getValueFromCombobox(sceltaAzione) != null && !Objects.equals(u.getValueFromCombobox(sceltaAzione), ""))
-        {
+    public void modificaInfoUtenti() {
+        if (u.getValueFromCombobox(sceltaUtente) != null && !Objects.equals(u.getValueFromCombobox(sceltaUtente), "") &&
+                u.getValueFromCombobox(sceltaAzione) != null && !Objects.equals(u.getValueFromCombobox(sceltaAzione), "")) {
             ClsTuristaAutenticato utente = this.ottieniUtente(u.getValueFromCombobox(sceltaUtente));
             ClsTuristaAutenticato utenteBackUp = utente.clone();
 
-            if(u.getValueFromCombobox(sceltaAzione) != null && !Objects.equals(u.getValueFromCombobox(sceltaAzione), ""))
-            {
-                TMP_ServizioAutenticazione.modificaPunteggioByNumero(utente,u.getValueFromTextField(inserimentoPunteggioTF),u.getValueFromCombobox(sceltaAzione));
+            if (u.getValueFromCombobox(sceltaAzione) != null && !Objects.equals(u.getValueFromCombobox(sceltaAzione), "")) {
+                TMP_ServizioAutenticazione.modificaPunteggioByNumero(utente, u.getValueFromTextField(inserimentoPunteggioTF), u.getValueFromCombobox(sceltaAzione));
 
-            }
-            else
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Attenzione");
                 alert.show();
             }
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attenzione");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
@@ -185,48 +168,40 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
 
     }
 
-    public void modificaRuoloUtente()
-    {
-        if(u.getValueFromCombobox(sceltaUtente) != null && !Objects.equals(u.getValueFromCombobox(sceltaUtente), "") &&
-                u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), ""))
-        {
+    public void modificaRuoloUtente() {
+        if (u.getValueFromCombobox(sceltaUtente) != null && !Objects.equals(u.getValueFromCombobox(sceltaUtente), "") &&
+                u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), "")) {
             ClsTuristaAutenticato utente = this.ottieniUtente(u.getValueFromCombobox(sceltaUtente));
             ClsTuristaAutenticato utenteBackUp = utente.clone();
 
-            if(u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), ""))
-            {
-                switch(u.getValueFromCombobox(sceltaRuolo))
-                {
+            if (u.getValueFromCombobox(sceltaRuolo) != null && !Objects.equals(u.getValueFromCombobox(sceltaRuolo), "")) {
+                switch (u.getValueFromCombobox(sceltaRuolo)) {
                     case "TURISTA_AUTENTICATO":
-                        if(true)
-                        {
+                        if (true) {
                             TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
                         }
                         break;
 
                     case "CONTRIBUTOR":
-                        if(true)
-                        {
+                        if (true) {
                             TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
                         }
                         break;
 
                     case "CONTRIBUTOR_AUTORIZZATO":
-                        if(true)
-                        {
+                        if (true) {
                             TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
                         }
                         break;
 
                     case "ANIMATORE":
-                        if(true)
-                        {
+                        if (true) {
                             TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
                         }
                         break;
 
                     default:
-                        Alert alerttttt = new Alert (Alert.AlertType.ERROR);
+                        Alert alerttttt = new Alert(Alert.AlertType.ERROR);
                         alerttttt.setTitle("Attenzione");
                         alerttttt.setContentText("Controlla le informazioni e riprova");
                         alerttttt.show();
@@ -234,39 +209,31 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
 
 
                 }
-            }
-            else
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Attenzione");
                 alert.setContentText("Controlla le informazioni e riprova");
                 alert.show();
             }
 
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attenzione");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    private ClsTuristaAutenticato ottieniUtente(String username)
-    {
-        for(int i = 0; i < utenti.size();i++)
-        {
-            if(utenti.get(i).getCredenziali().getUsername() == username)
-            {
+    private ClsTuristaAutenticato ottieniUtente(String username) {
+        for (int i = 0; i < utenti.size(); i++) {
+            if (utenti.get(i).getCredenziali().getUsername() == username) {
                 return utenti.get(i);
             }
         }
         return null;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -279,9 +246,8 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 }

@@ -14,10 +14,11 @@ import java.util.List;
  * Non è possibile diventare Gestore della Piattaforma tramite sistema a punteggi.
  */
 @Entity
-public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator
-{
-    public ClsGestoreDellaPiattaforma(){}
-    public ClsGestoreDellaPiattaforma(ClsAnimatore usr){
+public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator {
+    public ClsGestoreDellaPiattaforma() {
+    }
+
+    public ClsGestoreDellaPiattaforma(ClsAnimatore usr) {
 
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
@@ -35,36 +36,38 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
         this.iperRDCImmagini = usr.iperRDCImmagini;
 
     }
+
     //region Getters and Setters
-    public void setIperComuni(IPersistenceModel<ClsComune> iperComuni)
-    {
+    public void setIperComuni(IPersistenceModel<ClsComune> iperComuni) {
         this.iperComuni = iperComuni;
     }
     //endregion
 
     //region Override ITownHallAdministrator
+
     /**
      * Aggiunge direttamente un comune.
+     *
      * @param comune Comune da aggiungere.
      * @return True se l'inserimento ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
-    public boolean inserisciComune(ClsComune comune)
-    {
+    public boolean inserisciComune(ClsComune comune) {
         return this.iperComuni.insert(comune);
     }
 
     /**
      * Modifica direttamente un comune.
+     *
      * @param comune Comune modificato
-     * @param id Is del comune da modificare.
+     * @param id     Is del comune da modificare.
      * @return True se la modifica ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
-    public boolean modificaComune(ClsComune comune, Long id){
-        return this.iperComuni.update(null,comune);
+    public boolean modificaComune(ClsComune comune, Long id) {
+        return this.iperComuni.update(null, comune);
     }
 
     /**
@@ -72,24 +75,27 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      *
      * @param id Id del comune da eliminare
      * @return True se l'eliminazione ha successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
-    public boolean eliminaComune(Long id){
+    public boolean eliminaComune(Long id) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", id);
         return this.iperComuni.delete(filters);
     }
+
     //TODO
     @Override
-    public ClsComune[] visualizzaComuni(){
+    public ClsComune[] visualizzaComuni() {
         return null;
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsCuratore> getAllCuratori() {
-        return getUtentiByRuolo(eRUOLI_UTENTE.CURATORE).stream().map(c->(ClsCuratore)c).toList();
+        return getUtentiByRuolo(eRUOLI_UTENTE.CURATORE).stream().map(c -> (ClsCuratore) c).toList();
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLI_UTENTE ruolo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("ruolo", eRUOLI_UTENTE.CURATORE);

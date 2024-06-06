@@ -24,29 +24,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneInserimentoImmagini implements Initializable
-{
+public class Controller_SezioneInserimentoImmagini implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> ElencoNodi;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> idColonna;
+    TableColumn<ClsNodoVisual, String> idColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> idComuneColonna;
+    TableColumn<ClsNodoVisual, String> idComuneColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> nomeColonna;
+    TableColumn<ClsNodoVisual, String> nomeColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> posizioneColonna;
+    TableColumn<ClsNodoVisual, String> posizioneColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> tipologiaColonna;
+    TableColumn<ClsNodoVisual, String> tipologiaColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> aTempoColonna;
+    TableColumn<ClsNodoVisual, String> aTempoColonna;
 
     @FXML
     ComboBox sceltaNodo;
@@ -59,16 +58,14 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
         setNodi(nodi);
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             items.add(nodi.get(i).getId().toString());
         }
 
@@ -96,42 +93,36 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         //endregion
     }
 
-    public void inserisciImmagine(MouseEvent mouseEvent)
-    {
+    public void inserisciImmagine(MouseEvent mouseEvent) {
         Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
         ClsImmagine i = new ClsImmagine();
 
-        if((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine))
-        {
+        if ((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine)) {
             i.setIdCreatore(1L);
             i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
-            ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(i.visualizzaImmagine());
             alert.show();
-        }
-        else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("SELEZIONA UN NODO");
             alert.setContentText("--SELEZIONA UN NODO--");
             alert.show();
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             ElencoNodi.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -144,13 +135,11 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*if(id==null)
             return false;
         else{
@@ -168,7 +157,6 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         return true;
 
     }
-
 
 
 }

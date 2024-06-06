@@ -1,4 +1,5 @@
 package com.camerino.ids.fps.client.iper;
+
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.client.Controller_SezioneLogin;
@@ -15,8 +16,8 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     @Override
     public List<ClsRecensione> get(Map<String, Object> filters) {
         String query = "";
-        if(filters.containsKey("owner"))
-            query = "owner="+filters.get("owner");
+        if (filters.containsKey("owner"))
+            query = "owner=" + filters.get("owner");
         return api.Get(
                 Controller_SezioneLogin.UTENTE, query);
     }

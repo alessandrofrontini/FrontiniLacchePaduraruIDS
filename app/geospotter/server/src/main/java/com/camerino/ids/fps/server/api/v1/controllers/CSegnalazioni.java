@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class CSegnalazioni {
     private final SSegnalazioni sSegnalazioni;
-    private final String mapping = BaseUrl.baseUrl+"/segnalazioni";
+    private final String mapping = BaseUrl.baseUrl + "/segnalazioni";
 
     @Autowired
     public CSegnalazioni(SSegnalazioni sSegnalazioni) {

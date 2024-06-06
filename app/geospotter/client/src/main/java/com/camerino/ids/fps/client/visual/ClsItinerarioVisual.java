@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsItinerarioVisual
-{
+public class ClsItinerarioVisual {
     Long id;
 
     String nome;

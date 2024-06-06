@@ -23,19 +23,19 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     @Override
     public boolean update(Map<String, Object> filters, ClsImmagine object) {
         return api.Put(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsImmagine object) {
         return api.Post(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
         return api.Delete(
-                (ClsContributor)Controller_SezioneLogin.UTENTE,
+                (ClsContributor) Controller_SezioneLogin.UTENTE,
                 new Pair<>("idImmagine", filters.get("idImmagine").toString()));
     }
 }

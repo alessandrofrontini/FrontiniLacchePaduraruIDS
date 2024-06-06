@@ -22,18 +22,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class Controller_SezioneInserimentoComuni implements Initializable
-{
+public class Controller_SezioneInserimentoComuni implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsCuratoreVisual> elencoCuratori;
     @FXML
-    TableColumn<ClsCuratoreVisual,String> idCuratore;
+    TableColumn<ClsCuratoreVisual, String> idCuratore;
     @FXML
     TableColumn<ClsCuratoreVisual, String> usernameCuratore;
 
     @FXML
-    TextField textFieldCuratori,nome,descrizione,coordinataX,coordinataY,abitanti,superficie;
+    TextField textFieldCuratori, nome, descrizione, coordinataX, coordinataY, abitanti, superficie;
 
     @FXML
     Button home, conferma;
@@ -43,10 +42,9 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
-                .stream().map(u->{
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        curatori = ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+                .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
                     return tmp;
@@ -63,8 +61,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         //endregion
     }
 
-    public void inserisciComune(MouseEvent mouseEvent)
-    {
+    public void inserisciComune(MouseEvent mouseEvent) {
         ClsComune comune = new ClsComune();
 
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
@@ -72,14 +69,13 @@ public class Controller_SezioneInserimentoComuni implements Initializable
 
         List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<>();
 
-        if(curatoriCoinvoltiArray.length > 0 &&
+        if (curatoriCoinvoltiArray.length > 0 &&
                 !Objects.equals(u.getValueFromTextField(coordinataX), "") &&
                 !Objects.equals(u.getValueFromTextField(coordinataY), "") &&
                 !Objects.equals(u.getValueFromTextField(descrizione), "") &&
                 !Objects.equals(u.getValueFromTextField(nome), "") &&
                 !Objects.equals(u.getValueFromTextField(abitanti), null) &&
-                !Objects.equals(u.getValueFromTextField(superficie), ""))
-        {
+                !Objects.equals(u.getValueFromTextField(superficie), "")) {
             comune.setIdCreatore(1L);
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataX)), Double.parseDouble(u.getValueFromTextField(coordinataY))));
             comune.setNome(u.getValueFromTextField(nome));
@@ -87,32 +83,26 @@ public class Controller_SezioneInserimentoComuni implements Initializable
             comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitanti)));
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficie)));
 
-            comune.setCuratoriAssociati(this.ottieniCuratoriAssociati(new ArrayList<>(curatori),curatoriCoinvoltiArray));//todo:aggiungere
+            comune.setCuratoriAssociati(this.ottieniCuratoriAssociati(new ArrayList<>(curatori), curatoriCoinvoltiArray));//todo:aggiungere
 
-            ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).inserisciComune(comune);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).inserisciComune(comune);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");
             alert.setContentText(comune.visualizzaComune());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Devi inserire tutte le informazioni");
             alert.show();
         }
     }
 
-    public List<ClsCuratore> ottieniCuratoriAssociati (List<ClsCuratore> curatori, String[] idCuratori)
-    {
+    public List<ClsCuratore> ottieniCuratoriAssociati(List<ClsCuratore> curatori, String[] idCuratori) {
         List<ClsCuratore> tmp = new ArrayList<>();
-        for(int i = 0; i < curatori.size();i++)
-        {
-            for(int j = 0; j < idCuratori.length; j++)
-            {
-                if(Objects.equals(curatori.get(i).getId(), idCuratori[j]))
-                {
+        for (int i = 0; i < curatori.size(); i++) {
+            for (int j = 0; j < idCuratori.length; j++) {
+                if (Objects.equals(curatori.get(i).getId(), idCuratori[j])) {
                     tmp.add(curatori.get(i));
                 }
             }
@@ -120,17 +110,14 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return tmp;
     }
 
-    private void setCuratori (List<ClsCuratore> curatori)
-    {
-        for(int i = 0; i<curatori.size();i++)
-        {
+    private void setCuratori(List<ClsCuratore> curatori) {
+        for (int i = 0; i < curatori.size(); i++) {
             ClsCuratoreVisual c = u.convertFromClsCuratore(curatori.get(i));
             elencoCuratori.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -143,20 +130,18 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private String[] convertiCuratoriCoinvoltiInArray(String input)
-    {
+    private String[] convertiCuratoriCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
-        String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), curatori);;
+        String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), curatori);
+        ;
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (List<String> input, List<ClsCuratore> Curatori)
-    {
+    private String[] pulisciIDnonPresenti(List<String> input, List<ClsCuratore> Curatori) {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsCuratore obj : Curatori) {
@@ -188,15 +173,11 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return listaSenzaDuplicati;
     }
 
-    private List<ClsCuratore> ottieniCuratori (String[] idCuratori)
-    {
+    private List<ClsCuratore> ottieniCuratori(String[] idCuratori) {
         List<ClsCuratore> tmp = new ArrayList<ClsCuratore>();
-        for(int i = 0; i < this.curatori.size(); i++)
-        {
-            for(int k = 0; k< idCuratori.length; k++)
-            {
-                if(Objects.equals(curatori.get(i).getId(), idCuratori[k]))
-                {
+        for (int i = 0; i < this.curatori.size(); i++) {
+            for (int k = 0; k < idCuratori.length; k++) {
+                if (Objects.equals(curatori.get(i).getId(), idCuratori[k])) {
                     tmp.add(curatori.get(i));
                 }
             }

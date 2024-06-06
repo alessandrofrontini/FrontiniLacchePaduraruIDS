@@ -9,10 +9,16 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 @Deprecated
 public interface IContributable {
     boolean inserisciNodo(ClsNodo nodo);
+
     boolean modificaNodo(Long id, ClsNodo nodo);
+
     boolean eliminaNodo(Long id);
+
     boolean inserisciItinerario(ClsItinerario irinerario);
+
     boolean modificaItinerario(ClsItinerario itinerario, Long id);
+
     boolean eliminaItinerario(Long id);
+
     boolean visualizzaNodiPosessore();
 }

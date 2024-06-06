@@ -6,17 +6,17 @@ Authorization: {{tkGDP}}
 Content-Type: application/json
 
 {
-   "id":"0",
-   "idCreatore":null,
-   "posizione":{
-      "x":32.0,
-      "y":31.0
-   },
-   "nome":"Castelraimondo",
-   "descrizione":"Capitale",
-   "abitanti":0,
-   "superficie":213.0,
-   "curatoriAssociati":null
+  "id": "0",
+  "idCreatore": null,
+  "posizione": {
+    "x": 32.0,
+    "y": 31.0
+  },
+  "nome": "Castelraimondo",
+  "descrizione": "Capitale",
+  "abitanti": 0,
+  "superficie": 213.0,
+  "curatoriAssociati": null
 }
 
 ###
@@ -25,17 +25,17 @@ Authorization: {{tkGDP}}
 Content-Type: application/json
 
 {
-  "id":"3",
-  "idCreatore":null,
-  "posizione":{
-    "x":32.0,
-    "y":31.0
+  "id": "3",
+  "idCreatore": null,
+  "posizione": {
+    "x": 32.0,
+    "y": 31.0
   },
-  "nome":"Castelraimondo00000000000000o",
-  "descrizione":"Capitale",
-  "abitanti":0,
-  "superficie":213.0,
-  "curatoriAssociati":null
+  "nome": "Castelraimondo00000000000000o",
+  "descrizione": "Capitale",
+  "abitanti": 0,
+  "superficie": 213.0,
+  "curatoriAssociati": null
 }
 
 ###

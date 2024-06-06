@@ -9,5 +9,6 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 @Deprecated()
 public interface IPunteggioManager {
     boolean guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, Long idUtente);
+
     boolean saliDiLivello(Long idUtente);
 }

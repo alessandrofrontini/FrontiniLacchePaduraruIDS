@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsRichiestaAzioneDiContribuzioneVisual
-{
+public class ClsRichiestaAzioneDiContribuzioneVisual {
     public Long id;
 
     public String usernameCreatore;

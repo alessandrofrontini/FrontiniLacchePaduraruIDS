@@ -23,20 +23,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneEliminazioneItinerari implements Initializable
-{
+public class Controller_SezioneEliminazioneItinerari implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsItinerarioVisual> sezioneEliminazioneItinerariTableView;
 
     @FXML
-    TableColumn<ClsItinerarioVisual,String> sezioneEliminazioneItinerariTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsItinerarioVisual, String> sezioneEliminazioneItinerariTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneEliminazioneItinerariTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsItinerarioVisual, String> sezioneEliminazioneItinerariTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneInserimentoItinerariTableColumnOrdinato = new TableColumn<>("E' ordinato?");
+    TableColumn<ClsItinerarioVisual, String> sezioneInserimentoItinerariTableColumnOrdinato = new TableColumn<>("E' ordinato?");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneInserimentoItinerariTableColumnTappe = new TableColumn<>("Tappe");
+    TableColumn<ClsItinerarioVisual, String> sezioneInserimentoItinerariTableColumnTappe = new TableColumn<>("Tappe");
 
     @FXML
     ComboBox sezioneEliminazioneItinerariComboBoxSceltaItinerarioID;
@@ -49,8 +48,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
 
         this.setItinerari(itinerari);
@@ -58,8 +56,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<itinerari.size();i++)
-        {
+        for (int i = 0; i < itinerari.size(); i++) {
             items.add(itinerari.get(i).getId().toString());
         }
 
@@ -82,37 +79,31 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
 
     }
 
-    public void eliminaNodo(MouseEvent mouseEvent)
-    {
+    public void eliminaNodo(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        if(IDDaEliminare != null && controllaConformitaID(IDDaEliminare))
-        {
-            ((ClsContributor)Controller_SezioneLogin.UTENTE).eliminaItinerario(IDDaEliminare);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDDaEliminare != null && controllaConformitaID(IDDaEliminare)) {
+            ((ClsContributor) Controller_SezioneLogin.UTENTE).eliminaItinerario(IDDaEliminare);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle(IDDaEliminare.toString());
-            alert.setContentText("--"+IDDaEliminare+"--");
+            alert.setContentText("--" + IDDaEliminare + "--");
             alert.show();
-        }
-        else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("SELEZIONA UN NODO");
             alert.setContentText("--SELEZIONA UN NODO--");
             alert.show();
         }
     }
 
-    private void setItinerari (List<ClsItinerario> itinerari)
-    {
-        for(int i = 0; i<itinerari.size();i++)
-        {
+    private void setItinerari(List<ClsItinerario> itinerari) {
+        for (int i = 0; i < itinerari.size(); i++) {
             ClsItinerarioVisual c = u.convertFromClsItinerario(itinerari.get(i));
             sezioneEliminazioneItinerariTableView.getItems().add(c);
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {/*
+    private boolean controllaConformitaID(Long id) {/*
         boolean flag = false;
 
         for(int i = 0; i<itinerari.size();i++)
@@ -126,8 +117,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -140,9 +130,8 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 }

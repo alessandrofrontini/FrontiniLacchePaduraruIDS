@@ -25,30 +25,29 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneVisualizzazioneComuni implements Initializable
-{
+public class Controller_SezioneVisualizzazioneComuni implements Initializable {
 
     //region Elementi FXML
     @FXML
     TableView<ClsComuneVisual> elencoComuni;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> id;
+    TableColumn<ClsComuneVisual, String> id;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> nome;
+    TableColumn<ClsComuneVisual, String> nome;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> posizione;
+    TableColumn<ClsComuneVisual, String> posizione;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> abitanti;
+    TableColumn<ClsComuneVisual, String> abitanti;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> superficie;
+    TableColumn<ClsComuneVisual, String> superficie;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> curatori;
+    TableColumn<ClsComuneVisual, String> curatori;
 
     @FXML
     ComboBox selezionaElementoDettaglio, selezionaElementoSegnalazione;
@@ -61,18 +60,16 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
     Utils u = new Utils();
     List<ClsComune> comuni;
     List<ClsCuratore> Curatori = new ArrayList<>();
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<comuni.size();i++)
-        {
+        for (int i = 0; i < comuni.size(); i++) {
             items.add(comuni.get(i).getId().toString());
         }
 
@@ -82,8 +79,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
         //region combobox
         ObservableList<String> itemss = FXCollections.observableArrayList();
 
-        for(int i = 0;i<comuni.size();i++)
-        {
+        for (int i = 0; i < comuni.size(); i++) {
             itemss.add(comuni.get(i).getId().toString());
         }
 
@@ -114,50 +110,40 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
     }
 
-    public void inserisciSegnalazione()
-    {
+    public void inserisciSegnalazione() {
         String descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
 
-        if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
-        {
+        if (!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null) {
             Long IDDaSegnalare = Long.valueOf(u.getValueFromCombobox(selezionaElementoSegnalazione));
             ClsSegnalazione segnalazione = new ClsSegnalazione();
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for(int i = 0; i < this.comuni.size(); i++)
-            {
-                if(Objects.equals(comuni.get(i).getId(), IDDaSegnalare))
-                {
+            for (int i = 0; i < this.comuni.size(); i++) {
+                if (Objects.equals(comuni.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(comuni.get(i).getCuratoriAssociati().get(0).getId());
                 }
             }
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(segnalazione.visualizzaSegnalazione());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    public void visualizzaDettaglio ()
-    {
+    public void visualizzaDettaglio() {
         Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
-        if(this.controllaConformitaID(IDDaVisualizzare))
-        {
+        if (this.controllaConformitaID(IDDaVisualizzare)) {
             ClsComune c = new ClsComune();
-            for(int i = 0; i<comuni.size();i++)
-            {
-                if(IDDaVisualizzare.equals(this.comuni.get(i).getId()))
-                {
+            for (int i = 0; i < comuni.size(); i++) {
+                if (IDDaVisualizzare.equals(this.comuni.get(i).getId())) {
                     c.setId(comuni.get(i).getId());
                     c.setNome(comuni.get(i).getNome());
                     c.setCuratoriAssociati(comuni.get(i).getCuratoriAssociati());
@@ -168,32 +154,27 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
                     c.setPosizione(comuni.get(i).getPosizione());
                 }
             }
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(c.visualizzaComune());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    private void setComuni (List<ClsComune> comuni)
-    {
-        for(int i = 0; i<comuni.size();i++)
-        {
+    private void setComuni(List<ClsComune> comuni) {
+        for (int i = 0; i < comuni.size(); i++) {
             ClsComuneVisual c = u.convertFromClsComune(comuni.get(i));
 
             elencoComuni.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -206,17 +187,15 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
-    }
-    public void navigateToSezioneVisualizzazioneMappa(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazioneMappa.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private boolean controllaConformitaID (Long id)
-    {/*
+    public void navigateToSezioneVisualizzazioneMappa(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazioneMappa.fxml", mouseEvent);
+    }
+
+    private boolean controllaConformitaID(Long id) {/*
         boolean flag = false;
 
         for(int i = 0; i<comuni.size();i++)

@@ -20,31 +20,30 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class Controller_SezioneInserimentoItinerari implements Initializable
-{
+public class Controller_SezioneInserimentoItinerari implements Initializable {
 
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
     Button sezioneEliminazioneNodiButtonConferma, sezioneEliminazioneNodiButtonHomePage;
 
     @FXML
-    TextField sezioneInserimentoItinerariElencoTappe,sezioneInserimentoItinerariNomeItinerario;
+    TextField sezioneInserimentoItinerariElencoTappe, sezioneInserimentoItinerariNomeItinerario;
 
     @FXML
     CheckBox sezioneInserimentoItinerariCheckBoxOrdinato;
@@ -54,8 +53,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         setNodi(nodi);
@@ -81,22 +79,17 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         //endregion
     }
 
-    public void inserisciItinerario(MouseEvent mouseEvent)
-    {
+    public void inserisciItinerario(MouseEvent mouseEvent) {
         ClsItinerario itinerario = new ClsItinerario();
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
         List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
 
-        if(nodiCoinvoltiInArray.length>1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), ""))
-        {
-            for(int i = 0; i<nodi.size();i++)
-            {
-                for(int j = 0; j<nodiCoinvoltiInArray.length;j++)
-                {
-                    if(Objects.equals(nodi.get(i).getId(), nodiCoinvoltiInArray[j]))
-                    {
+        if (nodiCoinvoltiInArray.length > 1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) {
+            for (int i = 0; i < nodi.size(); i++) {
+                for (int j = 0; j < nodiCoinvoltiInArray.length; j++) {
+                    if (Objects.equals(nodi.get(i).getId(), nodiCoinvoltiInArray[j])) {
                         nodiAssociatiToItinerario.add(nodi.get(i));
                     }
                 }
@@ -107,40 +100,33 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
             itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
             itinerario.setTappe(nodiAssociatiToItinerario);
 
-            ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciItinerario(itinerario);
+            ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciItinerario(itinerario);
 
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("informazioni");
             alert.setContentText(itinerario.visualizzaItinerario());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Ricontrolla le informazioni");
             alert.show();
         }
 
 
-
-
         //Ottineni array dagli id in nodiCoinvoltiInArray
 
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -153,21 +139,18 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private String[] convertiNodiCoinvoltiInArray(String input)
-    {
+    private String[] convertiNodiCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);
 
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (List<String> input, List<ClsNodo> nodi)
-    {
+    private String[] pulisciIDnonPresenti(List<String> input, List<ClsNodo> nodi) {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsNodo obj : nodi) {

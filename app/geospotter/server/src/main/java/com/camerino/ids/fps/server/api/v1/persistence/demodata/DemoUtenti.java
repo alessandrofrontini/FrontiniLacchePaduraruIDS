@@ -13,11 +13,9 @@ import java.util.List;
 
 @Configuration
 @Order(1)
-public class DemoUtenti
-{
+public class DemoUtenti {
     @Bean
-    public CommandLineRunner aggiungiUtenti(RepoUtenti repo)
-    {
+    public CommandLineRunner aggiungiUtenti(RepoUtenti repo) {
         //Stessi utenti lato client, copy-paste
         List<ClsTuristaAutenticato> utenti = new ArrayList<>();
 

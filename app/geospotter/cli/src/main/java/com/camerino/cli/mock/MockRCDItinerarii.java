@@ -16,7 +16,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     @Override
     public List<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
         List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
-        if(filters.containsKey("id")) {
+        if (filters.containsKey("id")) {
             tmp.add(findById((String) filters.get("id")));
             return tmp;
         }
@@ -25,7 +25,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
 
     @Override
     public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
-        if(filters.containsKey("id"))
+        if (filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
     }
@@ -33,7 +33,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     @Override
     public boolean insert(ClsRichiestaAzioneDiContribuzioneItinerario object) {
         idCounter++;
-        object.setId(""+idCounter);
+        object.setId("" + idCounter);
         return rcdi.add(object);
     }
 
@@ -48,7 +48,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzioneItinerario object) {
         ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(id);
         int index = rcdi.indexOf(tmp);
-        if(index<0)
+        if (index < 0)
             return false;
         rcdi.set(index, object);
         return true;
@@ -56,8 +56,8 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
 
     private ClsRichiestaAzioneDiContribuzioneItinerario findById(Long id) {
         List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
-                rcdi.stream().filter(n->n.getId().equals(id)).toList();
-        if(tmp.isEmpty())
+                rcdi.stream().filter(n -> n.getId().equals(id)).toList();
+        if (tmp.isEmpty())
             return null;
         return tmp.get(0);
     }

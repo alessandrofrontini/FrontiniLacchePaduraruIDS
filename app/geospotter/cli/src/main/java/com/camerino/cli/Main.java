@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {//Gli scanner i double li vuole con la , e non punto .  . Comportamenot overridabile
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         while (true) {
             print_team();
@@ -29,24 +29,22 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
             ClsConsoleLogger.println("4)Mostra Nodo");
             ClsConsoleLogger.println("5)Segnala Nodo");
             ClsConsoleLogger.println("0)Esci");
-            switch (in.nextLine()){
-                case "0"-> {
+            switch (in.nextLine()) {
+                case "0" -> {
                     return;
                 }
-                case "1"-> login();
-                case "2"-> listaComuni();
-                case "3"-> ClsConsoleLogger.println("Noop");
-                case "4"-> ClsConsoleLogger.println("Noop");
-                case "5"-> ClsConsoleLogger.println("Noop");
+                case "1" -> login();
+                case "2" -> listaComuni();
+                case "3" -> ClsConsoleLogger.println("Noop");
+                case "4" -> ClsConsoleLogger.println("Noop");
+                case "5" -> ClsConsoleLogger.println("Noop");
             }
         }
     }
 
-    private static void listaComuni()
-    {
+    private static void listaComuni() {
         MockComuni mockComuni = MockLocator.getMockComuni();
-        for(int i = 0; i < mockComuni.get(null).size(); i++)
-        {
+        for (int i = 0; i < mockComuni.get(null).size(); i++) {
             System.out.println(mockComuni.get(null).get(i).visualizzaComune());
         }
 
@@ -66,7 +64,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
     }
 
     private static void main_menu(ClsTuristaAutenticato turista) {
-        switch (turista.getRuoloUtente()){
+        switch (turista.getRuoloUtente()) {
             case TURISTA_AUTENTICATO -> ClsConsoleLogger.println("Noop");
             case CONTRIBUTOR -> ClsConsoleLogger.println("Noop");
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth((ClsContributorAutorizzato) turista).menu();
@@ -96,8 +94,8 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
 
 
     }
-    private static void print_team()
-    {
+
+    private static void print_team() {
         ClsConsoleLogger.print("\n" +
                 "   _____ _____        ______      __  __       _______   _______ ______          __  __   _____  _____  ______  _____ ______ _   _ _______    \n" +
                 "  / ____|  __ \\ /\\   |  ____/\\   |  \\/  |   /\\|__   __| |__   __|  ____|   /\\   |  \\/  | |  __ \\|  __ \\|  ____|/ ____|  ____| \\ | |__   __|   \n" +

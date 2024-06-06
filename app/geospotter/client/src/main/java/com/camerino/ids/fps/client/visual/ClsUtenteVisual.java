@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsUtenteVisual
-{
+public class ClsUtenteVisual {
     public Long id;
     public String username;
     public String punteggio;

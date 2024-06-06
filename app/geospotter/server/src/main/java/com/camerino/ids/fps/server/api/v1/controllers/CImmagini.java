@@ -12,8 +12,8 @@ import java.util.List;
 
 @RestController
 public class CImmagini {
+    public final static String mapping = BaseUrl.baseUrl + "/immagini";
     SImmagini sImmagini;
-    public final static String mapping = BaseUrl.baseUrl+"/immagini";
 
     @Autowired
     public CImmagini(SImmagini sImmagini) {

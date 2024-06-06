@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class CLogin {
+    public final static String mapping = BaseUrl.baseUrl + "/login";
     SLogin sLogin;
-    public final static String mapping = BaseUrl.baseUrl+"/login";
 
     @Autowired
     public CLogin(SLogin sLogin) {
@@ -23,7 +23,7 @@ public class CLogin {
     @PostMapping(mapping)
     public ResponseEntity<ClsTuristaAutenticato> login(
             @RequestBody Credenziali credenziali
-            ){
+    ) {
         return ResponseEntity.ok(sLogin.login(credenziali));
     }
 

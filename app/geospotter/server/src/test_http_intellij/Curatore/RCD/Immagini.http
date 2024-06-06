@@ -41,13 +41,13 @@ Authorization:{{tkCuratore}}
   "creatore": null,
   "responsabile": null,
   "idContest": null,
-  "oldData":  {
+  "oldData": {
     "id": 1,
     "idCOntenutoAssociato": 1,
     "URL": "1",
     "usernameCreatore": "1"
   },
-  "newData":  {
+  "newData": {
     "id": 0,
     "idCOntenutoAssociato": 1,
     "URL": "aaaaa",

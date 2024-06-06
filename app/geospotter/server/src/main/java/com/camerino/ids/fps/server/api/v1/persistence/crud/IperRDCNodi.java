@@ -18,11 +18,12 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     public IperRDCNodi(final RepoRDCNodi repoRDCI) {
         this.repoRDCNodi = repoRDCI;
     }
+
     @Override
     public List<ClsRDCNodo> get(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return new ArrayList<>(repoRDCNodi.findAll());
-        if(filters.containsKey("idRDCNodo")) {
+        if (filters.containsKey("idRDCNodo")) {
             List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRDCNodo").toString());
             return new ArrayList<>(repoRDCNodi.findAllById(ids));
@@ -35,9 +36,9 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsRDCNodo object) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRDCNodo"))
+        if (!filters.containsKey("idRDCNodo"))
             return false;
         repoRDCNodi.save(object);
         return true;
@@ -51,9 +52,9 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRDCNodo"))
+        if (!filters.containsKey("idRDCNodo"))
             return false;
         repoRDCNodi.deleteById(filters.get("idRDCNodo").toString());
         return true;

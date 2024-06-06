@@ -1,7 +1,6 @@
 package com.camerino.ids.core.data.contenuti;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
 
@@ -16,7 +15,7 @@ public class ClsContestDiContribuzione {
     String usernameCreatore;
     Date durata;
     @OneToOne
-    @JoinColumn(name="")//TODO finire associazione
+    @JoinColumn(name = "")//TODO finire associazione
     ClsComune location;
     Boolean isAperto;
 
@@ -60,18 +59,17 @@ public class ClsContestDiContribuzione {
         isAperto = aperto;
     }
 
-    public String visualizzaContest ()
-    {
+    public String visualizzaContest() {
 
-            String dummy = "";
+        String dummy = "";
 
-            dummy += "\n\nID: " + this.getId() + "\n";
-            dummy += "Durata: " + this.getDurata().toString() + "\n";
-            dummy += "Comune: " + this.getLocation().getId() + "\n";
-            dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
-            dummy += "Su invito: " + this.isAperto  + "\n";
+        dummy += "\n\nID: " + this.getId() + "\n";
+        dummy += "Durata: " + this.getDurata().toString() + "\n";
+        dummy += "Comune: " + this.getLocation().getId() + "\n";
+        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Su invito: " + this.isAperto + "\n";
 
-            return dummy;
+        return dummy;
 
     }
 }

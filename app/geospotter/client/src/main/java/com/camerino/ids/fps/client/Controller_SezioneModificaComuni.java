@@ -28,29 +28,28 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneModificaComuni implements Initializable
-{
+public class Controller_SezioneModificaComuni implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsComuneVisual> elencoComuni;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> id;
+    TableColumn<ClsComuneVisual, String> id;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> nome;
+    TableColumn<ClsComuneVisual, String> nome;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> posizione;
+    TableColumn<ClsComuneVisual, String> posizione;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> abitanti;
+    TableColumn<ClsComuneVisual, String> abitanti;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> superficie;
+    TableColumn<ClsComuneVisual, String> superficie;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> curatori;
+    TableColumn<ClsComuneVisual, String> curatori;
 
     @FXML
     ComboBox sceltaComune;
@@ -58,11 +57,11 @@ public class Controller_SezioneModificaComuni implements Initializable
     @FXML
     TableView<ClsCuratoreVisual> elencoCuratori;
     @FXML
-    TableColumn<ClsCuratoreVisual,String> idCuratore;
+    TableColumn<ClsCuratoreVisual, String> idCuratore;
     @FXML
     TableColumn<ClsCuratoreVisual, String> usernameCuratore;
     @FXML
-    TextField textFieldCuratori,nomeTF,descrizioneTF,coordinataXTF,coordinataYTF,abitantiTF,superficieTF;
+    TextField textFieldCuratori, nomeTF, descrizioneTF, coordinataXTF, coordinataYTF, abitantiTF, superficieTF;
     //endregion
 
     List<ClsCuratore> Curatori;
@@ -70,10 +69,9 @@ public class Controller_SezioneModificaComuni implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
-        this.Curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
-                .stream().map(u->{
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.Curatori = ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+                .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
                     return tmp;
@@ -86,8 +84,7 @@ public class Controller_SezioneModificaComuni implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<comuni.size();i++)
-        {
+        for (int i = 0; i < comuni.size(); i++) {
             items.add(comuni.get(i).getId().toString());
         }
 
@@ -123,23 +120,19 @@ public class Controller_SezioneModificaComuni implements Initializable
         //endregion
     }
 
-    public void modificaComune(MouseEvent mouseEvent)
-    {
+    public void modificaComune(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(this.eliminaComune(mouseEvent));
         ClsComune nuovoComune = this.inserisciComune(mouseEvent);
 
-        if(!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null))
-        {
-            ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
+        if (!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null)) {
+            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
             nuovoComune.setId(IDDaEliminare);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaEliminare + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attenzione");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
@@ -147,27 +140,22 @@ public class Controller_SezioneModificaComuni implements Initializable
 
     }
 
-    private void setCuratori (List<ClsCuratore> curatori)
-    {
-        for(int i = 0; i<curatori.size();i++)
-        {
+    private void setCuratori(List<ClsCuratore> curatori) {
+        for (int i = 0; i < curatori.size(); i++) {
             ClsCuratoreVisual c = u.convertFromClsCuratore(curatori.get(i));
             elencoCuratori.getItems().add(c);
         }
     }
 
-    private void setComuni (List<ClsComune> comuni)
-    {
-        for(int i = 0; i<comuni.size();i++)
-        {
+    private void setComuni(List<ClsComune> comuni) {
+        for (int i = 0; i < comuni.size(); i++) {
             ClsComuneVisual c = u.convertFromClsComune(comuni.get(i));
 
             elencoComuni.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -180,58 +168,47 @@ public class Controller_SezioneModificaComuni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private String[] convertiCuratoriCoinvoltiInArray(String input)
-    {
+    private String[] convertiCuratoriCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
         return tmp;
     }
 
-    public String eliminaComune(MouseEvent mouseEvent)
-    {
+    public String eliminaComune(MouseEvent mouseEvent) {
         String IDdaEliminare = u.getValueFromCombobox(this.sceltaComune);
 
-        if(!(Objects.equals(IDdaEliminare, "")))
-        {
+        if (!(Objects.equals(IDdaEliminare, ""))) {
             return IDdaEliminare;
-        }
-        else
-        {
+        } else {
             return "";
         }
     }
 
-    public ClsComune inserisciComune(MouseEvent mouseEvent)
-    {
+    public ClsComune inserisciComune(MouseEvent mouseEvent) {
         ClsComune comune = new ClsComune();
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
         List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
 
-        for(int i = 0; i<Curatori.size();i++)
-        {
-            for(int j = 0; j<curatoriCoinvoltiArray.length;j++)
-            {
-                if(Objects.equals(Curatori.get(i).getId(), curatoriCoinvoltiArray[j]))
-                {
+        for (int i = 0; i < Curatori.size(); i++) {
+            for (int j = 0; j < curatoriCoinvoltiArray.length; j++) {
+                if (Objects.equals(Curatori.get(i).getId(), curatoriCoinvoltiArray[j])) {
                     curatoriAssociatiToComune.add(Curatori.get(i));
                 }
             }
         }
 
-        if(!curatoriAssociatiToComune.isEmpty() &&
+        if (!curatoriAssociatiToComune.isEmpty() &&
                 !Objects.equals(u.getValueFromTextField(coordinataXTF), "") &&
                 !Objects.equals(u.getValueFromTextField(coordinataYTF), "") &&
                 !Objects.equals(u.getValueFromTextField(descrizioneTF), "") &&
                 !Objects.equals(u.getValueFromTextField(nomeTF), "") &&
                 !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
-                !Objects.equals(u.getValueFromTextField(superficieTF), ""))
-        {
+                !Objects.equals(u.getValueFromTextField(superficieTF), "")) {
             comune.setIdCreatore(0L);
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
             comune.setNome(u.getValueFromTextField(nomeTF));
@@ -240,24 +217,19 @@ public class Controller_SezioneModificaComuni implements Initializable
             comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
             comune.setCuratoriAssociati(new ArrayList<>());
 
-          return comune;
-        }
-        else
-        {
+            return comune;
+        } else {
             return null;
         }
     }
 
-    public void vediInformazoniAttualiComune(MouseEvent mouseEvent)
-    {
+    public void vediInformazoniAttualiComune(MouseEvent mouseEvent) {
         Long idComune = Long.valueOf(u.getValueFromCombobox(sceltaComune));
 
         ClsComuneVisual c = new ClsComuneVisual();
 
-        for(int i=0;i<comuni.size();i++)
-        {
-            if(Objects.equals(comuni.get(i).getId(), idComune))
-            {
+        for (int i = 0; i < comuni.size(); i++) {
+            if (Objects.equals(comuni.get(i).getId(), idComune)) {
                 c = u.convertFromClsComune(comuni.get(i));
                 this.nomeTF.setText(c.getNome());
                 this.descrizioneTF.setText(c.getDescrizione());
@@ -269,7 +241,6 @@ public class Controller_SezioneModificaComuni implements Initializable
             }
         }
     }
-
 
 
 }

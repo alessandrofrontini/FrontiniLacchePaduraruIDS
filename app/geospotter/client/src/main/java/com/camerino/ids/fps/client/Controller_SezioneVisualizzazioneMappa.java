@@ -10,29 +10,24 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Controller_SezioneVisualizzazioneMappa
-{
+public class Controller_SezioneVisualizzazioneMappa {
 
 
-    public void navigateToSezioneVisualizzazioneItinerari (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazioneItinerari.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazioneItinerari(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazioneItinerari.fxml", mouseEvent);
     }
 
 
-    public void navigateToSezioneVisualizzazioneNodi (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazioneNodi.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazioneNodi(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazioneNodi.fxml", mouseEvent);
     }
 
-    public void navigateToSezioneVisualizzazioneComuni (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazioneComuni.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazioneComuni(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazioneComuni.fxml", mouseEvent);
     }
 
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -45,8 +40,7 @@ public class Controller_SezioneVisualizzazioneMappa
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 }

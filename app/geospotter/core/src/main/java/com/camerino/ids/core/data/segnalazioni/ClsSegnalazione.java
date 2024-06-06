@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.util.Objects;
-
 /**
  * TODO: commentare
  */
@@ -26,10 +24,12 @@ public class ClsSegnalazione {
     public Long getIdCuratore() {
         return idCuratore;
     }
+
     @Deprecated
     public void setIdCuratore(Long idCuratore) {
         this.idCuratore = idCuratore;
     }
+
     public Long getId() {
         return (id);
     }
@@ -57,8 +57,7 @@ public class ClsSegnalazione {
 
     //endregion
 
-    public String visualizzaSegnalazione()
-    {
+    public String visualizzaSegnalazione() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";

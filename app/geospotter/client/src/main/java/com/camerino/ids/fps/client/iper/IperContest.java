@@ -1,5 +1,4 @@
 package com.camerino.ids.fps.client.iper;
 
-public class IperContest
-{
+public class IperContest {
 }

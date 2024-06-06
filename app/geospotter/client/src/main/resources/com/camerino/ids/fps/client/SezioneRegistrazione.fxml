@@ -3,34 +3,45 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneRegistrazione">
-   <children>
-      <Text fontSmoothingType="LCD" layoutX="233.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrati">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="38.0" />
-         </font>
-      </Text>
-      <Text layoutX="20.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esplora il nostro bellissimo paese con GeoSpotter! Scopri luoghi nascosti, paesaggi mozzafiato e curiosità locali. &#10;Unisciti a milioni di appassionati di geografia e metti alla prova la tua conoscenza del territorio italiano. &#10;Registrati su GeoSpotter e inizia il tuo viaggio virtuale attraverso le strade, i borghi e le meraviglie d’Italia!" wrappingWidth="559.8251647949219">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Text>
-      <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0" prefWidth="543.0" promptText="Username">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="394.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="26.0" prefWidth="191.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="20.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="191.0" text="Home" />
-      <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0" prefWidth="543.0" promptText="Password">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </PasswordField>
-      <PasswordField fx:id="sezioneRegistrazioneTextBoxRipetiPassword" layoutX="20.0" layoutY="313.0" prefHeight="46.0" prefWidth="543.0" promptText="Ripeti Password">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </PasswordField>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneRegistrazione">
+    <children>
+        <Text fontSmoothingType="LCD" layoutX="233.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Registrati">
+            <font>
+                <Font name="Franklin Gothic Medium Cond" size="38.0"/>
+            </font>
+        </Text>
+        <Text layoutX="20.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Esplora il nostro bellissimo paese con GeoSpotter! Scopri luoghi nascosti, paesaggi mozzafiato e curiosità locali. &#10;Unisciti a milioni di appassionati di geografia e metti alla prova la tua conoscenza del territorio italiano. &#10;Registrati su GeoSpotter e inizia il tuo viaggio virtuale attraverso le strade, i borghi e le meraviglie d’Italia!"
+              wrappingWidth="559.8251647949219">
+            <font>
+                <Font size="10.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0"
+                   prefWidth="543.0" promptText="Username">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </TextField>
+        <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="394.0" layoutY="547.0" mnemonicParsing="false"
+                onMouseClicked="#registra" prefHeight="26.0" prefWidth="191.0" style="-fx-background-color: #15ad36;"
+                text="Conferma" textFill="WHITE"/>
+        <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="20.0" layoutY="547.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneNavigazione" prefHeight="26.0" prefWidth="191.0" text="Home"/>
+        <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0"
+                       prefWidth="543.0" promptText="Password">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </PasswordField>
+        <PasswordField fx:id="sezioneRegistrazioneTextBoxRipetiPassword" layoutX="20.0" layoutY="313.0"
+                       prefHeight="46.0" prefWidth="543.0" promptText="Ripeti Password">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </PasswordField>
+    </children>
 </AnchorPane>

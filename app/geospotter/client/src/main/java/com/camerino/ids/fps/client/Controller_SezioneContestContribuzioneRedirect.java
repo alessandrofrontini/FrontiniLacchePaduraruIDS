@@ -10,14 +10,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Controller_SezioneContestContribuzioneRedirect
-{
+public class Controller_SezioneContestContribuzioneRedirect {
 
 
-
-
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -30,18 +26,15 @@ public class Controller_SezioneContestContribuzioneRedirect
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void navigateToSezioneContestContribuzionePartecipazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneContestContribuzionePartecipazione.fxml",mouseEvent);
+    public void navigateToSezioneContestContribuzionePartecipazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneContestContribuzionePartecipazione.fxml", mouseEvent);
     }
 
-    public void navigateToSezioneContestContribuzionePartecipante (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneContestContribuzionePartecipante.fxml",mouseEvent);
+    public void navigateToSezioneContestContribuzionePartecipante(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneContestContribuzionePartecipante.fxml", mouseEvent);
     }
 }

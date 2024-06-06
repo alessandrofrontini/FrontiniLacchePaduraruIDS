@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class SRDCItinerari {
     HttpServletRequest request;
+
     @Autowired
     public SRDCItinerari(HttpServletRequest request) {
         this.request = request;
@@ -19,22 +20,22 @@ public class SRDCItinerari {
 
 
     public List<ClsRdcItinerario> getAllRDCItinerari() {
-        return ((ClsCuratore)request.getServletContext().getAttribute("user"))._getAllRDCItinerari();
+        return ((ClsCuratore) request.getServletContext().getAttribute("user"))._getAllRDCItinerari();
     }
 
     public List<ClsRdcItinerario> getRDCItinerarioById(Long idRDCItinerario) {
-        return ((ClsCuratore)request.getServletContext().getAttribute("user")).getRDCItinerarioById(idRDCItinerario);
+        return ((ClsCuratore) request.getServletContext().getAttribute("user")).getRDCItinerarioById(idRDCItinerario);
     }
 
     public boolean deleteRDCItinerarioById(Long idRDCItinerario) {
-        return ((ClsCuratore)request.getServletContext().getAttribute("user")).deleteRDCItinerario(idRDCItinerario);
+        return ((ClsCuratore) request.getServletContext().getAttribute("user")).deleteRDCItinerario(idRDCItinerario);
     }
 
     public boolean putRDCItinerario(ClsRdcItinerario rdc) {
-        return ((ClsCuratore)request.getServletContext().getAttribute("user")).putRDCItinerario(rdc);
+        return ((ClsCuratore) request.getServletContext().getAttribute("user")).putRDCItinerario(rdc);
     }
 
     public boolean postRDCItinerario(ClsRdcItinerario rdc) {
-        return ((ClsContributor)request.getServletContext().getAttribute("user")).postRDCItinerario(rdc);
+        return ((ClsContributor) request.getServletContext().getAttribute("user")).postRDCItinerario(rdc);
     }
 }

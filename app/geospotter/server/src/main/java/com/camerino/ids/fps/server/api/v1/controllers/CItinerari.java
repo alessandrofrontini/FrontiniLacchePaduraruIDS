@@ -12,8 +12,8 @@ import java.util.List;
 
 @Controller
 public class CItinerari {
+    public final static String mapping = BaseUrl.baseUrl + "/itinerari";
     SItinerari sItinerari;
-    public final static String mapping = BaseUrl.baseUrl+"/itinerari";
 
     @Autowired
     public CItinerari(SItinerari sItinerari) {
@@ -22,9 +22,9 @@ public class CItinerari {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsItinerario>> getItinerari(
-            @RequestParam(name = "idItinerario", required = false)  Long idItinerario
+            @RequestParam(name = "idItinerario", required = false) Long idItinerario
     ) {
-        if(idItinerario == null)
+        if (idItinerario == null)
             return ResponseEntity.ok(sItinerari.getAllItinerari());
         return ResponseEntity.ok(sItinerari.getItinerarioById(idItinerario));
     }
@@ -32,8 +32,8 @@ public class CItinerari {
     @PostMapping(mapping)
     public ResponseEntity<String> postItinerari(
             @RequestBody ClsItinerario itinerario
-    ){
-        if(sItinerari.postItinerario(itinerario))
+    ) {
+        if (sItinerari.postItinerario(itinerario))
             return ResponseEntity.ok("OK");
         return ResponseEntity.ok("ERROR");
     }
@@ -41,17 +41,17 @@ public class CItinerari {
     @PutMapping(mapping)
     public ResponseEntity<String> putItinerari(
             @RequestBody ClsItinerario itinerario
-    ){
-        if(sItinerari.putItinerario(itinerario))
+    ) {
+        if (sItinerari.putItinerario(itinerario))
             return ResponseEntity.ok("OK");
         return ResponseEntity.ok("ERROR");
     }
 
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteItinerari(
-            @RequestParam(name = "idItinerario", required = false)  Long idItinerario
-    ){
-        if(sItinerari.deleteItinerario(idItinerario))
+            @RequestParam(name = "idItinerario", required = false) Long idItinerario
+    ) {
+        if (sItinerari.deleteItinerario(idItinerario))
             return ResponseEntity.ok("OK");
         return ResponseEntity.ok("ERROR");
     }

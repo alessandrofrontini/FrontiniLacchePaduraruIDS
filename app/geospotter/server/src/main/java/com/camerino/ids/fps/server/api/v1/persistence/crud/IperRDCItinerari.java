@@ -21,9 +21,9 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
 
     @Override
     public List<ClsRdcItinerario> get(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return new ArrayList<>(repoRDCItinerari.findAll());
-        if(filters.containsKey("idRDCItinerario")) {
+        if (filters.containsKey("idRDCItinerario")) {
             List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRDCItinerario").toString());
             return new ArrayList<>(repoRDCItinerari.findAllById(ids));
@@ -36,9 +36,9 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsRdcItinerario object) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRDCItinerario"))
+        if (!filters.containsKey("idRDCItinerario"))
             return false;
         repoRDCItinerari.save(object);
         return true;
@@ -52,9 +52,9 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRDCItinerario"))
+        if (!filters.containsKey("idRDCItinerario"))
             return false;
         repoRDCItinerari.deleteById(filters.get("idRDCItinerario").toString());
         return true;

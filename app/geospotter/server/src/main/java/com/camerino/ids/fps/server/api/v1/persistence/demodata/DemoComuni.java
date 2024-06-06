@@ -1,8 +1,6 @@
 package com.camerino.ids.fps.server.api.v1.persistence.demodata;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoComuni;
 import org.springframework.boot.CommandLineRunner;
@@ -48,7 +46,7 @@ public class DemoComuni {
         ClsComune comune = new ClsComune();
         comune.setNome("Camerino");
         comune.setDescrizione("Comune di Camerino");
-        comune.setPosizione(new Posizione(13,24));
+        comune.setPosizione(new Posizione(13, 24));
 //        List<ClsCuratore> cur1 = new ArrayList<>();
 //        cur1.add(c1);
 //        comune.setCuratoriAssociati(new ArrayList<>(cur1));
@@ -95,7 +93,6 @@ public class DemoComuni {
 //        cur4.add(c4);
 //        comune.setCuratoriAssociati(new ArrayList<>(cur4));
         comuni.add(com3);
-
 
 
         return args -> repo.saveAll(comuni);

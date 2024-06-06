@@ -2,8 +2,7 @@ package com.camerino.ids.fps.client.visual;
 
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 
-public class ClsUtenteJWTDecode
-{
+public class ClsUtenteJWTDecode {
     private String jwt;
 
     private String username;

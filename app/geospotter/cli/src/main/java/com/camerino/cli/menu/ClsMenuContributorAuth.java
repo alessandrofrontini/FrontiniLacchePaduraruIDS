@@ -12,12 +12,14 @@ import static com.camerino.cli.actions.ClsCommonActions.*;
 import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 
-public class ClsMenuContributorAuth implements IMenu{
-    private ClsContributorAutorizzato user;
+public class ClsMenuContributorAuth implements IMenu {
     Scanner in = new Scanner(System.in);
+    private ClsContributorAutorizzato user;
+
     public ClsMenuContributorAuth(ClsContributorAutorizzato user) {
         this.user = user;
     }
+
     @Override
     public void menu() {
         boolean exit = false;
@@ -36,7 +38,7 @@ public class ClsMenuContributorAuth implements IMenu{
             println("6) Modifica Itinerario");
             println("0) Esci");
             print(">> ");
-            switch (in.nextLine()){//Gli altri case sono placeholder
+            switch (in.nextLine()) {//Gli altri case sono placeholder
                 case "1" -> aggiungiNodo(user);
                 case "2" -> menuModificaNodo();
                 case "3" -> menuEliminaNodo();
@@ -54,16 +56,16 @@ public class ClsMenuContributorAuth implements IMenu{
         tmp.put("id", in.nextLine());
         //TODO: aggiungere get nodo a user o usare le mock?
         ClsNodo old = MockLocator.getMockNodi().get(null).get(0);
-        if(old==null){
+        if (old == null) {
             println("Nessun Nodo Trovato");
             return;
         }
         ClsNodo nodo = Input.modificaNodo(old);
-        if(nodo==null) return;
+        if (nodo == null) return;
         user.modificaNodo(nodo.getId(), nodo);
     }
 
-    private void menuEliminaNodo(){
+    private void menuEliminaNodo() {
         print("Inserisci id del nodo da eliminare: ");
         eliminaNodo(user, in.nextLine());
         println("Nodo eliminato");

@@ -4,20 +4,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneCuratoreVisualizzazioneSegnalazioni">
-   <children>
-      <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VISUALIZZAZIONE SEGNALAZIONI" wrappingWidth="343.99998474121094">
-         <font>
-            <Font size="22.0" />
-         </font></Text>
-      <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egregio signor Curatore BENTORNATO.&#10;Consulti in santa pace le sue segnalazioni e apporti (dati i suoi grandi, immensi poteri di azione)&#10;le dovute modifiche consultando i feedback che tutti gli utenti ci mandano.&#10;Con lei GeoSpotter è un posto più tranquillo.&#10;" />
-      <TableView fx:id="elencoSegnalazioni" layoutX="14.0" layoutY="140.0" prefHeight="310.0" prefWidth="574.0">
-        <columns>
-          <TableColumn fx:id="idColonna" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="idElementoColonna" prefWidth="118.60001373291016" text="ID ELEMENTO" />
-            <TableColumn fx:id="descrizioneColonna" prefWidth="379.7999572753906" text="Descrizione" />
-        </columns>
-      </TableView>
-      <Button layoutX="26.0" layoutY="540.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneCuratoreVisualizzazioneSegnalazioni">
+    <children>
+        <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VISUALIZZAZIONE SEGNALAZIONI"
+              wrappingWidth="343.99998474121094">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <Text layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Egregio signor Curatore BENTORNATO.&#10;Consulti in santa pace le sue segnalazioni e apporti (dati i suoi grandi, immensi poteri di azione)&#10;le dovute modifiche consultando i feedback che tutti gli utenti ci mandano.&#10;Con lei GeoSpotter è un posto più tranquillo.&#10;"/>
+        <TableView fx:id="elencoSegnalazioni" layoutX="14.0" layoutY="140.0" prefHeight="310.0" prefWidth="574.0">
+            <columns>
+                <TableColumn fx:id="idColonna" prefWidth="75.0" text="ID"/>
+                <TableColumn fx:id="idElementoColonna" prefWidth="118.60001373291016" text="ID ELEMENTO"/>
+                <TableColumn fx:id="descrizioneColonna" prefWidth="379.7999572753906" text="Descrizione"/>
+            </columns>
+        </TableView>
+        <Button layoutX="26.0" layoutY="540.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home"/>
+    </children>
 </AnchorPane>

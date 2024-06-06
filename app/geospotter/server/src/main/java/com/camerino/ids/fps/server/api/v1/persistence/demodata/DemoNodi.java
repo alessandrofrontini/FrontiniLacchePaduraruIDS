@@ -24,7 +24,7 @@ public class DemoNodi {
         nodo1.setIdComuneAssociato(1L);
         nodo1.setaTempo(true);
         nodo1.setDescrizione("Ciao");
-        nodo1.setPosizione(new Posizione(12,23));
+        nodo1.setPosizione(new Posizione(12, 23));
         nodo1.setIdCreatore(1L);
         nodi.add(nodo1);
 
@@ -34,7 +34,7 @@ public class DemoNodi {
         nodo2.setIdComuneAssociato(1L);
         nodo2.setaTempo(true);
         nodo2.setDescrizione("Ciao");
-        nodo2.setPosizione(new Posizione(12,23));
+        nodo2.setPosizione(new Posizione(12, 23));
         nodi.add(nodo2);
 
         ClsNodo nodo3 = new ClsNodo();

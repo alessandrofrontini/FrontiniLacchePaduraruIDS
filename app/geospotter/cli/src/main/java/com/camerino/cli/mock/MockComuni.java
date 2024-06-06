@@ -11,13 +11,11 @@ import java.util.Map;
 /**
  * Classe che emula molto semplicemente
  */
-public class MockComuni implements IPersistenceModel<ClsComune>
-{
+public class MockComuni implements IPersistenceModel<ClsComune> {
     List<ClsComune> comuni = new ArrayList<ClsComune>();
     long id = 0;
 
-    public MockComuni()
-    {
+    public MockComuni() {
         this.generaComuni();
     }
 
@@ -25,14 +23,11 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
     @Override
-    public List<ClsComune> get(Map<String, Object> filters)
-    {
+    public List<ClsComune> get(Map<String, Object> filters) {
         List<ClsComune> tmp = new ArrayList<ClsComune>();
 
-        if(filters != null)
-        {
-            if(filters.containsKey("id"))
-            {
+        if (filters != null) {
+            if (filters.containsKey("id")) {
                 tmp.add(filterById(filters.get("id")));
                 return tmp;
             }
@@ -42,11 +37,9 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     @Override
-    public boolean update(Map<String, Object> filters, ClsComune object)
-    {
-        if(filters != null)
-        {
-            if(filters.containsKey("id"))
+    public boolean update(Map<String, Object> filters, ClsComune object) {
+        if (filters != null) {
+            if (filters.containsKey("id"))
                 return modificaComune(filters.get("id").toString(), object);
             return false;
         }
@@ -54,13 +47,11 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     @Override
-    public boolean insert(ClsComune comune)
-    {
+    public boolean insert(ClsComune comune) {
         this.id++;
 
-        if(!this.comuni.contains(comune))
-        {
-            comune.setId(""+this.id);
+        if (!this.comuni.contains(comune)) {
+            comune.setId("" + this.id);
             return this.comuni.add(comune);
         }
 
@@ -69,12 +60,10 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     @Override
-    public boolean delete(Map<String, Object> filters)
-    {
+    public boolean delete(Map<String, Object> filters) {
         ClsComune c = this.filterById(filters.get("id"));
 
-        if(c != null)
-        {
+        if (c != null) {
             return this.comuni.remove(this.comuni.remove(c));
         }
         return false;
@@ -82,26 +71,23 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
     // ------------------------------ Metodi Privati ------------------------------------------
-    private boolean modificaComune(Long id, ClsComune comune){
+    private boolean modificaComune(Long id, ClsComune comune) {
         ClsComune tmp = filterById(comune.getId());
         int index = comuni.indexOf(tmp);
-        if(index<0)
+        if (index < 0)
             return false;
         comuni.set(index, comune);
         return true;
     }
 
-    private ClsComune filterById(Object id)
-    {
+    private ClsComune filterById(Object id) {
         return comuni.stream().filter(comune -> comune.getId().equals(id)).toList().get(0);
     }
 
 //endregion
 
 
-
-    private void generaComuni()
-    {
+    private void generaComuni() {
         //ID numeri dispari
 
 
@@ -112,7 +98,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         comune1.setAbitanti(20000);
         comune1.setSuperficie(49900.94);
         comune1.setDescrizione("Comune#1 autogenerato per testing.");
-        comune1.setPosizione(new Posizione(50,20));
+        comune1.setPosizione(new Posizione(50, 20));
         this.comuni.add(comune1);
 
         ClsComune comune2 = new ClsComune();
@@ -122,7 +108,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         comune2.setAbitanti(65600);
         comune2.setSuperficie(903400.94);
         comune2.setDescrizione("Comune#2 autogenerato per testing.");
-        comune2.setPosizione(new Posizione(60,50));
+        comune2.setPosizione(new Posizione(60, 50));
         this.comuni.add(comune2);
 
         ClsComune comune3 = new ClsComune();
@@ -132,7 +118,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         comune3.setAbitanti(54432);
         comune3.setSuperficie(120344.94);
         comune3.setDescrizione("Comune#3 autogenerato per testing.");
-        comune3.setPosizione(new Posizione(102,456));
+        comune3.setPosizione(new Posizione(102, 456));
         this.comuni.add(comune3);
     }
 }

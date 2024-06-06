@@ -21,11 +21,14 @@ public interface IApi<T> {
             .setSerializationInclusion(Include.NON_NULL);
 
     List<T> Get(ClsTurista user, String query);
+
     boolean Post(ClsTurista user, T object);
+
     boolean Put(ClsTurista user, T object);
+
     boolean Delete(ClsTurista user, Pair<String, String> name_id);
 
-    default HttpRequest.BodyPublisher createBody(T object){
+    default HttpRequest.BodyPublisher createBody(T object) {
         HttpRequest.BodyPublisher bodyPublisher = null;
         try {
             bodyPublisher = HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(object));
@@ -36,7 +39,8 @@ public interface IApi<T> {
 
         return bodyPublisher;
     }
-    default HttpResponse<String> execute(HttpRequest request){
+
+    default HttpResponse<String> execute(HttpRequest request) {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpResponse<String> response;
         try {
@@ -47,7 +51,7 @@ public interface IApi<T> {
         return response;
     }
 
-    default List<T> deserialize(String responseBody, TypeReference<List<T>> type){
+    default List<T> deserialize(String responseBody, TypeReference<List<T>> type) {
         try {
             return mapper.readValue(responseBody, type);
         } catch (JsonProcessingException e) {

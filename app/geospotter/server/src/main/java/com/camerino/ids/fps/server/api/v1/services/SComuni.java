@@ -19,22 +19,22 @@ public class SComuni {
     }
 
     public List<ClsComune> getAllComuni() {
-        return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getAllComuni();
+        return ((ClsTurista) this.request.getServletContext().getAttribute("user")).getAllComuni();
     }
 
     public List<ClsComune> getComuneById(Long idComune) {
-        return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getComuneById(idComune);
+        return ((ClsTurista) this.request.getServletContext().getAttribute("user")).getComuneById(idComune);
     }
 
     public boolean deleteComuneById(Long idComune) {
-        return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
+        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
     }
 
     public boolean postComune(ClsComune comune) {
-        return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).inserisciComune(comune);
+        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).inserisciComune(comune);
     }
 
     public boolean putComune(ClsComune comune) {
-        return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).modificaComune(comune, comune.getId());
+        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).modificaComune(comune, comune.getId());
     }
 }

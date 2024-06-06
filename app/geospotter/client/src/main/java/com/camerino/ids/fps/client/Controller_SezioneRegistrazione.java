@@ -14,48 +14,42 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Controller_SezioneRegistrazione
-{
+public class Controller_SezioneRegistrazione {
 
     @FXML
-    Button sezioneRegistrazioneBTNConferma,sezioneRegistrazioneBTNVaiAllaHome;
+    Button sezioneRegistrazioneBTNConferma, sezioneRegistrazioneBTNVaiAllaHome;
 
     @FXML
     TextField sezioneRegistrazioneTextBoxRipetiPassword, sezioneRegistrazioneTextBoxPassword, sezioneRegistrazioneTextBoxUsername;
 
-    public void registra ()
-    {
+    public void registra() {
         String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
         String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
         String ripetiPassword = getNameFromTextField(sezioneRegistrazioneTextBoxRipetiPassword);
 
-        if(password.equals(ripetiPassword))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (password.equals(ripetiPassword)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("ToString");
             alert.setHeaderText(username + ":" + password);
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-                alert.setTitle("Reinserisci password");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Reinserisci password");
             alert.show();
         }
     }
 
     //region Navigazione
     public void navigateToSezioneNavigazione(MouseEvent mouseEvent) {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
     public void navigateToSezioneLogIn(MouseEvent mouseEvent) {
-        this.SwitchScene("SezioneLogIn.fxml",mouseEvent);
+        this.SwitchScene("SezioneLogIn.fxml", mouseEvent);
     }
 
     //region Navigazione - Metodi Privati
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
             //Utilities grafiche
@@ -73,22 +67,23 @@ public class Controller_SezioneRegistrazione
     //endregion
 
     //region Utilities
+
     /**
      * Metodo di comodo che elimina il contenuto di una textArea
+     *
      * @param t textArea
      */
-    private void clearTextFromTextField(TextField t)
-    {
+    private void clearTextFromTextField(TextField t) {
         t.clear();
     }
 
     /**
      * Metodo di comodo che estrae il contenuto da una textField
+     *
      * @param tf textField
      * @return Contenuto
      */
-    private String getNameFromTextField (TextField tf)
-    {
+    private String getNameFromTextField(TextField tf) {
         String name = tf.getText();
         tf.clear();
         return name;

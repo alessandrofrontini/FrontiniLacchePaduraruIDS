@@ -14,20 +14,19 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 /**
  * Questa classe contiene i menu comuni di input dati
  */
-public class Input
-{
+public class Input {
 
     //region Input Nodi
-    public static ClsNodo inserisciNodo(){
+    public static ClsNodo inserisciNodo() {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsNodo nodo = new ClsNodo();
         Posizione pos = new Posizione();
-        while (!ok){
+        while (!ok) {
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
             print("Inserisci tipo:\n 1)Commerciale\n2)Culturale\n3)Culinario\n>> ");
-            switch (in.nextLine()){
+            switch (in.nextLine()) {
                 case "1" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.COMMERCIALE);
                 case "2" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
                 case "3" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULINARIO);
@@ -46,15 +45,15 @@ public class Input
         return nodo;
     }
 
-    public static ClsNodo modificaNodo(ClsNodo nodo){
+    public static ClsNodo modificaNodo(ClsNodo nodo) {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         Posizione pos = nodo.getPosizione();
-        while (!ok){
+        while (!ok) {
             print(String.format("Inserisci nome (old: %s): ", nodo.getNome()));
             nodo.setNome(in.nextLine());
             print(String.format("Inserisci tipo:\n1)Commerciale\n2)Culturale\n3)Culinario\n(old: %s)\n>> ", nodo.getTipologiaNodo()));
-            switch (in.nextLine()){//TODO: nuovo "Input" per selezione tipo nodo
+            switch (in.nextLine()) {//TODO: nuovo "Input" per selezione tipo nodo
                 case "1" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.COMMERCIALE);
                 case "2" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
                 case "3" -> nodo.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULINARIO);
@@ -76,13 +75,12 @@ public class Input
     //endregion
 
     //region Input Comuni
-    public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp)
-    {
+    public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp) {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsComune comune = new ClsComune();
         Posizione pos = new Posizione();
-        while (!ok){
+        while (!ok) {
             print("Inserisci nome: ");
             comune.setNome(in.nextLine());
             print("Inserisci coordinata X del nodo: ");
@@ -107,21 +105,20 @@ public class Input
     //endregion
 
 
-
-    public static ClsItinerario richiediItinerario(){
+    public static ClsItinerario richiediItinerario() {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsItinerario itinerario = new ClsItinerario();
         Long idNodo = "0";
-        while (!ok){
+        while (!ok) {
             print("Inserisci nome itinerario: ");
             itinerario.setNome(in.nextLine());
             print("E' ordinato (s/n)?: ");
-            itinerario.setOrdinato(in.nextLine().charAt(0)=='s');
-            while (!idNodo.equals("-1")){
+            itinerario.setOrdinato(in.nextLine().charAt(0) == 's');
+            while (!idNodo.equals("-1")) {
                 print("Inserisci id del nodo da aggiungere (-1 per terminare l'inserimento): ");
                 idNodo = in.nextLine();
-                if (idNodo.equals("-1") && itinerario.getTappe().size()==0)
+                if (idNodo.equals("-1") && itinerario.getTappe().size() == 0)
                     print("Non puoi creare un itinerario con 0 tappe");
                 else if (idNodo.equals("-1"))
                     break;
@@ -134,11 +131,11 @@ public class Input
         return itinerario;
     }
 
-    public static Credenziali richiediCredenziali(){
+    public static Credenziali richiediCredenziali() {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         Credenziali credenziali = new Credenziali();
-        while (!ok){
+        while (!ok) {
             print("Username: ");
             credenziali.setUsername(in.nextLine());
             print("Password: ");

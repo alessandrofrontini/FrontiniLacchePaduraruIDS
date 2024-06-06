@@ -26,136 +26,16 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Objects;
 
-public class Controller_SezioneLogin
-{
-    @FXML
-    Button sezioneRegistrazioneBTNRegistrazione,sezioneRegistrazioneBTNVaiAllaHome,sezioneRegistrazioneBTNVaiAlLogin;
-
-    @FXML
-    TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
-
-
+public class Controller_SezioneLogin {
     public static ClsUtenteJWTDecode utente = new ClsUtenteJWTDecode(); //todo: metti qua l'utente
     //region esempio padu TODO
     public static ClsTurista UTENTE = CreaTurista();
+    @FXML
+    Button sezioneRegistrazioneBTNRegistrazione, sezioneRegistrazioneBTNVaiAllaHome, sezioneRegistrazioneBTNVaiAlLogin;
+    @FXML
+    TextField sezioneRegistrazioneTextBoxUsername, sezioneRegistrazioneTextBoxPassword;
 
     //endregion
-
-
-    public void logga ()
-    {
-        String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
-        String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
-
-        Credenziali c = new Credenziali();
-        c.setUsername(username);
-        c.setPassword(password);
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        HttpRequest.BodyPublisher bodyPublisher = null;
-        try {
-            bodyPublisher = HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(c));
-            System.out.println(mapper.writeValueAsString(c));
-        } catch (JsonProcessingException e) {
-            System.out.println(e.getMessage());
-        }
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Content-Type", "application/json")
-                .POST(bodyPublisher)
-                .uri(URI.create("http://localhost:8080/api/v1/login"))
-                .build();
-
-        HttpClient httpClient = HttpClient.newHttpClient();
-        HttpResponse<String> response;
-        try {
-            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            UTENTE = mapper.readValue(response.body(),new TypeReference<ClsTuristaAutenticato>(){});
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        InizializzaUtente();
-        //Controllo server
-        if(TMP_ServizioAutenticazione.login(c))
-        {
-            if(TMP_ServizioAutenticazione.retrieveUtente(c) != null)
-            {
-                utente = TMP_ServizioAutenticazione.retrieveUtente(c);
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Benvenuto");
-                alert.show();
-            }
-            else
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
-                alert.setTitle("Credenziali invalide");
-                alert.show();
-            }
-
-        }
-
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Reinserisci password");
-            alert.show();
-        }
-    }
-
-    private ClsTurista AuthClient(String authorization) {
-        if(authorization == null) {
-            return CreaTurista();
-        }
-        return switch (authorization) {
-            case "turista_aut" -> CreaTuristaAut();
-            case "contr"-> CreaContributor();
-            case "contr_aut" -> CreaContributorAut();
-            case "curatore" -> CreaCuratore();
-            case "animatore" -> CreaAnimatore();
-            case "gdp" -> CreaGDP();
-            default -> throw new RuntimeException("No user");
-        };
-    }
-
-    private void InizializzaUtente() {
-        UTENTE = switch (((ClsTuristaAutenticato)UTENTE).getRuoloUtente()) {
-            case TURISTA_AUTENTICATO -> CreaTuristaAut();
-            case CONTRIBUTOR-> CreaContributor();
-            case CONTRIBUTOR_AUTORIZZATO -> CreaContributorAut();
-            case CURATORE -> CreaCuratore();
-            case ANIMATORE -> CreaAnimatore();
-            case GESTORE_DELLA_PIATTAFORMA -> CreaGDP();
-        };
-        if(UTENTE instanceof ClsTuristaAutenticato tmp){
-            tmp.setId(1L);
-        }
-
-        if(UTENTE instanceof ClsContributor tmp){
-            tmp.setId(1L);
-        }
-
-        if(UTENTE instanceof ClsContributorAutorizzato tmp){
-            tmp.setId(2L);
-        }
-
-        if(UTENTE instanceof ClsAnimatore tmp){
-            tmp.setId(3L);
-        }
-
-        if(UTENTE instanceof ClsCuratore tmp){
-            tmp.setId(4L);
-        }
-
-        if(UTENTE instanceof ClsGestoreDellaPiattaforma tmp){
-            tmp.setId(5L);
-        }
-    }
 
     //region CREA X
     private static ClsTurista CreaTurista() {
@@ -214,17 +94,123 @@ public class Controller_SezioneLogin
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         return user;
     }
+
+    public void logga() {
+        String username = getNameFromTextField(sezioneRegistrazioneTextBoxUsername);
+        String password = getNameFromTextField(sezioneRegistrazioneTextBoxPassword);
+
+        Credenziali c = new Credenziali();
+        c.setUsername(username);
+        c.setPassword(password);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        HttpRequest.BodyPublisher bodyPublisher = null;
+        try {
+            bodyPublisher = HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(c));
+            System.out.println(mapper.writeValueAsString(c));
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .header("Content-Type", "application/json")
+                .POST(bodyPublisher)
+                .uri(URI.create("http://localhost:8080/api/v1/login"))
+                .build();
+
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpResponse<String> response;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            UTENTE = mapper.readValue(response.body(), new TypeReference<ClsTuristaAutenticato>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        InizializzaUtente();
+        //Controllo server
+        if (TMP_ServizioAutenticazione.login(c)) {
+            if (TMP_ServizioAutenticazione.retrieveUtente(c) != null) {
+                utente = TMP_ServizioAutenticazione.retrieveUtente(c);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Benvenuto");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Credenziali invalide");
+                alert.show();
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Reinserisci password");
+            alert.show();
+        }
+    }
+
+    private ClsTurista AuthClient(String authorization) {
+        if (authorization == null) {
+            return CreaTurista();
+        }
+        return switch (authorization) {
+            case "turista_aut" -> CreaTuristaAut();
+            case "contr" -> CreaContributor();
+            case "contr_aut" -> CreaContributorAut();
+            case "curatore" -> CreaCuratore();
+            case "animatore" -> CreaAnimatore();
+            case "gdp" -> CreaGDP();
+            default -> throw new RuntimeException("No user");
+        };
+    }
+
+    private void InizializzaUtente() {
+        UTENTE = switch (((ClsTuristaAutenticato) UTENTE).getRuoloUtente()) {
+            case TURISTA_AUTENTICATO -> CreaTuristaAut();
+            case CONTRIBUTOR -> CreaContributor();
+            case CONTRIBUTOR_AUTORIZZATO -> CreaContributorAut();
+            case CURATORE -> CreaCuratore();
+            case ANIMATORE -> CreaAnimatore();
+            case GESTORE_DELLA_PIATTAFORMA -> CreaGDP();
+        };
+        if (UTENTE instanceof ClsTuristaAutenticato tmp) {
+            tmp.setId(1L);
+        }
+
+        if (UTENTE instanceof ClsContributor tmp) {
+            tmp.setId(1L);
+        }
+
+        if (UTENTE instanceof ClsContributorAutorizzato tmp) {
+            tmp.setId(2L);
+        }
+
+        if (UTENTE instanceof ClsAnimatore tmp) {
+            tmp.setId(3L);
+        }
+
+        if (UTENTE instanceof ClsCuratore tmp) {
+            tmp.setId(4L);
+        }
+
+        if (UTENTE instanceof ClsGestoreDellaPiattaforma tmp) {
+            tmp.setId(5L);
+        }
+    }
     //endregion
 
-    public void loggaBypass()
-    {
+    public void loggaBypass() {
         Credenziali c = new Credenziali();
         c.setUsername("gdp");
         c.setPassword("gdp");
-        if(TMP_ServizioAutenticazione.retrieveUtente(c) != null)
-        {
+        if (TMP_ServizioAutenticazione.retrieveUtente(c) != null) {
             utente = TMP_ServizioAutenticazione.retrieveUtente(c);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Benvenuto");
             alert.show();
         }
@@ -233,23 +219,22 @@ public class Controller_SezioneLogin
 
     //region Navigazione
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
         this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void navigateToSezioneRegistrazione(MouseEvent mouseEvent)
-    {
+    public void navigateToSezioneRegistrazione(MouseEvent mouseEvent) {
         this.SwitchScene("SezioneRegistrazione.fxml", mouseEvent);
     }
 
     //region Navigazione - Metodi privati
+
     /**
      * Metodo di comodo che utile alla navigazione tra le scene
+     *
      * @param nomeScena scena che si vuole cambiare
      */
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -266,31 +251,29 @@ public class Controller_SezioneLogin
     //endregion
 
     //region Utilities
+
     /**
      * Metodo di comodo che elimina il contenuto di una textArea
+     *
      * @param t textArea
      */
-    private void clearTextFromTextField(TextField t)
-    {
+    private void clearTextFromTextField(TextField t) {
         t.clear();
     }
 
     /**
      * Metodo di comodo che estrae il contenuto da una textField
+     *
      * @param tf textField
      * @return Contenuto
      */
-    private String getNameFromTextField (TextField tf)
-    {
+    private String getNameFromTextField(TextField tf) {
         String name = tf.getText();
         tf.clear();
         return name;
     }
 
     //endregion
-
-
-
 
 
 }

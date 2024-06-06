@@ -1,6 +1,5 @@
 package com.camerino.ids.fps.client;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
@@ -23,10 +22,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class Controller_SezioneContestContribuzionePartecipante implements Initializable
-{
+public class Controller_SezioneContestContribuzionePartecipante implements Initializable {
     //region Elementi FXML
     @FXML
     TextField sezioneInserimentoNodiTextFieldNomeDelNodo, sezioneInserimentoNodiTextFieldComuneAssociato, sezioneInserimentoNodiTextFieldCoordinataX, sezioneInserimentoNodiTextFieldCoordinataY, sezioneInserimentoNodiTextFieldDescrizioneDelNodo, sezioneInserimentoNodiTextFieldDataInizio, sezioneInserimentoNodiTextFieldDataFine;
@@ -42,37 +43,37 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     TableView<ClsContestDiContribuzioneVisual> elencoContest;
 
     @FXML
-    TableColumn<ClsContestDiContribuzioneVisual,String> idColonna = new TableColumn<>("ID");
+    TableColumn<ClsContestDiContribuzioneVisual, String> idColonna = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> creatoreColonna = new TableColumn<>("CREATORE");
+    TableColumn<ClsContestDiContribuzioneVisual, String> creatoreColonna = new TableColumn<>("CREATORE");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> durataColonna = new TableColumn<>("DURATA");
+    TableColumn<ClsContestDiContribuzioneVisual, String> durataColonna = new TableColumn<>("DURATA");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> locationColonna = new TableColumn<>("LOCATION");
+    TableColumn<ClsContestDiContribuzioneVisual, String> locationColonna = new TableColumn<>("LOCATION");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> apertoColonna = new TableColumn<>("APERTO");
+    TableColumn<ClsContestDiContribuzioneVisual, String> apertoColonna = new TableColumn<>("APERTO");
 
 
     @FXML
     TableView<ClsNodoVisual> ElencoNodi;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> idImmagineColonna;
+    TableColumn<ClsNodoVisual, String> idImmagineColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> idComuneColonna;
+    TableColumn<ClsNodoVisual, String> idComuneColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> nomeColonna;
+    TableColumn<ClsNodoVisual, String> nomeColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> posizioneColonna;
+    TableColumn<ClsNodoVisual, String> posizioneColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> tipologiaColonna;
+    TableColumn<ClsNodoVisual, String> tipologiaColonna;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> aTempoColonna;
+    TableColumn<ClsNodoVisual, String> aTempoColonna;
 
     @FXML
     ComboBox sceltaNodo;
@@ -85,17 +86,17 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
     //endregion
 
     boolean flag = false;
@@ -105,8 +106,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         contests = new ArrayList<ClsContestDiContribuzione>();
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
@@ -151,8 +151,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<contests.size();i++)
-        {
+        for (int i = 0; i < contests.size(); i++) {
             items.add(contests.get(i).getId().toString());
         }
 
@@ -162,8 +161,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         //region combobox
         ObservableList<String> itemes = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             itemes.add(nodi.get(i).getId().toString());
         }
 
@@ -229,21 +227,18 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     }
 
-    public void inserisciNodo()
-    {
+    public void inserisciNodo() {
         ClsNodo nodo = new ClsNodo();
         Posizione posizione = new Posizione();
         String IDContest = this.partecipaContest(null);
 
-        try
-        {
-            if(!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN))
-            {
+        try {
+            if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
                 posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
                 posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
                 nodo.setPosizione(posizione);
 
-                if(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
+                if (u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), "") ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
@@ -251,8 +246,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
-                        Objects.equals(u.getValueFromCombobox(sceltaContest), null))
-                {
+                        Objects.equals(u.getValueFromCombobox(sceltaContest), null)) {
                     nodo.setIdCreatore(1L);
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
@@ -262,49 +256,38 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if(!u.checkInfoNodo(nodo) || Objects.equals(u.getValueFromCombobox(sceltaContest), null) || Objects.equals(u.getValueFromCombobox(sceltaContest), ""))
-                    {
-                        Alert alert = new Alert (Alert.AlertType.ERROR);
+                    if (!u.checkInfoNodo(nodo) || Objects.equals(u.getValueFromCombobox(sceltaContest), null) || Objects.equals(u.getValueFromCombobox(sceltaContest), "")) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore");
                         alert.setContentText("Controlla le informazioni");
                         alert.show();
-                    }
-                    else
-                    {
-                        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info Nodo");
                         alert.setContentText(nodo.visualizzaNodo());
                         alert.show();
                     }
-                }
-                else
-                {
-                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Errore");
                     alert.setContentText("Controlla le informazioni");
                     alert.show();
                 }
 
 
-            }
-            else
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore");
                 alert.setContentText("Controlla le informazioni");
                 alert.show();
             }
-        }
-        catch (NumberFormatException e)
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
-        }
-        catch (NullPointerException e)
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
@@ -312,29 +295,24 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     }
 
 
-    public void visualizzaInformazioniNodoTemporizzato()
-    {
+    public void visualizzaInformazioniNodoTemporizzato() {
         flag = !flag;
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
     }
 
-    public String partecipaContest(MouseEvent mouseEvent)
-    {
+    public String partecipaContest(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sceltaContest));
 
-        if(controllaConformitaID(IDDaEliminare))
-        {
+        if (controllaConformitaID(IDDaEliminare)) {
             return IDDaEliminare.toString();
-        }
-        else {
+        } else {
             return "";
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -347,13 +325,11 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*
         boolean flag = false;
 
@@ -368,8 +344,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         return true;
     }
 
-    private boolean controllaConformitaIDNodi (Long id)
-    {/*
+    private boolean controllaConformitaIDNodi(Long id) {/*
         if(id==null)
             return false;
         else{
@@ -387,30 +362,24 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         return true;
     }
 
-    private void setContest (List<ClsContestDiContribuzione> contests)
-    {
-        for(int i = 0; i<contests.size();i++)
-        {
+    private void setContest(List<ClsContestDiContribuzione> contests) {
+        for (int i = 0; i < contests.size(); i++) {
             ClsContestDiContribuzioneVisual c = u.convertFromaClsContestDiContribuzione(contests.get(i));
 
             elencoContest.getItems().add(c);
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void setNodiImmagine (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodiImmagine(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             ElencoNodi.getItems().add(c);
@@ -419,27 +388,23 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     }
 
 
-
-    public void inserisciImmagine(MouseEvent mouseEvent)
-    {
+    public void inserisciImmagine(MouseEvent mouseEvent) {
         Long IDContest = Long.valueOf(u.getValueFromCombobox(this.sceltaContest));
         Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
         ClsImmagine i = new ClsImmagine();
 
-        if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
-        {
+        if ((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine)) {
             i.setIdCreatore(1L);
             i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
 
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
-            alert.setContentText(i.visualizzaImmagine() + "\n\n IDCONTEST: "+ IDContest);
+            alert.setContentText(i.visualizzaImmagine() + "\n\n IDCONTEST: " + IDContest);
             alert.show();
-        }
-        else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Errore");
             alert.show();

@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsRDCVisual
-{
+public class ClsRDCVisual {
     public Long idRichiesta;
     public String azioneDiContribuzione;
     public String stato;

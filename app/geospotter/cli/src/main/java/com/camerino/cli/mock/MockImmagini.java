@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //TODO:implementare
-public class MockImmagini implements IPersistenceModel<ClsImmagine>
-{
+public class MockImmagini implements IPersistenceModel<ClsImmagine> {
     private List<ClsImmagine> immagini = new ArrayList<>();
     //TODO:add to vpp
     private long idCounter = 0;
@@ -36,8 +35,7 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     }
     //endregion
 
-    private void generaImmagini()
-    {
+    private void generaImmagini() {
         ClsImmagine immagine1 = new ClsImmagine();
         immagine1.setId("1");
         immagine1.setURL("https://picsum.photos/200");

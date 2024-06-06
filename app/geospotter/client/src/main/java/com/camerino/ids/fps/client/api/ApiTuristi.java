@@ -14,29 +14,30 @@ import java.util.List;
 import static com.camerino.ids.fps.client.api.BaseURL.BASE_URL;
 
 public class ApiTuristi implements IApi<ClsTuristaAutenticato> {
-    static final URI endpoint = URI.create(BASE_URL+"/utenti");
+    static final URI endpoint = URI.create(BASE_URL + "/utenti");
 
     @Override
-    public List<ClsTuristaAutenticato> Get(ClsTurista user, String query){
-        if(query==null)
+    public List<ClsTuristaAutenticato> Get(ClsTurista user, String query) {
+        if (query == null)
             query = "";
 
         HttpRequest.Builder request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
-                .uri(URI.create(String.format("%s?%s",endpoint,query)))
+                .uri(URI.create(String.format("%s?%s", endpoint, query)))
                 .GET();
         if (user instanceof ClsTuristaAutenticato)
             request.header("Authorization", FakeTokens.getToken(user));
 
         HttpResponse<String> response = execute(request.build());
-        if(response.statusCode() != 200)
+        if (response.statusCode() != 200)
             return new ArrayList<>();
 
-        return deserialize(response.body(), new TypeReference<>(){});
+        return deserialize(response.body(), new TypeReference<>() {
+        });
     }
 
     @Override
-    public boolean Post(ClsTurista user, ClsTuristaAutenticato nodo){
+    public boolean Post(ClsTurista user, ClsTuristaAutenticato nodo) {
         /*HttpRequest request = HttpRequest.newBuilder()//todo
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
@@ -47,8 +48,9 @@ public class ApiTuristi implements IApi<ClsTuristaAutenticato> {
         return execute(request).statusCode() == 200;*/
         return false;
     }
+
     @Override
-    public boolean Put(ClsTurista user, ClsTuristaAutenticato nodo){
+    public boolean Put(ClsTurista user, ClsTuristaAutenticato nodo) {
         /*HttpRequest request = HttpRequest.newBuilder()//todo
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
@@ -59,8 +61,9 @@ public class ApiTuristi implements IApi<ClsTuristaAutenticato> {
         return execute(request).statusCode() == 200;*/
         return false;
     }
+
     @Override
-    public boolean Delete(ClsTurista user, Pair<String, String> name_id){
+    public boolean Delete(ClsTurista user, Pair<String, String> name_id) {
         /*if(name_id == null)//todo
             return false;
         HttpRequest request = HttpRequest.newBuilder()

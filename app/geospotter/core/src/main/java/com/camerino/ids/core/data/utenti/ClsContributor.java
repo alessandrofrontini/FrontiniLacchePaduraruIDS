@@ -19,10 +19,9 @@ import java.util.List;
  * di Nodi e Itinerari nella piattaforma.
  * Le richieste dovranno poi essere accettate o rifiutate da un Curatore di competenza.
  * Si diventa contributor a 50+ punti.
- *
  */
 @Entity
-public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
+public class ClsContributor extends ClsTuristaAutenticato implements IContributable {
     @Transient
     transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
     @Transient
@@ -36,14 +35,17 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
 
     //region Constructors
-    public ClsContributor() {super();}
+    public ClsContributor() {
+        super();
+    }
+
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
         super();
         iperNodi = pNodo;
         this.iperItinerari = pItinerari;
     }
 
-    public ClsContributor(ClsTuristaAutenticato usr){
+    public ClsContributor(ClsTuristaAutenticato usr) {
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
@@ -58,8 +60,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 //endregion
 
-//region Getters and Setters
-@JsonIgnore
+    //region Getters and Setters
+    @JsonIgnore
     public IPersistenceModel<ClsRDCNodo> _getIperRDCNodi() {
         return iperRDCNodi;
     }
@@ -67,6 +69,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public void _setIperRDCNodi(IPersistenceModel<ClsRDCNodo> iperRDCNodi) {
         this.iperRDCNodi = iperRDCNodi;
     }
+
     @Transient
     public IPersistenceModel<ClsRdcItinerario> _getIperRDCItinerari() {
         return iperRDCItinerari;
@@ -75,11 +78,13 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public void _setIperRDCItinerari(IPersistenceModel<ClsRdcItinerario> iperRDCItinerari) {
         this.iperRDCItinerari = iperRDCItinerari;
     }
-@Deprecated
+
+    @Deprecated
     public void setpRDC(IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC) {
         this.pRDC = pRDC;
     }
-@Deprecated
+
+    @Deprecated
     public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
         this.pRDCI = pRDCI;
     }
@@ -89,9 +94,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di inserimento nodo.
+     *
      * @param nodo Il nodo da aggiungere
      * @return True se la creazione della richiesta ha avuto successo,
-     *         False altrimenti
+     * False altrimenti
      */
     public boolean inserisciNodo(ClsNodo nodo) {
         ClsRDCNodo rdc = new ClsRDCNodo(null, nodo);
@@ -112,16 +118,17 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di modifica di un nodo in suo possesso.
-     * @param id Id del nodo dal modificare
+     *
+     * @param id   Id del nodo dal modificare
      * @param nodo Il nodo contenente i dati modificati
      * @return True se la creazione della richiesta o la modifica ha avuto successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean modificaNodo(Long id, ClsNodo nodo) {
         List<ClsNodo> old = getNodoById(nodo.getId());
         nodo.setId(0L);
-        if(old.size() != 1)
+        if (old.size() != 1)
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), nodo);
         rdc.setCreatore(this);
@@ -131,13 +138,14 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di eliminazione di un nodo in suo possesso.
+     *
      * @param id Id del nodo da eliminare
      * @return True se la creazione della richiesta o l'eliminazione ha avuto successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     public boolean eliminaNodo(Long id) {
         List<ClsNodo> old = getNodoById(id);
-        if(old.size() != 1)
+        if (old.size() != 1)
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), null);
         rdc.setCreatore(this);
@@ -149,9 +157,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     /**
      * Crea una richiesta di inserimento itinerario.
      * (L'itinerario può contenere nodi che non sono di proprietà del Curatore)
+     *
      * @param itinerario L'itinerario da aggiungere
      * @return True se la richiesta viene creata con successo,
-     *         False altrimenti.
+     * False altrimenti.
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
@@ -164,10 +173,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di modifica di un itinerario di sua proprietà.
+     *
      * @param itinerario Itinerario modificato
-     * @param id Id dell'itinerario da modificare
+     * @param id         Id dell'itinerario da modificare
      * @return True se la modifica o la creazione della rihiesta ha successo,
-     *         False altrimenti,
+     * False altrimenti,
      */
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, Long id) {
@@ -180,9 +190,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
 
     /**
      * Crea una richiesta di eliminazione di un proprio itinerario.
+     *
      * @param id Id dell'itinerario da eliminare.
      * @return True se l'eliminazione o la creazione della richiesta ha successo,
-     *         False altirmenti.
+     * False altirmenti.
      */
     @Override
     public boolean eliminaItinerario(Long id) {
@@ -201,17 +212,19 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     }
 
     @JsonIgnore
-    public List<ClsNodo> getNodiPossessore(){
+    public List<ClsNodo> getNodiPossessore() {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("owner", this.id);
         return this.iperNodi.get(filters);
     }
+
     public boolean deleteNodo(Long idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
         return iperNodi.delete(tmp);
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsRDCNodo> getRDCNodiById(Long idRDC) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);

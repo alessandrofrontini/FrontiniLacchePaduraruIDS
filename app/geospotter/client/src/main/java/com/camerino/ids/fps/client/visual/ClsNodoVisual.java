@@ -1,14 +1,12 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsNodoVisual
-{
+public class ClsNodoVisual {
     public String ID;
     public String IDComuneAssociato;
     public String Posizione;
     public String Nome;
     public String Tipologia;
     public String ATempo;
-
 
 
     public String getID() {

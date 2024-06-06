@@ -23,32 +23,30 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class Controller_SezioneModificaItinerari implements Initializable
-{
+public class Controller_SezioneModificaItinerari implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
 
-
     @FXML
-    TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
     Button sezioneEliminazioneNodiButtonConferma, sezioneEliminazioneNodiButtonHomePage;
 
     @FXML
-    TextField sezioneInserimentoItinerariElencoTappe,sezioneInserimentoItinerariNomeItinerario;
+    TextField sezioneInserimentoItinerariElencoTappe, sezioneInserimentoItinerariNomeItinerario;
 
     @FXML
     CheckBox sezioneInserimentoItinerariCheckBoxOrdinato;
@@ -57,13 +55,13 @@ public class Controller_SezioneModificaItinerari implements Initializable
     TableView<ClsItinerarioVisual> sezioneEliminazioneItinerariTableView;
 
     @FXML
-    TableColumn<ClsItinerarioVisual,String> sezioneEliminazioneItinerariTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsItinerarioVisual, String> sezioneEliminazioneItinerariTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneEliminazioneItinerariTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsItinerarioVisual, String> sezioneEliminazioneItinerariTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneInserimentoItinerariTableColumnOrdinato = new TableColumn<>("E' ordinato?");
+    TableColumn<ClsItinerarioVisual, String> sezioneInserimentoItinerariTableColumnOrdinato = new TableColumn<>("E' ordinato?");
     @FXML
-    TableColumn <ClsItinerarioVisual,String> sezioneInserimentoItinerariTableColumnTappe = new TableColumn<>("Tappe");
+    TableColumn<ClsItinerarioVisual, String> sezioneInserimentoItinerariTableColumnTappe = new TableColumn<>("Tappe");
 
     @FXML
     ComboBox sezioneEliminazioneItinerariComboBoxSceltaItinerarioID;
@@ -74,8 +72,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
     List<ClsItinerario> itinerari;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
         itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
         this.setItinerari(itinerari);
@@ -117,8 +114,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<itinerari.size();i++)
-        {
+        for (int i = 0; i < itinerari.size(); i++) {
             items.add(itinerari.get(i).getId().toString());
         }
 
@@ -126,52 +122,42 @@ public class Controller_SezioneModificaItinerari implements Initializable
         //endregion
     }
 
-    public void modificaItinerario(MouseEvent mouseEvent)
-    {
+    public void modificaItinerario(MouseEvent mouseEvent) {
         ClsItinerario nuovoItinerario = this.inserisciItinerario(mouseEvent);
         Long IDDaModificare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        if(nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size()>=2)
-        {
+        if (nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size() >= 2) {
             nuovoItinerario.setId(IDDaModificare);
-            ((ClsContributor)Controller_SezioneLogin.UTENTE).modificaItinerario(nuovoItinerario, IDDaModificare);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaItinerario(nuovoItinerario, IDDaModificare);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attenzione");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    public ClsItinerario inserisciItinerario(MouseEvent mouseEvent)
-    {
+    public ClsItinerario inserisciItinerario(MouseEvent mouseEvent) {
         ClsItinerario itinerario = new ClsItinerario();
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
         List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
 
-        if(nodiCoinvoltiInArray.length>0)
-        {
-            for(int i = 0; i<nodi.size();i++)
-            {
-                for(int j = 0; j<nodiCoinvoltiInArray.length;j++)
-                {
-                    if(Objects.equals(nodi.get(i).getId(), nodiCoinvoltiInArray[j]))
-                    {
+        if (nodiCoinvoltiInArray.length > 0) {
+            for (int i = 0; i < nodi.size(); i++) {
+                for (int j = 0; j < nodiCoinvoltiInArray.length; j++) {
+                    if (Objects.equals(nodi.get(i).getId(), nodiCoinvoltiInArray[j])) {
                         nodiAssociatiToItinerario.add(nodi.get(i));
                     }
                 }
             }
 
-            if((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2)
-            {
+            if ((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2) {
                 itinerario.setId(0L);
                 itinerario.setIdCreatore(0L);
                 itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
@@ -179,39 +165,30 @@ public class Controller_SezioneModificaItinerari implements Initializable
                 itinerario.setTappe(nodiAssociatiToItinerario);
 
                 return itinerario;
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void setItinerari (List<ClsItinerario> itinerari)
-    {
-        for(int i = 0; i<itinerari.size();i++)
-        {
+    private void setItinerari(List<ClsItinerario> itinerari) {
+        for (int i = 0; i < itinerari.size(); i++) {
             ClsItinerarioVisual c = u.convertFromClsItinerario(itinerari.get(i));
             sezioneEliminazioneItinerariTableView.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -224,20 +201,16 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent)
-    {
+    public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent) {
         Long idItinerarioDaVisualizzare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
         ClsItinerarioVisual c = new ClsItinerarioVisual();
-        for(int i=0;i<itinerari.size();i++)
-        {
-            if(Objects.equals(itinerari.get(i).getId(), idItinerarioDaVisualizzare))
-            {
+        for (int i = 0; i < itinerari.size(); i++) {
+            if (Objects.equals(itinerari.get(i).getId(), idItinerarioDaVisualizzare)) {
                 c = u.convertFromClsItinerario(itinerari.get(i));
                 this.sezioneInserimentoItinerariElencoTappe.setText(c.getTappe());
                 this.sezioneInserimentoItinerariNomeItinerario.setText(c.getNome());
@@ -246,8 +219,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
-    private boolean controllaConformitaIDItinerario (Long id)
-    {/*
+    private boolean controllaConformitaIDItinerario(Long id) {/*
         boolean flag = false;
 
         for(int i = 0; i<itinerari.size();i++)
@@ -261,15 +233,14 @@ public class Controller_SezioneModificaItinerari implements Initializable
         return true;
     }
 
-    private String[] convertiNodiCoinvoltiInArray(String input)
-    {
+    private String[] convertiNodiCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
-        String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);;
+        String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), nodi);
+        ;
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (List<String> input, List<ClsNodo> nodi)
-    {
+    private String[] pulisciIDnonPresenti(List<String> input, List<ClsNodo> nodi) {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsNodo obj : nodi) {

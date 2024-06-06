@@ -24,20 +24,20 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public List<ClsNodo> get(Map<String, Object> filters) {
-        if(filters == null)
+        if (filters == null)
             return new ArrayList<>(repoNodi.findAll());
         List<ClsNodo> lNodi = new ArrayList<>();
-        if(filters.containsKey("idNodo")) {
+        if (filters.containsKey("idNodo")) {
             Optional<ClsNodo> nodo = repoNodi.findById(filters.get("idNodo").toString());
             if (nodo.isEmpty())
                 return lNodi;
             lNodi.add(nodo.get());
             return lNodi;
         }
-        if(filters.containsKey("idComune")) {
-            return new ArrayList<>(repoNodi.findNodiByComune((Long)filters.get("idComune")));
+        if (filters.containsKey("idComune")) {
+            return new ArrayList<>(repoNodi.findNodiByComune((Long) filters.get("idComune")));
         }
-        if(filters.containsKey("owner"))
+        if (filters.containsKey("owner"))
             return new ArrayList<>(repoNodi.findNodoByUtente(Long.valueOf(filters.get("owner").toString())));
         lNodi = new ArrayList<>(repoNodi.findAll());
         return lNodi;

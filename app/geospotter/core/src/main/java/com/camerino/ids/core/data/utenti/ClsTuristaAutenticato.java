@@ -38,46 +38,20 @@ import java.util.List;
         @JsonSubTypes.Type(value = ClsCuratore.class, name = "CURATORE"),
         @JsonSubTypes.Type(value = ClsGestoreDellaPiattaforma.class, name = "GESTORE_DELLA_PIATTAFORMA"),
 })
-public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
-    /**
-     * Contiene i diversi ruoli nella piattaforma
-     * e il loro punteggio massimo per appartenere a quel ruolo.
-     */
-    public enum eRUOLI_UTENTE {
-        TURISTA_AUTENTICATO(49),
-        CONTRIBUTOR(599),
-        CONTRIBUTOR_AUTORIZZATO(999),
-        ANIMATORE(1000),
-        CURATORE(Integer.MAX_VALUE),
-        GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
-
-        private Integer value;
-
-        public Integer getValue(){
-            return value;
-        }
-
-        eRUOLI_UTENTE(Integer value){
-            this.value = value;
-        }
-    }
-
+public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction {
     transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;
-
     @Id
     @GeneratedValue
-    Long id=0L;
+    Long id = 0L;
     @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali = new Credenziali();
     Integer punteggio;
     eRUOLI_UTENTE ruoloUtente;
-
-//region Constructors
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini)
-    {
+    //region Constructors
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini) {
     }
 
-    public ClsTuristaAutenticato(ClsTurista usr){
+    public ClsTuristaAutenticato(ClsTurista usr) {
         this.iperNodi = usr.iperNodi;
         this.iperItinerari = usr.iperItinerari;
         this.iperComuni = usr.iperComuni;
@@ -85,6 +59,48 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.iperSegnalazioni = usr.iperSegnalazioni;
         this.iperImmagini = usr.iperImmagini;
         this.iperUtenti = usr.iperUtenti;
+    }
+
+    public ClsTuristaAutenticato() {
+    }
+
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini, IPersistenceModel<ClsTuristaAutenticato> utenti) {
+//    TODO    super(segnalazioni);
+        iperRecensioni = recensioni;
+        iperImmagini = immagini;
+        iperUtenti = utenti;
+    }
+
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLI_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini) {
+        //  TODO     super(segnalazioni);
+        credenziali = c;
+        ruoloUtente = ruolo;
+        punteggio = ruolo.getValue();
+        iperRecensioni = recensioni;
+        iperImmagini = immagini;
+    }
+
+    public static eRUOLI_UTENTE convertRuoloFromString(String ruolo) {
+        switch (ruolo) {
+            case "TURISTA_AUTENTICATO":
+                return eRUOLI_UTENTE.TURISTA_AUTENTICATO;
+
+
+            case "CONTRIBUTOR":
+                return eRUOLI_UTENTE.CONTRIBUTOR;
+
+
+            case "CONTRIBUTOR_AUTORIZZATO":
+                return eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO;
+
+            case "ANIMATORE":
+                return eRUOLI_UTENTE.ANIMATORE;
+
+
+            default:
+                return null;
+
+        }
     }
 
     //region Getters and Setters
@@ -111,6 +127,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setCredenziali(Credenziali credenziali) {
         this.credenziali = credenziali;
     }
+//endregion
 
     public Integer getPunteggio() {
         return punteggio;
@@ -119,28 +136,10 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public void setPunteggio(Integer punteggio) {
         this.punteggio = punteggio;
     }
+
     public boolean pubblicaRecensione(ClsRecensione recensione) {
         recensione.setIdCreatore(this.id);
         return iperRecensioni.insert(recensione);
-    }
-//endregion
-
-    public ClsTuristaAutenticato() {}
-
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini, IPersistenceModel<ClsTuristaAutenticato> utenti)
-    {
-//    TODO    super(segnalazioni);
-        iperRecensioni = recensioni;
-        iperImmagini = immagini;
-        iperUtenti = utenti;
-    }
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLI_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
-        //  TODO     super(segnalazioni);
-        credenziali = c;
-        ruoloUtente = ruolo;
-        punteggio = ruolo.getValue();
-        iperRecensioni = recensioni;
-        iperImmagini = immagini;
     }
     //endregion
 
@@ -151,12 +150,14 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         recensione.setIdCreatore(this.id);
         return iperRecensioni.insert(recensione);
     }
+
     @Override
     public boolean eliminaRecensione(Long id) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idRecensione", id);
         return iperRecensioni.delete(tmp);
     }
+
     @Override
     public boolean modificaRecensione(Long IDDaModificare, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
@@ -165,11 +166,13 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         newrec.setIdCreatore(this.id);
         return iperRecensioni.update(tmp, newrec);
     }
+
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
         //TODO: merge con richiesta azione di contribuzione
         return iperImmagini.insert(immagine);
     }
+
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
         //TODO: manca l'associazione recensione - utente che la scrive
@@ -190,6 +193,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         filters.put("idRDCImmagini", idRDCImmagine);
         return iperRDCImmagini.delete(filters);
     }
+
     @JsonIgnore
     public List<ClsRecensione> getRecensioniPosessore() {
         HashMap<String, Object> filters = new HashMap<>();
@@ -197,8 +201,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperRecensioni.get(filters);
     }
 
-    public String visualizzaUtente()
-    {
+    public String visualizzaUtente() {
         String tmp = "";
 
         tmp += "ID: " + this.getId() + "\n";
@@ -222,46 +225,44 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return clone;
     }
 
-    public static eRUOLI_UTENTE convertRuoloFromString (String ruolo)
-    {
-        switch(ruolo)
-        {
-            case "TURISTA_AUTENTICATO":
-                return eRUOLI_UTENTE.TURISTA_AUTENTICATO;
-
-
-            case "CONTRIBUTOR":
-                return eRUOLI_UTENTE.CONTRIBUTOR;
-
-
-            case "CONTRIBUTOR_AUTORIZZATO":
-                return eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO;
-
-            case "ANIMATORE":
-                return eRUOLI_UTENTE.ANIMATORE;
-
-
-            default:
-                return null;
-
-        }
-    }
-
     public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
         this.iperRDCImmagini = iperRDCImmagini;
     }
+
     @JsonIgnore
-    public List<ClsTuristaAutenticato> getAllUtenti()
-    {
+    public List<ClsTuristaAutenticato> getAllUtenti() {
         return iperUtenti.get(null);
     }
-@JsonIgnore
-@Deprecated()
-    public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
-    {
+
+    @JsonIgnore
+    @Deprecated()
+    public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("ruolo", ruolo);
         return iperUtenti.get(filters);
+    }
+
+    /**
+     * Contiene i diversi ruoli nella piattaforma
+     * e il loro punteggio massimo per appartenere a quel ruolo.
+     */
+    public enum eRUOLI_UTENTE {
+        TURISTA_AUTENTICATO(49),
+        CONTRIBUTOR(599),
+        CONTRIBUTOR_AUTORIZZATO(999),
+        ANIMATORE(1000),
+        CURATORE(Integer.MAX_VALUE),
+        GESTORE_DELLA_PIATTAFORMA(Integer.MAX_VALUE);
+
+        private Integer value;
+
+        eRUOLI_UTENTE(Integer value) {
+            this.value = value;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
     }
 
 }

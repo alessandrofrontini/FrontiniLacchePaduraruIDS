@@ -5,10 +5,10 @@ import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.persistence.*;
 
 @MappedSuperclass
-public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
+public class AbsDefaultAction<E> implements IAction<E, EStatusRDC> {
     @Id
     @GeneratedValue
-    Long idRichiesta=0L;
+    Long idRichiesta = 0L;
     @Enumerated(EnumType.STRING)
     EAzioniDiContribuzione tipo;
     @Enumerated(EnumType.STRING)
@@ -35,22 +35,22 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
 
     }
 
-    public void setOldData(E oldData) {
-        this.oldData = oldData;
-    }
-
-    public void setNewData(E newData) {
-        this.newData = newData;
-    }
-
     @Override
     public E getOldData() {
         return oldData;
     }
 
+    public void setOldData(E oldData) {
+        this.oldData = oldData;
+    }
+
     @Override
     public E getNewData() {
         return newData;
+    }
+
+    public void setNewData(E newData) {
+        this.newData = newData;
     }
 
     @Override

@@ -13,8 +13,7 @@ public class ClsMenuGestore implements IMenu {
     ClsGestoreDellaPiattaforma user;
     Scanner in = new Scanner(System.in);
 
-    public ClsMenuGestore (ClsGestoreDellaPiattaforma gdp)
-    {
+    public ClsMenuGestore(ClsGestoreDellaPiattaforma gdp) {
         this.user = gdp;
         gdp.setIperComuni(MockLocator.getMockComuni());
     }
@@ -23,8 +22,7 @@ public class ClsMenuGestore implements IMenu {
     public void menu() {//TODO: implementare
         boolean exit = false;
 
-        while (!exit)
-        {
+        while (!exit) {
             println("1) Aggiungi Comune");
             println("2) Modifica Comune");
             println("3) Elimina Comune");

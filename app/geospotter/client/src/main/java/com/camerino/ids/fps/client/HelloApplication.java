@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SezioneVisualizzazione.fxml"));
@@ -16,8 +20,5 @@ public class HelloApplication extends Application {
         stage.setTitle("GeoSpotter");
         stage.setScene(scene);
         stage.show();
-    }
-    public static void main(String[] args) {
-        launch();
     }
 }

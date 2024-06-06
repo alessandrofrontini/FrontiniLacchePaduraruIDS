@@ -23,24 +23,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneVisualizzazioneNodi implements Initializable
-{
+public class Controller_SezioneVisualizzazioneNodi implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
     Button sezioneEliminazioneNodiButtonHomePage;
@@ -57,8 +56,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         setNodi(nodi);
@@ -86,8 +84,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             items.add(nodi.get(i).getId().toString());
         }
 
@@ -97,8 +94,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         //region combobox
         ObservableList<String> itemss = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             itemss.add(nodi.get(i).getId().toString());
         }
 
@@ -106,17 +102,13 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         //endregion
     }
 
-    public void visualizzaDettaglio(MouseEvent mouseEvent)
-    {
+    public void visualizzaDettaglio(MouseEvent mouseEvent) {
         Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
-        {
+        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
             ClsNodo nodo = new ClsNodo();
-            for(int i = 0; i<nodi.size();i++)
-            {
-                if(IDDaVisualizzare.equals(this.nodi.get(i).getId()))
-                {
+            for (int i = 0; i < nodi.size(); i++) {
+                if (IDDaVisualizzare.equals(this.nodi.get(i).getId())) {
                     nodo.setId(nodi.get(i).getId());
                     nodo.setNome(nodi.get(i).getNome());
                     nodo.setDescrizione(nodi.get(i).getDescrizione());
@@ -129,65 +121,54 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
                     nodo.setIdCreatore(nodi.get(i).getIdCreatore());
                 }
             }
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(nodo.visualizzaNodo());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    public void inserisciSegnalazione(MouseEvent mouseEvent)
-    {
+    public void inserisciSegnalazione(MouseEvent mouseEvent) {
         String descrizioneSegnalazione = u.getValueFromTextField(descrizioneTF);
 
-        if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
-        {
+        if (!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null) {
             Long IDDaSegnalare = Long.valueOf(u.getValueFromCombobox(selezionaElementoSegnalazione));
             ClsSegnalazione segnalazione = new ClsSegnalazione();
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for(int i = 0; i < this.nodi.size(); i++)
-            {
-                if(Objects.equals(nodi.get(i).getId(), IDDaSegnalare))
-                {
+            for (int i = 0; i < this.nodi.size(); i++) {
+                if (Objects.equals(nodi.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(1L); //todo:aggiungere chiamata per ottenere curatore
                 }
             }
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
             alert.setContentText(segnalazione.visualizzaSegnalazione());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -200,18 +181,15 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void navigateToSezioneVisualizzazioneMappa (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazioneMappa.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazioneMappa(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazioneMappa.fxml", mouseEvent);
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*boolean flag = false;
 
         for(int i = 0; i<nodi.size();i++)

@@ -9,8 +9,7 @@ import jakarta.persistence.MappedSuperclass;
  * TODO: commentare
  */
 @MappedSuperclass
-public abstract class ClsInformazione
-{
+public abstract class ClsInformazione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;

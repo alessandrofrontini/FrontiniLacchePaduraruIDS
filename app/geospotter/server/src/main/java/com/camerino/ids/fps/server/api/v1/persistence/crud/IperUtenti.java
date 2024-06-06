@@ -8,28 +8,27 @@ import jakarta.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
-public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
-{
-   RepoUtenti repoUtenti;
+public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato> {
+    RepoUtenti repoUtenti;
 
-   @Autowired
-   public IperUtenti(final RepoUtenti repoUtenti)
-   {
-    this.repoUtenti = repoUtenti;
-   }
+    @Autowired
+    public IperUtenti(final RepoUtenti repoUtenti) {
+        this.repoUtenti = repoUtenti;
+    }
 
 
     @Override
     @Transient
-    public List<ClsTuristaAutenticato> get(Map<String, Object> filters)
-    {
-        if(filters == null)
+    public List<ClsTuristaAutenticato> get(Map<String, Object> filters) {
+        if (filters == null)
             return new ArrayList<>(repoUtenti.findAll());
-        if(filters.containsKey("ruolo"))
-            return new ArrayList<>(repoUtenti.findByRuolo((eRUOLI_UTENTE)filters.get("ruolo")));
+        if (filters.containsKey("ruolo"))
+            return new ArrayList<>(repoUtenti.findByRuolo((eRUOLI_UTENTE) filters.get("ruolo")));
         return new ArrayList<>(repoUtenti.findAll());
     }
 

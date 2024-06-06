@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
  * TODO: commentare
  */
 @Entity
-public class ClsRecensione extends ClsInformazione{
+public class ClsRecensione extends ClsInformazione {
     //Ho errore referring to multiple physical column names: [idcontenuto_associato], [id_contenuto_associato]
     //perchè esiste anche in ClsImmagine
     @Column(name = "idNodoAssRec")
@@ -50,16 +50,15 @@ public class ClsRecensione extends ClsInformazione{
     }
     //endregion
 
-    public String visualizzaRecensione()
-    {
+    public String visualizzaRecensione() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
-        dummy += "Contenuto: " + this.getContenuto()+ "\n";
-        dummy += "Contenuto Associato: " + this.getIdNodoAssociato()+ "\n";
+        dummy += "Contenuto: " + this.getContenuto() + "\n";
+        dummy += "Contenuto Associato: " + this.getIdNodoAssociato() + "\n";
 
 
         return dummy;

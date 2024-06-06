@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //TODO: implementare
-public class MockRecensioni implements IPersistenceModel<ClsRecensione>
-{
+public class MockRecensioni implements IPersistenceModel<ClsRecensione> {
     private List<ClsRecensione> recensioni = new ArrayList<ClsRecensione>();
     //TODO: add to vpp
     private long idCounter = 0;

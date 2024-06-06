@@ -22,21 +22,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneEliminazioneRecensioni implements Initializable
-{
+public class Controller_SezioneEliminazioneRecensioni implements Initializable {
 
     //region Elementi FXML
     @FXML
     TableView<ClsRecensione> sezioneEliminazioneRecensioniTableView;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnID;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnID;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnOggetto;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnOggetto;
 
     @FXML
     TableColumn<ClsRecensione, Double> sezioneEliminazioneRecensioniTableColumnValutazione;
@@ -55,18 +54,16 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         //recensioni = Controller_SezioneLogin.UTENTE.getAllRecensioni();
-        recensioni = ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getRecensioniPosessore();
+        recensioni = ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getRecensioniPosessore();
 
         setRecensioni(recensioni);
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<recensioni.size();i++)
-        {
+        for (int i = 0; i < recensioni.size(); i++) {
             items.add(recensioni.get(i).getId().toString());
         }
 
@@ -92,37 +89,30 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
         //endregion
     }
 
-    public void eliminaRecensione(MouseEvent mouseEvent)
-    {
+    public void eliminaRecensione(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
 
-        if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
-        {
-            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(IDDaEliminare.toString());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
         }
     }
 
-    private void setRecensioni (List<ClsRecensione> recensioni)
-    {
-        for(int i = 0; i<recensioni.size();i++)
-        {
+    private void setRecensioni(List<ClsRecensione> recensioni) {
+        for (int i = 0; i < recensioni.size(); i++) {
             sezioneEliminazioneRecensioniTableView.getItems().add(recensioni.get(i));
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*boolean flag = false;
 
         for(int i = 0; i<recensioni.size();i++)
@@ -136,8 +126,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -150,9 +139,8 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 }

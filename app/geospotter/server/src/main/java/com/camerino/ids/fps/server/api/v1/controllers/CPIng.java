@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class CPIng {
-    @GetMapping(BaseUrl.baseUrl+"/ping")
+    @GetMapping(BaseUrl.baseUrl + "/ping")
     public ResponseEntity<String> ping() {
         return ResponseEntity.ok("Pong");
     }

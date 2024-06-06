@@ -16,32 +16,32 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     private final RepoRecensioni repoRecensioni;
 
     @Autowired
-    public IperRecensioni(final RepoRecensioni repoRecensioni){
+    public IperRecensioni(final RepoRecensioni repoRecensioni) {
         this.repoRecensioni = repoRecensioni;
     }
 
     @Override
     public List<ClsRecensione> get(Map<String, Object> filters) {
-        if(filters == null)
+        if (filters == null)
             return new ArrayList<>(repoRecensioni.findAll());
-        else if(filters.containsKey("idNodo"))
+        else if (filters.containsKey("idNodo"))
             return new ArrayList<>(repoRecensioni.findRecensioniByNodo((Long) filters.get("idNodo")));
-        else if(filters.containsKey("idRecensione")) {
+        else if (filters.containsKey("idRecensione")) {
             List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRecensione").toString());
             return new ArrayList<>(repoRecensioni.findAllById(ids));
-        }else if (filters.containsKey("idUtente"))
+        } else if (filters.containsKey("idUtente"))
             return new ArrayList<>(repoRecensioni.findRecensioniByUtente(Long.valueOf(Objects.toString(filters.get("idUtente")))));
-        else if(filters.containsKey("owner"))
+        else if (filters.containsKey("owner"))
             return new ArrayList<>(repoRecensioni.findRecensioniByUtente(Long.valueOf(Objects.toString(filters.get("owner")))));
         return new ArrayList<>(repoRecensioni.findAll());
     }
 
     @Override
     public boolean update(Map<String, Object> filters, ClsRecensione object) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRecensione"))
+        if (!filters.containsKey("idRecensione"))
             return false;
         repoRecensioni.save(object);
         return true;
@@ -55,9 +55,9 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRecensione"))
+        if (!filters.containsKey("idRecensione"))
             return false;
         repoRecensioni.deleteById(filters.get("idRecensione").toString());
         return true;

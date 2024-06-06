@@ -13,14 +13,14 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     private long idCounter = 0;
     private MockNodi mNodi;
 
-    public MockItinerari(MockNodi mNodi){
+    public MockItinerari(MockNodi mNodi) {
         this.mNodi = mNodi;
     }
 
     //region CRUD metodi
-    public boolean inserisciItinerario(ClsItinerario itinerario){
+    public boolean inserisciItinerario(ClsItinerario itinerario) {
         idCounter++;
-        itinerario.setId(""+idCounter);
+        itinerario.setId("" + idCounter);
 //        for(int i=0; i<itinerario.getTappe().size(); i++){
 //            HashMap<String, Object> tmp = new HashMap<>();
 //            tmp.put("id",itinerario.getTappe().get(i).getId());
@@ -37,24 +37,24 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return this.itinerari;
     }
 
-    private ClsItinerario getItinerarioById(Long id){
-        List<ClsItinerario> tmp =  itinerari.stream().filter(n->n.getId().equals(id)).toList();
-        if(tmp.isEmpty())
+    private ClsItinerario getItinerarioById(Long id) {
+        List<ClsItinerario> tmp = itinerari.stream().filter(n -> n.getId().equals(id)).toList();
+        if (tmp.isEmpty())
             return null;
         return tmp.get(0);
     }
 
     @Override
     public boolean update(Map<String, Object> filters, ClsItinerario object) {
-        if(filters.containsKey("id"))
+        if (filters.containsKey("id"))
             return modificaItinerario(filters.get("id").toString(), object);
         return false;
     }
 
-    private boolean modificaItinerario(Long id, ClsItinerario itinerario){
+    private boolean modificaItinerario(Long id, ClsItinerario itinerario) {
         ClsItinerario tmp = getItinerarioById(id);
         int index = itinerari.indexOf(tmp);
-        if(index<0)
+        if (index < 0)
             return false;
         itinerari.set(index, itinerario);
         return true;
@@ -72,11 +72,10 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return false;
     }
 
-    private boolean eliminaItinerario(Long id){
+    private boolean eliminaItinerario(Long id) {
         return itinerari.remove(getItinerarioById(id));
     }
     //endregion
-
 
 
 }

@@ -24,23 +24,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class Controller_SezioneContestContribuzionePartecipazione implements Initializable
-{
+public class Controller_SezioneContestContribuzionePartecipazione implements Initializable {
 
     //region Elementi FXML
     @FXML
     TableView<ClsContestDiContribuzioneVisual> elencoContest;
 
     @FXML
-    TableColumn<ClsContestDiContribuzioneVisual,String> idColonna = new TableColumn<>("ID");
+    TableColumn<ClsContestDiContribuzioneVisual, String> idColonna = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> creatoreColonna = new TableColumn<>("CREATORE");
+    TableColumn<ClsContestDiContribuzioneVisual, String> creatoreColonna = new TableColumn<>("CREATORE");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> durataColonna = new TableColumn<>("DURATA");
+    TableColumn<ClsContestDiContribuzioneVisual, String> durataColonna = new TableColumn<>("DURATA");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> locationColonna = new TableColumn<>("LOCATION");
+    TableColumn<ClsContestDiContribuzioneVisual, String> locationColonna = new TableColumn<>("LOCATION");
     @FXML
-    TableColumn <ClsContestDiContribuzioneVisual,String> apertoColonna = new TableColumn<>("APERTO");
+    TableColumn<ClsContestDiContribuzioneVisual, String> apertoColonna = new TableColumn<>("APERTO");
 
     @FXML
     ComboBox sceltaContestContribuzione;
@@ -50,8 +49,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         contests = new ArrayList<ClsContestDiContribuzione>();
 
         //region Creazione Contest dummy
@@ -91,8 +89,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<contests.size();i++)
-        {
+        for (int i = 0; i < contests.size(); i++) {
             items.add(contests.get(i).getId().toString());
         }
 
@@ -117,37 +114,31 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         //endregion
     }
 
-    public void partecipaContest(MouseEvent mouseEvent)
-    {
+    public void partecipaContest(MouseEvent mouseEvent) {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sceltaContestContribuzione));
 
-        if(IDDaEliminare != null && controllaConformitaID(IDDaEliminare))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDDaEliminare != null && controllaConformitaID(IDDaEliminare)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle(IDDaEliminare.toString());
-            alert.setContentText("--"+IDDaEliminare+"--");
+            alert.setContentText("--" + IDDaEliminare + "--");
             alert.show();
-        }
-        else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("SELEZIONA UN CONTEST");
             alert.setContentText("--SELEZIONA UN CONTEST--");
             alert.show();
         }
     }
 
-    private void setContest (List<ClsContestDiContribuzione> contests)
-    {
-        for(int i = 0; i<contests.size();i++)
-        {
+    private void setContest(List<ClsContestDiContribuzione> contests) {
+        for (int i = 0; i < contests.size(); i++) {
             ClsContestDiContribuzioneVisual c = u.convertFromaClsContestDiContribuzione(contests.get(i));
 
             elencoContest.getItems().add(c);
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*
         boolean flag = false;
 
@@ -162,8 +153,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -176,9 +166,8 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 

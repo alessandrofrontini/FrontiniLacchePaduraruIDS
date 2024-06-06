@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class SSegnalazioni {
     HttpServletRequest request;
+
     @Autowired
     public SSegnalazioni(HttpServletRequest request) {
         this.request = request;

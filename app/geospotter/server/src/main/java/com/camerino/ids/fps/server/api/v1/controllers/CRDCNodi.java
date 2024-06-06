@@ -11,8 +11,8 @@ import java.util.List;
 
 @RestController
 public class CRDCNodi {
+    public final static String mapping = BaseUrl.baseUrl + "/rdcnodi";
     SRDCNodi sRDCnodi;
-    public final static String mapping = BaseUrl.baseUrl+"/rdcnodi";
 
     @Autowired
     public CRDCNodi(SRDCNodi sRDCnodi) {
@@ -24,23 +24,25 @@ public class CRDCNodi {
             @RequestParam(value = "idRDC", required = false) Long idRDC,
             @RequestParam(value = "owner", required = false) Long owner
     ) {
-        if(idRDC != null)
+        if (idRDC != null)
             return ResponseEntity.ok(sRDCnodi.getRDCNodiById(idRDC));
         return ResponseEntity.ok(sRDCnodi.getAllRDCNodi());
     }
+
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(
             @RequestParam(value = "idRDCNodi", required = false) Long idRDC
     ) {
-        if(sRDCnodi.deleteRDCNodiById(idRDC))
+        if (sRDCnodi.deleteRDCNodiById(idRDC))
             return ResponseEntity.ok("RDC deleted");
         return ResponseEntity.status(500).body("RDC not deleted");
     }
+
     @PutMapping(mapping)
     public ResponseEntity<String> putRDC(
             @RequestBody ClsRDCNodo rdc
-    ){
-        if(sRDCnodi.putRDCNodi(rdc))
+    ) {
+        if (sRDCnodi.putRDCNodi(rdc))
             return ResponseEntity.ok("Azione Modificata");
         return ResponseEntity.ok("");
     }
@@ -48,8 +50,8 @@ public class CRDCNodi {
     @PostMapping(mapping)
     public ResponseEntity<String> postRDC(
             @RequestBody ClsRDCNodo rdc
-    ){
-        if(sRDCnodi.postRDCNodi(rdc))
+    ) {
+        if (sRDCnodi.postRDCNodi(rdc))
             return ResponseEntity.ok("Azione Creata");
         return ResponseEntity.ok(Boolean.toString(sRDCnodi.postRDCNodi(rdc)));
     }

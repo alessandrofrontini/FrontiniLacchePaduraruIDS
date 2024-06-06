@@ -6,9 +6,10 @@ import jakarta.persistence.AttributeConverter;
 public class ConvCredenziali implements AttributeConverter<Credenziali, String> {
 
     public static final String SEPARATOR = " ";
+
     @Override
     public String convertToDatabaseColumn(Credenziali credenziali) {
-        return credenziali.getUsername()+SEPARATOR+credenziali.getPassword();
+        return credenziali.getUsername() + SEPARATOR + credenziali.getPassword();
     }
 
     @Override

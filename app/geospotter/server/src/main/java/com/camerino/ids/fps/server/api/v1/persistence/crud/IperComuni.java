@@ -16,16 +16,16 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
     RepoComuni repoComuni;
 
     @Autowired
-    public IperComuni(final RepoComuni repoComuni){
+    public IperComuni(final RepoComuni repoComuni) {
         this.repoComuni = repoComuni;
     }
 
     @Override
     public List<ClsComune> get(Map<String, Object> filters) {
-       if(filters == null)
-           return new ArrayList<>(repoComuni.findAll());
+        if (filters == null)
+            return new ArrayList<>(repoComuni.findAll());
 
-       if (filters.containsKey("idComune")) {
+        if (filters.containsKey("idComune")) {
             List<String> ids = new ArrayList<>();
             ids.add((String) filters.get("idComune"));
             return new ArrayList<>(repoComuni.findAllById(ids));
@@ -48,7 +48,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters == null)
+        if (filters == null)
             return false;
         if (!filters.containsKey("idComune"))
             return false;

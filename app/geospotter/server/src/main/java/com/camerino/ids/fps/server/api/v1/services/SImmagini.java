@@ -18,6 +18,6 @@ public class SImmagini {
     }
 
     public List<ClsImmagine> getAllImmagini() {
-        return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getAllImmagini();
+        return ((ClsTurista) this.request.getServletContext().getAttribute("user")).getAllImmagini();
     }
 }

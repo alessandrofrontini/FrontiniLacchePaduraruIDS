@@ -26,9 +26,10 @@ public class ClsTurista implements ISignalable {
     /**
      * Crea una segnalazione per il contenuto segnalato (Nodo, Foto, Recensione, Itinerario)
      * che verrà poi vista da un curatore.
+     *
      * @param segnalazione Segnalazione fatta
      * @return True se la creazione della segnalazione ha successo,
-     *         False altrimenti.a
+     * False altrimenti.a
      */
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {
@@ -39,23 +40,27 @@ public class ClsTurista implements ISignalable {
     public List<ClsComune> getAllComuni() {
         return iperComuni.get(null);
     }
+
     @JsonIgnore
     public List<ClsNodo> getAllNodi() {
         return iperNodi.get(null);
     }
+
     @JsonIgnore
     public List<ClsNodo> getNodiByComune(Long idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return iperNodi.get(filters);
     }
+
     @JsonIgnore
     public List<ClsComune> getComuneById(Long idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return iperComuni.get(filters);
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsRecensione> getRecensioniNodo(Long idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
@@ -79,20 +84,24 @@ public class ClsTurista implements ISignalable {
     public void setIperRecensioni(IPersistenceModel<ClsRecensione> iperRecensioni) {
         this.iperRecensioni = iperRecensioni;
     }
+
     public void setIperSegnalazioni(IPersistenceModel<ClsSegnalazione> iperSegnalazioni) {
         this.iperSegnalazioni = iperSegnalazioni;
     }
+
     @JsonIgnore
     public List<ClsItinerario> getAllItinerari() {
         return this.iperItinerari.get(null);
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsItinerario> getItinerarioById() {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idItinerario", iperItinerari.get(filters));
         return this.iperItinerari.get(filters);
     }
-@JsonIgnore
+
+    @JsonIgnore
     public List<ClsNodo> getNodoById(Long idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
@@ -107,10 +116,12 @@ public class ClsTurista implements ISignalable {
     public List<ClsRecensione> getAllRecensioni() {
         return this.iperRecensioni.get(null);
     }
+
     @JsonIgnore
     public List<ClsImmagine> getAllImmagini() {
         return this.iperImmagini.get(null);
     }
+
     @JsonIgnore
     public IPersistenceModel<ClsImmagine> getpIperImmagini() {
         return iperImmagini;

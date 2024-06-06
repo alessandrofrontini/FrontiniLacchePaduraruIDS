@@ -15,7 +15,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     @Override
     public List<ClsRichiestaAzioneDiContribuzione> get(Map<String, Object> filters) {
         List<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
-        if(filters.containsKey("id")) {
+        if (filters.containsKey("id")) {
             tmp.add(findById(filters.get("id").toString()));
             return tmp;
         }
@@ -24,7 +24,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
 
     @Override
     public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
-        if(filters.containsKey("id"))
+        if (filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
     }
@@ -32,7 +32,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     @Override
     public boolean insert(ClsRichiestaAzioneDiContribuzione object) {
         idCounter++;
-        object.setId(""+idCounter);
+        object.setId("" + idCounter);
         return rcdi.add(object);
     }
 
@@ -47,7 +47,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzione object) {
         ClsRichiestaAzioneDiContribuzione tmp = findById(id);
         int index = rcdi.indexOf(tmp);
-        if(index<0)
+        if (index < 0)
             return false;
         rcdi.set(index, object);
         return true;
@@ -55,8 +55,8 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
 
     private ClsRichiestaAzioneDiContribuzione findById(Long id) {
         List<ClsRichiestaAzioneDiContribuzione> tmp =
-                rcdi.stream().filter(n->n.getId().equals(id)).toList();
-        if(tmp.isEmpty())
+                rcdi.stream().filter(n -> n.getId().equals(id)).toList();
+        if (tmp.isEmpty())
             return null;
         return tmp.get(0);
     }

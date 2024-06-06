@@ -22,8 +22,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 
-public class Controller_SezioneInserimentoNodi implements Initializable
-{
+public class Controller_SezioneInserimentoNodi implements Initializable {
     //region Elementi FXML
     @FXML
     TextField sezioneInserimentoNodiTextFieldNomeDelNodo, sezioneInserimentoNodiTextFieldComuneAssociato, sezioneInserimentoNodiTextFieldCoordinataX, sezioneInserimentoNodiTextFieldCoordinataY, sezioneInserimentoNodiTextFieldDescrizioneDelNodo, sezioneInserimentoNodiTextFieldDataInizio, sezioneInserimentoNodiTextFieldDataFine;
@@ -35,7 +34,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
     ComboBox sezioneInserimentoNodiComboBoxTipologiaNodo;
 
     @FXML
-    Button sezioneInserimentoNodiButtonConferma,sezioneInserimentoNodiButtonHomePage;
+    Button sezioneInserimentoNodiButtonConferma, sezioneInserimentoNodiButtonHomePage;
     //endregion
 
     boolean flag = false;
@@ -44,34 +43,29 @@ public class Controller_SezioneInserimentoNodi implements Initializable
     List<ClsComune> comuni;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
         comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
     }
 
-    public void inserisciNodo()
-    {
+    public void inserisciNodo() {
         ClsNodo nodo = new ClsNodo();
         Posizione posizione = new Posizione();
 
-        try
-        {
-            if(!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN))
-            {
+        try {
+            if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
                 posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
                 posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
                 nodo.setPosizione(posizione);
 
-                if(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
+                if (u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), "") ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null))
-                {
+                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
                     nodo.setIdCreatore(0L);
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
@@ -81,66 +75,53 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if(!u.checkInfoNodo(nodo) /*|| !this.CheckValidita(nodo, comuni)*/)
-                    {
-                        Alert alert = new Alert (Alert.AlertType.ERROR);
+                    if (!u.checkInfoNodo(nodo) /*|| !this.CheckValidita(nodo, comuni)*/) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore");
                         alert.setContentText("Controlla le informazioni");
                         alert.show();
-                    }
-                    else
-                    {
-                        ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciNodo(nodo);
-                        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+                    } else {
+                        ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciNodo(nodo);
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info Nodo");
                         alert.setContentText(nodo.visualizzaNodo());
                         alert.show();
                     }
-                }
-                else
-                {
-                    Alert alert = new Alert (Alert.AlertType.ERROR);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Errore");
                     alert.setContentText("Controlla le informazioni");
                     alert.show();
                 }
 
 
-            }
-            else
-            {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore");
                 alert.setContentText("Controlla le informazioni");
                 alert.show();
             }
-        }
-        catch (NumberFormatException e)
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
-        }
-        catch (NullPointerException e)
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Controlla le informazioni");
             alert.show();
         }
     }
 
-    public void visualizzaInformazioniNodoTemporizzato()
-    {
+    public void visualizzaInformazioniNodoTemporizzato() {
         flag = !flag;
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
     }
 
-    private void SwitchScene(String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -153,21 +134,17 @@ public class Controller_SezioneInserimentoNodi implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-  public boolean CheckValidita (ClsNodo nodo, List<ClsComune> comuni)
-  {
-      boolean flagComuni = false;
-      for(int i = 0; i < comuni.size(); i++)
-      {
-          if(Objects.equals(nodo.getIdComuneAssociato(), comuni.get(i).getId()))
-          {
-              flagComuni = true;
-          }
-      }
-      return flagComuni;
-  }
+    public boolean CheckValidita(ClsNodo nodo, List<ClsComune> comuni) {
+        boolean flagComuni = false;
+        for (int i = 0; i < comuni.size(); i++) {
+            if (Objects.equals(nodo.getIdComuneAssociato(), comuni.get(i).getId())) {
+                flagComuni = true;
+            }
+        }
+        return flagComuni;
+    }
 }

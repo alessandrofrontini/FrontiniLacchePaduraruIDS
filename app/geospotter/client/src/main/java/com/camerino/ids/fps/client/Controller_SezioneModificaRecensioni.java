@@ -24,21 +24,20 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneModificaRecensioni implements Initializable
-{
+public class Controller_SezioneModificaRecensioni implements Initializable {
 
     //region Elementi FXML
     @FXML
     TableView<ClsRecensione> sezioneEliminazioneRecensioniTableView;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnID;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnID;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato;
 
     @FXML
-    TableColumn<ClsRecensione,String> sezioneEliminazioneRecensioniTableColumnOggetto;
+    TableColumn<ClsRecensione, String> sezioneEliminazioneRecensioniTableColumnOggetto;
 
     @FXML
     TableColumn<ClsRecensione, Double> sezioneEliminazioneRecensioniTableColumnValutazione;
@@ -53,17 +52,17 @@ public class Controller_SezioneModificaRecensioni implements Initializable
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn<ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
     ComboBox sezioneEliminazioneNodiComboBoxSceltaNodoID;
@@ -77,19 +76,17 @@ public class Controller_SezioneModificaRecensioni implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //recensioni = ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getAllRecensioni();
-        recensioni = ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getRecensioniPosessore();
+        recensioni = ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getRecensioniPosessore();
 
         setRecensioni(recensioni);
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<recensioni.size();i++)
-        {
+        for (int i = 0; i < recensioni.size(); i++) {
             items.add(recensioni.get(i).getId().toString());
         }
 
@@ -123,8 +120,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         //region combobox
         ObservableList<String> itemes = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             itemes.add(nodi.get(i).getId().toString());
         }
 
@@ -153,8 +149,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
 
     }
 
-    public void modificaRecensione(MouseEvent mouseEvent)
-    {
+    public void modificaRecensione(MouseEvent mouseEvent) {
         ClsRecensione r = new ClsRecensione();
 
         Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
@@ -162,8 +157,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if(oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), ""))
-        {
+        if (oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), "")) {
             r.setId(id);
             //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             r.setIdNodoAssociato(id);
@@ -171,42 +165,35 @@ public class Controller_SezioneModificaRecensioni implements Initializable
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).modificaRecensione(id,r);
+            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(id, r);
 
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText(r.visualizzaRecensione());
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Inserisci tutte le informazioni necessarie");
             alert.show();
         }
     }
 
-    private void setRecensioni (List<ClsRecensione> recensioni)
-    {
-        for(int i = 0; i<recensioni.size();i++)
-        {
+    private void setRecensioni(List<ClsRecensione> recensioni) {
+        for (int i = 0; i < recensioni.size(); i++) {
             sezioneEliminazioneRecensioniTableView.getItems().add(recensioni.get(i));
         }
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -219,21 +206,16 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void visualizzaInformazioniAttualiRecensione (MouseEvent mouseEvent)
-    {
+    public void visualizzaInformazioniAttualiRecensione(MouseEvent mouseEvent) {
         String tmp = u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID);
 
-        if(!(Objects.equals(tmp,null) || tmp.isEmpty()))
-        {
-            for(int i = 0; i<recensioni.size();i++)
-            {
-                if(Objects.equals(recensioni.get(i).getId(), tmp))
-                {
+        if (!(Objects.equals(tmp, null) || tmp.isEmpty())) {
+            for (int i = 0; i < recensioni.size(); i++) {
+                if (Objects.equals(recensioni.get(i).getId(), tmp)) {
                     this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId());
                     this.oggetto.setText(recensioni.get(i).getOggetto());
                     this.contenuto.setText(recensioni.get(i).getContenuto());

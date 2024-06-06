@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import org.hibernate.annotations.UuidGenerator;
 
 @Deprecated
 @Entity
@@ -16,6 +15,7 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     @ManyToOne
     ClsItinerario datiItinerario;
     String usernameCreatore;
+    EAzioniDiContribuzione eAzioniDiContribuzione;
 
     public EAzioniDiContribuzione geteAzioniDiContribuzione() {
         return eAzioniDiContribuzione;
@@ -24,8 +24,6 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
     public void seteAzioniDiContribuzione(EAzioniDiContribuzione eAzioniDiContribuzione) {
         this.eAzioniDiContribuzione = eAzioniDiContribuzione;
     }
-
-    EAzioniDiContribuzione eAzioniDiContribuzione;
 
     public Long getId() {
         return id;
@@ -51,8 +49,7 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
         this.usernameCreatore = usernameCreatore;
     }
 
-    public String visualizzaRichiestaItinerario()
-    {
+    public String visualizzaRichiestaItinerario() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";

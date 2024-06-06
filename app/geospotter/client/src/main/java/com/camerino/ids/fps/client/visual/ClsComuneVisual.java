@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsComuneVisual
-{
+public class ClsComuneVisual {
 
     public Long id;
     public String nome;

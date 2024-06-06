@@ -1,17 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.persistence.demodata;
 
-import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
-import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoImmagini;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCImmagini;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Configuration
 @Order(2)

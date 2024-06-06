@@ -4,29 +4,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneInserimentoRecensioni">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneInserimentoRecensioni">
     <children>
         <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERISCI RECENSIONE">
             <font>
-                <Font size="22.0" />
+                <Font size="22.0"/>
             </font>
         </Text>
-        <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="18.0" layoutY="134.0" prefHeight="255.0" prefWidth="562.0">
+        <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="18.0" layoutY="134.0" prefHeight="255.0"
+                   prefWidth="562.0">
             <columns>
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID" prefWidth="43.59999084472656" text="ID" />
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato" prefWidth="97.19999313354492" text="ID COMUNE" />
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome" prefWidth="109.40000915527344" text="NOME" />
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione" prefWidth="108.5999755859375" text="POSIZIONE" />
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia" prefWidth="82.60003662109375" text="TIPOLOGIA" />
-                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="94.199951171875" text="A TEMPO" />
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID" prefWidth="43.59999084472656" text="ID"/>
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato" prefWidth="97.19999313354492"
+                             text="ID COMUNE"/>
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome" prefWidth="109.40000915527344" text="NOME"/>
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione" prefWidth="108.5999755859375"
+                             text="POSIZIONE"/>
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia" prefWidth="82.60003662109375"
+                             text="TIPOLOGIA"/>
+                <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="94.199951171875"
+                             text="A TEMPO"/>
             </columns>
         </TableView>
-        <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="134.0" layoutY="398.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona nodo associazione recensione" />
-        <TextField fx:id="oggetto" layoutX="21.0" layoutY="441.0" prefHeight="26.0" prefWidth="266.0" promptText="Oggetto" />
-        <TextField fx:id="valutazione" layoutX="21.0" layoutY="489.0" prefHeight="26.0" prefWidth="266.0" promptText="Valutazione" />
-        <TextField fx:id="contenuto" layoutX="311.0" layoutY="441.0" prefHeight="26.0" prefWidth="266.0" promptText="Contenuto" />
-        <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="20.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="173.0" text="Home" />
-        <Button fx:id="sezioneInserimentoRecensioniConferma" layoutX="415.0" layoutY="545.0" mnemonicParsing="false" onMouseClicked="#inserisciRecensione" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
-      <Text layoutX="16.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione hai la possibilità di inserire recensioni. Nella tabella sotto riportata puoi trovare &#10;l'elenco dei nodi alla quale è possibile associare una recensione, selezionane uno, riempi i campi richiesti&#10;e conferma l'inserimento." />
+        <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="134.0" layoutY="398.0" prefHeight="26.0"
+                  prefWidth="330.0" promptText="Seleziona nodo associazione recensione"/>
+        <TextField fx:id="oggetto" layoutX="21.0" layoutY="441.0" prefHeight="26.0" prefWidth="266.0"
+                   promptText="Oggetto"/>
+        <TextField fx:id="valutazione" layoutX="21.0" layoutY="489.0" prefHeight="26.0" prefWidth="266.0"
+                   promptText="Valutazione"/>
+        <TextField fx:id="contenuto" layoutX="311.0" layoutY="441.0" prefHeight="26.0" prefWidth="266.0"
+                   promptText="Contenuto"/>
+        <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="20.0" layoutY="545.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="173.0" text="Home"/>
+        <Button fx:id="sezioneInserimentoRecensioniConferma" layoutX="415.0" layoutY="545.0" mnemonicParsing="false"
+                onMouseClicked="#inserisciRecensione" prefHeight="26.0" prefWidth="174.0"
+                style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE"/>
+        <Text layoutX="16.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="In questa sezione hai la possibilità di inserire recensioni. Nella tabella sotto riportata puoi trovare &#10;l'elenco dei nodi alla quale è possibile associare una recensione, selezionane uno, riempi i campi richiesti&#10;e conferma l'inserimento."/>
     </children>
 </AnchorPane>

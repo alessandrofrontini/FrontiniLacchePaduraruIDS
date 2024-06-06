@@ -16,14 +16,15 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
     RepoItinerari repoItinerari;
 
     @Autowired
-    public IperItinerari(final RepoItinerari repoItinerari){
+    public IperItinerari(final RepoItinerari repoItinerari) {
         this.repoItinerari = repoItinerari;
     }
+
     @Override
     public List<ClsItinerario> get(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return new ArrayList<>(repoItinerari.findAll());
-        if(filters.containsKey("idItinerario")) {
+        if (filters.containsKey("idItinerario")) {
             List<String> ids = new ArrayList<>();
             ids.add(filters.get("idItinerario").toString());
             return new ArrayList<>(repoItinerari.findAllById(ids));
@@ -33,9 +34,9 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsItinerario object) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idItinerario"))
+        if (!filters.containsKey("idItinerario"))
             return false;
         repoItinerari.save(object);
         return true;
@@ -49,9 +50,9 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idItinerario"))
+        if (!filters.containsKey("idItinerario"))
             return false;
         repoItinerari.deleteById(filters.get("idItinierario").toString());
         return true;

@@ -11,19 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
-    public MockTuristi(){
-        creaTuristi();
-    }
-
     private List<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
     private long idCounter = 0;
+    public MockTuristi() {
+        creaTuristi();
+    }
 
     //region CRUD metodi
     @Override
     public List<ClsTuristaAutenticato> get(Map<String, Object> filters) {
-       List<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
-        if (filters.containsKey("credenziali"))
-        {
+        List<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
+        if (filters.containsKey("credenziali")) {
             //return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};
             tmp.add(login((Credenziali) filters.get("credenziali")));
             return tmp;
@@ -32,11 +30,11 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         return this.turisti;
     }
 
-    private ClsTuristaAutenticato login(Credenziali  credenziali){
-        List<ClsTuristaAutenticato> tmp = turisti.stream().filter(t->t.getCredenziali().equals(credenziali)).toList();
-        if(tmp.isEmpty())
+    private ClsTuristaAutenticato login(Credenziali credenziali) {
+        List<ClsTuristaAutenticato> tmp = turisti.stream().filter(t -> t.getCredenziali().equals(credenziali)).toList();
+        if (tmp.isEmpty())
             return null;
-        return  tmp.get(0);
+        return tmp.get(0);
     }
 
     @Override
@@ -49,9 +47,9 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         return inserisciUtente(object);
     }
 
-    private boolean inserisciUtente(ClsTuristaAutenticato utente){
+    private boolean inserisciUtente(ClsTuristaAutenticato utente) {
         idCounter++;
-        utente.setId(""+idCounter);
+        utente.setId("" + idCounter);
         return turisti.add(utente);
     }
 

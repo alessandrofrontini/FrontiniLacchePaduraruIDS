@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 //TODO: implementare
-public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
-{
+public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     private List<ClsSegnalazione> segnalazioni = new ArrayList<ClsSegnalazione>();
 
     //TODO:add to vpp

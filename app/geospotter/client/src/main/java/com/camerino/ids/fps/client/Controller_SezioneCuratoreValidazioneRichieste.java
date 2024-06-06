@@ -1,13 +1,9 @@
 package com.camerino.ids.fps.client;
 
-import com.camerino.ids.core.data.azioni.*;
-import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsImmagine;
-import com.camerino.ids.core.data.contenuti.ClsItinerario;
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsRDCVisual;
 import javafx.collections.FXCollections;
@@ -33,83 +29,80 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.CULINARIO;
-
-public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
-{
+public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable {
 
     //region Elementi FXML
 
-        //region Tabella Immagini
-        @FXML
-        TableView<ClsRDCVisual> elencoRichiesteContribuzioneImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idColonnaImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> azioneDiContribuzioneImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> statoImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> richiedenteImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> responsabileImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idContestImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> oldDataImmagine;
-        @FXML
-        TableColumn<ClsRDCVisual, String> newDataImmagine;
+    //region Tabella Immagini
+    @FXML
+    TableView<ClsRDCVisual> elencoRichiesteContribuzioneImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idColonnaImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> azioneDiContribuzioneImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> statoImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> richiedenteImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> responsabileImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idContestImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> oldDataImmagine;
+    @FXML
+    TableColumn<ClsRDCVisual, String> newDataImmagine;
 
-        @FXML
-        ComboBox sceltaAzioneImmagine, selezionaElementoDettaglioImmagine;
-        //endregion
+    @FXML
+    ComboBox sceltaAzioneImmagine, selezionaElementoDettaglioImmagine;
+    //endregion
 
-        //region Tabella Nodi
-        @FXML
-        TableView<ClsRDCVisual> elencoRichiesteContribuzioneNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idColonnaNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> azioneDiContribuzioneNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> statoNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> richiedenteNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> responsabileNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idContestNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> oldDataNodo;
-        @FXML
-        TableColumn<ClsRDCVisual, String> newDataNodo;
-        @FXML
-        ComboBox sceltaAzioneNodo, selezionaElementoDettaglioNodo;
-        //endregion
+    //region Tabella Nodi
+    @FXML
+    TableView<ClsRDCVisual> elencoRichiesteContribuzioneNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idColonnaNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> azioneDiContribuzioneNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> statoNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> richiedenteNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> responsabileNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idContestNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> oldDataNodo;
+    @FXML
+    TableColumn<ClsRDCVisual, String> newDataNodo;
+    @FXML
+    ComboBox sceltaAzioneNodo, selezionaElementoDettaglioNodo;
+    //endregion
 
-        //region Tabella Itinerari
-        @FXML
-        TableView<ClsRDCVisual> elencoRichiesteContribuzioneItinerario;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idColonnaItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> azioneDiContribuzioneItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> statoItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> richiedenteItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> responsabileItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> idContestItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> oldDataItinerari;
-        @FXML
-        TableColumn<ClsRDCVisual, String> newDataItinerari;
+    //region Tabella Itinerari
+    @FXML
+    TableView<ClsRDCVisual> elencoRichiesteContribuzioneItinerario;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idColonnaItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> azioneDiContribuzioneItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> statoItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> richiedenteItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> responsabileItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> idContestItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> oldDataItinerari;
+    @FXML
+    TableColumn<ClsRDCVisual, String> newDataItinerari;
 
-        @FXML
-        ComboBox sceltaAzioneItinerario,selezionaElementoDettaglioItinerario;
-        //endregion
+    @FXML
+    ComboBox sceltaAzioneItinerario, selezionaElementoDettaglioItinerario;
+    //endregion
 
     //endregion
 
@@ -123,8 +116,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     //endregion
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         this.richiesteImmagini = new ArrayList<ClsRDCImmagine>();
         this.richiesteNodo = new ArrayList<ClsRDCNodo>();
         this.richiesteItinerario = new ArrayList<ClsRdcItinerario>();
@@ -291,8 +283,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta Immagini
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteImmagini.size();i++)
-        {
+        for (int i = 0; i < richiesteImmagini.size(); i++) {
             items.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
@@ -302,8 +293,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta Immagini dettaglio
         ObservableList<String> itemss = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteNodo.size();i++)
-        {
+        for (int i = 0; i < richiesteNodo.size(); i++) {
             itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
@@ -313,8 +303,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta Nodi
         ObservableList<String> it = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteNodo.size();i++)
-        {
+        for (int i = 0; i < richiesteNodo.size(); i++) {
             it.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
@@ -324,8 +313,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta Nodi dettaglio
         ObservableList<String> ite = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteNodo.size();i++)
-        {
+        for (int i = 0; i < richiesteNodo.size(); i++) {
             ite.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
@@ -335,8 +323,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta itinerari
         ObservableList<String> iti = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteItinerario.size();i++)
-        {
+        for (int i = 0; i < richiesteItinerario.size(); i++) {
             iti.add(richiesteItinerario.get(i).getIdRichiesta().toString());
         }
 
@@ -346,8 +333,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //region Combobox Scelta Immagini dettaglio
         ObservableList<String> itin = FXCollections.observableArrayList();
 
-        for(int i = 0;i<richiesteItinerario.size();i++)
-        {
+        for (int i = 0; i < richiesteItinerario.size(); i++) {
             itin.add(richiesteItinerario.get(i).getIdRichiesta().toString());
         }
 
@@ -433,233 +419,184 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //endregion
     }
 
-    public void accettaAzioneImmagine(MouseEvent mouseEvent)
-    {
+    public void accettaAzioneImmagine(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    public void rifiutaAzioneImmagine(MouseEvent mouseEvent)
-    {
+    public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    public void accettaAzioneNodo(MouseEvent mouseEvent)
-    {
+    public void accettaAzioneNodo(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    public void rifiutaAzioneNodo(MouseEvent mouseEvent)
-    {
+    public void rifiutaAzioneNodo(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    public void accettaAzioneItinerario(MouseEvent mouseEvent)
-    {
+    public void accettaAzioneItinerario(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerario);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    public void rifiutaAzioneItinerario(MouseEvent mouseEvent)
-    {
+    public void rifiutaAzioneItinerario(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerario);
-        if(IDValidazione != null && !Objects.equals(IDValidazione, ""))
-        {
-            Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
         }
     }
 
-    private void setRichiesteImmagini (List<ClsRDCImmagine> richiesteImmagini)
-    {
-        for(int i = 0; i< richiesteImmagini.size(); i++)
-        {
+    private void setRichiesteImmagini(List<ClsRDCImmagine> richiesteImmagini) {
+        for (int i = 0; i < richiesteImmagini.size(); i++) {
             ClsRDCVisual c = u.convertFromRDCImmagine(richiesteImmagini.get(i));
             elencoRichiesteContribuzioneImmagine.getItems().add(c);
         }
     }
 
-    private void setRichiesteNodi (List<ClsRDCNodo> richiesteNodo)
-    {
-        for(int i = 0; i< richiesteNodo.size(); i++)
-        {
+    private void setRichiesteNodi(List<ClsRDCNodo> richiesteNodo) {
+        for (int i = 0; i < richiesteNodo.size(); i++) {
             ClsRDCVisual c = u.convertFromRDCNodo(richiesteNodo.get(i));
             elencoRichiesteContribuzioneNodo.getItems().add(c);
         }
     }
 
-    private void setRichiesteItinerari (List<ClsRdcItinerario> richiesteItinerario)
-    {
-        for(int i = 0; i< richiesteItinerario.size(); i++)
-        {
+    private void setRichiesteItinerari(List<ClsRdcItinerario> richiesteItinerario) {
+        for (int i = 0; i < richiesteItinerario.size(); i++) {
             ClsRDCVisual c = u.convertFromRDCItinerario(richiesteItinerario.get(i));
             elencoRichiesteContribuzioneItinerario.getItems().add(c);
         }
     }
 
-    public void visualizzaDettaglioImmagine()
-    {
+    public void visualizzaDettaglioImmagine() {
         Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
-        {
+        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for(int i = 0; i<richiesteImmagini.size();i++)
-            {
-                if(IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta()))
-                {
-                    Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            for (int i = 0; i < richiesteImmagini.size(); i++) {
+                if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("OK");
                     alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
                     alert.show();
                 }
             }
 
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    public void visualizzaDettaglioNodo()
-    {
+    public void visualizzaDettaglioNodo() {
         Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
-        {
+        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for(int i = 0; i<richiesteNodo.size();i++)
-            {
-                if(IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta()))
-                {
-                    Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            for (int i = 0; i < richiesteNodo.size(); i++) {
+                if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("OK");
                     alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
                     alert.show();
                 }
             }
 
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    public void visualizzaDettaglioItinerario()
-    {
+    public void visualizzaDettaglioItinerario() {
         String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario);
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.isEmpty() && this.controllaConformitaID(Long.valueOf(IDDaVisualizzare)))
-        {
+        if (IDDaVisualizzare != null && !IDDaVisualizzare.isEmpty() && this.controllaConformitaID(Long.valueOf(IDDaVisualizzare))) {
 
-            for(int i = 0; i<richiesteItinerario.size();i++)
-            {
-                if(IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta()))
-                {
-                    Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+            for (int i = 0; i < richiesteItinerario.size(); i++) {
+                if (IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta())) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("OK");
                     alert.setContentText("Vecchi dati:" + richiesteItinerario.get(i).getOldData().visualizzaItinerario() + "\nNuovi Dati:" + richiesteItinerario.get(i).getNewData().visualizzaItinerario());
                     alert.show();
                 }
             }
 
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*boolean flag = false;
 
         for(int i = 0; i<richieste.size();i++)
@@ -673,8 +610,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -687,9 +623,8 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
 

@@ -23,28 +23,27 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class Controller_SezioneEliminazioneNodi implements Initializable
-{
+public class Controller_SezioneEliminazioneNodi implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsNodoVisual> sezioneEliminazioneNodiTableView;
 
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnID = new TableColumn<>("ID");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnIDComuneAssociato = new TableColumn<>("Comune Associato");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnNome = new TableColumn<>("Nome");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnPosizione = new TableColumn<>("Posizione");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnTipologia = new TableColumn<>("Tipologia");
     @FXML
-    TableColumn <ClsNodoVisual,String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
+    TableColumn<ClsNodoVisual, String> sezioneEliminazioneNodiTableColumnATempo = new TableColumn<>("E' Temporizzato?");
 
     @FXML
     Button sezioneEliminazioneNodiButtonConferma, sezioneEliminazioneNodiButtonHomePage;
-    
+
     @FXML
     ComboBox sezioneEliminazioneNodiComboBoxSceltaNodoID;
 
@@ -54,18 +53,16 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         //nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
-        nodi = (List<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
+        nodi = (List<ClsNodo>) ((ClsContributor) Controller_SezioneLogin.UTENTE).getNodiPossessore();
 
         setNodi(nodi);
 
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<nodi.size();i++)
-        {
+        for (int i = 0; i < nodi.size(); i++) {
             items.add(nodi.get(i).getId().toString());
         }
 
@@ -93,27 +90,24 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
         //endregion
     }
 
-    public void eliminaNodo()
-    {
+    public void eliminaNodo() {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
 
-        if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
-        {
-            ClsContributor user = (ClsContributor)Controller_SezioneLogin.UTENTE;
-            if(user.eliminaNodo(IDDaEliminare)){
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+            ClsContributor user = (ClsContributor) Controller_SezioneLogin.UTENTE;
+            if (user.eliminaNodo(IDDaEliminare)) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle(IDDaEliminare.toString());
                 alert.setContentText("Eliminato!");
                 alert.show();
-            }else {
-                Alert alert = new Alert (Alert.AlertType.ERROR);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(IDDaEliminare.toString());
                 alert.setContentText("Orrore!");
                 alert.show();
             }
-        }
-        else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("SELEZIONA UN NODO");
             alert.setContentText("--SELEZIONA UN NODO--");
             alert.show();
@@ -121,18 +115,15 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
     }
 
-    private void setNodi (List<ClsNodo> nodi)
-    {
-        for(int i = 0; i<nodi.size();i++)
-        {
+    private void setNodi(List<ClsNodo> nodi) {
+        for (int i = 0; i < nodi.size(); i++) {
             ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 
             sezioneEliminazioneNodiTableView.getItems().add(c);
         }
     }
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*
         boolean flag = false;
 
@@ -147,8 +138,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -161,9 +151,8 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 }
 

@@ -12,32 +12,33 @@ import java.util.List;
 @Service
 public class SRecensioni {
     HttpServletRequest request;
+
     @Autowired
     public SRecensioni(HttpServletRequest request) {
         this.request = request;
     }
 
     public List<ClsRecensione> getRecensioniNodo(Long idNodo) {
-        return ((ClsTurista)request.getServletContext().getAttribute("user")).getRecensioniNodo(idNodo);
+        return ((ClsTurista) request.getServletContext().getAttribute("user")).getRecensioniNodo(idNodo);
     }
 
     public boolean deleteRecensioneById(Long idRecensione) {
-        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).eliminaRecensione(idRecensione);
+        return ((ClsTuristaAutenticato) request.getServletContext().getAttribute("user")).eliminaRecensione(idRecensione);
     }
 
     public boolean postRecensione(ClsRecensione recensione) {
-        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
+        return ((ClsTuristaAutenticato) request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
     }
 
     public List<ClsRecensione> getAllRecensioni() {
-        return ((ClsTurista)request.getServletContext().getAttribute("user")).getAllRecensioni();
+        return ((ClsTurista) request.getServletContext().getAttribute("user")).getAllRecensioni();
     }
 
     public boolean putRecensione(ClsRecensione recensione) {
-        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).modificaRecensione(recensione.getId(),recensione);
+        return ((ClsTuristaAutenticato) request.getServletContext().getAttribute("user")).modificaRecensione(recensione.getId(), recensione);
     }
 
     public List<ClsRecensione> getRecensioniPossesore() {
-        return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).getRecensioniPosessore();
+        return ((ClsTuristaAutenticato) request.getServletContext().getAttribute("user")).getRecensioniPosessore();
     }
 }

@@ -14,8 +14,7 @@ import java.util.List;
 
 @Configuration
 @Order(3)
-public class DemoItinerari
-{
+public class DemoItinerari {
     @Bean
     public CommandLineRunner aggiungiItinerari(RepoItinerari repo) {
         List<ClsNodo> nodi = new ArrayList<>();

@@ -18,13 +18,13 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public List<ClsNodo> get(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return api.Get(
                     Controller_SezioneLogin.UTENTE, null);
-        if(filters.containsKey("owner"))
-            return api.Get(Controller_SezioneLogin.UTENTE, "owner="+filters.get("owner"));
-        if(filters.containsKey("idNodo"))
-            return api.Get(Controller_SezioneLogin.UTENTE, "idNodo="+filters.get("idNodo"));
+        if (filters.containsKey("owner"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "owner=" + filters.get("owner"));
+        if (filters.containsKey("idNodo"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "idNodo=" + filters.get("idNodo"));
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }
@@ -32,19 +32,19 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     @Override
     public boolean update(Map<String, Object> filters, ClsNodo object) {
         return api.Put(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsNodo object) {
         return api.Post(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
         return api.Delete(
-                (ClsContributor)Controller_SezioneLogin.UTENTE,
+                (ClsContributor) Controller_SezioneLogin.UTENTE,
                 new Pair<>("idNodo", filters.get("idNodo").toString()));
     }
 }

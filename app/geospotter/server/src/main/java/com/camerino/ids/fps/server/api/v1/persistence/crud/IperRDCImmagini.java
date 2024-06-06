@@ -18,6 +18,7 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
     public IperRDCImmagini(final RepoRDCImmagini repoRDCI) {
         this.repoRDCIimmagini = repoRDCI;
     }
+
     @Override
     public List<ClsRDCImmagine> get(Map<String, Object> filters) {
         return new ArrayList<>(repoRDCIimmagini.findAll());
@@ -41,9 +42,9 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters==null)
+        if (filters == null)
             return false;
-        if(!filters.containsKey("idRDCImmagini"))
+        if (!filters.containsKey("idRDCImmagini"))
             return false;
         repoRDCIimmagini.deleteById(filters.get("idRDCImmagini").toString());
         return true;

@@ -62,8 +62,7 @@ public class ClsItinerario {
     }
     //endregion
 
-    public String visualizzaItinerario()
-    {
+    public String visualizzaItinerario() {
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
@@ -77,18 +76,17 @@ public class ClsItinerario {
 
     /**
      * Metodo di utility per la visualizzazione delle tappe di un Itinerario
+     *
      * @param tappe elenco tappe
      * @return
      */
-    private String visualizzaTappe(List<ClsNodo> tappe)
-    {
+    private String visualizzaTappe(List<ClsNodo> tappe) {
         String dummy = "";
 
-        for(int i = 0; i < tappe.size(); i++)
-        {
+        for (int i = 0; i < tappe.size(); i++) {
             dummy += "\t" + i + ")" + tappe.get(i).getNome() + "\n";
         }
 
-        return  dummy;
+        return dummy;
     }
 }

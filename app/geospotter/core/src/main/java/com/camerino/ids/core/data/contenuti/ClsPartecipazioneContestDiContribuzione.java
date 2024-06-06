@@ -36,8 +36,7 @@ public class ClsPartecipazioneContestDiContribuzione {
 
     //endregion
 
-    public String visualizzaPartecipazione ()
-    {
+    public String visualizzaPartecipazione() {
 
         String dummy = "";
 

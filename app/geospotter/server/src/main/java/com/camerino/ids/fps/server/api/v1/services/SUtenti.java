@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SUtenti
-{
+public class SUtenti {
     HttpServletRequest request;
+
     @Autowired
     public SUtenti(HttpServletRequest request) {
         this.request = request;
@@ -29,6 +29,6 @@ public class SUtenti
 
 
     public List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE ruolo) {
-        return ((ClsGestoreDellaPiattaforma)request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
+        return ((ClsGestoreDellaPiattaforma) request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
     }
 }

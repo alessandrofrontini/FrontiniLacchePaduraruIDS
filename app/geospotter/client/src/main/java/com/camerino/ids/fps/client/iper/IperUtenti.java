@@ -17,9 +17,9 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato> {
 
     @Override
     public List<ClsTuristaAutenticato> get(Map<String, Object> filters) {
-        if(filters== null)
+        if (filters == null)
             return api.Get(Controller_SezioneLogin.UTENTE, null);
-        if(filters.containsKey("ruolo"))
+        if (filters.containsKey("ruolo"))
             return api.Get(Controller_SezioneLogin.UTENTE, "ruolo=" + filters.get("ruolo"));
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
@@ -28,19 +28,19 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato> {
     @Override
     public boolean update(Map<String, Object> filters, ClsTuristaAutenticato object) {
         return api.Put(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsTuristaAutenticato object) {
         return api.Post(
-                (ClsContributor)Controller_SezioneLogin.UTENTE, object);
+                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
         return api.Delete(
-                (ClsContributor)Controller_SezioneLogin.UTENTE,
+                (ClsContributor) Controller_SezioneLogin.UTENTE,
                 new Pair<>("idSegnalazione", filters.get("idSegnalazione").toString()));
     }
 }

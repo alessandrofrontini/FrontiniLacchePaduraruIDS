@@ -14,9 +14,8 @@ import javafx.scene.control.TextField;
 import java.util.List;
 import java.util.Objects;
 
-public class Utils
-{
-    public ClsNodoVisual convertFromClsNodo(ClsNodo nodo){
+public class Utils {
+    public ClsNodoVisual convertFromClsNodo(ClsNodo nodo) {
         ClsNodoVisual c = new ClsNodoVisual();
 
         c.setID(nodo.getId().toString());
@@ -29,8 +28,7 @@ public class Utils
         return c;
     }
 
-    public ClsItinerarioVisual convertFromClsItinerario(ClsItinerario itinerario)
-    {
+    public ClsItinerarioVisual convertFromClsItinerario(ClsItinerario itinerario) {
         ClsItinerarioVisual i = new ClsItinerarioVisual();
 
         i.setId(itinerario.getId());
@@ -41,19 +39,17 @@ public class Utils
         return i;
     }
 
-    public ClsCuratoreVisual convertFromClsCuratore (ClsTuristaAutenticato curatore)
-    {
+    public ClsCuratoreVisual convertFromClsCuratore(ClsTuristaAutenticato curatore) {
         ClsCuratoreVisual c = new ClsCuratoreVisual();
 
         c.setId(curatore.getId());
-        c.setUsername("Punteggio: " + curatore.getPunteggio()+" \nUsername: "+curatore.getCredenziali().getUsername());
+        c.setUsername("Punteggio: " + curatore.getPunteggio() + " \nUsername: " + curatore.getCredenziali().getUsername());
 
 
         return c;
     }
 
-    public ClsComuneVisual convertFromClsComune (ClsComune comune)
-    {
+    public ClsComuneVisual convertFromClsComune(ClsComune comune) {
         ClsComuneVisual c = new ClsComuneVisual();
 
         c.setId(comune.getId());
@@ -64,20 +60,13 @@ public class Utils
         c.setAbitanti(comune.getAbitanti());
 
         String tmp = "";
-        if(comune.getCuratoriAssociati().isEmpty() || comune.getCuratoriAssociati() == null)
-        {
+        if (comune.getCuratoriAssociati().isEmpty() || comune.getCuratoriAssociati() == null) {
             tmp = "non gestito";
-        }
-        else
-        {
-            for(int i = 0; i< comune.getCuratoriAssociati().size() ;i++)
-            {
-                if(i == comune.getCuratoriAssociati().size()-1)
-                {
+        } else {
+            for (int i = 0; i < comune.getCuratoriAssociati().size(); i++) {
+                if (i == comune.getCuratoriAssociati().size() - 1) {
                     tmp += comune.getCuratoriAssociati().get(i).getId();
-                }
-                else
-                {
+                } else {
                     tmp += comune.getCuratoriAssociati().get(i).getId() + "-";
                 }
             }
@@ -88,8 +77,7 @@ public class Utils
         return c;
     }
 
-    public ClsContestDiContribuzioneVisual convertFromaClsContestDiContribuzione (ClsContestDiContribuzione contest)
-    {
+    public ClsContestDiContribuzioneVisual convertFromaClsContestDiContribuzione(ClsContestDiContribuzione contest) {
         ClsContestDiContribuzioneVisual c = new ClsContestDiContribuzioneVisual();
 
         c.setId(contest.getId());
@@ -102,8 +90,7 @@ public class Utils
         return c;
     }
 
-    public ClsUtenteInvitoContestVisual convertFromTuristaAutenticato (ClsTuristaAutenticato turista)
-    {
+    public ClsUtenteInvitoContestVisual convertFromTuristaAutenticato(ClsTuristaAutenticato turista) {
         ClsUtenteInvitoContestVisual u = new ClsUtenteInvitoContestVisual();
 
         u.setId(turista.getId());
@@ -114,8 +101,7 @@ public class Utils
         return u;
     }
 
-    public ClsRichiestaAzioneDiContribuzioneVisual convertFromRichiestaAzioneContribuzione (ClsRichiestaAzioneDiContribuzione richiesta)
-    {
+    public ClsRichiestaAzioneDiContribuzioneVisual convertFromRichiestaAzioneContribuzione(ClsRichiestaAzioneDiContribuzione richiesta) {
         ClsRichiestaAzioneDiContribuzioneVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneVisual();
 
         richiestaVisual.setId(richiesta.getId());
@@ -124,20 +110,16 @@ public class Utils
         richiestaVisual.setUsernameCreatore(richiesta.getUsernameCreatoreRichiesta());
 
         //Richiesta per nodo
-        if(richiesta.getDatiNodo() != null)
-        {
+        if (richiesta.getDatiNodo() != null) {
             richiestaVisual.setTipoContenuto("NODO");
-        }
-        else
-        {
+        } else {
             richiestaVisual.setTipoContenuto("IMMAGINE");
         }
 
         return richiestaVisual;
     }
 
-    public ClsUtenteVisual convertFromClsTuristaAutenticato (ClsTuristaAutenticato turista)
-    {
+    public ClsUtenteVisual convertFromClsTuristaAutenticato(ClsTuristaAutenticato turista) {
         ClsUtenteVisual c = new ClsUtenteVisual();
 
         c.setId(turista.getId());
@@ -147,8 +129,7 @@ public class Utils
         return c;
     }
 
-    public ClsRDCVisual convertFromRDCImmagine (ClsRDCImmagine rdcImmagine)
-    {
+    public ClsRDCVisual convertFromRDCImmagine(ClsRDCImmagine rdcImmagine) {
         ClsRDCVisual tmp = new ClsRDCVisual();
 
         tmp.setIdRichiesta(rdcImmagine.getIdRichiesta());
@@ -163,8 +144,7 @@ public class Utils
         return tmp;
     }
 
-    public ClsRDCVisual convertFromRDCNodo (ClsRDCNodo rdcNodo)
-    {
+    public ClsRDCVisual convertFromRDCNodo(ClsRDCNodo rdcNodo) {
         ClsRDCVisual tmp = new ClsRDCVisual();
 
         tmp.setIdRichiesta(rdcNodo.getIdRichiesta());
@@ -179,8 +159,7 @@ public class Utils
         return tmp;
     }
 
-    public ClsRDCVisual convertFromRDCItinerario (ClsRdcItinerario rdcItinerario)
-    {
+    public ClsRDCVisual convertFromRDCItinerario(ClsRdcItinerario rdcItinerario) {
         ClsRDCVisual tmp = new ClsRDCVisual();
 
         tmp.setIdRichiesta(rdcItinerario.getIdRichiesta());
@@ -195,8 +174,7 @@ public class Utils
         return tmp;
     }
 
-    public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario (ClsRichiestaAzioneDiContribuzioneItinerario richiesta)
-    {
+    public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta) {
         ClsRichiestaAzioneDiContribuzioneItinerarioVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneItinerarioVisual();
 
         richiestaVisual.setIdd(richiesta.getId());
@@ -205,15 +183,11 @@ public class Utils
         richiestaVisual.setAzione(richiesta.geteAzioniDiContribuzione().toString());
 
         String tappe = "";
-        for(int i = 0; i < richiesta.getDatiItinerario().getTappe().size(); i++)
-        {
-            if(i == richiesta.getDatiItinerario().getTappe().size() - 1)
-            {
+        for (int i = 0; i < richiesta.getDatiItinerario().getTappe().size(); i++) {
+            if (i == richiesta.getDatiItinerario().getTappe().size() - 1) {
                 tappe += richiesta.getDatiItinerario().getTappe().get(i).getId();
 
-            }
-            else
-            {
+            } else {
                 tappe += richiesta.getDatiItinerario().getTappe().get(i).getId() + "-";
             }
 
@@ -223,26 +197,25 @@ public class Utils
         return richiestaVisual;
     }
 
-    public String getValueFromCombobox (ComboBox c)
-    {
+    public String getValueFromCombobox(ComboBox c) {
         return (String) c.getValue();
     }
 
-    public String getValueFromTextField (TextField t) { return (String)  t.getText(); }
+    public String getValueFromTextField(TextField t) {
+        return (String) t.getText();
+    }
 
-    public boolean getValueFromCheckBox (CheckBox c) { return c.isSelected();}
+    public boolean getValueFromCheckBox(CheckBox c) {
+        return c.isSelected();
+    }
 
-    private String convertTappe(List<ClsNodo> tappe)
-    {
+    private String convertTappe(List<ClsNodo> tappe) {
         String tmp = "";
 
-        for(int i = 0; i<tappe.size();i++)
-        {
-            if(i == tappe.size()-1)
-            {
+        for (int i = 0; i < tappe.size(); i++) {
+            if (i == tappe.size() - 1) {
                 tmp += tappe.get(i).getId();
-            }
-            else{
+            } else {
                 tmp += tappe.get(i).getId() + "-";
             }
 
@@ -251,23 +224,19 @@ public class Utils
         return tmp;
     }
 
-    public boolean checkInfoNodo (ClsNodo nodo)
-    {
-        if(
+    public boolean checkInfoNodo(ClsNodo nodo) {
+        if (
                 Objects.equals(nodo.getNome(), "") ||
-                Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
-                Objects.equals(nodo.getIdComuneAssociato(), "") ||
-                Objects.equals(nodo.getDescrizione(), "") ||
-                //Objects.equals(nodo.getId(), null) ||
-                Objects.equals(nodo.getNome(), null) ||
-                Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
-                Objects.equals(nodo.getIdComuneAssociato(), null) ||
-                Objects.equals(nodo.getDescrizione(), null))
-        {
+                        Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
+                        Objects.equals(nodo.getIdComuneAssociato(), "") ||
+                        Objects.equals(nodo.getDescrizione(), "") ||
+                        //Objects.equals(nodo.getId(), null) ||
+                        Objects.equals(nodo.getNome(), null) ||
+                        Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
+                        Objects.equals(nodo.getIdComuneAssociato(), null) ||
+                        Objects.equals(nodo.getDescrizione(), null)) {
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
 

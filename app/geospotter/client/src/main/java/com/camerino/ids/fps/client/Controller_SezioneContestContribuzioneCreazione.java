@@ -29,29 +29,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class Controller_SezioneContestContribuzioneCreazione implements Initializable
-{
+public class Controller_SezioneContestContribuzioneCreazione implements Initializable {
     //region Elementi FXML
     @FXML
     TableView<ClsComuneVisual> elencoComuni;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> id;
+    TableColumn<ClsComuneVisual, String> id;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> nome;
+    TableColumn<ClsComuneVisual, String> nome;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> posizione;
+    TableColumn<ClsComuneVisual, String> posizione;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> abitanti;
+    TableColumn<ClsComuneVisual, String> abitanti;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> superficie;
+    TableColumn<ClsComuneVisual, String> superficie;
 
     @FXML
-    TableColumn<ClsComuneVisual,String> curatori;
+    TableColumn<ClsComuneVisual, String> curatori;
 
     @FXML
     ComboBox sceltaComune;
@@ -81,8 +80,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     List<ClsPartecipazioneContestDiContribuzione> partecipazioni;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         setComuni(comuni);
@@ -90,8 +88,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for(int i = 0;i<Curatori.size();i++)
-        {
+        for (int i = 0; i < Curatori.size(); i++) {
             items.add(Curatori.get(i).getId().toString());
         }
 
@@ -149,8 +146,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     }
 
-    public void inserisciContest(MouseEvent mouseEvent)
-    {
+    public void inserisciContest(MouseEvent mouseEvent) {
         ClsContestDiContribuzione contest = new ClsContestDiContribuzione();
         ClsComune comune = new ClsComune();
         this.partecipazioni = new ArrayList<>();
@@ -158,41 +154,36 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         Date data = this.parseStringToDate(u.getValueFromTextField(dataFine));
         List<ClsTuristaAutenticato> utentiInvitatiAContest = new ArrayList<ClsTuristaAutenticato>();
 
-        if(data != null && u.getValueFromCombobox(this.sceltaComune) != null)
-        {
+        if (data != null && u.getValueFromCombobox(this.sceltaComune) != null) {
             contest.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();
             comune.setId(Long.valueOf(u.getValueFromCombobox(this.sceltaComune)));
             contest.setLocation(comune);
 
-           contest.setAperto(true);
+            contest.setAperto(true);
 
-                for(int i = 0; i<utenti.size();i++)
-                {
-                    ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
-                    p.setId(0L);
-                    p.setUsernamePartecipante(utenti.get(i).getCredenziali().getUsername());
-                    p.setIdContest(contest.getId());
+            for (int i = 0; i < utenti.size(); i++) {
+                ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
+                p.setId(0L);
+                p.setUsernamePartecipante(utenti.get(i).getCredenziali().getUsername());
+                p.setIdContest(contest.getId());
 
-                    this.partecipazioni.add(p);
-                }
+                this.partecipazioni.add(p);
+            }
 
-                for(int i = 0 ; i < this.partecipazioni.size(); i++)
-                {
-                    System.out.println(this.partecipazioni.get(i).visualizzaPartecipazione());
-                }
+            for (int i = 0; i < this.partecipazioni.size(); i++) {
+                System.out.println(this.partecipazioni.get(i).visualizzaPartecipazione());
+            }
 
-                Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle("OK");
-                alert.setContentText(contest.visualizzaContest());
-                alert.show();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("OK");
+            alert.setContentText(contest.visualizzaContest());
+            alert.show();
 
 
-        }
-        else
-        {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Ricontrolla le informazioni e riprova");
             alert.show();
@@ -201,10 +192,8 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     }
 
-    private void setComuni (List<ClsComune> comuni)
-    {
-        for(int i = 0; i<comuni.size();i++)
-        {
+    private void setComuni(List<ClsComune> comuni) {
+        for (int i = 0; i < comuni.size(); i++) {
             ClsComuneVisual c = u.convertFromClsComune(comuni.get(i));
 
             elencoComuni.getItems().add(c);
@@ -212,8 +201,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     }
 
 
-    private boolean controllaConformitaID (Long id)
-    {
+    private boolean controllaConformitaID(Long id) {
         /*boolean flag = false;
 
         for(int i = 0; i<comuni.size();i++)
@@ -227,8 +215,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         return true;
     }
 
-    private void SwitchScene (String nomeScena, MouseEvent mouseEvent)
-    {
+    private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(nomeScena)));
 
@@ -241,29 +228,25 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         }
     }
 
-    public void navigateToSezioneVisualizzazione (MouseEvent mouseEvent)
-    {
-        this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
+    public void navigateToSezioneVisualizzazione(MouseEvent mouseEvent) {
+        this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void visualizzaTabInvitati (MouseEvent mouseEvent)
-    {
+    public void visualizzaTabInvitati(MouseEvent mouseEvent) {
         this.tabPartecipanti.setDisable(flag);
         this.flag = !flag;
 
     }
 
 
-    private String[] convertiUtentiCoinvoltiInArray(String input)
-    {
+    private String[] convertiUtentiCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), utenti);
 
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (List<String> input, List<ClsTuristaAutenticato> utenti)
-    {
+    private String[] pulisciIDnonPresenti(List<String> input, List<ClsTuristaAutenticato> utenti) {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsTuristaAutenticato obj : utenti) {
@@ -311,7 +294,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
             return null;
         }
 
-}
+    }
 
 
 }

@@ -17,11 +17,11 @@ import java.util.List;
  * Non è possibile diventare Curatore tramite sistema a punteggi.
  */
 @Entity
-public class ClsCuratore extends ClsAnimatore{
+public class ClsCuratore extends ClsAnimatore {
     Long idComuneAssociato;
 
     //region Constructors
-    public ClsCuratore(ClsAnimatore usr){
+    public ClsCuratore(ClsAnimatore usr) {
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
 
@@ -38,7 +38,7 @@ public class ClsCuratore extends ClsAnimatore{
         this.iperRDCNodi = usr.iperRDCNodi;
     }
 
-    public ClsCuratore(){
+    public ClsCuratore() {
         this.punteggio = Integer.MAX_VALUE;
         this.ruoloUtente = eRUOLI_UTENTE.CURATORE;
     }
@@ -47,12 +47,15 @@ public class ClsCuratore extends ClsAnimatore{
     public List<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
     }
+
     public List<ClsRDCNodo> _getAllRDCNodi() {
         return iperRDCNodi.get(null);
     }
+
     public List<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
         return pRDCI.get(null);
     }
+
     public List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(Long idRDCI) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCI", idRDCI);

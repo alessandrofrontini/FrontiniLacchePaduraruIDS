@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client.visual;
 
-public class ClsCuratoreVisual
-{
+public class ClsCuratoreVisual {
     public Long id;
     public String username;
 

@@ -3,34 +3,44 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneLogin">
-   <children>
-      <Text fontSmoothingType="LCD" layoutX="232.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log-In">
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="38.0" />
-         </font>
-      </Text>
-      <Text layoutX="20.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accedi subito a GeoSpotter e inizia anche tu a viaggiare. &#10;Il tempo del Covid è finito caro il mio Turista." wrappingWidth="496.8251647949219">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Text>
-      <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0" prefWidth="543.0" promptText="Username">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </TextField>
-      <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="395.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#logga" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
-      <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="178.0" text="Home" />
-      <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0" prefWidth="543.0" promptText="Password">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </PasswordField>
-      <Button layoutX="395.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#loggaBypass" prefHeight="26.0" prefWidth="178.0" text=":-)" textFill="#15ad34">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.camerino.ids.fps.client.Controller_SezioneLogin">
+    <children>
+        <Text fontSmoothingType="LCD" layoutX="232.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Log-In">
+            <font>
+                <Font name="Franklin Gothic Medium Cond" size="38.0"/>
+            </font>
+        </Text>
+        <Text layoutX="20.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Accedi subito a GeoSpotter e inizia anche tu a viaggiare. &#10;Il tempo del Covid è finito caro il mio Turista."
+              wrappingWidth="496.8251647949219">
+            <font>
+                <Font size="11.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0"
+                   prefWidth="543.0" promptText="Username">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </TextField>
+        <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="395.0" layoutY="541.0" mnemonicParsing="false"
+                onMouseClicked="#logga" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #15ad36;"
+                text="Conferma" textFill="WHITE"/>
+        <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="26.0" layoutY="541.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="178.0" text="Home"/>
+        <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0"
+                       prefWidth="543.0" promptText="Password">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </PasswordField>
+        <Button layoutX="395.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#loggaBypass" prefHeight="26.0"
+                prefWidth="178.0" text=":-)" textFill="#15ad34">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Button>
+    </children>
 </AnchorPane>
