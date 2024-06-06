@@ -21,8 +21,8 @@ public class ClsRecensione extends ClsInformazione {
         return idNodoAssociato;
     }
 
-    public void setIdNodoAssociato(Long idContenutoAssociato) {
-        this.idNodoAssociato = idContenutoAssociato;
+    public void setIdNodoAssociato(Long idNodoAssociato) {
+        this.idNodoAssociato = idNodoAssociato;
     }
 
     public Double getValutazione() {

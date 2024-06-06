@@ -22,8 +22,8 @@ public class ClsNodo extends ClsContenuto {
         return idComuneAssociato;
     }
 
-    public void setIdComuneAssociato(Long idComune) {
-        this.idComuneAssociato = idComune;
+    public void setIdComuneAssociato(Long idComuneAssociato) {
+        this.idComuneAssociato = idComuneAssociato;
     }
 
     public eTipologiaNodo getTipologiaNodo() {

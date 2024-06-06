@@ -155,7 +155,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         List<ClsTuristaAutenticato> utentiInvitatiAContest = new ArrayList<ClsTuristaAutenticato>();
 
         if (data != null && u.getValueFromCombobox(this.sceltaComune) != null) {
-            contest.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            contest.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();
             comune.setId(Long.valueOf(u.getValueFromCombobox(this.sceltaComune)));

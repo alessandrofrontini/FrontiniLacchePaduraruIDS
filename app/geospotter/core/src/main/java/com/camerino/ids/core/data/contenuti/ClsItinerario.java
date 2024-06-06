@@ -17,7 +17,6 @@ public class ClsItinerario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
-    //TODO: aggiungere titolo itinerario sulla documentazione
     String nome;
 
     //region Getter e setter
@@ -78,7 +77,7 @@ public class ClsItinerario {
      * Metodo di utility per la visualizzazione delle tappe di un Itinerario
      *
      * @param tappe elenco tappe
-     * @return
+     * @return tappe formato string
      */
     private String visualizzaTappe(List<ClsNodo> tappe) {
         String dummy = "";

@@ -17,8 +17,8 @@ public class ClsImmagine extends ClsInformazione {
         return idNodoAssociato;
     }
 
-    public void setIdNodoAssociato(Long idCOntenutoAssociato) {
-        this.idNodoAssociato = idCOntenutoAssociato;
+    public void setIdNodoAssociato(Long idNodoAssociato) {
+        this.idNodoAssociato = idNodoAssociato;
     }
 
     public String getURL() {
