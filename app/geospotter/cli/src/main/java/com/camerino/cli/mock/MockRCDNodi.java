@@ -1,12 +1,11 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContribuzione> {
     ArrayList<ClsRichiestaAzioneDiContribuzione> rcdi = new ArrayList<>();
@@ -14,7 +13,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
 
     //region Implements IPersistance
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRichiestaAzioneDiContribuzione> get(Map<String, Object> filters) {
         ArrayList<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
         if(filters.containsKey("id")) {
             tmp.add(findById(filters.get("id").toString()));
@@ -24,7 +23,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
+    public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
         if(filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
@@ -38,7 +37,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         ClsRichiestaAzioneDiContribuzione tmp = findById(filters.get("id").toString());
         return rcdi.remove(tmp);
     }

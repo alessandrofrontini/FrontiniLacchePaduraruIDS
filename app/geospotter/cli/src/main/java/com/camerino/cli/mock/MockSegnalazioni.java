@@ -4,7 +4,8 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 //TODO: implementare
 public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 {
@@ -15,12 +16,12 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsSegnalazione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsSegnalazione> get(Map<String, Object> filters) {
         return this.segnalazioni;
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsSegnalazione object) {
+    public boolean update(Map<String, Object> filters, ClsSegnalazione object) {
         return false;
     }
 
@@ -30,7 +31,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
     //endregion

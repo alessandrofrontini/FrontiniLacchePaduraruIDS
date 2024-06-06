@@ -5,8 +5,8 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
 
@@ -17,7 +17,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
     //region CRUD metodi
         @Override
-        public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
+        public ArrayList<ClsNodo> get(Map<String, Object> filters) {
     //        if(filters.containsKey("id"))
     //            return new ArrayList<ClsNodo>().{getNodoById(filters.get("id").toString())};
             return this.nodi;
@@ -31,7 +31,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
 
         @Override
-        public boolean update(HashMap<String, Object> filters, ClsNodo object) {
+        public boolean update(Map<String, Object> filters, ClsNodo object) {
             if(filters.containsKey("id"))
                 return modificaNodo(filters.get("id").toString(), object);
             return false;
@@ -58,7 +58,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
 
         @Override
-        public boolean delete(HashMap<String, Object> filters) {
+        public boolean delete(Map<String, Object> filters) {
             if(filters.containsKey("id"))
                 return eliminaNodo(filters.get("id").toString());
 

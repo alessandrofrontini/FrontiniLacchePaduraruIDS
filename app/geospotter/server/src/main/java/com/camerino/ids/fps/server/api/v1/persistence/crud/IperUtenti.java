@@ -1,6 +1,5 @@
 package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLO_UTENTE;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -9,10 +8,7 @@ import jakarta.persistence.Transient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
@@ -28,7 +24,7 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
 
     @Override
     @Transient
-    public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters)
+    public ArrayList<ClsTuristaAutenticato> get(Map<String, Object> filters)
     {
         if(filters == null)
             return new ArrayList<>(repoUtenti.findAll());
@@ -38,7 +34,7 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsTuristaAutenticato object) {
+    public boolean update(Map<String, Object> filters, ClsTuristaAutenticato object) {
         return false;
     }
 
@@ -48,7 +44,7 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
 }

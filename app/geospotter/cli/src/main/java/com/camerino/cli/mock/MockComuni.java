@@ -1,12 +1,11 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Classe che emula molto semplicemente
@@ -25,7 +24,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
     @Override
-    public ArrayList<ClsComune> get(HashMap<String, Object> filters)
+    public ArrayList<ClsComune> get(Map<String, Object> filters)
     {
         ArrayList<ClsComune> tmp = new ArrayList<ClsComune>();
 
@@ -42,7 +41,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsComune object)
+    public boolean update(Map<String, Object> filters, ClsComune object)
     {
         if(filters != null)
         {
@@ -69,7 +68,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters)
+    public boolean delete(Map<String, Object> filters)
     {
         ClsComune c = this.filterById(filters.get("id"));
 

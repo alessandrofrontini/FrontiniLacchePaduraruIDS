@@ -155,7 +155,7 @@ public class Utils
         tmp.setAzioneDiContribuzione(rdcImmagine.getTipo().toString());
         tmp.setStato(rdcImmagine.getStato().toString());
         tmp.setRichiedente(rdcImmagine.getCreatore().getId());
-        tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
+        //tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
         tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
@@ -171,7 +171,7 @@ public class Utils
         tmp.setAzioneDiContribuzione(rdcNodo.getTipo().toString());
         tmp.setStato(rdcNodo.getStato().toString());
         tmp.setRichiedente(rdcNodo.getCreatore().getId());
-        tmp.setResponsabile(rdcNodo.getResponsabile().getId());
+        //tmp.setResponsabile(rdcNodo.getResponsabile().getId());
         tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
@@ -187,7 +187,7 @@ public class Utils
         tmp.setAzioneDiContribuzione(rdcItinerario.getTipo().toString());
         tmp.setStato(rdcItinerario.getStato().toString());
         tmp.setRichiedente(rdcItinerario.getCreatore().getId());
-        tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
+        //tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
         tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");

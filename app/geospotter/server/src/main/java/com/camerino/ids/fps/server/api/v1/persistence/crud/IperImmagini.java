@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 @Repository
 public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     RepoImmagini repoImmagini;
@@ -18,7 +19,7 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     }
 
     @Override
-    public ArrayList<ClsImmagine> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsImmagine> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoImmagini.findAll());
 
@@ -26,7 +27,7 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsImmagine object) {
+    public boolean update(Map<String, Object> filters, ClsImmagine object) {
         return false;
     }
 
@@ -36,7 +37,7 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
 }

@@ -9,19 +9,19 @@ import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     IApi<ClsImmagine> api = new ApiImmagini();
 
     @Override
-    public ArrayList<ClsImmagine> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsImmagine> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsImmagine object) {
+    public boolean update(Map<String, Object> filters, ClsImmagine object) {
         return api.Put(
                 (ClsContributor)Controller_SezioneLogin.UTENTE, object);
     }
@@ -33,7 +33,7 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return api.Delete(
                 (ClsContributor)Controller_SezioneLogin.UTENTE,
                 new Pair<>("idImmagine", filters.get("idImmagine").toString()));

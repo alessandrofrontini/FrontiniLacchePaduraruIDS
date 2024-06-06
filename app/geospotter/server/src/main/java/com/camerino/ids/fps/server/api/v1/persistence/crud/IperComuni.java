@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class IperComuni implements IPersistenceModel<ClsComune> {
@@ -20,7 +20,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
     }
 
     @Override
-    public ArrayList<ClsComune> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsComune> get(Map<String, Object> filters) {
        if(filters == null)
            return new ArrayList<>(repoComuni.findAll());
 
@@ -34,7 +34,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsComune object) {
+    public boolean update(Map<String, Object> filters, ClsComune object) {
         repoComuni.save(object);
         return true;
     }
@@ -46,7 +46,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters == null)
             return false;
         if (!filters.containsKey("idComune"))

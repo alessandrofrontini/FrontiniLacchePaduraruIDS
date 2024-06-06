@@ -7,8 +7,8 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     public MockTuristi(){
@@ -20,7 +20,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsTuristaAutenticato> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsTuristaAutenticato> get(Map<String, Object> filters) {
        ArrayList<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
         if (filters.containsKey("credenziali"))
         {
@@ -40,7 +40,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsTuristaAutenticato object) {
+    public boolean update(Map<String, Object> filters, ClsTuristaAutenticato object) {
         return false;//TODO
     }
 
@@ -56,7 +56,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;//TODO
     }
     //endregion

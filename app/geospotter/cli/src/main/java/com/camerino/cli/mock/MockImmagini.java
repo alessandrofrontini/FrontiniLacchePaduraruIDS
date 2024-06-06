@@ -4,7 +4,8 @@ import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 //TODO:implementare
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
@@ -14,12 +15,12 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsImmagine> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsImmagine> get(Map<String, Object> filters) {
         return this.immagini;
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsImmagine object) {
+    public boolean update(Map<String, Object> filters, ClsImmagine object) {
         return false;
     }
 
@@ -29,7 +30,7 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
     //endregion

@@ -4,12 +4,10 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRecensioni;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Component
@@ -22,7 +20,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoRecensioni.findAll());
         else if(filters.containsKey("idNodo"))
@@ -39,7 +37,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRecensione object) {
+    public boolean update(Map<String, Object> filters, ClsRecensione object) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRecensione"))
@@ -55,7 +53,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRecensione"))

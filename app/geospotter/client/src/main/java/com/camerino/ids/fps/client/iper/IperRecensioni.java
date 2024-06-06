@@ -7,13 +7,13 @@ import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     IApi<ClsRecensione> api = new ApiRecensioni();
 
     @Override
-    public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
         String query = "";
         if(filters.containsKey("owner"))
             query = "owner="+filters.get("owner");
@@ -22,7 +22,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRecensione object) {
+    public boolean update(Map<String, Object> filters, ClsRecensione object) {
         return api.Put(
                 Controller_SezioneLogin.UTENTE, object);
     }
@@ -34,7 +34,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return api.Delete(
                 Controller_SezioneLogin.UTENTE,
                 new Pair<>("idRecensione", filters.get("idRecensione").toString()));

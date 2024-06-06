@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 @Component
 @Deprecated
 public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
@@ -18,7 +19,7 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
         this.repoRDCI = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoRDCI.findAll());
         if(filters.containsKey("idRDCI")) {
@@ -33,7 +34,7 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
+    public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCI"))
@@ -49,7 +50,7 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCI"))

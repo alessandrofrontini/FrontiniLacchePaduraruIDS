@@ -140,7 +140,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsCuratore c1 = new ClsCuratore();
         c1.setId("1");
-        img1.setResponsabile(c1);
+        //img1.setResponsabile(c1);
 
         ClsContestDiContribuzione contest1 = new ClsContestDiContribuzione();
         contest1.setId("1");
@@ -170,7 +170,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsCuratore c2 = new ClsCuratore();
         c2.setId("2");
-        img2.setResponsabile(c2);
+        //img2.setResponsabile(c2);
         img2.setIdContestAppartenenza(contest1);
 
         img2.setOldData(im1);
@@ -185,7 +185,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsCuratore c3 = new ClsCuratore();
         c3.setId("3");
-        img3.setResponsabile(c3);
+        //img3.setResponsabile(c3);
         img3.setIdContestAppartenenza(contest1);
 
         img3.setOldData(im1);
@@ -202,7 +202,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsCuratore cu1 = new ClsCuratore();
         cu1.setId("1");
-        n1.setResponsabile(cu1);
+        //n1.setResponsabile(cu1);
         n1.setIdContestAppartenenza(contest1);
 
         ClsNodo nodo1 = new ClsNodo();
@@ -232,7 +232,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsCuratore cu2 = new ClsCuratore();
         cu2.setId("2");
-        n2.setResponsabile(cu2);
+        //n2.setResponsabile(cu2);
         n2.setIdContestAppartenenza(contest1);
 
         nodo1.setNome("nomeOld");
@@ -260,7 +260,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         it1.setStato(EStatusRDC.ASSEGNATO);
         it1.setCreatore(utente);
 
-        it1.setResponsabile(c1);
+        //it1.setResponsabile(c1);
         it1.setIdContestAppartenenza(contest1);
 
         ClsItinerario itinerario1 = new ClsItinerario();

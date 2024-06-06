@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
     RepoRDCImmagini repoRDCIimmagini;
@@ -17,12 +18,12 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
         this.repoRDCIimmagini = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRDCImmagine> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRDCImmagine> get(Map<String, Object> filters) {
         return new ArrayList<>(repoRDCIimmagini.findAll());
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRDCImmagine object) {
+    public boolean update(Map<String, Object> filters, ClsRDCImmagine object) {
         /*if(filters==null)
             return false;
         if(!filters.containsKey("idRDCImmagini"))
@@ -38,7 +39,7 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCImmagini"))

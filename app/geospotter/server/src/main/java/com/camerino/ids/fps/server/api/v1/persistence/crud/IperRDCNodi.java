@@ -1,15 +1,13 @@
 package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCI;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCNodi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
@@ -20,7 +18,7 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
         this.repoRDCNodi = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRDCNodo> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRDCNodo> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoRDCNodi.findAll());
         if(filters.containsKey("idRDCNodo")) {
@@ -35,7 +33,7 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRDCNodo object) {
+    public boolean update(Map<String, Object> filters, ClsRDCNodo object) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCNodo"))
@@ -51,7 +49,7 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idRDCNodo"))

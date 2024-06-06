@@ -1,6 +1,5 @@
 package com.camerino.ids.fps.client.iper;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -10,20 +9,20 @@ import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
 
     IApi<ClsSegnalazione> api = new ApiSegnalazioni();
 
     @Override
-    public ArrayList<ClsSegnalazione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsSegnalazione> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsSegnalazione object) {
+    public boolean update(Map<String, Object> filters, ClsSegnalazione object) {
         return api.Put(
                 (ClsContributor)Controller_SezioneLogin.UTENTE, object);
     }
@@ -35,7 +34,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return api.Delete(
                 (ClsContributor)Controller_SezioneLogin.UTENTE,
                 new Pair<>("idSegnalazione", filters.get("idSegnalazione").toString()));

@@ -4,8 +4,8 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
@@ -30,7 +30,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public ArrayList<ClsItinerario> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
 //        if(filters.containsKey("id"))
 //            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
 
@@ -45,7 +45,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsItinerario object) {
+    public boolean update(Map<String, Object> filters, ClsItinerario object) {
         if(filters.containsKey("id"))
             return modificaItinerario(filters.get("id").toString(), object);
         return false;
@@ -66,7 +66,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if (filters.containsKey("id"))
             return eliminaItinerario(filters.get("id").toString());
         return false;

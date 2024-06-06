@@ -3,12 +3,11 @@ package com.camerino.ids.fps.server.api.v1.persistence.crud;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoItinerari;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class IperItinerari implements IPersistenceModel<ClsItinerario> {
@@ -20,7 +19,7 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
         this.repoItinerari = repoItinerari;
     }
     @Override
-    public ArrayList<ClsItinerario> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoItinerari.findAll());
         if(filters.containsKey("idItinerario")) {
@@ -32,7 +31,7 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsItinerario object) {
+    public boolean update(Map<String, Object> filters, ClsItinerario object) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idItinerario"))
@@ -48,7 +47,7 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         if(filters==null)
             return false;
         if(!filters.containsKey("idItinerario"))

@@ -1,8 +1,7 @@
 package com.camerino.ids.core.persistence;
 import java.beans.Transient;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 /**TODO: aggiornare la documentazione con questa classe
  * Questa classe definisce quali metodi CRUD definire
@@ -14,7 +13,7 @@ public interface IPersistenceModel<E> {
      * @return Array contente i dati letti.
      */
     @Transient
-    ArrayList<E> get(HashMap<String,Object> filters);
+    ArrayList<E> get(Map<String, Object> filters);
 
     /**
      * Questo metodo rappresenta l'aggiornamento di un dato.
@@ -23,7 +22,7 @@ public interface IPersistenceModel<E> {
      * @return True se l'operazione ha successo,
      *         False altrimenti.
      */
-    boolean update(HashMap<String,Object> filters, E object);
+    boolean update(Map<String, Object> filters, E object);
 
     /**
      * Questo metodo rappresenta l'inserimento di un dato.
@@ -39,6 +38,6 @@ public interface IPersistenceModel<E> {
      * @return True se l'operazione ha successo,
      *         False altrimenti.
      */
-    boolean delete(HashMap<String,Object> filters);
+    boolean delete(Map<String, Object> filters);
 }
 

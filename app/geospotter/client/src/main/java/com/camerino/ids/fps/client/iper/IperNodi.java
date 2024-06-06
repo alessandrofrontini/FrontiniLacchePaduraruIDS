@@ -9,7 +9,7 @@ import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 //https://www.youtube.com/watch?v=9oq7Y8n1t00
 public class IperNodi implements IPersistenceModel<ClsNodo> {
@@ -17,7 +17,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     IApi<ClsNodo> api = new ApiNodi();
 
     @Override
-    public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsNodo> get(Map<String, Object> filters) {
         if(filters==null)
             return api.Get(
                     Controller_SezioneLogin.UTENTE, null);
@@ -30,7 +30,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsNodo object) {
+    public boolean update(Map<String, Object> filters, ClsNodo object) {
         return api.Put(
                 (ClsContributor)Controller_SezioneLogin.UTENTE, object);
     }
@@ -42,7 +42,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return api.Delete(
                 (ClsContributor)Controller_SezioneLogin.UTENTE,
                 new Pair<>("idNodo", filters.get("idNodo").toString()));

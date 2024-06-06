@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 @Component
 public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     private final RepoSegnalazioni repoSegnalazioni;
@@ -18,7 +19,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     }
 
     @Override
-    public ArrayList<ClsSegnalazione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsSegnalazione> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoSegnalazioni.findAll());
         if(filters.containsKey("idContenuto"))
@@ -30,7 +31,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsSegnalazione object) {
+    public boolean update(Map<String, Object> filters, ClsSegnalazione object) {
         return false;
     }
 
@@ -41,7 +42,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
 }

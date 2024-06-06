@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -22,7 +22,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     }
 
     @Override
-    public ArrayList<ClsNodo> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsNodo> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoNodi.findAll());
         ArrayList<ClsNodo> lNodi = new ArrayList<>();
@@ -44,7 +44,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Transactional
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsNodo object) {
+    public boolean update(Map<String, Object> filters, ClsNodo object) {
         repoNodi.save(object);
         return true;
     }
@@ -56,7 +56,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         repoNodi.deleteById(filters.get("idNodo").toString());
         return true;
     }

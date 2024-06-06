@@ -4,7 +4,8 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+
 //TODO: implementare
 public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 {
@@ -14,12 +15,12 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsRecensione> get(HashMap<String, Object> filters) {
+    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
         return this.recensioni;
     }
 
     @Override
-    public boolean update(HashMap<String, Object> filters, ClsRecensione object) {
+    public boolean update(Map<String, Object> filters, ClsRecensione object) {
         return false;
     }
 
@@ -29,7 +30,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     }
 
     @Override
-    public boolean delete(HashMap<String, Object> filters) {
+    public boolean delete(Map<String, Object> filters) {
         return false;
     }
     //endregion
