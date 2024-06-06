@@ -40,7 +40,7 @@ public class CSegnalazioni {
 
     @DeleteMapping(mapping)
     public ResponseEntity<Boolean> deleteSegnalazioni(
-            @RequestParam("idSegnalazione") String idSegnalazione) {
+            @RequestParam("idSegnalazione") Long idSegnalazione) {
         return ResponseEntity.ok(sSegnalazioni.deleteSgnalazione(idSegnalazione));
     }
 }

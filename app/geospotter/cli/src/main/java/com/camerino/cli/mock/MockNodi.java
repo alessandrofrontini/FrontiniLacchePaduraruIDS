@@ -23,7 +23,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
             return this.nodi;
         }
 
-        private ClsNodo getNodoById(String id){
+        private ClsNodo getNodoById(Long id){
             List<ClsNodo> tmp =  nodi.stream().filter(n->n.getId().equals(id)).toList();
             if(tmp.isEmpty())
                 return null;
@@ -37,7 +37,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
             return false;
         }
 
-        private boolean modificaNodo(String id, ClsNodo nodo){
+        private boolean modificaNodo(Long id, ClsNodo nodo){
             ClsNodo tmp = getNodoById(nodo.getId());
             int index = nodi.indexOf(tmp);
             if(index<0)
@@ -65,7 +65,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
             return false;
         }
 
-        private boolean eliminaNodo(String id){
+        private boolean eliminaNodo(Long id){
             return nodi.remove(getNodoById(id));
         }
         //endregion

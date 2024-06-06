@@ -24,13 +24,13 @@ public class SRDCImmagini {
         return user._getAllRDCImmagini();
     }
 
-    public List<ClsRDCImmagine> getRDCIById(String idRDCI) {
+    public List<ClsRDCImmagine> getRDCIById(Long idRDCI) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         //return user.getRDCImmagineById(idRDCI);
         return null;
     }
 
-    public boolean deleteRDCImmagineById(String idRDCImmagine) {
+    public boolean deleteRDCImmagineById(Long idRDCImmagine) {
         ClsTuristaAutenticato user = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
         return user.deleteRDCImmagineById(idRDCImmagine);
         //return false;

@@ -1,8 +1,8 @@
 package com.camerino.ids.core.data.utils;
 
 public class Posizione {
-    double x;
-    double y;
+    Double x;
+    Double y;
 
     public Posizione(){}
 
@@ -11,7 +11,7 @@ public class Posizione {
         this.y = y;
     }
 
-    public double getX() {
+    public Double getX() {
         return x;
     }
 
@@ -19,7 +19,7 @@ public class Posizione {
         this.x = x;
     }
 
-    public double getY() {
+    public Double getY() {
         return y;
     }
 

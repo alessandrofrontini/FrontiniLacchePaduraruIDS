@@ -20,12 +20,12 @@ public class SNodi {
         this.request = request;
     }
 
-    public List<ClsNodo> findNodoById(String idNodo) {
+    public List<ClsNodo> findNodoById(Long idNodo) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodoById(idNodo);
     }
 
-    public List<ClsNodo> findNodiByComune(String idComune) {
+    public List<ClsNodo> findNodiByComune(Long idComune) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodiByComune(idComune);
     }
@@ -40,7 +40,7 @@ public class SNodi {
         return user.inserisciNodo(nodo);
     }
 
-    public boolean deleteNodoById(String idNodo) {
+    public boolean deleteNodoById(Long idNodo) {
         ClsContributor cont = (ClsContributor) request.getServletContext().getAttribute("user");
         return cont.deleteNodo(idNodo);
     }

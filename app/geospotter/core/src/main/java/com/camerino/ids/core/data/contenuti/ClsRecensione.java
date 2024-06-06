@@ -11,25 +11,25 @@ public class ClsRecensione extends ClsInformazione{
     //Ho errore referring to multiple physical column names: [idcontenuto_associato], [id_contenuto_associato]
     //perchè esiste anche in ClsImmagine
     @Column(name = "idNodoAssRec")
-    String idNodoAssociato;
-    double valutazione;
+    Long idNodoAssociato;
+    Double valutazione;
     String oggetto;
     String contenuto;
 
     //region Getter e setter
-    public String getIdNodoAssociato() {
+    public Long getIdNodoAssociato() {
         return idNodoAssociato;
     }
 
-    public void setIdNodoAssociato(String idContenutoAssociato) {
+    public void setIdNodoAssociato(Long idContenutoAssociato) {
         this.idNodoAssociato = idContenutoAssociato;
     }
 
-    public double getValutazione() {
+    public Double getValutazione() {
         return valutazione;
     }
 
-    public void setValutazione(double valutazione) {
+    public void setValutazione(Double valutazione) {
         this.valutazione = valutazione;
     }
 

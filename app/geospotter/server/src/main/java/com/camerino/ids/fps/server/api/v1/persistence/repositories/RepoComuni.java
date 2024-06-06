@@ -10,5 +10,5 @@ import java.util.List;
 public interface RepoComuni extends JpaRepository<ClsComune, String> {
     @Modifying
     @Query("update ClsComune c set c = ?1 WHERE c.id = ?2")
-    void updateComuneById(ClsComune object, String idComune);
+    void updateComuneById(ClsComune object, Long idComune);
 }

@@ -3,7 +3,7 @@ package com.camerino.ids.fps.client.visual;
 public class ClsComuneVisual
 {
 
-    public String id;
+    public Long id;
     public String nome;
     public String descrizione;
     public Double superficie;
@@ -19,11 +19,11 @@ public class ClsComuneVisual
         this.abitanti = abitanti;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

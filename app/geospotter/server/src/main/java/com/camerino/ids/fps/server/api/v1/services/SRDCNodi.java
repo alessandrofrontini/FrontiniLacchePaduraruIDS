@@ -22,12 +22,12 @@ public class SRDCNodi {
         return user._getAllRDCNodi();
     }
 
-    public List<ClsRDCNodo> getRDCNodiById(String idRDCNodo) {
+    public List<ClsRDCNodo> getRDCNodiById(Long idRDCNodo) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.getRDCNodiById(idRDCNodo);
     }
 
-    public boolean deleteRDCNodiById(String idRDCNodo) {
+    public boolean deleteRDCNodiById(Long idRDCNodo) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.deleteRDCById(idRDCNodo);
     }

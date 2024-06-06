@@ -112,7 +112,7 @@ public class Input
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsItinerario itinerario = new ClsItinerario();
-        String idNodo = "0";
+        Long idNodo = "0";
         while (!ok){
             print("Inserisci nome itinerario: ");
             itinerario.setNome(in.nextLine());

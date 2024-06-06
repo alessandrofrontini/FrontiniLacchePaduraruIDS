@@ -2,21 +2,21 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsRichiestaAzioneDiContribuzioneVisual
 {
-    public String id;
+    public Long id;
 
     public String usernameCreatore;
 
-    public String idContest;
+    public Long idContest;
 
     public String azioneDiContribuzione;
 
     public String tipoContenuto;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,11 +28,11 @@ public class ClsRichiestaAzioneDiContribuzioneVisual
         this.usernameCreatore = usernameCreatore;
     }
 
-    public String getIdContest() {
+    public Long getIdContest() {
         return idContest;
     }
 
-    public void setIdContest(String idContest) {
+    public void setIdContest(Long idContest) {
         this.idContest = idContest;
     }
 

@@ -73,7 +73,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
         for(int i = 0;i<comuni.size();i++)
         {
-            items.add(comuni.get(i).getId());
+            items.add(comuni.get(i).getId().toString());
         }
 
         this.selezionaElementoDettaglio.setItems(items);
@@ -84,7 +84,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
         for(int i = 0;i<comuni.size();i++)
         {
-            itemss.add(comuni.get(i).getId());
+            itemss.add(comuni.get(i).getId().toString());
         }
 
         this.selezionaElementoSegnalazione.setItems(itemss);
@@ -120,7 +120,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
         if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
         {
-            String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
+            Long IDDaSegnalare = Long.valueOf(u.getValueFromCombobox(selezionaElementoSegnalazione));
             ClsSegnalazione segnalazione = new ClsSegnalazione();
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
@@ -149,9 +149,9 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
 
     public void visualizzaDettaglio ()
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglio);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
+        if(this.controllaConformitaID(IDDaVisualizzare))
         {
             ClsComune c = new ClsComune();
             for(int i = 0; i<comuni.size();i++)
@@ -215,7 +215,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
         this.SwitchScene("SezioneVisualizzazioneMappa.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {/*
         boolean flag = false;
 

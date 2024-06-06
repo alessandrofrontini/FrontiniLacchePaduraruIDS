@@ -21,17 +21,17 @@ public class DemoNodi {
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setNome("Centro Camerino");
         nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato("Camerino");
+        nodo1.setIdComuneAssociato(1L);
         nodo1.setaTempo(true);
         nodo1.setDescrizione("Ciao");
         nodo1.setPosizione(new Posizione(12,23));
-        nodo1.setIdCreatore("1");
+        nodo1.setIdCreatore(1L);
         nodi.add(nodo1);
 
         ClsNodo nodo2 = new ClsNodo();
         nodo2.setNome("Porchettaro");
         nodo2.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo2.setIdComuneAssociato("Camerino");
+        nodo2.setIdComuneAssociato(1L);
         nodo2.setaTempo(true);
         nodo2.setDescrizione("Ciao");
         nodo2.setPosizione(new Posizione(12,23));
@@ -40,7 +40,7 @@ public class DemoNodi {
         ClsNodo nodo3 = new ClsNodo();
         nodo3.setNome("Museo Civico");
         nodo3.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo3.setIdComuneAssociato("Macerata");
+        nodo3.setIdComuneAssociato(2L);
         nodo3.setaTempo(true);
         nodo3.setDescrizione("Museo con reperti storici");
         nodo3.setPosizione(new Posizione(15, 30));
@@ -49,7 +49,7 @@ public class DemoNodi {
         ClsNodo nodo4 = new ClsNodo();
         nodo4.setNome("Teatro Romano");
         nodo4.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo4.setIdComuneAssociato("Fermo");
+        nodo4.setIdComuneAssociato(3L);
         nodo4.setaTempo(true);
         nodo4.setDescrizione("Antico teatro romano");
         nodo4.setPosizione(new Posizione(14, 28));
@@ -58,7 +58,7 @@ public class DemoNodi {
         ClsNodo nodo5 = new ClsNodo();
         nodo5.setNome("Parco Naturale");
         nodo5.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULINARIO);
-        nodo5.setIdComuneAssociato("Ascoli Piceno");
+        nodo5.setIdComuneAssociato(4L);
         nodo5.setaTempo(false);
         nodo5.setDescrizione("Parco con flora e fauna locali");
         nodo5.setPosizione(new Posizione(13, 25));

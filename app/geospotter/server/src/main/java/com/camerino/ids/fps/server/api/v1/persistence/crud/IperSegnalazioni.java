@@ -24,9 +24,9 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
         if(filters == null)
             return new ArrayList<>(repoSegnalazioni.findAll());
         if(filters.containsKey("idContenuto"))
-            return new ArrayList<>(repoSegnalazioni.filterByContenuto(filters.get("idContenuto").toString()));
+            return new ArrayList<>(repoSegnalazioni.filterByContenuto((Long)filters.get("idContenuto")));
         if(filters.containsKey("idUtente"))
-            return new ArrayList<>(repoSegnalazioni.getSegnalazioneByUser(filters.get("idUtente").toString()));
+            return new ArrayList<>(repoSegnalazioni.getSegnalazioneByUser((Long)filters.get("idUtente")));
 
         return new ArrayList<>(repoSegnalazioni.findAll());
     }

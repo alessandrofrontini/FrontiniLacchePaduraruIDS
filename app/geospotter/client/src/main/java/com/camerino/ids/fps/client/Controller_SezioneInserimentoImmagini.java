@@ -69,7 +69,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            items.add(nodi.get(i).getId());
+            items.add(nodi.get(i).getId().toString());
         }
 
         this.sceltaNodo.setItems(items);
@@ -98,13 +98,13 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
 
     public void inserisciImmagine(MouseEvent mouseEvent)
     {
-        String IDNodoAssociatoImmagine = u.getValueFromCombobox(this.sceltaNodo);
+        Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
         ClsImmagine i = new ClsImmagine();
 
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine))
         {
-            i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            i.setIdNodoAssociato(u.getValueFromCombobox(this.sceltaNodo));
+            i.setIdCreatore(1L);
+            i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
             ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -149,7 +149,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*if(id==null)
             return false;

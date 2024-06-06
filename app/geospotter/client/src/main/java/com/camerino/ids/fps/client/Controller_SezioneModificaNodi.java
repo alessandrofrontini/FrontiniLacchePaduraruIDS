@@ -88,7 +88,7 @@ public class Controller_SezioneModificaNodi implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            items.add(nodi.get(i).getId());
+            items.add(nodi.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(items);
@@ -119,7 +119,7 @@ public class Controller_SezioneModificaNodi implements Initializable
     public void modificaNodo(MouseEvent mouseEvent)
     {
         ClsNodo nuovoNodo = this.inserisciNodo(mouseEvent);
-        String IDDaModificare = this.eliminaNodo(mouseEvent);
+        Long IDDaModificare = Long.valueOf(this.eliminaNodo(mouseEvent));
 
 
 
@@ -178,7 +178,7 @@ public class Controller_SezioneModificaNodi implements Initializable
                     //nodo.setIdCreatore();
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
-                    nodo.setIdComuneAssociato(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
+                    nodo.setIdComuneAssociato(Long.valueOf(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato)));
                     nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
                     nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
@@ -269,8 +269,8 @@ public class Controller_SezioneModificaNodi implements Initializable
                     this.sezioneInserimentoNodiTextFieldComuneAssociato.setText(c.IDComuneAssociato);
                     this.sezioneInserimentoNodiTextFieldDataFine.setText(nodi.get(i).getDataFine());
                     this.sezioneInserimentoNodiTextFieldDataInizio.setText(nodi.get(i).getDataInizio());
-                    this.sezioneInserimentoNodiTextFieldCoordinataX.setText(nodi.get(i).getPosizione().getX()+"");
-                    this.sezioneInserimentoNodiTextFieldCoordinataY.setText(nodi.get(i).getPosizione().getY()+"");
+                    this.sezioneInserimentoNodiTextFieldCoordinataX.setText(nodi.get(i).getPosizione().getX().toString());
+                    this.sezioneInserimentoNodiTextFieldCoordinataY.setText(nodi.get(i).getPosizione().getY().toString());
                     this.sezioneInserimentoNodiTextFieldDescrizioneDelNodo.setText(nodi.get(i).getDescrizione());
                     this.sezioneInserimentoNodiComboBoxTipologiaNodo.setValue(nodi.get(i).getTipologiaNodoFormatoStringa());
                 }
@@ -308,7 +308,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {/*
         boolean flag = false;
 

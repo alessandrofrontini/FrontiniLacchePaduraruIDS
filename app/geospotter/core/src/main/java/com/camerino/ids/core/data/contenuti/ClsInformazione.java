@@ -5,8 +5,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
-import java.util.Objects;
-
 /**
  * TODO: commentare
  */
@@ -16,24 +14,24 @@ public abstract class ClsInformazione
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
-    String idCreatore;
+    Long idCreatore;
 
     //region Getters and setters
 
-    public String getId() {
-        return Objects.toString(id);
+    public Long getId() {
+        return (id);
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = Long.valueOf(id);
     }
 
-    public String getIdCreatore() {
+    public Long getIdCreatore() {
         return idCreatore;
     }
 
-    public void setIdCreatore(String usernameCreatore) {
-        this.idCreatore = usernameCreatore;
+    public void setIdCreatore(Long idCreatore) {
+        this.idCreatore = idCreatore;
     }
 
     //endregion

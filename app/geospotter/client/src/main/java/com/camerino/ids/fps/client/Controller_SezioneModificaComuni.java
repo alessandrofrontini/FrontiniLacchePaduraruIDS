@@ -88,7 +88,7 @@ public class Controller_SezioneModificaComuni implements Initializable
 
         for(int i = 0;i<comuni.size();i++)
         {
-            items.add(comuni.get(i).getId());
+            items.add(comuni.get(i).getId().toString());
         }
 
         this.sceltaComune.setItems(items);
@@ -125,7 +125,7 @@ public class Controller_SezioneModificaComuni implements Initializable
 
     public void modificaComune(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = this.eliminaComune(mouseEvent);
+        Long IDDaEliminare = Long.valueOf(this.eliminaComune(mouseEvent));
         ClsComune nuovoComune = this.inserisciComune(mouseEvent);
 
         if(!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null))
@@ -232,7 +232,7 @@ public class Controller_SezioneModificaComuni implements Initializable
                 !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
                 !Objects.equals(u.getValueFromTextField(superficieTF), ""))
         {
-            comune.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
+            comune.setIdCreatore(0L);
             comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
             comune.setNome(u.getValueFromTextField(nomeTF));
             comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
@@ -250,7 +250,7 @@ public class Controller_SezioneModificaComuni implements Initializable
 
     public void vediInformazoniAttualiComune(MouseEvent mouseEvent)
     {
-        String idComune = u.getValueFromCombobox(sceltaComune);
+        Long idComune = Long.valueOf(u.getValueFromCombobox(sceltaComune));
 
         ClsComuneVisual c = new ClsComuneVisual();
 
@@ -261,11 +261,11 @@ public class Controller_SezioneModificaComuni implements Initializable
                 c = u.convertFromClsComune(comuni.get(i));
                 this.nomeTF.setText(c.getNome());
                 this.descrizioneTF.setText(c.getDescrizione());
-                this.coordinataXTF.setText(comuni.get(i).getPosizione().getX()+"");
-                this.coordinataYTF.setText(comuni.get(i).getPosizione().getY()+"");
+                this.coordinataXTF.setText(comuni.get(i).getPosizione().getX().toString());
+                this.coordinataYTF.setText(comuni.get(i).getPosizione().getY().toString());
                 this.textFieldCuratori.setText(c.getCuratori());
-                this.abitantiTF.setText(c.getAbitanti()+"");
-                this.superficieTF.setText(c.getSuperficie()+"");
+                this.abitantiTF.setText(c.getAbitanti().toString());
+                this.superficieTF.setText(c.getSuperficie().toString());
             }
         }
     }

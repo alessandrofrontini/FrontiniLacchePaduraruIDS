@@ -112,7 +112,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
-
+/*
         //region Creazione Contest dummy
         ClsContestDiContribuzione c1 = new ClsContestDiContribuzione();
         c1.setId("1");
@@ -144,7 +144,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         c3.setAperto(true);
         contests.add(c3);
         //endregion
-
+*/
         setContest(contests);
         setNodi(nodi);
 
@@ -153,7 +153,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
         for(int i = 0;i<contests.size();i++)
         {
-            items.add(contests.get(i).getId());
+            items.add(contests.get(i).getId().toString());
         }
 
         this.sceltaContest.setItems(items);
@@ -164,7 +164,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
         for(int i = 0;i<nodi.size();i++)
         {
-            itemes.add(nodi.get(i).getId());
+            itemes.add(nodi.get(i).getId().toString());
         }
 
         this.sceltaNodo.setItems(itemes);
@@ -253,7 +253,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
                         Objects.equals(u.getValueFromCombobox(sceltaContest), null))
                 {
-                    nodo.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
+                    nodo.setIdCreatore(1L);
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     //nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
@@ -322,11 +322,11 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     public String partecipaContest(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = u.getValueFromCombobox(sceltaContest);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sceltaContest));
 
-        if(IDDaEliminare != null && controllaConformitaID(IDDaEliminare))
+        if(controllaConformitaID(IDDaEliminare))
         {
-            return IDDaEliminare;
+            return IDDaEliminare.toString();
         }
         else {
             return "";
@@ -352,7 +352,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*
         boolean flag = false;
@@ -368,7 +368,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         return true;
     }
 
-    private boolean controllaConformitaIDNodi (String id)
+    private boolean controllaConformitaIDNodi (Long id)
     {/*
         if(id==null)
             return false;
@@ -422,14 +422,14 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     public void inserisciImmagine(MouseEvent mouseEvent)
     {
-        String IDContest = u.getValueFromCombobox(this.sceltaContest);
-        String IDNodoAssociatoImmagine = u.getValueFromCombobox(this.sceltaNodo);
+        Long IDContest = Long.valueOf(u.getValueFromCombobox(this.sceltaContest));
+        Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
         ClsImmagine i = new ClsImmagine();
 
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
         {
-            i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            i.setIdNodoAssociato(u.getValueFromCombobox(this.sceltaNodo));
+            i.setIdCreatore(1L);
+            i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
 

@@ -31,8 +31,8 @@ public class CNodi {
      */
     @GetMapping(value = mapping, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClsNodo>> getNodi(
-            @RequestParam(value = "idNodo", required = false) String idNodo,
-            @RequestParam(value = "idComune", required = false) String idComune,
+            @RequestParam(value = "idNodo", required = false) Long idNodo,
+            @RequestParam(value = "idComune", required = false) Long idComune,
             @RequestParam(value = "owner", required = false) Long owner
     ){
         if(owner!=null)
@@ -67,7 +67,7 @@ public class CNodi {
      */
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteNodi(
-            @RequestParam(value = "idNodo") String idNodo
+            @RequestParam(value = "idNodo") Long idNodo
     ){
         if(!sNodi.deleteNodoById(idNodo))
             return ResponseEntity.internalServerError().build();

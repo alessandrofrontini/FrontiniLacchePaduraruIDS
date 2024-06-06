@@ -55,7 +55,7 @@ public class DemoComuni {
         comuni.add(comune);
 
         ClsComune com1 = new ClsComune();
-        com1.setId("1");
+        com1.setId(1L);
         com1.setNome("Canepona");
         com1.setDescrizione("Una strada, un tabacchi e un autovelox");
         com1.setSuperficie(321);
@@ -69,7 +69,7 @@ public class DemoComuni {
         comuni.add(com1);
 
         ClsComune com2 = new ClsComune();
-        com2.setId("2");
+        com2.setId(2L);
         com2.setNome("Spello");
         com2.setDescrizione("Spavento");
         com2.setSuperficie(123);
@@ -83,7 +83,7 @@ public class DemoComuni {
 //        comune.setCuratoriAssociati(new ArrayList<>(cur3));
 
         ClsComune com3 = new ClsComune();
-        com3.setId("3");
+        com3.setId(3L);
         com3.setNome("Castelraimondo");
         com3.setDescrizione("Capitale");
         com3.setSuperficie(213);

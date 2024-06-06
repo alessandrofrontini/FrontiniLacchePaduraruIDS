@@ -104,7 +104,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     {
         this.richiesteImmagini = new ArrayList<ClsRDCImmagine>();
         this.richiesteNodo = new ArrayList<ClsRDCNodo>();
-
+/*
         //region Creazione RDCImmagine
         ClsRDCImmagine img1 = new ClsRDCImmagine();
         img1.setIdRichiesta("1");
@@ -137,7 +137,6 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         im2.setIdNodoAssociato("testIDNodoNew");
         img1.setNewData(im2);
         richiesteImmagini.add(img1);
-        /****/
 
         ClsRDCImmagine img2 = new ClsRDCImmagine();
         img2.setIdRichiesta("2");
@@ -153,7 +152,6 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         img2.setOldData(im1);
         img2.setNewData(im2);
         richiesteImmagini.add(img2);
-        /****/
         ClsRDCImmagine img3 = new ClsRDCImmagine();
         img3.setIdRichiesta("3");
         img3.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
@@ -200,7 +198,6 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         n1.setNewData(nodo1);
         richiesteNodo.add(n1);
 
-        /*****/
         ClsRDCNodo n2 = new ClsRDCNodo();
         n2.setIdRichiesta("2");
         n2.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
@@ -229,7 +226,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         n2.setNewData(nodo1);
         richiesteNodo.add(n2);
         //endregion
-
+*/
         setRichiesteImmagini(richiesteImmagini);
 
         setRichiesteNodi(richiesteNodo);
@@ -239,7 +236,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
         for(int i = 0;i<richiesteImmagini.size();i++)
         {
-            items.add(richiesteImmagini.get(i).getIdRichiesta());
+            items.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
         this.sceltaAzioneImmagine.setItems(items);
@@ -250,7 +247,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            itemss.add(richiesteNodo.get(i).getIdRichiesta());
+            itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioImmagine.setItems(itemss);
@@ -261,7 +258,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            it.add(richiesteNodo.get(i).getIdRichiesta());
+            it.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.sceltaAzioneNodo.setItems(it);
@@ -272,7 +269,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            ite.add(richiesteNodo.get(i).getIdRichiesta());
+            ite.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioNodo.setItems(ite);
@@ -409,9 +406,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
     public void visualizzaDettaglioImmagine()
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioImmagine);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
+        if(this.controllaConformitaID(IDDaVisualizzare))
         {
 
             for(int i = 0; i<richiesteImmagini.size();i++)
@@ -437,9 +434,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
     public void visualizzaDettaglioNodo()
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioNodo);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
+        if(this.controllaConformitaID(IDDaVisualizzare))
         {
 
             for(int i = 0; i<richiesteNodo.size();i++)
@@ -500,7 +497,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 

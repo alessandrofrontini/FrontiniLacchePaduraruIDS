@@ -22,11 +22,11 @@ public class SRDCItinerari {
         return ((ClsCuratore)request.getServletContext().getAttribute("user"))._getAllRDCItinerari();
     }
 
-    public List<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
+    public List<ClsRdcItinerario> getRDCItinerarioById(Long idRDCItinerario) {
         return ((ClsCuratore)request.getServletContext().getAttribute("user")).getRDCItinerarioById(idRDCItinerario);
     }
 
-    public boolean deleteRDCItinerarioById(String idRDCItinerario) {
+    public boolean deleteRDCItinerarioById(Long idRDCItinerario) {
         return ((ClsCuratore)request.getServletContext().getAttribute("user")).deleteRDCItinerario(idRDCItinerario);
     }
 

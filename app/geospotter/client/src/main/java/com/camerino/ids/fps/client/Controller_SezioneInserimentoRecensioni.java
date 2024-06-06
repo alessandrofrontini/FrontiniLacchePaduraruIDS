@@ -68,7 +68,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            items.add(nodi.get(i).getId());
+            items.add(nodi.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(items);
@@ -101,12 +101,12 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
 
         ClsRecensione r = new ClsRecensione();
 
-        String id = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);
+        Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
         String oggetto = u.getValueFromTextField(this.oggetto);
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if((Objects.isNull(id) || id.isEmpty()) || (Objects.isNull(oggetto) || oggetto.isEmpty()) || (Objects.isNull(contenuto) || contenuto.isEmpty()) || (Objects.isNull(valutazione) || valutazione.isEmpty()))
+        if(Objects.isNull(oggetto) || oggetto.isEmpty() || Objects.isNull(contenuto) || contenuto.isEmpty() || Objects.isNull(valutazione) || valutazione.isEmpty())
         {
             Alert alert = new Alert (Alert.AlertType.ERROR);
             alert.setTitle("Errore");
@@ -115,7 +115,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         }
         else
         {
-            r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
+            r.setIdCreatore(1l);
             r.setIdNodoAssociato(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);

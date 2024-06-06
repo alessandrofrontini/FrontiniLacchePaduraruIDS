@@ -63,7 +63,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      *         False altrimenti.
      */
     @Override
-    public boolean modificaComune(ClsComune comune, String id){
+    public boolean modificaComune(ClsComune comune, Long id){
         return this.iperComuni.update(null,comune);
     }
 
@@ -75,7 +75,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      *         False altrimenti.
      */
     @Override
-    public boolean eliminaComune(String id){
+    public boolean eliminaComune(Long id){
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", id);
         return this.iperComuni.delete(filters);

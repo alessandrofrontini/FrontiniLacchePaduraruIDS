@@ -44,19 +44,19 @@ public class ClsTurista implements ISignalable {
         return iperNodi.get(null);
     }
     @JsonIgnore
-    public List<ClsNodo> getNodiByComune(String idComune) {
+    public List<ClsNodo> getNodiByComune(Long idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return iperNodi.get(filters);
     }
     @JsonIgnore
-    public List<ClsComune> getComuneById(String idComune) {
+    public List<ClsComune> getComuneById(Long idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return iperComuni.get(filters);
     }
 @JsonIgnore
-    public List<ClsRecensione> getRecensioniNodo(String idNodo) {
+    public List<ClsRecensione> getRecensioniNodo(Long idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
         return iperRecensioni.get(filters);
@@ -93,7 +93,7 @@ public class ClsTurista implements ISignalable {
         return this.iperItinerari.get(filters);
     }
 @JsonIgnore
-    public List<ClsNodo> getNodoById(String idNodo) {
+    public List<ClsNodo> getNodoById(Long idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
         return this.iperNodi.get(filters);

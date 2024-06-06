@@ -118,9 +118,9 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      *         False altrimenti.
      */
     @Override
-    public boolean modificaNodo(String id, ClsNodo nodo) {
+    public boolean modificaNodo(Long id, ClsNodo nodo) {
         List<ClsNodo> old = getNodoById(nodo.getId());
-        nodo.setId(0+"");
+        nodo.setId(0L);
         if(old.size() != 1)
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), nodo);
@@ -135,7 +135,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      * @return True se la creazione della richiesta o l'eliminazione ha avuto successo,
      *         False altrimenti.
      */
-    public boolean eliminaNodo(String id) {
+    public boolean eliminaNodo(Long id) {
         List<ClsNodo> old = getNodoById(id);
         if(old.size() != 1)
             return false;
@@ -170,7 +170,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      *         False altrimenti,
      */
     @Override
-    public boolean modificaItinerario(ClsItinerario itinerario, String id) {
+    public boolean modificaItinerario(ClsItinerario itinerario, Long id) {
         ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
         req.setUsernameCreatore(this.getCredenziali().getUsername());
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
@@ -185,7 +185,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      *         False altirmenti.
      */
     @Override
-    public boolean eliminaItinerario(String id) {
+    public boolean eliminaItinerario(Long id) {
         ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
         req.setUsernameCreatore(this.getCredenziali().getUsername());
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
@@ -206,19 +206,19 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         filters.put("owner", this.id);
         return this.iperNodi.get(filters);
     }
-    public boolean deleteNodo(String idNodo) {
+    public boolean deleteNodo(Long idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
         return iperNodi.delete(tmp);
     }
 @JsonIgnore
-    public List<ClsRDCNodo> getRDCNodiById(String idRDC) {
+    public List<ClsRDCNodo> getRDCNodiById(Long idRDC) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);
         return iperRDCNodi.get(filters);
     }
 
-    public boolean deleteRDCById(String idRDC) {
+    public boolean deleteRDCById(Long idRDC) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);
         return pRDC.delete(filters);

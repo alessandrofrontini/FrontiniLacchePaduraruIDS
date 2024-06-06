@@ -21,7 +21,7 @@ public class CRecensioni {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRecensione>> getRecensioni(
-            @RequestParam(value = "idNodo", required = false) String idNodo,
+            @RequestParam(value = "idNodo", required = false) Long idNodo,
             @RequestParam(value = "owner", required = false) Long owner
     ){
         //return ResponseEntity.ok(sRecensioni.getRecensioniNodo(idNodo));
@@ -46,7 +46,7 @@ public class CRecensioni {
 
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRecensioni(
-            @RequestParam(value = "idRecensione") String idRecensione
+            @RequestParam(value = "idRecensione") Long idRecensione
     ){
         if(!sRecensioni.deleteRecensioneById(idRecensione))
             return ResponseEntity.internalServerError().build();

@@ -21,7 +21,7 @@ public class TMP_ServizioAutenticazione
         //Tutti gli utenti
         //region contributor
         ClsContributor con = new ClsContributor();
-        con.setId("1");
+        con.setId(1L);
         Credenziali c1 = new Credenziali();
         c1.setUsername("c"); // Username univoco per ogni oggetto
         c1.setPassword("c"); // Password univoca per ogni oggetto
@@ -36,7 +36,7 @@ public class TMP_ServizioAutenticazione
         //region contributor auth
 
             ClsContributorAutorizzato conAuth = new ClsContributorAutorizzato();
-            conAuth.setId("2");
+            conAuth.setId(2L);
             Credenziali c2 = new Credenziali();
             c2.setUsername("ca"); // Username univoco per ogni oggetto
             c2.setPassword("ca"); // Password univoca per ogni oggetto
@@ -53,7 +53,7 @@ public class TMP_ServizioAutenticazione
         //region animatore
 
             ClsAnimatore anim = new ClsAnimatore();
-            anim.setId("3");
+            anim.setId(3L);
             Credenziali c3 = new Credenziali();
             c3.setUsername("a"); // Username univoco per ogni oggetto
             c3.setPassword("a"); // Password univoca per ogni oggetto
@@ -70,7 +70,7 @@ public class TMP_ServizioAutenticazione
         //region curatore
 
             ClsCuratore cur = new ClsCuratore();
-            cur.setId("4");
+            cur.setId(4L);
             Credenziali c4 = new Credenziali();
             c4.setUsername("cur"); // Username univoco per ogni oggetto
             c4.setPassword("cur"); // Password univoca per ogni oggetto
@@ -87,7 +87,7 @@ public class TMP_ServizioAutenticazione
         //region gestore
 
             ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
-            gdp.setId("5");
+            gdp.setId(5L);
             Credenziali c8 = new Credenziali();
             c8.setUsername("gdp"); // Username univoco per ogni oggetto
             c8.setPassword("gdp"); // Password univoca per ogni oggetto
@@ -207,7 +207,7 @@ public class TMP_ServizioAutenticazione
         return true;
     }
 
-    public static boolean eliminaUtente (String id)
+    public static boolean eliminaUtente (Long id)
     {
         for(int i = 0; i < utentiLegit.size(); i++)
         {
@@ -229,7 +229,7 @@ public class TMP_ServizioAutenticazione
         return false;
     }
 
-    public static boolean modificaUtente (ClsTuristaAutenticato nuovo, String id)
+    public static boolean modificaUtente (ClsTuristaAutenticato nuovo, Long id)
     {
         for(int i = 0; i < utentiLegit.size(); i++)
         {

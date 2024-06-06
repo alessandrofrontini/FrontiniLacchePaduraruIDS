@@ -88,7 +88,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            items.add(nodi.get(i).getId());
+            items.add(nodi.get(i).getId().toString());
         }
 
         this.selezionaElementoDettaglio.setItems(items);
@@ -99,7 +99,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            itemss.add(nodi.get(i).getId());
+            itemss.add(nodi.get(i).getId().toString());
         }
 
         this.selezionaElementoSegnalazione.setItems(itemss);
@@ -108,7 +108,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
     public void visualizzaDettaglio(MouseEvent mouseEvent)
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglio);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
         if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
         {
@@ -149,7 +149,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
 
         if(!Objects.equals(descrizioneSegnalazione, "") && descrizioneSegnalazione != null && u.getValueFromCombobox(selezionaElementoSegnalazione) != null)
         {
-            String IDDaSegnalare = u.getValueFromCombobox(selezionaElementoSegnalazione);
+            Long IDDaSegnalare = Long.valueOf(u.getValueFromCombobox(selezionaElementoSegnalazione));
             ClsSegnalazione segnalazione = new ClsSegnalazione();
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
@@ -158,7 +158,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
             {
                 if(Objects.equals(nodi.get(i).getId(), IDDaSegnalare))
                 {
-                    segnalazione.setIdCuratore("AGGIUNGERE"); //todo:aggiungere chiamata per ottenere curatore
+                    segnalazione.setIdCuratore(1L); //todo:aggiungere chiamata per ottenere curatore
                 }
             }
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
@@ -210,7 +210,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
         this.SwitchScene("SezioneVisualizzazioneMappa.fxml",mouseEvent);
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 

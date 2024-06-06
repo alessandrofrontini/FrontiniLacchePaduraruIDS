@@ -6,8 +6,8 @@ import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
  * TODO: commentare
  * TODO: come dovrebbe essere usata?
  */
-@Deprecated(forRemoval = true)
+@Deprecated()
 public interface IPunteggioManager {
-    boolean guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, String idUtente);
-    boolean saliDiLivello(String idUtente);
+    boolean guadagnaPunteggio(EAzioniDiContribuzione eAzioneDiContribuzione, Long idUtente);
+    boolean saliDiLivello(Long idUtente);
 }

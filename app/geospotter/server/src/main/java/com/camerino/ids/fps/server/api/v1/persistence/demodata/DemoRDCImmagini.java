@@ -20,7 +20,7 @@ public class DemoRDCImmagini
     @Bean
     public CommandLineRunner aggiungiRDCImmagini(RepoRDCImmagini repo) {
         ClsTuristaAutenticato creatore1=new ClsTuristaAutenticato();
-        creatore1.setId(1+"");
+        creatore1.setId(1L);
         List<ClsRDCImmagine> immagini = new ArrayList<>();
         ClsRDCImmagine rdcImmmagine1 = new ClsRDCImmagine();
         rdcImmmagine1.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);

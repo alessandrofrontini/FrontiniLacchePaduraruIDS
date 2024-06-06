@@ -22,7 +22,7 @@ public class CItinerari {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsItinerario>> getItinerari(
-            @RequestParam(name = "idItinerario", required = false)  String idItinerario
+            @RequestParam(name = "idItinerario", required = false)  Long idItinerario
     ) {
         if(idItinerario == null)
             return ResponseEntity.ok(sItinerari.getAllItinerari());
@@ -49,7 +49,7 @@ public class CItinerari {
 
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteItinerari(
-            @RequestParam(name = "idItinerario", required = false)  String idItinerario
+            @RequestParam(name = "idItinerario", required = false)  Long idItinerario
     ){
         if(sItinerari.deleteItinerario(idItinerario))
             return ResponseEntity.ok("OK");

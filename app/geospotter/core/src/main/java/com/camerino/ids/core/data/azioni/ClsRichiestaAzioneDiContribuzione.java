@@ -3,6 +3,7 @@ package com.camerino.ids.core.data.azioni;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import org.hibernate.annotations.UuidGenerator;
@@ -15,8 +16,8 @@ import org.hibernate.annotations.UuidGenerator;
 public class ClsRichiestaAzioneDiContribuzione {
 
     @Id
-    @UuidGenerator
-    String id;
+    @GeneratedValue
+    Long id;
     String usernameCreatoreRichiesta;
 
     EAzioniDiContribuzione eAzioneDiContribuzione;
@@ -24,14 +25,14 @@ public class ClsRichiestaAzioneDiContribuzione {
     ClsNodo datiNodo;
     @ManyToOne
     ClsImmagine datiImmagine;
-    String idContest;
+    Long idContest;
 
     //region Getters and Setters
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,11 +53,11 @@ public class ClsRichiestaAzioneDiContribuzione {
     public void setUsernameCreatoreRichiesta(String usernameCreatoreRichiesta) {
         this.usernameCreatoreRichiesta = usernameCreatoreRichiesta;
     }
-    public String getIdContest() {
+    public Long getIdContest() {
         return idContest;
     }
 
-    public void setIdContest(String idContest) {
+    public void setIdContest(Long idContest) {
         this.idContest = idContest;
     }
 

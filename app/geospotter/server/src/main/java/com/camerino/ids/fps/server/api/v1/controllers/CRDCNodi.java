@@ -21,7 +21,7 @@ public class CRDCNodi {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRDCNodo>> getRDC(
-            @RequestParam(value = "idRDC", required = false) String idRDC,
+            @RequestParam(value = "idRDC", required = false) Long idRDC,
             @RequestParam(value = "owner", required = false) Long owner
     ) {
         if(idRDC != null)
@@ -30,7 +30,7 @@ public class CRDCNodi {
     }
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(
-            @RequestParam(value = "idRDCNodi", required = false) String idRDC
+            @RequestParam(value = "idRDCNodi", required = false) Long idRDC
     ) {
         if(sRDCnodi.deleteRDCNodiById(idRDC))
             return ResponseEntity.ok("RDC deleted");

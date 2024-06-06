@@ -18,7 +18,6 @@ import jakarta.persistence.Id;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Ruolo associato ad un utente autenticato base.
@@ -70,7 +69,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     Long id=0L;
     @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali = new Credenziali();
-    int punteggio;
+    Integer punteggio;
     eRUOLI_UTENTE ruoloUtente;
 
 //region Constructors
@@ -89,11 +88,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 
     //region Getters and Setters
-    public String getId() {
-        return Objects.toString(id);
+    public Long getId() {
+        return (id);
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = Long.valueOf(id);
     }
 
@@ -113,15 +112,15 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.credenziali = credenziali;
     }
 
-    public int getPunteggio() {
+    public Integer getPunteggio() {
         return punteggio;
     }
 
-    public void setPunteggio(int punteggio) {
+    public void setPunteggio(Integer punteggio) {
         this.punteggio = punteggio;
     }
     public boolean pubblicaRecensione(ClsRecensione recensione) {
-        recensione.setIdCreatore(this.id+"");
+        recensione.setIdCreatore(this.id);
         return iperRecensioni.insert(recensione);
     }
 //endregion
@@ -149,21 +148,21 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
         //TODO: merge con richiesta azione di conribuzione
-        recensione.setIdCreatore(this.id.toString());
+        recensione.setIdCreatore(this.id);
         return iperRecensioni.insert(recensione);
     }
     @Override
-    public boolean eliminaRecensione(String id) {
+    public boolean eliminaRecensione(Long id) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idRecensione", id);
         return iperRecensioni.delete(tmp);
     }
     @Override
-    public boolean modificaRecensione(String IDDaModificare, ClsRecensione newrec) {
+    public boolean modificaRecensione(Long IDDaModificare, ClsRecensione newrec) {
         //TODO: merge con richiesta azione di contribuzione
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idRecensione", IDDaModificare);
-        newrec.setIdCreatore(this.id+"");
+        newrec.setIdCreatore(this.id);
         return iperRecensioni.update(tmp, newrec);
     }
     @Override
@@ -186,7 +185,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperRDCImmagini.insert(rdc);
     }
 
-    public boolean deleteRDCImmagineById(String idRDCImmagine) {
+    public boolean deleteRDCImmagineById(Long idRDCImmagine) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCImmagini", idRDCImmagine);
         return iperRDCImmagini.delete(filters);
@@ -215,7 +214,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     public ClsTuristaAutenticato clone() {
         ClsTuristaAutenticato clone = new ClsTuristaAutenticato();
 
-        clone.setId(this.id.toString());
+        clone.setId(this.id);
         clone.setPunteggio(this.getPunteggio());
         clone.setCredenziali(this.credenziali);
         clone.setRuoloUtente(this.ruoloUtente);
@@ -257,7 +256,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperUtenti.get(null);
     }
 @JsonIgnore
-@Deprecated(forRemoval = true)
+@Deprecated()
     public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
     {
         HashMap<String, Object> filters = new HashMap<>();

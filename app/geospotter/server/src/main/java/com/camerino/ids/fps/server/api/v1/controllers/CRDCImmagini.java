@@ -21,7 +21,7 @@ public class CRDCImmagini {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRDCImmagine>> getRDC(
-            @RequestParam(value = "idRDCImmagini", required = false) String idRDCImmagini
+            @RequestParam(value = "idRDCImmagini", required = false) Long idRDCImmagini
     ) {
         if(idRDCImmagini == null)
             return ResponseEntity.ok(sRDCImmagini.getAllRDCI());
@@ -29,7 +29,7 @@ public class CRDCImmagini {
     }
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(
-            @RequestParam(value = "idRDCImmagini") String idRDCI
+            @RequestParam(value = "idRDCImmagini") Long idRDCI
     ) {
         if(sRDCImmagini.deleteRDCImmagineById(idRDCI))
             return ResponseEntity.ok("RDC deleted");

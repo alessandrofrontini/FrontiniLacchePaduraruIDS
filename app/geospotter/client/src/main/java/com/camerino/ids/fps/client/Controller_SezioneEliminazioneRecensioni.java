@@ -67,7 +67,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
 
         for(int i = 0;i<recensioni.size();i++)
         {
-            items.add(recensioni.get(i).getId());
+            items.add(recensioni.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID.setItems(items);
@@ -94,14 +94,14 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
 
     public void eliminaRecensione(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
 
         if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
         {
             ((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
-            alert.setContentText(IDDaEliminare);
+            alert.setContentText(IDDaEliminare.toString());
             alert.show();
         }
         else
@@ -121,7 +121,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 

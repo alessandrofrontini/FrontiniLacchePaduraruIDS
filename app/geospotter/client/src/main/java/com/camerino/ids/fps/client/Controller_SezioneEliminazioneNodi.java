@@ -66,7 +66,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            items.add(nodi.get(i).getId());
+            items.add(nodi.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(items);
@@ -95,19 +95,19 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
     public void eliminaNodo()
     {
-        String IDDaEliminare = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
 
         if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
         {
             ClsContributor user = (ClsContributor)Controller_SezioneLogin.UTENTE;
             if(user.eliminaNodo(IDDaEliminare)){
                 Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-                alert.setTitle(IDDaEliminare);
+                alert.setTitle(IDDaEliminare.toString());
                 alert.setContentText("Eliminato!");
                 alert.show();
             }else {
                 Alert alert = new Alert (Alert.AlertType.ERROR);
-                alert.setTitle(IDDaEliminare);
+                alert.setTitle(IDDaEliminare.toString());
                 alert.setContentText("Orrore!");
                 alert.show();
             }
@@ -131,7 +131,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*
         boolean flag = false;

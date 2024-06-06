@@ -45,7 +45,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
     //endregion
 
     //region Utility
-    private boolean updateRCDI(String id, ClsRichiestaAzioneDiContribuzioneItinerario object) {
+    private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzioneItinerario object) {
         ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(id);
         int index = rcdi.indexOf(tmp);
         if(index<0)
@@ -54,7 +54,7 @@ public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDi
         return true;
     }
 
-    private ClsRichiestaAzioneDiContribuzioneItinerario findById(String id) {
+    private ClsRichiestaAzioneDiContribuzioneItinerario findById(Long id) {
         List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
                 rcdi.stream().filter(n->n.getId().equals(id)).toList();
         if(tmp.isEmpty())

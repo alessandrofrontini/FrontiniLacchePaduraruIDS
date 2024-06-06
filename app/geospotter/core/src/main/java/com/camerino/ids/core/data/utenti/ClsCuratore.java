@@ -53,7 +53,7 @@ public class ClsCuratore extends ClsAnimatore{
     public List<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
         return pRDCI.get(null);
     }
-    public List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(String idRDCI) {
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(Long idRDCI) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCI", idRDCI);
         return pRDCI.get(filters);
@@ -78,13 +78,13 @@ public class ClsCuratore extends ClsAnimatore{
         return iperRDCItinerari.get(null);
     }
 
-    public List<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
+    public List<ClsRdcItinerario> getRDCItinerarioById(Long idRDCItinerario) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCItinerario", idRDCItinerario);
         return iperRDCItinerari.get(filters);
     }
 
-    public boolean deleteRDCItinerario(String idRDCItinerario) {
+    public boolean deleteRDCItinerario(Long idRDCItinerario) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCItinerario", idRDCItinerario);
         return iperRDCItinerari.delete(filters);

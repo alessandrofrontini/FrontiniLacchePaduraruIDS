@@ -82,7 +82,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
     // ------------------------------ Metodi Privati ------------------------------------------
-    private boolean modificaComune(String id, ClsComune comune){
+    private boolean modificaComune(Long id, ClsComune comune){
         ClsComune tmp = filterById(comune.getId());
         int index = comuni.indexOf(tmp);
         if(index<0)

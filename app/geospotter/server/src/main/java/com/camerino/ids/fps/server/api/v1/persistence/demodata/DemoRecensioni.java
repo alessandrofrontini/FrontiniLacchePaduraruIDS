@@ -19,9 +19,9 @@ public class DemoRecensioni {
         ClsRecensione recensione = new ClsRecensione();
         recensione.setContenuto("Contenuto Recensione");
         recensione.setOggetto("Bello, Carino, Avventuroso");
-        recensione.setValutazione(2);
-        recensione.setIdNodoAssociato("0");
-        recensione.setIdCreatore("Turista Aut");
+        recensione.setValutazione(2D);
+        recensione.setIdNodoAssociato(0L);
+        recensione.setIdCreatore(1L);
         recensioni.add(recensione);
         return args -> repo.saveAll(recensioni);
     }

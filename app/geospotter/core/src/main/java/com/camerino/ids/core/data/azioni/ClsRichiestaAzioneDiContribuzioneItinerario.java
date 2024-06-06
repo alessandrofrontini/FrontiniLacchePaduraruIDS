@@ -2,6 +2,7 @@ package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import org.hibernate.annotations.UuidGenerator;
@@ -10,8 +11,8 @@ import org.hibernate.annotations.UuidGenerator;
 @Entity
 public class ClsRichiestaAzioneDiContribuzioneItinerario {
     @Id
-    @UuidGenerator
-    String id;
+    @GeneratedValue
+    Long id;
     @ManyToOne
     ClsItinerario datiItinerario;
     String usernameCreatore;
@@ -26,11 +27,11 @@ public class ClsRichiestaAzioneDiContribuzioneItinerario {
 
     EAzioniDiContribuzione eAzioniDiContribuzione;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -45,7 +45,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
-        nodo.setIdCreatore(this.id+"");
+        nodo.setIdCreatore(this.id);
         return iperNodi.insert(nodo);
     }
 
@@ -58,7 +58,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *         False altrimenti.
      */
     @Override
-    public boolean modificaNodo(String id, ClsNodo nodo) {
+    public boolean modificaNodo(Long id, ClsNodo nodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", id);
         nodo.setIdCreatore(this.getId());
@@ -86,7 +86,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *         False altrimenti.
      */
     @Override
-    public boolean modificaItinerario(ClsItinerario itinerario, String idItinerario) {
+    public boolean modificaItinerario(ClsItinerario itinerario, Long idItinerario) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idItinerario", idItinerario);
         return iperItinerari.update(tmp, itinerario);
@@ -100,7 +100,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      *         False altrimenti.
      */
     @Override
-    public boolean eliminaItinerario(String id) {
+    public boolean eliminaItinerario(Long id) {
         return false;
     }
     //TODO
@@ -109,7 +109,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
         return false;
     }
     @Override
-    public boolean eliminaNodo(String id) {
+    public boolean eliminaNodo(Long id) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", id);
         return iperNodi.delete(filters);

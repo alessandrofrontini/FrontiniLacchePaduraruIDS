@@ -3,18 +3,18 @@ package com.camerino.ids.core.data.contenuti;
 /**
  * TODO: commentare
  */
-@Deprecated(forRemoval = true)
+@Deprecated()
 public class ClsPartecipazioneContestDiContribuzione {
-    String id;
+    Long id;
     String usernamePartecipante;
-    String idContest;
+    Long idContest;
     //region Getters and Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -26,11 +26,11 @@ public class ClsPartecipazioneContestDiContribuzione {
         this.usernamePartecipante = usernamePartecipante;
     }
 
-    public String getIdContest() {
+    public Long getIdContest() {
         return idContest;
     }
 
-    public void setIdContest(String idContest) {
+    public void setIdContest(Long idContest) {
         this.idContest = idContest;
     }
 

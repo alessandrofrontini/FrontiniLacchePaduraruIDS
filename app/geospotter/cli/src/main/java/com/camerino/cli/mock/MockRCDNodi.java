@@ -44,7 +44,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
     //endregion
 
     //region Utility
-    private boolean updateRCDI(String id, ClsRichiestaAzioneDiContribuzione object) {
+    private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzione object) {
         ClsRichiestaAzioneDiContribuzione tmp = findById(id);
         int index = rcdi.indexOf(tmp);
         if(index<0)
@@ -53,7 +53,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         return true;
     }
 
-    private ClsRichiestaAzioneDiContribuzione findById(String id) {
+    private ClsRichiestaAzioneDiContribuzione findById(Long id) {
         List<ClsRichiestaAzioneDiContribuzione> tmp =
                 rcdi.stream().filter(n->n.getId().equals(id)).toList();
         if(tmp.isEmpty())

@@ -133,27 +133,27 @@ public class Controller_SezioneLogin
             case GESTORE_DELLA_PIATTAFORMA -> CreaGDP();
         };
         if(UTENTE instanceof ClsTuristaAutenticato tmp){
-            tmp.setId(1+"");
+            tmp.setId(1L);
         }
 
         if(UTENTE instanceof ClsContributor tmp){
-            tmp.setId(1+"");
+            tmp.setId(1L);
         }
 
         if(UTENTE instanceof ClsContributorAutorizzato tmp){
-            tmp.setId(2+"");
+            tmp.setId(2L);
         }
 
         if(UTENTE instanceof ClsAnimatore tmp){
-            tmp.setId(3+"");
+            tmp.setId(3L);
         }
 
         if(UTENTE instanceof ClsCuratore tmp){
-            tmp.setId(4+"");
+            tmp.setId(4L);
         }
 
         if(UTENTE instanceof ClsGestoreDellaPiattaforma tmp){
-            tmp.setId(5+"");
+            tmp.setId(5L);
         }
     }
 

@@ -93,7 +93,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
         for(int i = 0;i<utenti.size();i++)
         {
-            items.add(utenti.get(i).getId());
+            items.add(utenti.get(i).getId().toString());
         }
 
         this.selezionaEliminaUtente.setItems(items);
@@ -181,7 +181,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             }
 
 
-                            ta.setId(utentiLegit.size() + 1 + "");
+                            ta.setId(utentiLegit.size() + 1L);
                             TMP_ServizioAutenticazione.inserisciUtente(ta);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -218,7 +218,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             }
 
 
-                            c.setId(utentiLegit.size() + 1 + "");
+                            c.setId(utentiLegit.size() + 1L);
                             utentiLegit.add(c);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -257,7 +257,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
 
 
-                            ca.setId(utentiLegit.size() + 1 + "");
+                            ca.setId(utentiLegit.size() + 1L);
                             utentiLegit.add(ca);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -293,7 +293,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                                 }
                             }
 
-                            a.setId(utentiLegit.size() + 1 + "");
+                            a.setId(utentiLegit.size() + 1L);
                             utentiLegit.add(a);
 
                             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
@@ -330,7 +330,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
     public void eliminaUtente()
     {
-        String IDDaEliminare = u.getValueFromCombobox(this.selezionaEliminaUtente);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.selezionaEliminaUtente));
 
         if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare) && TMP_ServizioAutenticazione.eliminaUtente(IDDaEliminare))
         {
@@ -349,7 +349,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
 
     public void modificaUtente()
     {
-     String IDDaModificare = this.eliminaUtenteCUSTOM();
+     Long IDDaModificare = Long.valueOf(this.eliminaUtenteCUSTOM());
 
      ClsTuristaAutenticato utente = this.ottieniUtente(IDDaModificare);
 
@@ -600,7 +600,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
             return true;
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 
@@ -628,7 +628,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
         }
     }
 
-    private ClsTuristaAutenticato ottieniUtente (String id)
+    private ClsTuristaAutenticato ottieniUtente (Long id)
     {
         for(int i = 0; i < this.utenti.size(); i++)
         {
@@ -644,14 +644,14 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
     {
         if(u.getValueFromCombobox(selezionaModificaUtente) != null && !Objects.equals(u.getValueFromCombobox(selezionaModificaUtente), ""))
         {
-            String ID = u.getValueFromCombobox(selezionaModificaUtente);
+            Long ID = Long.valueOf(u.getValueFromCombobox(selezionaModificaUtente));
 
             ClsTuristaAutenticato tmp = this.ottieniUtente(ID);
 
             this.usernameMODTF.setText(tmp.getCredenziali().getUsername());
             this.passwordMODTF.setText(tmp.getCredenziali().getPassword());
             this.ruoloMOD.setValue(tmp.getRuoloUtente().toString());
-            this.punteggioMODTF.setText(tmp.getPunteggio()+"");
+            this.punteggioMODTF.setText(tmp.getPunteggio().toString());
         }
     }
 

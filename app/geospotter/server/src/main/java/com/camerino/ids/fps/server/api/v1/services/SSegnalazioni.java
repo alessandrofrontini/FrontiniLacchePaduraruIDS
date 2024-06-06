@@ -28,7 +28,7 @@ public class SSegnalazioni {
         return user.segnalaContenuto(segnalazione);
     }
 
-    public boolean deleteSgnalazione(String idSegnalazione) {
+    public boolean deleteSgnalazione(Long idSegnalazione) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return false;
     }

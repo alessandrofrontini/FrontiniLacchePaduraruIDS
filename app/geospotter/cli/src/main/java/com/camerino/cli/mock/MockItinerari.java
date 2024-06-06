@@ -37,7 +37,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return this.itinerari;
     }
 
-    private ClsItinerario getItinerarioById(String id){
+    private ClsItinerario getItinerarioById(Long id){
         List<ClsItinerario> tmp =  itinerari.stream().filter(n->n.getId().equals(id)).toList();
         if(tmp.isEmpty())
             return null;
@@ -51,7 +51,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return false;
     }
 
-    private boolean modificaItinerario(String id, ClsItinerario itinerario){
+    private boolean modificaItinerario(Long id, ClsItinerario itinerario){
         ClsItinerario tmp = getItinerarioById(id);
         int index = itinerari.indexOf(tmp);
         if(index<0)
@@ -72,7 +72,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
         return false;
     }
 
-    private boolean eliminaItinerario(String id){
+    private boolean eliminaItinerario(Long id){
         return itinerari.remove(getItinerarioById(id));
     }
     //endregion

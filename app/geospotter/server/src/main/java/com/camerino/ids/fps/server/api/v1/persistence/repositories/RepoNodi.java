@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface RepoNodi extends JpaRepository<ClsNodo, String> {
     @Query(value = "select n from ClsNodo n WHERE n.idComuneAssociato=?1")
-    List<ClsNodo> findNodiByComune(String idComune);
+    List<ClsNodo> findNodiByComune(Long idComune);
 
     @Query("SELECT n from ClsNodo n where n.idCreatore=?1")
     List<ClsNodo> findNodoByUtente(Long owner);

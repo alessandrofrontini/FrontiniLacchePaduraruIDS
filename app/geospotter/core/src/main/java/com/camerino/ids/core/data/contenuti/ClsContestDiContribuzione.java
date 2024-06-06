@@ -1,9 +1,6 @@
 package com.camerino.ids.core.data.contenuti;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.util.Date;
@@ -14,20 +11,20 @@ import java.util.Date;
 @Entity
 public class ClsContestDiContribuzione {
     @Id
-    @UuidGenerator
-    String id;
+    @GeneratedValue
+    Long id;
     String usernameCreatore;
     Date durata;
     @OneToOne
     @JoinColumn(name="")//TODO finire associazione
     ClsComune location;
-    boolean isAperto;
+    Boolean isAperto;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,7 +52,7 @@ public class ClsContestDiContribuzione {
         this.location = location;
     }
 
-    public boolean isAperto() {
+    public Boolean isAperto() {
         return isAperto;
     }
 

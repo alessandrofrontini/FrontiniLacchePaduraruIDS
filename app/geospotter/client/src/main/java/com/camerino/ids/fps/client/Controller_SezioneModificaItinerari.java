@@ -119,7 +119,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
 
         for(int i = 0;i<itinerari.size();i++)
         {
-            items.add(itinerari.get(i).getId());
+            items.add(itinerari.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneItinerariComboBoxSceltaItinerarioID.setItems(items);
@@ -129,7 +129,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
     public void modificaItinerario(MouseEvent mouseEvent)
     {
         ClsItinerario nuovoItinerario = this.inserisciItinerario(mouseEvent);
-        String IDDaModificare = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
+        Long IDDaModificare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
         if(nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size()>=2)
         {
@@ -172,8 +172,8 @@ public class Controller_SezioneModificaItinerari implements Initializable
 
             if((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2)
             {
-                itinerario.setId("0");
-                itinerario.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
+                itinerario.setId(0L);
+                itinerario.setIdCreatore(0L);
                 itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
                 itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
                 itinerario.setTappe(nodiAssociatiToItinerario);
@@ -231,7 +231,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
 
     public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent)
     {
-        String idItinerarioDaVisualizzare = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
+        Long idItinerarioDaVisualizzare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
         ClsItinerarioVisual c = new ClsItinerarioVisual();
         for(int i=0;i<itinerari.size();i++)
@@ -246,7 +246,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
-    private boolean controllaConformitaIDItinerario (String id)
+    private boolean controllaConformitaIDItinerario (Long id)
     {/*
         boolean flag = false;
 
@@ -273,7 +273,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsNodo obj : nodi) {
-            setAValues.add(obj.getId());
+            setAValues.add(obj.getId().toString());
         }
 
         // Use an Iterator to safely remove elements from listB

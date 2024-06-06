@@ -2,17 +2,17 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsUtenteInvitoContestVisual
 {
-    public String id;
+    public Long id;
     public String username;
     public String punteggio;
     public String ruolo;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

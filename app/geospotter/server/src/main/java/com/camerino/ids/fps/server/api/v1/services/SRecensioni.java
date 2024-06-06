@@ -17,11 +17,11 @@ public class SRecensioni {
         this.request = request;
     }
 
-    public List<ClsRecensione> getRecensioniNodo(String idNodo) {
+    public List<ClsRecensione> getRecensioniNodo(Long idNodo) {
         return ((ClsTurista)request.getServletContext().getAttribute("user")).getRecensioniNodo(idNodo);
     }
 
-    public boolean deleteRecensioneById(String idRecensione) {
+    public boolean deleteRecensioneById(Long idRecensione) {
         return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).eliminaRecensione(idRecensione);
     }
 

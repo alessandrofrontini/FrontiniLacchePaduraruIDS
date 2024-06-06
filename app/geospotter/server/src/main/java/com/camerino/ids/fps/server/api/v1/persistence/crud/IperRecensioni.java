@@ -25,7 +25,7 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
         if(filters == null)
             return new ArrayList<>(repoRecensioni.findAll());
         else if(filters.containsKey("idNodo"))
-            return new ArrayList<>(repoRecensioni.findRecensioniByNodo(filters.get("idNodo").toString()));
+            return new ArrayList<>(repoRecensioni.findRecensioniByNodo((Long) filters.get("idNodo")));
         else if(filters.containsKey("idRecensione")) {
             List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRecensione").toString());

@@ -128,64 +128,63 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         this.richiesteImmagini = new ArrayList<ClsRDCImmagine>();
         this.richiesteNodo = new ArrayList<ClsRDCNodo>();
         this.richiesteItinerario = new ArrayList<ClsRdcItinerario>();
-
+/*
         //region Creazione RDCImmagine
         ClsRDCImmagine img1 = new ClsRDCImmagine();
-        img1.setIdRichiesta("1");
+        img1.setIdRichiesta(1L);
         img1.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
         img1.setStato(EStatusRDC.ASSEGNATO);
 
         ClsTuristaAutenticato utente = new ClsTuristaAutenticato();
-        utente.setId("1");
+        utente.setId(1L);
         img1.setCreatore(utente);
 
         ClsCuratore c1 = new ClsCuratore();
-        c1.setId("1");
+        c1.setId(1L);
         //img1.setResponsabile(c1);
 
         ClsContestDiContribuzione contest1 = new ClsContestDiContribuzione();
-        contest1.setId("1");
+        contest1.setId(1L);
         img1.setIdContestAppartenenza(contest1);
 
         ClsImmagine im1 = new ClsImmagine();
-        im1.setId("1");
+        im1.setId(2L);
         im1.setURL("testURLOld");
         im1.setIdCreatore("testCreatoreOld");
         im1.setIdNodoAssociato("testIDNodoOld");
         img1.setOldData(im1);
 
         ClsImmagine im2 = new ClsImmagine();
-        im2.setId("1");
+        im2.setId(1L);
         im2.setURL("testURLNew");
         im2.setIdCreatore("testCreatoreNew");
         im2.setIdNodoAssociato("testIDNodoNew");
         img1.setNewData(im2);
         richiesteImmagini.add(img1);
-        /****/
 
         ClsRDCImmagine img2 = new ClsRDCImmagine();
-        img2.setIdRichiesta("2");
+        img2.setIdRichiesta(2L);
         img2.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
         img2.setStato(EStatusRDC.ASSEGNATO);
         img2.setCreatore(utente);
 
         ClsCuratore c2 = new ClsCuratore();
-        c2.setId("2");
+        c2.setId(2L);
         //img2.setResponsabile(c2);
         img2.setIdContestAppartenenza(contest1);
 
         img2.setOldData(im1);
         img2.setNewData(im2);
         richiesteImmagini.add(img2);
-        /****/
+
         ClsRDCImmagine img3 = new ClsRDCImmagine();
-        img3.setIdRichiesta("3");
+        img3.setIdRichiesta(3L);
         img3.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
         img3.setStato(EStatusRDC.ASSEGNATO);
         img3.setCreatore(utente);
 
         ClsCuratore c3 = new ClsCuratore();
-        c3.setId("3");
+        c3.setId(3L);
         //img3.setResponsabile(c3);
         img3.setIdContestAppartenenza(contest1);
 
@@ -196,20 +195,20 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         //region Creazione RDCNodo
         ClsRDCNodo n1 = new ClsRDCNodo();
-        n1.setIdRichiesta("1");
+        n1.setIdRichiesta(1L);
         n1.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
         n1.setStato(EStatusRDC.ASSEGNATO);
         n1.setCreatore(utente);
 
         ClsCuratore cu1 = new ClsCuratore();
-        cu1.setId("1");
+        cu1.setId(1L);
         //n1.setResponsabile(cu1);
         n1.setIdContestAppartenenza(contest1);
 
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setNome("nomeOld");
         nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato("comuneOld");
+        nodo1.setIdComuneAssociato(1L);
         nodo1.setaTempo(true);
         nodo1.setDescrizione("descrizioneOld");
         nodo1.setPosizione(new Posizione(14, 28));
@@ -217,16 +216,15 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         nodo1.setNome("nomeNew");
         nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComuneAssociato("comuneNew");
+        nodo1.setIdComuneAssociato(1L);
         nodo1.setaTempo(false);
         nodo1.setDescrizione("descrizioneNew");
         nodo1.setPosizione(new Posizione(14, 28));
         n1.setNewData(nodo1);
         richiesteNodo.add(n1);
 
-        /*****/
         ClsRDCNodo n2 = new ClsRDCNodo();
-        n2.setIdRichiesta("2");
+        n2.setIdRichiesta(2L);
         n2.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
         n2.setStato(EStatusRDC.ASSEGNATO);
         n2.setCreatore(utente);
@@ -283,7 +281,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         it1.setNewData(itinerario1);
         richiesteItinerario.add(it1);
         //endregion
-
+*/
         setRichiesteImmagini(richiesteImmagini);
 
         setRichiesteNodi(richiesteNodo);
@@ -295,7 +293,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteImmagini.size();i++)
         {
-            items.add(richiesteImmagini.get(i).getIdRichiesta());
+            items.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
         this.sceltaAzioneImmagine.setItems(items);
@@ -306,7 +304,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            itemss.add(richiesteNodo.get(i).getIdRichiesta());
+            itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioImmagine.setItems(itemss);
@@ -317,7 +315,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            it.add(richiesteNodo.get(i).getIdRichiesta());
+            it.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.sceltaAzioneNodo.setItems(it);
@@ -328,7 +326,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteNodo.size();i++)
         {
-            ite.add(richiesteNodo.get(i).getIdRichiesta());
+            ite.add(richiesteNodo.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioNodo.setItems(ite);
@@ -339,7 +337,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteItinerario.size();i++)
         {
-            iti.add(richiesteItinerario.get(i).getIdRichiesta());
+            iti.add(richiesteItinerario.get(i).getIdRichiesta().toString());
         }
 
         this.sceltaAzioneItinerario.setItems(iti);
@@ -350,7 +348,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         for(int i = 0;i<richiesteItinerario.size();i++)
         {
-            itin.add(richiesteItinerario.get(i).getIdRichiesta());
+            itin.add(richiesteItinerario.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioItinerario.setItems(itin);
@@ -578,7 +576,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     public void visualizzaDettaglioImmagine()
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioImmagine);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
         if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
         {
@@ -606,7 +604,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     public void visualizzaDettaglioNodo()
     {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioNodo);
+        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
         if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
         {
@@ -636,7 +634,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     {
         String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario);
 
-        if(IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare))
+        if(IDDaVisualizzare != null && !IDDaVisualizzare.isEmpty() && this.controllaConformitaID(Long.valueOf(IDDaVisualizzare)))
         {
 
             for(int i = 0; i<richiesteItinerario.size();i++)
@@ -660,7 +658,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 

@@ -11,9 +11,9 @@ import java.util.List;
 public interface RepoRDCI extends JpaRepository<ClsRichiestaAzioneDiContribuzioneItinerario, String> {
 
     @Query("select r from ClsRichiestaAzioneDiContribuzioneItinerario r where r.usernameCreatore = ?1")
-    List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIByUser(String idUser);
+    List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIByUser(Long idUser);
 
     @Modifying
     @Query("update ClsRichiestaAzioneDiContribuzioneItinerario r set r = ?1 where r.id= ?2")
-    void updateRDCIById(ClsRichiestaAzioneDiContribuzioneItinerario object, String idRDCI);
+    void updateRDCIById(ClsRichiestaAzioneDiContribuzioneItinerario object, Long idRDCI);
 }

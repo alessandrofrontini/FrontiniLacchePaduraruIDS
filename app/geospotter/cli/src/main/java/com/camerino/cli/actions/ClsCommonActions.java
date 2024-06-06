@@ -15,7 +15,7 @@ public class ClsCommonActions {
         return false;
     }
 
-    public static boolean eliminaNodo(IContributable user, String id){
+    public static boolean eliminaNodo(IContributable user, Long id){
         return user.eliminaNodo(id);
     }
 

@@ -56,7 +56,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
 
         //region Creazione Contest dummy
         ClsContestDiContribuzione c1 = new ClsContestDiContribuzione();
-        c1.setId("1");
+        c1.setId(1L);
         c1.setDurata(new Date("01/01/2024"));
         c1.setUsernameCreatore("test1");
         ClsComune com1 = new ClsComune();
@@ -66,7 +66,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         contests.add(c1);
 
         ClsContestDiContribuzione c2 = new ClsContestDiContribuzione();
-        c2.setId("2");
+        c2.setId(2L);
         c2.setDurata(new Date("02/02/2024"));
         c2.setUsernameCreatore("test2");
         ClsComune com2 = new ClsComune();
@@ -76,7 +76,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         contests.add(c2);
 
         ClsContestDiContribuzione c3 = new ClsContestDiContribuzione();
-        c3.setId("3");
+        c3.setId(3L);
         c3.setDurata(new Date("03/03/2024"));
         c3.setUsernameCreatore("test3");
         ClsComune com3 = new ClsComune();
@@ -93,7 +93,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
 
         for(int i = 0;i<contests.size();i++)
         {
-            items.add(contests.get(i).getId());
+            items.add(contests.get(i).getId().toString());
         }
 
         this.sceltaContestContribuzione.setItems(items);
@@ -119,12 +119,12 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
 
     public void partecipaContest(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = u.getValueFromCombobox(sceltaContestContribuzione);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sceltaContestContribuzione));
 
         if(IDDaEliminare != null && controllaConformitaID(IDDaEliminare))
         {
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle(IDDaEliminare);
+            alert.setTitle(IDDaEliminare.toString());
             alert.setContentText("--"+IDDaEliminare+"--");
             alert.show();
         }
@@ -146,7 +146,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*
         boolean flag = false;

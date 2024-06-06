@@ -90,7 +90,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
 
         for(int i = 0;i<recensioni.size();i++)
         {
-            items.add(recensioni.get(i).getId());
+            items.add(recensioni.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID.setItems(items);
@@ -125,7 +125,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
 
         for(int i = 0;i<nodi.size();i++)
         {
-            itemes.add(nodi.get(i).getId());
+            itemes.add(nodi.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setItems(itemes);
@@ -157,12 +157,12 @@ public class Controller_SezioneModificaRecensioni implements Initializable
     {
         ClsRecensione r = new ClsRecensione();
 
-        String id = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);
+        Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
         String oggetto = u.getValueFromTextField(this.oggetto);
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if(id != null && !id.isEmpty() && oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), ""))
+        if(oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), ""))
         {
             r.setId(id);
             //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
@@ -237,7 +237,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
                     this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId());
                     this.oggetto.setText(recensioni.get(i).getOggetto());
                     this.contenuto.setText(recensioni.get(i).getContenuto());
-                    this.valutazione.setText(recensioni.get(i).getValutazione()+"");
+                    this.valutazione.setText(recensioni.get(i).getValutazione().toString());
                 }
             }
         }

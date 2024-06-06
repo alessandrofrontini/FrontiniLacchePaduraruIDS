@@ -16,33 +16,33 @@ public class ClsSegnalazione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
-    String idContenuto;
+    Long idContenuto;
     @Deprecated
-    String idCuratore;
+    Long idCuratore;
     String descrizione;
 
     //region Getters and Setters
     @Deprecated
-    public String getIdCuratore() {
+    public Long getIdCuratore() {
         return idCuratore;
     }
     @Deprecated
-    public void setIdCuratore(String idCuratore) {
+    public void setIdCuratore(Long idCuratore) {
         this.idCuratore = idCuratore;
     }
-    public String getId() {
-        return Objects.toString(id);
+    public Long getId() {
+        return (id);
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = Long.valueOf(id);
     }
 
-    public String getIdContenuto() {
+    public Long getIdContenuto() {
         return idContenuto;
     }
 
-    public void setIdContenuto(String idContenuto) {
+    public void setIdContenuto(Long idContenuto) {
         this.idContenuto = idContenuto;
     }
 

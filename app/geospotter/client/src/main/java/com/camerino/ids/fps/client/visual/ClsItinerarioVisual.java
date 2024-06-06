@@ -2,7 +2,7 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsItinerarioVisual
 {
-    String id;
+    Long id;
 
     String nome;
 
@@ -10,11 +10,11 @@ public class ClsItinerarioVisual
 
     String tappe;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

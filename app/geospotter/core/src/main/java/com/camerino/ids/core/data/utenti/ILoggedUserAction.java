@@ -7,8 +7,8 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 public interface ILoggedUserAction {
     //TODO: da finire di aggiungere i parametri ai metodi
     boolean inserisciRecensione(ClsRecensione recensione);
-    boolean eliminaRecensione(String id);
-    boolean modificaRecensione(String IDDaModificare, ClsRecensione newrec);
+    boolean eliminaRecensione(Long id);
+    boolean modificaRecensione(Long IDDaModificare, ClsRecensione newrec);
     boolean inserisciImmagine(ClsImmagine immagine);
     //TODO: cambiare da boolean a ClsRecensione
     ClsRecensione[] visualizzaRecensioniPosessore();

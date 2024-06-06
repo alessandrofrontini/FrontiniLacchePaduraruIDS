@@ -19,12 +19,12 @@ public class Utils
     public ClsNodoVisual convertFromClsNodo(ClsNodo nodo){
         ClsNodoVisual c = new ClsNodoVisual();
 
-        c.setID(nodo.getId());
-        c.setIDComuneAssociato(nodo.getIdComuneAssociato());
+        c.setID(nodo.getId().toString());
+        c.setIDComuneAssociato(nodo.getIdComuneAssociato().toString());
         c.setNome(nodo.getNome());
         c.setTipologia(nodo.getTipologiaNodoFormatoStringa());
         c.setPosizione(nodo.getPosizione().getX() + "-" + nodo.getPosizione().getY());
-        c.setATempo(nodo.isaTempo()+"");
+        c.setATempo(nodo.isaTempo().toString());
 
         return c;
     }
@@ -46,7 +46,7 @@ public class Utils
         ClsCuratoreVisual c = new ClsCuratoreVisual();
 
         c.setId(curatore.getId());
-        c.setUsername("Punteggio: " + curatore.getPunteggio()+""+" \nUsername: "+curatore.getCredenziali().getUsername());
+        c.setUsername("Punteggio: " + curatore.getPunteggio()+" \nUsername: "+curatore.getCredenziali().getUsername());
 
 
         return c;
@@ -96,7 +96,7 @@ public class Utils
         c.setUsernameCreatore(contest.getUsernameCreatore());
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
-        c.setIsAperto(contest.isAperto()+"");
+        c.setIsAperto(contest.isAperto().toString());
 
 
         return c;
@@ -107,8 +107,8 @@ public class Utils
         ClsUtenteInvitoContestVisual u = new ClsUtenteInvitoContestVisual();
 
         u.setId(turista.getId());
-        u.setPunteggio(turista.getPunteggio()+"");
-        u.setRuolo(turista.getRuoloUtente()+"");
+        u.setPunteggio(turista.getPunteggio().toString());
+        u.setRuolo(turista.getRuoloUtente().toString());
         u.setUsername(turista.getCredenziali().getUsername());
 
         return u;
@@ -141,7 +141,7 @@ public class Utils
         ClsUtenteVisual c = new ClsUtenteVisual();
 
         c.setId(turista.getId());
-        c.setPunteggio(turista.getPunteggio()+"");
+        c.setPunteggio(turista.getPunteggio().toString());
         c.setUsername(turista.getCredenziali().getUsername());
 
         return c;
@@ -154,7 +154,7 @@ public class Utils
         tmp.setIdRichiesta(rdcImmagine.getIdRichiesta());
         tmp.setAzioneDiContribuzione(rdcImmagine.getTipo().toString());
         tmp.setStato(rdcImmagine.getStato().toString());
-        tmp.setRichiedente(rdcImmagine.getCreatore().getId());
+        tmp.setRichiedente(rdcImmagine.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
         tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
@@ -170,7 +170,7 @@ public class Utils
         tmp.setIdRichiesta(rdcNodo.getIdRichiesta());
         tmp.setAzioneDiContribuzione(rdcNodo.getTipo().toString());
         tmp.setStato(rdcNodo.getStato().toString());
-        tmp.setRichiedente(rdcNodo.getCreatore().getId());
+        tmp.setRichiedente(rdcNodo.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcNodo.getResponsabile().getId());
         tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
@@ -186,7 +186,7 @@ public class Utils
         tmp.setIdRichiesta(rdcItinerario.getIdRichiesta());
         tmp.setAzioneDiContribuzione(rdcItinerario.getTipo().toString());
         tmp.setStato(rdcItinerario.getStato().toString());
-        tmp.setRichiedente(rdcItinerario.getCreatore().getId());
+        tmp.setRichiedente(rdcItinerario.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
         tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");

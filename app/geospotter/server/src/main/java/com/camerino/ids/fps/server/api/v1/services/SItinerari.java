@@ -23,7 +23,7 @@ public class SItinerari {
         return user.getAllItinerari();
     }
 
-    public List<ClsItinerario> getItinerarioById(String idItinerario) {
+    public List<ClsItinerario> getItinerarioById(Long idItinerario) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getItinerarioById();
     }
@@ -38,7 +38,7 @@ public class SItinerari {
         return user.modificaItinerario(itinerario, itinerario.getId());
     }
 
-    public boolean deleteItinerario(String idItinerario) {
+    public boolean deleteItinerario(Long idItinerario) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.eliminaItinerario(idItinerario);
     }

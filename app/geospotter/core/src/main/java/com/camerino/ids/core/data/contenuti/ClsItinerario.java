@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Entity
 public class ClsItinerario {
-    String idCreatore;
+    Long idCreatore;
     @ManyToMany
     List<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
@@ -29,20 +29,20 @@ public class ClsItinerario {
         this.nome = nome;
     }
 
-    public String getId() {
-        return id.toString();
+    public Long getId() {
+        return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = Long.valueOf(id);
     }
 
-    public String getIdCreatore() {
+    public Long getIdCreatore() {
         return idCreatore;
     }
 
-    public void setIdCreatore(String usernameCreatore) {
-        this.idCreatore = usernameCreatore;
+    public void setIdCreatore(Long idCreatore) {
+        this.idCreatore = idCreatore;
     }
 
     public List<ClsNodo> getTappe() {

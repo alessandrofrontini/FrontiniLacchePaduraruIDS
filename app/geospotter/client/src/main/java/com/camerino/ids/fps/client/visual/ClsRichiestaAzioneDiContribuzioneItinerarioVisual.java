@@ -2,11 +2,11 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsRichiestaAzioneDiContribuzioneItinerarioVisual
 {
-    public String idd;
+    public Long idd;
 
     public String usernameCreatoree;
 
-    public String idItinerario;
+    public Long idItinerario;
 
     public String tappe;
 
@@ -20,11 +20,11 @@ public class ClsRichiestaAzioneDiContribuzioneItinerarioVisual
         this.azione = azione;
     }
 
-    public String getIdd() {
+    public Long getIdd() {
         return idd;
     }
 
-    public void setIdd(String idd) {
+    public void setIdd(Long idd) {
         this.idd = idd;
     }
 
@@ -36,11 +36,11 @@ public class ClsRichiestaAzioneDiContribuzioneItinerarioVisual
         this.usernameCreatoree = usernameCreatoree;
     }
 
-    public String getIdItinerario() {
+    public Long getIdItinerario() {
         return idItinerario;
     }
 
-    public void setIdItinerario(String idItinerario) {
+    public void setIdItinerario(Long idItinerario) {
         this.idItinerario = idItinerario;
     }
 

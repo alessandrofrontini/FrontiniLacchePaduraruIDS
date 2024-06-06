@@ -2,12 +2,12 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsRDCVisual
 {
-    public String idRichiesta;
+    public Long idRichiesta;
     public String azioneDiContribuzione;
     public String stato;
     public String richiedente;
     public String responsabile;
-    public String idContest;
+    public Long idContest;
     public String oldData;
     public String newData;
 
@@ -27,11 +27,11 @@ public class ClsRDCVisual
         this.newData = newData;
     }
 
-    public String getIdRichiesta() {
+    public Long getIdRichiesta() {
         return idRichiesta;
     }
 
-    public void setIdRichiesta(String idRichiesta) {
+    public void setIdRichiesta(Long idRichiesta) {
         this.idRichiesta = idRichiesta;
     }
 
@@ -67,11 +67,11 @@ public class ClsRDCVisual
         this.responsabile = responsabile;
     }
 
-    public String getIdContest() {
+    public Long getIdContest() {
         return idContest;
     }
 
-    public void setIdContest(String idContest) {
+    public void setIdContest(Long idContest) {
         this.idContest = idContest;
     }
 }

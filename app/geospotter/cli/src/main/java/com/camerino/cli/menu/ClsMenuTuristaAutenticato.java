@@ -91,7 +91,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             }
         }
 
-        private void inserisciFotoContenuto(String idContenuto) {
+        private void inserisciFotoContenuto(Long idContenuto) {
             //input della foto
             //metodo CommonActions che richiede l'inserimento delle foto
             //metodo User che richiede l'inserimento delle foto

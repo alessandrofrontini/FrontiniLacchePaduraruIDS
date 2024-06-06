@@ -60,11 +60,11 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
 
     //region G&S
 
-    public String getIdRichiesta() {
-        return idRichiesta.toString();
+    public Long getIdRichiesta() {
+        return idRichiesta;
     }
 
-    public void setIdRichiesta(String idRichiesta) {
+    public void setIdRichiesta(Long idRichiesta) {
         this.idRichiesta = Long.valueOf(idRichiesta);
     }
 

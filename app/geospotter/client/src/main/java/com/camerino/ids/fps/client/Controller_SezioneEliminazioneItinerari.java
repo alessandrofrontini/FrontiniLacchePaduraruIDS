@@ -60,7 +60,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
 
         for(int i = 0;i<itinerari.size();i++)
         {
-            items.add(itinerari.get(i).getId());
+            items.add(itinerari.get(i).getId().toString());
         }
 
         this.sezioneEliminazioneItinerariComboBoxSceltaItinerarioID.setItems(items);
@@ -84,13 +84,13 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
 
     public void eliminaNodo(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
         if(IDDaEliminare != null && controllaConformitaID(IDDaEliminare))
         {
             ((ClsContributor)Controller_SezioneLogin.UTENTE).eliminaItinerario(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-            alert.setTitle(IDDaEliminare);
+            alert.setTitle(IDDaEliminare.toString());
             alert.setContentText("--"+IDDaEliminare+"--");
             alert.show();
         }
@@ -111,7 +111,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {/*
         boolean flag = false;
 

@@ -92,7 +92,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
         for(int i = 0;i<Curatori.size();i++)
         {
-            items.add(Curatori.get(i).getId());
+            items.add(Curatori.get(i).getId().toString());
         }
 
         this.sceltaComune.setItems(items);
@@ -120,7 +120,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
         //region Creazione Utenti dummy
         ClsTuristaAutenticato ta1 = new ClsTuristaAutenticato();
-        ta1.setId("1");
+        ta1.setId(1L);
         ta1.setPunteggio(190);
         Credenziali credenz1 = new Credenziali();
         credenz1.setUsername("username1");
@@ -129,7 +129,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         utenti.add(ta1);
 
         ClsTuristaAutenticato ta2 = new ClsTuristaAutenticato();
-        ta2.setId("2");
+        ta2.setId(2L);
         ta2.setPunteggio(290);
         Credenziali credenz2 = new Credenziali();
         credenz2.setUsername("username2");
@@ -138,7 +138,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         utenti.add(ta2);
 
         ClsTuristaAutenticato ta3 = new ClsTuristaAutenticato();
-        ta3.setId("3");
+        ta3.setId(3L);
         ta3.setPunteggio(220);
         Credenziali credenz3 = new Credenziali();
         credenz3.setUsername("username3");
@@ -163,7 +163,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
             contest.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();
-            comune.setId(u.getValueFromCombobox(this.sceltaComune));
+            comune.setId(Long.valueOf(u.getValueFromCombobox(this.sceltaComune)));
             contest.setLocation(comune);
 
            contest.setAperto(true);
@@ -171,7 +171,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
                 for(int i = 0; i<utenti.size();i++)
                 {
                     ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
-                    p.setId("test");
+                    p.setId(0L);
                     p.setUsernamePartecipante(utenti.get(i).getCredenziali().getUsername());
                     p.setIdContest(contest.getId());
 
@@ -212,7 +212,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     }
 
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {
         /*boolean flag = false;
 
@@ -267,7 +267,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsTuristaAutenticato obj : utenti) {
-            setAValues.add(obj.getId());
+            setAValues.add(obj.getId().toString());
         }
 
         // Use an Iterator to safely remove elements from listB

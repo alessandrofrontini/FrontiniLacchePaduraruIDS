@@ -22,11 +22,11 @@ public class SComuni {
         return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getAllComuni();
     }
 
-    public List<ClsComune> getComuneById(String idComune) {
+    public List<ClsComune> getComuneById(Long idComune) {
         return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getComuneById(idComune);
     }
 
-    public boolean deleteComuneById(String idComune) {
+    public boolean deleteComuneById(Long idComune) {
         return ((ClsGestoreDellaPiattaforma)this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
     }
 

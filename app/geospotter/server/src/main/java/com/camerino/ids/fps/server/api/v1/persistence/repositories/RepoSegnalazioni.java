@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface RepoSegnalazioni extends JpaRepository<ClsSegnalazione, String> {
     @Query("select r from ClsSegnalazione r where r.idContenuto=?1")
-    List<ClsSegnalazione> filterByContenuto(String idContenuto);
+    List<ClsSegnalazione> filterByContenuto(Long idContenuto);
 
     @Query("select r from ClsSegnalazione r where r.id=?1")
-    List<ClsSegnalazione> getSegnalazioneByUser(String idUtente);
+    List<ClsSegnalazione> getSegnalazioneByUser(Long idUtente);
 }

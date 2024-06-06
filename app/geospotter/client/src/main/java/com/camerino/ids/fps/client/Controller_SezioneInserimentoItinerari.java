@@ -101,8 +101,8 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
                     }
                 }
             }
-            itinerario.setId("0");
-            itinerario.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
+            itinerario.setId(0L);
+            itinerario.setIdCreatore(1L);
             itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
             itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
             itinerario.setTappe(nodiAssociatiToItinerario);
@@ -171,7 +171,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
         for (ClsNodo obj : nodi) {
-            setAValues.add(obj.getId());
+            setAValues.add(obj.getId().toString());
         }
 
         // Use an Iterator to safely remove elements from listB

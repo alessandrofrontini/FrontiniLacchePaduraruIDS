@@ -70,7 +70,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
 
         for(int i = 0;i<comuni.size();i++)
         {
-            items.add(comuni.get(i).getId());
+            items.add(comuni.get(i).getId().toString());
         }
 
         this.sceltaComune.setItems(items);
@@ -100,14 +100,14 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
 
     public void eliminaComune(MouseEvent mouseEvent)
     {
-        String IDDaEliminare = u.getValueFromCombobox(this.sceltaComune);
+        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sceltaComune));
 
         if(IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare))
         {
             ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
             Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
-            alert.setContentText(IDDaEliminare);
+            alert.setContentText(IDDaEliminare.toString());
             alert.show();
         }
         else
@@ -129,7 +129,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable
         }
     }
 
-    private boolean controllaConformitaID (String id)
+    private boolean controllaConformitaID (Long id)
     {/*
         boolean flag = false;
 
