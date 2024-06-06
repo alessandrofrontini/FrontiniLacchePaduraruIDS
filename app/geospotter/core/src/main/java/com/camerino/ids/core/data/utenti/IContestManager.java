@@ -5,9 +5,7 @@ import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 
 import java.util.Date;
 
-/**
- * TODO: commentare
- */
+@Deprecated
 public interface IContestManager {
     //TODO: da aggiornare con la documentazione
     boolean creaContestDiContribuzione(ClsContributor[] invitati, Date inizio, Date fine);

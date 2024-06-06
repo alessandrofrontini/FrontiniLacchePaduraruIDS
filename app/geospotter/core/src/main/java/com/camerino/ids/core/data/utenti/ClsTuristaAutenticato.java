@@ -41,26 +41,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     {
     }
 
-    public boolean postRDCImmagine(ClsRDCImmagine rdc) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idUtente", this.id);
-        rdc.setCreatore(this.iperUtenti.get(filters).get(0));
-        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        return iperRDCImmagini.insert(rdc);
-    }
-
-    public boolean deleteRDCImmagineById(String idRDCImmagine) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDCImmagini", idRDCImmagine);
-        return iperRDCImmagini.delete(filters);
-    }
-@JsonIgnore
-    public ArrayList<ClsRecensione> getRecensioniPosessore() {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("owner", this.id);
-        return iperRecensioni.get(filters);
-    }
-
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
@@ -192,6 +172,26 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     }
 //endregion
 
+    public boolean postRDCImmagine(ClsRDCImmagine rdc) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idUtente", this.id);
+        rdc.setCreatore(this.iperUtenti.get(filters).get(0));
+        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        return iperRDCImmagini.insert(rdc);
+    }
+
+    public boolean deleteRDCImmagineById(String idRDCImmagine) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idRDCImmagini", idRDCImmagine);
+        return iperRDCImmagini.delete(filters);
+    }
+    @JsonIgnore
+    public ArrayList<ClsRecensione> getRecensioniPosessore() {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("owner", this.id);
+        return iperRecensioni.get(filters);
+    }
+
     public String visualizzaUtente()
     {
         String tmp = "";
@@ -242,7 +242,6 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         }
     }
 
-    @Transient
     public void setIperRDCImmagini(IPersistenceModel<ClsRDCImmagine> iperRDCImmagini) {
         this.iperRDCImmagini = iperRDCImmagini;
     }
@@ -251,7 +250,8 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     {
         return iperUtenti.get(null);
     }
-
+@JsonIgnore
+@Deprecated(forRemoval = true)
     public ArrayList<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
     {
         HashMap<String, Object> filters = new HashMap<>();

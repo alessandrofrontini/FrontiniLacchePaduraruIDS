@@ -102,7 +102,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
                 }
             }
             itinerario.setId("0");
-            itinerario.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+            itinerario.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
             itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
             itinerario.setTappe(nodiAssociatiToItinerario);

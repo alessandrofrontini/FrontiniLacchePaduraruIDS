@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsContributorAutorizzato extends ClsContributor {
-
+//region Constructors
     public ClsContributorAutorizzato(){}
     public ClsContributorAutorizzato(ClsContributor usr){
 
@@ -37,8 +37,9 @@ public class ClsContributorAutorizzato extends ClsContributor {
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
     }
+//endregion
 
-    //region Override Contributor Autorizzato
+// region Override Contributor Autorizzato
 
     /**
      * Inserisce direttamente il nodo creato.

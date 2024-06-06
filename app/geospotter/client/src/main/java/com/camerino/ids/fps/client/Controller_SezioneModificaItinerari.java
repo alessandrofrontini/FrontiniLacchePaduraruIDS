@@ -173,7 +173,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
             if((u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null || !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) && nodiAssociatiToItinerario.size() >= 2)
             {
                 itinerario.setId("0");
-                itinerario.setUsernameCreatore(Controller_SezioneLogin.utente.getUsername());
+                itinerario.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
                 itinerario.setOrdinato(u.getValueFromCheckBox(sezioneInserimentoItinerariCheckBoxOrdinato));
                 itinerario.setNome(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario));
                 itinerario.setTappe(nodiAssociatiToItinerario);

@@ -77,7 +77,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setId("2");
-        nodo1.setIdComune("1");
+        nodo1.setIdComuneAssociato("1");
         nodo1.setaTempo(false);
         nodo1.setTipologiaNodo(COMMERCIALE);
         nodo1.setIdCreatore("");
@@ -88,7 +88,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         ClsNodo nodo2 = new ClsNodo();
         nodo2.setId("4");
-        nodo2.setIdComune("3");
+        nodo2.setIdComuneAssociato("3");
         nodo2.setaTempo(false);
         nodo2.setTipologiaNodo(CULTURALE);
         nodo2.setIdCreatore("");
@@ -99,7 +99,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
         ClsNodo nodo3 = new ClsNodo();
         nodo3.setId("6");
-        nodo3.setIdComune("5");
+        nodo3.setIdComuneAssociato("5");
         nodo3.setaTempo(false);
         nodo3.setTipologiaNodo(CULINARIO);
         nodo3.setIdCreatore("");

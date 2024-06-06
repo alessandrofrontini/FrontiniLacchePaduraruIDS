@@ -5,14 +5,11 @@ import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsRDCVisual;
-import com.camerino.ids.fps.client.visual.ClsRichiestaAzioneDiContribuzioneItinerarioVisual;
-import com.camerino.ids.fps.client.visual.ClsRichiestaAzioneDiContribuzioneVisual;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -35,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
 import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.CULINARIO;
 
 public class Controller_SezioneCuratoreValidazioneRichieste implements Initializable
@@ -148,20 +144,20 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         ClsContestDiContribuzione contest1 = new ClsContestDiContribuzione();
         contest1.setId("1");
-        img1.setIdContest(contest1);
+        img1.setIdContestAppartenenza(contest1);
 
         ClsImmagine im1 = new ClsImmagine();
         im1.setId("1");
         im1.setURL("testURLOld");
         im1.setIdCreatore("testCreatoreOld");
-        im1.setIdNodo("testIDNodoOld");
+        im1.setIdNodoAssociato("testIDNodoOld");
         img1.setOldData(im1);
 
         ClsImmagine im2 = new ClsImmagine();
         im2.setId("1");
         im2.setURL("testURLNew");
         im2.setIdCreatore("testCreatoreNew");
-        im2.setIdNodo("testIDNodoNew");
+        im2.setIdNodoAssociato("testIDNodoNew");
         img1.setNewData(im2);
         richiesteImmagini.add(img1);
         /****/
@@ -175,7 +171,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         ClsCuratore c2 = new ClsCuratore();
         c2.setId("2");
         img2.setResponsabile(c2);
-        img2.setIdContest(contest1);
+        img2.setIdContestAppartenenza(contest1);
 
         img2.setOldData(im1);
         img2.setNewData(im2);
@@ -190,7 +186,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         ClsCuratore c3 = new ClsCuratore();
         c3.setId("3");
         img3.setResponsabile(c3);
-        img3.setIdContest(contest1);
+        img3.setIdContestAppartenenza(contest1);
 
         img3.setOldData(im1);
         img3.setNewData(im2);
@@ -207,12 +203,12 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         ClsCuratore cu1 = new ClsCuratore();
         cu1.setId("1");
         n1.setResponsabile(cu1);
-        n1.setIdContest(contest1);
+        n1.setIdContestAppartenenza(contest1);
 
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setNome("nomeOld");
         nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComune("comuneOld");
+        nodo1.setIdComuneAssociato("comuneOld");
         nodo1.setaTempo(true);
         nodo1.setDescrizione("descrizioneOld");
         nodo1.setPosizione(new Posizione(14, 28));
@@ -220,7 +216,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         nodo1.setNome("nomeNew");
         nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComune("comuneNew");
+        nodo1.setIdComuneAssociato("comuneNew");
         nodo1.setaTempo(false);
         nodo1.setDescrizione("descrizioneNew");
         nodo1.setPosizione(new Posizione(14, 28));
@@ -237,11 +233,11 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         ClsCuratore cu2 = new ClsCuratore();
         cu2.setId("2");
         n2.setResponsabile(cu2);
-        n2.setIdContest(contest1);
+        n2.setIdContestAppartenenza(contest1);
 
         nodo1.setNome("nomeOld");
         nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComune("comuneOld");
+        nodo1.setIdComuneAssociato("comuneOld");
         nodo1.setaTempo(true);
         nodo1.setDescrizione("descrizioneOld");
         nodo1.setPosizione(new Posizione(14, 28));
@@ -249,7 +245,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         nodo1.setNome("nomeNew");
         nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComune("comuneNew");
+        nodo1.setIdComuneAssociato("comuneNew");
         nodo1.setaTempo(false);
         nodo1.setDescrizione("descrizioneNew");
         nodo1.setPosizione(new Posizione(14, 28));
@@ -265,12 +261,12 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         it1.setCreatore(utente);
 
         it1.setResponsabile(c1);
-        it1.setIdContest(contest1);
+        it1.setIdContestAppartenenza(contest1);
 
         ClsItinerario itinerario1 = new ClsItinerario();
         itinerario1.setId("1");
         itinerario1.setOrdinato(false);
-        itinerario1.setUsernameCreatore("testCreatoreOld");
+        itinerario1.setIdCreatore("testCreatoreOld");
         itinerario1.setNome("nomeOld");
 
         ArrayList<ClsNodo> tappe1 = new ArrayList<>();
@@ -281,7 +277,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
         itinerario1.setId("1");
         itinerario1.setOrdinato(true);
-        itinerario1.setUsernameCreatore("testCreatoreNew");
+        itinerario1.setIdCreatore("testCreatoreNew");
         itinerario1.setNome("nomeNew");
         it1.setNewData(itinerario1);
         richiesteItinerario.add(it1);

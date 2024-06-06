@@ -18,7 +18,7 @@ public class DemoRecensioni {
         recensione.setContenuto("Contenuto Recensione");
         recensione.setOggetto("Bello, Carino, Avventuroso");
         recensione.setValutazione(2);
-        recensione.setIdNodo("0");
+        recensione.setIdNodoAssociato("0");
         recensione.setIdCreatore("Turista Aut");
         recensioni.add(recensione);
         return args -> repo.saveAll(recensioni);

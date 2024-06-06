@@ -13,11 +13,19 @@ public class ClsSegnalazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
     String idContenuto;
+    @Deprecated
     String idCuratore;
     String descrizione;
 
     //region Getters and Setters
-
+    @Deprecated
+    public String getIdCuratore() {
+        return idCuratore;
+    }
+    @Deprecated
+    public void setIdCuratore(String idCuratore) {
+        this.idCuratore = idCuratore;
+    }
     public String getId() {
         return Objects.toString(id);
     }
@@ -32,14 +40,6 @@ public class ClsSegnalazione {
 
     public void setIdContenuto(String idContenuto) {
         this.idContenuto = idContenuto;
-    }
-
-    public String getIdCuratore() {
-        return idCuratore;
-    }
-
-    public void setIdCuratore(String idCuratore) {
-        this.idCuratore = idCuratore;
     }
 
     public String getDescrizione() {

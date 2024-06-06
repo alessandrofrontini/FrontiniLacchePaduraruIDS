@@ -10,8 +10,7 @@ import java.util.List;
  */
 @Entity
 public class ClsItinerario {
-    //TODO: idCreatore invece di username(?)
-    String usernameCreatore;
+    String idCreatore;
     @ManyToMany
     List<ClsNodo> tappe = new ArrayList<>();
     boolean ordinato;
@@ -38,12 +37,12 @@ public class ClsItinerario {
         this.id = Long.valueOf(id);
     }
 
-    public String getUsernameCreatore() {
-        return usernameCreatore;
+    public String getIdCreatore() {
+        return idCreatore;
     }
 
-    public void setUsernameCreatore(String usernameCreatore) {
-        this.usernameCreatore = usernameCreatore;
+    public void setIdCreatore(String usernameCreatore) {
+        this.idCreatore = usernameCreatore;
     }
 
     public List<ClsNodo> getTappe() {
@@ -69,7 +68,7 @@ public class ClsItinerario {
 
         dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "isOrdered: " + this.ordinato + "\n";
-        dummy += "Username Creatore: " + this.getUsernameCreatore() + "\n";
+        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "TAPPE: " + "\n" + this.visualizzaTappe(this.tappe);
 

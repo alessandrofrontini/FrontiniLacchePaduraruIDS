@@ -16,8 +16,10 @@ import java.util.HashMap;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore{
-    public ClsCuratore(ClsAnimatore usr){
+    String idComuneAssociato;
 
+    //region Constructors
+    public ClsCuratore(ClsAnimatore usr){
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
 
@@ -33,11 +35,12 @@ public class ClsCuratore extends ClsAnimatore{
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
     }
-    String idComuneAssociato;
+
     public ClsCuratore(){
         this.punteggio = Integer.MAX_VALUE;
         this.ruoloUtente = eRUOLO_UTENTE.CURATORE;
     }
+    //endregion
 
     public ArrayList<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
@@ -45,11 +48,9 @@ public class ClsCuratore extends ClsAnimatore{
     public ArrayList<ClsRDCNodo> _getAllRDCNodi() {
         return new ArrayList<>(iperRDCNodi.get(null));
     }
-
     public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
         return pRDCI.get(null);
     }
-
     public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(String idRDCI) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCI", idRDCI);

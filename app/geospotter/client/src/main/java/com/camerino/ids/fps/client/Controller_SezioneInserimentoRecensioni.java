@@ -116,7 +116,7 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable
         else
         {
             r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdNodo(id);
+            r.setIdNodoAssociato(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));

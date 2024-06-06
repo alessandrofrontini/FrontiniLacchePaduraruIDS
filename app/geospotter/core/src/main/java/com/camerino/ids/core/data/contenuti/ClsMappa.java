@@ -5,6 +5,7 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 /**
  * TODO: commentare
  */
+@Deprecated(forRemoval = true)
 public class ClsMappa
 {
     ClsComune[] comuni;

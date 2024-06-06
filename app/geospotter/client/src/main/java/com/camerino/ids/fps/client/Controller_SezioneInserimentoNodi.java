@@ -74,7 +74,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                     nodo.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
-                    nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
+                    nodo.setIdComuneAssociato(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
                     nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
                     nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
@@ -162,7 +162,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
       boolean flagComuni = false;
       for(int i = 0; i < comuni.size(); i++)
       {
-          if(Objects.equals(nodo.getIdComune(), comuni.get(i).getId()))
+          if(Objects.equals(nodo.getIdComuneAssociato(), comuni.get(i).getId()))
           {
               flagComuni = true;
           }

@@ -11,7 +11,7 @@ public class ClsNodo extends ClsContenuto{
     //region Tipologia nodo (enumerazione)
     public enum eTipologiaNodo { COMMERCIALE, CULTURALE, CULINARIO }
     //endregion
-    private String idComune;
+    private String idComuneAssociato;
     private eTipologiaNodo eTipologiaNodo;
     private boolean aTempo;
 
@@ -23,12 +23,12 @@ public class ClsNodo extends ClsContenuto{
 
 
     //region Getter e setter
-    public String getIdComune() {
-        return idComune;
+    public String getIdComuneAssociato() {
+        return idComuneAssociato;
     }
 
-    public void setIdComune(String idComune) {
-        this.idComune = idComune;
+    public void setIdComuneAssociato(String idComune) {
+        this.idComuneAssociato = idComune;
     }
 
     public eTipologiaNodo getTipologiaNodo() {
@@ -95,7 +95,7 @@ public class ClsNodo extends ClsContenuto{
         String dummy = "";
 
         dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "ID Comune: " + this.getIdComune() + "\n";
+        dummy += "ID Comune: " + this.getIdComuneAssociato() + "\n";
         dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "Tipologia: " + this.getDescrizione() + "\n";

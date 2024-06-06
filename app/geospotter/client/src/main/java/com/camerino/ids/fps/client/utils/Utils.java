@@ -5,7 +5,6 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.visual.*;
 import javafx.scene.control.CheckBox;
@@ -21,7 +20,7 @@ public class Utils
         ClsNodoVisual c = new ClsNodoVisual();
 
         c.setID(nodo.getId());
-        c.setIDComuneAssociato(nodo.getIdComune());
+        c.setIDComuneAssociato(nodo.getIdComuneAssociato());
         c.setNome(nodo.getNome());
         c.setTipologia(nodo.getTipologiaNodoFormatoStringa());
         c.setPosizione(nodo.getPosizione().getX() + "-" + nodo.getPosizione().getY());
@@ -157,7 +156,7 @@ public class Utils
         tmp.setStato(rdcImmagine.getStato().toString());
         tmp.setRichiedente(rdcImmagine.getCreatore().getId());
         tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
-        tmp.setIdContest(rdcImmagine.getIdContest().getId());
+        tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -173,7 +172,7 @@ public class Utils
         tmp.setStato(rdcNodo.getStato().toString());
         tmp.setRichiedente(rdcNodo.getCreatore().getId());
         tmp.setResponsabile(rdcNodo.getResponsabile().getId());
-        tmp.setIdContest(rdcNodo.getIdContest().getId());
+        tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -189,7 +188,7 @@ public class Utils
         tmp.setStato(rdcItinerario.getStato().toString());
         tmp.setRichiedente(rdcItinerario.getCreatore().getId());
         tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
-        tmp.setIdContest(rdcItinerario.getIdContest().getId());
+        tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -257,12 +256,12 @@ public class Utils
         if(
                 Objects.equals(nodo.getNome(), "") ||
                 Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
-                Objects.equals(nodo.getIdComune(), "") ||
+                Objects.equals(nodo.getIdComuneAssociato(), "") ||
                 Objects.equals(nodo.getDescrizione(), "") ||
                 //Objects.equals(nodo.getId(), null) ||
                 Objects.equals(nodo.getNome(), null) ||
                 Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
-                Objects.equals(nodo.getIdComune(), null) ||
+                Objects.equals(nodo.getIdComuneAssociato(), null) ||
                 Objects.equals(nodo.getDescrizione(), null))
         {
             return false;

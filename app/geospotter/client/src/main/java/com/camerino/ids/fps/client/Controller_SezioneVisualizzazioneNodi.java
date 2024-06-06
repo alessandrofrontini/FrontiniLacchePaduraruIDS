@@ -124,7 +124,7 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable
                     nodo.setaTempo(nodi.get(i).isaTempo());
                     nodo.setDataInizio(nodi.get(i).getDataInizio());
                     nodo.setDataFine(nodi.get(i).getDataFine());
-                    nodo.setIdComune(nodi.get(i).getIdComune());
+                    nodo.setIdComuneAssociato(nodi.get(i).getIdComuneAssociato());
                     nodo.setTipologiaNodo(nodi.get(i).getTipologiaNodo());
                     nodo.setIdCreatore(nodi.get(i).getIdCreatore());
                 }

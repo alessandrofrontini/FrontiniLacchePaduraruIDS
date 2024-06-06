@@ -38,7 +38,7 @@ public class Input
             pos.setY(in.nextDouble());
             nodo.setPosizione(pos);
             print("Inserisci id del comune di appartenenza: ");
-            nodo.setIdComune(in.nextLine());
+            nodo.setIdComuneAssociato(in.nextLine());
             //TODO: aggiungere inserimento "aTempo" e durata
             //TODO: aggiungere eventuali controlli sui dati inseriti
             ok = true;
@@ -64,8 +64,8 @@ public class Input
             print(String.format("Inserisci coordinata Y del nodo (old: %s): ", pos.getY()));
             pos.setY(in.nextDouble());
             nodo.setPosizione(pos);
-            print(String.format("Inserisci id del comune di appartenenza (old: %s): ", nodo.getIdComune()));
-            nodo.setIdComune(in.nextLine());
+            print(String.format("Inserisci id del comune di appartenenza (old: %s): ", nodo.getIdComuneAssociato()));
+            nodo.setIdComuneAssociato(in.nextLine());
             //TODO: aggiungere inserimento "aTempo" e durata
             //TODO: aggiungere eventuali controlli sui dati inseriti
             ok = true;

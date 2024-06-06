@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 public class ClsComune extends ClsContenuto
 {
-    String usernameCreatore = "ADMIN";
     int abitanti;
     double superficie;
     @OneToMany(mappedBy = "id")

@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 @Entity
 public class ClsAnimatore extends ClsContributorAutorizzato{
+    //region Constructors
     public ClsAnimatore(){}
     public ClsAnimatore(ClsContributorAutorizzato usr){
-
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;
 
@@ -33,11 +33,11 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
     }
+    //endregion
 
     public ArrayList<ClsRDCImmagine> _getAllRDCImmagini() {
         return this.iperRDCImmagini.get(null);
     }
-
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return false;
     }

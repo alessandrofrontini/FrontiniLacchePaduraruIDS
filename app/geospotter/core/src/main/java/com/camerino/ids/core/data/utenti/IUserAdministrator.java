@@ -1,8 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
-/**
- * TODO: commentare
- */
+@Deprecated
 public interface IUserAdministrator {
     boolean uprankUtente(String id, int punteggio);
     boolean downrankUtente(String id, int punteggio);

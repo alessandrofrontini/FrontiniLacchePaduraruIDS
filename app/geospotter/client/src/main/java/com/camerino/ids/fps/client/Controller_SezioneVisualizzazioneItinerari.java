@@ -139,7 +139,7 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
             {
                 if(Objects.equals(itinerari.get(i).getId(), IDDaSegnalare))
                 {
-                    segnalazione.setIdCuratore(itinerari.get(i).getTappe().get(0).getIdComune()); //todo: ottenere da spring
+                    segnalazione.setIdCuratore(itinerari.get(i).getTappe().get(0).getIdComuneAssociato()); //todo: ottenere da spring
                 }
             }
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);

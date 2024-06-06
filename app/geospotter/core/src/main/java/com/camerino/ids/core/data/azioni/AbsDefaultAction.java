@@ -1,14 +1,10 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsImmagine;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.persistence.*;
-import org.hibernate.annotations.UuidGenerator;
+
 @MappedSuperclass
 public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @Id
@@ -22,10 +18,9 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "id")
     ClsTuristaAutenticato creatore;
+
     @ManyToOne(cascade = CascadeType.ALL)
-    ClsCuratore responsabile;
-    @ManyToOne(cascade = CascadeType.ALL)
-    ClsContestDiContribuzione idContest;
+    ClsContestDiContribuzione idContestAppartenenza;
 
     @ManyToOne(cascade = CascadeType.ALL)
     E oldData;
@@ -98,20 +93,12 @@ public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
         this.creatore = creatore;
     }
 
-    public ClsCuratore getResponsabile() {
-        return responsabile;
+    public ClsContestDiContribuzione getIdContestAppartenenza() {
+        return idContestAppartenenza;
     }
 
-    public void setResponsabile(ClsCuratore responsabile) {
-        this.responsabile = responsabile;
-    }
-
-    public ClsContestDiContribuzione getIdContest() {
-        return idContest;
-    }
-
-    public void setIdContest(ClsContestDiContribuzione idContest) {
-        this.idContest = idContest;
+    public void setIdContestAppartenenza(ClsContestDiContribuzione idContest) {
+        this.idContestAppartenenza = idContest;
     }
 
     //endregion

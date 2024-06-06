@@ -28,8 +28,6 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
-
 public class Controller_SezioneContestContribuzionePartecipante implements Initializable
 {
     //region Elementi FXML
@@ -434,7 +432,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         if((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine))
         {
             i.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            i.setIdNodo(u.getValueFromCombobox(this.sceltaNodo));
+            i.setIdNodoAssociato(u.getValueFromCombobox(this.sceltaNodo));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
 

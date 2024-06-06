@@ -104,7 +104,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         rdc.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
         rdc.setCreatore(this);
         rdc.setStato(EStatusRDC.NUOVO);
-        rdc.setIdContest(contest);
+        rdc.setIdContestAppartenenza(contest);
         return this.postRDCNodo(rdc);
     }
 

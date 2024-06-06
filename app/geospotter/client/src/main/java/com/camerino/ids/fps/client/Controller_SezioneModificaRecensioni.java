@@ -166,7 +166,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         {
             r.setId(id);
             //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdNodo(id);
+            r.setIdNodoAssociato(id);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));

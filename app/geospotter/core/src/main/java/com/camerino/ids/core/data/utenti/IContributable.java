@@ -6,6 +6,7 @@ import com.camerino.ids.core.data.contenuti.ClsNodo;
 /**
  * TODO: commentare
  */
+@Deprecated
 public interface IContributable {
     boolean inserisciNodo(ClsNodo nodo);
     boolean modificaNodo(String id, ClsNodo nodo);

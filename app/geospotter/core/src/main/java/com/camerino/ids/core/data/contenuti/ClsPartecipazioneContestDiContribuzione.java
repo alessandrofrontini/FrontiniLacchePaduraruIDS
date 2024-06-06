@@ -3,6 +3,7 @@ package com.camerino.ids.core.data.contenuti;
 /**
  * TODO: commentare
  */
+@Deprecated(forRemoval = true)
 public class ClsPartecipazioneContestDiContribuzione {
     String id;
     String usernamePartecipante;

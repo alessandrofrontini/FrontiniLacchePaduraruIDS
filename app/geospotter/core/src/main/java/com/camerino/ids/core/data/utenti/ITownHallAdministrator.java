@@ -2,9 +2,7 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 
-/**
- * TODO: commentare
- */
+@Deprecated
 public interface ITownHallAdministrator {
     boolean inserisciComune(ClsComune comune);
     boolean modificaComune(ClsComune comune, String id);
