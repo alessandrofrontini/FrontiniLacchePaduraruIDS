@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore{
-    String idComuneAssociato;
+    Long idComuneAssociato;
 
     //region Constructors
     public ClsCuratore(ClsAnimatore usr){
@@ -28,9 +28,9 @@ public class ClsCuratore extends ClsAnimatore{
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
         this.iperUtenti = usr.iperUtenti;
@@ -40,7 +40,7 @@ public class ClsCuratore extends ClsAnimatore{
 
     public ClsCuratore(){
         this.punteggio = Integer.MAX_VALUE;
-        this.ruoloUtente = eRUOLO_UTENTE.CURATORE;
+        this.ruoloUtente = eRUOLI_UTENTE.CURATORE;
     }
     //endregion
 

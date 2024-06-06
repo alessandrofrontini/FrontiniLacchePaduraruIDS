@@ -8,7 +8,7 @@ public class ClsUtenteJWTDecode
 
     private String username;
 
-    private ClsTuristaAutenticato.eRUOLO_UTENTE ruolo;
+    private ClsTuristaAutenticato.eRUOLI_UTENTE ruolo;
 
     public String getJwt() {
         return jwt;
@@ -26,11 +26,11 @@ public class ClsUtenteJWTDecode
         this.username = username;
     }
 
-    public ClsTuristaAutenticato.eRUOLO_UTENTE getRuolo() {
+    public ClsTuristaAutenticato.eRUOLI_UTENTE getRuolo() {
         return ruolo;
     }
 
-    public void setRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+    public void setRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE ruolo) {
         this.ruolo = ruolo;
     }
 }

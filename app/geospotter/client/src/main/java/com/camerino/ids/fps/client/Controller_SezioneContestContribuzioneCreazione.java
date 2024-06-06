@@ -125,7 +125,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         Credenziali credenz1 = new Credenziali();
         credenz1.setUsername("username1");
         ta1.setCredenziali(credenz1);
-        ta1.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+        ta1.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
         utenti.add(ta1);
 
         ClsTuristaAutenticato ta2 = new ClsTuristaAutenticato();
@@ -134,7 +134,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         Credenziali credenz2 = new Credenziali();
         credenz2.setUsername("username2");
         ta2.setCredenziali(credenz2);
-        ta2.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+        ta2.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
         utenti.add(ta2);
 
         ClsTuristaAutenticato ta3 = new ClsTuristaAutenticato();
@@ -143,7 +143,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         Credenziali credenz3 = new Credenziali();
         credenz3.setUsername("username3");
         ta3.setCredenziali(credenz3);
-        ta3.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        ta3.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         utenti.add(ta3);
         //endregion
 

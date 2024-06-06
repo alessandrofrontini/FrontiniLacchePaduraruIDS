@@ -200,28 +200,28 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
                     case "TURISTA_AUTENTICATO":
                         if(true)
                         {
-                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
                         }
                         break;
 
                     case "CONTRIBUTOR":
                         if(true)
                         {
-                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
                         }
                         break;
 
                     case "CONTRIBUTOR_AUTORIZZATO":
                         if(true)
                         {
-                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
                         }
                         break;
 
                     case "ANIMATORE":
                         if(true)
                         {
-                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente,ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+                            TMP_ServizioAutenticazione.modificaPunteggioByEnum(utente, ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
                         }
                         break;
 

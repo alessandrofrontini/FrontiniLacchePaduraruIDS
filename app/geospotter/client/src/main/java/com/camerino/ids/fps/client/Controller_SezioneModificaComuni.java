@@ -72,7 +72,7 @@ public class Controller_SezioneModificaComuni implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.Curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR)
+        this.Curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
                 .stream().map(u->{
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());

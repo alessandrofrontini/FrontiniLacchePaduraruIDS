@@ -162,7 +162,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             ta.setCredenziali(cta);
-                            ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+                            ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
 
                             if(Integer.parseInt(punteggio) < 0)
                             {
@@ -170,9 +170,9 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             }
                             else
                             {
-                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue())
                                 {
-                                    ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+                                    ta.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue());
                                 }
                                 else
                                 {
@@ -199,17 +199,17 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             c.setCredenziali(cta);
-                            c.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+                            c.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
 
-                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue())
                             {
-                                c.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
+                                c.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
                             }
                             else
                             {
-                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue())
                                 {
-                                    c.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
+                                    c.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue());
                                 }
                                 else
                                 {
@@ -236,18 +236,18 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             ca.setCredenziali(cta);
-                            ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+                            ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
 
 
-                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue())
                             {
-                                ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() + 1);
+                                ca.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue() + 1);
                             }
                             else
                             {
-                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
                                 {
-                                    ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+                                    ca.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
                                 }
                                 else
                                 {
@@ -275,17 +275,17 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                             cta.setUsername(username);
                             cta.setPassword(password);
                             a.setCredenziali(cta);
-                            a.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+                            a.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
 
-                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                            if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
                             {
-                                a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
+                                a.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
                             }
                             else
                             {
-                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue())
+                                if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue())
                                 {
-                                    a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+                                    a.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue());
                                 }
                                 else
                                 {
@@ -383,7 +383,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                      cta.setUsername(username);
                      cta.setPassword(password);
                      ta.setCredenziali(cta);
-                     ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+                     ta.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
 
                      if(Integer.parseInt(punteggio) < 0)
                      {
@@ -391,9 +391,9 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                      }
                      else
                      {
-                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue())
                          {
-                             ta.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue());
+                             ta.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue());
                          }
                          else
                          {
@@ -422,17 +422,17 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                      cta.setUsername(username);
                      cta.setPassword(password);
                      contr.setCredenziali(cta);
-                     contr.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+                     contr.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
 
-                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue())
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue())
                      {
-                         contr.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
+                         contr.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO.getValue() + 1);
                      }
                      else
                      {
-                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue())
                          {
-                             contr.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue());
+                             contr.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue());
                          }
                          else
                          {
@@ -462,18 +462,18 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                      cta.setUsername(username);
                      cta.setPassword(password);
                      ca.setCredenziali(cta);
-                     ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+                     ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
 
 
-                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue())
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue())
                      {
-                         ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() + 1);
+                         ca.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue() + 1);
                      }
                      else
                      {
-                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
                          {
-                             ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+                             ca.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
                          }
                          else
                          {
@@ -502,17 +502,17 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
                      cta.setUsername(username);
                      cta.setPassword(password);
                      a.setCredenziali(cta);
-                     a.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+                     a.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
 
-                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
+                     if(Integer.parseInt(punteggio) <= ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue())
                      {
-                         a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
+                         a.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() + 1);
                      }
                      else
                      {
-                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue())
+                         if(Integer.parseInt(punteggio) > ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue())
                          {
-                             a.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+                             a.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue());
                          }
                          else
                          {

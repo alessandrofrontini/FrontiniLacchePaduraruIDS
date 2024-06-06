@@ -28,8 +28,8 @@ public class TMP_ServizioAutenticazione
 
         con.setCredenziali(c1);
 
-        con.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-        con.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() - 5);
+        con.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
+        con.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue() - 5);
         utenti.add(con);
         //endregion
 
@@ -43,8 +43,8 @@ public class TMP_ServizioAutenticazione
 
             conAuth.setCredenziali(c2);
 
-            conAuth.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-            conAuth.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 100);
+            conAuth.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+            conAuth.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 100);
 
             utenti.add(conAuth);
 
@@ -60,8 +60,8 @@ public class TMP_ServizioAutenticazione
 
             anim.setCredenziali(c3);
 
-            anim.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-            anim.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue());
+            anim.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
+            anim.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue());
 
             utenti.add(anim);
 
@@ -77,8 +77,8 @@ public class TMP_ServizioAutenticazione
 
             cur.setCredenziali(c4);
 
-            cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-            cur.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+            cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
+            cur.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE.getValue());
 
             utenti.add(cur);
 
@@ -94,8 +94,8 @@ public class TMP_ServizioAutenticazione
 
             gdp.setCredenziali(c8);
 
-            gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-            gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+            gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+            gdp.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
 
             utenti.add(gdp);
 
@@ -313,7 +313,7 @@ public class TMP_ServizioAutenticazione
 
             case "RESET-RANK":
                 utente.setPunteggio(0);
-                utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+                utente.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
                 Alert alerttt = new Alert (Alert.AlertType.CONFIRMATION);
                 alerttt.setTitle("OK");
                 alerttt.setContentText("Prima: \n" + utenteBackUp.visualizzaUtente() + "\nDopo: \n" + utente.visualizzaUtente());
@@ -327,7 +327,7 @@ public class TMP_ServizioAutenticazione
     }
 
 
-    public static void modificaPunteggioByEnum (ClsTuristaAutenticato utente, ClsTuristaAutenticato.eRUOLO_UTENTE ruolo)
+    public static void modificaPunteggioByEnum (ClsTuristaAutenticato utente, ClsTuristaAutenticato.eRUOLI_UTENTE ruolo)
     {
         ClsTuristaAutenticato utenteBackUp = utente.clone();
 
@@ -348,27 +348,27 @@ public class TMP_ServizioAutenticazione
         alerttt.show();
     }
 
-    public static ClsTuristaAutenticato.eRUOLO_UTENTE punteggioToEnum (int punteggio)
+    public static ClsTuristaAutenticato.eRUOLI_UTENTE punteggioToEnum (int punteggio)
     {
         if(punteggio>=0 && punteggio<50)
         {
-            return ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO;
+            return ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO;
         }
         if(punteggio>=50 && punteggio<600)
         {
-            return ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR;
+            return ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR;
         }
         if(punteggio>=600 && punteggio<999)
         {
-            return ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO;
+            return ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO;
         }
         if(punteggio>=1000)
         {
-            return ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE;
+            return ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE;
         }
         if(punteggio < 0)
         {
-            return ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO;
+            return ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO;
         }
 
 

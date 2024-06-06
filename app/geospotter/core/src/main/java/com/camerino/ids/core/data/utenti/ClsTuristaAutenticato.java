@@ -40,15 +40,11 @@ import java.util.Objects;
         @JsonSubTypes.Type(value = ClsGestoreDellaPiattaforma.class, name = "GESTORE_DELLA_PIATTAFORMA"),
 })
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction{
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini)
-    {
-    }
-
     /**
      * Contiene i diversi ruoli nella piattaforma
      * e il loro punteggio massimo per appartenere a quel ruolo.
      */
-    public enum eRUOLO_UTENTE {
+    public enum eRUOLI_UTENTE {
         TURISTA_AUTENTICATO(49),
         CONTRIBUTOR(599),
         CONTRIBUTOR_AUTORIZZATO(999),
@@ -62,7 +58,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
             return value;
         }
 
-        eRUOLO_UTENTE(Integer value){
+        eRUOLI_UTENTE(Integer value){
             this.value = value;
         }
     }
@@ -75,15 +71,20 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @Convert(converter = ConvCredenziali.class)
     Credenziali credenziali = new Credenziali();
     int punteggio;
-    eRUOLO_UTENTE ruoloUtente;
-    
+    eRUOLI_UTENTE ruoloUtente;
+
+//region Constructors
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> pSegnalazioni, IPersistenceModel<ClsRecensione> pRecensioni, IPersistenceModel<ClsImmagine> pImmagini)
+    {
+    }
+
     public ClsTuristaAutenticato(ClsTurista usr){
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
-        this.pImmagini = usr.pImmagini;
+        this.iperImmagini = usr.iperImmagini;
         this.iperUtenti = usr.iperUtenti;
     }
 
@@ -96,11 +97,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.id = Long.valueOf(id);
     }
 
-    public eRUOLO_UTENTE getRuoloUtente() {
+    public eRUOLI_UTENTE getRuoloUtente() {
         return ruoloUtente;
     }
 
-    public void setRuoloUtente(eRUOLO_UTENTE ruoloUtente) {
+    public void setRuoloUtente(eRUOLI_UTENTE ruoloUtente) {
         this.ruoloUtente = ruoloUtente;
     }
 
@@ -131,17 +132,19 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     {
 //    TODO    super(segnalazioni);
         iperRecensioni = recensioni;
-        pImmagini = immagini;
+        iperImmagini = immagini;
         iperUtenti = utenti;
     }
-    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLO_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
+    public ClsTuristaAutenticato(IPersistenceModel<ClsSegnalazione> segnalazioni, Credenziali c, eRUOLI_UTENTE ruolo, IPersistenceModel<ClsRecensione> recensioni, IPersistenceModel<ClsImmagine> immagini){
         //  TODO     super(segnalazioni);
         credenziali = c;
         ruoloUtente = ruolo;
         punteggio = ruolo.getValue();
         iperRecensioni = recensioni;
-        pImmagini = immagini;
+        iperImmagini = immagini;
     }
+    //endregion
+
     //region Override ILoggedUserAction
     @Override
     public boolean inserisciRecensione(ClsRecensione recensione) {
@@ -166,7 +169,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
         //TODO: merge con richiesta azione di contribuzione
-        return pImmagini.insert(immagine);
+        return iperImmagini.insert(immagine);
     }
     @Override
     public ClsRecensione[] visualizzaRecensioniPosessore() {
@@ -220,23 +223,23 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return clone;
     }
 
-    public static eRUOLO_UTENTE convertRuoloFromString (String ruolo)
+    public static eRUOLI_UTENTE convertRuoloFromString (String ruolo)
     {
         switch(ruolo)
         {
             case "TURISTA_AUTENTICATO":
-                return eRUOLO_UTENTE.TURISTA_AUTENTICATO;
+                return eRUOLI_UTENTE.TURISTA_AUTENTICATO;
 
 
             case "CONTRIBUTOR":
-                return eRUOLO_UTENTE.CONTRIBUTOR;
+                return eRUOLI_UTENTE.CONTRIBUTOR;
 
 
             case "CONTRIBUTOR_AUTORIZZATO":
-                return eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO;
+                return eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO;
 
             case "ANIMATORE":
-                return eRUOLO_UTENTE.ANIMATORE;
+                return eRUOLI_UTENTE.ANIMATORE;
 
 
             default:

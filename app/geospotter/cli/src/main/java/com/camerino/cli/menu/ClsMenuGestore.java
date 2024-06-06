@@ -16,7 +16,7 @@ public class ClsMenuGestore implements IMenu {
     public ClsMenuGestore (ClsGestoreDellaPiattaforma gdp)
     {
         this.user = gdp;
-        gdp.setMockComuni(MockLocator.getMockComuni());
+        gdp.setIperComuni(MockLocator.getMockComuni());
     }
 
     @Override

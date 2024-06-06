@@ -160,13 +160,13 @@ public class Controller_SezioneLogin
     //region CREA X
     private static ClsTurista CreaTurista() {
         ClsTurista user = new ClsTurista();
-        user.setpNodi(new IperNodi());
-        user.setMockComuni(new IperComuni());
-        user.setpItinerari(new IperItinerari());
+        user.setIperNodi(new IperNodi());
+        user.setIperComuni(new IperComuni());
+        user.setIperItinerari(new IperItinerari());
         user.setIperRecensioni(new IperRecensioni());
         user.setIperSegnalazioni(new IperSegnalazioni());
-        user.setpImmagini(new IperImmagini());
-        user.setMockComuni(new IperComuni());
+        user.setpIperImmagini(new IperImmagini());
+        user.setIperComuni(new IperComuni());
         user.setIperUtenti(new IperUtenti());
 
         return user;
@@ -174,7 +174,7 @@ public class Controller_SezioneLogin
 
     private static ClsTuristaAutenticato CreaTuristaAut() {
         ClsTuristaAutenticato user = new ClsTuristaAutenticato(CreaTurista());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.TURISTA_AUTENTICATO);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
         //user.setIperUtenti(new IperUtenti());
         user.setIperRDCImmagini(new IperRCDImmagini());
         return user;
@@ -182,7 +182,7 @@ public class Controller_SezioneLogin
 
     private static ClsContributor CreaContributor() {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
         //user.setpRDC(this.iperRDC);
         //user.setpRDCI(this.iperRDCI);
         //user._setIperRDCNodi(this.iperRDCNodi);
@@ -192,26 +192,26 @@ public class Controller_SezioneLogin
 
     private static ClsContributorAutorizzato CreaContributorAut() {
         ClsContributorAutorizzato user = new ClsContributorAutorizzato(CreaContributor());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         return user;
     }
 
     private static ClsAnimatore CreaAnimatore() {
         ClsAnimatore user = new ClsAnimatore(CreaContributorAut());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
         return user;
     }
 
     private static ClsCuratore CreaCuratore() {
         ClsCuratore user = new ClsCuratore(CreaAnimatore());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
 
         return user;
     }
 
     private static ClsGestoreDellaPiattaforma CreaGDP() {
         ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma(CreaCuratore());
-        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         return user;
     }
     //endregion

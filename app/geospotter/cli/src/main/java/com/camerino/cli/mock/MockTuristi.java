@@ -67,8 +67,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         credenzialiCA.setUsername("CA");
         credenzialiCA.setPassword("");
         ca.setCredenziali(credenzialiCA);
-        ca.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
-        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        ca.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue());
+        ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         inserisciUtente(ca);
 
         ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
@@ -76,8 +76,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         credenzialiGdP.setUsername("GDP");
         credenzialiGdP.setPassword("");
         gdp.setCredenziali(credenzialiGdP);
-        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
-        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         inserisciUtente(gdp);
     }
 }

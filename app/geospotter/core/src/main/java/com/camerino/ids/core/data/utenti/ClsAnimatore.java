@@ -22,9 +22,9 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
 

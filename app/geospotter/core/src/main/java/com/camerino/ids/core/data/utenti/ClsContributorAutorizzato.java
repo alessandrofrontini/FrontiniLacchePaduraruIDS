@@ -23,9 +23,9 @@ public class ClsContributorAutorizzato extends ClsContributor {
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
@@ -46,7 +46,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     @Override
     public boolean inserisciNodo(ClsNodo nodo) {
         nodo.setIdCreatore(this.id+"");
-        return pNodi.insert(nodo);
+        return iperNodi.insert(nodo);
     }
 
     /**
@@ -62,7 +62,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", id);
         nodo.setIdCreatore(this.getId());
-        return pNodi.update(tmp, nodo);
+        return iperNodi.update(tmp, nodo);
     }
 
     /**
@@ -74,7 +74,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
-        return pItinerari.insert(itinerario);
+        return iperItinerari.insert(itinerario);
     }
 
     /**
@@ -89,7 +89,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean modificaItinerario(ClsItinerario itinerario, String idItinerario) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idItinerario", idItinerario);
-        return pItinerari.update(tmp, itinerario);
+        return iperItinerari.update(tmp, itinerario);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
     public boolean eliminaNodo(String id) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", id);
-        return pNodi.delete(filters);
+        return iperNodi.delete(filters);
     }
 //endregion
 }

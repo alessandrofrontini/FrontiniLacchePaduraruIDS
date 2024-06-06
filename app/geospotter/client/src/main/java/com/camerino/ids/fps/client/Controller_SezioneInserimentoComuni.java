@@ -45,7 +45,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR)
+        curatori = ((ClsGestoreDellaPiattaforma)Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
                 .stream().map(u->{
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());

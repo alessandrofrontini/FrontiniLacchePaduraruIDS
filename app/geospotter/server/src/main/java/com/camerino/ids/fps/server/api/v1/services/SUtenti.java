@@ -28,7 +28,7 @@ public class SUtenti
     }
 
 
-    public List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+    public List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE ruolo) {
         return ((ClsGestoreDellaPiattaforma)request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
     }
 }

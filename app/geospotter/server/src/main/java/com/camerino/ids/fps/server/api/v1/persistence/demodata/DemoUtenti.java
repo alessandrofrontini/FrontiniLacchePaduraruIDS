@@ -1,10 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.persistence.demodata;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.ids.core.data.utils.Posizione;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoComuni;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -33,8 +30,8 @@ public class DemoUtenti
 
         con.setCredenziali(c1);
 
-        con.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR);
-        con.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR.getValue() - 5);
+        con.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
+        con.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR.getValue() - 5);
         utenti.add(con);
         //endregion
 
@@ -48,8 +45,8 @@ public class DemoUtenti
 
         conAuth.setCredenziali(c2);
 
-        conAuth.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-        conAuth.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 150);
+        conAuth.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
+        conAuth.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO.getValue() - 150);
 
         utenti.add(conAuth);
 
@@ -65,8 +62,8 @@ public class DemoUtenti
 
         anim.setCredenziali(c3);
 
-        anim.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE);
-        anim.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.ANIMATORE.getValue() - 380);
+        anim.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE);
+        anim.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.ANIMATORE.getValue() - 380);
 
         utenti.add(anim);
 
@@ -82,8 +79,8 @@ public class DemoUtenti
 
         cur.setCredenziali(c4);
 
-        cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE);
-        cur.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.CURATORE.getValue());
+        cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
+        cur.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE.getValue());
 
         utenti.add(cur);
 
@@ -99,8 +96,8 @@ public class DemoUtenti
 
         gdp.setCredenziali(c8);
 
-        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA);
-        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLO_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
+        gdp.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
+        gdp.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA.getValue());
 
         utenti.add(gdp);
 

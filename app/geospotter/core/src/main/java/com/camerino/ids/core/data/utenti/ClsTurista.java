@@ -15,12 +15,12 @@ import java.util.List;
  */
 @MappedSuperclass
 public class ClsTurista implements ISignalable {
-    transient IPersistenceModel<ClsNodo> pNodi;
-    transient IPersistenceModel<ClsItinerario> pItinerari;
-    transient IPersistenceModel<ClsComune> mockComuni;
+    transient IPersistenceModel<ClsNodo> iperNodi;
+    transient IPersistenceModel<ClsItinerario> iperItinerari;
+    transient IPersistenceModel<ClsComune> iperComuni;
     transient IPersistenceModel<ClsRecensione> iperRecensioni;
     transient IPersistenceModel<ClsSegnalazione> iperSegnalazioni;
-    transient IPersistenceModel<ClsImmagine> pImmagini;
+    transient IPersistenceModel<ClsImmagine> iperImmagini;
     transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
 
     /**
@@ -30,9 +30,6 @@ public class ClsTurista implements ISignalable {
      * @return True se la creazione della segnalazione ha successo,
      *         False altrimenti.a
      */
-
-
-
     @Override
     public boolean segnalaContenuto(ClsSegnalazione segnalazione) {
         return iperSegnalazioni.insert(segnalazione);
@@ -40,23 +37,23 @@ public class ClsTurista implements ISignalable {
 
     @JsonIgnore
     public List<ClsComune> getAllComuni() {
-        return mockComuni.get(null);
+        return iperComuni.get(null);
     }
     @JsonIgnore
     public List<ClsNodo> getAllNodi() {
-        return pNodi.get(null);
+        return iperNodi.get(null);
     }
     @JsonIgnore
     public List<ClsNodo> getNodiByComune(String idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
-        return pNodi.get(filters);
+        return iperNodi.get(filters);
     }
     @JsonIgnore
     public List<ClsComune> getComuneById(String idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
-        return mockComuni.get(filters);
+        return iperComuni.get(filters);
     }
 @JsonIgnore
     public List<ClsRecensione> getRecensioniNodo(String idNodo) {
@@ -67,16 +64,16 @@ public class ClsTurista implements ISignalable {
 
 //region Getters and Settera
 
-    public void setpNodi(IPersistenceModel<ClsNodo> pNodi) {
-        this.pNodi = pNodi;
+    public void setIperNodi(IPersistenceModel<ClsNodo> iperNodi) {
+        this.iperNodi = iperNodi;
     }
 
-    public void setpItinerari(IPersistenceModel<ClsItinerario> pItinerari) {
-        this.pItinerari = pItinerari;
+    public void setIperItinerari(IPersistenceModel<ClsItinerario> iperItinerari) {
+        this.iperItinerari = iperItinerari;
     }
 
-    public void setMockComuni(IPersistenceModel<ClsComune> mockComuni) {
-        this.mockComuni = mockComuni;
+    public void setIperComuni(IPersistenceModel<ClsComune> iperComuni) {
+        this.iperComuni = iperComuni;
     }
 
     public void setIperRecensioni(IPersistenceModel<ClsRecensione> iperRecensioni) {
@@ -87,19 +84,19 @@ public class ClsTurista implements ISignalable {
     }
     @JsonIgnore
     public List<ClsItinerario> getAllItinerari() {
-        return this.pItinerari.get(null);
+        return this.iperItinerari.get(null);
     }
 @JsonIgnore
     public List<ClsItinerario> getItinerarioById() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idItinerario", pItinerari.get(filters));
-        return this.pItinerari.get(filters);
+        filters.put("idItinerario", iperItinerari.get(filters));
+        return this.iperItinerari.get(filters);
     }
 @JsonIgnore
     public List<ClsNodo> getNodoById(String idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
-        return this.pNodi.get(filters);
+        return this.iperNodi.get(filters);
     }
 
     public List<ClsSegnalazione> GetAllSegnalazioni() {
@@ -112,15 +109,15 @@ public class ClsTurista implements ISignalable {
     }
     @JsonIgnore
     public List<ClsImmagine> getAllImmagini() {
-        return this.pImmagini.get(null);
+        return this.iperImmagini.get(null);
     }
     @JsonIgnore
-    public IPersistenceModel<ClsImmagine> getpImmagini() {
-        return pImmagini;
+    public IPersistenceModel<ClsImmagine> getpIperImmagini() {
+        return iperImmagini;
     }
 
-    public void setpImmagini(IPersistenceModel<ClsImmagine> pImmagini) {
-        this.pImmagini = pImmagini;
+    public void setpIperImmagini(IPersistenceModel<ClsImmagine> pImmagini) {
+        this.iperImmagini = pImmagini;
     }
 
     public void setIperUtenti(IPersistenceModel<ClsTuristaAutenticato> iperUtenti) {

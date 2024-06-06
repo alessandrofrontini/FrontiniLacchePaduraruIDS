@@ -1,7 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.controllers;
 
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLO_UTENTE;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLI_UTENTE;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
 import com.camerino.ids.fps.server.api.v1.services.SUtenti;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class CUtenti {
 
     @GetMapping(value = mapping)
     public ResponseEntity<List<ClsTuristaAutenticato>> getUtenti(
-            @RequestParam(value = "ruolo", required = false) eRUOLO_UTENTE ruolo
+            @RequestParam(value = "ruolo", required = false) eRUOLI_UTENTE ruolo
     ){
         if(ruolo!= null)
             return ResponseEntity.ok(sUtenti.getUtentiByRuolo(ruolo));

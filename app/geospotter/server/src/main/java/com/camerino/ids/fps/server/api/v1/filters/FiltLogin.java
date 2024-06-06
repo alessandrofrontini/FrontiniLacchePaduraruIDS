@@ -82,12 +82,12 @@ public class FiltLogin extends OncePerRequestFilter {
     }
 
     private void InitializeUser(ClsTurista user) {
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
+        user.setIperNodi(this.iperNodi);
+        user.setIperComuni(this.iperComuni);
+        user.setIperItinerari(this.iperItinerari);
         user.setIperRecensioni(this.iperRecensioni);
         user.setIperSegnalazioni(this.iperSegnalazioni);
-        user.setpImmagini(this.iperImmagini);
+        user.setpIperImmagini(this.iperImmagini);
 
         if(user instanceof ClsTuristaAutenticato tmp){
             tmp.setIperUtenti(this.iperUtenti);
@@ -134,12 +134,12 @@ public class FiltLogin extends OncePerRequestFilter {
 //TODO: possibile nuovo pattern
     private ClsTurista CreaTurista() {
         ClsTurista user = new ClsTurista();
-        user.setpNodi(this.iperNodi);
-        user.setMockComuni(this.iperComuni);
-        user.setpItinerari(this.iperItinerari);
+        user.setIperNodi(this.iperNodi);
+        user.setIperComuni(this.iperComuni);
+        user.setIperItinerari(this.iperItinerari);
         user.setIperRecensioni(this.iperRecensioni);
         user.setIperSegnalazioni(this.iperSegnalazioni);
-        user.setpImmagini(this.iperImmagini);
+        user.setpIperImmagini(this.iperImmagini);
 
         return user;
     }

@@ -23,41 +23,43 @@ import java.util.List;
  */
 @Entity
 public class ClsContributor extends ClsTuristaAutenticato implements IContributable{
+    @Transient
+    transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
+    @Transient
+    transient IPersistenceModel<ClsRdcItinerario> iperRDCItinerari;
 
     @Deprecated
     @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
-    @Transient
-    transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
     @Deprecated
     @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
-    @Transient
-    transient IPersistenceModel<ClsRdcItinerario> iperRDCItinerari;
 
+    //region Constructors
     public ClsContributor() {super();}
     public ClsContributor(IPersistenceModel<ClsNodo> pNodo, IPersistenceModel<ClsItinerario> pItinerari) {
         super();
-        pNodi = pNodo;
-        this.pItinerari = pItinerari;
+        iperNodi = pNodo;
+        this.iperItinerari = pItinerari;
     }
 
     public ClsContributor(ClsTuristaAutenticato usr){
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
     }
+//endregion
 
 //region Getters and Setters
-@Transient
+@JsonIgnore
     public IPersistenceModel<ClsRDCNodo> _getIperRDCNodi() {
         return iperRDCNodi;
     }
@@ -82,7 +84,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         this.pRDCI = pRDCI;
     }
 //endregion
-    //Region Override IContributable
+
+    //region Override IContributable
 
     /**
      * Crea una richiesta di inserimento nodo.
@@ -188,7 +191,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("id", id);
-        req.setDatiItinerario(pItinerari.get(tmp).get(0));
+        req.setDatiItinerario(iperItinerari.get(tmp).get(0));
         return pRDCI.insert(req);
     }
 
@@ -201,12 +204,12 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
     public List<ClsNodo> getNodiPossessore(){
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("owner", this.id);
-        return this.pNodi.get(filters);
+        return this.iperNodi.get(filters);
     }
     public boolean deleteNodo(String idNodo) {
         HashMap<String, Object> tmp = new HashMap<>();
         tmp.put("idNodo", idNodo);
-        return pNodi.delete(tmp);
+        return iperNodi.delete(tmp);
     }
 @JsonIgnore
     public List<ClsRDCNodo> getRDCNodiById(String idRDC) {

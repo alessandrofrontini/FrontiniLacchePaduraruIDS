@@ -25,9 +25,9 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
-        this.pNodi = usr.pNodi;
-        this.pItinerari = usr.pItinerari;
-        this.mockComuni = usr.mockComuni;
+        this.iperNodi = usr.iperNodi;
+        this.iperItinerari = usr.iperItinerari;
+        this.iperComuni = usr.iperComuni;
         this.iperRecensioni = usr.iperRecensioni;
         this.iperSegnalazioni = usr.iperSegnalazioni;
 
@@ -36,9 +36,9 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
 
     }
     //region Getters and Setters
-    public void setMockComuni (IPersistenceModel<ClsComune> mockComuni)
+    public void setIperComuni(IPersistenceModel<ClsComune> iperComuni)
     {
-        this.mockComuni = mockComuni;
+        this.iperComuni = iperComuni;
     }
     //endregion
 
@@ -52,7 +52,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
     @Override
     public boolean inserisciComune(ClsComune comune)
     {
-        return this.mockComuni.insert(comune);
+        return this.iperComuni.insert(comune);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
      */
     @Override
     public boolean modificaComune(ClsComune comune, String id){
-        return this.mockComuni.update(null,comune);
+        return this.iperComuni.update(null,comune);
     }
 
     /**
@@ -78,7 +78,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
     public boolean eliminaComune(String id){
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", id);
-        return this.mockComuni.delete(filters);
+        return this.iperComuni.delete(filters);
     }
     //TODO
     @Override
@@ -87,12 +87,12 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
     }
 @JsonIgnore
     public List<ClsCuratore> getAllCuratori() {
-        return getUtentiByRuolo(eRUOLO_UTENTE.CURATORE).stream().map(c->(ClsCuratore)c).toList();
+        return getUtentiByRuolo(eRUOLI_UTENTE.CURATORE).stream().map(c->(ClsCuratore)c).toList();
     }
 @JsonIgnore
-    public List<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLO_UTENTE ruolo) {
+    public List<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLI_UTENTE ruolo) {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("ruolo", eRUOLO_UTENTE.CURATORE);
+        filters.put("ruolo", eRUOLI_UTENTE.CURATORE);
         return iperUtenti.get(filters);
     }
 //endregion
