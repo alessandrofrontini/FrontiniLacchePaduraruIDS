@@ -21,12 +21,12 @@ public class SNodi {
     }
 
     public ArrayList<ClsNodo> findNodoById(String idNodo) {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodoById(idNodo);
     }
 
     public ArrayList<ClsNodo> findNodiByComune(String idComune) {
-        ClsTurista user = (ClsTurista) request.getSession().getAttribute("user");
+        ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodiByComune(idComune);
     }
 

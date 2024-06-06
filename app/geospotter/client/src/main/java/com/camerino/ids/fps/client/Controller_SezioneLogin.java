@@ -187,6 +187,7 @@ public class Controller_SezioneLogin
         //user.setpRDC(this.iperRDC);
         //user.setpRDCI(this.iperRDCI);
         //user._setIperRDCNodi(this.iperRDCNodi);
+        user._setIperRDCNodi(new IperRDCNodi());
         return user;
     }
 

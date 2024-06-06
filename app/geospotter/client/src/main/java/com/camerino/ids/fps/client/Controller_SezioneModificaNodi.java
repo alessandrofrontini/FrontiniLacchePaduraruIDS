@@ -123,7 +123,7 @@ public class Controller_SezioneModificaNodi implements Initializable
 
 
 
-        if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null && this.CheckValidita(nuovoNodo,comuni))
+        if(!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null /*&& this.CheckValidita(nuovoNodo,comuni)*/)
         {
             nuovoNodo.setId(IDDaModificare);
             ((ClsContributor)Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);

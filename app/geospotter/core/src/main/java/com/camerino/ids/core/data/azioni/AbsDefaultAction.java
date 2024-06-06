@@ -13,7 +13,7 @@ import org.hibernate.annotations.UuidGenerator;
 public class AbsDefaultAction<E> implements IAction<E,EStatusRDC>{
     @Id
     @GeneratedValue
-    Long idRichiesta;
+    Long idRichiesta=0L;
     @Enumerated(EnumType.STRING)
     EAzioniDiContribuzione tipo;
     @Enumerated(EnumType.STRING)

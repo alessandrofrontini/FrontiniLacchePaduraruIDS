@@ -42,14 +42,15 @@ public class CRDCNodi {
     ){
         if(sRDCnodi.putRDCNodi(rdc))
             return ResponseEntity.ok("Azione Modificata");
-        return ResponseEntity.status(500).body("Azione non modificata");
+        return ResponseEntity.ok("");
     }
+
     @PostMapping(mapping)
     public ResponseEntity<String> postRDC(
             @RequestBody ClsRDCNodo rdc
     ){
         if(sRDCnodi.postRDCNodi(rdc))
             return ResponseEntity.ok("Azione Creata");
-        return ResponseEntity.status(500).body("Azione non creata");
+        return ResponseEntity.ok(Boolean.toString(sRDCnodi.postRDCNodi(rdc)));
     }
 }

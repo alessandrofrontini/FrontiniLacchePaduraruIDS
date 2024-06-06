@@ -80,7 +80,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if(!u.checkInfoNodo(nodo) || !this.CheckValidita(nodo, comuni))
+                    if(!u.checkInfoNodo(nodo) /*|| !this.CheckValidita(nodo, comuni)*/)
                     {
                         Alert alert = new Alert (Alert.AlertType.ERROR);
                         alert.setTitle("Errore");

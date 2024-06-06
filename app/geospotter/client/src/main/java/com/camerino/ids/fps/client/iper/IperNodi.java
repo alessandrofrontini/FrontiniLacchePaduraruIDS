@@ -23,6 +23,8 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
                     Controller_SezioneLogin.UTENTE, null);
         if(filters.containsKey("owner"))
             return api.Get(Controller_SezioneLogin.UTENTE, "owner="+filters.get("owner"));
+        if(filters.containsKey("idNodo"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "idNodo="+filters.get("idNodo"));
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }
