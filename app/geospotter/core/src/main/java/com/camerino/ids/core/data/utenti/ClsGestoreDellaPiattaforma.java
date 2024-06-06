@@ -92,7 +92,7 @@ public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHal
         return getUtentiByRuolo(eRUOLO_UTENTE.CURATORE).stream().map(c->(ClsCuratore)c).toList();
     }
 @JsonIgnore
-    public ArrayList<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLO_UTENTE ruolo) {
+    public List<ClsTuristaAutenticato> getUtentiByRuolo(eRUOLO_UTENTE ruolo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("ruolo", eRUOLO_UTENTE.CURATORE);
         return iperUtenti.get(filters);

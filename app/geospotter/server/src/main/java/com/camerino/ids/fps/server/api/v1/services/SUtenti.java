@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SUtenti
@@ -17,18 +18,18 @@ public class SUtenti
         this.request = request;
     }
 
-    public ArrayList<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo) {
+    public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo) {
         ClsTuristaAutenticato user = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
         return user.getUtentiPerGestionePunteggio(ruolo);
     }
 
-    public ArrayList<ClsTuristaAutenticato> getAllUtenti() {
+    public List<ClsTuristaAutenticato> getAllUtenti() {
         ClsTuristaAutenticato user = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
         return user.getAllUtenti();
     }
 
 
-    public ArrayList<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
+    public List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLO_UTENTE ruolo) {
         return ((ClsGestoreDellaPiattaforma)request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
     }
 }

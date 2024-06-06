@@ -22,10 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller_SezioneContestContribuzionePartecipazione implements Initializable
 {
@@ -49,7 +46,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
     ComboBox sceltaContestContribuzione;
     //endregion
 
-    ArrayList<ClsContestDiContribuzione> contests;
+    List<ClsContestDiContribuzione> contests;
     Utils u = new Utils();
 
     @Override
@@ -139,7 +136,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
         }
     }
 
-    private void setContest (ArrayList<ClsContestDiContribuzione> contests)
+    private void setContest (List<ClsContestDiContribuzione> contests)
     {
         for(int i = 0; i<contests.size();i++)
         {

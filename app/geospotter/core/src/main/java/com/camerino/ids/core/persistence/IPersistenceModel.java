@@ -1,6 +1,6 @@
 package com.camerino.ids.core.persistence;
 import java.beans.Transient;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**TODO: aggiornare la documentazione con questa classe
@@ -9,11 +9,12 @@ import java.util.Map;
 public interface IPersistenceModel<E> {
     /**
      * Questo metodo rappresenta la lettura dei dati.
+     *
      * @param filters Eventuali filtri da applicare. Questo è un parametro libero. E' a discrezione del programmatore come usarlo.
      * @return Array contente i dati letti.
      */
     @Transient
-    ArrayList<E> get(Map<String, Object> filters);
+    List<E> get(Map<String, Object> filters);
 
     /**
      * Questo metodo rappresenta l'aggiornamento di un dato.

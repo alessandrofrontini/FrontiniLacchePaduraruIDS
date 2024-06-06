@@ -9,13 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @Order(2)
 public class DemoNodi {
     @Bean
     public CommandLineRunner aggiungiNodi(RepoNodi repo) {
-        ArrayList<ClsNodo> nodi = new ArrayList<>();
+        List<ClsNodo> nodi = new ArrayList<>();
 
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setNome("Centro Camerino");

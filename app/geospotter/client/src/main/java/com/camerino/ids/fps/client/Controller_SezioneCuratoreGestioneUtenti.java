@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -70,8 +71,8 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
     //endregion
 
     Utils u = new Utils();
-    ArrayList<ClsTuristaAutenticato> utenti;
-    ArrayList<String> ruoli; //Statico
+    List<ClsTuristaAutenticato> utenti;
+    List<String> ruoli; //Statico
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -572,7 +573,7 @@ public class Controller_SezioneCuratoreGestioneUtenti implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-    private void setUtenti (ArrayList<ClsTuristaAutenticato> utenti)
+    private void setUtenti (List<ClsTuristaAutenticato> utenti)
     {
         for(int i = 0; i< utenti.size(); i++)
         {

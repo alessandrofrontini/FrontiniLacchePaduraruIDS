@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //Le azioni del contributor base saranno mascherate con la creazione di un rdc
 @Service
@@ -20,17 +21,17 @@ public class SNodi {
         this.request = request;
     }
 
-    public ArrayList<ClsNodo> findNodoById(String idNodo) {
+    public List<ClsNodo> findNodoById(String idNodo) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodoById(idNodo);
     }
 
-    public ArrayList<ClsNodo> findNodiByComune(String idComune) {
+    public List<ClsNodo> findNodiByComune(String idComune) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getNodiByComune(idComune);
     }
 
-    public ArrayList<ClsNodo> getAllNodi() {
+    public List<ClsNodo> getAllNodi() {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getAllNodi();
     }
@@ -50,7 +51,7 @@ public class SNodi {
         return cont.modificaNodo(nodo.getId(), nodo);
     }
 
-    public ArrayList<ClsNodo> getNodiPosessore() {
-        return (ArrayList<ClsNodo>) ((ClsContributor)request.getServletContext().getAttribute("user")).getNodiPossessore();
+    public List<ClsNodo> getNodiPosessore() {
+        return (List<ClsNodo>) ((ClsContributor)request.getServletContext().getAttribute("user")).getNodiPossessore();
     }
 }

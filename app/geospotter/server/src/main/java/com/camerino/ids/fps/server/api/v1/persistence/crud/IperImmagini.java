@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -19,7 +20,7 @@ public class IperImmagini implements IPersistenceModel<ClsImmagine> {
     }
 
     @Override
-    public ArrayList<ClsImmagine> get(Map<String, Object> filters) {
+    public List<ClsImmagine> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoImmagini.findAll());
 

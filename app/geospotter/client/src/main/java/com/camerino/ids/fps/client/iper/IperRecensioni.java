@@ -6,14 +6,14 @@ import com.camerino.ids.fps.client.api.ApiRecensioni;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     IApi<ClsRecensione> api = new ApiRecensioni();
 
     @Override
-    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
+    public List<ClsRecensione> get(Map<String, Object> filters) {
         String query = "";
         if(filters.containsKey("owner"))
             query = "owner="+filters.get("owner");

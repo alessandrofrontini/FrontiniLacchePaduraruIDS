@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CComuni {
@@ -21,7 +22,7 @@ public class CComuni {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsComune>> getComuni(
+    public ResponseEntity<List<ClsComune>> getComuni(
             @RequestParam(value = "idComune", required = false) String idComune
     ) {
 

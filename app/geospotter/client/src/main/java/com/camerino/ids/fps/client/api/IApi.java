@@ -22,7 +22,7 @@ public interface IApi<T> {
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setSerializationInclusion(Include.NON_NULL);
 
-    ArrayList<T> Get(ClsTurista user, String query);
+    List<T> Get(ClsTurista user, String query);
     boolean Post(ClsTurista user, T object);
     boolean Put(ClsTurista user, T object);
     boolean Delete(ClsTurista user, Pair<String, String> name_id);
@@ -49,9 +49,9 @@ public interface IApi<T> {
         return response;
     }
 
-    default ArrayList<T> deserialize(String responseBody, TypeReference<List<T>> type){
+    default List<T> deserialize(String responseBody, TypeReference<List<T>> type){
         try {
-            return new ArrayList<>(mapper.readValue(responseBody, type));
+            return mapper.readValue(responseBody, type);
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
         }

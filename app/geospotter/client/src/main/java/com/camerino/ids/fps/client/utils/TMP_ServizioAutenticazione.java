@@ -7,12 +7,13 @@ import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 public class TMP_ServizioAutenticazione
 {
-    public static ArrayList<ClsTuristaAutenticato> utenti = new ArrayList<>(); //Tutti gli utenti
-    public static ArrayList<ClsTuristaAutenticato> utentiLegit = new ArrayList<>(); //Utenti gestibili
+    public static List<ClsTuristaAutenticato> utenti = new ArrayList<>(); //Tutti gli utenti
+    public static List<ClsTuristaAutenticato> utentiLegit = new ArrayList<>(); //Utenti gestibili
     public static String tmpJWT = "DJASIDJIQ09I4902JDIOAR8932";
 
     static
@@ -389,7 +390,7 @@ public class TMP_ServizioAutenticazione
       return -1;
     }
 
-    public static <ClsTuristaAutenticato> ArrayList<ClsTuristaAutenticato> mergeListsExcludingDuplicates(ArrayList<ClsTuristaAutenticato> list1, ArrayList<ClsTuristaAutenticato> list2) {
+    public static <ClsTuristaAutenticato> List<ClsTuristaAutenticato> mergeListsExcludingDuplicates(List<ClsTuristaAutenticato> list1, List<ClsTuristaAutenticato> list2) {
         HashSet<ClsTuristaAutenticato> set = new HashSet<>();
         set.addAll(list1);
         set.addAll(list2);

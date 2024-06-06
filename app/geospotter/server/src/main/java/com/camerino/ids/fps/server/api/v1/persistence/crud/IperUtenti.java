@@ -24,7 +24,7 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato>
 
     @Override
     @Transient
-    public ArrayList<ClsTuristaAutenticato> get(Map<String, Object> filters)
+    public List<ClsTuristaAutenticato> get(Map<String, Object> filters)
     {
         if(filters == null)
             return new ArrayList<>(repoUtenti.findAll());

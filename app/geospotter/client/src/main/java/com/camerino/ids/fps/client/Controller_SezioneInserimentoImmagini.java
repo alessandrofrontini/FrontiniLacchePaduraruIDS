@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -55,7 +56,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
     TextField urlImmagine;
     //endregion
 
-    ArrayList<ClsNodo> nodi;
+    List<ClsNodo> nodi;
     Utils u = new Utils();
 
     @Override
@@ -120,7 +121,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable
         }
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {

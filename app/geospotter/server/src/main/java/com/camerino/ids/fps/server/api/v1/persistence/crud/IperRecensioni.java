@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,13 +21,13 @@ public class IperRecensioni implements IPersistenceModel<ClsRecensione> {
     }
 
     @Override
-    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
+    public List<ClsRecensione> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoRecensioni.findAll());
         else if(filters.containsKey("idNodo"))
             return new ArrayList<>(repoRecensioni.findRecensioniByNodo(filters.get("idNodo").toString()));
         else if(filters.containsKey("idRecensione")) {
-            ArrayList<String> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRecensione").toString());
             return new ArrayList<>(repoRecensioni.findAllById(ids));
         }else if (filters.containsKey("idUtente"))

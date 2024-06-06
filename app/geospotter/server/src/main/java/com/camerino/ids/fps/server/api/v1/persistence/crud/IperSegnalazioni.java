@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -19,7 +20,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     }
 
     @Override
-    public ArrayList<ClsSegnalazione> get(Map<String, Object> filters) {
+    public List<ClsSegnalazione> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoSegnalazioni.findAll());
         if(filters.containsKey("idContenuto"))

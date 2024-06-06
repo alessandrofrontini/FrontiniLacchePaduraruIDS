@@ -7,14 +7,14 @@ import com.camerino.ids.fps.client.api.ApiRDCNodi;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     IApi<ClsRDCNodo> api = new ApiRDCNodi();
 
     @Override
-    public ArrayList<ClsRDCNodo> get(Map<String, Object> filters) {
+    public List<ClsRDCNodo> get(Map<String, Object> filters) {
         return api.Get(Controller_SezioneLogin.UTENTE, null);
     }
 

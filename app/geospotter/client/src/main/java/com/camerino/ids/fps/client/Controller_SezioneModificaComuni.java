@@ -63,7 +63,7 @@ public class Controller_SezioneModificaComuni implements Initializable
     //endregion
 
     List<ClsCuratore> Curatori;
-    ArrayList<ClsComune> comuni;
+    List<ClsComune> comuni;
     Utils u = new Utils();
 
     @Override
@@ -144,7 +144,7 @@ public class Controller_SezioneModificaComuni implements Initializable
 
     }
 
-    private void setCuratori (ArrayList<ClsCuratore> curatori)
+    private void setCuratori (List<ClsCuratore> curatori)
     {
         for(int i = 0; i<curatori.size();i++)
         {
@@ -153,7 +153,7 @@ public class Controller_SezioneModificaComuni implements Initializable
         }
     }
 
-    private void setComuni (ArrayList<ClsComune> comuni)
+    private void setComuni (List<ClsComune> comuni)
     {
         for(int i = 0; i<comuni.size();i++)
         {
@@ -208,7 +208,7 @@ public class Controller_SezioneModificaComuni implements Initializable
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
-        ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
+        List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
 
         for(int i = 0; i<Curatori.size();i++)
         {

@@ -50,7 +50,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
     CheckBox sezioneInserimentoItinerariCheckBoxOrdinato;
     //endregion
 
-    ArrayList<ClsNodo> nodi;
+    List<ClsNodo> nodi;
     Utils u = new Utils();
 
     @Override
@@ -87,7 +87,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
-        ArrayList<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
+        List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
 
         if(nodiCoinvoltiInArray.length>1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), ""))
         {
@@ -129,7 +129,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
 
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {
@@ -166,7 +166,7 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsNodo> nodi)
+    private String[] pulisciIDnonPresenti (List<String> input, List<ClsNodo> nodi)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
@@ -189,12 +189,12 @@ public class Controller_SezioneInserimentoItinerari implements Initializable
         return input.toArray(new String[input.size()]);
     }
 
-    private ArrayList<String> rimuoviDuplicati(ArrayList<String> listaOriginale) {
+    private List<String> rimuoviDuplicati(List<String> listaOriginale) {
         // Creiamo un HashSet che conterrà solo elementi unici
         HashSet<String> setUnici = new HashSet<>(listaOriginale);
 
         // Ricostruiamo l'ArrayList senza duplicati
-        ArrayList<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
+        List<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
 
         return listaSenzaDuplicati;
     }

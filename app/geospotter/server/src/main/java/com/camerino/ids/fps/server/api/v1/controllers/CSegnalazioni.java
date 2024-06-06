@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CSegnalazioni {
@@ -21,7 +22,7 @@ public class CSegnalazioni {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsSegnalazione>> getSegnalazioni() {
+    public ResponseEntity<List<ClsSegnalazione>> getSegnalazioni() {
         return ResponseEntity.ok(sSegnalazioni.getAll());
     }
 

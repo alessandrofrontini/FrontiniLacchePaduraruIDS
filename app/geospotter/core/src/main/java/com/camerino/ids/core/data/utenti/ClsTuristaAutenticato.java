@@ -15,6 +15,7 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -186,7 +187,7 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         return iperRDCImmagini.delete(filters);
     }
     @JsonIgnore
-    public ArrayList<ClsRecensione> getRecensioniPosessore() {
+    public List<ClsRecensione> getRecensioniPosessore() {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("owner", this.id);
         return iperRecensioni.get(filters);
@@ -246,13 +247,13 @@ public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserActi
         this.iperRDCImmagini = iperRDCImmagini;
     }
     @JsonIgnore
-    public ArrayList<ClsTuristaAutenticato> getAllUtenti()
+    public List<ClsTuristaAutenticato> getAllUtenti()
     {
         return iperUtenti.get(null);
     }
 @JsonIgnore
 @Deprecated(forRemoval = true)
-    public ArrayList<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
+    public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo)
     {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("ruolo", ruolo);

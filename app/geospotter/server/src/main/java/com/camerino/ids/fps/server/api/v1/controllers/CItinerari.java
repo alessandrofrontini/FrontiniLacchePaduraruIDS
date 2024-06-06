@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class CItinerari {
@@ -21,7 +22,7 @@ public class CItinerari {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsItinerario>> getItinerari(
+    public ResponseEntity<List<ClsItinerario>> getItinerari(
             @RequestParam(name = "idItinerario", required = false)  String idItinerario
     ) {
         if(idItinerario == null)

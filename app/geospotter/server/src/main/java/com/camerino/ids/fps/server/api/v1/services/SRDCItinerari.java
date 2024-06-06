@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SRDCItinerari {
@@ -18,11 +19,11 @@ public class SRDCItinerari {
     }
 
 
-    public ArrayList<ClsRdcItinerario> getAllRDCItinerari() {
+    public List<ClsRdcItinerario> getAllRDCItinerari() {
         return ((ClsCuratore)request.getServletContext().getAttribute("user"))._getAllRDCItinerari();
     }
 
-    public ArrayList<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
+    public List<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
         return ((ClsCuratore)request.getServletContext().getAttribute("user")).getRDCItinerarioById(idRDCItinerario);
     }
 

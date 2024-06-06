@@ -20,7 +20,7 @@ public class ApiTuristi implements IApi<ClsTuristaAutenticato> {
     static final URI endpoint = URI.create(BASE_URL+"/utenti");
 
     @Override
-    public ArrayList<ClsTuristaAutenticato> Get(ClsTurista user, String query){
+    public List<ClsTuristaAutenticato> Get(ClsTurista user, String query){
         if(query==null)
             query = "";
 

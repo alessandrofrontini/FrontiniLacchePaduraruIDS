@@ -20,5 +20,5 @@ public interface RepoUtenti extends JpaRepository<ClsTuristaAutenticato, String>
     @Query("select usr from ClsTuristaAutenticato  usr where usr.ruoloUtente=?1")
     List<ClsTuristaAutenticato> findByRuolo(eRUOLO_UTENTE ruolo);
 //    @Query(value = "Select c from ClsTuristaAutenticato c WHERE c.ruoloString == ")
-//    ArrayList<ClsTuristaAutenticato>getUtentiByRuolo(String ruolo);
+//    List<ClsTuristaAutenticato>getUtentiByRuolo(String ruolo);
 }

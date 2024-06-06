@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.camerino.ids.fps.client.api.BaseURL.BASE_URL;
 
@@ -17,7 +18,7 @@ public class ApiRDCNodi implements IApi<ClsRDCNodo> {
     static final URI endpoint = URI.create(BASE_URL+"/rdcnodi");
 
     @Override
-    public ArrayList<ClsRDCNodo> Get(ClsTurista user, String query){
+    public List<ClsRDCNodo> Get(ClsTurista user, String query){
         if(query==null)
             query = "";
         HttpRequest request = HttpRequest.newBuilder()

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -19,11 +20,11 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
         this.repoItinerari = repoItinerari;
     }
     @Override
-    public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
+    public List<ClsItinerario> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoItinerari.findAll());
         if(filters.containsKey("idItinerario")) {
-            ArrayList<String> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(filters.get("idItinerario").toString());
             return new ArrayList<>(repoItinerari.findAllById(ids));
         }

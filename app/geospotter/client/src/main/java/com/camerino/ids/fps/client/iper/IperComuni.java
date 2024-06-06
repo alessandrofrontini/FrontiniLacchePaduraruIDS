@@ -8,14 +8,14 @@ import com.camerino.ids.fps.client.api.ApiComuni;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperComuni implements IPersistenceModel<ClsComune> {
     IApi<ClsComune> api = new ApiComuni();
 
     @Override
-    public ArrayList<ClsComune> get(Map<String, Object> filters) {
+    public List<ClsComune> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }

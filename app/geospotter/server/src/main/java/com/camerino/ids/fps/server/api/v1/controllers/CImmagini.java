@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class CImmagini {
     SImmagini sImmagini;
@@ -25,7 +27,7 @@ public class CImmagini {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsImmagine>> postComuni(
+    public ResponseEntity<List<ClsImmagine>> postComuni(
 
     ) {
         return ResponseEntity.ok(sImmagini.getAllImmagini());

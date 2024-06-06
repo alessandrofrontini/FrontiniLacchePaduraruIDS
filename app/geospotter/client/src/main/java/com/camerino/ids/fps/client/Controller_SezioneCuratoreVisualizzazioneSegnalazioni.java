@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -38,7 +39,7 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
     //endregion
 
     Utils u = new Utils();
-    ArrayList<ClsSegnalazione> segnalazioni;
+    List<ClsSegnalazione> segnalazioni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -58,7 +59,7 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
                 new PropertyValueFactory<>("descrizione"));
         //endregion
     }
-    private void setSegnalazioni (ArrayList<ClsSegnalazione> segnalazioni)
+    private void setSegnalazioni (List<ClsSegnalazione> segnalazioni)
     {
         for(int i = 0; i<segnalazioni.size();i++)
         {

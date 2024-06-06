@@ -71,7 +71,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
-        ArrayList<ClsCuratore> curatoriAssociatiToComune = new ArrayList<>();
+        List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<>();
 
         if(curatoriCoinvoltiArray.length > 0 &&
                 !Objects.equals(u.getValueFromTextField(coordinataX), "") &&
@@ -105,9 +105,9 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         }
     }
 
-    public ArrayList<ClsCuratore> ottieniCuratoriAssociati (ArrayList<ClsCuratore> curatori, String[] idCuratori)
+    public List<ClsCuratore> ottieniCuratoriAssociati (List<ClsCuratore> curatori, String[] idCuratori)
     {
-        ArrayList<ClsCuratore> tmp = new ArrayList<>();
+        List<ClsCuratore> tmp = new ArrayList<>();
         for(int i = 0; i < curatori.size();i++)
         {
             for(int j = 0; j < idCuratori.length; j++)
@@ -156,7 +156,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (ArrayList<String> input, List<ClsCuratore> Curatori)
+    private String[] pulisciIDnonPresenti (List<String> input, List<ClsCuratore> Curatori)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
@@ -179,19 +179,19 @@ public class Controller_SezioneInserimentoComuni implements Initializable
         return input.toArray(new String[input.size()]);
     }
 
-    private ArrayList<String> rimuoviDuplicati(ArrayList<String> listaOriginale) {
+    private List<String> rimuoviDuplicati(List<String> listaOriginale) {
         // Creiamo un HashSet che conterrà solo elementi unici
         HashSet<String> setUnici = new HashSet<>(listaOriginale);
 
         // Ricostruiamo l'ArrayList senza duplicati
-        ArrayList<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
+        List<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
 
         return listaSenzaDuplicati;
     }
 
-    private ArrayList<ClsCuratore> ottieniCuratori (String[] idCuratori)
+    private List<ClsCuratore> ottieniCuratori (String[] idCuratori)
     {
-        ArrayList<ClsCuratore> tmp = new ArrayList<ClsCuratore>();
+        List<ClsCuratore> tmp = new ArrayList<ClsCuratore>();
         for(int i = 0; i < this.curatori.size(); i++)
         {
             for(int k = 0; k< idCuratori.length; k++)

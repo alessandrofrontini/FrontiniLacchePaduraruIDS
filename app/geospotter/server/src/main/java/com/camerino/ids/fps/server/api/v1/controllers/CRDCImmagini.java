@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CRDCImmagini {
@@ -20,7 +21,7 @@ public class CRDCImmagini {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsRDCImmagine>> getRDC(
+    public ResponseEntity<List<ClsRDCImmagine>> getRDC(
             @RequestParam(value = "idRDCImmagini", required = false) String idRDCImmagini
     ) {
         if(idRDCImmagini == null)

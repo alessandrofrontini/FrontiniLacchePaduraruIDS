@@ -10,6 +10,7 @@ import jakarta.persistence.Transient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Rappresenta un utente non autenticato.
@@ -40,27 +41,27 @@ public class ClsTurista implements ISignalable {
     }
 
     @JsonIgnore
-    public ArrayList<ClsComune> getAllComuni() {
+    public List<ClsComune> getAllComuni() {
         return mockComuni.get(null);
     }
     @JsonIgnore
-    public ArrayList<ClsNodo> getAllNodi() {
+    public List<ClsNodo> getAllNodi() {
         return pNodi.get(null);
     }
     @JsonIgnore
-    public ArrayList<ClsNodo> getNodiByComune(String idComune) {
+    public List<ClsNodo> getNodiByComune(String idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return pNodi.get(filters);
     }
     @JsonIgnore
-    public ArrayList<ClsComune> getComuneById(String idComune) {
+    public List<ClsComune> getComuneById(String idComune) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idComune", idComune);
         return mockComuni.get(filters);
     }
 @JsonIgnore
-    public ArrayList<ClsRecensione> getRecensioniNodo(String idNodo) {
+    public List<ClsRecensione> getRecensioniNodo(String idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
         return iperRecensioni.get(filters);
@@ -87,32 +88,32 @@ public class ClsTurista implements ISignalable {
         this.iperSegnalazioni = iperSegnalazioni;
     }
     @JsonIgnore
-    public ArrayList<ClsItinerario> getAllItinerari() {
+    public List<ClsItinerario> getAllItinerari() {
         return this.pItinerari.get(null);
     }
 @JsonIgnore
-    public ArrayList<ClsItinerario> getItinerarioById() {
+    public List<ClsItinerario> getItinerarioById() {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idItinerario", pItinerari.get(filters));
         return this.pItinerari.get(filters);
     }
 @JsonIgnore
-    public ArrayList<ClsNodo> getNodoById(String idNodo) {
+    public List<ClsNodo> getNodoById(String idNodo) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idNodo", idNodo);
         return this.pNodi.get(filters);
     }
 
-    public ArrayList<ClsSegnalazione> GetAllSegnalazioni() {
+    public List<ClsSegnalazione> GetAllSegnalazioni() {
         return this.iperSegnalazioni.get(null);
     }
 
     @JsonIgnore
-    public ArrayList<ClsRecensione> getAllRecensioni() {
+    public List<ClsRecensione> getAllRecensioni() {
         return this.iperRecensioni.get(null);
     }
     @JsonIgnore
-    public ArrayList<ClsImmagine> getAllImmagini() {
+    public List<ClsImmagine> getAllImmagini() {
         return this.pImmagini.get(null);
     }
     @JsonIgnore

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -19,11 +20,11 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
         this.repoRDCI = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoRDCI.findAll());
         if(filters.containsKey("idRDCI")) {
-            ArrayList<String> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRDCI").toString());
             return new ArrayList<>(repoRDCI.findAllById(ids));
         }

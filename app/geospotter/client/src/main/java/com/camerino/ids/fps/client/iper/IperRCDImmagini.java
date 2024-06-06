@@ -8,14 +8,14 @@ import com.camerino.ids.fps.client.api.ApiRDCImmagini;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
     IApi<ClsRDCImmagine> api = new ApiRDCImmagini();
 
     @Override
-    public ArrayList<ClsRDCImmagine> get(Map<String, Object> filters) {
+    public List<ClsRDCImmagine> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }

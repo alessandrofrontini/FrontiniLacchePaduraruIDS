@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContribuzione> {
-    ArrayList<ClsRichiestaAzioneDiContribuzione> rcdi = new ArrayList<>();
+    List<ClsRichiestaAzioneDiContribuzione> rcdi = new ArrayList<>();
     long idCounter = 0;
 
     //region Implements IPersistance
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzione> get(Map<String, Object> filters) {
-        ArrayList<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
+    public List<ClsRichiestaAzioneDiContribuzione> get(Map<String, Object> filters) {
+        List<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
         if(filters.containsKey("id")) {
             tmp.add(findById(filters.get("id").toString()));
             return tmp;

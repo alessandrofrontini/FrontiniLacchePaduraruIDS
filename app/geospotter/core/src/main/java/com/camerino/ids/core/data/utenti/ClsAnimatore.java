@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 
 import javax.swing.plaf.InsetsUIResource;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Il suo ruolo è quello di aggiungere contest sulla piattaforma.
@@ -35,7 +36,7 @@ public class ClsAnimatore extends ClsContributorAutorizzato{
     }
     //endregion
 
-    public ArrayList<ClsRDCImmagine> _getAllRDCImmagini() {
+    public List<ClsRDCImmagine> _getAllRDCImmagini() {
         return this.iperRDCImmagini.get(null);
     }
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {

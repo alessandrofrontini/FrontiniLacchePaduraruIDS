@@ -12,12 +12,12 @@ import static com.camerino.ids.core.data.contenuti.ClsNodo.eTipologiaNodo.*;
 
 public class MockNodi implements IPersistenceModel<ClsNodo> {
 
-    private ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    private List<ClsNodo> nodi = new ArrayList<ClsNodo>();
     private long idCounter = 0;
 
     //region CRUD metodi
         @Override
-        public ArrayList<ClsNodo> get(Map<String, Object> filters) {
+        public List<ClsNodo> get(Map<String, Object> filters) {
     //        if(filters.containsKey("id"))
     //            return new ArrayList<ClsNodo>().{getNodoById(filters.get("id").toString())};
             return this.nodi;

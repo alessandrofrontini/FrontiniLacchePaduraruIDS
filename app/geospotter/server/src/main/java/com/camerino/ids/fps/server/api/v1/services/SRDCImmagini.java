@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SRDCImmagini {
@@ -19,12 +20,12 @@ public class SRDCImmagini {
         this.request = request;
     }
 
-    public ArrayList<ClsRDCImmagine> getAllRDCI() {
+    public List<ClsRDCImmagine> getAllRDCI() {
         ClsAnimatore user = (ClsAnimatore) request.getServletContext().getAttribute("user");
         return user._getAllRDCImmagini();
     }
 
-    public ArrayList<ClsRDCImmagine> getRDCIById(String idRDCI) {
+    public List<ClsRDCImmagine> getRDCIById(String idRDCI) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         //return user.getRDCImmagineById(idRDCI);
         return null;

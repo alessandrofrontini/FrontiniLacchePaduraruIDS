@@ -5,6 +5,7 @@ import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 public class MockComuni implements IPersistenceModel<ClsComune>
 {
-    ArrayList<ClsComune> comuni = new ArrayList<ClsComune>();
+    List<ClsComune> comuni = new ArrayList<ClsComune>();
     long id = 0;
 
     public MockComuni()
@@ -24,9 +25,9 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
 
     @Override
-    public ArrayList<ClsComune> get(Map<String, Object> filters)
+    public List<ClsComune> get(Map<String, Object> filters)
     {
-        ArrayList<ClsComune> tmp = new ArrayList<ClsComune>();
+        List<ClsComune> tmp = new ArrayList<ClsComune>();
 
         if(filters != null)
         {

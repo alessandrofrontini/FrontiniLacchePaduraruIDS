@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
-    private ArrayList<ClsItinerario> itinerari = new ArrayList<ClsItinerario>();
+    private List<ClsItinerario> itinerari = new ArrayList<ClsItinerario>();
     private long idCounter = 0;
     private MockNodi mNodi;
 
@@ -30,7 +30,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
 
     @Override
-    public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
+    public List<ClsItinerario> get(Map<String, Object> filters) {
 //        if(filters.containsKey("id"))
 //            return new ClsItinerario[]{getItinerarioById(filters.get("id").toString())};
 

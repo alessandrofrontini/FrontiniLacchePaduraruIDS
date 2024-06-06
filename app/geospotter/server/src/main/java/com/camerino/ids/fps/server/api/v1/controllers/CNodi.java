@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CNodi {
@@ -33,7 +34,7 @@ public class CNodi {
      * @return
      */
     @GetMapping(value = mapping, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArrayList<ClsNodo>> getNodi(
+    public ResponseEntity<List<ClsNodo>> getNodi(
             @RequestParam(value = "idNodo", required = false) String idNodo,
             @RequestParam(value = "idComune", required = false) String idComune,
             @RequestParam(value = "owner", required = false) Long owner

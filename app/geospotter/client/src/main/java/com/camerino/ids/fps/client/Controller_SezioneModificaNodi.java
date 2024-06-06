@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -67,8 +68,8 @@ public class Controller_SezioneModificaNodi implements Initializable
     boolean flag = false;
     Utils u = new Utils();
     ObservableList<String> itemsComboBox;
-    ArrayList<ClsNodo> nodi;
-    ArrayList<ClsComune> comuni;
+    List<ClsNodo> nodi;
+    List<ClsComune> comuni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -76,7 +77,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
 
-        nodi = (ArrayList<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
+        nodi = (List<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
         comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         //endregion
@@ -210,7 +211,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         return null;
     }
 
-    public boolean checkInfoNodo (ClsNodo nodo, ArrayList<ClsComune> comuni)
+    public boolean checkInfoNodo (ClsNodo nodo, List<ClsComune> comuni)
     {
         boolean flag = false;
         if(
@@ -242,7 +243,7 @@ public class Controller_SezioneModificaNodi implements Initializable
 
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {
@@ -323,7 +324,7 @@ public class Controller_SezioneModificaNodi implements Initializable
         return true;
     }
 
-    public boolean CheckValidita (ClsNodo nodo, ArrayList<ClsComune> comuni)
+    public boolean CheckValidita (ClsNodo nodo, List<ClsComune> comuni)
     {
         boolean flagComuni = false;
         for(int i = 0; i < comuni.size(); i++)

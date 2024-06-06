@@ -117,7 +117,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      */
     @Override
     public boolean modificaNodo(String id, ClsNodo nodo) {
-        ArrayList<ClsNodo> old = getNodoById(nodo.getId());
+        List<ClsNodo> old = getNodoById(nodo.getId());
         nodo.setId(0+"");
         if(old.size() != 1)
             return false;
@@ -134,7 +134,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
      *         False altrimenti.
      */
     public boolean eliminaNodo(String id) {
-        ArrayList<ClsNodo> old = getNodoById(id);
+        List<ClsNodo> old = getNodoById(id);
         if(old.size() != 1)
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), null);
@@ -210,7 +210,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IContributa
         return pNodi.delete(tmp);
     }
 @JsonIgnore
-    public ArrayList<ClsRDCNodo> getRDCNodiById(String idRDC) {
+    public List<ClsRDCNodo> getRDCNodiById(String idRDC) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);
         return iperRDCNodi.get(filters);

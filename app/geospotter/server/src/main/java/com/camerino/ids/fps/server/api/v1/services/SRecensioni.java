@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SRecensioni {
@@ -17,7 +18,7 @@ public class SRecensioni {
         this.request = request;
     }
 
-    public ArrayList<ClsRecensione> getRecensioniNodo(String idNodo) {
+    public List<ClsRecensione> getRecensioniNodo(String idNodo) {
         return ((ClsTurista)request.getServletContext().getAttribute("user")).getRecensioniNodo(idNodo);
     }
 
@@ -29,7 +30,7 @@ public class SRecensioni {
         return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
     }
 
-    public ArrayList<ClsRecensione> getAllRecensioni() {
+    public List<ClsRecensione> getAllRecensioni() {
         return ((ClsTurista)request.getServletContext().getAttribute("user")).getAllRecensioni();
     }
 
@@ -37,7 +38,7 @@ public class SRecensioni {
         return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).modificaRecensione(recensione.getId(),recensione);
     }
 
-    public ArrayList<ClsRecensione> getRecensioniPossesore() {
+    public List<ClsRecensione> getRecensioniPossesore() {
         return ((ClsTuristaAutenticato)request.getServletContext().getAttribute("user")).getRecensioniPosessore();
     }
 }

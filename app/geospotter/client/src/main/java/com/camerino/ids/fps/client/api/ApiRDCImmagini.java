@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.camerino.ids.fps.client.api.BaseURL.BASE_URL;
 
@@ -16,7 +17,7 @@ public class ApiRDCImmagini implements IApi<ClsRDCImmagine> {
     static final URI endpoint = URI.create(BASE_URL+"/rdcimmagini");
 
     @Override
-    public ArrayList<ClsRDCImmagine> Get(ClsTurista user, String query){
+    public List<ClsRDCImmagine> Get(ClsTurista user, String query){
         if(query==null)
             query = "";
         HttpRequest request = HttpRequest.newBuilder()

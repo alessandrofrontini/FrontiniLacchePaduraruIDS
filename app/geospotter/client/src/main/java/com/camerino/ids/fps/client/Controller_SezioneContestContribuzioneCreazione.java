@@ -70,14 +70,14 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     boolean flag = false;
     Utils u = new Utils();
-    ArrayList<ClsComune> comuni;
-    ArrayList<ClsTuristaAutenticato> utenti;
+    List<ClsComune> comuni;
+    List<ClsTuristaAutenticato> utenti;
 
-    ArrayList<ClsContributor> contributors;
+    List<ClsContributor> contributors;
 
-    ArrayList<ClsContributorAutorizzato> contributorAutorizzatos;
-    ArrayList<ClsCuratore> Curatori = new ArrayList<ClsCuratore>();
-    ArrayList<ClsPartecipazioneContestDiContribuzione> partecipazioni;
+    List<ClsContributorAutorizzato> contributorAutorizzatos;
+    List<ClsCuratore> Curatori = new ArrayList<>();
+    List<ClsPartecipazioneContestDiContribuzione> partecipazioni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -155,7 +155,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         this.partecipazioni = new ArrayList<>();
 
         Date data = this.parseStringToDate(u.getValueFromTextField(dataFine));
-        ArrayList<ClsTuristaAutenticato> utentiInvitatiAContest = new ArrayList<ClsTuristaAutenticato>();
+        List<ClsTuristaAutenticato> utentiInvitatiAContest = new ArrayList<ClsTuristaAutenticato>();
 
         if(data != null && u.getValueFromCombobox(this.sceltaComune) != null)
         {
@@ -200,7 +200,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     }
 
-    private void setComuni (ArrayList<ClsComune> comuni)
+    private void setComuni (List<ClsComune> comuni)
     {
         for(int i = 0; i<comuni.size();i++)
         {
@@ -261,7 +261,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsTuristaAutenticato> utenti)
+    private String[] pulisciIDnonPresenti (List<String> input, List<ClsTuristaAutenticato> utenti)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
@@ -284,12 +284,12 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         return input.toArray(new String[input.size()]);
     }
 
-    private ArrayList<String> rimuoviDuplicati(ArrayList<String> listaOriginale) {
+    private List<String> rimuoviDuplicati(List<String> listaOriginale) {
         // Creiamo un HashSet che conterrà solo elementi unici
         HashSet<String> setUnici = new HashSet<>(listaOriginale);
 
         // Ricostruiamo l'ArrayList senza duplicati
-        ArrayList<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
+        List<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
 
         return listaSenzaDuplicati;
     }

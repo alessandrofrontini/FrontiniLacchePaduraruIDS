@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SRDCNodi {
@@ -17,12 +18,12 @@ public class SRDCNodi {
         this.request = request;
     }
 
-    public ArrayList<ClsRDCNodo> getAllRDCNodi() {
+    public List<ClsRDCNodo> getAllRDCNodi() {
         ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
         return user._getAllRDCNodi();
     }
 
-    public ArrayList<ClsRDCNodo> getRDCNodiById(String idRDCNodo) {
+    public List<ClsRDCNodo> getRDCNodiById(String idRDCNodo) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.getRDCNodiById(idRDCNodo);
     }

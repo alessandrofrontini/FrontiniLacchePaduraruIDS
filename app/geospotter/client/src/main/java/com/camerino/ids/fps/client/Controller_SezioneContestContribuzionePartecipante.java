@@ -23,10 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller_SezioneContestContribuzionePartecipante implements Initializable
 {
@@ -102,9 +99,9 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     //endregion
 
     boolean flag = false;
-    ArrayList<ClsContestDiContribuzione> contests;
-    ArrayList<ClsNodo> nodi;
-    ArrayList<ClsNodo> nodiParsati;
+    List<ClsContestDiContribuzione> contests;
+    List<ClsNodo> nodi;
+    List<ClsNodo> nodiParsati;
     Utils u = new Utils();
 
     @Override
@@ -390,7 +387,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         return true;
     }
 
-    private void setContest (ArrayList<ClsContestDiContribuzione> contests)
+    private void setContest (List<ClsContestDiContribuzione> contests)
     {
         for(int i = 0; i<contests.size();i++)
         {
@@ -400,7 +397,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {
@@ -410,7 +407,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
     }
 
-    private void setNodiImmagine (ArrayList<ClsNodo> nodi)
+    private void setNodiImmagine (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {

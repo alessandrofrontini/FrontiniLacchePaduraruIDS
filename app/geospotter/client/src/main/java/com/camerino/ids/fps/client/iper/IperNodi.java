@@ -8,7 +8,7 @@ import com.camerino.ids.fps.client.Controller_SezioneLogin;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 //https://www.youtube.com/watch?v=9oq7Y8n1t00
@@ -17,7 +17,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     IApi<ClsNodo> api = new ApiNodi();
 
     @Override
-    public ArrayList<ClsNodo> get(Map<String, Object> filters) {
+    public List<ClsNodo> get(Map<String, Object> filters) {
         if(filters==null)
             return api.Get(
                     Controller_SezioneLogin.UTENTE, null);

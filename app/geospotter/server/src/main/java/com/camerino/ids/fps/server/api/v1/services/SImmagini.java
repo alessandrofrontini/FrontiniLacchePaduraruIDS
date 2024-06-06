@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SImmagini {
@@ -17,7 +18,7 @@ public class SImmagini {
         this.request = request;
     }
 
-    public ArrayList<ClsImmagine> getAllImmagini() {
+    public List<ClsImmagine> getAllImmagini() {
         return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getAllImmagini();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -18,11 +19,11 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
         this.repoRDCNodi = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRDCNodo> get(Map<String, Object> filters) {
+    public List<ClsRDCNodo> get(Map<String, Object> filters) {
         if(filters==null)
             return new ArrayList<>(repoRDCNodi.findAll());
         if(filters.containsKey("idRDCNodo")) {
-            ArrayList<String> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add(filters.get("idRDCNodo").toString());
             return new ArrayList<>(repoRDCNodi.findAllById(ids));
         }

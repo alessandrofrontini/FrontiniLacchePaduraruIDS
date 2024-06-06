@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SSegnalazioni {
@@ -17,7 +18,7 @@ public class SSegnalazioni {
         this.request = request;
     }
 
-    public ArrayList<ClsSegnalazione> getAll() {
+    public List<ClsSegnalazione> getAll() {
         //chi visualizza le segnalazione? Il curatore no?
         ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
         return user._getAllSegnalazioni();

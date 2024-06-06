@@ -8,14 +8,14 @@ import com.camerino.ids.fps.client.api.ApiItinerari;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperItinerari implements IPersistenceModel<ClsItinerario> {
     IApi<ClsItinerario> api = new ApiItinerari();
 
     @Override
-    public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
+    public List<ClsItinerario> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }

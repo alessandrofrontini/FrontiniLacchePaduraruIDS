@@ -18,8 +18,8 @@ import java.util.List;
 public class DemoComuni {
     @Bean
     public CommandLineRunner aggiungiComuni(RepoComuni repo) {
-        ArrayList<ClsComune> comuni = new ArrayList<>();
-//        ArrayList<ClsCuratore> Curatori = new ArrayList<>();
+        List<ClsComune> comuni = new ArrayList<>();
+//        List<ClsCuratore> Curatori = new ArrayList<>();
 //
 //        ClsCuratore c1 = new ClsCuratore();
 //        c1.setId("1");

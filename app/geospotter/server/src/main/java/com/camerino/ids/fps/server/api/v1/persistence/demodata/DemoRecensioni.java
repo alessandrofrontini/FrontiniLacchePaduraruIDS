@@ -8,12 +8,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @Order(2)
 public class DemoRecensioni {
     @Bean
     public CommandLineRunner aggiungiRecensioni(RepoRecensioni repo) {
-        ArrayList<ClsRecensione> recensioni = new ArrayList<>();
+        List<ClsRecensione> recensioni = new ArrayList<>();
         ClsRecensione recensione = new ClsRecensione();
         recensione.setContenuto("Contenuto Recensione");
         recensione.setOggetto("Bello, Carino, Avventuroso");

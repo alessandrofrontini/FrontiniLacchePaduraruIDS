@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SItinerari {
@@ -19,12 +20,12 @@ public class SItinerari {
         this.request = request;
     }
 
-    public ArrayList<ClsItinerario> getAllItinerari() {
+    public List<ClsItinerario> getAllItinerari() {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getAllItinerari();
     }
 
-    public ArrayList<ClsItinerario> getItinerarioById(String idItinerario) {
+    public List<ClsItinerario> getItinerarioById(String idItinerario) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
         return user.getItinerarioById();
     }

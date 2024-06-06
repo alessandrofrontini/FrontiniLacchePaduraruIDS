@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
 
-    ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = new ArrayList<>();
+    List<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = new ArrayList<>();
     long idCounter = 0;
 
     //region Implements IPersistance
     @Override
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
-        ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
+        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
         if(filters.containsKey("id")) {
             tmp.add(findById((String) filters.get("id")));
             return tmp;

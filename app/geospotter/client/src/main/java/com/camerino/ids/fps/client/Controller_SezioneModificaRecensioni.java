@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -72,8 +73,8 @@ public class Controller_SezioneModificaRecensioni implements Initializable
     TextField oggetto, contenuto, valutazione;
     //endregion
 
-    ArrayList<ClsRecensione> recensioni;
-    ArrayList<ClsNodo> nodi;
+    List<ClsRecensione> recensioni;
+    List<ClsNodo> nodi;
     Utils u = new Utils();
 
     @Override
@@ -187,7 +188,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         }
     }
 
-    private void setRecensioni (ArrayList<ClsRecensione> recensioni)
+    private void setRecensioni (List<ClsRecensione> recensioni)
     {
         for(int i = 0; i<recensioni.size();i++)
         {
@@ -195,7 +196,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable
         }
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {

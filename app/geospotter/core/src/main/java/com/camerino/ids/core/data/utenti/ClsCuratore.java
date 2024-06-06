@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Questo ruolo accetta o respinge le richieste fatte dai vari utenti.
@@ -42,16 +43,16 @@ public class ClsCuratore extends ClsAnimatore{
     }
     //endregion
 
-    public ArrayList<ClsSegnalazione> _getAllSegnalazioni() {
+    public List<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
     }
-    public ArrayList<ClsRDCNodo> _getAllRDCNodi() {
-        return new ArrayList<>(iperRDCNodi.get(null));
+    public List<ClsRDCNodo> _getAllRDCNodi() {
+        return iperRDCNodi.get(null);
     }
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
         return pRDCI.get(null);
     }
-    public ArrayList<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(String idRDCI) {
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(String idRDCI) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCI", idRDCI);
         return pRDCI.get(filters);
@@ -72,11 +73,11 @@ public class ClsCuratore extends ClsAnimatore{
         return iperRDCImmagini.update(null, rdci);
     }
 
-    public ArrayList<ClsRdcItinerario> _getAllRDCItinerari() {
+    public List<ClsRdcItinerario> _getAllRDCItinerari() {
         return iperRDCItinerari.get(null);
     }
 
-    public ArrayList<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
+    public List<ClsRdcItinerario> getRDCItinerarioById(String idRDCItinerario) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDCItinerario", idRDCItinerario);
         return iperRDCItinerari.get(filters);

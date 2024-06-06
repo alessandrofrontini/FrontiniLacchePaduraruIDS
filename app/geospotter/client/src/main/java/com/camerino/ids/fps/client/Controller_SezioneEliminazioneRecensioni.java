@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -51,7 +52,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
     ComboBox sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID;
     //endregion
 
-    ArrayList<ClsRecensione> recensioni;
+    List<ClsRecensione> recensioni;
     Utils u = new Utils();
 
     @Override
@@ -113,7 +114,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable
         }
     }
 
-    private void setRecensioni (ArrayList<ClsRecensione> recensioni)
+    private void setRecensioni (List<ClsRecensione> recensioni)
     {
         for(int i = 0; i<recensioni.size();i++)
         {

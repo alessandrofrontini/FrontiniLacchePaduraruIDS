@@ -4,18 +4,19 @@ import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 //TODO: implementare
 public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 {
-    private ArrayList<ClsRecensione> recensioni = new ArrayList<ClsRecensione>();
+    private List<ClsRecensione> recensioni = new ArrayList<ClsRecensione>();
     //TODO: add to vpp
     private long idCounter = 0;
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsRecensione> get(Map<String, Object> filters) {
+    public List<ClsRecensione> get(Map<String, Object> filters) {
         return this.recensioni;
     }
 

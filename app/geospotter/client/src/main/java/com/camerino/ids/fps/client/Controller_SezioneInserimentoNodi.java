@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -40,7 +41,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
     boolean flag = false;
     Utils u = new Utils();
 
-    ArrayList<ClsComune> comuni;
+    List<ClsComune> comuni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -157,7 +158,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable
         this.SwitchScene("SezioneVisualizzazione.fxml",mouseEvent);
     }
 
-  public boolean CheckValidita (ClsNodo nodo, ArrayList<ClsComune> comuni)
+  public boolean CheckValidita (ClsNodo nodo, List<ClsComune> comuni)
   {
       boolean flagComuni = false;
       for(int i = 0; i < comuni.size(); i++)

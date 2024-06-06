@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -20,12 +21,12 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
     }
 
     @Override
-    public ArrayList<ClsComune> get(Map<String, Object> filters) {
+    public List<ClsComune> get(Map<String, Object> filters) {
        if(filters == null)
            return new ArrayList<>(repoComuni.findAll());
 
        if (filters.containsKey("idComune")) {
-            ArrayList<String> ids = new ArrayList<>();
+            List<String> ids = new ArrayList<>();
             ids.add((String) filters.get("idComune"));
             return new ArrayList<>(repoComuni.findAllById(ids));
         }

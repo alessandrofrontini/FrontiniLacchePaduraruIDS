@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -112,13 +113,13 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     //endregion
 
-    ArrayList<ClsRDCImmagine> richiesteImmagini;
-    ArrayList<ClsRDCNodo> richiesteNodo;
-    ArrayList<ClsRdcItinerario> richiesteItinerario;
+    List<ClsRDCImmagine> richiesteImmagini;
+    List<ClsRDCNodo> richiesteNodo;
+    List<ClsRdcItinerario> richiesteItinerario;
 
     Utils u = new Utils();
     //region dummy arrays per creare immagini nodi e itinerari
-    ArrayList<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    List<ClsNodo> nodi = new ArrayList<ClsNodo>();
 
     //endregion
     @Override
@@ -269,7 +270,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         itinerario1.setIdCreatore("testCreatoreOld");
         itinerario1.setNome("nomeOld");
 
-        ArrayList<ClsNodo> tappe1 = new ArrayList<>();
+        List<ClsNodo> tappe1 = new ArrayList<>();
         tappe1.add(nodo1);
         tappe1.add(new ClsNodo());
         itinerario1.setTappe(tappe1);
@@ -548,7 +549,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    private void setRichiesteImmagini (ArrayList<ClsRDCImmagine> richiesteImmagini)
+    private void setRichiesteImmagini (List<ClsRDCImmagine> richiesteImmagini)
     {
         for(int i = 0; i< richiesteImmagini.size(); i++)
         {
@@ -557,7 +558,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    private void setRichiesteNodi (ArrayList<ClsRDCNodo> richiesteNodo)
+    private void setRichiesteNodi (List<ClsRDCNodo> richiesteNodo)
     {
         for(int i = 0; i< richiesteNodo.size(); i++)
         {
@@ -566,7 +567,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    private void setRichiesteItinerari (ArrayList<ClsRdcItinerario> richiesteItinerario)
+    private void setRichiesteItinerari (List<ClsRdcItinerario> richiesteItinerario)
     {
         for(int i = 0; i< richiesteItinerario.size(); i++)
         {

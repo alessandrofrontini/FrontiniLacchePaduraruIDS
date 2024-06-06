@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SComuni {
@@ -18,11 +19,11 @@ public class SComuni {
         this.request = request;
     }
 
-    public ArrayList<ClsComune> getAllComuni() {
+    public List<ClsComune> getAllComuni() {
         return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getAllComuni();
     }
 
-    public ArrayList<ClsComune> getComuneById(String idComune) {
+    public List<ClsComune> getComuneById(String idComune) {
         return ((ClsTurista)this.request.getServletContext().getAttribute("user")).getComuneById(idComune);
     }
 

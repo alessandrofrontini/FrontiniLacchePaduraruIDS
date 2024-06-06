@@ -23,7 +23,7 @@ public class ApiNodi implements IApi<ClsNodo>{
     static final URI endpoint = URI.create(BASE_URL+"/nodi");
 
     @Override
-    public ArrayList<ClsNodo> Get(ClsTurista user, String query){
+    public List<ClsNodo> Get(ClsTurista user, String query){
         if(query==null)
             query = "";
         HttpRequest request = HttpRequest.newBuilder()

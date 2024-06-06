@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @Order(1)
@@ -21,7 +22,7 @@ public class DemoUtenti
     public CommandLineRunner aggiungiUtenti(RepoUtenti repo)
     {
         //Stessi utenti lato client, copy-paste
-        ArrayList<ClsTuristaAutenticato> utenti = new ArrayList<>();
+        List<ClsTuristaAutenticato> utenti = new ArrayList<>();
 
         //region contributor
         ClsContributor con = new ClsContributor();

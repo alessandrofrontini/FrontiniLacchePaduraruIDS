@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -50,14 +51,14 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
     //endregion
 
-    ArrayList<ClsNodo> nodi;
+    List<ClsNodo> nodi;
     Utils u = new Utils();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         //nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
-        nodi = (ArrayList<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
+        nodi = (List<ClsNodo>) ((ClsContributor)Controller_SezioneLogin.UTENTE).getNodiPossessore();
 
         setNodi(nodi);
 
@@ -121,7 +122,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable
 
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {

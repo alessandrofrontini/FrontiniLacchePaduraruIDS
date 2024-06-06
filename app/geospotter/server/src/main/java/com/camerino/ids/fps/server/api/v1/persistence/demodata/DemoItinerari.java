@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @Order(3)
@@ -17,7 +18,7 @@ public class DemoItinerari
 {
     @Bean
     public CommandLineRunner aggiungiItinerari(RepoItinerari repo) {
-        ArrayList<ClsNodo> nodi = new ArrayList<>();
+        List<ClsNodo> nodi = new ArrayList<>();
 
         ClsNodo nodo1 = new ClsNodo();
         nodo1.setNome("Centro Camerino");
@@ -37,7 +38,7 @@ public class DemoItinerari
         nodo2.setPosizione(new Posizione(12, 23));
         nodi.add(nodo2);
 
-        ArrayList<ClsItinerario> itinerari = new ArrayList<>();
+        List<ClsItinerario> itinerari = new ArrayList<>();
 
         ClsItinerario itinerario = new ClsItinerario();
         itinerario.setId("1");

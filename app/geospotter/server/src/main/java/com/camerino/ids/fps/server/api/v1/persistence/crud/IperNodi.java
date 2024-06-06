@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,10 +23,10 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     }
 
     @Override
-    public ArrayList<ClsNodo> get(Map<String, Object> filters) {
+    public List<ClsNodo> get(Map<String, Object> filters) {
         if(filters == null)
             return new ArrayList<>(repoNodi.findAll());
-        ArrayList<ClsNodo> lNodi = new ArrayList<>();
+        List<ClsNodo> lNodi = new ArrayList<>();
         if(filters.containsKey("idNodo")) {
             Optional<ClsNodo> nodo = repoNodi.findById(filters.get("idNodo").toString());
             if (nodo.isEmpty())

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CRDCNodi {
@@ -20,7 +21,7 @@ public class CRDCNodi {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsRDCNodo>> getRDC(
+    public ResponseEntity<List<ClsRDCNodo>> getRDC(
             @RequestParam(value = "idRDC", required = false) String idRDC,
             @RequestParam(value = "owner", required = false) Long owner
     ) {

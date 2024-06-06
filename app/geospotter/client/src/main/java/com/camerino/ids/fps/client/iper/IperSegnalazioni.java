@@ -8,7 +8,7 @@ import com.camerino.ids.fps.client.api.ApiSegnalazioni;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
@@ -16,7 +16,7 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
     IApi<ClsSegnalazione> api = new ApiSegnalazioni();
 
     @Override
-    public ArrayList<ClsSegnalazione> get(Map<String, Object> filters) {
+    public List<ClsSegnalazione> get(Map<String, Object> filters) {
         return api.Get(
                 Controller_SezioneLogin.UTENTE, null);
     }

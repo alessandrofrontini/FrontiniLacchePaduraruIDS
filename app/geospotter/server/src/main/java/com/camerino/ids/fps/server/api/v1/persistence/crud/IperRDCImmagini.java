@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -18,7 +19,7 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
         this.repoRDCIimmagini = repoRDCI;
     }
     @Override
-    public ArrayList<ClsRDCImmagine> get(Map<String, Object> filters) {
+    public List<ClsRDCImmagine> get(Map<String, Object> filters) {
         return new ArrayList<>(repoRDCIimmagini.findAll());
     }
 

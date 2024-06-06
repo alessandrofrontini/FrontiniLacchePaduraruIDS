@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class CRDCItinerari {
     SRDCItinerari sRDCItinerari;
@@ -19,7 +21,7 @@ public class CRDCItinerari {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsRdcItinerario>> getRDC(
+    public ResponseEntity<List<ClsRdcItinerario>> getRDC(
             @RequestParam(value = "idRDCItinerario", required = false) String idRDCItinerario
     ) {
         if(idRDCItinerario == null)

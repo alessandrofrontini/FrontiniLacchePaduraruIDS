@@ -4,18 +4,19 @@ import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 //TODO:implementare
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
-    private ArrayList<ClsImmagine> immagini = new ArrayList<>();
+    private List<ClsImmagine> immagini = new ArrayList<>();
     //TODO:add to vpp
     private long idCounter = 0;
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsImmagine> get(Map<String, Object> filters) {
+    public List<ClsImmagine> get(Map<String, Object> filters) {
         return this.immagini;
     }
 

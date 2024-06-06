@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -58,8 +59,8 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
     //endregion
 
     Utils u = new Utils();
-    ArrayList<ClsComune> comuni;
-    ArrayList<ClsCuratore> Curatori = new ArrayList<ClsCuratore>();
+    List<ClsComune> comuni;
+    List<ClsCuratore> Curatori = new ArrayList<>();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -181,7 +182,7 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable
         }
     }
 
-    private void setComuni (ArrayList<ClsComune> comuni)
+    private void setComuni (List<ClsComune> comuni)
     {
         for(int i = 0; i<comuni.size();i++)
         {

@@ -15,13 +15,13 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         creaTuristi();
     }
 
-    private ArrayList<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
+    private List<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
     private long idCounter = 0;
 
     //region CRUD metodi
     @Override
-    public ArrayList<ClsTuristaAutenticato> get(Map<String, Object> filters) {
-       ArrayList<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
+    public List<ClsTuristaAutenticato> get(Map<String, Object> filters) {
+       List<ClsTuristaAutenticato> tmp = new ArrayList<ClsTuristaAutenticato>();
         if (filters.containsKey("credenziali"))
         {
             //return new ClsTuristaAutenticato[]{login((Credenziali) filters.get("credenziali"))};

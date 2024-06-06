@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -46,10 +47,10 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
     TableColumn<ClsUtenteVisual, String> punteggioColonna;
     //endregion
 
-    ArrayList<ClsTuristaAutenticato> utenti;
+    List<ClsTuristaAutenticato> utenti;
 
-    ArrayList<String> azioni;
-    ArrayList<String> ruoli;
+    List<String> azioni;
+    List<String> ruoli;
     Utils u = new Utils();
 
     @Override
@@ -121,7 +122,7 @@ public class Controller_SezioneCuratorePunteggioUtenti implements Initializable
         //endregion
     }
 
-    private void setUtenti (ArrayList<ClsTuristaAutenticato> utenti)
+    private void setUtenti (List<ClsTuristaAutenticato> utenti)
     {
         for(int i = 0; i< utenti.size(); i++)
         {

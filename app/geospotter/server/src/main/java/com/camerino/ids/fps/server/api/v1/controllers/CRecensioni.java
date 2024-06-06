@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CRecensioni {
@@ -20,7 +21,7 @@ public class CRecensioni {
     }
 
     @GetMapping(mapping)
-    public ResponseEntity<ArrayList<ClsRecensione>> getRecensioni(
+    public ResponseEntity<List<ClsRecensione>> getRecensioni(
             @RequestParam(value = "idNodo", required = false) String idNodo,
             @RequestParam(value = "owner", required = false) Long owner
     ){

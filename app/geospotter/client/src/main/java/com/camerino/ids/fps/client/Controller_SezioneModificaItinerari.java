@@ -70,8 +70,8 @@ public class Controller_SezioneModificaItinerari implements Initializable
     //endregion
 
     Utils u = new Utils();
-    ArrayList<ClsNodo> nodi;
-    ArrayList<ClsItinerario> itinerari;
+    List<ClsNodo> nodi;
+    List<ClsItinerario> itinerari;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -155,7 +155,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
-        ArrayList<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
+        List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
 
         if(nodiCoinvoltiInArray.length>0)
         {
@@ -191,7 +191,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
-    private void setNodi (ArrayList<ClsNodo> nodi)
+    private void setNodi (List<ClsNodo> nodi)
     {
         for(int i = 0; i<nodi.size();i++)
         {
@@ -201,7 +201,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         }
     }
 
-    private void setItinerari (ArrayList<ClsItinerario> itinerari)
+    private void setItinerari (List<ClsItinerario> itinerari)
     {
         for(int i = 0; i<itinerari.size();i++)
         {
@@ -268,7 +268,7 @@ public class Controller_SezioneModificaItinerari implements Initializable
         return nuova;
     }
 
-    private String[] pulisciIDnonPresenti (ArrayList<String> input, ArrayList<ClsNodo> nodi)
+    private String[] pulisciIDnonPresenti (List<String> input, List<ClsNodo> nodi)
     {
         // Create a HashSet from the string values of objects in listA for faster lookup
         HashSet<String> setAValues = new HashSet<>();
@@ -291,12 +291,12 @@ public class Controller_SezioneModificaItinerari implements Initializable
         return input.toArray(new String[input.size()]);
     }
 
-    private ArrayList<String> rimuoviDuplicati(ArrayList<String> listaOriginale) {
+    private List<String> rimuoviDuplicati(List<String> listaOriginale) {
         // Creiamo un HashSet che conterrà solo elementi unici
         HashSet<String> setUnici = new HashSet<>(listaOriginale);
 
         // Ricostruiamo l'ArrayList senza duplicati
-        ArrayList<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
+        List<String> listaSenzaDuplicati = new ArrayList<>(setUnici);
 
         return listaSenzaDuplicati;
     }
