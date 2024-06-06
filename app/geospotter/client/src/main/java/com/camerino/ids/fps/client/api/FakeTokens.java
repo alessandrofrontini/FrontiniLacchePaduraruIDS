@@ -2,7 +2,6 @@ package com.camerino.ids.fps.client.api;
 
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLO_UTENTE;
 
 public class FakeTokens {
         public static final String TK_TURISTA = null;

@@ -1,7 +1,9 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import org.hibernate.annotations.UuidGenerator;
 
 @Deprecated

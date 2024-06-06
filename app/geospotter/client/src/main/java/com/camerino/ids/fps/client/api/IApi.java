@@ -1,7 +1,5 @@
 package com.camerino.ids.fps.client.api;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;

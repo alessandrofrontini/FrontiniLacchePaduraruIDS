@@ -3,9 +3,7 @@ package com.camerino.cli.menu;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-
 import com.camerino.ids.core.data.utils.Credenziali;
-import com.camerino.cli.mock.MockNodi;
 
 import java.util.HashMap;
 import java.util.Scanner;

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

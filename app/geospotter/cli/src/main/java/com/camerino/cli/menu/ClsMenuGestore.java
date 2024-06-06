@@ -1,10 +1,8 @@
 package com.camerino.cli.menu;
 
 import com.camerino.cli.actions.ClsCommonActions;
-import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
-import com.camerino.ids.core.data.utils.Credenziali;
 
 import java.util.Scanner;
 

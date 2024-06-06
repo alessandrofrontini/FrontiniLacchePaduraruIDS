@@ -3,8 +3,8 @@ package com.camerino.cli.mock;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.core.data.utils.Credenziali;
+import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;
 import java.util.List;

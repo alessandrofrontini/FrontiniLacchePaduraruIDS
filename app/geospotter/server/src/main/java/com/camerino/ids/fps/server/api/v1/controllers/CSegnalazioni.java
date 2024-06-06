@@ -4,11 +4,9 @@ import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
 import com.camerino.ids.fps.server.api.v1.services.SSegnalazioni;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

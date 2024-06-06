@@ -6,9 +6,7 @@ import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Transient;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

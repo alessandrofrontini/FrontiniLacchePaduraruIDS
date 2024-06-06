@@ -1,10 +1,7 @@
 package com.camerino.ids.fps.client.api;
 
-import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;
 

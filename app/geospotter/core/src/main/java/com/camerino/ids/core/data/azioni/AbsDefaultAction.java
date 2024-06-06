@@ -1,7 +1,6 @@
 package com.camerino.ids.core.data.azioni;
 
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.persistence.*;
 

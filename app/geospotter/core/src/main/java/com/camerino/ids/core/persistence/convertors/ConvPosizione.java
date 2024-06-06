@@ -1,7 +1,6 @@
 package com.camerino.ids.core.persistence.convertors;
 
 import com.camerino.ids.core.data.utils.Posizione;
-
 import jakarta.persistence.AttributeConverter;
 
 /**

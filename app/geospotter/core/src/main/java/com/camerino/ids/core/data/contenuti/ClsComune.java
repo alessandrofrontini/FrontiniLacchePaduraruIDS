@@ -4,7 +4,6 @@ import com.camerino.ids.core.data.utenti.ClsCuratore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

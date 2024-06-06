@@ -1,7 +1,6 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.fps.client.utils.TMP_ServizioAutenticazione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsUtenteVisual;

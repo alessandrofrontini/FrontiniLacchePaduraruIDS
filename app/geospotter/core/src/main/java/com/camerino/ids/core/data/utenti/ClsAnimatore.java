@@ -3,8 +3,6 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import jakarta.persistence.Entity;
 
-import javax.swing.plaf.InsetsUIResource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

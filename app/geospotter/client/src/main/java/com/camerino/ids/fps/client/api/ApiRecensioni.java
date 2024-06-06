@@ -1,8 +1,6 @@
 package com.camerino.ids.fps.client.api;
 
-import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
-import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;

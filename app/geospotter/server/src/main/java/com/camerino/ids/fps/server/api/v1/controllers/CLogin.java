@@ -3,7 +3,6 @@ package com.camerino.ids.fps.server.api.v1.controllers;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
-import com.camerino.ids.fps.server.api.v1.services.SItinerari;
 import com.camerino.ids.fps.server.api.v1.services.SLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

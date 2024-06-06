@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.hibernate.sql.ast.tree.from.UnionTableReference;
 
 import java.io.IOException;
 import java.net.URI;

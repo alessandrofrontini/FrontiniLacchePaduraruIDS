@@ -2,9 +2,7 @@ package com.camerino.ids.core.data.contenuti;
 
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.convertors.ConvPosizione;
-
 import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
 
 /**

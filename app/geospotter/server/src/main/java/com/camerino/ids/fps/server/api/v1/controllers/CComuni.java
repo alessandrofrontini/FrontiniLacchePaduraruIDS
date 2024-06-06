@@ -1,14 +1,12 @@
 package com.camerino.ids.fps.server.api.v1.controllers;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.fps.server.api.v1.BaseUrl;
 import com.camerino.ids.fps.server.api.v1.services.SComuni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

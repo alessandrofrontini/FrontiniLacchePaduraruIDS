@@ -1,11 +1,12 @@
 package com.camerino.ids.core.data.utenti;
 
-import com.camerino.ids.core.data.azioni.*;
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
+import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

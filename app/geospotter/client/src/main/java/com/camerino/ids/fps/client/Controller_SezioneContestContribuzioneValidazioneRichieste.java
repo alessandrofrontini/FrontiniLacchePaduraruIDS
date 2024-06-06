@@ -1,6 +1,9 @@
 package com.camerino.ids.fps.client;
 
-import com.camerino.ids.core.data.azioni.*;
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.EStatusRDC;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;

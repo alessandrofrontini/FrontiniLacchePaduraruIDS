@@ -6,7 +6,6 @@ import com.camerino.cli.menu.ClsMenuGestore;
 import com.camerino.cli.menu.Input;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.cli.mock.MockTuristi;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
 import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;

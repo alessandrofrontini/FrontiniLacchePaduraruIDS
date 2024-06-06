@@ -5,10 +5,8 @@ import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Questo ruolo ha potere assoluto.

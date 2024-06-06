@@ -1,7 +1,5 @@
 package com.camerino.ids.core.data.utils;
 
-import jakarta.persistence.Entity;
-
 public class Posizione {
     double x;
     double y;
