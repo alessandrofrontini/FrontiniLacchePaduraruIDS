@@ -89,8 +89,8 @@ public class Controller_SezioneLogin {
         return user;
     }
 
-    private static ClsGestoreDellaPiattaforma CreaGDP() {
-        ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma(CreaCuratore());
+    private static ClsGDP CreaGDP() {
+        ClsGDP user = new ClsGDP(CreaCuratore());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.GESTORE_DELLA_PIATTAFORMA);
         return user;
     }
@@ -198,7 +198,7 @@ public class Controller_SezioneLogin {
             tmp.setId(4L);
         }
 
-        if (UTENTE instanceof ClsGestoreDellaPiattaforma tmp) {
+        if (UTENTE instanceof ClsGDP tmp) {
             tmp.setId(5L);
         }
     }

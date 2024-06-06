@@ -2,7 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
@@ -43,7 +43,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        curatori = ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+        curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
                 .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
@@ -85,7 +85,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
 
             comune.setCuratoriAssociati(this.ottieniCuratoriAssociati(new ArrayList<>(curatori), curatoriCoinvoltiArray));//todo:aggiungere
 
-            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).inserisciComune(comune);
+            ((ClsGDP) Controller_SezioneLogin.UTENTE).inserisciComune(comune);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("AGGIUNTO");
             alert.setContentText(comune.visualizzaComune());

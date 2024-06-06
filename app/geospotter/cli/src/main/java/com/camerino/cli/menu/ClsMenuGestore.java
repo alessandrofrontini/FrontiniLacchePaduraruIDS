@@ -2,7 +2,7 @@ package com.camerino.cli.menu;
 
 import com.camerino.cli.actions.ClsCommonActions;
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 
 import java.util.Scanner;
 
@@ -10,10 +10,10 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.print;
 import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 
 public class ClsMenuGestore implements IMenu {
-    ClsGestoreDellaPiattaforma user;
+    ClsGDP user;
     Scanner in = new Scanner(System.in);
 
-    public ClsMenuGestore(ClsGestoreDellaPiattaforma gdp) {
+    public ClsMenuGestore(ClsGDP gdp) {
         this.user = gdp;
         gdp.setIperComuni(MockLocator.getMockComuni());
     }

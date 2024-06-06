@@ -110,7 +110,7 @@ public class FiltLogin extends OncePerRequestFilter {
             //noop
         }
 
-        if (user instanceof ClsGestoreDellaPiattaforma tmp) {
+        if (user instanceof ClsGDP tmp) {
             //noop
         }
     }
@@ -173,8 +173,8 @@ public class FiltLogin extends OncePerRequestFilter {
         return user;
     }
 
-    private ClsGestoreDellaPiattaforma CreaGDP() {
-        ClsGestoreDellaPiattaforma user = new ClsGestoreDellaPiattaforma(CreaCuratore());
+    private ClsGDP CreaGDP() {
+        ClsGDP user = new ClsGDP(CreaCuratore());
         return user;
     }
 }

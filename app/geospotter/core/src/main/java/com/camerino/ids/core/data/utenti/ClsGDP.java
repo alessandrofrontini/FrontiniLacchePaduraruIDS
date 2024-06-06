@@ -14,11 +14,11 @@ import java.util.List;
  * Non è possibile diventare Gestore della Piattaforma tramite sistema a punteggi.
  */
 @Entity
-public class ClsGestoreDellaPiattaforma extends ClsAnimatore implements ITownHallAdministrator {
-    public ClsGestoreDellaPiattaforma() {
+public class ClsGDP extends ClsAnimatore implements ITownHallAdministrator {
+    public ClsGDP() {
     }
 
-    public ClsGestoreDellaPiattaforma(ClsAnimatore usr) {
+    public ClsGDP(ClsAnimatore usr) {
 
         this.pRDC = usr.pRDC;
         this.pRDCI = usr.pRDCI;

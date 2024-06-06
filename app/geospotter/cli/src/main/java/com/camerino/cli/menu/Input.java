@@ -3,7 +3,7 @@ package com.camerino.cli.menu;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 
@@ -75,7 +75,7 @@ public class Input {
     //endregion
 
     //region Input Comuni
-    public static ClsComune inserisciComune(ClsGestoreDellaPiattaforma gdp) {
+    public static ClsComune inserisciComune(ClsGDP gdp) {
         boolean ok = false;
         Scanner in = new Scanner(System.in);
         ClsComune comune = new ClsComune();

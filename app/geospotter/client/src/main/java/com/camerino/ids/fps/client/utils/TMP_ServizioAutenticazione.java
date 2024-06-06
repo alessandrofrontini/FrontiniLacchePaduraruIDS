@@ -84,7 +84,7 @@ public class TMP_ServizioAutenticazione {
 
         //region gestore
 
-        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
+        ClsGDP gdp = new ClsGDP();
         gdp.setId(5L);
         Credenziali c8 = new Credenziali();
         c8.setUsername("gdp"); // Username univoco per ogni oggetto

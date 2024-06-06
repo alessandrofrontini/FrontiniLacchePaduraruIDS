@@ -1,7 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ public class SComuni {
     }
 
     public boolean deleteComuneById(Long idComune) {
-        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
+        return ((ClsGDP) this.request.getServletContext().getAttribute("user")).eliminaComune(idComune);
     }
 
     public boolean postComune(ClsComune comune) {
-        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).inserisciComune(comune);
+        return ((ClsGDP) this.request.getServletContext().getAttribute("user")).inserisciComune(comune);
     }
 
     public boolean putComune(ClsComune comune) {
-        return ((ClsGestoreDellaPiattaforma) this.request.getServletContext().getAttribute("user")).modificaComune(comune, comune.getId());
+        return ((ClsGDP) this.request.getServletContext().getAttribute("user")).modificaComune(comune, comune.getId());
     }
 }

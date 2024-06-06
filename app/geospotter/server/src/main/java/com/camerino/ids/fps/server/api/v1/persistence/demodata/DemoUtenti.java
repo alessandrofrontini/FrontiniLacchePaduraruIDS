@@ -86,7 +86,7 @@ public class DemoUtenti {
 
         //region gestore
 
-        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
+        ClsGDP gdp = new ClsGDP();
 
         Credenziali c8 = new Credenziali();
         c8.setUsername("gdp"); // Username univoco per ogni oggetto

@@ -1,7 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -69,7 +69,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         ca.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
         inserisciUtente(ca);
 
-        ClsGestoreDellaPiattaforma gdp = new ClsGestoreDellaPiattaforma();
+        ClsGDP gdp = new ClsGDP();
         Credenziali credenzialiGdP = new Credenziali();
         credenzialiGdP.setUsername("GDP");
         credenzialiGdP.setPassword("");

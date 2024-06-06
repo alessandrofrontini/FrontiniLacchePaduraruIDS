@@ -2,7 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
@@ -70,7 +70,7 @@ public class Controller_SezioneModificaComuni implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.Curatori = ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+        this.Curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
                 .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
@@ -125,7 +125,7 @@ public class Controller_SezioneModificaComuni implements Initializable {
         ClsComune nuovoComune = this.inserisciComune(mouseEvent);
 
         if (!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null)) {
-            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
+            ((ClsGDP) Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
             nuovoComune.setId(IDDaEliminare);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");

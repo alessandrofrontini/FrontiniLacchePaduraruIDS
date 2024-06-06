@@ -4,7 +4,7 @@ import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.IContributable;
 
 public class ClsCommonActions {
@@ -26,7 +26,7 @@ public class ClsCommonActions {
         return false;
     }
 
-    public static boolean aggiungiComune(ClsGestoreDellaPiattaforma gdp) {
+    public static boolean aggiungiComune(ClsGDP gdp) {
         ClsComune comune = Input.inserisciComune(gdp);
         if (comune != null)
             return gdp.inserisciComune(comune);

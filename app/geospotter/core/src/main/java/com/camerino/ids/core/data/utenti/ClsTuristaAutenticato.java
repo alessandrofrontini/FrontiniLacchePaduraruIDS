@@ -36,7 +36,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = ClsContributorAutorizzato.class, name = "CONTRIBUTOR_AUTORIZZATO"),
         @JsonSubTypes.Type(value = ClsAnimatore.class, name = "ANIMATORE"),
         @JsonSubTypes.Type(value = ClsCuratore.class, name = "CURATORE"),
-        @JsonSubTypes.Type(value = ClsGestoreDellaPiattaforma.class, name = "GESTORE_DELLA_PIATTAFORMA"),
+        @JsonSubTypes.Type(value = ClsGDP.class, name = "GESTORE_DELLA_PIATTAFORMA"),
 })
 public class ClsTuristaAutenticato extends ClsTurista implements ILoggedUserAction {
     transient IPersistenceModel<ClsRDCImmagine> iperRDCImmagini;

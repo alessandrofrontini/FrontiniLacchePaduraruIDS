@@ -1,7 +1,7 @@
 package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
 import javafx.collections.FXCollections;
@@ -99,7 +99,7 @@ public class Controller_SezioneEliminazioneComuni implements Initializable {
         Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sceltaComune));
 
         if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
-            ((ClsGestoreDellaPiattaforma) Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
+            ((ClsGDP) Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(IDDaEliminare.toString());

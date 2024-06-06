@@ -7,7 +7,7 @@ import com.camerino.cli.menu.Input;
 import com.camerino.cli.mock.MockComuni;
 import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsGestoreDellaPiattaforma;
+import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 
@@ -70,7 +70,7 @@ public class Main {//Gli scanner i double li vuole con la , e non punto .  . Com
             case CONTRIBUTOR_AUTORIZZATO -> new ClsMenuContributorAuth((ClsContributorAutorizzato) turista).menu();
             case ANIMATORE -> ClsConsoleLogger.println("Noop");
             case CURATORE -> ClsConsoleLogger.println("Noop");
-            case GESTORE_DELLA_PIATTAFORMA -> new ClsMenuGestore((ClsGestoreDellaPiattaforma) turista).menu();
+            case GESTORE_DELLA_PIATTAFORMA -> new ClsMenuGestore((ClsGDP) turista).menu();
         }
     }
 
