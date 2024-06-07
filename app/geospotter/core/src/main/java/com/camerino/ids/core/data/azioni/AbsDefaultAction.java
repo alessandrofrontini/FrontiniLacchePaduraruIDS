@@ -96,8 +96,8 @@ public class AbsDefaultAction<E> implements IAction<E, EStatusRDC> {
         return idContestAppartenenza;
     }
 
-    public void setIdContestAppartenenza(ClsContestDiContribuzione idContest) {
-        this.idContestAppartenenza = idContest;
+    public void setIdContestAppartenenza(ClsContestDiContribuzione contest) {
+        this.idContestAppartenenza = contest;
     }
 
     //endregion

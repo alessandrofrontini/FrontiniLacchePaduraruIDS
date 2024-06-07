@@ -14,7 +14,7 @@ public interface IAzioniTurista {
     @JsonIgnore
     List<ClsNodo> getNodoById(Long idNodo);
     @JsonIgnore
-    List<ClsSegnalazione> GetAllSegnalazioni();
+    List<ClsSegnalazione> getAllSegnalazioni();
     @JsonIgnore
     List<ClsRecensione> getAllRecensioni();
     @JsonIgnore

@@ -41,7 +41,7 @@ public class Controller_SezioneCuratoreVisualizzazioneSegnalazioni implements In
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        segnalazioni = Controller_SezioneLogin.UTENTE.GetAllSegnalazioni();
+        segnalazioni = Controller_SezioneLogin.UTENTE.getAllSegnalazioni();
 
         setSegnalazioni(segnalazioni);
 

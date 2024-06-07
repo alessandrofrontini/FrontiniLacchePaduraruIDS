@@ -75,7 +75,7 @@ public class ClsTurista implements IAzioniTurista {
         return this.iperNodi.get(filters);
     }
 
-    public List<ClsSegnalazione> GetAllSegnalazioni() {
+    public List<ClsSegnalazione> getAllSegnalazioni() {
         return this.iperSegnalazioni.get(null);
     }
     
