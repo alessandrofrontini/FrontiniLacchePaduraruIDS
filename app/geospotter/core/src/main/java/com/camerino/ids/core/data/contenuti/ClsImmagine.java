@@ -12,6 +12,8 @@ public class ClsImmagine extends ClsInformazione {
     Long idNodoAssociato;
     String URL;
 
+
+
     //region Getter e setter
     public Long getIdNodoAssociato() {
         return idNodoAssociato;
