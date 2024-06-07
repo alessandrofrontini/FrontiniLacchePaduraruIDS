@@ -31,16 +31,4 @@ public class CSegnalazioni {
 
         return ResponseEntity.ok(sSegnalazioni.creaSegnalazione(segnalazione));
     }
-
-    @PutMapping(mapping)
-    public ResponseEntity<String> putSegnalazioni(
-            @RequestBody ClsSegnalazione segnalazione) {
-        return ResponseEntity.status(501).build();
-    }
-
-    @DeleteMapping(mapping)
-    public ResponseEntity<Boolean> deleteSegnalazioni(
-            @RequestParam("idSegnalazione") Long idSegnalazione) {
-        return ResponseEntity.ok(sSegnalazioni.deleteSgnalazione(idSegnalazione));
-    }
 }

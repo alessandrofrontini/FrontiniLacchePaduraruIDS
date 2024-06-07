@@ -2,7 +2,6 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.contenuti.*;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
-import com.camerino.ids.core.data.segnalazioni.ISignalable;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.MappedSuperclass;
@@ -23,7 +22,7 @@ public class ClsTurista implements IAzioniTurista {
     transient IPersistenceModel<ClsImmagine> iperImmagini;
     transient IPersistenceModel<ClsTuristaAutenticato> iperUtenti;
 
-//region Getters and Settera
+//region Getters and Setters
 
     public void setIperNodi(IPersistenceModel<ClsNodo> iperNodi) {
         this.iperNodi = iperNodi;
