@@ -36,11 +36,11 @@ public class ApiComuni implements IApi<ClsComune> {
     }
 
     @Override
-    public boolean Post(ClsTurista user, ClsComune nodo) {
+    public boolean Post(ClsTurista user, ClsComune comune) {
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
-                .POST(createBody(nodo))
+                .POST(createBody(comune))
                 .uri(endpoint)
                 .build();
 
@@ -48,11 +48,11 @@ public class ApiComuni implements IApi<ClsComune> {
     }
 
     @Override
-    public boolean Put(ClsTurista user, ClsComune nodo) {
+    public boolean Put(ClsTurista user, ClsComune comune) {
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
-                .PUT(createBody(nodo))
+                .PUT(createBody(comune))
                 .uri(endpoint)
                 .build();
         return execute(request).statusCode() == 200;
