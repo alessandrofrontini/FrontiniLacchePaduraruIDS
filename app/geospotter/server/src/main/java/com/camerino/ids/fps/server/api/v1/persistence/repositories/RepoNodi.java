@@ -14,4 +14,7 @@ public interface RepoNodi extends JpaRepository<ClsNodo, Long> {
 
     @Query("SELECT n from ClsNodo n where n.idCreatore=?1")
     List<ClsNodo> findNodoByUtente(Long owner);
+    //Trova tutti i nodi che non fanno parte di una RDC
+    @Query(value = "select * from CLS_NODO where id not in (select NEW_DATA_ID from CLSRDcnodo where NEW_DATA_ID  is not null)", nativeQuery = true)
+    List<ClsNodo> findAllOfficial();
 }

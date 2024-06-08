@@ -25,7 +25,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
     @Override
     public List<ClsNodo> get(Map<String, Object> filters) {
         if (filters == null)
-            return new ArrayList<>(repoNodi.findAll());
+            return new ArrayList<>(repoNodi.findAllOfficial());
         List<ClsNodo> lNodi = new ArrayList<>();
         if (filters.containsKey("idNodo")) {
             Optional<ClsNodo> nodo = repoNodi.findById((Long) filters.get("idNodo"));
@@ -39,7 +39,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
         }
         if (filters.containsKey("owner"))
             return new ArrayList<>(repoNodi.findNodoByUtente(Long.valueOf(filters.get("owner").toString())));
-        lNodi = new ArrayList<>(repoNodi.findAll());
+        lNodi = new ArrayList<>(repoNodi.findAllOfficial());
         return lNodi;
     }
 

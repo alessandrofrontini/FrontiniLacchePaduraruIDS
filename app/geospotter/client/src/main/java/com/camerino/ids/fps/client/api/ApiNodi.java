@@ -19,7 +19,7 @@ public class ApiNodi implements IApi<ClsNodo> {
     @Override
     public List<ClsNodo> Get(ClsTurista user, String query) {
         if (query == null)
-            query = "";
+            query = "";//todo: fixare null on no user
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
