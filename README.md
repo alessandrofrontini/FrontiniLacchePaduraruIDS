@@ -30,12 +30,12 @@ E' possibile trovare all' interno del progetto **DUE** versioni di GeoSpotter:
 - GeoSpotter (v1): **Server/GUI**
   
 Consigliamo fortemente di utilizzare e testare entrambe le versioni di GeoSpotter per comprenderne al meglio l'essenza :)
-## V1 - CLI
+## V1 - CLI (Java)
 La CLI, la prima versione di GeoSpotter, rappresenta una **DEMO** delle funzionalità cardine di cui GeoSpotter si serve per il suo funzionamento. <br/>
 Questa prima versione utilizza un interfaccia a linea di comando (Command Line Interface) per interagire con l'utente che la utilizza e essa implementa i casi d'uso cruciali di cui GeoSpotter si serve.
 
 ### Come eseguire la CLI?
-## V2 - SERVER/GUI 
+## V2 - SERVER(SpringBoot) - GUI(JavaFX) 
 La versione Server di GeoSpotter rappresenta un'evoluzione rispetto alla prima versione, che era una demo delle funzionalità fondamentali del software. <br/> Questa versione di GeoSpotter è da considerarsi **finale e completa**.
 ### Come eseguire il Server?
 
