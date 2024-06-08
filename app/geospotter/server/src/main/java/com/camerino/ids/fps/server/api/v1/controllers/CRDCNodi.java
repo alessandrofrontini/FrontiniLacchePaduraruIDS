@@ -44,29 +44,23 @@ public class CRDCNodi {
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteRDC(
+    public ResponseEntity<Boolean> deleteRDC(
             @RequestParam(value = "idRDCNodi") Long idRDC
     ) {
-        if (sRDCnodi.deleteRDCNodiById(idRDC))
-            return ResponseEntity.ok("RDC deleted");
-        return ResponseEntity.status(500).body("RDC not deleted");
+        return ResponseEntity.ok(sRDCnodi.deleteRDCNodiById(idRDC));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putRDC(
+    public ResponseEntity<Boolean> putRDC(
             @RequestBody ClsRDCNodo rdc
     ) {
-        if (sRDCnodi.putRDCNodi(rdc))
-            return ResponseEntity.ok("Azione Modificata");
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(sRDCnodi.putRDCNodi(rdc));
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postRDC(
+    public ResponseEntity<Boolean> postRDC(
             @RequestBody ClsRDCNodo rdc
     ) {
-        if (sRDCnodi.postRDCNodi(rdc))
-            return ResponseEntity.ok("Azione Creata");
-        return ResponseEntity.ok(Boolean.toString(sRDCnodi.postRDCNodi(rdc)));
+        return ResponseEntity.ok(sRDCnodi.postRDCNodi(rdc));
     }
 }

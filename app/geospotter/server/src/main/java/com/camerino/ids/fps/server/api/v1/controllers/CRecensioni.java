@@ -31,21 +31,21 @@ public class CRecensioni {
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postRecensioni(
+    public ResponseEntity<Boolean> postRecensioni(
             @RequestBody ClsRecensione recensione
     ) {
-        return ResponseEntity.ok(Boolean.toString(sRecensioni.postRecensione(recensione)));
+        return ResponseEntity.ok(sRecensioni.postRecensione(recensione));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putRecensioni(
+    public ResponseEntity<Boolean> putRecensioni(
             @RequestBody ClsRecensione recensione
     ) {
-        return ResponseEntity.ok(Boolean.toString(sRecensioni.putRecensione(recensione)));
+        return ResponseEntity.ok(sRecensioni.putRecensione(recensione));
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteRecensioni(
+    public ResponseEntity<Boolean> deleteRecensioni(
             @RequestParam(value = "idRecensione") Long idRecensione
     ) {
         if (!sRecensioni.deleteRecensioneById(idRecensione))

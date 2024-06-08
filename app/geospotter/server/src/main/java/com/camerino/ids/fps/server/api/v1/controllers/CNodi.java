@@ -53,7 +53,7 @@ public class CNodi {
      * @return
      */
     @PostMapping(mapping)
-    public ResponseEntity<String> postNodi(
+    public ResponseEntity<Boolean> postNodi(
             @RequestBody ClsNodo nodo
     ) {
         if (!sNodi.postNodo(nodo))
@@ -69,7 +69,7 @@ public class CNodi {
      * @return
      */
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteNodi(
+    public ResponseEntity<Boolean> deleteNodi(
             @RequestParam(value = "idNodo") Long idNodo
     ) {
         if (!sNodi.deleteNodoById(idNodo))
@@ -85,7 +85,7 @@ public class CNodi {
      * @return
      */
     @PutMapping(mapping)
-    public ResponseEntity<String> putNodi(
+    public ResponseEntity<Boolean> putNodi(
             @RequestBody ClsNodo nodo
     ) {
         if (!sNodi.putNodo(nodo))

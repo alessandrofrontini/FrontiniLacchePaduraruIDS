@@ -30,29 +30,23 @@ public class CItinerari {
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postItinerari(
+    public ResponseEntity<Boolean> postItinerari(
             @RequestBody ClsItinerario itinerario
     ) {
-        if (sItinerari.postItinerario(itinerario))
-            return ResponseEntity.ok("OK");
-        return ResponseEntity.ok("ERROR");
+        return ResponseEntity.ok(sItinerari.postItinerario(itinerario));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putItinerari(
+    public ResponseEntity<Boolean> putItinerari(
             @RequestBody ClsItinerario itinerario
     ) {
-        if (sItinerari.putItinerario(itinerario))
-            return ResponseEntity.ok("OK");
-        return ResponseEntity.ok("ERROR");
+        return ResponseEntity.ok(sItinerari.putItinerario(itinerario));
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteItinerari(
+    public ResponseEntity<Boolean> deleteItinerari(
             @RequestParam(name = "idItinerario", required = false) Long idItinerario
     ) {
-        if (sItinerari.deleteItinerario(idItinerario))
-            return ResponseEntity.ok("OK");
-        return ResponseEntity.ok("ERROR");
+        return ResponseEntity.ok(sItinerari.deleteItinerario(idItinerario));
     }
 }

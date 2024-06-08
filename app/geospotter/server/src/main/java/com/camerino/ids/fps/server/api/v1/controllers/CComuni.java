@@ -30,25 +30,23 @@ public class CComuni {
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteComune(
+    public ResponseEntity<Boolean> deleteComune(
             @RequestParam(value = "idComune", required = false) Long idComune
     ) {
-        if (sComnuni.deleteComuneById(idComune))
-            return ResponseEntity.ok("Comune deleted");
-        return ResponseEntity.status(500).body("Comune not deleted");
+        return ResponseEntity.ok(sComnuni.deleteComuneById(idComune));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putComune(
+    public ResponseEntity<Boolean> putComune(
             @RequestBody ClsComune comune
     ) {
-        return ResponseEntity.ok(Boolean.toString(sComnuni.putComune(comune)));
+        return ResponseEntity.ok(sComnuni.putComune(comune));
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postComune(
+    public ResponseEntity<Boolean> postComune(
             @RequestBody ClsComune comune
     ) {
-        return ResponseEntity.ok(Boolean.toString(sComnuni.postComune(comune)));
+        return ResponseEntity.ok(sComnuni.postComune(comune));
     }
 }

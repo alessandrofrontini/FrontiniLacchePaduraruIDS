@@ -29,29 +29,23 @@ public class CRDCImmagini {
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteRDC(
+    public ResponseEntity<Boolean> deleteRDC(
             @RequestParam(value = "idRDCImmagini") Long idRDCI
     ) {
-        if (sRDCImmagini.deleteRDCImmagineById(idRDCI))
-            return ResponseEntity.ok("RDC deleted");
-        return ResponseEntity.status(500).body("RDC not deleted");
+        return ResponseEntity.ok(sRDCImmagini.deleteRDCImmagineById(idRDCI));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putRDCI(
+    public ResponseEntity<Boolean> putRDCI(
             @RequestBody ClsRDCImmagine rdci
     ) {
-        if (sRDCImmagini.putRDCI(rdci))
-            return ResponseEntity.ok("Azione Modificata");
-        return ResponseEntity.status(500).body("Azione non modificata");
+        return ResponseEntity.ok(sRDCImmagini.putRDCI(rdci));
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postRDC(
+    public ResponseEntity<Boolean> postRDC(
             @RequestBody ClsRDCImmagine rdc
     ) {
-        if (sRDCImmagini.postRDCImmagine(rdc))
-            return ResponseEntity.ok("Azione Creata");
-        return ResponseEntity.status(500).body("Azione non creata");
+        return ResponseEntity.ok(sRDCImmagini.postRDCImmagine(rdc));
     }
 }
