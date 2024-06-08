@@ -124,13 +124,20 @@ public class Controller_SezioneLogin {
         try {
             response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Credenziali invalide");
+            alert.show();
             throw new RuntimeException(e);
+
         }
 
         try {
             UTENTE = mapper.readValue(response.body(), new TypeReference<ClsTuristaAutenticato>() {
             });
         } catch (JsonProcessingException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Credenziali invalide");
+            alert.show();
             throw new RuntimeException(e);
         }
         InizializzaUtente();

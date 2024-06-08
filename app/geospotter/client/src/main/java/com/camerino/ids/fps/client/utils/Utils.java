@@ -7,6 +7,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.visual.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -15,6 +16,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class Utils {
+
+    public void alertConfirm(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Scossa?");
+        alert.setContentText("Va bene");
+        alert.show();
+    }
+
+    public void alertError(){
+        Alert alerttt = new Alert(Alert.AlertType.ERROR);
+        alerttt.setTitle("Errore");
+        alerttt.setContentText("Errore");
+        alerttt.show();
+    }
+
     public ClsNodoVisual convertFromClsNodo(ClsNodo nodo) {
         ClsNodoVisual c = new ClsNodoVisual();
 
