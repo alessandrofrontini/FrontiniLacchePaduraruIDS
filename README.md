@@ -26,8 +26,8 @@ Possiamo sommariamente dire che, all'interno della cartella Documentazione, è p
 # Codice
 E' possibile trovare all' interno del progetto **DUE** versioni di GeoSpotter:
 
-- GeoSpotter (v0): **CLI(Java)** 
-- GeoSpotter (v1): **Server(SpringBoot)** / **GUI(JavaFX)**
+- GeoSpotter (v0): **CLI** 
+- GeoSpotter (v1): **Server**/**GUI**
   
 Consigliamo fortemente di utilizzare e testare entrambe le versioni di GeoSpotter per comprenderne al meglio l'essenza :)
 ## V1 - CLI (Java)
