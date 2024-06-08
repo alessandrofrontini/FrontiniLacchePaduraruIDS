@@ -26,7 +26,7 @@ Possiamo sommariamente dire che, all'interno della cartella Documentazione, è p
 # Codice
 E' possibile trovare all' interno del progetto **DUE** versioni di GeoSpotter:
 
-- GeoSpotter (demo): **Command Line Interface**
+- GeoSpotter (v0): **Command Line Interface**
 - GeoSpotter (v1): **Server/GUI**
   
 Consigliamo fortemente di utilizzare e testare entrambe le versioni di GeoSpotter per comprenderne al meglio l'essenza :)
