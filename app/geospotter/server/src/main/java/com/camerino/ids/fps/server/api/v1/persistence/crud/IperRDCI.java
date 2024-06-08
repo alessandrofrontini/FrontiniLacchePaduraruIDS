@@ -25,8 +25,8 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
         if (filters == null)
             return new ArrayList<>(repoRDCI.findAll());
         if (filters.containsKey("idRDCI")) {
-            List<String> ids = new ArrayList<>();
-            ids.add(filters.get("idRDCI").toString());
+            List<Long> ids = new ArrayList<>();
+            ids.add((Long) filters.get("idRDCI"));
             return new ArrayList<>(repoRDCI.findAllById(ids));
         }
         if (filters.containsKey("idUser"))
@@ -57,7 +57,7 @@ public class IperRDCI implements IPersistenceModel<ClsRichiestaAzioneDiContribuz
             return false;
         if (!filters.containsKey("idRDCI"))
             return false;
-        repoRDCI.deleteById(filters.get("idRDCI").toString());
+        repoRDCI.deleteById((Long) filters.get("idRDCI"));
         return true;
     }
 }

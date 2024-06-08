@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RepoSegnalazioni extends JpaRepository<ClsSegnalazione, String> {
+public interface RepoSegnalazioni extends JpaRepository<ClsSegnalazione, Long> {
     @Query("select r from ClsSegnalazione r where r.idContenuto=?1")
     List<ClsSegnalazione> filterByContenuto(Long idContenuto);
 

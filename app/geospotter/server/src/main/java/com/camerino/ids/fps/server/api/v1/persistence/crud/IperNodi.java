@@ -28,7 +28,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
             return new ArrayList<>(repoNodi.findAll());
         List<ClsNodo> lNodi = new ArrayList<>();
         if (filters.containsKey("idNodo")) {
-            Optional<ClsNodo> nodo = repoNodi.findById(filters.get("idNodo").toString());
+            Optional<ClsNodo> nodo = repoNodi.findById((Long) filters.get("idNodo"));
             if (nodo.isEmpty())
                 return lNodi;
             lNodi.add(nodo.get());
@@ -58,7 +58,7 @@ public class IperNodi implements IPersistenceModel<ClsNodo> {
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        repoNodi.deleteById(filters.get("idNodo").toString());
+        repoNodi.deleteById((Long) filters.get("idNodo"));
         return true;
     }
 }

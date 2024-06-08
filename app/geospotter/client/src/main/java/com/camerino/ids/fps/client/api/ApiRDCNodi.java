@@ -20,12 +20,34 @@ public class ApiRDCNodi implements IApi<ClsRDCNodo> {
     public List<ClsRDCNodo> Get(ClsTurista user, String query) {
         if (query == null)
             query = "";
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Authorization", FakeTokens.getToken(user))
-                .header("Content-Type", "application/json")
-                .uri(URI.create(String.format("%s?%s", endpoint, query)))
-                .GET()
-                .build();
+
+        HttpRequest request;
+
+        if(query.startsWith("true")){
+            query=query.replaceAll("true", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/accetta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        } else if (query.startsWith("false")) {
+            query=query.replaceAll("false", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/refiuta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
+        else {
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
 
         HttpResponse<String> response = execute(request);
         if (response.statusCode() != 200)

@@ -7,6 +7,7 @@ import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItiner
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     }
 
     public List<ClsRdcItinerario> _getAllRDCItinerari() {
-        return iperRDCItinerari.get(null);
+        return new ArrayList<>();//iperRDCItinerari.get(null);
     }
 
     public List<ClsRdcItinerario> getRDCItinerarioById(Long idRDCItinerario) {
@@ -95,5 +96,33 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
 
     public boolean putRDCItinerario(ClsRdcItinerario rdc) {
         return iperRDCItinerari.update(null, rdc);
+    }
+
+    @Override
+    public List<ClsRDCNodo> getAllRDCNodi() {
+        return this.iperRDCNodi.get(null);
+    }
+
+    @Override
+    public List<ClsRDCImmagine> getAllRDCImmagini() {
+        return new ArrayList<>();//this.iperRDCImmagini.get(null);
+    }
+
+    @Override
+    public boolean accettaRichiestaNodo(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", true);
+        iperRDCNodi.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean rifiutaRichiestaNodo(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", false);
+        iperRDCNodi.get(filters);
+        return true;
     }
 }

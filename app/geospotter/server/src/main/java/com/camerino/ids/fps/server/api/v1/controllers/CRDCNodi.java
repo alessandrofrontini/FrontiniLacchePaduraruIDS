@@ -29,9 +29,23 @@ public class CRDCNodi {
         return ResponseEntity.ok(sRDCnodi.getAllRDCNodi());
     }
 
+    @GetMapping(mapping+"/accetta")
+    public ResponseEntity<Boolean> RDC(
+            @RequestParam(value = "idValidazione") Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCnodi.accettaRDCNodo(idRDC));
+    }
+
+    @GetMapping(mapping+"/rifiuta")
+    public ResponseEntity<Boolean> rifiutaRDC(
+            @RequestParam(value = "idValidazione", required = false) Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCnodi.rifutaRDCNodi(idRDC));
+    }
+
     @DeleteMapping(mapping)
     public ResponseEntity<String> deleteRDC(
-            @RequestParam(value = "idRDCNodi", required = false) Long idRDC
+            @RequestParam(value = "idRDCNodi") Long idRDC
     ) {
         if (sRDCnodi.deleteRDCNodiById(idRDC))
             return ResponseEntity.ok("RDC deleted");

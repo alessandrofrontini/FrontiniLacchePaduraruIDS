@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RepoUtenti extends JpaRepository<ClsTuristaAutenticato, String> {
+public interface RepoUtenti extends JpaRepository<ClsTuristaAutenticato, Long> {
     @Query("select usr from ClsTuristaAutenticato usr where usr.credenziali=?1")
     Optional<ClsTuristaAutenticato> login(Credenziali credenziali);
 

@@ -152,7 +152,7 @@ public class Utils {
         tmp.setStato(rdcNodo.getStato().toString());
         tmp.setRichiedente(rdcNodo.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcNodo.getResponsabile().getId());
-        tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 

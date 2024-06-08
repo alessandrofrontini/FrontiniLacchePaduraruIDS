@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 @Deprecated
-public interface RepoRDCI extends JpaRepository<ClsRichiestaAzioneDiContribuzioneItinerario, String> {
+public interface RepoRDCI extends JpaRepository<ClsRichiestaAzioneDiContribuzioneItinerario, Long> {
 
     @Query("select r from ClsRichiestaAzioneDiContribuzioneItinerario r where r.usernameCreatore = ?1")
     List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIByUser(Long idUser);

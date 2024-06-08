@@ -15,6 +15,16 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
 
     @Override
     public List<ClsRDCNodo> get(Map<String, Object> filters) {
+        if(filters == null)
+            return api.Get(Controller_SezioneLogin.UTENTE, null);
+
+        if(filters.containsKey("idValidazione") && filters.containsKey("accetta")){
+            if((Boolean)filters.get("accetta"))
+                return api.Get(Controller_SezioneLogin.UTENTE, "trueidValidazione="+filters.get("idValidazione"));
+            else
+                return api.Get(Controller_SezioneLogin.UTENTE, "falseidValidazione="+filters.get("idValidazione"));
+        }
+
         return api.Get(Controller_SezioneLogin.UTENTE, null);
     }
 

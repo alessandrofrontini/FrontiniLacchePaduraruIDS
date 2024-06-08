@@ -24,8 +24,8 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
         if (filters == null)
             return new ArrayList<>(repoRDCItinerari.findAll());
         if (filters.containsKey("idRDCItinerario")) {
-            List<String> ids = new ArrayList<>();
-            ids.add(filters.get("idRDCItinerario").toString());
+            List<Long> ids = new ArrayList<>();
+            ids.add((Long) filters.get("idRDCItinerario"));
             return new ArrayList<>(repoRDCItinerari.findAllById(ids));
         }
         //if(filters.containsKey("idUser"))
@@ -56,7 +56,7 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
             return false;
         if (!filters.containsKey("idRDCItinerario"))
             return false;
-        repoRDCItinerari.deleteById(filters.get("idRDCItinerario").toString());
+        repoRDCItinerari.deleteById((Long) filters.get("idRDCItinerario"));
         return true;
     }
 }

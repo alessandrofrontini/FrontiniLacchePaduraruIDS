@@ -25,8 +25,8 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
         if (filters == null)
             return new ArrayList<>(repoItinerari.findAll());
         if (filters.containsKey("idItinerario")) {
-            List<String> ids = new ArrayList<>();
-            ids.add(filters.get("idItinerario").toString());
+            List<Long> ids = new ArrayList<>();
+            ids.add((Long) filters.get("idItinerario"));
             return new ArrayList<>(repoItinerari.findAllById(ids));
         }
         return new ArrayList<>(repoItinerari.findAll());
@@ -54,7 +54,7 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
             return false;
         if (!filters.containsKey("idItinerario"))
             return false;
-        repoItinerari.deleteById(filters.get("idItinierario").toString());
+        repoItinerari.deleteById((Long) filters.get("idItinierario"));
         return true;
     }
 }

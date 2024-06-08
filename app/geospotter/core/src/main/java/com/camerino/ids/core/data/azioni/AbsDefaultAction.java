@@ -14,16 +14,16 @@ public class AbsDefaultAction<E> implements IAction<E, EStatusRDC> {
     @Enumerated(EnumType.STRING)
     EStatusRDC stato = EStatusRDC.NUOVO;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     ClsTuristaAutenticato creatore;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     ClsContestDiContribuzione idContestAppartenenza;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     E oldData;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     E newData;
 
     public AbsDefaultAction(E oldData, E newData) {

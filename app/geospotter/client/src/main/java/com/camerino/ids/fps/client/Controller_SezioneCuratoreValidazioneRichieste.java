@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsRDCVisual;
 import javafx.collections.FXCollections;
@@ -117,163 +118,10 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     //endregion
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.richiesteImmagini = new ArrayList<ClsRDCImmagine>();
-        this.richiesteNodo = new ArrayList<ClsRDCNodo>();
-        this.richiesteItinerario = new ArrayList<ClsRdcItinerario>();
-/*
-        //region Creazione RDCImmagine
-        ClsRDCImmagine img1 = new ClsRDCImmagine();
-        img1.setIdRichiesta(1L);
-        img1.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img1.setStato(EStatusRDC.ASSEGNATO);
+        this.richiesteImmagini = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCImmagini();
+        this.richiesteNodo = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCNodi();
+        this.richiesteItinerario = ((ClsCuratore)Controller_SezioneLogin.UTENTE)._getAllRDCItinerari();
 
-        ClsTuristaAutenticato utente = new ClsTuristaAutenticato();
-        utente.setId(1L);
-        img1.setCreatore(utente);
-
-        ClsCuratore c1 = new ClsCuratore();
-        c1.setId(1L);
-        //img1.setResponsabile(c1);
-
-        ClsContestDiContribuzione contest1 = new ClsContestDiContribuzione();
-        contest1.setId(1L);
-        img1.setIdContestAppartenenza(contest1);
-
-        ClsImmagine im1 = new ClsImmagine();
-        im1.setId(2L);
-        im1.setURL("testURLOld");
-        im1.setIdCreatore("testCreatoreOld");
-        im1.setIdNodoAssociato("testIDNodoOld");
-        img1.setOldData(im1);
-
-        ClsImmagine im2 = new ClsImmagine();
-        im2.setId(1L);
-        im2.setURL("testURLNew");
-        im2.setIdCreatore("testCreatoreNew");
-        im2.setIdNodoAssociato("testIDNodoNew");
-        img1.setNewData(im2);
-        richiesteImmagini.add(img1);
-
-        ClsRDCImmagine img2 = new ClsRDCImmagine();
-        img2.setIdRichiesta(2L);
-        img2.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img2.setStato(EStatusRDC.ASSEGNATO);
-        img2.setCreatore(utente);
-
-        ClsCuratore c2 = new ClsCuratore();
-        c2.setId(2L);
-        //img2.setResponsabile(c2);
-        img2.setIdContestAppartenenza(contest1);
-
-        img2.setOldData(im1);
-        img2.setNewData(im2);
-        richiesteImmagini.add(img2);
-
-        ClsRDCImmagine img3 = new ClsRDCImmagine();
-        img3.setIdRichiesta(3L);
-        img3.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img3.setStato(EStatusRDC.ASSEGNATO);
-        img3.setCreatore(utente);
-
-        ClsCuratore c3 = new ClsCuratore();
-        c3.setId(3L);
-        //img3.setResponsabile(c3);
-        img3.setIdContestAppartenenza(contest1);
-
-        img3.setOldData(im1);
-        img3.setNewData(im2);
-        richiesteImmagini.add(img3);
-        //endregion
-
-        //region Creazione RDCNodo
-        ClsRDCNodo n1 = new ClsRDCNodo();
-        n1.setIdRichiesta(1L);
-        n1.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
-        n1.setStato(EStatusRDC.ASSEGNATO);
-        n1.setCreatore(utente);
-
-        ClsCuratore cu1 = new ClsCuratore();
-        cu1.setId(1L);
-        //n1.setResponsabile(cu1);
-        n1.setIdContestAppartenenza(contest1);
-
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setNome("nomeOld");
-        nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato(1L);
-        nodo1.setaTempo(true);
-        nodo1.setDescrizione("descrizioneOld");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n1.setOldData(nodo1);
-
-        nodo1.setNome("nomeNew");
-        nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComuneAssociato(1L);
-        nodo1.setaTempo(false);
-        nodo1.setDescrizione("descrizioneNew");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n1.setNewData(nodo1);
-        richiesteNodo.add(n1);
-
-        ClsRDCNodo n2 = new ClsRDCNodo();
-        n2.setIdRichiesta(2L);
-        n2.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
-        n2.setStato(EStatusRDC.ASSEGNATO);
-        n2.setCreatore(utente);
-
-        ClsCuratore cu2 = new ClsCuratore();
-        cu2.setId("2");
-        //n2.setResponsabile(cu2);
-        n2.setIdContestAppartenenza(contest1);
-
-        nodo1.setNome("nomeOld");
-        nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato("comuneOld");
-        nodo1.setaTempo(true);
-        nodo1.setDescrizione("descrizioneOld");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n2.setOldData(nodo1);
-
-        nodo1.setNome("nomeNew");
-        nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComuneAssociato("comuneNew");
-        nodo1.setaTempo(false);
-        nodo1.setDescrizione("descrizioneNew");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n2.setNewData(nodo1);
-        richiesteNodo.add(n2);
-        //endregion
-
-        //region Creazione RDCItinerario
-        ClsRdcItinerario it1 = new ClsRdcItinerario();
-        it1.setIdRichiesta("1");
-        it1.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        it1.setStato(EStatusRDC.ASSEGNATO);
-        it1.setCreatore(utente);
-
-        //it1.setResponsabile(c1);
-        it1.setIdContestAppartenenza(contest1);
-
-        ClsItinerario itinerario1 = new ClsItinerario();
-        itinerario1.setId("1");
-        itinerario1.setOrdinato(false);
-        itinerario1.setIdCreatore("testCreatoreOld");
-        itinerario1.setNome("nomeOld");
-
-        List<ClsNodo> tappe1 = new ArrayList<>();
-        tappe1.add(nodo1);
-        tappe1.add(new ClsNodo());
-        itinerario1.setTappe(tappe1);
-        it1.setOldData(itinerario1);
-
-        itinerario1.setId("1");
-        itinerario1.setOrdinato(true);
-        itinerario1.setIdCreatore("testCreatoreNew");
-        itinerario1.setNome("nomeNew");
-        it1.setNewData(itinerario1);
-        richiesteItinerario.add(it1);
-        //endregion
-*/
         setRichiesteImmagini(richiesteImmagini);
 
         setRichiesteNodi(richiesteNodo);
@@ -450,33 +298,35 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     }
 
     public void accettaAzioneNodo(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
+        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaNodo(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     public void rifiutaAzioneNodo(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
+        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaNodo(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     public void accettaAzioneItinerario(MouseEvent mouseEvent) {

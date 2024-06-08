@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RepoNodi extends JpaRepository<ClsNodo, String> {
+public interface RepoNodi extends JpaRepository<ClsNodo, Long> {
     @Query(value = "select n from ClsNodo n WHERE n.idComuneAssociato=?1")
     List<ClsNodo> findNodiByComune(Long idComune);
 

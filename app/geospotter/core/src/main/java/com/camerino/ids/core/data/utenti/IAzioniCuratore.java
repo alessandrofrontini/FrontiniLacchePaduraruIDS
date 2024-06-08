@@ -1,5 +1,6 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
@@ -23,4 +24,12 @@ public interface IAzioniCuratore {
     List<ClsRdcItinerario> _getAllRDCItinerari();
     boolean deleteRDCItinerario(Long idRDCItinerario);
     boolean putRDCItinerario(ClsRdcItinerario rdc);
+    @JsonIgnore
+    List<ClsRDCNodo> getAllRDCNodi();
+    @JsonIgnore
+    List<ClsRDCImmagine> getAllRDCImmagini();
+
+    boolean accettaRichiestaNodo(Long idValidazione);
+
+    boolean rifiutaRichiestaNodo(Long idValidazione);
 }

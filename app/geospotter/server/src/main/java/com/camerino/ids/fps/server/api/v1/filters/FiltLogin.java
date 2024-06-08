@@ -71,9 +71,9 @@ public class FiltLogin extends OncePerRequestFilter {
         } else {
             String[] parts = request.getHeader("Authorization").split(" ");
             if (parts.length == 2)
-                user = repoUtenti.getReferenceById(parts[1]);
-            user = (ClsTurista) ((HibernateProxy) user).getHibernateLazyInitializer()
-                    .getImplementation();
+                user = repoUtenti.findById(Long.valueOf(parts[1])).get();
+            /*user = (ClsTurista) ((HibernateProxy) user).getHibernateLazyInitializer()
+                    .getImplementation();*/
             InitializeUser(user);
             request.getServletContext().setAttribute("user", user);
         }
