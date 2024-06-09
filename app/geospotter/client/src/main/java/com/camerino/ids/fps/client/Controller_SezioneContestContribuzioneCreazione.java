@@ -3,10 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsPartecipazioneContestDiContribuzione;
-import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
@@ -88,8 +85,8 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         //region combobox
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        for (int i = 0; i < Curatori.size(); i++) {
-            items.add(Curatori.get(i).getId().toString());
+        for (int i = 0; i < comuni.size(); i++) {
+            items.add(comuni.get(i).getId().toString());
         }
 
         this.sceltaComune.setItems(items);
@@ -114,36 +111,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         curatori.setCellValueFactory(
                 new PropertyValueFactory<>("curatori"));
         //endregion
-
-        //region Creazione Utenti dummy
-        ClsTuristaAutenticato ta1 = new ClsTuristaAutenticato();
-        ta1.setId(1L);
-        ta1.setPunteggio(190);
-        Credenziali credenz1 = new Credenziali();
-        credenz1.setUsername("username1");
-        ta1.setCredenziali(credenz1);
-        ta1.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
-        utenti.add(ta1);
-
-        ClsTuristaAutenticato ta2 = new ClsTuristaAutenticato();
-        ta2.setId(2L);
-        ta2.setPunteggio(290);
-        Credenziali credenz2 = new Credenziali();
-        credenz2.setUsername("username2");
-        ta2.setCredenziali(credenz2);
-        ta2.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
-        utenti.add(ta2);
-
-        ClsTuristaAutenticato ta3 = new ClsTuristaAutenticato();
-        ta3.setId(3L);
-        ta3.setPunteggio(220);
-        Credenziali credenz3 = new Credenziali();
-        credenz3.setUsername("username3");
-        ta3.setCredenziali(credenz3);
-        ta3.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR_AUTORIZZATO);
-        utenti.add(ta3);
-        //endregion
-
     }
 
     public void inserisciContest(MouseEvent mouseEvent) {
@@ -152,10 +119,8 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
         this.partecipazioni = new ArrayList<>();
 
         Date data = this.parseStringToDate(u.getValueFromTextField(dataFine));
-        List<ClsTuristaAutenticato> utentiInvitatiAContest = new ArrayList<ClsTuristaAutenticato>();
 
         if (data != null && u.getValueFromCombobox(this.sceltaComune) != null) {
-            contest.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
             contest.setDurata(data);
             comune = new ClsComune();
             comune.setId(Long.valueOf(u.getValueFromCombobox(this.sceltaComune)));
@@ -163,18 +128,7 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
             contest.setAperto(true);
 
-            for (int i = 0; i < utenti.size(); i++) {
-                ClsPartecipazioneContestDiContribuzione p = new ClsPartecipazioneContestDiContribuzione();
-                p.setId(0L);
-                p.setUsernamePartecipante(utenti.get(i).getCredenziali().getUsername());
-                p.setIdContest(contest.getId());
-
-                this.partecipazioni.add(p);
-            }
-
-            for (int i = 0; i < this.partecipazioni.size(); i++) {
-                System.out.println(this.partecipazioni.get(i).visualizzaPartecipazione());
-            }
+            ((ClsAnimatore)Controller_SezioneLogin.UTENTE).inserisciContest(contest);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");

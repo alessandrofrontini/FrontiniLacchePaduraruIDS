@@ -37,6 +37,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
+        this.iperContest = usr.iperContest;
     }
 
     public ClsCuratore() {

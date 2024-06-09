@@ -81,7 +81,7 @@ public class Utils {
         ClsContestDiContribuzioneVisual c = new ClsContestDiContribuzioneVisual();
 
         c.setId(contest.getId());
-        c.setUsernameCreatore(contest.getIdCreatore());
+        c.setIdCreatore(contest.getIdCreatore());
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
         c.setIsAperto(contest.isAperto().toString());

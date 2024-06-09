@@ -67,6 +67,7 @@ public class Controller_SezioneLogin {
         //user.setpRDCI(this.iperRDCI);
         //user._setIperRDCNodi(this.iperRDCNodi);
         user._setIperRDCNodi(new IperRDCNodi());
+        user.setIperContest(new IperContest());
         return user;
     }
 

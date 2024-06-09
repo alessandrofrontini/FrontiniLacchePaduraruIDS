@@ -32,6 +32,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     @Deprecated
     @Transient
     transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    @Transient
+    transient IPersistenceModel<ClsContestDiContribuzione> iperContest;
 
     //region Constructors
     public ClsContributor() {
@@ -87,7 +89,19 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
         this.pRDCI = pRDCI;
     }
-//endregion
+
+    public void setIperContest(IPersistenceModel<ClsContestDiContribuzione> iperContest) {
+        this.iperContest = iperContest;
+    }
+
+    public void setIperRDCItinerari(IPersistenceModel<ClsRdcItinerario> iperRDCItinerari) {
+        this.iperRDCItinerari = iperRDCItinerari;
+    }
+
+    public void setIperRDCNodi(IPersistenceModel<ClsRDCNodo> iperRDCNodi) {
+        this.iperRDCNodi = iperRDCNodi;
+    }
+    //endregion
 
     //region Override IContributable
 
@@ -249,6 +263,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
         rdc.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
         rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCItinerari.insert(rdc);
+    }
+
+    @Override
+    public List<ClsContestDiContribuzione> getAllContest() {
+        return this.iperContest.get(null);
     }
     //endregion
 }

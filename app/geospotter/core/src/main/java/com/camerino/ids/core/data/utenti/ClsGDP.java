@@ -34,7 +34,7 @@ public class ClsGDP extends ClsAnimatore implements IAzioniGDP {
 
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
-
+        this.iperContest = usr.iperContest;
     }
 
     //region Getters and Setters

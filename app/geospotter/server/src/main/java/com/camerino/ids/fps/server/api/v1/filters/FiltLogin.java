@@ -35,6 +35,7 @@ public class FiltLogin extends OncePerRequestFilter {
     IperRDCImmagini iperRDCImmagini;
     IperRDCNodi iperRDCNodi;
     RepoUtenti repoUtenti;
+    IperContest iperContest;
 
     @Autowired
     public FiltLogin(
@@ -48,7 +49,8 @@ public class FiltLogin extends OncePerRequestFilter {
             IperImmagini iperImmagini,
             IperRDCImmagini iperRDCImmagini,
             IperRDCNodi iperRDCNodi,
-            RepoUtenti repoUtenti) {
+            RepoUtenti repoUtenti,
+            IperContest iperContest) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
@@ -60,6 +62,7 @@ public class FiltLogin extends OncePerRequestFilter {
         this.iperRDCImmagini = iperRDCImmagini;
         this.iperRDCNodi = iperRDCNodi;
         this.repoUtenti = repoUtenti;
+        this.iperContest = iperContest;
     }
 
     @Override
@@ -96,6 +99,7 @@ public class FiltLogin extends OncePerRequestFilter {
         if (user instanceof ClsContributor tmp) {
             tmp.setpRDCI(this.iperRDCI);
             tmp._setIperRDCNodi(this.iperRDCNodi);
+            tmp.setIperContest(this.iperContest);
         }
 
         if (user instanceof ClsContributorAutorizzato tmp) {
