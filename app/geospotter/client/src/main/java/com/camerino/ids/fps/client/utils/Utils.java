@@ -183,7 +183,7 @@ public class Utils {
         tmp.setStato(rdcItinerario.getStato().toString());
         tmp.setRichiedente(rdcItinerario.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
-        tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 

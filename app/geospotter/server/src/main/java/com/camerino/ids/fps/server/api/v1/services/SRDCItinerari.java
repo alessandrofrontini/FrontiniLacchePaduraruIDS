@@ -53,6 +53,18 @@ public class SRDCItinerari {
     }
 
     public Boolean rifutaRDCNodi(Long idRDC) {
+        repoRDC.deleteById(idRDC);
+        //TODO: far guadagnare punteggio all'utente
+        return true;
+    }
+
+    public Boolean deleteRDCNodiById(Long idRDC) {
+        repoRDC.deleteById(idRDC);
+        //TODO: far guadagnare punteggio all'utente
+        return true;
+    }
+
+    public Boolean accettaRDCNodo(Long idRDC) {
         ClsRdcItinerario rdc = repoRDC.findById(idRDC).get();
         ClsItinerario oldData = rdc.getOldData();
         ClsItinerario newData  = rdc.getNewData();
@@ -71,12 +83,6 @@ public class SRDCItinerari {
                 repoItinerari.delete(oldData);
             }break;
         }
-        //TODO: far guadagnare punteggio all'utente
-        return true;
-    }
-
-    public Boolean deleteRDCNodiById(Long idRDC) {
-        repoRDC.deleteById(idRDC);
         //TODO: far guadagnare punteggio all'utente
         return true;
     }

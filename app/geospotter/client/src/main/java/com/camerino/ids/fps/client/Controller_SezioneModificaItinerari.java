@@ -126,19 +126,19 @@ public class Controller_SezioneModificaItinerari implements Initializable {
         ClsItinerario nuovoItinerario = this.inserisciItinerario(mouseEvent);
         Long IDDaModificare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        if (nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size() >= 2) {
+        //if (nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size() >= 2) {
             nuovoItinerario.setId(IDDaModificare);
             ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaItinerario(nuovoItinerario, IDDaModificare);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
             alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Attenzione");
             alert.setContentText("Controlla le informazioni e riprova");
             alert.show();
-        }
+        }*/
     }
 
     public ClsItinerario inserisciItinerario(MouseEvent mouseEvent) {
@@ -146,7 +146,7 @@ public class Controller_SezioneModificaItinerari implements Initializable {
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);
 
-        List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<ClsNodo>();
+        List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
 
         if (nodiCoinvoltiInArray.length > 0) {
             for (int i = 0; i < nodi.size(); i++) {

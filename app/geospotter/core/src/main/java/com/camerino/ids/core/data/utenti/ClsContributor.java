@@ -206,7 +206,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
             return false;
         ClsRdcItinerario rdc = new ClsRdcItinerario(old.get(0), null);
         rdc.setCreatore(this);
-        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCItinerari.insert(rdc);
     }
@@ -252,9 +252,9 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     }
 
     public boolean postRDCItinerario(ClsRdcItinerario rdc) {
-        rdc.setCreatore(this);
-        rdc.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        rdc.setStato(EStatusRDC.NUOVO);
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idUtente", this.id);
+        rdc.setCreatore(iperUtenti.get(filters).get(0));
         return iperRDCItinerari.insert(rdc);
     }
 
