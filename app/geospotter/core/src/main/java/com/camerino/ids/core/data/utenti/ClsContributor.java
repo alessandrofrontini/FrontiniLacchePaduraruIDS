@@ -126,6 +126,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
         rdc.setCreatore(this);
         rdc.setStato(EStatusRDC.NUOVO);
         rdc.setIdContestAppartenenza(contest);
+        nodo.setIdComuneAssociato(contest.getLocation().getId());
         return this.postRDCNodo(rdc);
     }
 

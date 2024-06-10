@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsContestDiContribuzioneVisual;
 import javafx.collections.FXCollections;
@@ -50,40 +51,7 @@ public class Controller_SezioneContestContribuzionePartecipazione implements Ini
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        contests = new ArrayList<ClsContestDiContribuzione>();
-
-        //region Creazione Contest dummy
-        ClsContestDiContribuzione c1 = new ClsContestDiContribuzione();
-        c1.setId(1L);
-        c1.setDurata(new Date("01/01/2024"));
-        c1.setIdCreatore(1L);
-        ClsComune com1 = new ClsComune();
-        com1.setNome("Comune1");
-        c1.setLocation(com1);
-        c1.setAperto(true);
-        contests.add(c1);
-
-        ClsContestDiContribuzione c2 = new ClsContestDiContribuzione();
-        c2.setId(2L);
-        c2.setDurata(new Date("02/02/2024"));
-        c2.setIdCreatore(1L);
-        ClsComune com2 = new ClsComune();
-        com2.setNome("Comune2");
-        c2.setLocation(com2);
-        c2.setAperto(false);
-        contests.add(c2);
-
-        ClsContestDiContribuzione c3 = new ClsContestDiContribuzione();
-        c3.setId(3L);
-        c3.setDurata(new Date("03/03/2024"));
-        c3.setIdCreatore(1L);
-        ClsComune com3 = new ClsComune();
-        com3.setNome("Comune3");
-        c3.setLocation(com3);
-        c3.setAperto(true);
-        contests.add(c3);
-        //endregion
-
+        contests = ((ClsContributor)Controller_SezioneLogin.UTENTE).getAllContest();
         setContest(contests);
 
         //region combobox

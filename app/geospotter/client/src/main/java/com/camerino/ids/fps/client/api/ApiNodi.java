@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client.api;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;
 
@@ -19,15 +20,16 @@ public class ApiNodi implements IApi<ClsNodo> {
     @Override
     public List<ClsNodo> Get(ClsTurista user, String query) {
         if (query == null)
-            query = "";//todo: fixare null on no user
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Authorization", FakeTokens.getToken(user))
+            query = "";
+        HttpRequest.Builder request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .uri(URI.create(String.format("%s?%s", endpoint, query)))
-                .GET()
-                .build();
+                .GET();
 
-        HttpResponse<String> response = execute(request);
+        if(user instanceof ClsTuristaAutenticato)
+            request.header("Authorization", FakeTokens.getToken(user));
+
+        HttpResponse<String> response = execute(request.build());
         if (response.statusCode() != 200)
             return new ArrayList<>();
 
