@@ -18,10 +18,6 @@ public class ClsContributorAutorizzato extends ClsContributor {
     }
 
     public ClsContributorAutorizzato(ClsContributor usr) {
-
-        this.pRDC = usr.pRDC;
-        this.pRDCI = usr.pRDCI;
-
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
@@ -35,6 +31,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
         this.iperContest = usr.iperContest;
+        this.iperRDCItinerari = usr.iperRDCItinerari;
     }
 //endregion
 

@@ -268,33 +268,35 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     }
 
     public void accettaAzioneImmagine(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
+        //f (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaImmagine(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     public void accettaAzioneNodo(MouseEvent mouseEvent) {
@@ -330,33 +332,35 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     }
 
     public void accettaAzioneItinerario(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerario);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
+        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaItinerario(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     public void rifiutaAzioneItinerario(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneItinerario);
-        if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
+        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaItinerario(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERRORE");
             alert.setContentText("ERRORE");
             alert.show();
-        }
+        }*/
     }
 
     private void setRichiesteImmagini(List<ClsRDCImmagine> richiesteImmagini) {

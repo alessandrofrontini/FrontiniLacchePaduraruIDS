@@ -2,9 +2,7 @@ package com.camerino.ids.fps.client;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
-import com.camerino.ids.core.data.contenuti.ClsPartecipazioneContestDiContribuzione;
 import com.camerino.ids.core.data.utenti.*;
-import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsComuneVisual;
 import javafx.collections.FXCollections;
@@ -74,7 +72,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
 
     List<ClsContributorAutorizzato> contributorAutorizzatos;
     List<ClsCuratore> Curatori = new ArrayList<>();
-    List<ClsPartecipazioneContestDiContribuzione> partecipazioni;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -116,7 +113,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
     public void inserisciContest(MouseEvent mouseEvent) {
         ClsContestDiContribuzione contest = new ClsContestDiContribuzione();
         ClsComune comune = new ClsComune();
-        this.partecipazioni = new ArrayList<>();
 
         Date data = this.parseStringToDate(u.getValueFromTextField(dataFine));
 

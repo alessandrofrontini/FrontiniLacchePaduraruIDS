@@ -30,7 +30,7 @@ public class CRDCItinerari {
 
     @DeleteMapping(mapping)
     public ResponseEntity<Boolean> deleteRDC(
-            @RequestParam(value = "idRDCItinerario", required = false) Long idRDCI
+            @RequestParam(value = "idRDCItinerario") Long idRDCI
     ) {
         return ResponseEntity.ok(sRDCItinerari.deleteRDCItinerarioById(idRDCI));
     }
@@ -47,5 +47,12 @@ public class CRDCItinerari {
             @RequestBody ClsRdcItinerario rdc
     ) {
         return ResponseEntity.ok(sRDCItinerari.postRDCItinerario(rdc));
+    }
+
+    @GetMapping(mapping+"/rifiuta")
+    public ResponseEntity<Boolean> rifiutaRDC(
+            @RequestParam(value = "idValidazione", required = false) Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCItinerari.rifutaRDCNodi(idRDC));
     }
 }

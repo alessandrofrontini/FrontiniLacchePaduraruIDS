@@ -59,7 +59,7 @@ public class SRDCNodi {
         repoRDC.delete(rdc);
         switch (rdc.getTipo()){
             case INSERISCI_NODO: {
-
+                //Basta cancellare la RDC
             }break;
             case MODIFICA_NODO: {//todo: bug owner nodo non settato
                 oldData.setPosizione(newData.getPosizione());

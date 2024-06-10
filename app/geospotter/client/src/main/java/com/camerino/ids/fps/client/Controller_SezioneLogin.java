@@ -63,11 +63,9 @@ public class Controller_SezioneLogin {
     private static ClsContributor CreaContributor() {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
-        //user.setpRDC(this.iperRDC);
-        //user.setpRDCI(this.iperRDCI);
-        //user._setIperRDCNodi(this.iperRDCNodi);
         user._setIperRDCNodi(new IperRDCNodi());
         user.setIperContest(new IperContest());
+        user._setIperRDCItinerari(new IperRDCItinerari());
         return user;
     }
 

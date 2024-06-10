@@ -62,9 +62,9 @@ public class ClsTurista implements IAzioniTurista {
         return this.iperItinerari.get(null);
     }
 
-    public List<ClsItinerario> getItinerarioById() {
+    public List<ClsItinerario> getItinerarioById(Long id) {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idItinerario", iperItinerari.get(filters));
+        filters.put("idItinerario", id);
         return this.iperItinerari.get(filters);
     }
     

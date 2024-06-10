@@ -1,6 +1,5 @@
 package com.camerino.cli.mock;
 
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
 import java.util.ArrayList;

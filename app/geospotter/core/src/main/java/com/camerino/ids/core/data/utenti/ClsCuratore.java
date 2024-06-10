@@ -3,7 +3,6 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import jakarta.persistence.Entity;
 
@@ -23,9 +22,6 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
 
     //region Constructors
     public ClsCuratore(ClsAnimatore usr) {
-        this.pRDC = usr.pRDC;
-        this.pRDCI = usr.pRDCI;
-
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
@@ -38,6 +34,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
         this.iperContest = usr.iperContest;
+        this.iperRDCItinerari = usr.iperRDCItinerari;
     }
 
     public ClsCuratore() {
@@ -54,33 +51,13 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         return iperRDCNodi.get(null);
     }
 
-    public List<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI() {
-        return pRDCI.get(null);
-    }
-
-    public List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(Long idRDCI) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDCI", idRDCI);
-        return pRDCI.get(filters);
-    }
-
-    public boolean putRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idRDCI", rdci.getId());
-        return pRDCI.update(filters, rdci);
-    }
-
-    public boolean postRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci) {
-        return pRDCI.insert(rdci);
-    }
-
     @Override
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return iperRDCImmagini.update(null, rdci);
     }
 
     public List<ClsRdcItinerario> _getAllRDCItinerari() {
-        return new ArrayList<>();//iperRDCItinerari.get(null);
+        return iperRDCItinerari.get(null);
     }
 
     public List<ClsRdcItinerario> getRDCItinerarioById(Long idRDCItinerario) {
@@ -124,6 +101,42 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         filters.put("idValidazione", idValidazione);
         filters.put("accetta", false);
         iperRDCNodi.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean accettaRichiestaItinerario(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", true);
+        iperRDCItinerari.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean rifiutaRichiestaImmagine(String idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", false);
+        iperRDCImmagini.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean accettaRichiestaImmagine(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", true);
+        iperRDCImmagini.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean rifiutaRichiestaItinerario(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", false);
+        iperRDCItinerari.get(filters);
         return true;
     }
 }
