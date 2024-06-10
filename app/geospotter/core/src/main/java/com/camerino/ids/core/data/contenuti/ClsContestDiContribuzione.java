@@ -12,10 +12,10 @@ public class ClsContestDiContribuzione {
     @Id
     @GeneratedValue
     Long id;
-    String idCreatore;
+    Long idCreatore;
     Date durata;
     @OneToOne
-    @JoinColumn(name = "")//TODO finire associazione
+    @JoinColumn(name = "id")
     ClsComune location;
     Boolean isAperto;
 
@@ -27,11 +27,11 @@ public class ClsContestDiContribuzione {
         this.id = id;
     }
 
-    public String getIdCreatore() {
+    public Long getIdCreatore() {
         return idCreatore;
     }
 
-    public void setIdCreatore(String usernameCreatore) {
+    public void setIdCreatore(Long usernameCreatore) {
         this.idCreatore = usernameCreatore;
     }
 

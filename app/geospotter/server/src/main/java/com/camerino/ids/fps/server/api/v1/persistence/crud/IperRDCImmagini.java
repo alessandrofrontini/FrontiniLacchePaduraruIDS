@@ -46,7 +46,7 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
             return false;
         if (!filters.containsKey("idRDCImmagini"))
             return false;
-        repoRDCIimmagini.deleteById(filters.get("idRDCImmagini").toString());
+        repoRDCIimmagini.deleteById((Long) filters.get("idRDCImmagini"));
         return true;
     }
 }

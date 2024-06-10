@@ -25,7 +25,7 @@ public class SItinerari {
 
     public List<ClsItinerario> getItinerarioById(Long idItinerario) {
         ClsTurista user = (ClsTurista) request.getServletContext().getAttribute("user");
-        return user.getItinerarioById();
+        return user.getItinerarioById(idItinerario);
     }
 
     public boolean postItinerario(ClsItinerario itinerario) {

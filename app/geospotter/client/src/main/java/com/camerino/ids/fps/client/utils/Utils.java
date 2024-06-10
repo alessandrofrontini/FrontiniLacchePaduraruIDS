@@ -97,7 +97,7 @@ public class Utils {
         ClsContestDiContribuzioneVisual c = new ClsContestDiContribuzioneVisual();
 
         c.setId(contest.getId());
-        c.setUsernameCreatore(contest.getIdCreatore());
+        c.setIdCreatore(contest.getIdCreatore());
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
         c.setIsAperto(contest.isAperto().toString());
@@ -117,7 +117,7 @@ public class Utils {
         return u;
     }
 
-    public ClsRichiestaAzioneDiContribuzioneVisual convertFromRichiestaAzioneContribuzione(ClsRichiestaAzioneDiContribuzione richiesta) {
+    /*public ClsRichiestaAzioneDiContribuzioneVisual convertFromRichiestaAzioneContribuzione(ClsRichiestaAzioneDiContribuzione richiesta) {
         ClsRichiestaAzioneDiContribuzioneVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneVisual();
 
         richiestaVisual.setId(richiesta.getId());
@@ -133,7 +133,7 @@ public class Utils {
         }
 
         return richiestaVisual;
-    }
+    }*/
 
     public ClsUtenteVisual convertFromClsTuristaAutenticato(ClsTuristaAutenticato turista) {
         ClsUtenteVisual c = new ClsUtenteVisual();
@@ -168,7 +168,7 @@ public class Utils {
         tmp.setStato(rdcNodo.getStato().toString());
         tmp.setRichiedente(rdcNodo.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcNodo.getResponsabile().getId());
-        tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcNodo.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -190,7 +190,7 @@ public class Utils {
         return tmp;
     }
 
-    public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta) {
+    /*public ClsRichiestaAzioneDiContribuzioneItinerarioVisual convertFromRichiestaAzioneContribuzioneItinerario(ClsRichiestaAzioneDiContribuzioneItinerario richiesta) {
         ClsRichiestaAzioneDiContribuzioneItinerarioVisual richiestaVisual = new ClsRichiestaAzioneDiContribuzioneItinerarioVisual();
 
         richiestaVisual.setIdd(richiesta.getId());
@@ -211,7 +211,7 @@ public class Utils {
         richiestaVisual.setTappe(tappe);
 
         return richiestaVisual;
-    }
+    }*/
 
     public String getValueFromCombobox(ComboBox c) {
         return (String) c.getValue();

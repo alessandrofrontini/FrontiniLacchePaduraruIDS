@@ -1,6 +1,7 @@
 package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import jakarta.persistence.Entity;
 
 import java.util.List;
@@ -18,9 +19,6 @@ public class ClsAnimatore extends ClsContributorAutorizzato implements IAzioniAn
     }
 
     public ClsAnimatore(ClsContributorAutorizzato usr) {
-        this.pRDC = usr.pRDC;
-        this.pRDCI = usr.pRDCI;
-
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
@@ -33,6 +31,8 @@ public class ClsAnimatore extends ClsContributorAutorizzato implements IAzioniAn
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
         this.iperRDCNodi = usr.iperRDCNodi;
+        this.iperContest = usr.iperContest;
+        this.iperRDCItinerari = usr.iperRDCItinerari;
     }
     //endregion
 
@@ -42,5 +42,13 @@ public class ClsAnimatore extends ClsContributorAutorizzato implements IAzioniAn
 
     public boolean putRDCImmagine(ClsRDCImmagine rdci) {
         return false;
+    }
+
+    @Override
+    public boolean inserisciContest(ClsContestDiContribuzione contest) {
+        contest.setIdCreatore(this.id);
+        contest.setAperto(true);
+        this.iperContest.insert(contest);
+        return true;
     }
 }

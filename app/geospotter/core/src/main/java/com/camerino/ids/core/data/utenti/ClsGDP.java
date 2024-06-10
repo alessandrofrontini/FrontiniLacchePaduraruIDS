@@ -19,10 +19,6 @@ public class ClsGDP extends ClsAnimatore implements IAzioniGDP {
     }
 
     public ClsGDP(ClsAnimatore usr) {
-
-        this.pRDC = usr.pRDC;
-        this.pRDCI = usr.pRDCI;
-
         this.credenziali = usr.credenziali;
         this.id = usr.id;
 
@@ -34,7 +30,8 @@ public class ClsGDP extends ClsAnimatore implements IAzioniGDP {
 
         this.iperUtenti = usr.iperUtenti;
         this.iperRDCImmagini = usr.iperRDCImmagini;
-
+        this.iperContest = usr.iperContest;
+        this.iperRDCItinerari = usr.iperRDCItinerari;
     }
 
     //region Getters and Setters

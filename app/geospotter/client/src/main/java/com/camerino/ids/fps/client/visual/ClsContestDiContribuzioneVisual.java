@@ -2,7 +2,7 @@ package com.camerino.ids.fps.client.visual;
 
 public class ClsContestDiContribuzioneVisual {
     public Long id;
-    public String usernameCreatore;
+    public Long idCreatore;
 
     public String durata;
 
@@ -18,12 +18,12 @@ public class ClsContestDiContribuzioneVisual {
         this.id = id;
     }
 
-    public String getUsernameCreatore() {
-        return usernameCreatore;
+    public Long getIdCreatore() {
+        return idCreatore;
     }
 
-    public void setUsernameCreatore(String usernameCreatore) {
-        this.usernameCreatore = usernameCreatore;
+    public void setIdCreatore(Long idCreatore) {
+        this.idCreatore = idCreatore;
     }
 
     public String getDurata() {

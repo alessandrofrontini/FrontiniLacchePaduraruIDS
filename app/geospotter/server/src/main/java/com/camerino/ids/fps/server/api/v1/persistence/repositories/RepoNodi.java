@@ -8,10 +8,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RepoNodi extends JpaRepository<ClsNodo, String> {
+public interface RepoNodi extends JpaRepository<ClsNodo, Long> {
     @Query(value = "select n from ClsNodo n WHERE n.idComuneAssociato=?1")
     List<ClsNodo> findNodiByComune(Long idComune);
 
     @Query("SELECT n from ClsNodo n where n.idCreatore=?1")
     List<ClsNodo> findNodoByUtente(Long owner);
+
+    //Trova tutti i nodi che non fanno parte di una RDC
+    @Query(value = """
+select * from CLS_NODO where id not in (select NEW_DATA_ID from CLSRDcnodo where NEW_DATA_ID  is not null)
+""", nativeQuery = true)
+    List<ClsNodo> findAllOfficial();
 }

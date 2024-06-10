@@ -26,12 +26,8 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     transient IPersistenceModel<ClsRDCNodo> iperRDCNodi;
     @Transient
     transient IPersistenceModel<ClsRdcItinerario> iperRDCItinerari;
-    @Deprecated
     @Transient
-    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC;
-    @Deprecated
-    @Transient
-    transient IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI;
+    transient IPersistenceModel<ClsContestDiContribuzione> iperContest;
 
     //region Constructors
     public ClsContributor() {
@@ -78,16 +74,18 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
         this.iperRDCItinerari = iperRDCItinerari;
     }
 
-    @Deprecated
-    public void setpRDC(IPersistenceModel<ClsRichiestaAzioneDiContribuzione> pRDC) {
-        this.pRDC = pRDC;
+    public void setIperContest(IPersistenceModel<ClsContestDiContribuzione> iperContest) {
+        this.iperContest = iperContest;
     }
 
-    @Deprecated
-    public void setpRDCI(IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> pRDCI) {
-        this.pRDCI = pRDCI;
+    public void setIperRDCItinerari(IPersistenceModel<ClsRdcItinerario> iperRDCItinerari) {
+        this.iperRDCItinerari = iperRDCItinerari;
     }
-//endregion
+
+    public void setIperRDCNodi(IPersistenceModel<ClsRDCNodo> iperRDCNodi) {
+        this.iperRDCNodi = iperRDCNodi;
+    }
+    //endregion
 
     //region Override IContributable
 
@@ -112,6 +110,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
         rdc.setCreatore(this);
         rdc.setStato(EStatusRDC.NUOVO);
         rdc.setIdContestAppartenenza(contest);
+        nodo.setIdComuneAssociato(contest.getLocation().getId());
         return this.postRDCNodo(rdc);
     }
 
@@ -148,7 +147,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
             return false;
         ClsRDCNodo rdc = new ClsRDCNodo(old.get(0), null);
         rdc.setCreatore(this);
-        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCNodi.insert(rdc);
     }
@@ -163,11 +162,14 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
-        req.setDatiItinerario(itinerario);
-        return pRDCI.insert(req);
+        ClsRdcItinerario req = new ClsRdcItinerario(null, itinerario);
+        req.setStato(EStatusRDC.NUOVO);
+        req.setCreatore(this);
+        req.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
+
+        itinerario.setIdCreatore(this.id);
+
+        return this.iperRDCItinerari.insert(req);
     }
 
     /**
@@ -180,11 +182,14 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
      */
     @Override
     public boolean modificaItinerario(ClsItinerario itinerario, Long id) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
-        req.setDatiItinerario(itinerario);
-        return pRDCI.insert(req);
+        List<ClsItinerario> old = getItinerarioById(itinerario.getId());
+        itinerario.setId(0L);
+        if (old.size() != 1)
+            return false;
+        ClsRdcItinerario rdc = new ClsRdcItinerario(old.get(0), itinerario);
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.MODIFICA_ITINERARIO);
+        return iperRDCItinerari.insert(rdc);
     }
 
     /**
@@ -196,13 +201,14 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
      */
     @Override
     public boolean eliminaItinerario(Long id) {
-        ClsRichiestaAzioneDiContribuzioneItinerario req = new ClsRichiestaAzioneDiContribuzioneItinerario();
-        req.setUsernameCreatore(this.getCredenziali().getUsername());
-        req.seteAzioniDiContribuzione(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("id", id);
-        req.setDatiItinerario(iperItinerari.get(tmp).get(0));
-        return pRDCI.insert(req);
+        List<ClsItinerario> old = getItinerarioById(id);
+        if (old.size() != 1)
+            return false;
+        ClsRdcItinerario rdc = new ClsRdcItinerario(old.get(0), null);
+        rdc.setCreatore(this);
+        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        rdc.setStato(EStatusRDC.NUOVO);
+        return iperRDCItinerari.insert(rdc);
     }
 
     @JsonIgnore
@@ -226,9 +232,10 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     }
 
     public boolean deleteRDCById(Long idRDC) {
-        HashMap<String, Object> filters = new HashMap<>();
+        /*HashMap<String, Object> filters = new HashMap<>();
         filters.put("idRDC", idRDC);
-        return pRDC.delete(filters);
+        return pRDC.delete(filters);*/
+        return false;
     }
 
     public boolean putRDCNodo(ClsRDCNodo rdc) {
@@ -249,6 +256,11 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
         rdc.setTipo(EAzioniDiContribuzione.INSERISCI_ITINERARIO);
         rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCItinerari.insert(rdc);
+    }
+
+    @Override
+    public List<ClsContestDiContribuzione> getAllContest() {
+        return this.iperContest.get(null);
     }
     //endregion
 }

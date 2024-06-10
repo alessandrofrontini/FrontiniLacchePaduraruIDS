@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RepoRecensioni extends JpaRepository<ClsRecensione, String> {
+public interface RepoRecensioni extends JpaRepository<ClsRecensione, Long> {
     @Query(value = "Select r from ClsRecensione r WHERE r.idNodoAssociato= ?1")
     List<ClsRecensione> findRecensioniByNodo(Long idNodo);
 

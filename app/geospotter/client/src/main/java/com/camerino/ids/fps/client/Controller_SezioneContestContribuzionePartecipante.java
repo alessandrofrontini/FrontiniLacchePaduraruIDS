@@ -3,6 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsContestDiContribuzioneVisual;
@@ -107,44 +108,12 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        contests = new ArrayList<ClsContestDiContribuzione>();
+        contests = ((ClsContributor)Controller_SezioneLogin.UTENTE).getAllContest();
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
 
         this.sezioneInserimentoNodiTextFieldDataInizio.setVisible(flag);
         this.sezioneInserimentoNodiTextFieldDataFine.setVisible(flag);
-/*
-        //region Creazione Contest dummy
-        ClsContestDiContribuzione c1 = new ClsContestDiContribuzione();
-        c1.setId("1");
-        c1.setDurata(new Date("01/01/2024"));
-        c1.setUsernameCreatore("test1");
-        ClsComune com1 = new ClsComune();
-        com1.setNome("Comune1");
-        c1.setLocation(com1);
-        c1.setAperto(true);
-        contests.add(c1);
 
-        ClsContestDiContribuzione c2 = new ClsContestDiContribuzione();
-        c2.setId("2");
-        c2.setDurata(new Date("02/02/2024"));
-        c2.setUsernameCreatore("test2");
-        ClsComune com2 = new ClsComune();
-        com2.setNome("Comune2");
-        c2.setLocation(com2);
-        c2.setAperto(false);
-        contests.add(c2);
-
-        ClsContestDiContribuzione c3 = new ClsContestDiContribuzione();
-        c3.setId("3");
-        c3.setDurata(new Date("03/03/2024"));
-        c3.setUsernameCreatore("test3");
-        ClsComune com3 = new ClsComune();
-        com3.setNome("Comune3");
-        c3.setLocation(com3);
-        c3.setAperto(true);
-        contests.add(c3);
-        //endregion
-*/
         setContest(contests);
         setNodi(nodi);
 
@@ -230,7 +199,8 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     public void inserisciNodo() {
         ClsNodo nodo = new ClsNodo();
         Posizione posizione = new Posizione();
-        String IDContest = this.partecipaContest(null);
+        Long IDContest = Long.valueOf(this.partecipaContest(null));
+        ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
 
         try {
             if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
@@ -248,6 +218,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
                         Objects.equals(u.getValueFromCombobox(sceltaContest), null)) {
                     nodo.setIdCreatore(1L);
+                    nodo.setIdComuneAssociato(contest.getId());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     //nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
@@ -256,12 +227,13 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if (!u.checkInfoNodo(nodo) || Objects.equals(u.getValueFromCombobox(sceltaContest), null) || Objects.equals(u.getValueFromCombobox(sceltaContest), "")) {
+                    if (!u.checkInfoNodo(nodo)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore");
                         alert.setContentText("Controlla le informazioni");
                         alert.show();
                     } else {
+                        ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciNodo(nodo, contest);
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info Nodo");
                         alert.setContentText(nodo.visualizzaNodo());

@@ -26,8 +26,8 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
             return new ArrayList<>(repoComuni.findAll());
 
         if (filters.containsKey("idComune")) {
-            List<String> ids = new ArrayList<>();
-            ids.add((String) filters.get("idComune"));
+            List<Long> ids = new ArrayList<>();
+            ids.add((Long) filters.get("idComune"));
             return new ArrayList<>(repoComuni.findAllById(ids));
         }
 
@@ -52,7 +52,7 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
             return false;
         if (!filters.containsKey("idComune"))
             return false;
-        repoComuni.deleteById(filters.get("idComune").toString());
+        repoComuni.deleteById((Long) filters.get("idComune"));
         return true;
     }
 }

@@ -26,4 +26,6 @@ public interface IAzioniContributor {
     boolean putRDCNodo(ClsRDCNodo rdc);
     boolean postRDCNodo(ClsRDCNodo rdc);
     boolean postRDCItinerario(ClsRdcItinerario rdc);
+    @JsonIgnore
+    List<ClsContestDiContribuzione> getAllContest();
 }

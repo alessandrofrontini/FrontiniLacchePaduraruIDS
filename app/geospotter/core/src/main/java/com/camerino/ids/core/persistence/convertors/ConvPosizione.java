@@ -11,6 +11,7 @@ public class ConvPosizione implements AttributeConverter<Posizione, String> {
 
     @Override
     public String convertToDatabaseColumn(Posizione posizione) {
+        if (posizione==null) return null;
         return posizione.getX() + delimitatore + posizione.getY();
     }
 

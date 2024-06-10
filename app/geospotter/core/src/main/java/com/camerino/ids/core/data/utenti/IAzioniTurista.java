@@ -10,7 +10,7 @@ public interface IAzioniTurista {
     @JsonIgnore
     List<ClsItinerario> getAllItinerari();
     @JsonIgnore
-    List<ClsItinerario> getItinerarioById();
+    List<ClsItinerario> getItinerarioById(Long id);
     @JsonIgnore
     List<ClsNodo> getNodoById(Long idNodo);
     @JsonIgnore

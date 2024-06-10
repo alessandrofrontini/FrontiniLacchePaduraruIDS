@@ -1,8 +1,9 @@
 package com.camerino.ids.core.data.utenti;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
-import com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzioneItinerario;
+import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,13 +15,23 @@ public interface IAzioniCuratore {
     @JsonIgnore
     List<ClsRDCNodo> _getAllRDCNodi();
     @JsonIgnore
-    List<ClsRichiestaAzioneDiContribuzioneItinerario> _getAllRDCI();
-    @JsonIgnore
-    List<ClsRichiestaAzioneDiContribuzioneItinerario> getRDCIById(Long idRDCI);
-    boolean putRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci);
-    boolean postRDCI(ClsRichiestaAzioneDiContribuzioneItinerario rdci);
-    @JsonIgnore
     List<ClsRdcItinerario> _getAllRDCItinerari();
     boolean deleteRDCItinerario(Long idRDCItinerario);
     boolean putRDCItinerario(ClsRdcItinerario rdc);
+    @JsonIgnore
+    List<ClsRDCNodo> getAllRDCNodi();
+    @JsonIgnore
+    List<ClsRDCImmagine> getAllRDCImmagini();
+
+    boolean accettaRichiestaNodo(Long idValidazione);
+
+    boolean rifiutaRichiestaNodo(Long idValidazione);
+
+    boolean accettaRichiestaItinerario(Long idValidazione);
+
+    boolean rifiutaRichiestaImmagine(String idValidazione);
+
+    boolean accettaRichiestaImmagine(Long idValidazione);
+
+    boolean rifiutaRichiestaItinerario(Long idValidazione);
 }

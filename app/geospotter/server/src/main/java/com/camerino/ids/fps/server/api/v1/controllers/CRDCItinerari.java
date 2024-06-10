@@ -29,29 +29,30 @@ public class CRDCItinerari {
     }
 
     @DeleteMapping(mapping)
-    public ResponseEntity<String> deleteRDC(
-            @RequestParam(value = "idRDCItinerario", required = false) Long idRDCI
+    public ResponseEntity<Boolean> deleteRDC(
+            @RequestParam(value = "idRDCItinerario") Long idRDCI
     ) {
-        if (sRDCItinerari.deleteRDCItinerarioById(idRDCI))
-            return ResponseEntity.ok("RDC deleted");
-        return ResponseEntity.status(500).body("RDC not deleted");
+        return ResponseEntity.ok(sRDCItinerari.deleteRDCItinerarioById(idRDCI));
     }
 
     @PutMapping(mapping)
-    public ResponseEntity<String> putRDCI(
+    public ResponseEntity<Boolean> putRDCI(
             @RequestBody ClsRdcItinerario rdc
     ) {
-        if (sRDCItinerari.putRDCItinerario(rdc))
-            return ResponseEntity.ok("Azione Modificata");
-        return ResponseEntity.status(500).body("Azione non modificata");
+        return ResponseEntity.ok(sRDCItinerari.putRDCItinerario(rdc));
     }
 
     @PostMapping(mapping)
-    public ResponseEntity<String> postRDC(
+    public ResponseEntity<Boolean> postRDC(
             @RequestBody ClsRdcItinerario rdc
     ) {
-        if (sRDCItinerari.postRDCItinerario(rdc))
-            return ResponseEntity.ok("Azione Creata");
-        return ResponseEntity.status(500).body("Azione non creata");
+        return ResponseEntity.ok(sRDCItinerari.postRDCItinerario(rdc));
+    }
+
+    @GetMapping(mapping+"/rifiuta")
+    public ResponseEntity<Boolean> rifiutaRDC(
+            @RequestParam(value = "idValidazione", required = false) Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCItinerari.rifutaRDCNodi(idRDC));
     }
 }

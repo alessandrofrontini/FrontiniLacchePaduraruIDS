@@ -1,8 +1,13 @@
 package com.camerino.ids.fps.client.iper;
 
+import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
+import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.client.Controller_SezioneLogin;
+import com.camerino.ids.fps.client.api.ApiRDCImmagini;
+import com.camerino.ids.fps.client.api.ApiRDCItinerari;
 import com.camerino.ids.fps.client.api.ApiRDCNodi;
 import com.camerino.ids.fps.client.api.IApi;
 import javafx.util.Pair;
@@ -10,11 +15,11 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Map;
 
-public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
-    IApi<ClsRDCNodo> api = new ApiRDCNodi();
+public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
+    IApi<ClsRdcItinerario> api = new ApiRDCItinerari();
 
     @Override
-    public List<ClsRDCNodo> get(Map<String, Object> filters) {
+    public List<ClsRdcItinerario> get(Map<String, Object> filters) {
         if(filters == null)
             return api.Get(Controller_SezioneLogin.UTENTE, null);
 
@@ -29,21 +34,18 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     }
 
     @Override
-    public boolean update(Map<String, Object> filters, ClsRDCNodo object) {
-        return api.Put(
-                Controller_SezioneLogin.UTENTE, object);
+    public boolean update(Map<String, Object> filters, ClsRdcItinerario object) {
+        return api.Put(Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
-    public boolean insert(ClsRDCNodo object) {
-        return api.Post(
-                Controller_SezioneLogin.UTENTE, object);
+    public boolean insert(ClsRdcItinerario object) {
+        return api.Post(Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        return api.Delete(
-                Controller_SezioneLogin.UTENTE,
-                new Pair<>("idRDCNodo", filters.get("idRDCNodo").toString()));
+        return api.Delete(Controller_SezioneLogin.UTENTE,
+                new Pair<>("idRDCItinerario", filters.get("idRDCItinerario").toString()));
     }
 }

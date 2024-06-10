@@ -28,27 +28,29 @@ public class FiltLogin extends OncePerRequestFilter {
     IperNodi iperNodi;
     IperComuni iperComuni;
     IperItinerari iperItinerari;
-    IperRDCI iperRDCI;
     IperSegnalazioni iperSegnalazioni;
     IperUtenti iperUtenti;
     IperImmagini iperImmagini;
     IperRDCImmagini iperRDCImmagini;
     IperRDCNodi iperRDCNodi;
+    IperRDCItinerari iperRDCItinerari;
     RepoUtenti repoUtenti;
+    IperContest iperContest;
 
     @Autowired
     public FiltLogin(
             IperNodi iperNodi,
             IperComuni iperComuni,
             IperItinerari iperItinerari,
-            IperRDCI iperRDCI,
             IperRecensioni iperRecensioni,
             IperSegnalazioni iperSegnalazioni,
             IperUtenti iperUtenti,
             IperImmagini iperImmagini,
             IperRDCImmagini iperRDCImmagini,
             IperRDCNodi iperRDCNodi,
-            RepoUtenti repoUtenti) {
+            IperRDCItinerari iperRDCItinerari,
+            RepoUtenti repoUtenti,
+            IperContest iperContest) {
 
         this.iperNodi = iperNodi;
         this.iperComuni = iperComuni;
@@ -60,6 +62,8 @@ public class FiltLogin extends OncePerRequestFilter {
         this.iperRDCImmagini = iperRDCImmagini;
         this.iperRDCNodi = iperRDCNodi;
         this.repoUtenti = repoUtenti;
+        this.iperContest = iperContest;
+        this.iperRDCItinerari = iperRDCItinerari;
     }
 
     @Override
@@ -71,9 +75,9 @@ public class FiltLogin extends OncePerRequestFilter {
         } else {
             String[] parts = request.getHeader("Authorization").split(" ");
             if (parts.length == 2)
-                user = repoUtenti.getReferenceById(parts[1]);
-            user = (ClsTurista) ((HibernateProxy) user).getHibernateLazyInitializer()
-                    .getImplementation();
+                user = repoUtenti.findById(Long.valueOf(parts[1])).get();
+            /*user = (ClsTurista) ((HibernateProxy) user).getHibernateLazyInitializer()
+                    .getImplementation();*/
             InitializeUser(user);
             request.getServletContext().setAttribute("user", user);
         }
@@ -94,8 +98,9 @@ public class FiltLogin extends OncePerRequestFilter {
         }
 
         if (user instanceof ClsContributor tmp) {
-            tmp.setpRDCI(this.iperRDCI);
+            tmp._setIperRDCItinerari(this.iperRDCItinerari);
             tmp._setIperRDCNodi(this.iperRDCNodi);
+            tmp.setIperContest(this.iperContest);
         }
 
         if (user instanceof ClsContributorAutorizzato tmp) {
@@ -152,8 +157,7 @@ public class FiltLogin extends OncePerRequestFilter {
 
     private ClsContributor CreaContributor() {
         ClsContributor user = new ClsContributor(CreaTuristaAut());
-        //user.setpRDC(this.iperRDC);
-        user.setpRDCI(this.iperRDCI);
+        user._setIperRDCItinerari(this.iperRDCItinerari);
         user._setIperRDCNodi(this.iperRDCNodi);
         return user;
     }

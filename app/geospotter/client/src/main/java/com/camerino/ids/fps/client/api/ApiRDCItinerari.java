@@ -1,8 +1,8 @@
 package com.camerino.ids.fps.client.api;
 
-import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.utenti.ClsTurista;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;
 
@@ -14,22 +14,43 @@ import java.util.List;
 
 import static com.camerino.ids.fps.client.api.BaseURL.BASE_URL;
 
-public class ApiNodi implements IApi<ClsNodo> {
-    static final URI endpoint = URI.create(BASE_URL + "/nodi");
+public class ApiRDCItinerari implements IApi<ClsRdcItinerario> {
+    static final URI endpoint = URI.create(BASE_URL + "/rdcitinerari");
 
     @Override
-    public List<ClsNodo> Get(ClsTurista user, String query) {
+    public List<ClsRdcItinerario> Get(ClsTurista user, String query) {
         if (query == null)
             query = "";
-        HttpRequest.Builder request = HttpRequest.newBuilder()
-                .header("Content-Type", "application/json")
-                .uri(URI.create(String.format("%s?%s", endpoint, query)))
-                .GET();
 
-        if(user instanceof ClsTuristaAutenticato)
-            request.header("Authorization", FakeTokens.getToken(user));
+        HttpRequest request;
 
-        HttpResponse<String> response = execute(request.build());
+        if(query.startsWith("true")){
+            query=query.replaceAll("true", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/accetta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        } else if (query.startsWith("false")) {
+            query=query.replaceAll("false", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/refiuta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
+        else {
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
+
+        HttpResponse<String> response = execute(request);
         if (response.statusCode() != 200)
             return new ArrayList<>();
 
@@ -38,7 +59,7 @@ public class ApiNodi implements IApi<ClsNodo> {
     }
 
     @Override
-    public boolean Post(ClsTurista user, ClsNodo nodo) {
+    public boolean Post(ClsTurista user, ClsRdcItinerario nodo) {
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
@@ -50,7 +71,7 @@ public class ApiNodi implements IApi<ClsNodo> {
     }
 
     @Override
-    public boolean Put(ClsTurista user, ClsNodo nodo) {
+    public boolean Put(ClsTurista user, ClsRdcItinerario nodo) {
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Authorization", FakeTokens.getToken(user))
                 .header("Content-Type", "application/json")
