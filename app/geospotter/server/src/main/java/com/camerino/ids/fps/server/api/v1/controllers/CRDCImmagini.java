@@ -48,4 +48,17 @@ public class CRDCImmagini {
     ) {
         return ResponseEntity.ok(sRDCImmagini.postRDCImmagine(rdc));
     }
+    @GetMapping(mapping+"/accetta")
+    public ResponseEntity<Boolean> RDC(
+            @RequestParam(value = "idValidazione") Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCImmagini.accettaRDCImmagine(idRDC));
+    }
+
+    @GetMapping(mapping+"/rifiuta")
+    public ResponseEntity<Boolean> rifiutaRDC(
+            @RequestParam(value = "idValidazione", required = false) Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCImmagini.rifutaRDCImmagine(idRDC));
+    }
 }

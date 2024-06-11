@@ -83,7 +83,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
 
     @Override
     public List<ClsRDCImmagine> getAllRDCImmagini() {
-        return new ArrayList<>();//this.iperRDCImmagini.get(null);
+        return this.iperRDCImmagini.get(null);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
+import com.camerino.ids.core.data.azioni.EStatusRDC;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
@@ -195,8 +196,11 @@ public class ClsTuristaAutenticato extends ClsTurista implements IAzioniTuristaA
 
     @Override
     public boolean inserisciImmagine(ClsImmagine immagine) {
-        //TODO: merge con richiesta azione di contribuzione
-        return iperImmagini.insert(immagine);
+        ClsRDCImmagine rdcImmagine = new ClsRDCImmagine(null, immagine);
+        rdcImmagine.setCreatore(this);
+        rdcImmagine.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        rdcImmagine.setStato(EStatusRDC.NUOVO);
+        return iperRDCImmagini.insert(rdcImmagine);
     }
 //endregion
 

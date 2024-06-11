@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client.api;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;
 
@@ -20,12 +21,34 @@ public class ApiRDCImmagini implements IApi<ClsRDCImmagine> {
     public List<ClsRDCImmagine> Get(ClsTurista user, String query) {
         if (query == null)
             query = "";
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Authorization", FakeTokens.getToken(user))
-                .header("Content-Type", "application/json")
-                .uri(URI.create(String.format("%s?%s", endpoint, query)))
-                .GET()
-                .build();
+
+        HttpRequest request;
+
+        if(query.startsWith("true")){
+            query=query.replaceAll("true", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/accetta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        } else if (query.startsWith("false")) {
+            query=query.replaceAll("false", "");
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s/rifiuta?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
+        else {
+            request = HttpRequest.newBuilder()
+                    .header("Authorization", FakeTokens.getToken(user))
+                    .header("Content-Type", "application/json")
+                    .uri(URI.create(String.format("%s?%s", endpoint, query)))
+                    .GET()
+                    .build();
+        }
 
         HttpResponse<String> response = execute(request);
         if (response.statusCode() != 200)

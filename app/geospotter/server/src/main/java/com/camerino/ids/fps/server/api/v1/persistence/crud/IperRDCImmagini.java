@@ -2,6 +2,7 @@ package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.persistence.IPersistenceModel;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoImmagini;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCImmagini;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,13 @@ import java.util.Map;
 @Component
 public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
     RepoRDCImmagini repoRDCIimmagini;
+    RepoImmagini repoImmagini;
 
     @Autowired
-    public IperRDCImmagini(final RepoRDCImmagini repoRDCI) {
+    public IperRDCImmagini(final RepoRDCImmagini repoRDCI,
+                           final RepoImmagini repoImmagini) {
         this.repoRDCIimmagini = repoRDCI;
+        this.repoImmagini = repoImmagini;
     }
 
     @Override
@@ -36,6 +40,10 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public boolean insert(ClsRDCImmagine object) {
+        if(object.getNewData()!= null)
+            object.setNewData(repoImmagini.save(object.getNewData()));
+        if(object.getOldData()!=null)
+            object.setOldData(repoImmagini.save(object.getOldData()));
         repoRDCIimmagini.save(object);
         return true;
     }

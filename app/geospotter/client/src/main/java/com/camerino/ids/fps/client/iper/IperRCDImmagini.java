@@ -16,8 +16,17 @@ public class IperRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public List<ClsRDCImmagine> get(Map<String, Object> filters) {
-        return api.Get(
-                Controller_SezioneLogin.UTENTE, null);
+        if(filters == null)
+            return api.Get(Controller_SezioneLogin.UTENTE, null);
+
+        if(filters.containsKey("idValidazione") && filters.containsKey("accetta")){
+            if((Boolean)filters.get("accetta"))
+                return api.Get(Controller_SezioneLogin.UTENTE, "trueidValidazione="+filters.get("idValidazione"));
+            else
+                return api.Get(Controller_SezioneLogin.UTENTE, "falseidValidazione="+filters.get("idValidazione"));
+        }
+
+        return api.Get(Controller_SezioneLogin.UTENTE, null);
     }
 
     @Override

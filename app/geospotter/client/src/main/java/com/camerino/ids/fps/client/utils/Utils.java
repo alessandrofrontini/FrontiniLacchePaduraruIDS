@@ -153,7 +153,7 @@ public class Utils {
         tmp.setStato(rdcImmagine.getStato().toString());
         tmp.setRichiedente(rdcImmagine.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
-        tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
