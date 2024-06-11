@@ -86,10 +86,12 @@ public class Controller_SezioneInserimentoItinerari implements Initializable {
 
         List<ClsNodo> nodiAssociatiToItinerario = new ArrayList<>();
 
-        if (nodiCoinvoltiInArray.length > 1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "")) {
+        if (nodiCoinvoltiInArray.length > 1 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), ""))
+        {
+
             for (int i = 0; i < nodi.size(); i++) {
                 for (int j = 0; j < nodiCoinvoltiInArray.length; j++) {
-                    if (Objects.equals(nodi.get(i).getId(), nodiCoinvoltiInArray[j])) {
+                    if (Objects.equals(nodi.get(i).getId(), Long.valueOf(nodiCoinvoltiInArray[j]))) {
                         nodiAssociatiToItinerario.add(nodi.get(i));
                     }
                 }
