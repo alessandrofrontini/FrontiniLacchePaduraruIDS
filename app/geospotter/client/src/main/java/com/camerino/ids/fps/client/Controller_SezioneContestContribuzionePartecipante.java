@@ -364,22 +364,23 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         Long IDContest = Long.valueOf(u.getValueFromCombobox(this.sceltaContest));
         Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
         ClsImmagine i = new ClsImmagine();
+        ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
 
-        if ((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine)) {
+        //if ((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine)) {
             i.setIdCreatore(1L);
             i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
-
+            ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciImmagine(i, contest);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Corretto");
             alert.setContentText(i.visualizzaImmagine() + "\n\n IDCONTEST: " + IDContest);
             alert.show();
-        } else {
+        /*} else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setContentText("Errore");
             alert.show();
-        }
+        }*/
     }
 }

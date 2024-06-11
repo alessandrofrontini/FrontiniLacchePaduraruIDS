@@ -2,6 +2,7 @@ package com.camerino.ids.core.data.utenti;
 
 import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -88,6 +89,17 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     //endregion
 
     //region Override IContributable
+
+    @Override
+    public boolean inserisciImmagine(ClsImmagine immagine, ClsContestDiContribuzione contest) {
+        ClsRDCImmagine rdcImmagine = new ClsRDCImmagine(null, immagine);
+        rdcImmagine.setCreatore(this);
+        rdcImmagine.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
+        rdcImmagine.setStato(EStatusRDC.NUOVO);
+        rdcImmagine.setIdContestAppartenenza(contest);
+
+        return iperRDCImmagini.insert(rdcImmagine);
+    }
 
     /**
      * Crea una richiesta di inserimento nodo.
