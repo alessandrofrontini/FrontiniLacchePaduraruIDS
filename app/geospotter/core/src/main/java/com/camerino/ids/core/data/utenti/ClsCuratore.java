@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Questo ruolo accetta o respinge le richieste fatte dai vari utenti.
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
-    Long idComuneAssociato;
+        Long idComuneAssociato;
 
     //region Constructors
     public ClsCuratore(ClsAnimatore usr) {
@@ -42,7 +43,13 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         this.ruoloUtente = eRUOLI_UTENTE.CURATORE;
     }
     //endregion
+    public Long getIdComuneAssociato() {
+        return idComuneAssociato;
+    }
 
+    public void setIdComuneAssociato(Long idComuneAssociato) {
+        this.idComuneAssociato = idComuneAssociato;
+    }
     public List<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
     }
@@ -114,7 +121,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     }
 
     @Override
-    public boolean rifiutaRichiestaImmagine(String idValidazione) {
+    public boolean rifiutaRichiestaImmagine(Long idValidazione) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idValidazione", idValidazione);
         filters.put("accetta", false);
@@ -138,5 +145,36 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         filters.put("accetta", false);
         iperRDCItinerari.get(filters);
         return true;
+    }
+
+    @Override
+    public List<ClsRDCImmagine> getRDCImmaginePossessoreCur() {
+        List<ClsRDCImmagine> rdcPossessore = new ArrayList<>();
+        for(ClsRDCImmagine rdc: getAllRDCImmagini()){
+            if (Objects.equals(getNodoById(rdc.getNewData().getIdNodoAssociato()).get(0).getIdComuneAssociato(), idComuneAssociato)){
+                rdcPossessore.add(rdc);
+            }
+        }
+        return rdcPossessore;
+    }
+
+    @Override
+    public List<ClsRDCNodo> getRDCNodoPossessoreCur() {
+        List<ClsRDCNodo> rdcPossessore = new ArrayList<>();
+        for(ClsRDCNodo rdc: getAllRDCNodi()){
+            if((Objects.equals(rdc.getOldData().getIdComuneAssociato(), idComuneAssociato))||(Objects.equals(rdc.getNewData().getIdComuneAssociato(), idComuneAssociato)))
+                rdcPossessore.add(rdc);
+        }
+        return rdcPossessore;
+    }
+
+    @Override
+    public List<ClsRdcItinerario> getRDCItinerarioPossessoreCur() {
+        List<ClsRdcItinerario> rdcIPossessore = new ArrayList<>();
+        for(ClsRdcItinerario rdc:_getAllRDCItinerari()){
+            if((Objects.equals(rdc.getOldData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato))||(Objects.equals(rdc.getNewData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))
+                rdcIPossessore.add(rdc);
+        }
+        return rdcIPossessore;
     }
 }

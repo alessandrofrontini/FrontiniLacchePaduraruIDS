@@ -9,12 +9,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Questo ruolo può effettuare Richieste Di Contribuzione
- * ({@link com.camerino.ids.core.data.azioni.ClsRichiestaAzioneDiContribuzione})
+ * ({@link com.camerino.ids.core.data.azioni.ClsRDCNodo})
  * , modifica ed eliminazione
  * di Nodi e Itinerari nella piattaforma.
  * Le richieste dovranno poi essere accettate o rifiutate da un Curatore di competenza.
@@ -261,6 +263,17 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
     @Override
     public List<ClsContestDiContribuzione> getAllContest() {
         return this.iperContest.get(null);
+    }
+
+    @Override
+    public List<ClsItinerario> getItinerariPossessore() {
+        List<ClsItinerario> itinerariPossessore = new ArrayList<>();
+        for(ClsItinerario i:getAllItinerari()){
+            if(Objects.equals(i.getIdCreatore(), this.id)){
+                itinerariPossessore.add(i);
+            }
+        }
+        return itinerariPossessore;
     }
     //endregion
 }

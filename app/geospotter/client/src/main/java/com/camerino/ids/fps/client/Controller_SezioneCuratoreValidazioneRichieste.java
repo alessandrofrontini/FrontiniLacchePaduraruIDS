@@ -286,7 +286,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
         String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
         //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(IDValidazione);
+            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(Long.parseLong(IDValidazione));
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");

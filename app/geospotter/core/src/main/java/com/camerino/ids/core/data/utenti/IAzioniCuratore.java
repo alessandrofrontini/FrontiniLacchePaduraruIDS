@@ -29,9 +29,15 @@ public interface IAzioniCuratore {
 
     boolean accettaRichiestaItinerario(Long idValidazione);
 
-    boolean rifiutaRichiestaImmagine(String idValidazione);
+    boolean rifiutaRichiestaImmagine(Long idValidazione);
 
     boolean accettaRichiestaImmagine(Long idValidazione);
 
     boolean rifiutaRichiestaItinerario(Long idValidazione);
+    @JsonIgnore
+    List<ClsRDCImmagine> getRDCImmaginePossessoreCur();
+    @JsonIgnore
+    List<ClsRDCNodo> getRDCNodoPossessoreCur();
+    @JsonIgnore
+    List<ClsRdcItinerario> getRDCItinerarioPossessoreCur();
 }
