@@ -373,48 +373,64 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         }
     }
 
-    public void visualizzaDettaglioImmagine() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
+    public void visualizzaDettaglioImmagine()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != "" && u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-        if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for (int i = 0; i < richiesteImmagini.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
-                    alert.show();
+                for (int i = 0; i < richiesteImmagini.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
-    public void visualizzaDettaglioNodo() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
+    public void visualizzaDettaglioNodo()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioNodo) != "" && u.getValueFromCombobox(selezionaElementoDettaglioNodo) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-        if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for (int i = 0; i < richiesteNodo.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
-                    alert.show();
+                for (int i = 0; i < richiesteNodo.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else {
+            u.alertError();
+        }
+
     }
 
     private void setRichiesteImmagini(List<ClsRDCImmagine> richiesteImmagini) {

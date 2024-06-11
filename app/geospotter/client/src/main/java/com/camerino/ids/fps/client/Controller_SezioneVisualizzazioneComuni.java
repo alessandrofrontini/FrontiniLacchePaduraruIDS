@@ -137,33 +137,42 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable {
         }
     }
 
-    public void visualizzaDettaglio() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
+    public void visualizzaDettaglio()
+    {
+        if(!Objects.equals(u.getValueFromCombobox(selezionaElementoDettaglio), "") && u.getValueFromCombobox(selezionaElementoDettaglio) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
-        if (this.controllaConformitaID(IDDaVisualizzare)) {
-            ClsComune c = new ClsComune();
-            for (int i = 0; i < comuni.size(); i++) {
-                if (IDDaVisualizzare.equals(this.comuni.get(i).getId())) {
-                    c.setId(comuni.get(i).getId());
-                    c.setNome(comuni.get(i).getNome());
-                    c.setCuratoriAssociati(comuni.get(i).getCuratoriAssociati());
-                    c.setSuperficie(comuni.get(i).getSuperficie());
-                    c.setDescrizione(comuni.get(i).getDescrizione());
-                    c.setIdCreatore(comuni.get(i).getIdCreatore());
-                    c.setAbitanti(comuni.get(i).getAbitanti());
-                    c.setPosizione(comuni.get(i).getPosizione());
+            if (this.controllaConformitaID(IDDaVisualizzare)) {
+                ClsComune c = new ClsComune();
+                for (int i = 0; i < comuni.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.comuni.get(i).getId())) {
+                        c.setId(comuni.get(i).getId());
+                        c.setNome(comuni.get(i).getNome());
+                        c.setCuratoriAssociati(comuni.get(i).getCuratoriAssociati());
+                        c.setSuperficie(comuni.get(i).getSuperficie());
+                        c.setDescrizione(comuni.get(i).getDescrizione());
+                        c.setIdCreatore(comuni.get(i).getIdCreatore());
+                        c.setAbitanti(comuni.get(i).getAbitanti());
+                        c.setPosizione(comuni.get(i).getPosizione());
+                    }
                 }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("OK");
+                alert.setContentText(c.visualizzaComune());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("OK");
-            alert.setContentText(c.visualizzaComune());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
         }
+        else
+        {
+            u.alertError();
+        }
+
     }
 
     private void setComuni(List<ClsComune> comuni) {

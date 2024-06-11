@@ -1,88 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/17.0.2-ea"
-            fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaRecensioni">
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaRecensioni">
     <children>
         <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICA RECENSIONI">
             <font>
-                <Font size="22.0"/>
+                <Font size="22.0" />
             </font>
         </Text>
-        <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="560.490234375"/>
+        <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="560.490234375" />
         <TabPane layoutX="4.0" layoutY="84.0" prefHeight="438.0" prefWidth="592.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Seleziona Recensione">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <TableView fx:id="sezioneEliminazioneRecensioniTableView" layoutX="28.0" layoutY="96.0"
-                                       prefHeight="273.0" prefWidth="535.0">
+                            <TableView fx:id="sezioneEliminazioneRecensioniTableView" layoutX="28.0" layoutY="96.0" prefHeight="273.0" prefWidth="535.0">
                                 <columns>
-                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnID"
-                                                 prefWidth="69.39999008178711" text="ID"/>
-                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato"
-                                                 prefWidth="146.5999755859375" text="ID ASSOCIAZIONE"/>
-                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnOggetto"
-                                                 prefWidth="77.00004577636719" text="OGGETTO"/>
-                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnValutazione"
-                                                 prefWidth="112.79998779296875" text="VALUTAZIONE"/>
-                                    <TableColumn fx:id="getSezioneEliminazioneRecensioniTableColumnContenuto"
-                                                 prefWidth="127.20000000000005" text="CONTENUTO"/>
+                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnID" prefWidth="69.39999008178711" text="ID" />
+                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato" prefWidth="146.5999755859375" text="ASSOCIAZIONE" />
+                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnOggetto" prefWidth="77.00004577636719" text="OGGETTO" />
+                                    <TableColumn fx:id="sezioneEliminazioneRecensioniTableColumnValutazione" prefWidth="112.79998779296875" text="VALUTAZIONE" />
+                                    <TableColumn fx:id="getSezioneEliminazioneRecensioniTableColumnContenuto" prefWidth="127.20000000000005" text="CONTENUTO" />
                                 </columns>
                             </TableView>
-                            <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" layoutX="112.0"
-                                      layoutY="378.0" onMouseEntered="#visualizzaInformazioniAttualiRecensione"
-                                      onMouseExited="#visualizzaInformazioniAttualiRecensione"
-                                      onMouseMoved="#visualizzaInformazioniAttualiRecensione" prefHeight="26.0"
-                                      prefWidth="374.0" promptText="Seleziona qui"/>
-                            <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                  text="In questa sezione potrai modificare delle recensioni, sotto puoi trovare l'elenco&#10;delle recensioni della quale puoi richiedere una modifica. Selezionane una, aggiornane il contenuto e &#10;conferma la tua operazione.&#10;"/>
+                            <ComboBox fx:id="sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID" layoutX="112.0" layoutY="378.0" onMouseEntered="#visualizzaInformazioniAttualiRecensione" onMouseExited="#visualizzaInformazioniAttualiRecensione" onMouseMoved="#visualizzaInformazioniAttualiRecensione" prefHeight="26.0" prefWidth="374.0" promptText="Seleziona qui" />
+                            <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione potrai modificare delle recensioni, sotto puoi trovare l'elenco&#10;delle recensioni della quale puoi richiedere una modifica. Selezionane una, aggiornane il contenuto e &#10;conferma la tua operazione.&#10;" />
                         </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Aggiorna Recensione">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="15.0" layoutY="58.0"
-                                       prefHeight="237.0" prefWidth="562.0">
+                            <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="15.0" layoutY="58.0" prefHeight="237.0" prefWidth="562.0">
                                 <columns>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID"
-                                                 prefWidth="43.59999084472656" text="ID"/>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato"
-                                                 prefWidth="97.19999313354492" text="ID COMUNE"/>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome"
-                                                 prefWidth="109.40000915527344" text="NOME"/>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione"
-                                                 prefWidth="108.5999755859375" text="POSIZIONE"/>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia"
-                                                 prefWidth="82.60003662109375" text="TIPOLOGIA"/>
-                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo"
-                                                 prefWidth="94.199951171875" text="A TEMPO"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID" prefWidth="43.59999084472656" text="ID" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato" prefWidth="97.19999313354492" text="ASSOCIAZIONE" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome" prefWidth="109.40000915527344" text="NOME" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione" prefWidth="108.5999755859375" text="POSIZIONE" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia" prefWidth="82.60003662109375" text="TIPOLOGIA" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="94.199951171875" text="A TEMPO" />
                                 </columns>
                             </TableView>
-                            <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="144.0"
-                                      layoutY="300.0" prefHeight="26.0" prefWidth="330.0"
-                                      promptText="Seleziona nodo associazione recensione"/>
-                            <TextField fx:id="oggetto" layoutX="32.0" layoutY="334.0" prefHeight="26.0"
-                                       prefWidth="266.0" promptText="Oggetto"/>
-                            <TextField fx:id="valutazione" layoutX="32.0" layoutY="369.0" prefHeight="26.0"
-                                       prefWidth="266.0" promptText="Valutazione"/>
-                            <TextField fx:id="contenuto" layoutX="310.0" layoutY="334.0" prefHeight="26.0"
-                                       prefWidth="266.0" promptText="Contenuto"/>
-                            <Text layoutX="15.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                                  text="Aggiorna qui il contenuto della recensione"/>
+                            <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="144.0" layoutY="300.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona nodo associazione recensione" />
+                            <TextField fx:id="oggetto" layoutX="32.0" layoutY="334.0" prefHeight="26.0" prefWidth="266.0" promptText="Oggetto" />
+                            <TextField fx:id="valutazione" layoutX="32.0" layoutY="369.0" prefHeight="26.0" prefWidth="266.0" promptText="Valutazione" />
+                            <TextField fx:id="contenuto" layoutX="310.0" layoutY="334.0" prefHeight="26.0" prefWidth="266.0" promptText="Contenuto" />
+                            <Text layoutX="15.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aggiorna qui il contenuto della recensione" />
                         </AnchorPane>
                     </content>
                 </Tab>
             </tabs>
         </TabPane>
-        <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false"
-                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="164.0" text="Home"/>
-        <Button layoutX="422.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#modificaRecensione"
-                prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: #15ad36;" text="Conferma"
-                textFill="WHITE"/>
+        <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="164.0" text="Home" />
+        <Button layoutX="422.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#modificaRecensione" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
     </children>
 </AnchorPane>

@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsContestDiContribuzioneVisual;
@@ -54,27 +55,6 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
     @FXML
     TableColumn<ClsContestDiContribuzioneVisual, String> apertoColonna = new TableColumn<>("APERTO");
 
-
-    @FXML
-    TableView<ClsNodoVisual> ElencoNodi;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> idImmagineColonna;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> idComuneColonna;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> nomeColonna;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> posizioneColonna;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> tipologiaColonna;
-
-    @FXML
-    TableColumn<ClsNodoVisual, String> aTempoColonna;
 
     @FXML
     ComboBox sceltaNodo;
@@ -142,7 +122,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                 new PropertyValueFactory<>("id"));
 
         creatoreColonna.setCellValueFactory(
-                new PropertyValueFactory<>("usernameCreatore"));
+                new PropertyValueFactory<>("idCreatore"));
 
         durataColonna.setCellValueFactory(
                 new PropertyValueFactory<>("durata"));
@@ -154,25 +134,7 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
                 new PropertyValueFactory<>("isAperto"));
         //endregion
 
-        //region setting up colonne tabella
-        idImmagineColonna.setCellValueFactory(
-                new PropertyValueFactory<>("ID"));
 
-        idComuneColonna.setCellValueFactory(
-                new PropertyValueFactory<>("IDComuneAssociato"));
-
-        nomeColonna.setCellValueFactory(
-                new PropertyValueFactory<>("Nome"));
-
-        posizioneColonna.setCellValueFactory(
-                new PropertyValueFactory<>("Posizione"));
-
-        tipologiaColonna.setCellValueFactory(
-                new PropertyValueFactory<>("Tipologia"));
-
-        aTempoColonna.setCellValueFactory(
-                new PropertyValueFactory<>("ATempo"));
-        //endregion
 
         //region setting up colonne tabella
         sezioneEliminazioneNodiTableColumnID.setCellValueFactory(
@@ -196,74 +158,77 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
 
     }
 
-    public void inserisciNodo() {
-        ClsNodo nodo = new ClsNodo();
-        Posizione posizione = new Posizione();
-        Long IDContest = Long.valueOf(this.partecipaContest(null));
-        ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
+    public void inserisciNodo()
+    {
 
-        try {
-            if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
-                posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
-                posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
-                nodo.setPosizione(posizione);
+        if(!Objects.equals(u.getValueFromCombobox(sceltaContest), "") && u.getValueFromCombobox(sceltaContest) != null)
+        {
+            ClsNodo nodo = new ClsNodo();
+            Posizione posizione = new Posizione();
+            Long IDContest = Long.valueOf(this.partecipaContest(null));
+            ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
 
-                if (u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), "") ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
-                        Objects.equals(u.getValueFromCombobox(sceltaContest), "") ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
-                        Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
-                        Objects.equals(u.getValueFromCombobox(sceltaContest), null)) {
-                    nodo.setIdCreatore(1L);
-                    nodo.setIdComuneAssociato(contest.getId());
-                    nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
-                    nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
-                    //nodo.setIdComune(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato));
-                    nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
-                    nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
-                    nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
-                    nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
+            try {
 
-                    if (!u.checkInfoNodo(nodo)) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Errore");
-                        alert.setContentText("Controlla le informazioni");
-                        alert.show();
+                if (!(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)) == Double.NaN || Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)) == Double.NaN)) {
+                    posizione.setX(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataX)));
+                    posizione.setY(Double.parseDouble(u.getValueFromTextField(sezioneInserimentoNodiTextFieldCoordinataY)));
+                    nodo.setPosizione(posizione);
+
+                    if (u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo) != null ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), "") ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), "") ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), "") ||
+                            Objects.equals(u.getValueFromCombobox(sceltaContest), "") ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
+                            Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null) ||
+                            Objects.equals(u.getValueFromCombobox(sceltaContest), null)) {
+                        nodo.setIdCreatore(1L);
+                        //nodo.setIdComuneAssociato(contest.getLocation().getId());
+                        nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
+                        nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
+                        nodo.setDescrizione(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo));
+                        nodo.setaTempo(u.getValueFromCheckBox(sezioneInserimentoNodiCheckBoxTemporizzato));
+                        nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
+                        nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
+                        nodo.setIdComuneAssociato(IDContest);
+
+                        if (!u.checkInfoNodo(nodo)) {
+                            u.alertError();
+                        } else {
+                            ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciNodo(nodo, contest);
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Info Nodo");
+                            alert.setContentText(nodo.visualizzaNodo());
+                            alert.show();
+                        }
                     } else {
-                        ((ClsContributor)Controller_SezioneLogin.UTENTE).inserisciNodo(nodo, contest);
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Info Nodo");
-                        alert.setContentText(nodo.visualizzaNodo());
-                        alert.show();
+                        u.alertError();
                     }
+
+
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setContentText("Controlla le informazioni");
-                    alert.show();
+                    u.alertError();
                 }
 
-
-            } else {
+            } catch (NumberFormatException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Controlla le informazioni");
+                alert.show();
+            } catch (NullPointerException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Errore");
                 alert.setContentText("Controlla le informazioni");
                 alert.show();
             }
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Controlla le informazioni");
-            alert.show();
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Controlla le informazioni");
-            alert.show();
         }
+        else {
+            u.alertError();
+        }
+
+
     }
 
 
@@ -350,24 +315,19 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
         }
     }
 
-    private void setNodiImmagine(List<ClsNodo> nodi) {
-        for (int i = 0; i < nodi.size(); i++) {
-            ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
-
-            ElencoNodi.getItems().add(c);
-
-        }
-    }
 
 
-    public void inserisciImmagine(MouseEvent mouseEvent) {
-        Long IDContest = Long.valueOf(u.getValueFromCombobox(this.sceltaContest));
-        Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
-        ClsImmagine i = new ClsImmagine();
-        ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
 
-        //if ((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine)) {
-            i.setIdCreatore(1L);
+    public void inserisciImmagine(MouseEvent mouseEvent)
+    {
+        if(!Objects.equals(u.getValueFromCombobox(sceltaContest), "") && u.getValueFromCombobox(sceltaContest) != null && !Objects.equals(u.getValueFromCombobox(this.sceltaNodo), "") && u.getValueFromCombobox(this.sceltaNodo) != null){
+            Long IDContest = Long.valueOf(u.getValueFromCombobox(this.sceltaContest));
+            Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
+            ClsImmagine i = new ClsImmagine();
+            ClsContestDiContribuzione contest = this.contests.stream().filter(c->c.getId().equals(IDContest)).findFirst().get();
+
+            if ((!Objects.equals(u.getValueFromCombobox(this.sceltaContest), null)) && (!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaIDNodi(IDNodoAssociatoImmagine)) {
+            i.setIdCreatore(((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getId());
             i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
             i.setURL(u.getValueFromTextField(urlImmagine));
 
@@ -376,11 +336,18 @@ public class Controller_SezioneContestContribuzionePartecipante implements Initi
             alert.setTitle("Corretto");
             alert.setContentText(i.visualizzaImmagine() + "\n\n IDCONTEST: " + IDContest);
             alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Errore");
-            alert.show();
-        }*/
-    }
+            }
+            else
+            {
+                u.alertError();
+            }
+        }
+        else
+        {
+            u.alertError();
+        }
+        }
+
+
+
 }

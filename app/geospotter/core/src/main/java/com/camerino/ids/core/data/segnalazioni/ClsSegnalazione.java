@@ -49,8 +49,7 @@ public class ClsSegnalazione {
     public String visualizzaSegnalazione() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "ID Contenuto: " + this.getIdContenuto() + "\n";
+        dummy += "ID Associazione: " + this.getIdContenuto() + "\n";
         dummy += "Descrizione: " + this.getDescrizione() + "\n";
 
         return dummy;

@@ -129,12 +129,12 @@ public class Controller_SezioneModificaItinerari implements Initializable {
         ClsItinerario nuovoItinerario = this.inserisciItinerario(mouseEvent);
         Long IDDaModificare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        if (nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size() >= 2) {
+        if (nuovoItinerario != null && this.controllaConformitaIDItinerario(IDDaModificare) && nuovoItinerario.getTappe().size() >= 2 && !Objects.equals(u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario), "") && u.getValueFromTextField(sezioneInserimentoItinerariNomeItinerario) != null) {
             nuovoItinerario.setId(IDDaModificare);
             ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaItinerario(nuovoItinerario, IDDaModificare);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("FATTO");
-            alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoItinerario.visualizzaItinerario());
+            alert.setContentText("ID: " + IDDaModificare + "\n\n" + nuovoItinerario.visualizzaItinerario());
             alert.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

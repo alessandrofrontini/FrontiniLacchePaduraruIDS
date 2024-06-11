@@ -114,23 +114,30 @@ public class Controller_SezioneModificaNodi implements Initializable {
     }
 
     public void modificaNodo(MouseEvent mouseEvent) {
-        ClsNodo nuovoNodo = this.inserisciNodo(mouseEvent);
-        Long IDDaModificare = Long.valueOf(this.eliminaNodo(mouseEvent));
+        if(!Objects.equals(this.eliminaNodo(mouseEvent), "") && this.inserisciNodo(mouseEvent) != null){
+            ClsNodo nuovoNodo = this.inserisciNodo(mouseEvent);
+            Long IDDaModificare = Long.valueOf(this.eliminaNodo(mouseEvent));
 
 
-        if (!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null /*&& this.CheckValidita(nuovoNodo,comuni)*/) {
-            nuovoNodo.setId(IDDaModificare);
-            ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("FATTO");
-            alert.setContentText("ID: " + IDDaModificare + "\n\n NuovoNodo:" + nuovoNodo.visualizzaNodo());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Attenzione");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            if (!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null /*&& this.CheckValidita(nuovoNodo,comuni)*/) {
+                nuovoNodo.setId(IDDaModificare);
+                ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("FATTO");
+                alert.setContentText("ID: " + IDDaModificare + "\n\n" + nuovoNodo.visualizzaNodo());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Attenzione");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else{
+            u.alertError();
+        }
+
+
 
     }
 
@@ -163,7 +170,7 @@ public class Controller_SezioneModificaNodi implements Initializable {
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
 
-                    //nodo.setIdCreatore();
+                    nodo.setIdCreatore( ((ClsContributor) Controller_SezioneLogin.UTENTE).getId());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComuneAssociato(Long.valueOf(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato)));
@@ -233,7 +240,7 @@ public class Controller_SezioneModificaNodi implements Initializable {
 
         if (valore != null) {
             for (int i = 0; i < this.nodi.size(); i++) {
-                if (Objects.equals(valore, nodi.get(i).getId())) {
+                if (Objects.equals(Long.valueOf(valore), nodi.get(i).getId())) {
 
                     ClsNodoVisual c = u.convertFromClsNodo(nodi.get(i));
 

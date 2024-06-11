@@ -96,20 +96,27 @@ public class Controller_SezioneEliminazioneComuni implements Initializable {
     }
 
     public void eliminaComune(MouseEvent mouseEvent) {
-        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sceltaComune));
+        if(u.getValueFromCombobox(this.sceltaComune) != "" && u.getValueFromCombobox(this.sceltaComune) != null)
+        {
+            Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sceltaComune));
 
-        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
-            ((ClsGDP) Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Corretto");
-            alert.setContentText(IDDaEliminare.toString());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Controlla le informazioni");
-            alert.show();
+            if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+                ((ClsGDP) Controller_SezioneLogin.UTENTE).eliminaComune(IDDaEliminare);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Corretto");
+                alert.setContentText(IDDaEliminare.toString());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Controlla le informazioni");
+                alert.show();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     private void setComuni(List<ClsComune> comuni) {

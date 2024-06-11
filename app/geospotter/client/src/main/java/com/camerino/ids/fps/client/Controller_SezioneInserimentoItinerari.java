@@ -79,7 +79,8 @@ public class Controller_SezioneInserimentoItinerari implements Initializable {
         //endregion
     }
 
-    public void inserisciItinerario(MouseEvent mouseEvent) {
+    public void inserisciItinerario(MouseEvent mouseEvent)
+    {
         ClsItinerario itinerario = new ClsItinerario();
         String nodiCoinvolti = u.getValueFromTextField(sezioneInserimentoItinerariElencoTappe);
         String[] nodiCoinvoltiInArray = this.convertiNodiCoinvoltiInArray(nodiCoinvolti);

@@ -75,7 +75,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable {
                 new PropertyValueFactory<>("id"));
 
         sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato.setCellValueFactory(
-                new PropertyValueFactory<>("idContenutoAssociato"));
+                new PropertyValueFactory<>("idNodoAssociato"));
 
         sezioneEliminazioneRecensioniTableColumnOggetto.setCellValueFactory(
                 new PropertyValueFactory<>("oggetto"));
@@ -89,21 +89,30 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable {
         //endregion
     }
 
-    public void eliminaRecensione(MouseEvent mouseEvent) {
-        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
+    public void eliminaRecensione(MouseEvent mouseEvent)
+    {
+        if(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != "" && u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null)
+        {
+            Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
 
-        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
-            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Corretto");
-            alert.setContentText(IDDaEliminare.toString());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Controlla le informazioni");
-            alert.show();
+            if (this.controllaConformitaID(IDDaEliminare)) {
+                ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).eliminaRecensione(IDDaEliminare);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Corretto");
+                alert.setContentText(IDDaEliminare.toString());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Controlla le informazioni");
+                alert.show();
+            }
         }
+        else
+        {
+            u.alertError();
+        }
+
     }
 
     private void setRecensioni(List<ClsRecensione> recensioni) {
@@ -113,7 +122,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable {
     }
 
     private boolean controllaConformitaID(Long id) {
-        /*boolean flag = false;
+        boolean flag = false;
 
         for(int i = 0; i<recensioni.size();i++)
         {
@@ -122,8 +131,7 @@ public class Controller_SezioneEliminazioneRecensioni implements Initializable {
                 flag = true;
             }
         }
-        return flag;*/
-        return true;
+        return flag;
     }
 
     private void SwitchScene(String nomeScena, MouseEvent mouseEvent) {

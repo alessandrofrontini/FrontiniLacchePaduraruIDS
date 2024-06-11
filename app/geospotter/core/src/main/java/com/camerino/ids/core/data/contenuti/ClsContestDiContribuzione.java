@@ -17,6 +17,7 @@ public class ClsContestDiContribuzione {
     @OneToOne
     @JoinColumn(name = "id")
     ClsComune location;
+    @Deprecated
     Boolean isAperto;
 
     public Long getId() {
@@ -51,10 +52,12 @@ public class ClsContestDiContribuzione {
         this.location = location;
     }
 
+    @Deprecated
     public Boolean isAperto() {
         return isAperto;
     }
 
+    @Deprecated
     public void setAperto(boolean aperto) {
         isAperto = aperto;
     }
@@ -63,11 +66,9 @@ public class ClsContestDiContribuzione {
 
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "Durata: " + this.getDurata().toString() + "\n";
+        dummy += "UTC: " + this.getDurata().toString() + "\n";
         dummy += "Comune: " + this.getLocation().getId() + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
-        dummy += "Su invito: " + this.isAperto + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
 
         return dummy;
 

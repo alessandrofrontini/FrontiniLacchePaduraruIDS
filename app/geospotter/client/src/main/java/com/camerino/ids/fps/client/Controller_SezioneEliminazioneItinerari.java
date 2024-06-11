@@ -80,20 +80,25 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable {
     }
 
     public void eliminaNodo(MouseEvent mouseEvent) {
-        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        if (IDDaEliminare != null && controllaConformitaID(IDDaEliminare)) {
-            ((ClsContributor) Controller_SezioneLogin.UTENTE).eliminaItinerario(IDDaEliminare);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle(IDDaEliminare.toString());
-            alert.setContentText("--" + IDDaEliminare + "--");
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SELEZIONA UN NODO");
-            alert.setContentText("--SELEZIONA UN NODO--");
-            alert.show();
+        if(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID) != "" && u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID) != null)
+        {
+            Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
+
+            if (IDDaEliminare != null && controllaConformitaID(IDDaEliminare)) {
+                ((ClsContributor) Controller_SezioneLogin.UTENTE).eliminaItinerario(IDDaEliminare);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle(IDDaEliminare.toString());
+                alert.setContentText("--" + IDDaEliminare + "--");
+                alert.show();
+            } else {
+                u.alertError();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     private void setItinerari(List<ClsItinerario> itinerari) {

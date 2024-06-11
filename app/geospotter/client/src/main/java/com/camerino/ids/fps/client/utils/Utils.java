@@ -106,8 +106,8 @@ public class Utils {
         return c;
     }
 
-    public ClsUtenteInvitoContestVisual convertFromTuristaAutenticato(ClsTuristaAutenticato turista) {
-        ClsUtenteInvitoContestVisual u = new ClsUtenteInvitoContestVisual();
+    public ClsUtenteUtilityBack convertFromTuristaAutenticato(ClsTuristaAutenticato turista) {
+        ClsUtenteUtilityBack u = new ClsUtenteUtilityBack();
 
         u.setId(turista.getId());
         u.setPunteggio(turista.getPunteggio().toString());
@@ -244,9 +244,7 @@ public class Utils {
         if (
                 Objects.equals(nodo.getNome(), "") ||
                         Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
-                        Objects.equals(nodo.getIdComuneAssociato(), "") ||
                         Objects.equals(nodo.getDescrizione(), "") ||
-                        //Objects.equals(nodo.getId(), null) ||
                         Objects.equals(nodo.getNome(), null) ||
                         Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
                         Objects.equals(nodo.getIdComuneAssociato(), null) ||
@@ -255,7 +253,6 @@ public class Utils {
         } else {
             return true;
         }
-
     }
 
 }

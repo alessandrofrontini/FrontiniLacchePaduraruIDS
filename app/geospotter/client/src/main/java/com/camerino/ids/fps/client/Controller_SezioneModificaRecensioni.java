@@ -98,7 +98,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
                 new PropertyValueFactory<>("id"));
 
         sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato.setCellValueFactory(
-                new PropertyValueFactory<>("idContenutoAssociato"));
+                new PropertyValueFactory<>("idNodoAssociato"));
 
         sezioneEliminazioneRecensioniTableColumnOggetto.setCellValueFactory(
                 new PropertyValueFactory<>("oggetto"));
@@ -152,32 +152,42 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
     public void modificaRecensione(MouseEvent mouseEvent) {
         ClsRecensione r = new ClsRecensione();
 
-        Long idNodo = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
-        Long idRec = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
-        String oggetto = u.getValueFromTextField(this.oggetto);
-        String contenuto = u.getValueFromTextField(this.contenuto);
-        String valutazione = u.getValueFromTextField(this.valutazione);
+        if(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != "" && u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != null && u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != "" && u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null)
+        {
+            Long idNodo = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+            Long idRec = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
+            String oggetto = u.getValueFromTextField(this.oggetto);
+            String contenuto = u.getValueFromTextField(this.contenuto);
+            String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if (oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), "")) {
-            r.setId(idRec);
-            //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdNodoAssociato(idNodo);
-            r.setOggetto(oggetto);
-            r.setContenuto(contenuto);
-            r.setValutazione(Double.parseDouble(valutazione));
+            if (!(Objects.equals(oggetto, "")) && !(oggetto == null) && !(Objects.equals(contenuto, "")) && !(contenuto == null) && !(Objects.equals(valutazione, "")) && !(valutazione == null) && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), "")) {
+                r.setId(idRec);
+                r.setIdCreatore(((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getId());
+                r.setIdNodoAssociato(idNodo);
+                r.setOggetto(oggetto);
+                r.setContenuto(contenuto);
+                r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(idNodo, r);
+                ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(idNodo, r);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText(r.visualizzaRecensione());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Inserisci tutte le informazioni necessarie");
-            alert.show();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText(r.visualizzaRecensione());
+                alert.show();
+            }
+            else
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Inserisci tutte le informazioni necessarie");
+                alert.show();
+            }
         }
+        else
+        {
+            u.alertError();
+        }
+
     }
 
     private void setRecensioni(List<ClsRecensione> recensioni) {
@@ -216,7 +226,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
 
         if (!(Objects.equals(tmp, null) || tmp.isEmpty())) {
             for (int i = 0; i < recensioni.size(); i++) {
-                if (Objects.equals(recensioni.get(i).getId(), tmp)) {
+                if (Objects.equals(recensioni.get(i).getId(), Long.valueOf(tmp))) {
                     this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId());
                     this.oggetto.setText(recensioni.get(i).getOggetto());
                     this.contenuto.setText(recensioni.get(i).getContenuto());

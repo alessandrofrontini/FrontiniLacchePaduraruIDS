@@ -34,7 +34,7 @@
                 onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="144.0" text="Home"/>
         <Button fx:id="sezioneEliminazioneItinerariButtonConferma" layoutX="430.0" layoutY="541.0"
                 mnemonicParsing="false" onMouseClicked="#eliminaNodo" prefHeight="26.0" prefWidth="144.0"
-                style="-fx-background-color: #15ad36; color: ;" text="Conferma" textFill="WHITE"/>
+                style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE"/>
 
     </children>
 </AnchorPane>

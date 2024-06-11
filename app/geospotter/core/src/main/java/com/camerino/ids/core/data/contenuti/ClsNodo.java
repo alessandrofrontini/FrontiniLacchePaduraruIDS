@@ -87,9 +87,8 @@ public class ClsNodo extends ClsContenuto {
     public String visualizzaNodo() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "ID Comune: " + this.getIdComuneAssociato() + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "Tipologia: " + this.getDescrizione() + "\n";
         dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n\n";
