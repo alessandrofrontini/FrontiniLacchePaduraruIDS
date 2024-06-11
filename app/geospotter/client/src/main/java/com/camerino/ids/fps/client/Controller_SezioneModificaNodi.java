@@ -119,7 +119,7 @@ public class Controller_SezioneModificaNodi implements Initializable {
             Long IDDaModificare = Long.valueOf(this.eliminaNodo(mouseEvent));
 
 
-            if (!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null /*&& this.CheckValidita(nuovoNodo,comuni)*/) {
+            if (!Objects.equals(IDDaModificare, "") && this.controllaConformitaID(IDDaModificare) && nuovoNodo != null && this.CheckValidita(nuovoNodo,comuni)) {
                 nuovoNodo.setId(IDDaModificare);
                 ((ClsContributor) Controller_SezioneLogin.UTENTE).modificaNodo(IDDaModificare, nuovoNodo);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
