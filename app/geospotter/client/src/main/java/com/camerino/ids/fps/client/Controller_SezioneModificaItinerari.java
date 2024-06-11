@@ -75,7 +75,7 @@ public class Controller_SezioneModificaItinerari implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
-        itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
+        itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari(); //TODO: add getItinerariPossessore
 
         this.setItinerari(itinerari);
         this.setNodi(nodi);
@@ -214,19 +214,25 @@ public class Controller_SezioneModificaItinerari implements Initializable {
         this.SwitchScene("SezioneVisualizzazione.fxml", mouseEvent);
     }
 
-    public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent) {
-        Long idItinerarioDaVisualizzare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
+    public void vediInformazoniAttualiItinerario(MouseEvent mouseEvent)
+    {
+        if(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID) != "" && u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID) != null)
+        {
+            Long idItinerarioDaVisualizzare = Long.valueOf(u.getValueFromCombobox(sezioneEliminazioneItinerariComboBoxSceltaItinerarioID));
 
-        ClsItinerarioVisual c = new ClsItinerarioVisual();
+            ClsItinerarioVisual c = new ClsItinerarioVisual();
 
-        for (int i = 0; i < itinerari.size(); i++) {
-            if (Objects.equals(itinerari.get(i).getId(), idItinerarioDaVisualizzare)) {
-                c = u.convertFromClsItinerario(itinerari.get(i));
-                this.sezioneInserimentoItinerariElencoTappe.setText(c.getTappe());
-                this.sezioneInserimentoItinerariNomeItinerario.setText(c.getNome());
-                this.sezioneInserimentoItinerariCheckBoxOrdinato.setSelected(itinerari.get(i).isOrdinato());
+            for (int i = 0; i < itinerari.size(); i++) {
+                if (Objects.equals(itinerari.get(i).getId(), idItinerarioDaVisualizzare)) {
+                    c = u.convertFromClsItinerario(itinerari.get(i));
+                    this.sezioneInserimentoItinerariElencoTappe.setText(c.getTappe());
+                    this.sezioneInserimentoItinerariNomeItinerario.setText(c.getNome());
+                    this.sezioneInserimentoItinerariCheckBoxOrdinato.setSelected(itinerari.get(i).isOrdinato());
+                }
             }
         }
+
+
     }
 
     private boolean controllaConformitaIDItinerario(Long id) {/*

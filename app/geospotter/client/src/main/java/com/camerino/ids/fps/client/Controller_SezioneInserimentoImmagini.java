@@ -95,7 +95,7 @@ public class Controller_SezioneInserimentoImmagini implements Initializable {
 
     public void inserisciImmagine(MouseEvent mouseEvent)
     {
-        if(u.getValueFromCombobox(this.sceltaNodo) != "" && u.getValueFromCombobox(this.sceltaNodo) != null)
+        if(!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), "") && u.getValueFromCombobox(this.sceltaNodo) != null && !Objects.equals(u.getValueFromCombobox(this.sceltaNodo), "null"))
         {
             Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
             ClsImmagine i = new ClsImmagine();

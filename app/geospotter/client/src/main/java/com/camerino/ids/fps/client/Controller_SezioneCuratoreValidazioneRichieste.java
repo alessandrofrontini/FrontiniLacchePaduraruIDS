@@ -139,13 +139,13 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //endregion
 
         //region Combobox Scelta Immagini dettaglio
-        ObservableList<String> itemss = FXCollections.observableArrayList();
+        ObservableList<String> itme = FXCollections.observableArrayList();
 
-        for (int i = 0; i < richiesteNodo.size(); i++) {
-            itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
+        for (int i = 0; i < richiesteImmagini.size(); i++) {
+            itme.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
-        this.selezionaElementoDettaglioImmagine.setItems(itemss);
+        this.selezionaElementoDettaglioImmagine.setItems(itme);
         //endregion
 
         //region Combobox Scelta Nodi
@@ -487,26 +487,18 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     public void visualizzaDettaglioItinerario()
     {
-        if(u.getValueFromCombobox(selezionaElementoDettaglioItinerario) != "" && u.getValueFromCombobox(selezionaElementoDettaglioItinerario) != null)
+
+        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario).toString();
+
+        if(!Objects.equals(IDDaVisualizzare, ""))
         {
-            String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario);
-
-            if (true) {
-
                 for (int i = 0; i < richiesteItinerario.size(); i++) {
-                    if (IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta())) {
+                    if (IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta().toString())) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("OK");
                         alert.setContentText("ID:" + richiesteItinerario.get(i).getIdRichiesta() +"\nCreatore: " + richiesteItinerario.get(i).getCreatore().getId());
                         alert.show();
                     }
-                }
-
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERRORE");
-                alert.setContentText("Controlla le informazioni e riprova");
-                alert.show();
             }
         }
         else{

@@ -57,7 +57,7 @@ public class ClsRecensione extends ClsInformazione {
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
         dummy += "Contenuto: " + this.getContenuto() + "\n";
-        dummy += "Contenuto Associato: " + this.getIdNodoAssociato() + "\n";
+        dummy += "Associazione: " + this.getIdNodoAssociato() + "\n";
 
 
         return dummy;

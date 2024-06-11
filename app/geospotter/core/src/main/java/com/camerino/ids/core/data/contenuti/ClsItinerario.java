@@ -65,7 +65,7 @@ public class ClsItinerario {
         String dummy = "";
 
         dummy += "isOrdered: " + this.ordinato + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "TAPPE: " + "\n" + this.visualizzaTappe(this.tappe);
 
