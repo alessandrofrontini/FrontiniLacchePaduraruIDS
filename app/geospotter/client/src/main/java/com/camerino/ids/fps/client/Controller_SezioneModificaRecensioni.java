@@ -152,20 +152,21 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
     public void modificaRecensione(MouseEvent mouseEvent) {
         ClsRecensione r = new ClsRecensione();
 
-        Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+        Long idNodo = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+        Long idRec = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID));
         String oggetto = u.getValueFromTextField(this.oggetto);
         String contenuto = u.getValueFromTextField(this.contenuto);
         String valutazione = u.getValueFromTextField(this.valutazione);
 
         if (oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), "")) {
-            r.setId(id);
+            r.setId(idRec);
             //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdNodoAssociato(id);
+            r.setIdNodoAssociato(idNodo);
             r.setOggetto(oggetto);
             r.setContenuto(contenuto);
             r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(id, r);
+            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(idNodo, r);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");

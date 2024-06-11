@@ -142,11 +142,11 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable {
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for (int i = 0; i < this.nodi.size(); i++) {
+            /*for (int i = 0; i < this.nodi.size(); i++) {
                 if (Objects.equals(nodi.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(1L); //todo:aggiungere chiamata per ottenere curatore
                 }
-            }
+            }*/
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");

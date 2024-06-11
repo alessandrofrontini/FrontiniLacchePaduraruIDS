@@ -123,11 +123,11 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for (int i = 0; i < this.itinerari.size(); i++) {
+            /*for (int i = 0; i < this.itinerari.size(); i++) {
                 if (Objects.equals(itinerari.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(itinerari.get(i).getTappe().get(0).getIdComuneAssociato()); //todo: ottenere da spring
                 }
-            }
+            }*/
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");

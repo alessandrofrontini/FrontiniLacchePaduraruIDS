@@ -118,12 +118,12 @@ public class Controller_SezioneVisualizzazioneComuni implements Initializable {
             ClsSegnalazione segnalazione = new ClsSegnalazione();
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
-            for (int i = 0; i < this.comuni.size(); i++) {
+            /*for (int i = 0; i < this.comuni.size(); i++) {
                 if (Objects.equals(comuni.get(i).getId(), IDDaSegnalare)) {
                     if(!comuni.get(i).getCuratoriAssociati().isEmpty())
                         segnalazione.setIdCuratore(comuni.get(i).getCuratoriAssociati().get(0).getId());
                 }
-            }
+            }*/
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");
