@@ -22,10 +22,12 @@ public class CRDCNodi {
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRDCNodo>> getRDC(
             @RequestParam(value = "idRDC", required = false) Long idRDC,
-            @RequestParam(value = "owner", required = false) Long owner
+            @RequestParam(value = "idUtente", required = false) Long idUtente
     ) {
         if (idRDC != null)
             return ResponseEntity.ok(sRDCnodi.getRDCNodiById(idRDC));
+        if (idUtente != null)
+            return ResponseEntity.ok(sRDCnodi.getRDCNodiCur());
         return ResponseEntity.ok(sRDCnodi.getAllRDCNodi());
     }
 

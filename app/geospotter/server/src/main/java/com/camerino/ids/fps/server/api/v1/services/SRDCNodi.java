@@ -106,5 +106,10 @@ public class SRDCNodi {
             repoNodi.delete(newData);
         return true;
     }
+
+    public List<ClsRDCNodo> getRDCNodiCur() {
+        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
+        return user.getRDCNodiPosessoreCur();
+    }
 }
 

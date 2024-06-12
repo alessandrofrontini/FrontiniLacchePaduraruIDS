@@ -21,11 +21,14 @@ public class CRDCItinerari {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRdcItinerario>> getRDC(
-            @RequestParam(value = "idRDCItinerario", required = false) Long idRDCItinerario
+            @RequestParam(value = "idRDCItinerario", required = false) Long idRDCItinerario,
+            @RequestParam(value = "idUtente", required = false) Long idUtente
     ) {
-        if (idRDCItinerario == null)
-            return ResponseEntity.ok(sRDCItinerari.getAllRDCItinerari());
-        return ResponseEntity.ok(sRDCItinerari.getRDCItinerarioById(idRDCItinerario));
+        if (idRDCItinerario != null)
+            return ResponseEntity.ok(sRDCItinerari.getRDCItinerarioById(idRDCItinerario));
+        if(idUtente != null)
+            return ResponseEntity.ok(sRDCItinerari.getAllRDCItinerariCur());
+        return ResponseEntity.ok(sRDCItinerari.getAllRDCItinerari());
     }
 
     @DeleteMapping(mapping)

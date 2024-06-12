@@ -102,4 +102,9 @@ public class SRDCItinerari {
         repoUtenti.incrementaPunteggio(rdc.getCreatore().getId(), 2);
         return true;
     }
+
+    public List<ClsRdcItinerario> getAllRDCItinerariCur() {
+        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
+        return user.getRDCItinerarioPosessoreCur();
+    }
 }
