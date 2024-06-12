@@ -6,30 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContribuzione> {
-    List<ClsRichiestaAzioneDiContribuzione> rcdi = new ArrayList<>();
+public class MockRCDItinerarii implements IPersistenceModel<ClsRichiestaAzioneDiContribuzioneItinerario> {
+
+    List<ClsRichiestaAzioneDiContribuzioneItinerario> rcdi = new ArrayList<>();
     long idCounter = 0;
 
     //region Implements IPersistance
     @Override
-    public List<ClsRichiestaAzioneDiContribuzione> get(Map<String, Object> filters) {
-        List<ClsRichiestaAzioneDiContribuzione> tmp = new ArrayList<>();
+    public List<ClsRichiestaAzioneDiContribuzioneItinerario> get(Map<String, Object> filters) {
+        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp = new ArrayList<>();
         if (filters.containsKey("id")) {
-            tmp.add(findById(filters.get("id").toString()));
+            tmp.add(findById((String) filters.get("id")));
             return tmp;
         }
         return rcdi;
     }
 
     @Override
-    public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzione object) {
+    public boolean update(Map<String, Object> filters, ClsRichiestaAzioneDiContribuzioneItinerario object) {
         if (filters.containsKey("id"))
             return updateRCDI(filters.get("id").toString(), object);
         return false;
     }
 
     @Override
-    public boolean insert(ClsRichiestaAzioneDiContribuzione object) {
+    public boolean insert(ClsRichiestaAzioneDiContribuzioneItinerario object) {
         idCounter++;
         object.setId("" + idCounter);
         return rcdi.add(object);
@@ -37,14 +38,14 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        ClsRichiestaAzioneDiContribuzione tmp = findById(filters.get("id").toString());
+        ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(filters.get("id").toString());
         return rcdi.remove(tmp);
     }
     //endregion
 
     //region Utility
-    private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzione object) {
-        ClsRichiestaAzioneDiContribuzione tmp = findById(id);
+    private boolean updateRCDI(Long id, ClsRichiestaAzioneDiContribuzioneItinerario object) {
+        ClsRichiestaAzioneDiContribuzioneItinerario tmp = findById(id);
         int index = rcdi.indexOf(tmp);
         if (index < 0)
             return false;
@@ -52,8 +53,8 @@ public class MockRCDNodi implements IPersistenceModel<ClsRichiestaAzioneDiContri
         return true;
     }
 
-    private ClsRichiestaAzioneDiContribuzione findById(Long id) {
-        List<ClsRichiestaAzioneDiContribuzione> tmp =
+    private ClsRichiestaAzioneDiContribuzioneItinerario findById(Long id) {
+        List<ClsRichiestaAzioneDiContribuzioneItinerario> tmp =
                 rcdi.stream().filter(n -> n.getId().equals(id)).toList();
         if (tmp.isEmpty())
             return null;
