@@ -3,6 +3,7 @@ package com.camerino.ids.fps.server.api.v1.services;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsAnimatore;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
@@ -35,8 +36,8 @@ public class SRDCNodi {
     }
 
     public List<ClsRDCNodo> getAllRDCNodi() {
-        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
-        return user._getAllRDCNodi();
+        ClsAnimatore user = (ClsAnimatore) request.getServletContext().getAttribute("user");
+        return user.GetRDCNodoPosessore();
     }
 
     public List<ClsRDCNodo> getRDCNodiById(Long idRDCNodo) {
