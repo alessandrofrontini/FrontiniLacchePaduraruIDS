@@ -30,4 +30,6 @@ public interface IAzioniContributor {
     boolean postRDCItinerario(ClsRdcItinerario rdc);
     @JsonIgnore
     List<ClsContestDiContribuzione> getAllContest();
+    @JsonIgnore
+    List<ClsItinerario> getItinerariPossessore();
 }

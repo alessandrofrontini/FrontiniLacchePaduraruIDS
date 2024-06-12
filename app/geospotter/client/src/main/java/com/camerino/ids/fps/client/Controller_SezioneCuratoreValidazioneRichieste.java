@@ -310,7 +310,6 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         else{
             u.alertError();
         }
-
     }
 
     public void accettaAzioneNodo(MouseEvent mouseEvent) {

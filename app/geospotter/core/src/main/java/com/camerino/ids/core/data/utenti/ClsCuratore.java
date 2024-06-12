@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Questo ruolo accetta o respinge le richieste fatte dai vari utenti.
@@ -50,7 +51,13 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         this.ruoloUtente = eRUOLI_UTENTE.CURATORE;
     }
     //endregion
+    public Long getIdComuneAssociato() {
+        return idComuneAssociato;
+    }
 
+    public void setIdComuneAssociato(Long idComuneAssociato) {
+        this.idComuneAssociato = idComuneAssociato;
+    }
     public List<ClsSegnalazione> _getAllSegnalazioni() {
         return iperSegnalazioni.get(null);
     }
@@ -96,6 +103,37 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
 
     @Override
     public List<ClsRDCImmagine> getRdcImmaginiPosessoreCur() {
+    }
+
+    @Override
+    public boolean accettaRichiestaNodo(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", true);
+        iperRDCNodi.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean rifiutaRichiestaNodo(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", false);
+        iperRDCNodi.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean accettaRichiestaItinerario(Long idValidazione) {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("idValidazione", idValidazione);
+        filters.put("accetta", true);
+        iperRDCItinerari.get(filters);
+        return true;
+    }
+
+    @Override
+    public boolean rifiutaRichiestaImmagine(Long idValidazione) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idUtente", this.id);
         return this.iperRDCImmagini.get(filters);
@@ -113,5 +151,36 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idUtente", this.id);
         return this.iperRDCItinerari.get(filters);
+    }
+
+    @Override
+    public List<ClsRDCImmagine> getRDCImmaginePossessoreCur() {
+        List<ClsRDCImmagine> rdcPossessore = new ArrayList<>();
+        for(ClsRDCImmagine rdc: getAllRDCImmagini()){
+            if (Objects.equals(getNodoById(rdc.getNewData().getIdNodoAssociato()).get(0).getIdComuneAssociato(), idComuneAssociato)){
+                rdcPossessore.add(rdc);
+            }
+        }
+        return rdcPossessore;
+    }
+
+    @Override
+    public List<ClsRDCNodo> getRDCNodoPossessoreCur() {
+        List<ClsRDCNodo> rdcPossessore = new ArrayList<>();
+        for(ClsRDCNodo rdc: getAllRDCNodi()){
+            if(((rdc.getOldData()!=null)&&(Objects.equals(rdc.getOldData().getIdComuneAssociato(), idComuneAssociato)))||(Objects.equals(rdc.getNewData().getIdComuneAssociato(), idComuneAssociato)))
+                rdcPossessore.add(rdc);
+        }
+        return rdcPossessore;
+    }
+
+    @Override
+    public List<ClsRdcItinerario> getRDCItinerarioPossessoreCur() {
+        List<ClsRdcItinerario> rdcIPossessore = new ArrayList<>();
+        for(ClsRdcItinerario rdc:_getAllRDCItinerari()){
+            if(((rdc.getOldData()!=null)&&(Objects.equals(rdc.getOldData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))||(Objects.equals(rdc.getNewData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))
+                rdcIPossessore.add(rdc);
+        }
+        return rdcIPossessore;
     }
 }
