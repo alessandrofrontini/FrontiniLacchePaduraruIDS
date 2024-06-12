@@ -5,14 +5,9 @@ import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
-import com.camerino.ids.core.data.utenti.ClsAnimatore;
-import com.camerino.ids.core.data.utenti.ClsContributor;
-import com.camerino.ids.core.data.utenti.ClsContributorAutorizzato;
-import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -25,16 +20,16 @@ import static com.camerino.cli.loggers.ClsConsoleLogger.println;
 /**
  * Questa classe contiene i menu comuni di input dati
  */
-public class Input
-{
+public class Input {
     static Scanner in = new Scanner(System.in);
+
     //region Input Nodi
-    public static ClsNodo inserisciNodo(){
+    public static ClsNodo inserisciNodo() {
         boolean exit = false;
         boolean fine = false;
         ClsNodo nodo = new ClsNodo();
         nodo.setIdCreatore(0L);
-        while(!fine) {
+        while (!fine) {
             Posizione pos = new Posizione();
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
@@ -88,7 +83,7 @@ public class Input
             }
             if (checkNodoDuplicato(nodo))
                 fine = true;
-            else{
+            else {
                 println("Il nodo che vuoi inserire esiste già nella piattaforma. Riprova");
                 in.nextLine();
             }
@@ -100,7 +95,7 @@ public class Input
         ClsNodo nodo = new ClsNodo();
         nodo.setIdCreatore(vecchio.getIdCreatore());
         boolean fine = false;
-        while(!fine) {
+        while (!fine) {
             Posizione pos = vecchio.getPosizione();
             nodo.setId(vecchio.getId());
             Posizione newpos = new Posizione();
@@ -171,9 +166,9 @@ public class Input
                 nodo.setaTempo(false);
                 nodo.setDataFine("2099-12-31");
             }
-            if(checkNodoDuplicato(nodo))
+            if (checkNodoDuplicato(nodo))
                 fine = true;
-            else{
+            else {
                 println("Il nodo che vuoi inserire esiste già nella piattaforma. Riprova");
                 in.nextLine();
             }
@@ -181,44 +176,44 @@ public class Input
         return nodo;
     }
 
-    private static boolean checkNodoDuplicato(ClsNodo nodo){
-        for(ClsNodo n:MockLocator.getMockNodi().get(null)){
-            if((Objects.equals(n.getPosizione().getX(), nodo.getPosizione().getX()))&&(Objects.equals(n.getPosizione().getY(), nodo.getPosizione().getY()))&&(Objects.equals(n.getIdComuneAssociato(), nodo.getIdComuneAssociato())))
+    private static boolean checkNodoDuplicato(ClsNodo nodo) {
+        for (ClsNodo n : MockLocator.getMockNodi().get(null)) {
+            if ((Objects.equals(n.getPosizione().getX(), nodo.getPosizione().getX())) && (Objects.equals(n.getPosizione().getY(), nodo.getPosizione().getY())) && (Objects.equals(n.getIdComuneAssociato(), nodo.getIdComuneAssociato())))
                 return false;
         }
         return true;
     }
+
     //endregion
     //region Input Comuni
     //non considera l'associazione con il curatore(fatta dopo)
-    public static ClsComune inserisciComune(boolean o, ClsComune old)
-    {
+    public static ClsComune inserisciComune(boolean o, ClsComune old) {
         ClsComune comune = new ClsComune();
-        if(o)
+        if (o)
             comune = old;
         Posizione pos = new Posizione();
-            print("Inserisci nome" + (o? " (Old: " + old.getNome() + "): ":": "));
-            comune.setNome(in.nextLine());
-            print("Inserisci coordinata X: " + (o? " (Old: " + old.getPosizione().getX() + "): ":": "));
-            pos.setX(Double.parseDouble(in.nextLine()));
-            print("Inserisci coordinata Y: "+ (o? " (Old: " + old.getPosizione() .getY()+ "): ":": "));
-            pos.setY(Double.parseDouble(in.nextLine()));
-            comune.setPosizione(pos);
-            print("Inserisci numero abitanti: "+ (o? " (Old: " + old.getAbitanti() + "): ":": "));
-            comune.setAbitanti(Integer.parseInt(in.nextLine()));
-            print("Inserisci superficie: "+ (o? " (Old: " + old.getSuperficie() + "): ":": "));
-            comune.setSuperficie(Double.parseDouble(in.nextLine()));
-            print("Inserisci descrizione: "+ (o? " (Old: " + old.getDescrizione() + "): ":": "));
-            comune.setDescrizione(in.nextLine());
+        print("Inserisci nome" + (o ? " (Old: " + old.getNome() + "): " : ": "));
+        comune.setNome(in.nextLine());
+        print("Inserisci coordinata X: " + (o ? " (Old: " + old.getPosizione().getX() + "): " : ": "));
+        pos.setX(Double.parseDouble(in.nextLine()));
+        print("Inserisci coordinata Y: " + (o ? " (Old: " + old.getPosizione().getY() + "): " : ": "));
+        pos.setY(Double.parseDouble(in.nextLine()));
+        comune.setPosizione(pos);
+        print("Inserisci numero abitanti: " + (o ? " (Old: " + old.getAbitanti() + "): " : ": "));
+        comune.setAbitanti(Integer.parseInt(in.nextLine()));
+        print("Inserisci superficie: " + (o ? " (Old: " + old.getSuperficie() + "): " : ": "));
+        comune.setSuperficie(Double.parseDouble(in.nextLine()));
+        print("Inserisci descrizione: " + (o ? " (Old: " + old.getDescrizione() + "): " : ": "));
+        comune.setDescrizione(in.nextLine());
 
         return comune;
     }
     //endregion
 
-    public static ClsItinerario richiediItinerario(){
+    public static ClsItinerario richiediItinerario() {
         boolean exit = false;
         ClsItinerario itinerario = new ClsItinerario();
-        while(!exit) {
+        while (!exit) {
             itinerario.setTappe(new ArrayList<>());
             print("Inserisci nome itinerario: ");
             itinerario.setNome(in.nextLine());
@@ -238,17 +233,16 @@ public class Input
                     println("Tappa già presente. seleziona un altro nodo.");
                     in.nextLine();
                 } else {
-                    if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList())))){
+                    if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList())))) {
                         HashMap<String, Object> filtro = new HashMap<>();
                         filtro.put("idNodo", idNodo);
                         itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
-                    }
-                    else println("Nodo inesistente. Riprova.");
+                    } else println("Nodo inesistente. Riprova.");
                 }
             }
-            if(checkItinerarioDuplicato(itinerario))
+            if (checkItinerarioDuplicato(itinerario))
                 exit = true;
-            else{
+            else {
                 println("Questo itinerario è già presente. Riprova");
                 in.nextLine();
             }
@@ -256,10 +250,10 @@ public class Input
         return itinerario;
     }
 
-    public static Credenziali richiediCredenziali(){
+    public static Credenziali richiediCredenziali() {
         boolean ok = false;
         Credenziali credenziali = new Credenziali();
-        while (!ok){
+        while (!ok) {
             print("Username: ");
             credenziali.setUsername(in.nextLine());
             print("Password: ");
@@ -269,34 +263,34 @@ public class Input
         return credenziali;
     }
 
-    public static boolean checkItinerarioDuplicato(ClsItinerario itinerario){
-        for(ClsItinerario i:MockLocator.getMockItinerari().get(null)){
-            if((!checkTappe(i, itinerario))&&(itinerario.isOrdinato()==i.isOrdinato()))
+    public static boolean checkItinerarioDuplicato(ClsItinerario itinerario) {
+        for (ClsItinerario i : MockLocator.getMockItinerari().get(null)) {
+            if ((!checkTappe(i, itinerario)) && (itinerario.isOrdinato() == i.isOrdinato()))
                 return false;
         }
         return true;
     }
-    private static boolean checkTappe(ClsItinerario it1, ClsItinerario it2){
-        if(it1.getTappe().size() != it2.getTappe().size())
+
+    private static boolean checkTappe(ClsItinerario it1, ClsItinerario it2) {
+        if (it1.getTappe().size() != it2.getTappe().size())
             return true;
-        for(int i = 0; i<it1.getTappe().size(); i++){
-            if(it1.getTappe().get(i) != it2.getTappe().get(i))
+        for (int i = 0; i < it1.getTappe().size(); i++) {
+            if (it1.getTappe().get(i) != it2.getTappe().get(i))
                 return true;
         }
         return false;
     }
 
-    public static ClsRecensione inserisciRecensione(){
+    public static ClsRecensione inserisciRecensione() {
         ClsRecensione recensione = new ClsRecensione();
         println("Inserisci l'ID del nodo da recensire");
         String input = in.nextLine();
-        if(checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
+        if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
             recensione.setIdNodoAssociato(Long.valueOf(input));
-        }
-        else return null;
+        } else return null;
         println("Dai un punteggio da 1 a 5");
         String punteggio = in.nextLine();
-        if((Double.parseDouble(punteggio)>=1)&&(Double.parseDouble(punteggio)<=5))
+        if ((Double.parseDouble(punteggio) >= 1) && (Double.parseDouble(punteggio) <= 5))
             recensione.setValutazione(Double.parseDouble(punteggio));
         else return null;
         println("Scegli un titolo per la recensione");
@@ -305,7 +299,8 @@ public class Input
         recensione.setContenuto(in.nextLine());
         return recensione;
     }
-    public static ClsRecensione modificaRecensione(ClsRecensione old){
+
+    public static ClsRecensione modificaRecensione(ClsRecensione old) {
         println("Scegli una nuova valutazione da 1 a 5");
         old.setValutazione(Double.parseDouble(in.nextLine()));
         println("Scegli una nuova descrizione:");
@@ -313,7 +308,7 @@ public class Input
         return old;
     }
 
-    public static boolean checkValore(String input, ArrayList<String> range){
+    public static boolean checkValore(String input, ArrayList<String> range) {
         return range.contains(input);
     }
 }

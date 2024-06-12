@@ -83,7 +83,7 @@ public class ClsMenuCuratore implements IMenu{
      */
 
     public void menuVisualizzaRichieste(){
-        println("1) richieste dei nodi\n2) richieste itinerari\n3)Richieste Immagini\n0) esci");
+        println("1) richieste dei nodi\n2) richieste itinerari\n3) Richieste Immagini\n0) esci");
         String input = in.nextLine();
         if(Objects.equals(input, "1")){
             List<ClsRDCNodo> richieste =user.getRDCNodoPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
@@ -226,12 +226,14 @@ public class ClsMenuCuratore implements IMenu{
                         if(((Objects.equals(nodor.getPosizione().getX(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodor.getPosizione().getY(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodor.getIdComuneAssociato(), nodorichiesta.getIdComuneAssociato())))){
                             richiestaIterator.remove(); break;
                         }
+                        else break;
                     }
                     case ELIMINA_NODO:{
                         ClsNodo nodorichiesta = richiesta.getOldData();
                         if(((Objects.equals(nodold.getPosizione().getX(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodold.getPosizione().getY(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodold.getIdComuneAssociato(), nodorichiesta.getIdComuneAssociato())))){
                             richiestaIterator.remove(); break;
                         }
+                        else break;
                     }
 
                 }
@@ -259,13 +261,13 @@ public class ClsMenuCuratore implements IMenu{
                     case ELIMINA_ITINERARIO:{
                         if(isUgualeItinerario(itold, itro)){
                             rcdIterator.remove(); break;
-                        }
+                        } else break;
                     }
                     case INSERISCI_ITINERARIO:
                     case MODIFICA_ITINERARIO:{
                         if(isUgualeItinerario(itnew, itrn)){
                             rcdIterator.remove(); break;
-                        }
+                        } else break;
                     }
                 }
             }
@@ -301,6 +303,7 @@ public class ClsMenuCuratore implements IMenu{
                 println("Segnalazione " + s.getId() + "\nNodo associato: " + s.getIdContenuto() + "\nDescrizione: " + s.getDescrizione() + "\n");
             }
         }
+        else println("Non ci sono segnalazioni.");
         in.nextLine();
     }
 

@@ -188,17 +188,12 @@ public class ClsMenuContributor implements IMenu{
             boolean exit = false;
             boolean exitSezione = false;
             while (!exit) {
-                println("1 - cambia nome");
-                println("2 - aggiungi una tappa");
-                println("3 - rimuovi una tappa");
-                println("4 - attiva/disattiva l'ordinamento");
+                println("1 - aggiungi una tappa");
+                println("2 - rimuovi una tappa");
+                println("3 - attiva/disattiva l'ordinamento");
                 println("0 - Salva ed esci dal menu");
                 switch (in.nextLine()) {
-                    case "1":
-                        print("inserisci il nuovo nome: ");
-                        nuovo.setNome(in.nextLine());
-                        break;
-                    case "2": {
+                    case "1": {
                         while (!exitSezione) {
                             print("inserisci l'id della nuova tappa");
                             input = in.nextLine();
@@ -218,23 +213,23 @@ public class ClsMenuContributor implements IMenu{
                         }
                         break;
                     }
-                    case "3": {
+                    case "2": {
                         for (ClsNodo nodo : nuovo.getTappe()) {
                             println(nodo.visualizzaNodo());
                         }
-                        while (exitSezione) {
+                        while (!exitSezione) {
                             print("Inserisci l'id della tappa da eliminare");
                             String idTappa = in.nextLine();
                             if (!controllaTappaDuplicataItinerario(nuovo, Long.valueOf(idTappa))) {
                                 nuovo.getTappe().remove(user.getNodoById(Long.valueOf(idTappa)).get(0));
-                                exitSezione = false;
+                                exitSezione = true;
                             } else {
                                 println("Errore.");
                             }
                         }
                         break;
                     }
-                    case "4": {
+                    case "3": {
                         print("Attualmente l'itinerario è: ");
                         if (nuovo.isOrdinato())
                             print("Ordinato.");

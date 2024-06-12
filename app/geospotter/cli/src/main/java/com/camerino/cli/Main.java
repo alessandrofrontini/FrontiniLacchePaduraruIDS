@@ -31,7 +31,6 @@ public class Main {
         while (true) {
             //Queste sono le azioni che un turista (non autenticato) può fare
             println("1)Login");
-            println("2)Registrati");
             println("3)Lista Comuni");
             println("4)Lista nodi di un comune");
             println("5)Mostra Nodo");
@@ -43,7 +42,6 @@ public class Main {
                     return;
                 }
                 case "1"-> login();
-                case "2"-> registraUtente();
                 case "3"-> listaComuni();
                 case "4"-> menuListaNodiComune();
                 case "5"-> menuMostraNodo();
@@ -69,7 +67,7 @@ public class Main {
     /**
      * Il metodo legge da file tutti i dati salvati e riempie le Mock
      */
-    private static void leggiTutto(){
+    private static void leggiTutto() {
         MockLocator.getMockTuristi().leggiUtenti();
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
@@ -80,35 +78,6 @@ public class Main {
         MockLocator.getMockItinerari().leggiItinerari();
         MockLocator.getMockRCDI().leggiRCDItinerari();
         MockLocator.getMockRCDImmagini().LeggiRCDImmagini();
-    }
-    private static void registraUtente(){
-        String username = "", pwd = "";
-        boolean exit = false;
-        while(!exit) {
-            println("Inserisci l'username");
-            username = in.nextLine();
-            if (checkValore(username, (ArrayList<String>) MockLocator.getMockTuristi().get(null).stream().map(utente -> utente.getCredenziali().getUsername()).collect(Collectors.toList()))) {
-                println("Username già in uso. Riprova");
-                in.nextLine();
-            }
-            else exit = true;
-        }
-        println("Inserisci la password");
-        pwd = in.nextLine();
-        while(exit) {
-            println("Ripeti la password");
-            if (!Objects.equals(pwd, in.nextLine())) {
-                println("Le password non corrispondono. Riprova.");
-                in.nextLine();
-            }
-            else exit = false;
-        }
-        ClsTuristaAutenticato utente = new ClsTuristaAutenticato();
-        Credenziali c = new Credenziali();
-        c.setUsername(username);
-        c.setPassword(pwd);
-        utente.setCredenziali(c);
-        MockLocator.getMockTuristi().insert(utente);
     }
 
     /**
