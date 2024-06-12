@@ -79,4 +79,12 @@ public class SRDCImmagini {
         //TODO: far guadagnare punteggio all'utente
         return true;
     }
+
+    public List<ClsRDCImmagine> GetRDCImmaginePosessore() {
+        return ((ClsAnimatore)request.getServletContext().getAttribute("user")).GetRDCImmaginePosessore();
+    }
+
+    public List<ClsRDCImmagine> GetRDCImmaginePosessoreCur() {
+        return ((ClsCuratore)request.getServletContext().getAttribute("user")).getRdcImmaginiPosessoreCur();
+    }
 }

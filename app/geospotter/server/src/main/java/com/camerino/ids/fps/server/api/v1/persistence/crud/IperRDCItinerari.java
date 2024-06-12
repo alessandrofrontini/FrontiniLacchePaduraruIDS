@@ -27,6 +27,10 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
     public List<ClsRdcItinerario> get(Map<String, Object> filters) {
         if (filters == null)
             return new ArrayList<>(repoRDCItinerari.findAll());
+
+        if(filters.containsKey("idUtente"))
+            return repoRDCItinerari.findRDCItinerariByUtenteCur((Long)filters.get("idUtente"));
+
         if (filters.containsKey("idRDCNodo")) {
             List<Long> ids = new ArrayList<>();
             ids.add((Long) filters.get("idRDCNodo"));

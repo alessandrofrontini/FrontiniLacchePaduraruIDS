@@ -25,7 +25,16 @@ public class IperRDCImmagini implements IPersistenceModel<ClsRDCImmagine> {
 
     @Override
     public List<ClsRDCImmagine> get(Map<String, Object> filters) {
-        return new ArrayList<>(repoRDCIimmagini.findAll());
+        if(filters == null)
+            return repoRDCIimmagini.findAll();
+
+        if(filters.containsKey("idUtente")){
+            if(filters.containsKey("onlyContest"))
+                return repoRDCIimmagini.findRDCImmaginiByUtente((Long)filters.get("idUtente"));
+            return repoRDCIimmagini.findRDCImmaginiByUtenteCur((Long)filters.get("idUtente"));
+        }
+
+        return repoRDCIimmagini.findAll();
     }
 
     @Override

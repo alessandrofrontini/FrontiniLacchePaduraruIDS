@@ -18,6 +18,14 @@ import java.util.List;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
+    public Long getIdComuneAssociato() {
+        return idComuneAssociato;
+    }
+
+    public void setIdComuneAssociato(Long idComuneAssociato) {
+        this.idComuneAssociato = idComuneAssociato;
+    }
+
     Long idComuneAssociato;
 
     //region Constructors
@@ -87,56 +95,23 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     }
 
     @Override
-    public boolean accettaRichiestaNodo(Long idValidazione) {
+    public List<ClsRDCImmagine> getRdcImmaginiPosessoreCur() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", true);
-        iperRDCNodi.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCImmagini.get(filters);
     }
 
     @Override
-    public boolean rifiutaRichiestaNodo(Long idValidazione) {
+    public List<ClsRDCNodo> getRDCNodiPosessoreCur() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", false);
-        iperRDCNodi.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCNodi.get(filters);
     }
 
     @Override
-    public boolean accettaRichiestaItinerario(Long idValidazione) {
+    public List<ClsRdcItinerario> getRDCItinerarioPosessoreCur() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", true);
-        iperRDCItinerari.get(filters);
-        return true;
-    }
-
-    @Override
-    public boolean rifiutaRichiestaImmagine(String idValidazione) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", false);
-        iperRDCImmagini.get(filters);
-        return true;
-    }
-
-    @Override
-    public boolean accettaRichiestaImmagine(Long idValidazione) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", true);
-        iperRDCImmagini.get(filters);
-        return true;
-    }
-
-    @Override
-    public boolean rifiutaRichiestaItinerario(Long idValidazione) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", false);
-        iperRDCItinerari.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCItinerari.get(filters);
     }
 }

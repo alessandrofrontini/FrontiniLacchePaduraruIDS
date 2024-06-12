@@ -27,6 +27,13 @@ public class IperRDCNodi implements IPersistenceModel<ClsRDCNodo> {
     public List<ClsRDCNodo> get(Map<String, Object> filters) {
         if (filters == null)
             return new ArrayList<>(repoRDCNodi.findAll());
+
+        if(filters.containsKey("idUtente")){
+            if(filters.containsKey("onlyContest"))
+                return repoRDCNodi.findRDCNodiByUtente((Long)filters.get("idUtente"));
+            return repoRDCNodi.findRDCNodiByUtenteCur((Long)filters.get("idUtente"));
+        }
+
         if (filters.containsKey("idRDCNodo")) {
             List<Long> ids = new ArrayList<>();
             ids.add((Long) filters.get("idRDCNodo"));

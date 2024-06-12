@@ -23,6 +23,9 @@ public class IperRDCItinerari implements IPersistenceModel<ClsRdcItinerario> {
         if(filters == null)
             return api.Get(Controller_SezioneLogin.UTENTE, null);
 
+        if(filters.containsKey("idUtente"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "idUtente=" + filters.get("idUtente"));
+
         if(filters.containsKey("idValidazione") && filters.containsKey("accetta")){
             if((Boolean)filters.get("accetta"))
                 return api.Get(Controller_SezioneLogin.UTENTE, "trueidValidazione="+filters.get("idValidazione"));

@@ -113,14 +113,14 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     Utils u = new Utils();
     //region dummy arrays per creare immagini nodi e itinerari
-    List<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    List<ClsNodo> nodi = new ArrayList<>();
 
     //endregion
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.richiesteImmagini = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCImmagini();
-        this.richiesteNodo = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCNodi();
-        this.richiesteItinerario = ((ClsCuratore)Controller_SezioneLogin.UTENTE)._getAllRDCItinerari();
+        this.richiesteImmagini = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRdcImmaginiPosessoreCur();
+        this.richiesteNodo = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRDCNodiPosessoreCur();
+        this.richiesteItinerario = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRDCItinerarioPosessoreCur();
 
         setRichiesteImmagini(richiesteImmagini);
 
@@ -293,7 +293,7 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
         if(u.getValueFromCombobox(sceltaAzioneImmagine) != "" && u.getValueFromCombobox(sceltaAzioneImmagine) != null)
         {
-            String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
             if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
                 ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(IDValidazione);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

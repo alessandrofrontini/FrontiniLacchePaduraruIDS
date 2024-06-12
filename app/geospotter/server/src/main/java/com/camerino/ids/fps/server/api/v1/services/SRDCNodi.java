@@ -82,7 +82,12 @@ public class SRDCNodi {
     }
 
     public Boolean rifutaRDCNodi(Long idRDC) {
-        repoRDC.deleteById(idRDC);
+        ClsRDCNodo rdc = repoRDC.findById(idRDC).get();
+        ClsNodo newData  = rdc.getNewData();
+        ClsNodo oldData = rdc.getOldData();
+        if(newData!=null)
+            repoNodi.delete(newData);
+        repoRDC.delete(rdc);
         //TODO: far guadagnare punteggio all'utente
         return true;
     }
