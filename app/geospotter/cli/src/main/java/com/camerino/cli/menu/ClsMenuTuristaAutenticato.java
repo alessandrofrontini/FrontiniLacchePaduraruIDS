@@ -82,7 +82,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
             print("Inserisci l'id della recensione da modificare: ");
             String input = in.nextLine();
             if(checkValore(input, (ArrayList<String>) user.getRecensioniPosessore().stream().map(recensione -> recensione.getId().toString()).collect(Collectors.toList()))) {
-                ClsRecensione old = user.getRecensioneById(Long.valueOf(input)).get(0);
+                ClsRecensione old = user.getRecensioniPosessore().stream().filter(r -> r.getId() == Long.parseLong(input)).toList().get(0);
                 if (old == null) {
                     println("Recensione non trovata.");
                     return;

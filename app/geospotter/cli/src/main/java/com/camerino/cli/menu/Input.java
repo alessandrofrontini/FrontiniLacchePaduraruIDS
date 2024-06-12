@@ -33,6 +33,7 @@ public class Input
         boolean exit = false;
         boolean fine = false;
         ClsNodo nodo = new ClsNodo();
+        nodo.setIdCreatore(0L);
         while(!fine) {
             Posizione pos = new Posizione();
             print("Inserisci nome: ");
@@ -97,6 +98,7 @@ public class Input
 
     public static ClsNodo modificaNodo(ClsNodo vecchio) {
         ClsNodo nodo = new ClsNodo();
+        nodo.setIdCreatore(vecchio.getIdCreatore());
         boolean fine = false;
         while(!fine) {
             Posizione pos = vecchio.getPosizione();
@@ -238,7 +240,7 @@ public class Input
                 } else {
                     if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList())))){
                         HashMap<String, Object> filtro = new HashMap<>();
-                        filtro.put("id", idNodo);
+                        filtro.put("idNodo", idNodo);
                         itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
                     }
                     else println("Nodo inesistente. Riprova.");
@@ -311,69 +313,6 @@ public class Input
         return old;
     }
 
-    public static ClsTuristaAutenticato menuRegistraUtente(){
-        ClsTuristaAutenticato utente;
-            println("Inserisci il ruolo:");
-            println("0 > Turista Autenticato");
-            println("1 > Contributor");
-            println("2 > Contributor Autorizzato");
-            println("3 > Animatore");
-            switch (in.nextLine()) {
-                case "0":
-                    utente = MockLocator.getMockTuristi().CreaTuristaAut();
-                    break;
-                case "1":
-                    utente = MockLocator.getMockTuristi().CreaContributor();
-                    break;
-                case "2":
-                    utente = MockLocator.getMockTuristi().CreaContributorAut();
-                    break;
-                case "3":
-                    utente = MockLocator.getMockTuristi().CreaAnimatore();
-                    break;
-                default:
-                    println("Scegli una voce dal menu"); in.nextLine();
-                    return null;
-            }
-        utente.setPunteggio(utente.getRuoloUtente().getValue());
-        print("Inserisci l'username > ");
-        Credenziali credenziali = new Credenziali();
-        credenziali.setUsername(in.nextLine());
-        print("Inserisci la password > ");
-        credenziali.setPassword(in.nextLine());
-        utente.setCredenziali(credenziali);
-        return utente;
-    }
-
-    public static void modificaUtente(String user){
-        HashMap<String, Object> filtro = new HashMap<>();
-        filtro.put("username", user);
-        ClsTuristaAutenticato utente = MockLocator.getMockTuristi().get(filtro).get(0);
-        println("ruolo: " + utente.getRuoloUtente() + "\nUsername: " + utente.getCredenziali().getUsername() + "\nPassword: " + utente.getCredenziali().getPassword() + "\n\nScegli un'azione:");
-        boolean exit = false;
-        while(!exit) {
-            println("1 > Cambia username\n2 > Cambia password\n0 > Esci");
-            switch (in.nextLine()) {
-                case "1":
-                    print("Scegli un nuovo username: ");
-                    String username = in.nextLine();
-                    if (controllaUsernameDuplicato(username)) utente.getCredenziali().setUsername(username);
-                    else println("Username già esistente. Riprova."); break;
-                case "2":
-                    print("Scegli una nuova password: ");
-                    utente.getCredenziali().setPassword(in.nextLine()); println("Password aggiornata."); break;
-                case "0": exit = true; break;
-            }
-        }
-    }
-
-    private static boolean controllaUsernameDuplicato(String username){
-        for(ClsTuristaAutenticato t:MockLocator.getMockTuristi().get(null)){
-            if(Objects.equals(t.getCredenziali().getUsername(), username))
-                return false;
-        }
-        return true;
-    }
     public static boolean checkValore(String input, ArrayList<String> range){
         return range.contains(input);
     }

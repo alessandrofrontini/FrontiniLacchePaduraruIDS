@@ -4,6 +4,7 @@ import com.camerino.cli.mock.MockLocator;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
+import com.camerino.ids.core.data.azioni.EStatusRDC;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -89,7 +90,7 @@ public class ClsMenuCuratore implements IMenu{
         println("1) richieste dei nodi\n2) richieste itinerari\n3)Richieste Immagini\n0) esci");
         String input = in.nextLine();
         if(Objects.equals(input, "1")){
-            List<ClsRDCNodo> richieste =user.getRDCNodoPossessoreCur();
+            List<ClsRDCNodo> richieste =user.getRDCNodoPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
             if(!richieste.isEmpty()) {
                 for (ClsRDCNodo r : richieste) {
                     println("richiesta n. " + r.getIdRichiesta() + ", tipologia: nodo");
@@ -98,7 +99,7 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
         else if(Objects.equals(input, "2")){
-            List<ClsRdcItinerario> richieste = user.getRDCItinerarioPossessoreCur();
+            List<ClsRdcItinerario> richieste = user.getRDCItinerarioPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
             if(!richieste.isEmpty()) {
                 for (ClsRdcItinerario r : richieste) {
                     println("richiesta n. " + r.getIdRichiesta() + ", tipologia: itinerario");
@@ -107,7 +108,7 @@ public class ClsMenuCuratore implements IMenu{
             }
         }
         else{
-            List<ClsRDCImmagine> richieste = user.getRDCImmaginePossessoreCur();
+            List<ClsRDCImmagine> richieste = user.getRDCImmaginePossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
             if(!richieste.isEmpty()){
                 for(ClsRDCImmagine r:richieste){
                     println("richiesta n. " + r.getIdRichiesta() + ", tipologia: immagine");
@@ -133,7 +134,7 @@ public class ClsMenuCuratore implements IMenu{
                 println("Richiesta " + idr);
                 String esito;
                 if (tipo==2) {
-                    if (checkValore(idr, (ArrayList<String>) user._getAllRDCItinerari().stream().map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
+                    if (checkValore(idr, (ArrayList<String>) user._getAllRDCItinerari().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
                         ClsRdcItinerario rit = user.getRDCItinerarioById(Long.parseLong(idr)).get(0);
                         println("Tipo richiesta -> " + rit.getTipo());
                         println("Tappe itinerario:");
@@ -160,7 +161,7 @@ public class ClsMenuCuratore implements IMenu{
                         in.nextLine();
                     }
                 } else if(tipo==1) {
-                    if (checkValore(idr, (ArrayList<String>) user.getAllRDCNodi().stream().map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
+                    if (checkValore(idr, (ArrayList<String>) user.getAllRDCNodi().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
                         ClsRDCNodo r = user.getRDCNodiById(Long.parseLong(idr)).get(0);
                         println("Tipo richiesta -> " + r.getTipo());
                         println("Validare? Y/N");
@@ -180,8 +181,8 @@ public class ClsMenuCuratore implements IMenu{
                     in.nextLine();
                 }
                 else {
-                    if (checkValore(idr, (ArrayList<String>) user.getAllRDCImmagini().stream().map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
-                        ClsRDCImmagine r = user.getRDCImmagineById(Long.parseLong(idr)).get(0);
+                    if (checkValore(idr, (ArrayList<String>) user.getAllRDCImmagini().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).map(rcd -> rcd.getIdRichiesta().toString()).collect(Collectors.toList()))) {
+                        ClsRDCImmagine r = user.getAllRDCImmagini().stream().filter(rdc -> rdc.getIdRichiesta() == Long.parseLong(idr)).toList().get(0);
                         println("Tipo richiesta -> " + r.getTipo());
                         println("Validare? Y/N");
                         esito = in.nextLine();
@@ -292,9 +293,7 @@ public class ClsMenuCuratore implements IMenu{
     public void menuVisualizzaSegnalazioni(){
         if(user._getAllSegnalazioni()!=null){
             for(ClsSegnalazione s:user._getAllSegnalazioni()){
-                if(Objects.equals(s.getIdCuratore(), "null")){
-                    println("Segnalazione " + s.getId() + "\nNodo associato: " + s.getIdContenuto() + "\nDescrizione: " + s.getDescrizione() + "\n");
-                }
+                println("Segnalazione " + s.getId() + "\nNodo associato: " + s.getIdContenuto() + "\nDescrizione: " + s.getDescrizione() + "\n");
             }
         }
         in.nextLine();

@@ -81,12 +81,16 @@ public class ClsMenuContributor implements IMenu{
             for(ClsNodo n: user.getNodiPossessore())
                 println(n.visualizzaNodo());
             println("inserisci l'id del nodo da modificare");
-            ClsNodo old = user.getNodoById(Long.parseLong(in.nextLine())).get(0);
-            if (old == null) {
-                println("Nessun Nodo Trovato");
-                return;
+            String input = in.nextLine();
+            if (checkValore(input, (ArrayList<String>) user.getNodiPossessore().stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))){
+                ClsNodo old = user.getNodoById(Long.parseLong(input)).get(0);
+                user.modificaNodo(Long.valueOf(input), Input.modificaNodo(old));
             }
-            user.modificaNodo(old.getId(), Input.modificaNodo(old));
+            else{
+                println("Nessun Nodo Trovato");
+                in.nextLine();
+            }
+
         }
     }
 

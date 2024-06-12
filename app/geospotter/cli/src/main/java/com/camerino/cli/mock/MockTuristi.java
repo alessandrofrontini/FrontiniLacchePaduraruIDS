@@ -28,8 +28,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                tmp.addAll(findByRuolo(filters.get("ruoloUtente").toString()));
                return tmp;
            }
-           if (filters.containsKey("id")) {
-               tmp.addAll(findByID(Long.valueOf(filters.get("id").toString())));
+           if (filters.containsKey("idUtente")) {
+               tmp.addAll(findByID(Long.valueOf(filters.get("idUtente").toString())));
                return tmp;
            }
        }
@@ -127,7 +127,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                             daAggiungere = CreaAnimatore();
                             break;
                         case "CURATORE": {
-                            CreaCuratore();
+                            daAggiungere = CreaCuratore();
                             break;
                         }
                         case "GESTORE_DELLA_PIATTAFORMA":
@@ -140,6 +140,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                     cr.setPassword(dati[3]);
                     daAggiungere.setCredenziali(cr);
                     daAggiungere.setPunteggio(Integer.parseInt(dati[4]));
+                    if(daAggiungere.getClass()==ClsCuratore.class)
+                        ((ClsCuratore) daAggiungere).setIdComuneAssociato(Long.parseLong(dati[5]));
                     inserisciUtente(daAggiungere);
                 }
                 maxID();
@@ -162,6 +164,8 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR);
         user._setIperRDCNodi(MockLocator.getMockRCD());
         user._setIperRDCItinerari(MockLocator.getMockRCDI());
+        user.setIperNodi(MockLocator.getMockNodi());
+        user.setIperItinerari(MockLocator.getMockItinerari());
         return user;
     }
 
@@ -180,7 +184,6 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
     private ClsCuratore CreaCuratore() {
         ClsCuratore user = new ClsCuratore(CreaAnimatore());
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
-
         return user;
     }
 

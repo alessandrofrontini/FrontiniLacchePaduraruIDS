@@ -27,16 +27,16 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         public ArrayList<ClsNodo> get(Map<String, Object> filters) {
             if(filters!=null) {
                 ArrayList<ClsNodo> nodi = new ArrayList<>();
-                if (filters.containsKey("id")) {
-                    nodi.add(getNodoById(Long.valueOf(filters.get("id").toString())));
+                if (filters.containsKey("idNodo")) {
+                    nodi.add(getNodoById(Long.valueOf(filters.get("idNodo").toString())));
                     return nodi;
                 }
                 if (filters.containsKey("idComune")) {
                     nodi.addAll(filterByIdComune((Long) filters.get("idComune")));
                     return nodi;
                 }
-                if (filters.containsKey("idCreatore")) {
-                    nodi.addAll(filterByUsername((Long) filters.get("idCreatore")));
+                if((filters.containsKey("owner"))){
+                    nodi.addAll(filterByUsername((Long) filters.get("owner")));
                     return nodi;
                 }
             }
@@ -147,9 +147,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                 FileWriter output = new FileWriter("CLIsave/nodi.csv");
                 StringBuilder daScrivere = new StringBuilder();
                 for(ClsNodo nodo:nodi){
-                    SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-
-                    daScrivere.append(nodo.getId() + "," + nodo.getIdComuneAssociato() + "," + nodo.isaTempo() + "," + d.format(nodo.getDataFine()) + "," + nodo.getTipologiaNodo() + "," + nodo.getIdCreatore() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\n");
+                    daScrivere.append(nodo.getId() + "," + nodo.getIdComuneAssociato() + "," + nodo.isaTempo() + "," + nodo.getDataFine() + "," + nodo.getTipologiaNodo() + "," + nodo.getIdCreatore() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\n");
                 }
                 output.write(String.valueOf(daScrivere));
                 output.close();

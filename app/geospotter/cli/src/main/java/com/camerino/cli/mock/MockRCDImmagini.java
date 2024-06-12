@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.azioni.EStatusRDC;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
@@ -30,6 +31,15 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
                     tmp.addAll(findLibere());
                     return tmp;
                 } else return null;
+            }
+            if(filters.containsKey("idValidazione")) {
+                ClsRDCImmagine rdcImm = findById(Long.valueOf(filters.get("idValidazione").toString()));
+                if (filters.containsKey("accetta")) {
+                    ClsImmagine immagine = rdcImm.getNewData();
+                    immagine.setIdCreatore(rdcImm.getCreatore().getId());
+                    rdcImm.setStato(EStatusRDC.ACCETTATO);
+                    MockLocator.getMockImmagini().insert(immagine);
+                }
             }
         }
         return rcdi;

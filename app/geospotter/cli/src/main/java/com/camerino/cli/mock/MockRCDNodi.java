@@ -24,8 +24,8 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
     public ArrayList<ClsRDCNodo> get(Map<String, Object> filters) {
         if(filters!=null) {
             ArrayList<ClsRDCNodo> tmp = new ArrayList<>();
-            if (filters.containsKey("id")) {
-                tmp.add(findById(Long.valueOf(filters.get("id").toString())));
+            if (filters.containsKey("idRDC")) {
+                tmp.add(findById(Long.valueOf(filters.get("idRDC").toString())));
                 return tmp;
             }
             if (filters.containsKey("usernameCuratore")) {
@@ -33,6 +33,35 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
                     tmp.addAll(findLibere());
                     return tmp;
                 } else return null;
+            }
+            if(filters.containsKey("idValidazione")){
+                ClsRDCNodo rdcNodo = findById(Long.valueOf(filters.get("idValidazione").toString()));
+                if(filters.containsKey("accetta")){
+                    switch (rdcNodo.getTipo()){
+                        case INSERISCI_NODO:{
+                            rdcNodo.getNewData().setIdCreatore(rdcNodo.getCreatore().getId());
+                            rdcNodo.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockNodi().insert(rdcNodo.getNewData());
+                            break;
+                        }
+                        case MODIFICA_NODO:{
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", rdcNodo.getOldData().getId());
+                            rdcNodo.getNewData().setIdCreatore(rdcNodo.getCreatore().getId());
+                            rdcNodo.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockNodi().update(filtro, rdcNodo.getNewData());
+                            break;
+                        }
+                        case ELIMINA_NODO:{
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", rdcNodo.getOldData().getId());
+                            rdcNodo.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockNodi().delete(filtro);
+                            break;
+                        }
+                    }
+                }
+                else rdcNodo.setStato(EStatusRDC.RIFUTATO);
             }
         }
         return rcdi;
@@ -122,16 +151,18 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
         n.setIdCreatore(Long.valueOf(dati[8]));
         n.setNome(dati[9]);
         n.setPosizione(new Posizione(Double.parseDouble(dati[10]), Double.parseDouble(dati[11])));
-        if(!Objects.equals(dati[0], "MODIFICA_NODO"))
+        if(Objects.equals(dati[0], "INSERISCI_NODO"))
             r = new ClsRDCNodo(null, n);
+        else if(Objects.equals(dati[0], "ELIMINA_NODO"))
+            r = new ClsRDCNodo(n, null);
         else{
             HashMap<String, Object> filtro2 = new HashMap<>();
-            filtro2.put("id", dati[14]);
+            filtro2.put("idNodo", dati[13]);
             r = new ClsRDCNodo(MockLocator.getMockNodi().get(filtro2).get(0), n);
         }
         r.setTipo(EAzioniDiContribuzione.valueOf(dati[0]));
         HashMap<String, Object> filtro = new HashMap<>();
-        filtro.put("username", dati[1]);
+        filtro.put("idUtente", dati[1]);
         r.setCreatore(MockLocator.getMockTuristi().get(filtro).get(0));
         r.setIdRichiesta(Long.valueOf(dati[2]));
         r.setStato(EStatusRDC.valueOf(dati[12]));
@@ -143,10 +174,15 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
             FileWriter output = new FileWriter("CLIsave/rcd.csv");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRDCNodo r:rcdi){
-                daScrivere.append(r.getTipo() + "," + r.getCreatore().getCredenziali().getUsername() + "," + r.getIdRichiesta() + ",");
-                SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
-                ClsNodo n = r.getNewData();
-                daScrivere.append(n.getId() + "," + n.getIdComuneAssociato() + "," + n.isaTempo() + "," + d.format(n.getDataFine()) + "," + n.getTipologiaNodo() + "," + n.getIdCreatore() + "," + n.getNome() + "," + n.getPosizione().getY() + "," + n.getPosizione().getX() + "," + r.getStato());
+                daScrivere.append(r.getTipo() + "," + r.getCreatore().getId() + "," + r.getIdRichiesta() + ",");
+                ClsNodo n;
+                if(r.getTipo()==EAzioniDiContribuzione.ELIMINA_NODO){
+                    n = r.getOldData();
+                }
+                else{
+                    n = r.getNewData();
+                }
+                daScrivere.append(n.getId() + "," + n.getIdComuneAssociato() + "," + n.isaTempo() + "," + n.getDataFine() + "," + n.getTipologiaNodo() + "," + n.getIdCreatore() + "," + n.getNome() + "," + n.getPosizione().getY() + "," + n.getPosizione().getX() + "," + r.getStato());
                 if(r.getTipo()==EAzioniDiContribuzione.MODIFICA_NODO){
                     ClsNodo nodoold = r.getOldData();
                     daScrivere.append("," + nodoold.getId());

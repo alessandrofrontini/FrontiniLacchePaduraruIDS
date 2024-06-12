@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.azioni.EStatusRDC;
@@ -31,6 +32,35 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                     tmp.addAll(findLibere());
                     return tmp;
                 } else return null;
+            }
+            if(filters.containsKey("idValidazione")){
+                ClsRdcItinerario rdcIt = findById(Long.valueOf(filters.get("idValidazione").toString()));
+                if(filters.containsKey("accetta")){
+                    switch (rdcIt.getTipo()){
+                        case INSERISCI_ITINERARIO:{
+                            rdcIt.getNewData().setIdCreatore(rdcIt.getCreatore().getId());
+                            rdcIt.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockItinerari().insert(rdcIt.getNewData());
+                            break;
+                        }
+                        case MODIFICA_ITINERARIO:{
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", rdcIt.getOldData().getId());
+                            rdcIt.getNewData().setIdCreatore(rdcIt.getCreatore().getId());
+                            rdcIt.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockItinerari().update(filtro, rdcIt.getNewData());
+                            break;
+                        }
+                        case ELIMINA_ITINERARIO:{
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("id", rdcIt.getOldData().getId());
+                            rdcIt.setStato(EStatusRDC.ACCETTATO);
+                            MockLocator.getMockItinerari().delete(filtro);
+                            break;
+                        }
+                    }
+                }
+                else rdcIt.setStato(EStatusRDC.RIFUTATO);
             }
         }
         return rcdi;
@@ -141,7 +171,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                         }
                         r.setTipo(EAzioniDiContribuzione.valueOf(dati[0]));
                         r.setIdRichiesta(Long.valueOf(dati[1]));
-                        filtro.put("id", dati[2]);
+                        filtro.put("idUtente", dati[2]);
                         r.setCreatore( MockLocator.getMockTuristi().get(filtro).get(0));
                         r.setStato(EStatusRDC.valueOf(dati[dati.length-1]));
                         rcdi.add(r);
@@ -162,7 +192,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
             ArrayList<ClsNodo> tappe = new ArrayList<>();
             for(int j = i+4; j<fine; j++){
                 HashMap<String,Object> filtro = new HashMap<>();
-                filtro.put("id", dati[j]);
+                filtro.put("idNodo", dati[j]);
                 tappe.add(MockLocator.getMockNodi().get(filtro).get(0));
             }
             it.setTappe(tappe);

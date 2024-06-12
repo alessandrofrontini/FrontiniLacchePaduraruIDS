@@ -68,11 +68,11 @@ public class Main {
      * Il metodo legge da file tutti i dati salvati e riempie le Mock
      */
     private static void leggiTutto(){
+        MockLocator.getMockTuristi().leggiUtenti();
         MockLocator.getMockComuni().leggiComuni();
         MockLocator.getMockNodi().leggiNodi();
         MockLocator.getMockSegnalazioni().leggiSegnalazioni();
         MockLocator.getMockRecensioni().leggiRecensioni();
-        MockLocator.getMockTuristi().leggiUtenti();
         MockLocator.getMockImmagini().leggiImmagini();
         MockLocator.getMockRCD().leggiRCD();
         MockLocator.getMockItinerari().leggiItinerari();

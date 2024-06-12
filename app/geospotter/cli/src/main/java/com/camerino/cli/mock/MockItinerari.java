@@ -115,7 +115,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
                         ArrayList<ClsNodo> nodi = new ArrayList<>();
                         for(int j = 4; j<dati.length; j++){
                             HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", dati[j]);
+                            filtro.put("idNodo", dati[j]);
                             nodi.add(MockLocator.getMockNodi().get(filtro).get(0));
                         }
                         daAggiungere.setTappe(nodi);

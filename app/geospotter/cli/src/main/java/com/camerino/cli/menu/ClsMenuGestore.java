@@ -86,12 +86,15 @@ public class ClsMenuGestore implements IMenu {
             print("Seleziona una voce dal menu > ");
             String idc = in.nextLine();
             if ((Integer.parseInt(idc)<curatoriDisponibili.size())&&(Integer.parseInt(idc)>=0)){
+                if(comune.getCuratoriAssociati()==null){
+                    List<ClsCuratore> curatori = new ArrayList<>();
+                    curatori.add(curatoriDisponibili.get(Integer.parseInt(idc)));
+                    comune.setCuratoriAssociati(curatori);
+                }
                 comune.getCuratoriAssociati().add(curatoriDisponibili.get(Integer.parseInt(idc)));
-                HashMap<String, Object> filtro = new HashMap<>();
-                filtro.put("username", curatoriDisponibili.get(Integer.parseInt(idc)).getCredenziali().getUsername());
-                ClsCuratore c = (ClsCuratore)(MockLocator.getMockTuristi().get(filtro).get(0));
-                c.setIdComuneAssociato(comune.getId());
+                ClsCuratore c = (ClsCuratore) user.getAllUtenti().stream().filter(utente -> Objects.equals(utente.getId(), comune.getCuratoriAssociati().get(comune.getCuratoriAssociati().size()-1).getId())).toList().get(0);
                 user.inserisciComune(comune);
+                c.setIdComuneAssociato(comune.getId());
                 exit = true;
             }
             else{

@@ -162,7 +162,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     public List<ClsRDCNodo> getRDCNodoPossessoreCur() {
         List<ClsRDCNodo> rdcPossessore = new ArrayList<>();
         for(ClsRDCNodo rdc: getAllRDCNodi()){
-            if((Objects.equals(rdc.getOldData().getIdComuneAssociato(), idComuneAssociato))||(Objects.equals(rdc.getNewData().getIdComuneAssociato(), idComuneAssociato)))
+            if(((rdc.getOldData()!=null)&&(Objects.equals(rdc.getOldData().getIdComuneAssociato(), idComuneAssociato)))||(Objects.equals(rdc.getNewData().getIdComuneAssociato(), idComuneAssociato)))
                 rdcPossessore.add(rdc);
         }
         return rdcPossessore;
@@ -172,7 +172,7 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     public List<ClsRdcItinerario> getRDCItinerarioPossessoreCur() {
         List<ClsRdcItinerario> rdcIPossessore = new ArrayList<>();
         for(ClsRdcItinerario rdc:_getAllRDCItinerari()){
-            if((Objects.equals(rdc.getOldData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato))||(Objects.equals(rdc.getNewData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))
+            if(((rdc.getOldData()!=null)&&(Objects.equals(rdc.getOldData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))||(Objects.equals(rdc.getNewData().getTappe().get(0).getIdComuneAssociato(), idComuneAssociato)))
                 rdcIPossessore.add(rdc);
         }
         return rdcIPossessore;

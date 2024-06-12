@@ -136,7 +136,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         List<ClsCuratore> curatori = new ArrayList<>();
         for(String s:c){
             HashMap<String, Object> filtro = new HashMap<>();
-            filtro.put("id", s);
+            filtro.put("idUtente", s);
             curatori.add((ClsCuratore) MockLocator.getMockTuristi().get(filtro).get(0));
         }
         return curatori;
