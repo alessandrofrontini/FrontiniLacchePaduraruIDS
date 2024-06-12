@@ -3,6 +3,7 @@ package com.camerino.ids.fps.server.api.v1.services;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,13 @@ import java.util.List;
 @Service
 public class SRecensioni {
     HttpServletRequest request;
+    RepoUtenti repoUtenti;
 
     @Autowired
-    public SRecensioni(HttpServletRequest request) {
+    public SRecensioni(HttpServletRequest request,
+                       RepoUtenti repoUtenti) {
         this.request = request;
+        this.repoUtenti = repoUtenti;
     }
 
     public List<ClsRecensione> getRecensioniNodo(Long idNodo) {
@@ -27,7 +31,9 @@ public class SRecensioni {
     }
 
     public boolean postRecensione(ClsRecensione recensione) {
-        return ((ClsTuristaAutenticato) request.getServletContext().getAttribute("user")).pubblicaRecensione(recensione);
+        ClsTuristaAutenticato usr = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
+        repoUtenti.incrementaPunteggio(usr.getId(), 1);
+        return (usr).pubblicaRecensione(recensione);
     }
 
     public List<ClsRecensione> getAllRecensioni() {

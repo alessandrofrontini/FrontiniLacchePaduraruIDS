@@ -7,10 +7,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoItinerari;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCItinerari;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCNodi;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,14 +21,17 @@ public class SRDCItinerari {
     HttpServletRequest request;
     RepoRDCItinerari repoRDC;
     RepoItinerari repoItinerari;
+    RepoUtenti repoUtenti;
 
     @Autowired
     public SRDCItinerari(HttpServletRequest request,
                          RepoItinerari repoItinerari,
-                         RepoRDCItinerari repoRDC) {
+                         RepoRDCItinerari repoRDC,
+                         RepoUtenti repoUtenti) {
         this.request = request;
         this.repoItinerari = repoItinerari;
         this.repoRDC = repoRDC;
+        this.repoUtenti = repoUtenti;
     }
 
 
@@ -66,14 +66,17 @@ public class SRDCItinerari {
     }
 
     public Boolean rifutaRDCNodi(Long idRDC) {
-        repoRDC.deleteById(idRDC);
-        //TODO: far guadagnare punteggio all'utente
+        ClsRdcItinerario rdc = repoRDC.findById(idRDC).get();
+        ClsItinerario newData  = rdc.getNewData();
+        ClsItinerario oldData = rdc.getOldData();
+        repoRDC.delete(rdc);
+        if(newData!=null)
+            repoItinerari.delete(newData);
         return true;
     }
 
     public Boolean deleteRDCNodiById(Long idRDC) {
         repoRDC.deleteById(idRDC);
-        //TODO: far guadagnare punteggio all'utente
         return true;
     }
 
@@ -96,7 +99,7 @@ public class SRDCItinerari {
                 repoItinerari.delete(oldData);
             }break;
         }
-        //TODO: far guadagnare punteggio all'utente
+        repoUtenti.incrementaPunteggio(rdc.getCreatore().getId(), 2);
         return true;
     }
 }

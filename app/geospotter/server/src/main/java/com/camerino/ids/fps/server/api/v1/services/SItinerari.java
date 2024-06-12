@@ -4,6 +4,7 @@ import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoItinerari;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,15 @@ public class SItinerari {
     HttpServletRequest request;
     @Deprecated
     RepoItinerari repoItinerari;
+    RepoUtenti repoUtenti;
 
     @Autowired
     public SItinerari(HttpServletRequest request,
-                      RepoItinerari repoItinerari) {
+                      RepoItinerari repoItinerari,
+                      RepoUtenti repoUtenti) {
         this.request = request;
         this.repoItinerari = repoItinerari;
+        this.repoUtenti = repoUtenti;
     }
 
     public List<ClsItinerario> getAllItinerari() {
@@ -43,6 +47,7 @@ public class SItinerari {
             return false;
 
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
+        repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.inserisciItinerario(itinerario);
     }
 
@@ -55,11 +60,13 @@ public class SItinerari {
             return false;
 
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
+        repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.modificaItinerario(itinerario, itinerario.getId());
     }
 
     public boolean deleteItinerario(Long idItinerario) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
+        repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.eliminaItinerario(idItinerario);
     }
 }

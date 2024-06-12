@@ -8,10 +8,7 @@ import com.camerino.ids.core.data.utenti.ClsAnimatore;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTurista;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoImmagini;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoNodi;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCImmagini;
-import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoRDCNodi;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +20,17 @@ public class SRDCImmagini {
     HttpServletRequest request;
     RepoRDCImmagini repoRDC;
     RepoImmagini repoImmagini;
+    RepoUtenti repoUtenti;
 
     @Autowired
     public SRDCImmagini(HttpServletRequest request,
                         RepoImmagini repoNodi,
-                        RepoRDCImmagini repoRDC) {
+                        RepoRDCImmagini repoRDC,
+                        RepoUtenti repoUtenti) {
         this.request = request;
         this.repoImmagini = repoNodi;
         this.repoRDC = repoRDC;
+        this.repoUtenti = repoUtenti;
     }
 
     public List<ClsRDCImmagine> getAllRDCI() {
@@ -70,13 +70,18 @@ public class SRDCImmagini {
                 //Basta cancellare la RDC
             }break;
         }
-        //TODO: far guadagnare punteggio all'utente
+        if(rdc.getIdContestAppartenenza()!=null)
+            repoUtenti.incrementaPunteggio(rdc.getCreatore().getId(), 2);
         return true;
     }
 
     public Boolean rifutaRDCImmagine(Long idRDC) {
-        repoRDC.deleteById(idRDC);
-        //TODO: far guadagnare punteggio all'utente
+        ClsRDCImmagine rdc = repoRDC.findById(idRDC).get();
+        ClsImmagine newData  = rdc.getNewData();
+        ClsImmagine oldData = rdc.getOldData();
+        repoRDC.delete(rdc);
+        if(newData!=null)
+            repoImmagini.delete(newData);
         return true;
     }
 
