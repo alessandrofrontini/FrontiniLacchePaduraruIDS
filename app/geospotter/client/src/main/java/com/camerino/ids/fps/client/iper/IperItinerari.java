@@ -16,6 +16,12 @@ public class IperItinerari implements IPersistenceModel<ClsItinerario> {
 
     @Override
     public List<ClsItinerario> get(Map<String, Object> filters) {
+        if(filters == null)
+            return api.Get(Controller_SezioneLogin.UTENTE, null);
+
+        if(filters.containsKey("idItinerario"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "idItinerario=" + filters.get("idItinerario"));
+
         return api.Get(Controller_SezioneLogin.UTENTE, null);
     }
 

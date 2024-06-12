@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SItinerari {
@@ -35,7 +36,9 @@ public class SItinerari {
 
     public boolean postItinerario(ClsItinerario itinerario) {
         List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
-        long numItUguali = itinerari.stream().filter(it->it.equals(itinerario)).count();
+        long numItUguali = itinerari.stream()
+                .filter(it->it.equals(itinerario) && !Objects.equals(it.getId(), itinerario.getId()))
+                .count();
         if (numItUguali != 0)
             return false;
 
@@ -45,7 +48,9 @@ public class SItinerari {
 
     public boolean putItinerario(ClsItinerario itinerario) {
         List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
-        long numItUguali = itinerari.stream().filter(it->it.equals(itinerario)).count();
+        long numItUguali = itinerari.stream().
+                filter(it->it.equals(itinerario) && !Objects.equals(it.getId(), itinerario.getId()))
+                .count();
         if (numItUguali != 0)
             return false;
 

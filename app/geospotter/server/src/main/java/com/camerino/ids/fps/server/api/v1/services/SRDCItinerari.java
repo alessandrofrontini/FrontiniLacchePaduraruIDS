@@ -2,6 +2,7 @@ package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 @Service
 public class SRDCItinerari {
@@ -45,18 +48,20 @@ public class SRDCItinerari {
     }
 
     public boolean putRDCItinerario(ClsRdcItinerario rdc) {
-        List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
-        long numItUguali = itinerari.stream().filter(it->it.equals(rdc.getNewData())).count();
-        if (numItUguali != 0)
-            return false;
         return ((ClsCuratore) request.getServletContext().getAttribute("user")).putRDCItinerario(rdc);
     }
 
     public boolean postRDCItinerario(ClsRdcItinerario rdc) {
-        List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
-        long numItUguali = itinerari.stream().filter(it->it.equals(rdc.getNewData())).count();
-        if (numItUguali != 0)
-            return false;
+        if(rdc.getTipo()!= EAzioniDiContribuzione.ELIMINA_ITINERARIO) {
+            List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
+            Stream<ClsItinerario> stream = itinerari.stream()
+                    .filter(it -> it.equals(rdc.getNewData()));
+
+            if (rdc.getTipo() == EAzioniDiContribuzione.MODIFICA_ITINERARIO)
+                stream = stream.filter(it -> !Objects.equals(it.getId(), rdc.getOldData().getId()));
+            if (stream.count() != 0)
+                return false;
+        }
         return ((ClsContributor) request.getServletContext().getAttribute("user")).postRDCItinerario(rdc);
     }
 

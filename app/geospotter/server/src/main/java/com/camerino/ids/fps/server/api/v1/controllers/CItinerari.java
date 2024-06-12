@@ -24,9 +24,9 @@ public class CItinerari {
     public ResponseEntity<List<ClsItinerario>> getItinerari(
             @RequestParam(name = "idItinerario", required = false) Long idItinerario
     ) {
-        if (idItinerario == null)
-            return ResponseEntity.ok(sItinerari.getAllItinerari());
-        return ResponseEntity.ok(sItinerari.getItinerarioById(idItinerario));
+        if (idItinerario != null)
+            return ResponseEntity.ok(sItinerari.getItinerarioById(idItinerario));
+        return ResponseEntity.ok(sItinerari.getAllItinerari());
     }
 
     @PostMapping(mapping)

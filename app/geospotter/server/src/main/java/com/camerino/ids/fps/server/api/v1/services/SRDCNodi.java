@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
@@ -45,15 +46,19 @@ public class SRDCNodi {
     }
 
     public boolean putRDCNodi(ClsRDCNodo rdc) {
-        if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
-            return false;
+        if(rdc.getTipo()!= EAzioniDiContribuzione.ELIMINA_NODO)
+            if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+                return false;
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.putRDCNodo(rdc);
     }
 
     public boolean postRDCNodi(ClsRDCNodo rdc) {
-        if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
-            return false;
+
+        if(rdc.getTipo()!= EAzioniDiContribuzione.ELIMINA_NODO)
+            if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+                return false;
+
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.postRDCNodo(rdc);
     }
