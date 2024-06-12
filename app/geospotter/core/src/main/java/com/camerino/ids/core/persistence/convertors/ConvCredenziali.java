@@ -2,7 +2,9 @@ package com.camerino.ids.core.persistence.convertors;
 
 import com.camerino.ids.core.data.utils.Credenziali;
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
+@Converter(autoApply = true)
 public class ConvCredenziali implements AttributeConverter<Credenziali, String> {
 
     public static final String SEPARATOR = " ";

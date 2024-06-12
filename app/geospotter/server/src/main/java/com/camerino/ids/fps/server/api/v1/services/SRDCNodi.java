@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.camerino.ids.fps.server.api.v1.services.SNodi.convPosizione;
+
 @Service
 public class SRDCNodi {
     HttpServletRequest request;
@@ -43,11 +45,15 @@ public class SRDCNodi {
     }
 
     public boolean putRDCNodi(ClsRDCNodo rdc) {
+        if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+            return false;
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.putRDCNodo(rdc);
     }
 
     public boolean postRDCNodi(ClsRDCNodo rdc) {
+        if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+            return false;
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.postRDCNodo(rdc);
     }

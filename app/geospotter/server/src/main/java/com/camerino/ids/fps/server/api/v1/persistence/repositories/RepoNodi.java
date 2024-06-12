@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.persistence.repositories;
 
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utils.Posizione;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,7 @@ public interface RepoNodi extends JpaRepository<ClsNodo, Long> {
 select * from CLS_NODO where id not in (select NEW_DATA_ID from CLSRDcnodo where NEW_DATA_ID  is not null)
 """, nativeQuery = true)
     List<ClsNodo> findAllOfficial();
+    @Query(value = "SELECT COUNT(*) FROM (SELECT * FROM cls_nodo WHERE id NOT IN (SELECT new_data_id FROM clsrdcnodo) AND posizione=?1);",
+    nativeQuery = true)
+    int countNodiOnSamePosition(String convertedPosition);
 }
