@@ -22,9 +22,8 @@ public class ClsMenuAnimatore implements IMenu{
             menuca = new ClsMenuContributorAuth(user);
             while (!exit) {
                 menuca.menu();
-                println("12) Crea Contest aperto");
-                println("13) Crea Contest su invito");
-                println("14) Valida contenuti del contest");
+                println("12) Crea Contest");
+                println("13) Valida contenuti del contest");
                 if (user.getClass().equals(ClsAnimatore.class)) {
                     println("0) Esci");
                     print(">> ");
@@ -41,8 +40,7 @@ public class ClsMenuAnimatore implements IMenu{
                         case "10" : menuca.getMenuc().menuEliminaItinerario(); break;
                         case "11" : menuca.getMenuc().sottoMenuContest(); break;
                         case "12" :
-                        case "13" :
-                        case "14" : menuContest(); break;
+                        case "13" : menuContest(); break;
                         case "0" : exit = true;
                     }
                 }

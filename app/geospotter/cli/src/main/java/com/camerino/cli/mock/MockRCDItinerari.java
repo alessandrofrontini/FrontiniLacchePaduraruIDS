@@ -23,8 +23,8 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
     public ArrayList<ClsRdcItinerario> get(Map<String, Object> filters) {
         if(filters!=null) {
             ArrayList<ClsRdcItinerario> tmp = new ArrayList<>();
-            if (filters.containsKey("id")) {
-                tmp.add(findById(Long.valueOf((String) filters.get("id"))));
+            if (filters.containsKey("idRDCItinerario")) {
+                tmp.add(findById(Long.valueOf(filters.get("idRDCItinerario").toString())));
                 return tmp;
             }
             if (filters.containsKey("usernameCuratore")) {
@@ -35,7 +35,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
             }
             if(filters.containsKey("idValidazione")){
                 ClsRdcItinerario rdcIt = findById(Long.valueOf(filters.get("idValidazione").toString()));
-                if(filters.containsKey("accetta")){
+                if((filters.containsKey("accetta"))&&(filters.get("accetta").toString().equals("true"))){
                     switch (rdcIt.getTipo()){
                         case INSERISCI_ITINERARIO:{
                             rdcIt.getNewData().setIdCreatore(rdcIt.getCreatore().getId());
@@ -45,8 +45,9 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                         }
                         case MODIFICA_ITINERARIO:{
                             HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", rdcIt.getOldData().getId());
+                            filtro.put("idItinerario", rdcIt.getOldData().getId());
                             rdcIt.getNewData().setIdCreatore(rdcIt.getCreatore().getId());
+                            rdcIt.getNewData().setId(rdcIt.getOldData().getId());
                             rdcIt.setStato(EStatusRDC.ACCETTATO);
                             MockLocator.getMockItinerari().update(filtro, rdcIt.getNewData());
                             break;
@@ -118,7 +119,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
             for(ClsRdcItinerario r:rcdi){
                 daScrivere.append(r.getTipo() +","+ r.getIdRichiesta() + "," + r.getCreatore().getId()+ ",");
                 switch (r.getTipo()){
-                    case ELIMINA_ITINERARIO:
+                    case ELIMINA_ITINERARIO: daScrivere = scriviNuovoItinerario(r.getOldData(), daScrivere); break;
                     case INSERISCI_ITINERARIO: daScrivere = scriviNuovoItinerario(r.getNewData(), daScrivere); break;
                     case MODIFICA_ITINERARIO: {
                         ClsItinerario i = r.getOldData();
@@ -152,10 +153,15 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                         String[] dati = richiesta.split(",");
                         ClsRdcItinerario r = new ClsRdcItinerario();
                         switch (dati[0]) {
-                            case "INSERISCI_ITINERARIO":
+                            case "INSERISCI_ITINERARIO":{
+                                ClsItinerario i = leggiItinerarioNuovo(3, dati.length - 1, dati);
+                                ClsRdcItinerario tmp = new ClsRdcItinerario(null, i);
+                                r = tmp;
+                                break;
+                            }
                                 case "ELIMINA_ITINERARIO": {
                                     ClsItinerario i = leggiItinerarioNuovo(3, dati.length - 1, dati);
-                                    ClsRdcItinerario tmp = new ClsRdcItinerario(null,i);
+                                    ClsRdcItinerario tmp = new ClsRdcItinerario(i, null);
                                     r = tmp;
                                     break;
                                 }

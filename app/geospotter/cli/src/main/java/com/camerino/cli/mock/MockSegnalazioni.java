@@ -106,8 +106,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
                         ClsSegnalazione daAggiungere = new ClsSegnalazione();
                         daAggiungere.setId(Long.valueOf(dati[0]));
                         daAggiungere.setIdContenuto(Long.valueOf(dati[1]));
-                        daAggiungere.setIdCuratore(Long.valueOf(dati[2]));
-                        daAggiungere.setDescrizione(dati[3]);
+                        daAggiungere.setDescrizione(dati[2]);
                         aggiungiSegnalazione(daAggiungere);
                     }
                     maxID();
@@ -128,7 +127,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
             FileWriter output = new FileWriter("CLIsave/segnalazioni.txt");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsSegnalazione s:segnalazioni){
-                output.append(s.getId() + "," + s.getIdContenuto() + "," + s.getIdCuratore() + "," + s.getDescrizione() + "\n");
+                output.append(s.getId() + "," + s.getIdContenuto() + "," + s.getDescrizione() + "\n");
             }
             output.write(String.valueOf(daScrivere));
             output.close();

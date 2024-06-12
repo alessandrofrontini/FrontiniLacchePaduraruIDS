@@ -25,8 +25,8 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
             if(recensioni.isEmpty())
                 return null;
             ArrayList<ClsRecensione> r = new ArrayList<>();
-            if (filters.containsKey("id")) {
-                r.add(getRecensioneByID(Long.valueOf(filters.get("id").toString())));
+            if (filters.containsKey("idRecensione")) {
+                r.add(getRecensioneByID(Long.valueOf(filters.get("idRecensione").toString())));
                 return r;
             }
             if (filters.containsKey("idCreatore")) {
@@ -52,8 +52,8 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     }
     @Override
     public boolean update(Map<String, Object> filters, ClsRecensione object) {
-        if(filters.containsKey("id"))
-            return modificaRecensione(Long.valueOf(filters.get("id").toString()), object);
+        if(filters.containsKey("idRecensione"))
+            return modificaRecensione(Long.valueOf(filters.get("idRecensione").toString()), object);
         return false;
     }
     private boolean modificaRecensione(Long id, ClsRecensione r){
@@ -77,8 +77,8 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        if(filters.containsKey("id"))
-            return eliminaRecensione(Long.valueOf(filters.get("id").toString()));
+        if(filters.containsKey("idRecensione"))
+            return eliminaRecensione(Long.valueOf(filters.get("idRecensione").toString()));
         return false;
     }
     private boolean eliminaRecensione(Long id){

@@ -23,9 +23,11 @@ public class Main {
     static ClsTurista user;
     public static void main(String[] args)
     {
-        user = new ClsTurista();
         print_header();
         leggiTutto();
+        user = new ClsTurista();
+        user.setIperNodi(MockLocator.getMockNodi());
+        user.setIperSegnalazioni(MockLocator.getMockSegnalazioni());
         while (true) {
             //Queste sono le azioni che un turista (non autenticato) può fare
             println("1)Login");
@@ -154,7 +156,6 @@ public class Main {
      * e infine la segnalazione viene salvata.
      */
     private static void menuSegnalaNodo(){
-        ClsTurista user = new ClsTurista();
         ClsSegnalazione segnalazione = new ClsSegnalazione();
         println("inserisci l'id del nodo");
         String input = in.nextLine();

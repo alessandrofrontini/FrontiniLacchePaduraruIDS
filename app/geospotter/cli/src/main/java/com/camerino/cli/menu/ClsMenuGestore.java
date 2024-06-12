@@ -40,9 +40,9 @@ public class ClsMenuGestore implements IMenu {
         while (!exit)
         {
             menuc.menu();
-            println("17) Aggiungi Comune");
-            println("18) Modifica Comune");
-            println("19) Elimina Comune");
+            println("16) Aggiungi Comune");
+            println("17) Modifica Comune");
+            println("18) Elimina Comune");
             println("0) Esci");
             print(">> ");
             switch (in.nextLine()) {
@@ -58,13 +58,12 @@ public class ClsMenuGestore implements IMenu {
                 case "10": menuc.getMenuAnimatore().getMenuca().getMenuc().menuEliminaItinerario(); break;
                 case "11": menuc.getMenuAnimatore().getMenuca().getMenuc().sottoMenuContest(); break;
                 case "12":
-                case "13":
-                case "14": menuc.getMenuAnimatore().menuContest(); break;
-                case "15": menuc.menuVisualizzaRichieste(); break;
-                case "16": menuc.menuVisualizzaSegnalazioni(); break;
-                case "17": menuAggiungiComune(); break;
-                case "18": menuModificaComune(); break;
-                case "19": menuEliminaComune(); break;
+                case "13": menuc.getMenuAnimatore().menuContest(); break;
+                case "14": menuc.menuVisualizzaRichieste(); break;
+                case "15": menuc.menuVisualizzaSegnalazioni(); break;
+                case "16": menuAggiungiComune(); break;
+                case "17": menuModificaComune(); break;
+                case "18": menuEliminaComune(); break;
                 case "0": exit = true; break;
             }
         }
@@ -90,8 +89,8 @@ public class ClsMenuGestore implements IMenu {
                     List<ClsCuratore> curatori = new ArrayList<>();
                     curatori.add(curatoriDisponibili.get(Integer.parseInt(idc)));
                     comune.setCuratoriAssociati(curatori);
-                }
-                comune.getCuratoriAssociati().add(curatoriDisponibili.get(Integer.parseInt(idc)));
+                } else
+                    comune.getCuratoriAssociati().add(curatoriDisponibili.get(Integer.parseInt(idc)));
                 ClsCuratore c = (ClsCuratore) user.getAllUtenti().stream().filter(utente -> Objects.equals(utente.getId(), comune.getCuratoriAssociati().get(comune.getCuratoriAssociati().size()-1).getId())).toList().get(0);
                 user.inserisciComune(comune);
                 c.setIdComuneAssociato(comune.getId());
@@ -120,33 +119,29 @@ public class ClsMenuGestore implements IMenu {
         while(!exit) {
             println("Seleziona un id tra quelli sopra");
             String input = in.nextLine();
-             if (checkValore(input, (ArrayList<String>) MockLocator.getMockTuristi().get(null).stream()
-                    .map(turista -> turista.getCredenziali().getUsername())
+             if (checkValore(input, (ArrayList<String>) MockLocator.getMockComuni().get(null).stream()
+                    .map(comune -> comune.getId().toString())
                     .collect(Collectors.toList()))){
-                HashMap<String, Object> filtro = new HashMap<>();
-                filtro.put("id", input);
-                println("1> Modifica le informazioni del comune\n2> Aggiungi un curatore al comune\n3> rimuovi un curatore al comune");
+                println("1> Modifica le informazioni del comune\n2> Aggiungi un curatore al comune");
                 switch (in.nextLine()) {
                     case "1": {
-                        Input.inserisciComune(true, MockLocator.getMockComuni().get(filtro).get(0));
+                        Input.inserisciComune(true, user.getComuneById(Long.parseLong(input)).get(0));
                     }
                     break;
                     case "2": {
                         for (ClsCuratore c : curatoriLiberi(getCuratori())) {
-                            println("> " + c.getCredenziali().getUsername());
+                            println("> " + c.getId());
                         }
                         boolean exit2 = false;
                         while(!exit2) {
-                            println("Inserisci l'username del nuovo curatore");
-                            input = in.nextLine();
+                            println("Inserisci l'id del nuovo curatore");
+                            String idCuratore = in.nextLine();
                             if (checkValore(input, (ArrayList<String>) MockLocator.getMockTuristi().get(null).stream()
-                                    .map(turista -> turista.getCredenziali().getUsername())
+                                    .map(turista -> turista.getId().toString())
                                     .collect(Collectors.toList()))) {
-                                HashMap<String, Object> fuser = new HashMap<>();
-                                fuser.put("username", input);
-                                ClsCuratore c = (ClsCuratore) MockLocator.getMockTuristi().get(fuser).get(0);
-                                MockLocator.getMockComuni().get(filtro).get(0).getCuratoriAssociati().add(c);
-                                c.setIdComuneAssociato(MockLocator.getMockComuni().get(filtro).get(0).getId());
+                                ClsCuratore c = (ClsCuratore) user.getAllUtenti().stream().filter(utente -> utente.getId() == Long.parseLong(idCuratore)).toList().get(0);
+                                user.getComuneById(Long.parseLong(input)).get(0).getCuratoriAssociati().add(c);
+                                c.setIdComuneAssociato(user.getComuneById(Long.parseLong(input)).get(0).getId());
                                 exit2 = true;
                             }
                             else{
@@ -185,11 +180,7 @@ public class ClsMenuGestore implements IMenu {
             println("Seleziona l'id del comune da eliminare");
             String input = in.nextLine();
             if (checkValore(input, (ArrayList<String>) MockLocator.getMockComuni().get(null).stream().map(comune -> comune.getId().toString()).collect(Collectors.toList()))) {
-                HashMap<String, Object> filtro = new HashMap<>();
-                filtro.put("id", input);
-                HashMap<String, Object> filtroc = new HashMap<>();
-                filtroc.put("ruoloUtente", ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
-                ArrayList<ClsTuristaAutenticato> utenti = MockLocator.getMockTuristi().get(filtroc);
+                List<ClsTuristaAutenticato> utenti = user.getAllUtenti().stream().filter(utente -> utente.getRuoloUtente() == ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE).toList();
                 ArrayList<ClsNodo> nodi = MockLocator.getMockNodi().get(null);
                 ArrayList<ClsImmagine> immagini = MockLocator.getMockImmagini().get(null);
                 ArrayList<ClsRecensione> recensioni = MockLocator.getMockRecensioni().get(null);
@@ -198,19 +189,21 @@ public class ClsMenuGestore implements IMenu {
                 ArrayList<ClsRdcItinerario> rcdi = MockLocator.getMockRCDI().get(null);
                 ArrayList<ClsRDCImmagine> rcdimmagini = MockLocator.getMockRCDImmagini().get(null);
                 ArrayList<ClsItinerario> itinerari = MockLocator.getMockItinerari().get(null);
-
+                rcd.removeIf(r -> (Objects.equals(r.getNewData().getIdComuneAssociato(), Long.parseLong(input))) || (Objects.equals(r.getOldData().getIdComuneAssociato(), Long.parseLong(input))));
                 Iterator<ClsNodo> nodoIterator = nodi.iterator();
                 while (nodoIterator.hasNext()) {
                     ClsNodo nodo = nodoIterator.next();
-                    if (Objects.equals(nodo.getIdComuneAssociato(), MockLocator.getMockComuni().get(filtro).get(0).getId())) {
+                    if (Objects.equals(nodo.getIdComuneAssociato(), Long.parseLong(input))) {
                         recensioni.removeIf(recensione -> Objects.equals(recensione.getIdNodoAssociato(), nodo.getId()));
                         segnalazioni.removeIf(segnalazione -> Objects.equals(segnalazione.getIdContenuto(), nodo.getId()));
                         immagini.removeIf(immagine -> Objects.equals(immagine.getIdNodoAssociato(), nodo.getId()));
-                        rcd.removeIf(r -> Objects.equals((r.getNewData()), nodo));
 
-                        for (ClsRdcItinerario r : rcdi) {
-                            ClsItinerario itnuovo = r.getNewData();
-                            itnuovo.getTappe().removeIf(tappa -> Objects.equals(tappa.getId(), nodo.getId()));
+
+                        Iterator<ClsRdcItinerario> rdcItinerarioIterator = rcdi.iterator();
+                       while(rdcItinerarioIterator.hasNext()) {
+                            ClsRdcItinerario r = rdcItinerarioIterator.next();
+                            if((r.getNewData().getTappe().contains(nodo))||(r.getOldData().getTappe().contains(nodo)))
+                                rdcItinerarioIterator.remove();
                         }
 
                         Iterator<ClsRDCImmagine> rcdimmaginiiterator= rcdimmagini.iterator();
@@ -235,10 +228,10 @@ public class ClsMenuGestore implements IMenu {
                 }
                 for(ClsTuristaAutenticato turista:utenti){
                     ClsCuratore c = (ClsCuratore) turista;
-                    if(Objects.equals(c.getIdComuneAssociato(), MockLocator.getMockComuni().get(filtro).get(0).getId()))
+                    if(Objects.equals(c.getIdComuneAssociato(), Long.parseLong(input)))
                         c.setIdComuneAssociato(0L);
                 }
-                MockLocator.getMockComuni().delete(filtro);
+                user.eliminaComune(Long.parseLong(input));
                  exit = true;
             }
             }
@@ -251,9 +244,7 @@ public class ClsMenuGestore implements IMenu {
     private ArrayList<ClsCuratore> getCuratori(){
         ArrayList<ClsCuratore> curatori = new ArrayList<>();
         HashMap<String, Object> filtro = new HashMap<>();
-        filtro.put("ruoloUtente", ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
-        ArrayList<ClsTuristaAutenticato> a =  MockLocator.getMockTuristi().get(filtro);
-        for(ClsTuristaAutenticato t:a){
+        for(ClsTuristaAutenticato t:user.getAllUtenti().stream().filter(utente -> utente.getRuoloUtente() == ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE).toList()){
             curatori.add((ClsCuratore) t);
         }
         return curatori;

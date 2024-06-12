@@ -208,7 +208,7 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
             return false;
         ClsRdcItinerario rdc = new ClsRdcItinerario(old.get(0), null);
         rdc.setCreatore(this);
-        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
+        rdc.setTipo(EAzioniDiContribuzione.ELIMINA_ITINERARIO);
         rdc.setStato(EStatusRDC.NUOVO);
         return iperRDCItinerari.insert(rdc);
     }

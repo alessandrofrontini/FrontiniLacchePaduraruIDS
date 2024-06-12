@@ -146,6 +146,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
         immagine.setIdCreatore(user.getId());
         println("Inserisci l'URL dell'immagine");
         immagine.setURL(in.nextLine());
-        user.inserisciImmagine(immagine);
+        ClsRDCImmagine rdcImmagine = new ClsRDCImmagine(null, immagine);
+        user.postRDCImmagine(rdcImmagine);
     }
 }

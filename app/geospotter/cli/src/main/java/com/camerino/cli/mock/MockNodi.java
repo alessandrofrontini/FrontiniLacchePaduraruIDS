@@ -64,8 +64,8 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
 
 
         public boolean update(Map<String, Object> filters, ClsNodo object) {
-            if(filters.containsKey("id"))
-                return modificaNodo(Long.valueOf(filters.get("id").toString()), object);
+            if(filters.containsKey("idNodo"))
+                return modificaNodo(Long.valueOf(filters.get("idNodo").toString()), object);
             return false;
         }
 
@@ -90,9 +90,9 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
 
         public boolean delete(Map<String, Object> filters) {
-            if(filters.containsKey("id")) {
-                cascadeNodo(getNodoById(Long.valueOf(filters.get("id").toString())));
-                return eliminaNodo(Long.valueOf(filters.get("id").toString()));
+            if(filters.containsKey("idNodo")) {
+                cascadeNodo(getNodoById(Long.valueOf(filters.get("idNodo").toString())));
+                return eliminaNodo(Long.valueOf(filters.get("idNodo").toString()));
             }
 
             return false;

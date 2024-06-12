@@ -33,8 +33,8 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     public ArrayList<ClsItinerario> get(Map<String, Object> filters) {
         if(filters!=null) {
             ArrayList<ClsItinerario> tmp = new ArrayList<>();
-            if (filters.containsKey("id")) {
-                tmp.add(getItinerarioById(Long.valueOf(filters.get("id").toString())));
+            if (filters.containsKey("idItinerario")) {
+                tmp.add(getItinerarioById(Long.valueOf(filters.get("idItinerario").toString())));
                 return tmp;
             }
             if (filters.containsKey("idCreatore")) {
@@ -60,8 +60,8 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
 
     public boolean update(Map<String, Object> filters, ClsItinerario object) {
-        if(filters.containsKey("id"))
-            return modificaItinerario(Long.valueOf(filters.get("id").toString()), object);
+        if(filters.containsKey("idItinerario"))
+            return modificaItinerario(Long.valueOf(filters.get("idItinerario").toString()), object);
         return false;
     }
 
@@ -83,8 +83,8 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
 
     public boolean delete(Map<String, Object> filters) {
-        if (filters.containsKey("id"))
-            return eliminaItinerario(Long.valueOf(filters.get("id").toString()));
+        if (filters.containsKey("idItinerario"))
+            return eliminaItinerario(Long.valueOf(filters.get("idItinerario").toString()));
         return false;
     }
 

@@ -156,6 +156,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
         user.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.TURISTA_AUTENTICATO);
         user.setIperComuni(MockLocator.getMockComuni());
         user.setIperRDCImmagini(MockLocator.getMockRCDImmagini());
+        user.setIperSegnalazioni(MockLocator.getMockSegnalazioni());
         return user;
     }
 

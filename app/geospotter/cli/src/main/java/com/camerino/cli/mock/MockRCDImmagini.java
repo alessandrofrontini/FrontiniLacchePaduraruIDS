@@ -34,7 +34,7 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
             }
             if(filters.containsKey("idValidazione")) {
                 ClsRDCImmagine rdcImm = findById(Long.valueOf(filters.get("idValidazione").toString()));
-                if (filters.containsKey("accetta")) {
+                if((filters.containsKey("accetta"))&&(filters.get("accetta").toString().equals("true"))) {
                     ClsImmagine immagine = rdcImm.getNewData();
                     immagine.setIdCreatore(rdcImm.getCreatore().getId());
                     rdcImm.setStato(EStatusRDC.ACCETTATO);
@@ -117,7 +117,7 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
                             r.setTipo(EAzioniDiContribuzione.valueOf(dati[4]));
                             r.setIdRichiesta(Long.valueOf(dati[5]));
                             HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", dati[6]);
+                            filtro.put("idUtente", dati[6]);
                             r.setCreatore(MockLocator.getMockTuristi().get(filtro).get(0));
                             r.setStato(EStatusRDC.valueOf(dati[7]));
                             rcdi.add(r);

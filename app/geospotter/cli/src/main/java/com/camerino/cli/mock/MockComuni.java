@@ -30,9 +30,9 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
         if(filters != null)
         {
-            if(filters.containsKey("id"))
+            if(filters.containsKey("idComune"))
             {
-                tmp.add(filterById(filters.get("id")));
+                tmp.add(filterById((Long.parseLong(filters.get("idComune").toString()))));
                 return tmp;
             }
         }
@@ -44,8 +44,8 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     {
         if(filters != null)
         {
-            if(filters.containsKey("id"))
-                return modificaComune(filters.get("id").toString(), object);
+            if(filters.containsKey("idComune"))
+                return modificaComune(filters.get("idComune").toString(), object);
             return false;
         }
         return false;
@@ -67,7 +67,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     public boolean delete(Map<String, Object> filters)
     {
-        ClsComune c = this.filterById(filters.get("id"));
+        ClsComune c = this.filterById(Long.parseLong(filters.get("idComune").toString()));
 
         if(c != null)
         {
@@ -87,7 +87,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
         return true;
     }
 
-    private ClsComune filterById(Object id)
+    private ClsComune filterById(Long id)
     {
         return comuni.stream().filter(comune -> comune.getId().equals(id)).toList().get(0);
     }
@@ -95,7 +95,6 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 //endregion
 
 
-//SPLITTARE PER \r\n, ; e ,
     public void leggiComuni()
     {
         File f = new File("CLIsave/comuni.csv");

@@ -1,10 +1,7 @@
 package com.camerino.cli.menu;
 
 import com.camerino.cli.mock.MockLocator;
-import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
-import com.camerino.ids.core.data.azioni.ClsRDCNodo;
-import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
-import com.camerino.ids.core.data.azioni.EStatusRDC;
+import com.camerino.ids.core.data.azioni.*;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
@@ -38,8 +35,8 @@ public class ClsMenuCuratore implements IMenu{
         menuAnimatore = new ClsMenuAnimatore(user);
         while (!exit) {
             menuAnimatore.menu();
-            println("15) Visualizza richieste");
-            println("16) Visualizza segnalazioni");
+            println("14) Visualizza richieste");
+            println("15) Visualizza segnalazioni");
             if (user.getClass().equals(ClsCuratore.class)) {
                 println("0) Esci");
                 print(">> ");
@@ -68,11 +65,10 @@ public class ClsMenuCuratore implements IMenu{
                         menuAnimatore.getMenuca().getMenuc().sottoMenuContest(); break;
                     case "12":
                     case "13":
-                    case "14":
                         menuAnimatore.menuContest(); break;
-                    case "15":
+                    case "14":
                         menuVisualizzaRichieste(); break;
-                    case "16":
+                    case "15":
                         menuVisualizzaSegnalazioni(); break;
                     case "0":
                         exit = true; break;
@@ -138,9 +134,12 @@ public class ClsMenuCuratore implements IMenu{
                         ClsRdcItinerario rit = user.getRDCItinerarioById(Long.parseLong(idr)).get(0);
                         println("Tipo richiesta -> " + rit.getTipo());
                         println("Tappe itinerario:");
-                        ClsItinerario itnuovo = rit.getNewData();
+                        ClsItinerario itnuovo;
+                        if(rit.getTipo()== EAzioniDiContribuzione.ELIMINA_ITINERARIO)
+                            itnuovo = rit.getOldData();
+                        else itnuovo = rit.getNewData();
                         for (ClsNodo n : itnuovo.getTappe()) {
-                            println(n.toString());
+                            println("nodo n." + n.getId());
                         }
                         println("Validare? Y/N");
                         esito = in.nextLine();
@@ -218,13 +217,19 @@ public class ClsMenuCuratore implements IMenu{
         while(richiestaIterator.hasNext()){
             ClsRDCNodo r = richiestaIterator.next();
             ClsNodo nodor = r.getNewData();
+            ClsNodo nodold = r.getOldData();
             if((r.getTipo() == richiesta.getTipo())&&(!Objects.equals(r.getIdRichiesta(), richiesta.getIdRichiesta()))) {
                 switch (r.getTipo()) {
                     case INSERISCI_NODO:
-                    case MODIFICA_NODO:
-                    case ELIMINA_NODO:{
+                    case MODIFICA_NODO:{
                         ClsNodo nodorichiesta = richiesta.getNewData();
                         if(((Objects.equals(nodor.getPosizione().getX(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodor.getPosizione().getY(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodor.getIdComuneAssociato(), nodorichiesta.getIdComuneAssociato())))){
+                            richiestaIterator.remove(); break;
+                        }
+                    }
+                    case ELIMINA_NODO:{
+                        ClsNodo nodorichiesta = richiesta.getOldData();
+                        if(((Objects.equals(nodold.getPosizione().getX(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodold.getPosizione().getY(), nodorichiesta.getPosizione().getY()))&&(Objects.equals(nodold.getIdComuneAssociato(), nodorichiesta.getIdComuneAssociato())))){
                             richiestaIterator.remove(); break;
                         }
                     }
@@ -251,14 +256,14 @@ public class ClsMenuCuratore implements IMenu{
             ClsItinerario itnew = r.getNewData();
             if((r.getTipo() == richiesta.getTipo())&&(!Objects.equals(r.getIdRichiesta(), richiesta.getIdRichiesta()))){
                 switch(r.getTipo()){
-                    case INSERISCI_ITINERARIO:
                     case ELIMINA_ITINERARIO:{
-                        if(itnew==itrn){
+                        if(isUgualeItinerario(itold, itro)){
                             rcdIterator.remove(); break;
                         }
                     }
+                    case INSERISCI_ITINERARIO:
                     case MODIFICA_ITINERARIO:{
-                        if((itnew==itrn)&&(itold==itro)&&(itnew.isOrdinato() == itrn.isOrdinato())){
+                        if(isUgualeItinerario(itnew, itrn)){
                             rcdIterator.remove(); break;
                         }
                     }
@@ -299,4 +304,14 @@ public class ClsMenuCuratore implements IMenu{
         in.nextLine();
     }
 
+    private boolean isUgualeItinerario(ClsItinerario it1, ClsItinerario it2){
+        if(it1.isOrdinato() == it2.isOrdinato()){
+            for(ClsNodo n: it1.getTappe()){
+                if(!it2.getTappe().contains(n))
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

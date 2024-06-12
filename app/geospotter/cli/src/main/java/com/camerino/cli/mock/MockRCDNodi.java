@@ -36,7 +36,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
             }
             if(filters.containsKey("idValidazione")){
                 ClsRDCNodo rdcNodo = findById(Long.valueOf(filters.get("idValidazione").toString()));
-                if(filters.containsKey("accetta")){
+                if((filters.containsKey("accetta"))&&(filters.get("accetta").toString().equals("true"))){
                     switch (rdcNodo.getTipo()){
                         case INSERISCI_NODO:{
                             rdcNodo.getNewData().setIdCreatore(rdcNodo.getCreatore().getId());
@@ -46,7 +46,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
                         }
                         case MODIFICA_NODO:{
                             HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", rdcNodo.getOldData().getId());
+                            filtro.put("idNodo", rdcNodo.getOldData().getId());
                             rdcNodo.getNewData().setIdCreatore(rdcNodo.getCreatore().getId());
                             rdcNodo.setStato(EStatusRDC.ACCETTATO);
                             MockLocator.getMockNodi().update(filtro, rdcNodo.getNewData());
@@ -54,7 +54,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
                         }
                         case ELIMINA_NODO:{
                             HashMap<String, Object> filtro = new HashMap<>();
-                            filtro.put("id", rdcNodo.getOldData().getId());
+                            filtro.put("idNodo", rdcNodo.getOldData().getId());
                             rdcNodo.setStato(EStatusRDC.ACCETTATO);
                             MockLocator.getMockNodi().delete(filtro);
                             break;
