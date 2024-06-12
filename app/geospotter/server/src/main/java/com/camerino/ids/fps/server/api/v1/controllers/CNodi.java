@@ -56,9 +56,7 @@ public class CNodi {
     public ResponseEntity<Boolean> postNodi(
             @RequestBody ClsNodo nodo
     ) {
-        if (!sNodi.postNodo(nodo))
-            return ResponseEntity.internalServerError().build();
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(sNodi.postNodo(nodo));
     }
 
     /**
@@ -88,8 +86,6 @@ public class CNodi {
     public ResponseEntity<Boolean> putNodi(
             @RequestBody ClsNodo nodo
     ) {
-        if (!sNodi.putNodo(nodo))
-            return ResponseEntity.internalServerError().build();
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(sNodi.putNodo(nodo));
     }
 }

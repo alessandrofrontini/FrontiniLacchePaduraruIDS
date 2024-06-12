@@ -2,6 +2,7 @@ package com.camerino.ids.fps.client.api;
 
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.data.utenti.ClsTurista;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.fasterxml.jackson.core.type.TypeReference;
 import javafx.util.Pair;
 
@@ -37,14 +38,14 @@ public class ApiSegnalazioni implements IApi<ClsSegnalazione> {
 
     @Override
     public boolean Post(ClsTurista user, ClsSegnalazione nodo) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .header("Authorization", FakeTokens.getToken(user))
+        HttpRequest.Builder request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .POST(createBody(nodo))
-                .uri(endpoint)
-                .build();
-        System.out.println(createBody(nodo));
-        return execute(request).statusCode() == 200;
+                .uri(endpoint);
+        if(user instanceof ClsTuristaAutenticato)
+            request.header("Authorization", FakeTokens.getToken(user));
+
+        return execute(request.build()).statusCode() == 200;
     }
 
     @Override

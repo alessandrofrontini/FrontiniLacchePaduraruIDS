@@ -97,29 +97,37 @@ public class Controller_SezioneInserimentoRecensioni implements Initializable {
 
         ClsRecensione r = new ClsRecensione();
 
-        Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
-        String oggetto = u.getValueFromTextField(this.oggetto);
-        String contenuto = u.getValueFromTextField(this.contenuto);
-        String valutazione = u.getValueFromTextField(this.valutazione);
+        if(!Objects.equals(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID), "") && u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != null)
+        {
+            Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+            String idParseString = id.toString();
+            String oggetto = u.getValueFromTextField(this.oggetto);
+            String contenuto = u.getValueFromTextField(this.contenuto);
+            String valutazione = u.getValueFromTextField(this.valutazione);
 
-        if (Objects.isNull(oggetto) || oggetto.isEmpty() || Objects.isNull(contenuto) || contenuto.isEmpty() || Objects.isNull(valutazione) || valutazione.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Inserisci tutte le informazioni necessarie");
-            alert.show();
-        } else {
-            r.setIdCreatore(1l);
-            r.setIdNodoAssociato(id);
-            r.setOggetto(oggetto);
-            r.setContenuto(contenuto);
-            r.setValutazione(Double.parseDouble(valutazione));
+            if (Objects.equals(oggetto, "") || oggetto == null || Objects.equals(contenuto, "") || contenuto == null || Objects.equals(valutazione, "") || valutazione == null || idParseString.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Inserisci tutte le informazioni necessarie");
+                alert.show();
+            } else {
+                r.setIdCreatore(((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getId());
+                r.setIdNodoAssociato(id);
+                r.setOggetto(oggetto);
+                r.setContenuto(contenuto);
+                r.setValutazione(Double.parseDouble(valutazione));
 
-            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).inserisciRecensione(r);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText(r.visualizzaRecensione());
-            alert.show();
+                ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).inserisciRecensione(r);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText(r.visualizzaRecensione());
+                alert.show();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     private void setNodi(List<ClsNodo> nodi) {

@@ -23,20 +23,17 @@ public class IperSegnalazioni implements IPersistenceModel<ClsSegnalazione> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsSegnalazione object) {
-        return api.Put(
-                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
+        return api.Put(Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean insert(ClsSegnalazione object) {
-        return api.Post(
-                (ClsContributor) Controller_SezioneLogin.UTENTE, object);
+        return api.Post(Controller_SezioneLogin.UTENTE, object);
     }
 
     @Override
     public boolean delete(Map<String, Object> filters) {
-        return api.Delete(
-                (ClsContributor) Controller_SezioneLogin.UTENTE,
+        return api.Delete(Controller_SezioneLogin.UTENTE,
                 new Pair<>("idSegnalazione", filters.get("idSegnalazione").toString()));
     }
 

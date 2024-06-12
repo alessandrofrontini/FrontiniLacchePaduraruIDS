@@ -2,10 +2,12 @@ package com.camerino.ids.core.persistence.convertors;
 
 import com.camerino.ids.core.data.utils.Posizione;
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 /**
  * Converte la class Posizione in una stringa formato "x y".
  */
+@Converter(autoApply = true)
 public class ConvPosizione implements AttributeConverter<Posizione, String> {
     public static final String delimitatore = " ";
 

@@ -3,6 +3,7 @@ package com.camerino.ids.core.data.utenti;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.contenuti.ClsContestDiContribuzione;
+import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public interface IAzioniContributor {
+    boolean inserisciImmagine(ClsImmagine nodo, ClsContestDiContribuzione contest);
     boolean inserisciNodo(ClsNodo nodo);
     boolean inserisciNodo(ClsNodo nodo, ClsContestDiContribuzione contest);
     boolean modificaNodo(Long id, ClsNodo nodo);

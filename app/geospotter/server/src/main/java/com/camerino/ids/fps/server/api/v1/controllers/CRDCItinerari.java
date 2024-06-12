@@ -49,6 +49,13 @@ public class CRDCItinerari {
         return ResponseEntity.ok(sRDCItinerari.postRDCItinerario(rdc));
     }
 
+    @GetMapping(mapping+"/accetta")
+    public ResponseEntity<Boolean> RDC(
+            @RequestParam(value = "idValidazione") Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCItinerari.accettaRDCNodo(idRDC));
+    }
+
     @GetMapping(mapping+"/rifiuta")
     public ResponseEntity<Boolean> rifiutaRDC(
             @RequestParam(value = "idValidazione", required = false) Long idRDC

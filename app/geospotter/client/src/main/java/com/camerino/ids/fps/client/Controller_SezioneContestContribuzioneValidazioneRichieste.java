@@ -3,6 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
+import com.camerino.ids.core.data.utenti.ClsAnimatore;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsRDCVisual;
 import javafx.collections.FXCollections;
@@ -91,131 +92,10 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.richiesteImmagini = new ArrayList<ClsRDCImmagine>();
-        this.richiesteNodo = new ArrayList<ClsRDCNodo>();
-/*
-        //region Creazione RDCImmagine
-        ClsRDCImmagine img1 = new ClsRDCImmagine();
-        img1.setIdRichiesta("1");
-        img1.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img1.setStato(EStatusRDC.ASSEGNATO);
 
-        ClsTuristaAutenticato utente = new ClsTuristaAutenticato();
-        utente.setId("1");
-        img1.setCreatore(utente);
+        this.richiesteImmagini = ((ClsAnimatore)Controller_SezioneLogin.UTENTE).GetRDCImmaginePosessore();
+        this.richiesteNodo = ((ClsAnimatore)Controller_SezioneLogin.UTENTE).GetRDCNodoPosessore();
 
-        ClsCuratore c1 = new ClsCuratore();
-        c1.setId("1");
-        //img1.setResponsabile(c1);
-
-        ClsContestDiContribuzione contest1 = new ClsContestDiContribuzione();
-        contest1.setId("1");
-        img1.setIdContestAppartenenza(contest1);
-
-        ClsImmagine im1 = new ClsImmagine();
-        im1.setId("1");
-        im1.setURL("testURLOld");
-        im1.setIdCreatore("testCreatoreOld");
-        im1.setIdNodoAssociato("testIDNodoOld");
-        img1.setOldData(im1);
-
-        ClsImmagine im2 = new ClsImmagine();
-        im2.setId("1");
-        im2.setURL("testURLNew");
-        im2.setIdCreatore("testCreatoreNew");
-        im2.setIdNodoAssociato("testIDNodoNew");
-        img1.setNewData(im2);
-        richiesteImmagini.add(img1);
-
-        ClsRDCImmagine img2 = new ClsRDCImmagine();
-        img2.setIdRichiesta("2");
-        img2.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img2.setStato(EStatusRDC.ASSEGNATO);
-        img2.setCreatore(utente);
-
-        ClsCuratore c2 = new ClsCuratore();
-        c2.setId("2");
-        //img2.setResponsabile(c2);
-        img2.setIdContestAppartenenza(contest1);
-
-        img2.setOldData(im1);
-        img2.setNewData(im2);
-        richiesteImmagini.add(img2);
-        ClsRDCImmagine img3 = new ClsRDCImmagine();
-        img3.setIdRichiesta("3");
-        img3.setTipo(EAzioniDiContribuzione.INSERISCI_IMMAGINE);
-        img3.setStato(EStatusRDC.ASSEGNATO);
-        img3.setCreatore(utente);
-
-        ClsCuratore c3 = new ClsCuratore();
-        c3.setId("3");
-        //img3.setResponsabile(c3);
-        img3.setIdContestAppartenenza(contest1);
-
-        img3.setOldData(im1);
-        img3.setNewData(im2);
-        richiesteImmagini.add(img3);
-        //endregion
-
-        //region Creazione RDCNodo
-        ClsRDCNodo n1 = new ClsRDCNodo();
-        n1.setIdRichiesta("1");
-        n1.setTipo(EAzioniDiContribuzione.INSERISCI_NODO);
-        n1.setStato(EStatusRDC.ASSEGNATO);
-        n1.setCreatore(utente);
-
-        ClsCuratore cu1 = new ClsCuratore();
-        cu1.setId("1");
-        //n1.setResponsabile(cu1);
-        n1.setIdContestAppartenenza(contest1);
-
-        ClsNodo nodo1 = new ClsNodo();
-        nodo1.setNome("nomeOld");
-        nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato("comuneOld");
-        nodo1.setaTempo(true);
-        nodo1.setDescrizione("descrizioneOld");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n1.setOldData(nodo1);
-
-        nodo1.setNome("nomeNew");
-        nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComuneAssociato("comuneNew");
-        nodo1.setaTempo(false);
-        nodo1.setDescrizione("descrizioneNew");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n1.setNewData(nodo1);
-        richiesteNodo.add(n1);
-
-        ClsRDCNodo n2 = new ClsRDCNodo();
-        n2.setIdRichiesta("2");
-        n2.setTipo(EAzioniDiContribuzione.ELIMINA_NODO);
-        n2.setStato(EStatusRDC.ASSEGNATO);
-        n2.setCreatore(utente);
-
-        ClsCuratore cu2 = new ClsCuratore();
-        cu2.setId("2");
-        //n2.setResponsabile(cu2);
-        n2.setIdContestAppartenenza(contest1);
-
-        nodo1.setNome("nomeOld");
-        nodo1.setTipologiaNodo(ClsNodo.eTipologiaNodo.CULTURALE);
-        nodo1.setIdComuneAssociato("comuneOld");
-        nodo1.setaTempo(true);
-        nodo1.setDescrizione("descrizioneOld");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n2.setOldData(nodo1);
-
-        nodo1.setNome("nomeNew");
-        nodo1.setTipologiaNodo(CULINARIO);
-        nodo1.setIdComuneAssociato("comuneNew");
-        nodo1.setaTempo(false);
-        nodo1.setDescrizione("descrizioneNew");
-        nodo1.setPosizione(new Posizione(14, 28));
-        n2.setNewData(nodo1);
-        richiesteNodo.add(n2);
-        //endregion
-*/
         setRichiesteImmagini(richiesteImmagini);
 
         setRichiesteNodi(richiesteNodo);
@@ -314,8 +194,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     }
 
     public void accettaAzioneImmagine(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
         if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsAnimatore)Controller_SezioneLogin.UTENTE).accettaRichiestaImmagine(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
@@ -329,8 +210,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     }
 
     public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
         if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsAnimatore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
@@ -344,8 +226,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     }
 
     public void accettaAzioneNodo(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
         if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsAnimatore)Controller_SezioneLogin.UTENTE).accettaRichiestaNodo(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
@@ -359,8 +242,9 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
     }
 
     public void rifiutaAzioneNodo(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneNodo);
+        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
         if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+            ((ClsAnimatore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaNodo(IDValidazione);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("OK");
             alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
@@ -373,48 +257,64 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         }
     }
 
-    public void visualizzaDettaglioImmagine() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
+    public void visualizzaDettaglioImmagine()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != "" && u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-        if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for (int i = 0; i < richiesteImmagini.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
-                    alert.show();
+                for (int i = 0; i < richiesteImmagini.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
-    public void visualizzaDettaglioNodo() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
+    public void visualizzaDettaglioNodo()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioNodo) != "" && u.getValueFromCombobox(selezionaElementoDettaglioNodo) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-        if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (this.controllaConformitaID(IDDaVisualizzare)) {
 
-            for (int i = 0; i < richiesteNodo.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
-                    alert.show();
+                for (int i = 0; i < richiesteNodo.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else {
+            u.alertError();
+        }
+
     }
 
     private void setRichiesteImmagini(List<ClsRDCImmagine> richiesteImmagini) {

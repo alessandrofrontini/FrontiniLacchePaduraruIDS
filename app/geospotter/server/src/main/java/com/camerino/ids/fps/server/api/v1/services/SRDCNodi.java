@@ -1,6 +1,7 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
+import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.camerino.ids.fps.server.api.v1.services.SNodi.convPosizione;
 
 @Service
 public class SRDCNodi {
@@ -43,11 +46,19 @@ public class SRDCNodi {
     }
 
     public boolean putRDCNodi(ClsRDCNodo rdc) {
+        if(rdc.getTipo()!= EAzioniDiContribuzione.ELIMINA_NODO)
+            if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+                return false;
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.putRDCNodo(rdc);
     }
 
     public boolean postRDCNodi(ClsRDCNodo rdc) {
+
+        if(rdc.getTipo()!= EAzioniDiContribuzione.ELIMINA_NODO)
+            if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(rdc.getNewData().getPosizione()))!=0)
+                return false;
+
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
         return user.postRDCNodo(rdc);
     }
@@ -82,7 +93,12 @@ public class SRDCNodi {
     }
 
     public Boolean rifutaRDCNodi(Long idRDC) {
-        repoRDC.deleteById(idRDC);
+        ClsRDCNodo rdc = repoRDC.findById(idRDC).get();
+        ClsNodo newData  = rdc.getNewData();
+        ClsNodo oldData = rdc.getOldData();
+        if(newData!=null)
+            repoNodi.delete(newData);
+        repoRDC.delete(rdc);
         //TODO: far guadagnare punteggio all'utente
         return true;
     }

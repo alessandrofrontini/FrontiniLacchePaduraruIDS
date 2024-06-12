@@ -98,7 +98,7 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
                 new PropertyValueFactory<>("id"));
 
         sezioneEliminazioneRecensioniTableColumnIDContenutoAssociato.setCellValueFactory(
-                new PropertyValueFactory<>("idContenutoAssociato"));
+                new PropertyValueFactory<>("idNodoAssociato"));
 
         sezioneEliminazioneRecensioniTableColumnOggetto.setCellValueFactory(
                 new PropertyValueFactory<>("oggetto"));
@@ -151,32 +151,44 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
 
     public void modificaRecensione(MouseEvent mouseEvent) {
         ClsRecensione r = new ClsRecensione();
+        String idNodo = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) + "";
+        String idRec = u.getValueFromCombobox(this.sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) + "";
 
-        Long id = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
-        String oggetto = u.getValueFromTextField(this.oggetto);
-        String contenuto = u.getValueFromTextField(this.contenuto);
-        String valutazione = u.getValueFromTextField(this.valutazione);
+        if(!Objects.equals(idNodo, "") && !Objects.equals(idRec, ""))
+        {
 
-        if (oggetto != null && !oggetto.isEmpty() && contenuto != null && !contenuto.isEmpty() && valutazione != null && !valutazione.isEmpty() && u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID) != null && !Objects.equals(u.getValueFromCombobox(sezioneEliminazioneRecensioniComboBoxSceltaRecensioneID), "")) {
-            r.setId(id);
-            //r.setIdCreatore(Controller_SezioneLogin.utente.getUsername());
-            r.setIdNodoAssociato(id);
-            r.setOggetto(oggetto);
-            r.setContenuto(contenuto);
-            r.setValutazione(Double.parseDouble(valutazione));
+            String oggettoo = u.getValueFromTextField(this.oggetto);
+            String contenutoo = u.getValueFromTextField(this.contenuto);
+            String valutazionee = u.getValueFromTextField(this.valutazione);
 
-            ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(id, r);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText(r.visualizzaRecensione());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Errore");
-            alert.setContentText("Inserisci tutte le informazioni necessarie");
-            alert.show();
+            if (!(Objects.equals(oggettoo, "")) && !(oggettoo == null) && !(Objects.equals(contenutoo, "")) && !(contenutoo == null) && valutazionee != null && !valutazionee.equals("")) {
+
+
+                r.setId(Long.valueOf(idRec));
+                r.setIdCreatore(((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getId());
+                r.setIdNodoAssociato(Long.valueOf(idNodo));
+                r.setOggetto(oggettoo);
+                r.setContenuto(contenutoo);
+                r.setValutazione(Double.parseDouble(valutazionee));
+
+                ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).modificaRecensione(Long.valueOf(idNodo), r);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText(r.visualizzaRecensione());
+                alert.show();
+            }
+            else
+            {
+                u.alertError();
+            }
         }
+        else
+        {
+            u.alertError();
+        }
+
     }
 
     private void setRecensioni(List<ClsRecensione> recensioni) {
@@ -215,8 +227,8 @@ public class Controller_SezioneModificaRecensioni implements Initializable {
 
         if (!(Objects.equals(tmp, null) || tmp.isEmpty())) {
             for (int i = 0; i < recensioni.size(); i++) {
-                if (Objects.equals(recensioni.get(i).getId(), tmp)) {
-                    this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId());
+                if (Objects.equals(recensioni.get(i).getId(), Long.valueOf(tmp))) {
+                    this.sezioneEliminazioneNodiComboBoxSceltaNodoID.setValue(recensioni.get(i).getId().toString());
                     this.oggetto.setText(recensioni.get(i).getOggetto());
                     this.contenuto.setText(recensioni.get(i).getContenuto());
                     this.valutazione.setText(recensioni.get(i).getValutazione().toString());

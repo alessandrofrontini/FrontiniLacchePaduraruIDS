@@ -19,7 +19,15 @@ import java.util.Objects;
  */
 @Entity
 public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
-        Long idComuneAssociato;
+    public Long getIdComuneAssociato() {
+        return idComuneAssociato;
+    }
+
+    public void setIdComuneAssociato(Long idComuneAssociato) {
+        this.idComuneAssociato = idComuneAssociato;
+    }
+
+    Long idComuneAssociato;
 
     //region Constructors
     public ClsCuratore(ClsAnimatore usr) {
@@ -94,6 +102,10 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     }
 
     @Override
+    public List<ClsRDCImmagine> getRdcImmaginiPosessoreCur() {
+    }
+
+    @Override
     public boolean accettaRichiestaNodo(Long idValidazione) {
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("idValidazione", idValidazione);
@@ -123,28 +135,22 @@ public class ClsCuratore extends ClsAnimatore implements IAzioniCuratore {
     @Override
     public boolean rifiutaRichiestaImmagine(Long idValidazione) {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", false);
-        iperRDCImmagini.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCImmagini.get(filters);
     }
 
     @Override
-    public boolean accettaRichiestaImmagine(Long idValidazione) {
+    public List<ClsRDCNodo> getRDCNodiPosessoreCur() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", true);
-        iperRDCImmagini.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCNodi.get(filters);
     }
 
     @Override
-    public boolean rifiutaRichiestaItinerario(Long idValidazione) {
+    public List<ClsRdcItinerario> getRDCItinerarioPosessoreCur() {
         HashMap<String, Object> filters = new HashMap<>();
-        filters.put("idValidazione", idValidazione);
-        filters.put("accetta", false);
-        iperRDCItinerari.get(filters);
-        return true;
+        filters.put("idUtente", this.id);
+        return this.iperRDCItinerari.get(filters);
     }
 
     @Override

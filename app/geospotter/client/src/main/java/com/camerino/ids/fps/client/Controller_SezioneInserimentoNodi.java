@@ -3,6 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import javafx.fxml.FXML;
@@ -66,7 +67,7 @@ public class Controller_SezioneInserimentoNodi implements Initializable {
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato), null) ||
                         Objects.equals(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDescrizioneDelNodo), null)) {
-                    nodo.setIdCreatore(0L);
+                    nodo.setIdCreatore( ((ClsTuristaAutenticato) Controller_SezioneLogin.UTENTE).getId());
                     nodo.seteTologiaNodoFormatoStringa(u.getValueFromCombobox(sezioneInserimentoNodiComboBoxTipologiaNodo));
                     nodo.setNome(u.getValueFromTextField(sezioneInserimentoNodiTextFieldNomeDelNodo));
                     nodo.setIdComuneAssociato(Long.valueOf(u.getValueFromTextField(sezioneInserimentoNodiTextFieldComuneAssociato)));
@@ -75,10 +76,10 @@ public class Controller_SezioneInserimentoNodi implements Initializable {
                     nodo.setDataInizio(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataInizio));
                     nodo.setDataFine(u.getValueFromTextField(sezioneInserimentoNodiTextFieldDataFine));
 
-                    if (!u.checkInfoNodo(nodo) /*|| !this.CheckValidita(nodo, comuni)*/) {
+                    if (!u.checkInfoNodo(nodo) || !this.CheckValidita(nodo, comuni)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Errore");
-                        alert.setContentText("Controlla le informazioni");
+                        alert.setContentText("Setta un comune valido");
                         alert.show();
                     } else {
                         ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciNodo(nodo);

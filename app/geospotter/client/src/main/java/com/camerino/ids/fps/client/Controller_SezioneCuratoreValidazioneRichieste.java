@@ -113,14 +113,14 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
 
     Utils u = new Utils();
     //region dummy arrays per creare immagini nodi e itinerari
-    List<ClsNodo> nodi = new ArrayList<ClsNodo>();
+    List<ClsNodo> nodi = new ArrayList<>();
 
     //endregion
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.richiesteImmagini = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCImmagini();
-        this.richiesteNodo = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getAllRDCNodi();
-        this.richiesteItinerario = ((ClsCuratore)Controller_SezioneLogin.UTENTE)._getAllRDCItinerari();
+        this.richiesteImmagini = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRdcImmaginiPosessoreCur();
+        this.richiesteNodo = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRDCNodiPosessoreCur();
+        this.richiesteItinerario = ((ClsCuratore)Controller_SezioneLogin.UTENTE).getRDCItinerarioPosessoreCur();
 
         setRichiesteImmagini(richiesteImmagini);
 
@@ -139,13 +139,13 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         //endregion
 
         //region Combobox Scelta Immagini dettaglio
-        ObservableList<String> itemss = FXCollections.observableArrayList();
+        ObservableList<String> itme = FXCollections.observableArrayList();
 
-        for (int i = 0; i < richiesteNodo.size(); i++) {
-            itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
+        for (int i = 0; i < richiesteImmagini.size(); i++) {
+            itme.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
-        this.selezionaElementoDettaglioImmagine.setItems(itemss);
+        this.selezionaElementoDettaglioImmagine.setItems(itme);
         //endregion
 
         //region Combobox Scelta Nodi
@@ -268,99 +268,139 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
     }
 
     public void accettaAzioneImmagine(MouseEvent mouseEvent) {
-        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
-        //f (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-            ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaImmagine(IDValidazione);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneImmagine) != "" && u.getValueFromCombobox(sceltaAzioneImmagine) != null)
+        {
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaImmagine(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else{
+            u.alertError();
+        }
+
     }
 
     public void rifiutaAzioneImmagine(MouseEvent mouseEvent) {
-        String IDValidazione = u.getValueFromCombobox(sceltaAzioneImmagine);
-        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(Long.parseLong(IDValidazione));
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneImmagine) != "" && u.getValueFromCombobox(sceltaAzioneImmagine) != null)
+        {
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneImmagine));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaImmagine(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else{
+            u.alertError();
+        }
     }
 
     public void accettaAzioneNodo(MouseEvent mouseEvent) {
-        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
-        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-        ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaNodo(IDValidazione);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneNodo) != "" && u.getValueFromCombobox(sceltaAzioneNodo) != null){
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaNodo(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else{
+            u.alertError();
+        }
+
     }
 
     public void rifiutaAzioneNodo(MouseEvent mouseEvent) {
-        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
-        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-        ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaNodo(IDValidazione);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneNodo) != "" && u.getValueFromCombobox(sceltaAzioneNodo) != null)
+        {
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneNodo));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaNodo(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else{
+            u.alertError();
+        }
+
     }
 
     public void accettaAzioneItinerario(MouseEvent mouseEvent) {
-        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
-        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-            ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaItinerario(IDValidazione);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneItinerario) != "" && u.getValueFromCombobox(sceltaAzioneItinerario) != null)
+        {
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).accettaRichiestaItinerario(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else{
+            u.alertError();
+        }
+
     }
 
     public void rifiutaAzioneItinerario(MouseEvent mouseEvent) {
-        Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
-        //if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
-            ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaItinerario(IDValidazione);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("OK");
-            alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
-            alert.show();
-        /*} else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("ERRORE");
-            alert.show();
-        }*/
+        if(u.getValueFromCombobox(sceltaAzioneItinerario) != "" && u.getValueFromCombobox(sceltaAzioneItinerario) != null)
+        {
+            Long IDValidazione = Long.valueOf(u.getValueFromCombobox(sceltaAzioneItinerario));
+            if (IDValidazione != null && !Objects.equals(IDValidazione, "")) {
+                ((ClsCuratore)Controller_SezioneLogin.UTENTE).rifiutaRichiestaItinerario(IDValidazione);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("OK");
+                alert.setContentText("AZIONE (" + IDValidazione + ") NON Validata");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("ERRORE");
+                alert.show();
+            }
+        }
+        else {
+            u.alertError();
+        }
+
     }
 
     private void setRichiesteImmagini(List<ClsRDCImmagine> richiesteImmagini) {
@@ -384,70 +424,86 @@ public class Controller_SezioneCuratoreValidazioneRichieste implements Initializ
         }
     }
 
-    public void visualizzaDettaglioImmagine() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
+    public void visualizzaDettaglioImmagine()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != "" && u.getValueFromCombobox(selezionaElementoDettaglioImmagine) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
+            if (true) {
 
-            for (int i = 0; i < richiesteImmagini.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
-                    alert.show();
+                for (int i = 0; i < richiesteImmagini.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("ID: " + richiesteImmagini.get(i).getIdRichiesta() + "\nCreatore:" + richiesteImmagini.get(i).getCreatore().getId());
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else {
+            u.alertError();
+        }
+
     }
 
-    public void visualizzaDettaglioNodo() {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
+    public void visualizzaDettaglioNodo()
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglioNodo) != "" && u.getValueFromCombobox(selezionaElementoDettaglioNodo) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
+            if (true) {
 
-            for (int i = 0; i < richiesteNodo.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
-                    alert.show();
+                for (int i = 0; i < richiesteNodo.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("ID: " +richiesteNodo.get(i).getIdRichiesta() + "\nCreatore: " + richiesteNodo.get(i).getCreatore().getId() );
+                        alert.show();
+                    }
                 }
-            }
 
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
+            }
         }
+        else {
+            u.alertError();
+        }
+
     }
 
-    public void visualizzaDettaglioItinerario() {
-        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario);
+    public void visualizzaDettaglioItinerario()
+    {
 
-        if (IDDaVisualizzare != null && !IDDaVisualizzare.isEmpty() && this.controllaConformitaID(Long.valueOf(IDDaVisualizzare))) {
+        String IDDaVisualizzare = u.getValueFromCombobox(selezionaElementoDettaglioItinerario).toString();
 
-            for (int i = 0; i < richiesteItinerario.size(); i++) {
-                if (IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta())) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("OK");
-                    alert.setContentText("Vecchi dati:" + richiesteItinerario.get(i).getOldData().visualizzaItinerario() + "\nNuovi Dati:" + richiesteItinerario.get(i).getNewData().visualizzaItinerario());
-                    alert.show();
-                }
+        if(!Objects.equals(IDDaVisualizzare, ""))
+        {
+                for (int i = 0; i < richiesteItinerario.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.richiesteItinerario.get(i).getIdRichiesta().toString())) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("OK");
+                        alert.setContentText("ID:" + richiesteItinerario.get(i).getIdRichiesta() +"\nCreatore: " + richiesteItinerario.get(i).getCreatore().getId());
+                        alert.show();
+                    }
             }
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     private boolean controllaConformitaID(Long id) {

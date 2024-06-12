@@ -89,29 +89,39 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
 
     }
 
-    public void visualizzaDettaglio(MouseEvent mouseEvent) {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
+    public void visualizzaDettaglio(MouseEvent mouseEvent)
+    {
 
-        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
-            ClsItinerario itinerario = new ClsItinerario();
-            for (int i = 0; i < itinerari.size(); i++) {
-                if (IDDaVisualizzare.equals(this.itinerari.get(i).getId())) {
-                    itinerario.setId(itinerari.get(i).getId());
-                    itinerario.setTappe(itinerari.get(i).getTappe());
-                    itinerario.setNome(itinerari.get(i).getNome());
-                    itinerario.setOrdinato(itinerari.get(i).isOrdinato());
+        if(u.getValueFromCombobox(selezionaElementoDettaglio) != "" && u.getValueFromCombobox(selezionaElementoDettaglio) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
+
+            if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
+                ClsItinerario itinerario = new ClsItinerario();
+                for (int i = 0; i < itinerari.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.itinerari.get(i).getId())) {
+                        itinerario.setId(itinerari.get(i).getId());
+                        itinerario.setTappe(itinerari.get(i).getTappe());
+                        itinerario.setNome(itinerari.get(i).getNome());
+                        itinerario.setOrdinato(itinerari.get(i).isOrdinato());
+                    }
                 }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("OK");
+                alert.setContentText(itinerario.visualizzaItinerario());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("OK");
-            alert.setContentText(itinerario.visualizzaItinerario());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
         }
+        else
+        {
+            u.alertError();
+        }
+
     }
 
     public void inserisciSegnalazione(MouseEvent mouseEvent) {
@@ -123,11 +133,11 @@ public class Controller_SezioneVisualizzazioneItinerari implements Initializable
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for (int i = 0; i < this.itinerari.size(); i++) {
+            /*for (int i = 0; i < this.itinerari.size(); i++) {
                 if (Objects.equals(itinerari.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(itinerari.get(i).getTappe().get(0).getIdComuneAssociato()); //todo: ottenere da spring
                 }
-            }
+            }*/
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");

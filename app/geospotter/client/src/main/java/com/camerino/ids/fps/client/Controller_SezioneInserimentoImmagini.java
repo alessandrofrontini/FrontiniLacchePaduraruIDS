@@ -93,25 +93,34 @@ public class Controller_SezioneInserimentoImmagini implements Initializable {
         //endregion
     }
 
-    public void inserisciImmagine(MouseEvent mouseEvent) {
-        Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
-        ClsImmagine i = new ClsImmagine();
+    public void inserisciImmagine(MouseEvent mouseEvent)
+    {
+        if(!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), "") && u.getValueFromCombobox(this.sceltaNodo) != null && !Objects.equals(u.getValueFromCombobox(this.sceltaNodo), "null"))
+        {
+            Long IDNodoAssociatoImmagine = Long.valueOf(u.getValueFromCombobox(this.sceltaNodo));
+            ClsImmagine i = new ClsImmagine();
 
-        if ((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine)) {
-            i.setIdCreatore(1L);
-            i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
-            i.setURL(u.getValueFromTextField(urlImmagine));
-            ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Corretto");
-            alert.setContentText(i.visualizzaImmagine());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SELEZIONA UN NODO");
-            alert.setContentText("--SELEZIONA UN NODO--");
-            alert.show();
+            if ((!Objects.equals(u.getValueFromCombobox(this.sceltaNodo), null)) && (!Objects.equals(u.getValueFromTextField(urlImmagine), "")) && this.controllaConformitaID(IDNodoAssociatoImmagine)) {
+
+                i.setIdCreatore(1L);
+                i.setIdNodoAssociato(Long.valueOf(u.getValueFromCombobox(this.sceltaNodo)));
+                i.setURL(u.getValueFromTextField(urlImmagine));
+
+                ((ClsContributor) Controller_SezioneLogin.UTENTE).inserisciImmagine(i);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Corretto");
+                alert.setContentText(i.visualizzaImmagine());
+                alert.show();
+
+            } else {
+                u.alertError();
+            }
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     private void setNodi(List<ClsNodo> nodi) {

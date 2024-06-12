@@ -3,7 +3,9 @@ package com.camerino.ids.core.data.contenuti;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * TODO: commentare
@@ -64,9 +66,8 @@ public class ClsItinerario {
     public String visualizzaItinerario() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "isOrdered: " + this.ordinato + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Nome: " + this.getNome() + "\n";
         dummy += "TAPPE: " + "\n" + this.visualizzaTappe(this.tappe);
 
@@ -87,5 +88,20 @@ public class ClsItinerario {
         }
 
         return dummy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClsItinerario that = (ClsItinerario) o;
+        return ordinato == that.ordinato &&
+                Objects.equals(new HashSet<>(tappe),
+                        new HashSet<>(that.tappe));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tappe, ordinato);
     }
 }

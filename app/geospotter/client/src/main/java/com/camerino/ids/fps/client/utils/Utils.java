@@ -106,8 +106,8 @@ public class Utils {
         return c;
     }
 
-    public ClsUtenteInvitoContestVisual convertFromTuristaAutenticato(ClsTuristaAutenticato turista) {
-        ClsUtenteInvitoContestVisual u = new ClsUtenteInvitoContestVisual();
+    public ClsUtenteUtilityBack convertFromTuristaAutenticato(ClsTuristaAutenticato turista) {
+        ClsUtenteUtilityBack u = new ClsUtenteUtilityBack();
 
         u.setId(turista.getId());
         u.setPunteggio(turista.getPunteggio().toString());
@@ -153,7 +153,7 @@ public class Utils {
         tmp.setStato(rdcImmagine.getStato().toString());
         tmp.setRichiedente(rdcImmagine.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcImmagine.getResponsabile().getId());
-        tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcImmagine.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -183,7 +183,7 @@ public class Utils {
         tmp.setStato(rdcItinerario.getStato().toString());
         tmp.setRichiedente(rdcItinerario.getCreatore().getId().toString());
         //tmp.setResponsabile(rdcItinerario.getResponsabile().getId());
-        tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
+        //tmp.setIdContest(rdcItinerario.getIdContestAppartenenza().getId());
         tmp.setOldData("Dettaglio...");
         tmp.setNewData("Dettaglio...");
 
@@ -244,9 +244,7 @@ public class Utils {
         if (
                 Objects.equals(nodo.getNome(), "") ||
                         Objects.equals(nodo.getTipologiaNodoFormatoStringa(), "") ||
-                        Objects.equals(nodo.getIdComuneAssociato(), "") ||
                         Objects.equals(nodo.getDescrizione(), "") ||
-                        //Objects.equals(nodo.getId(), null) ||
                         Objects.equals(nodo.getNome(), null) ||
                         Objects.equals(nodo.getTipologiaNodoFormatoStringa(), null) ||
                         Objects.equals(nodo.getIdComuneAssociato(), null) ||
@@ -255,7 +253,6 @@ public class Utils {
         } else {
             return true;
         }
-
     }
 
 }

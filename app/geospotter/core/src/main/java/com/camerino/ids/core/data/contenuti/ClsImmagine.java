@@ -35,10 +35,9 @@ public class ClsImmagine extends ClsInformazione {
     public String visualizzaImmagine() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
         dummy += "URL: " + this.getURL() + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
-        dummy += "ID Contenuto Associato: " + this.idNodoAssociato + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
+        dummy += "ID Associazione: " + this.idNodoAssociato + "\n";
 
         dummy += "";
 

@@ -152,7 +152,7 @@
         <Button layoutX="16.0" layoutY="541.0" mnemonicParsing="false"
                 onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home"/>
         <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="VALIDAZIONE RICHIESTE (Curatore)">
+              text="VALIDAZIONE RICHIESTE (Animatore)">
             <font>
                 <Font size="22.0"/>
             </font>

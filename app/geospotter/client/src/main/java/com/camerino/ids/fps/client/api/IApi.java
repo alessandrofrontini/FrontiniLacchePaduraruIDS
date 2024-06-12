@@ -32,7 +32,7 @@ public interface IApi<T> {
         HttpRequest.BodyPublisher bodyPublisher = null;
         try {
             bodyPublisher = HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(object));
-            System.out.println(mapper.writeValueAsString(object));
+            System.out.println("Request Body: "+mapper.writeValueAsString(object));
         } catch (JsonProcessingException e) {
             System.out.println(e.getMessage());
         }
@@ -48,6 +48,7 @@ public interface IApi<T> {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Response Body: "+response.body());
         return response;
     }
 

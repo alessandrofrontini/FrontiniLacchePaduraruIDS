@@ -53,12 +53,11 @@ public class ClsRecensione extends ClsInformazione {
     public String visualizzaRecensione() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "Username Creatore: " + this.getIdCreatore() + "\n";
+        dummy += "Creatore: " + this.getIdCreatore() + "\n";
         dummy += "Valutazione: " + this.getValutazione() + "\n";
         dummy += "Oggetto: " + this.getOggetto() + "\n";
         dummy += "Contenuto: " + this.getContenuto() + "\n";
-        dummy += "Contenuto Associato: " + this.getIdNodoAssociato() + "\n";
+        dummy += "Associazione: " + this.getIdNodoAssociato() + "\n";
 
 
         return dummy;

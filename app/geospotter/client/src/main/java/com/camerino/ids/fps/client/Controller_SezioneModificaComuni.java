@@ -120,23 +120,28 @@ public class Controller_SezioneModificaComuni implements Initializable {
         //endregion
     }
 
-    public void modificaComune(MouseEvent mouseEvent) {
-        Long IDDaEliminare = Long.valueOf(this.eliminaComune(mouseEvent));
-        ClsComune nuovoComune = this.inserisciComune(mouseEvent);
+    public void modificaComune(MouseEvent mouseEvent)
+    {
+        if(!Objects.equals(u.getValueFromCombobox(this.sceltaComune), "") && u.getValueFromCombobox(this.sceltaComune) != null)
+        {
+            Long IDDaEliminare = Long.valueOf(this.eliminaComune(mouseEvent));
+            ClsComune nuovoComune = this.inserisciComune(mouseEvent);
 
-        if (!Objects.equals(IDDaEliminare, null) && !Objects.equals(IDDaEliminare, "") && (nuovoComune != null)) {
-            ((ClsGDP) Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
-            nuovoComune.setId(IDDaEliminare);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("FATTO");
-            alert.setContentText("ID: " + IDDaEliminare + "\n\n NuovoNodo:" + nuovoComune.visualizzaComune());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Attenzione");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
+            if (nuovoComune != null) {
+                ((ClsGDP) Controller_SezioneLogin.UTENTE).modificaComune(nuovoComune, IDDaEliminare);
+                nuovoComune.setId(IDDaEliminare);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("FATTO");
+                alert.setContentText("ID: " + IDDaEliminare + "\n\n" + nuovoComune.visualizzaComune());
+                alert.show();
+            } else {
+                u.alertError();
+            }
         }
+        else{
+            u.alertError();
+        }
+
 
     }
 
@@ -192,35 +197,51 @@ public class Controller_SezioneModificaComuni implements Initializable {
         String curatoriCoinvolti = u.getValueFromTextField(textFieldCuratori);
         String[] curatoriCoinvoltiArray = this.convertiCuratoriCoinvoltiInArray(curatoriCoinvolti);
 
-        List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
+        if(curatoriCoinvoltiArray.length > 0)
+        {
+            List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
 
-        for (int i = 0; i < Curatori.size(); i++) {
-            for (int j = 0; j < curatoriCoinvoltiArray.length; j++) {
-                if (Objects.equals(Curatori.get(i).getId(), curatoriCoinvoltiArray[j])) {
-                    curatoriAssociatiToComune.add(Curatori.get(i));
+            for (int i = 0; i < Curatori.size(); i++) {
+                for (int j = 0; j < curatoriCoinvoltiArray.length; j++) {
+                    try
+                    {
+                        if (Objects.equals(Curatori.get(i).getId(), Long.valueOf(curatoriCoinvoltiArray[j]))) {
+                            curatoriAssociatiToComune.add(Curatori.get(i));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        u.alertError();
+                        throw new RuntimeException(e);
+                    }
+
                 }
             }
+
+            if (!curatoriAssociatiToComune.isEmpty() &&
+                    !Objects.equals(u.getValueFromTextField(coordinataXTF), "") &&
+                    !Objects.equals(u.getValueFromTextField(coordinataYTF), "") &&
+                    !Objects.equals(u.getValueFromTextField(descrizioneTF), "") &&
+                    !Objects.equals(u.getValueFromTextField(nomeTF), "") &&
+                    !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
+                    !Objects.equals(u.getValueFromTextField(superficieTF), "")) {
+                comune.setIdCreatore(((ClsTuristaAutenticato)Controller_SezioneLogin.UTENTE).getId());
+                comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
+                comune.setNome(u.getValueFromTextField(nomeTF));
+                comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
+                comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitantiTF)));
+                comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
+                comune.setCuratoriAssociati(new ArrayList<>());
+
+                return comune;
+            } else {
+                return null;
+            }
         }
-
-        if (!curatoriAssociatiToComune.isEmpty() &&
-                !Objects.equals(u.getValueFromTextField(coordinataXTF), "") &&
-                !Objects.equals(u.getValueFromTextField(coordinataYTF), "") &&
-                !Objects.equals(u.getValueFromTextField(descrizioneTF), "") &&
-                !Objects.equals(u.getValueFromTextField(nomeTF), "") &&
-                !Objects.equals(u.getValueFromTextField(abitantiTF), "") &&
-                !Objects.equals(u.getValueFromTextField(superficieTF), "")) {
-            comune.setIdCreatore(0L);
-            comune.setPosizione(new Posizione(Double.parseDouble(u.getValueFromTextField(coordinataXTF)), Double.parseDouble(u.getValueFromTextField(coordinataYTF))));
-            comune.setNome(u.getValueFromTextField(nomeTF));
-            comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
-            comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitantiTF)));
-            comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
-            comune.setCuratoriAssociati(new ArrayList<>());
-
-            return comune;
-        } else {
+        else{
             return null;
         }
+
     }
 
     public void vediInformazoniAttualiComune(MouseEvent mouseEvent) {

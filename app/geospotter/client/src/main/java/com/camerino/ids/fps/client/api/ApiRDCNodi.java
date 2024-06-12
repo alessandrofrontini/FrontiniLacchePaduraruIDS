@@ -36,7 +36,7 @@ public class ApiRDCNodi implements IApi<ClsRDCNodo> {
             request = HttpRequest.newBuilder()
                     .header("Authorization", FakeTokens.getToken(user))
                     .header("Content-Type", "application/json")
-                    .uri(URI.create(String.format("%s/refiuta?%s", endpoint, query)))
+                    .uri(URI.create(String.format("%s/rifiuta?%s", endpoint, query)))
                     .GET()
                     .build();
         }

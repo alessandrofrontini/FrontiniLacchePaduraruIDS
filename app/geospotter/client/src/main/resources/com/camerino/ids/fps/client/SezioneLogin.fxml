@@ -16,17 +16,28 @@
                 <Font size="11.0" />
             </font>
         </Text>
-        <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="20.0" layoutY="186.0" prefHeight="26.0" prefWidth="543.0" promptText="Username">
+        <TextField fx:id="sezioneRegistrazioneTextBoxUsername" layoutX="14.0" layoutY="132.0" prefHeight="26.0" prefWidth="543.0" promptText="Username">
             <font>
                 <Font size="22.0" />
             </font>
         </TextField>
         <Button fx:id="sezioneRegistrazioneBTNConferma" layoutX="395.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#logga" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
         <Button fx:id="sezioneRegistrazioneBTNVaiAllaHome" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="178.0" text="Home" />
-        <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="20.0" layoutY="253.0" prefHeight="46.0" prefWidth="543.0" promptText="Password">
+        <PasswordField fx:id="sezioneRegistrazioneTextBoxPassword" layoutX="14.0" layoutY="199.0" prefHeight="46.0" prefWidth="543.0" promptText="Password">
             <font>
                 <Font size="22.0" />
             </font>
         </PasswordField>
+      <Text layoutX="20.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="!!! Logs !!!">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="20.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contributor= c:c&#10;Contributor Aut= ca:ca&#10;Animatore = a:a&#10;Curatore = cur:cur&#10;GDP = gdp:gdp" />
+      <Text layoutX="20.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attendere qualche secondo per setup del server !!!!">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

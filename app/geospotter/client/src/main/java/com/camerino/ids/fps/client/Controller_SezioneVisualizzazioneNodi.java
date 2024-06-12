@@ -102,35 +102,43 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable {
         //endregion
     }
 
-    public void visualizzaDettaglio(MouseEvent mouseEvent) {
-        Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
+    public void visualizzaDettaglio(MouseEvent mouseEvent)
+    {
+        if(u.getValueFromCombobox(selezionaElementoDettaglio) != "" && u.getValueFromCombobox(selezionaElementoDettaglio) != null)
+        {
+            Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglio));
 
-        if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
-            ClsNodo nodo = new ClsNodo();
-            for (int i = 0; i < nodi.size(); i++) {
-                if (IDDaVisualizzare.equals(this.nodi.get(i).getId())) {
-                    nodo.setId(nodi.get(i).getId());
-                    nodo.setNome(nodi.get(i).getNome());
-                    nodo.setDescrizione(nodi.get(i).getDescrizione());
-                    nodo.setPosizione(nodi.get(i).getPosizione());
-                    nodo.setaTempo(nodi.get(i).isaTempo());
-                    nodo.setDataInizio(nodi.get(i).getDataInizio());
-                    nodo.setDataFine(nodi.get(i).getDataFine());
-                    nodo.setIdComuneAssociato(nodi.get(i).getIdComuneAssociato());
-                    nodo.setTipologiaNodo(nodi.get(i).getTipologiaNodo());
-                    nodo.setIdCreatore(nodi.get(i).getIdCreatore());
+            if (IDDaVisualizzare != null && !IDDaVisualizzare.equals("") && this.controllaConformitaID(IDDaVisualizzare)) {
+                ClsNodo nodo = new ClsNodo();
+                for (int i = 0; i < nodi.size(); i++) {
+                    if (IDDaVisualizzare.equals(this.nodi.get(i).getId())) {
+                        nodo.setId(nodi.get(i).getId());
+                        nodo.setNome(nodi.get(i).getNome());
+                        nodo.setDescrizione(nodi.get(i).getDescrizione());
+                        nodo.setPosizione(nodi.get(i).getPosizione());
+                        nodo.setaTempo(nodi.get(i).isaTempo());
+                        nodo.setDataInizio(nodi.get(i).getDataInizio());
+                        nodo.setDataFine(nodi.get(i).getDataFine());
+                        nodo.setIdComuneAssociato(nodi.get(i).getIdComuneAssociato());
+                        nodo.setTipologiaNodo(nodi.get(i).getTipologiaNodo());
+                        nodo.setIdCreatore(nodi.get(i).getIdCreatore());
+                    }
                 }
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("OK");
+                alert.setContentText(nodo.visualizzaNodo());
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRORE");
+                alert.setContentText("Controlla le informazioni e riprova");
+                alert.show();
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("OK");
-            alert.setContentText(nodo.visualizzaNodo());
-            alert.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setContentText("Controlla le informazioni e riprova");
-            alert.show();
         }
+        else{
+            u.alertError();
+        }
+
     }
 
     public void inserisciSegnalazione(MouseEvent mouseEvent) {
@@ -142,11 +150,11 @@ public class Controller_SezioneVisualizzazioneNodi implements Initializable {
             segnalazione.setDescrizione(descrizioneSegnalazione);
             segnalazione.setIdContenuto(IDDaSegnalare);
 
-            for (int i = 0; i < this.nodi.size(); i++) {
+            /*for (int i = 0; i < this.nodi.size(); i++) {
                 if (Objects.equals(nodi.get(i).getId(), IDDaSegnalare)) {
                     segnalazione.setIdCuratore(1L); //todo:aggiungere chiamata per ottenere curatore
                 }
-            }
+            }*/
             Controller_SezioneLogin.UTENTE.segnalaContenuto(segnalazione);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("OK");

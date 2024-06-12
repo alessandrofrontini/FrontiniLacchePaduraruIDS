@@ -21,10 +21,16 @@ public class CRDCImmagini {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRDCImmagine>> getRDC(
-            @RequestParam(value = "idRDCImmagini", required = false) Long idRDCImmagini
+            @RequestParam(value = "idRDCImmagini", required = false) Long idRDCImmagini,
+            @RequestParam(value = "idUtente", required = false) Long idUtente,
+            @RequestParam(value = "onlyContest", required = false) Boolean onlyContest
     ) {
-        if (idRDCImmagini == null)
-            return ResponseEntity.ok(sRDCImmagini.getAllRDCI());
+        if(idUtente!=null)
+        {
+            if (onlyContest!=null)
+                return ResponseEntity.ok(sRDCImmagini.GetRDCImmaginePosessore());
+            return ResponseEntity.ok(sRDCImmagini.GetRDCImmaginePosessoreCur());
+        }
         return ResponseEntity.ok(sRDCImmagini.getRDCIById(idRDCImmagini));
     }
 
@@ -47,5 +53,18 @@ public class CRDCImmagini {
             @RequestBody ClsRDCImmagine rdc
     ) {
         return ResponseEntity.ok(sRDCImmagini.postRDCImmagine(rdc));
+    }
+    @GetMapping(mapping+"/accetta")
+    public ResponseEntity<Boolean> RDC(
+            @RequestParam(value = "idValidazione") Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCImmagini.accettaRDCImmagine(idRDC));
+    }
+
+    @GetMapping(mapping+"/rifiuta")
+    public ResponseEntity<Boolean> rifiutaRDC(
+            @RequestParam(value = "idValidazione", required = false) Long idRDC
+    ) {
+        return ResponseEntity.ok(sRDCImmagini.rifutaRDCImmagine(idRDC));
     }
 }

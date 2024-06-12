@@ -23,6 +23,13 @@ public interface IAzioniCuratore {
     @JsonIgnore
     List<ClsRDCImmagine> getAllRDCImmagini();
 
+    @JsonIgnore
+    List<ClsRDCImmagine> getRdcImmaginiPosessoreCur();
+    @JsonIgnore
+    List<ClsRDCNodo> getRDCNodiPosessoreCur();
+    @JsonIgnore
+    List<ClsRdcItinerario> getRDCItinerarioPosessoreCur();
+
     boolean accettaRichiestaNodo(Long idValidazione);
 
     boolean rifiutaRichiestaNodo(Long idValidazione);
@@ -34,10 +41,4 @@ public interface IAzioniCuratore {
     boolean accettaRichiestaImmagine(Long idValidazione);
 
     boolean rifiutaRichiestaItinerario(Long idValidazione);
-    @JsonIgnore
-    List<ClsRDCImmagine> getRDCImmaginePossessoreCur();
-    @JsonIgnore
-    List<ClsRDCNodo> getRDCNodoPossessoreCur();
-    @JsonIgnore
-    List<ClsRdcItinerario> getRDCItinerarioPossessoreCur();
 }

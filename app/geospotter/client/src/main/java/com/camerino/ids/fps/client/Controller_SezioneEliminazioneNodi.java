@@ -90,27 +90,28 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
         //endregion
     }
 
-    public void eliminaNodo() {
-        Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+    public void eliminaNodo()
+    {
+        if(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != "" && u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != null)
+        {
+            Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
 
-        if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
-            ClsContributor user = (ClsContributor) Controller_SezioneLogin.UTENTE;
-            if (user.eliminaNodo(IDDaEliminare)) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle(IDDaEliminare.toString());
-                alert.setContentText("Eliminato!");
-                alert.show();
+            if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+                ClsContributor user = (ClsContributor) Controller_SezioneLogin.UTENTE;
+                if (user.eliminaNodo(IDDaEliminare)) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle(IDDaEliminare.toString());
+                    alert.setContentText("Eliminato!");
+                    alert.show();
+                } else {
+                    u.alertError();
+                }
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle(IDDaEliminare.toString());
-                alert.setContentText("Orrore!");
-                alert.show();
+               u.alertError();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("SELEZIONA UN NODO");
-            alert.setContentText("--SELEZIONA UN NODO--");
-            alert.show();
+        }
+        else {
+            u.alertError();
         }
 
     }

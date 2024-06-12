@@ -15,20 +15,9 @@ public class ClsSegnalazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
     Long idContenuto;
-    @Deprecated
-    Long idCuratore;
     String descrizione;
 
     //region Getters and Setters
-    @Deprecated
-    public Long getIdCuratore() {
-        return idCuratore;
-    }
-
-    @Deprecated
-    public void setIdCuratore(Long idCuratore) {
-        this.idCuratore = idCuratore;
-    }
 
     public Long getId() {
         return (id);
@@ -60,9 +49,7 @@ public class ClsSegnalazione {
     public String visualizzaSegnalazione() {
         String dummy = "";
 
-        dummy += "\n\nID: " + this.getId() + "\n";
-        dummy += "ID Contenuto: " + this.getIdContenuto() + "\n";
-        dummy += "ID Curatore: " + this.getIdCuratore() + "\n";
+        dummy += "ID Associazione: " + this.getIdContenuto() + "\n";
         dummy += "Descrizione: " + this.getDescrizione() + "\n";
 
         return dummy;
