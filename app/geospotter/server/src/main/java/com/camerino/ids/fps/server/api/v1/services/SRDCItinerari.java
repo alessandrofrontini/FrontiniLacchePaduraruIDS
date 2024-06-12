@@ -45,10 +45,18 @@ public class SRDCItinerari {
     }
 
     public boolean putRDCItinerario(ClsRdcItinerario rdc) {
+        List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
+        long numItUguali = itinerari.stream().filter(it->it.equals(rdc.getNewData())).count();
+        if (numItUguali != 0)
+            return false;
         return ((ClsCuratore) request.getServletContext().getAttribute("user")).putRDCItinerario(rdc);
     }
 
     public boolean postRDCItinerario(ClsRdcItinerario rdc) {
+        List<ClsItinerario> itinerari = repoItinerari.findAllOfficial();
+        long numItUguali = itinerari.stream().filter(it->it.equals(rdc.getNewData())).count();
+        if (numItUguali != 0)
+            return false;
         return ((ClsContributor) request.getServletContext().getAttribute("user")).postRDCItinerario(rdc);
     }
 

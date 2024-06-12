@@ -2,6 +2,8 @@ package com.camerino.ids.core.data.contenuti;
 
 import jakarta.persistence.Entity;
 
+import java.util.Objects;
+
 /**
  * TODO: commentare
  */
@@ -94,6 +96,19 @@ public class ClsNodo extends ClsContenuto {
         dummy += "Posizione: " + this.getPosizione().getX() + ("(X) - ") + this.getPosizione().getY() + ("(Y)") + "\n\n";
 
         return dummy;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClsNodo clsNodo = (ClsNodo) o;
+        return Objects.equals(idComuneAssociato, clsNodo.idComuneAssociato) && eTipologiaNodo == clsNodo.eTipologiaNodo && Objects.equals(aTempo, clsNodo.aTempo) && Objects.equals(dataInizio, clsNodo.dataInizio) && Objects.equals(dataFine, clsNodo.dataFine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idComuneAssociato, eTipologiaNodo, aTempo, dataInizio, dataFine);
     }
 
     //endregion
