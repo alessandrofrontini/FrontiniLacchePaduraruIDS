@@ -1,34 +1,38 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.loggers.ClsConsoleLogger;
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.*;
 
 /**
  * Classe che emula molto semplicemente
  */
-public class MockComuni implements IPersistenceModel<ClsComune> {
-    List<ClsComune> comuni = new ArrayList<ClsComune>();
+public class MockComuni implements IPersistenceModel<ClsComune>
+{
+    ArrayList<ClsComune> comuni = new ArrayList<>();
     long id = 0;
 
-    public MockComuni() {
-        this.generaComuni();
+    public MockComuni()
+    {
     }
 
-    //region CRUD metodi
 
+    public ArrayList<ClsComune> get(Map<String, Object> filters)
+    {
+        ArrayList<ClsComune> tmp = new ArrayList<ClsComune>();
 
-    @Override
-    public List<ClsComune> get(Map<String, Object> filters) {
-        List<ClsComune> tmp = new ArrayList<ClsComune>();
-
-        if (filters != null) {
-            if (filters.containsKey("id")) {
-                tmp.add(filterById(filters.get("id")));
+        if(filters != null)
+        {
+            if(filters.containsKey("idComune"))
+            {
+                tmp.add(filterById((Long.parseLong(filters.get("idComune").toString()))));
                 return tmp;
             }
         }
@@ -36,22 +40,24 @@ public class MockComuni implements IPersistenceModel<ClsComune> {
         return comuni;
     }
 
-    @Override
-    public boolean update(Map<String, Object> filters, ClsComune object) {
-        if (filters != null) {
-            if (filters.containsKey("id"))
-                return modificaComune(filters.get("id").toString(), object);
+    public boolean update(Map<String, Object> filters, ClsComune object)
+    {
+        if(filters != null)
+        {
+            if(filters.containsKey("idComune"))
+                return modificaComune(filters.get("idComune").toString(), object);
             return false;
         }
         return false;
     }
 
-    @Override
-    public boolean insert(ClsComune comune) {
+    public boolean insert(ClsComune comune)
+    {
         this.id++;
 
-        if (!this.comuni.contains(comune)) {
-            comune.setId("" + this.id);
+        if(!this.comuni.contains(comune))
+        {
+            comune.setId(this.id);
             return this.comuni.add(comune);
         }
 
@@ -59,11 +65,12 @@ public class MockComuni implements IPersistenceModel<ClsComune> {
 
     }
 
-    @Override
-    public boolean delete(Map<String, Object> filters) {
-        ClsComune c = this.filterById(filters.get("id"));
+    public boolean delete(Map<String, Object> filters)
+    {
+        ClsComune c = this.filterById(Long.parseLong(filters.get("idComune").toString()));
 
-        if (c != null) {
+        if(c != null)
+        {
             return this.comuni.remove(this.comuni.remove(c));
         }
         return false;
@@ -71,54 +78,90 @@ public class MockComuni implements IPersistenceModel<ClsComune> {
 
 
     // ------------------------------ Metodi Privati ------------------------------------------
-    private boolean modificaComune(Long id, ClsComune comune) {
+    private boolean modificaComune(String id, ClsComune comune){
         ClsComune tmp = filterById(comune.getId());
         int index = comuni.indexOf(tmp);
-        if (index < 0)
+        if(index<0)
             return false;
         comuni.set(index, comune);
         return true;
     }
 
-    private ClsComune filterById(Object id) {
+    private ClsComune filterById(Long id)
+    {
         return comuni.stream().filter(comune -> comune.getId().equals(id)).toList().get(0);
     }
 
 //endregion
 
 
-    private void generaComuni() {
-        //ID numeri dispari
+    public void leggiComuni()
+    {
+        File f = new File("CLIsave/comuni.csv");
+        if(f.exists()) {
+            try {
+                FileReader input = new FileReader(f);
+                StringBuilder comuniFile = new StringBuilder();
+                int c;
+                while ((c = input.read()) != -1) {
+                    comuniFile.append((char) c);
+                }
+                if(comuniFile.length()>1) {
+                    String comuniTotal = String.valueOf(comuniFile);
+                    String[] comuniACapo = comuniTotal.split("\n");
+                    for (String comune : comuniACapo) {
+                        ClsComune daAggiungere = new ClsComune();
+                        String[] dati = comune.split(",");
+                        daAggiungere.setId(Long.valueOf(dati[0]));
+                        daAggiungere.setNome(dati[1]);
+                        daAggiungere.setDescrizione(dati[2]);
+                        Posizione p = new Posizione(Double.parseDouble(dati[3]), Double.parseDouble(dati[4]));
+                        daAggiungere.setPosizione(p);
+                        daAggiungere.setAbitanti(Integer.parseInt(dati[5]));
+                        daAggiungere.setSuperficie(Double.parseDouble(dati[6]));
+                        List<String> curatori = new ArrayList<>();
+                        curatori.addAll(Arrays.asList(dati).subList(7, dati.length));
+                        daAggiungere.setCuratoriAssociati(caricaCuratoriDaElenco(curatori));
+                        comuni.add(daAggiungere);
+                    }
+                    maxID();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private List<ClsCuratore> caricaCuratoriDaElenco(List<String> c){
+        List<ClsCuratore> curatori = new ArrayList<>();
+        for(String s:c){
+            HashMap<String, Object> filtro = new HashMap<>();
+            filtro.put("idUtente", s);
+            curatori.add((ClsCuratore) MockLocator.getMockTuristi().get(filtro).get(0));
+        }
+        return curatori;
+    }
+    private void maxID(){
+        for(ClsComune rc:comuni){
+            if(this.id<rc.getId())
+                this.id =rc.getId();
+        }
+    }
+    public void scriviComuni(){
+        try {
+            FileWriter output = new FileWriter("CLIsave/comuni.csv");
+            StringBuilder daScrivere = new StringBuilder("");
+            for(ClsComune comune:comuni){
+                daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");
+                for(ClsCuratore curatore:comune.getCuratoriAssociati())
+                    daScrivere.append(curatore.getId() + ",");
+                daScrivere.deleteCharAt(daScrivere.length()-1);
+                daScrivere.append("\n");
+            }
+            output.write(String.valueOf(daScrivere));
+            output.close();
+        } catch(Exception e){
+            ClsConsoleLogger.println("Errore");
+        }
 
-
-        ClsComune comune1 = new ClsComune();
-        comune1.setId("1");
-        comune1.setCuratoriAssociati(null);
-        comune1.setNome("Lezzano");
-        comune1.setAbitanti(20000);
-        comune1.setSuperficie(49900.94);
-        comune1.setDescrizione("Comune#1 autogenerato per testing.");
-        comune1.setPosizione(new Posizione(50, 20));
-        this.comuni.add(comune1);
-
-        ClsComune comune2 = new ClsComune();
-        comune2.setId("3");
-        comune2.setCuratoriAssociati(null);
-        comune2.setNome("Rombazzo");
-        comune2.setAbitanti(65600);
-        comune2.setSuperficie(903400.94);
-        comune2.setDescrizione("Comune#2 autogenerato per testing.");
-        comune2.setPosizione(new Posizione(60, 50));
-        this.comuni.add(comune2);
-
-        ClsComune comune3 = new ClsComune();
-        comune3.setId("5");
-        comune3.setCuratoriAssociati(null);
-        comune3.setNome("Pililla");
-        comune3.setAbitanti(54432);
-        comune3.setSuperficie(120344.94);
-        comune3.setDescrizione("Comune#3 autogenerato per testing.");
-        comune3.setPosizione(new Posizione(102, 456));
-        this.comuni.add(comune3);
     }
 }
