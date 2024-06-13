@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO: implementare
+
 public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 {
     private ArrayList<ClsRecensione> recensioni = new ArrayList<ClsRecensione>();
-    //TODO: add to vpp
+
     private long idCounter = 0;
 
     //region CRUD metodi

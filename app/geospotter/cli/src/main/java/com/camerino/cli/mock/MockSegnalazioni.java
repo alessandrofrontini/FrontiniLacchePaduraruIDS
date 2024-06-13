@@ -9,12 +9,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
-//TODO: implementare
+
 public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 {
     private ArrayList<ClsSegnalazione> segnalazioni = new ArrayList<ClsSegnalazione>();
 
-    //TODO:add to vpp
+
     private long idCounter = 0;
 
     //region CRUD metodi

@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO:implementare
+
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
     private ArrayList<ClsImmagine> immagini = new ArrayList<>();
-    //TODO:add to vpp
+
     private long idCounter = 0;
 
     //region CRUD metodi
