@@ -17,8 +17,6 @@ public class ClsContestDiContribuzione {
     @OneToOne
     @JoinColumn(name = "id")
     ClsComune location;
-    @Deprecated
-    Boolean isAperto;
 
     public Long getId() {
         return id;
@@ -50,16 +48,6 @@ public class ClsContestDiContribuzione {
 
     public void setLocation(ClsComune location) {
         this.location = location;
-    }
-
-    @Deprecated
-    public Boolean isAperto() {
-        return isAperto;
-    }
-
-    @Deprecated
-    public void setAperto(boolean aperto) {
-        isAperto = aperto;
     }
 
     public String visualizzaContest() {

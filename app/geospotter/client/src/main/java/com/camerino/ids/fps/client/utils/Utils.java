@@ -100,7 +100,6 @@ public class Utils {
         c.setIdCreatore(contest.getIdCreatore());
         c.setLocationComune(contest.getLocation().getNome());
         c.setDurata(contest.getDurata().toString());
-        c.setIsAperto(contest.isAperto().toString());
 
 
         return c;

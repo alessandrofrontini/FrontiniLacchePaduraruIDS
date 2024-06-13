@@ -49,7 +49,6 @@ public class ClsAnimatore extends ClsContributorAutorizzato implements IAzioniAn
     @Override
     public boolean inserisciContest(ClsContestDiContribuzione contest) {
         contest.setIdCreatore(this.id);
-        contest.setAperto(true);
         this.iperContest.insert(contest);
         return true;
     }

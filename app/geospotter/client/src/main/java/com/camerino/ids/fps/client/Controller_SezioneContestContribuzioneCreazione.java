@@ -122,7 +122,6 @@ public class Controller_SezioneContestContribuzioneCreazione implements Initiali
             comune.setId(Long.valueOf(u.getValueFromCombobox(this.sceltaComune)));
             contest.setLocation(comune);
 
-            contest.setAperto(true);
 
             ((ClsAnimatore)Controller_SezioneLogin.UTENTE).inserisciContest(contest);
 

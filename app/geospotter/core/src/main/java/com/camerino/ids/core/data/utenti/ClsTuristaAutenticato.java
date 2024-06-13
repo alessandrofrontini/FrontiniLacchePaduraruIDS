@@ -253,12 +253,4 @@ public class ClsTuristaAutenticato extends ClsTurista implements IAzioniTuristaA
     public List<ClsTuristaAutenticato> getAllUtenti() {
         return iperUtenti.get(null);
     }
-
-    @JsonIgnore
-    @Deprecated()
-    public List<ClsTuristaAutenticato> getUtentiPerGestionePunteggio(String ruolo) {
-        HashMap<String, Object> filters = new HashMap<>();
-        filters.put("ruolo", ruolo);
-        return iperUtenti.get(filters);
-    }
 }

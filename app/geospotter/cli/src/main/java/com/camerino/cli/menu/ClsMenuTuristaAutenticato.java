@@ -21,8 +21,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
 
     private ClsTuristaAutenticato user;
     Scanner in = new Scanner(System.in);
-    @Deprecated
-    IPersistenceModel<ClsRDCImmagine> pImmagini;
+
     public ClsMenuTuristaAutenticato(ClsTuristaAutenticato t){
         user = t;
     }
