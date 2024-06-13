@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneContestContribuzionePartecipante">
+    <children>
+        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sezione Contest Contribuzione (collaborazione)">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+        <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In questa sezione hai la possibilità di aggiungere nuovi elementi a contest di contribuzione.&#10;Seleziona il contest (di cui sei partecipante), riempi i campi e conferma l'inserimento!&#10;" />
+        <TabPane layoutX="14.0" layoutY="117.0" prefHeight="406.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab style="-fx-background-color: #8aadb8;" text="Seleziona Contest">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #8aadb8;">
+                            <children>
+                                <TableView fx:id="elencoContest" layoutX="21.0" layoutY="45.0" prefHeight="273.0" prefWidth="535.0">
+                                    <columns>
+                                        <TableColumn fx:id="idColonna" prefWidth="33.999996185302734" text="ID" />
+                                        <TableColumn fx:id="creatoreColonna" prefWidth="100.39999389648438" text="CREATORE" />
+                                        <TableColumn fx:id="durataColonna" prefWidth="173.2000274658203" text="DURATA" />
+                                        <TableColumn fx:id="locationColonna" minWidth="40" prefWidth="130.19998168945312" text="LOCATION" />
+                                        <TableColumn fx:id="apertoColonna" prefWidth="99.39999389648438" text="APERTO" />
+                                    </columns>
+                                </TableView>
+                                <ComboBox fx:id="sceltaContest" layoutX="106.0" layoutY="323.0" onMouseClicked="#partecipaContest" prefHeight="26.0" prefWidth="365.0" promptText="Seleziona qui" />
+                                <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona Contest">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab closable="false" style="-fx-background-color: #9cc2cf;" text="Visualizza Nodi">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #9cc2cf;">
+                            <children>
+                                <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="14.0" layoutY="44.0" prefHeight="304.0" prefWidth="535.0">
+                                    <columns>
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID" prefWidth="33.199981689453125" text="ID" />
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato" prefWidth="107.0" text="ID COMUNE" />
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome" prefWidth="109.40000915527344" text="NOME" />
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione" prefWidth="108.5999755859375" text="POSIZIONE" />
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia" prefWidth="82.60003662109375" text="TIPOLOGIA" />
+                                        <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="94.199951171875" text="A TEMPO" />
+                                    </columns>
+                                </TableView>
+                                <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nodi prodotti">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab style="-fx-background-color: #add8e6;" text="Aggiungi Nodo a Contest">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #add8e6;">
+                            <children>
+                                <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nodo*">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldNomeDelNodo" layoutX="14.0" layoutY="45.0" prefHeight="26.0" prefWidth="260.0" promptText="Nome del nodo" />
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldCoordinataX" layoutX="13.0" layoutY="134.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. X" />
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldCoordinataY" layoutX="143.0" layoutY="134.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. Y" />
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldDataInizio" layoutX="298.0" layoutY="134.0" prefHeight="26.0" prefWidth="131.0" promptText="Data di Inizio" />
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldDataFine" layoutX="429.0" layoutY="134.0" prefHeight="26.0" prefWidth="131.0" promptText="Data di Fine" />
+                                <ComboBox fx:id="sezioneInserimentoNodiComboBoxTipologiaNodo" layoutX="299.0" layoutY="45.0" prefHeight="26.0" prefWidth="260.0" promptText="Tipologia del Nodo">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Commerciale" />
+                                            <String fx:value="Culinario" />
+                                            <String fx:value="Culturale" />
+                                        </FXCollections>
+                                    </items>
+
+                                </ComboBox>
+                                <TextField fx:id="sezioneInserimentoNodiTextFieldDescrizioneDelNodo" layoutX="14.0" layoutY="180.0" prefHeight="74.0" prefWidth="550.0" promptText="Descrizione del nodo" />
+                                <Button layoutX="199.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#inserisciNodo" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+                                <CheckBox fx:id="sezioneInserimentoNodiCheckBoxTemporizzato" layoutX="298.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#visualizzaInformazioniNodoTemporizzato" text="Temporizzato?" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab style="-fx-background-color: #add8e6;" text="Aggiungi Immagine a Contest">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #add8e6;">
+                            <children>
+                                <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Immagine*">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Text>
+                                <ComboBox fx:id="sceltaNodo" layoutX="131.0" layoutY="198.0" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
+                                <Button layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="150.0" text="Home" />
+                                <Button layoutX="214.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#inserisciImmagine" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+                                <TextField fx:id="urlImmagine" layoutX="28.0" layoutY="238.0" prefHeight="26.0" prefWidth="535.0" promptText="URL" />
+                        <Text layoutX="15.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A cosa serve un'immagine? &#10;A immortalare un momento, a farci ricordare quei pochi bei &#10;momenti che uno si vive. &#10;&#10;Un'immagine ha il potere di fermare il tempo, di bloccare un frammento della nostra esistenza &#10;e renderlo eterno. &#10;In un certo senso, ci permette di rivivere emozioni passate, &#10;di ritornare a certe situaizoni che, altrimenti, non potremmo più rivivere.&#10;" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

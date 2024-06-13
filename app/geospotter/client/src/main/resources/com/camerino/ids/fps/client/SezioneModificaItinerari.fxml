@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaItinerari">
+    <children>
+        <TabPane layoutY="91.0" prefHeight="418.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Seleziona Itinerario">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <TableView fx:id="sezioneEliminazioneItinerariTableView" layoutX="32.0" layoutY="45.0" prefHeight="299.0" prefWidth="535.0">
+                                <columns>
+                                    <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnID" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="sezioneEliminazioneItinerariTableColumnNome" prefWidth="115.20000457763672" text="NOME" />
+                                    <TableColumn fx:id="sezioneInserimentoItinerariTableColumnOrdinato" prefWidth="125.0" text="ORDINATO" />
+                                    <TableColumn fx:id="sezioneInserimentoItinerariTableColumnTappe" prefWidth="217.59999389648442" text="TAPPE" />
+                                </columns>
+                            </TableView>
+                            <ComboBox fx:id="sezioneEliminazioneItinerariComboBoxSceltaItinerarioID" layoutX="135.0" layoutY="356.0" onMouseClicked="#vediInformazoniAttualiItinerario" onMouseExited="#vediInformazoniAttualiItinerario" prefHeight="26.0" prefWidth="330.0" promptText="Seleziona qui" />
+                            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona il nodo di cui desideri modificare il contenuto. Puoi trovare l'elenco di nodi nella tabella sotto." />
+
+                        </AnchorPane>
+
+                    </content>
+                </Tab>
+                <Tab text="Modifica Itinerario">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="32.0" layoutY="72.0" prefHeight="245.0" prefWidth="535.0">
+                                <columns>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID" prefWidth="33.199981689453125" text="ID" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato" prefWidth="86.19999694824219" text="COMUNE" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome" prefWidth="144.1999969482422" text="NOME" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione" prefWidth="95.79998779296875" text="POSIZIONE" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia" prefWidth="107.5999755859375" text="TIPOLOGIA" />
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo" prefWidth="70.79998779296875" text="A TEMPO" />
+                                </columns>
+                            </TableView>
+                            <Button fx:id="sezioneEliminazioneNodiButtonConferma" layoutX="465.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#inserisciItinerario" prefHeight="26.0" prefWidth="101.0" text="Conferma" />
+                            <TextField fx:id="sezioneInserimentoItinerariElencoTappe" layoutX="32.0" layoutY="324.0" prefHeight="26.0" prefWidth="535.0" promptText="Tappe (IDnodo1-IDnodo2-IDnodo3-...-IDnodoN-/)" />
+                            <TextField fx:id="sezioneInserimentoItinerariNomeItinerario" layoutX="32.0" layoutY="358.0" prefHeight="26.0" prefWidth="257.0" promptText="Nome itinerario" />
+                            <CheckBox fx:id="sezioneInserimentoItinerariCheckBoxOrdinato" layoutX="379.0" layoutY="362.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="85.0" text="Ordinato?" />
+                            <Text layoutX="11.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aggiorna il contenuto del nodo che hai precedentemente selezionato. Se vuoi aggiungere o eliminare una qualche tappa&#10;puoi visualizzare l'elenco dei nodi qui sotto.&#10;" wrappingWidth="557.19921875" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICA ITINERARI">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Text>
+        <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="144.0" text="Home" />
+        <Button fx:id="sezioneEliminazioneItinerariButtonConferma" layoutX="430.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#modificaItinerario" prefHeight="26.0" prefWidth="144.0" style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE" />
+    </children>
+</AnchorPane>

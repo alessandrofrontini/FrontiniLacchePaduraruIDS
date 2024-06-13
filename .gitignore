@@ -1,5 +1,7 @@
 *.iml
-.idea/
+**/.idea/**
+!**/.idea/artifacts/**
+#!.idea/workspace.xml
 target
 .classpath
 .settings

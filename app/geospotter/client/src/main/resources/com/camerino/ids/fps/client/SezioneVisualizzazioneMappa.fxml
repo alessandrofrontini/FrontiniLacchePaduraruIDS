@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            style="-fx-background-color: #a3a3a3;" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneVisualizzazioneMappa">
+    <children>
+        <Text fill="WHITE" layoutX="179.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LA MAPPA"
+              wrappingWidth="209.13671875">
+            <font>
+                <Font size="44.0"/>
+            </font>
+        </Text>
+        <Button layoutX="186.0" layoutY="335.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazioneNodi" prefHeight="46.0" prefWidth="228.0"
+                style="-fx-background-color: black;" text="Visualizza NODI" textFill="#ffbc00">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Button>
+        <Button layoutX="192.0" layoutY="134.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazioneComuni" style="-fx-background-color: black;"
+                text="Visualizza COMUNI" textFill="#00ff1a">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Button>
+        <Button layoutX="186.0" layoutY="232.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazioneItinerari" prefHeight="46.0" prefWidth="228.0"
+                style="-fx-background-color: black;" text="Visualizza ITINERARI" textFill="#3300ff">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Button>
+        <Button layoutX="223.0" layoutY="474.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="153.0" text="Home"/>
+    </children>
+</AnchorPane>

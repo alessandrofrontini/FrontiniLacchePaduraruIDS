@@ -1,0 +1,43 @@
+GET localhost:8080/api/v1/comuni
+
+###
+POST localhost:8080/api/v1/comuni
+Authorization: {{tkGDP}}
+Content-Type: application/json
+
+{
+  "id": "0",
+  "idCreatore": null,
+  "posizione": {
+    "x": 32.0,
+    "y": 31.0
+  },
+  "nome": "Castelraimondo",
+  "descrizione": "Capitale",
+  "abitanti": 0,
+  "superficie": 213.0,
+  "curatoriAssociati": null
+}
+
+###
+PUT localhost:8080/api/v1/comuni
+Authorization: {{tkGDP}}
+Content-Type: application/json
+
+{
+  "id": "3",
+  "idCreatore": null,
+  "posizione": {
+    "x": 32.0,
+    "y": 31.0
+  },
+  "nome": "Castelraimondo00000000000000o",
+  "descrizione": "Capitale",
+  "abitanti": 0,
+  "superficie": 213.0,
+  "curatoriAssociati": null
+}
+
+###
+DELETE localhost:8080/api/v1/comuni?idComune=3
+Authorization: {{tkGDP}}

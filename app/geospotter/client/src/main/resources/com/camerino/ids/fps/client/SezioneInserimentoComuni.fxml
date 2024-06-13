@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            style="-fx-background-color: d3d3d3;" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneInserimentoComuni">
+    <children>
+        <Text fill="RED" layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INSERISCI COMUNI">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <Text layoutX="10.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Signor Gestore della Piattaforma BENTROVATO. In questa sezione potrai aggiungere nuovi comuni a&#10;GeoSpotter. Buon lavoro. SELEZIONA ALMENO UN CURATORE, MI RACCOMANDO!!!!&#10;&#10;"
+              wrappingWidth="580.2792663574219"/>
+        <TextField fx:id="nome" layoutX="12.0" layoutY="406.0" prefHeight="26.0" prefWidth="250.0" promptText="Nome"/>
+        <TextField fx:id="coordinataY" layoutX="146.0" layoutY="488.0" prefHeight="26.0" prefWidth="120.0"
+                   promptText="Coordinata Y"/>
+        <TextField fx:id="coordinataX" layoutX="12.0" layoutY="488.0" prefHeight="26.0" prefWidth="120.0"
+                   promptText="Coordinata X"/>
+        <TextField fx:id="descrizione" layoutX="12.0" layoutY="447.0" prefHeight="26.0" prefWidth="250.0"
+                   promptText="Descrizione"/>
+        <TextField fx:id="abitanti" layoutX="338.0" layoutY="406.0" prefHeight="26.0" prefWidth="250.0"
+                   promptText="Abitanti"/>
+        <TextField fx:id="superficie" layoutX="338.0" layoutY="447.0" prefHeight="26.0" prefWidth="250.0"
+                   promptText="Superficie (M^2)"/>
+        <Button fx:id="home" layoutX="26.0" layoutY="541.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="151.0" text="Home"/>
+        <Button fx:id="conferma" layoutX="430.0" layoutY="541.0" mnemonicParsing="false"
+                onMouseClicked="#inserisciComune" prefHeight="26.0" prefWidth="151.0"
+                style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE"/>
+        <TableView fx:id="elencoCuratori" layoutX="15.0" layoutY="119.0" prefHeight="212.0" prefWidth="570.0">
+            <columns>
+                <TableColumn fx:id="idCuratore" prefWidth="74.59997367858887" text="ID"/>
+                <TableColumn fx:id="usernameCuratore" minWidth="0.0" prefWidth="495.79996490478516" text="PUNTEGGIO"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="textFieldCuratori" layoutX="15.0" layoutY="359.0" prefHeight="26.0" prefWidth="570.0"
+                   promptText="Curatori Associati (IDcuratore1-IDcuratore2-...-IDcuratoreN)"/>
+    </children>
+</AnchorPane>

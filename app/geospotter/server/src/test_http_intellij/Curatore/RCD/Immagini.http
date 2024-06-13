@@ -1,0 +1,61 @@
+GET http://localhost:8080/api/v1/rdcimmagini
+Authorization:{{tkCuratore}}
+
+###
+GET http://localhost:8080/api/v1/immagini
+Authorization:{{tkCuratore}}
+
+###
+POST http://localhost:8080/api/v1/rdcimmagini
+Content-Type: application/json
+Authorization:{{tkCuratore}}
+
+{
+  "idRichiesta": "0",
+  "tipo": "INSERISCI_IMMAGINE",
+  "stato": "NUOVO",
+  "creatore": {
+    "id": "2",
+    "credenziali": {
+      "username": null,
+      "password": "c"
+    },
+    "punteggio": 594,
+    "ruoloUtente": "CONTRIBUTOR"
+  },
+  "responsabile": null,
+  "idContest": null,
+  "oldData": null,
+  "newData": null
+}
+
+###
+PUT http://localhost:8080/api/v1/rdcimmagini
+Content-Type: application/json
+Authorization:{{tkCuratore}}
+
+{
+  "idRichiesta": "1",
+  "tipo": "ELIMINA_ITINERARIO",
+  "stato": "NUOVO",
+  "creatore": null,
+  "responsabile": null,
+  "idContest": null,
+  "oldData": {
+    "id": 1,
+    "idCOntenutoAssociato": 1,
+    "URL": "1",
+    "usernameCreatore": "1"
+  },
+  "newData": {
+    "id": 0,
+    "idCOntenutoAssociato": 1,
+    "URL": "aaaaa",
+    "usernameCreatore": "2"
+  }
+}
+
+###
+DELETE http://localhost:8080/api/v1/rdcimmagini?
+    idRDCImmagini=1
+Authorization:{{tkCuratore}}

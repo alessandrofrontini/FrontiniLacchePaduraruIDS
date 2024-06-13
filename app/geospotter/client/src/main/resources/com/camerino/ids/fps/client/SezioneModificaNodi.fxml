@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="com.camerino.ids.fps.client.Controller_SezioneModificaNodi">
+    <children>
+        <TabPane layoutY="91.0" prefHeight="418.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Seleziona Nodo">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="600.0">
+                            <TableView fx:id="sezioneEliminazioneNodiTableView" layoutX="34.0" layoutY="69.0"
+                                       prefHeight="269.0" prefWidth="532.0">
+                                <columns>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnID"
+                                                 prefWidth="33.199981689453125" text="ID"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnIDComuneAssociato"
+                                                 prefWidth="107.0" text="ID COMUNE"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnNome"
+                                                 prefWidth="109.40000915527344" text="NOME"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnPosizione"
+                                                 prefWidth="108.5999755859375" text="POSIZIONE"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnTipologia"
+                                                 prefWidth="82.60003662109375" text="TIPOLOGIA"/>
+                                    <TableColumn fx:id="sezioneEliminazioneNodiTableColumnATempo"
+                                                 prefWidth="94.199951171875" text="A TEMPO"/>
+                                </columns>
+                            </TableView>
+                            <ComboBox fx:id="sezioneEliminazioneNodiComboBoxSceltaNodoID" layoutX="135.0"
+                                      layoutY="349.0" onMouseEntered="#visualizzaInformazioniAttualiNodo"
+                                      onMouseExited="#visualizzaInformazioniAttualiNodo" prefHeight="26.0"
+                                      prefWidth="330.0" promptText="Seleziona Nodo"/>
+                            <Button fx:id="sezioneEliminazioneNodiButtonHomePage" layoutX="26.0" layoutY="541.0"
+                                    mnemonicParsing="false" onMouseClicked="#navigateToSezioneVisualizzazione"
+                                    prefHeight="26.0" prefWidth="144.0" text="Home"/>
+                            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                  text="Seleziona qua sotto il nodo di cui vuoi effettaure una modifica.&#10;Puoi trovare subito sotto l'elenco dei nodi della quale puoi richiedere&#10;l'operazione."/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Modifica Nodo">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldNomeDelNodo" layoutX="22.0" layoutY="98.0"
+                                       prefHeight="26.0" prefWidth="260.0" promptText="Nome del nodo"/>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldCoordinataX" layoutX="20.0" layoutY="237.0"
+                                       prefHeight="26.0" prefWidth="131.0" promptText="Coord. X"/>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldCoordinataY" layoutX="150.0"
+                                       layoutY="237.0" prefHeight="26.0" prefWidth="131.0" promptText="Coord. Y"/>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldComuneAssociato" layoutX="22.0"
+                                       layoutY="168.0" prefHeight="26.0" prefWidth="260.0"
+                                       promptText="IDComuneAssociato"/>
+                            <CheckBox fx:id="sezioneInserimentoNodiCheckBoxTemporizzato" layoutX="319.0" layoutY="172.0"
+                                      mnemonicParsing="false" onMouseClicked="#visualizzaInformazioniNodoTemporizzato"
+                                      prefHeight="18.0" prefWidth="101.0" text="Temporizzato"/>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldDataInizio" layoutX="317.0" layoutY="237.0"
+                                       prefHeight="26.0" prefWidth="131.0" promptText="Data di Inizio"/>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldDataFine" layoutX="447.0" layoutY="237.0"
+                                       prefHeight="26.0" prefWidth="131.0" promptText="Data di Fine"/>
+                            <ComboBox fx:id="sezioneInserimentoNodiComboBoxTipologiaNodo" layoutX="319.0" layoutY="98.0"
+                                      prefHeight="26.0" prefWidth="260.0" promptText="Tipologia del Nodo">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value="Commerciale"/>
+                                        <String fx:value="Culinario"/>
+                                        <String fx:value="Culturale"/>
+                                    </FXCollections>
+                                </items>
+
+                            </ComboBox>
+                            <TextField fx:id="sezioneInserimentoNodiTextFieldDescrizioneDelNodo" layoutX="20.0"
+                                       layoutY="316.0" prefHeight="26.0" prefWidth="260.0"
+                                       promptText="Descrizione del nodo"/>
+                            <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                  text="Aggiorna le informazioni del nodo che hai precedentemente selezionato qui sotto,&#10;Una volta terminata la compilazione premi conferma per continuare con l'operazione.&#10;"/>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Button fx:id="sezioneModificaNodiButtonConferma" layoutX="424.0" layoutY="545.0" mnemonicParsing="false"
+                onMouseClicked="#modificaNodo" prefHeight="26.0" prefWidth="161.0"
+                style="-fx-background-color: #15ad36;" text="Conferma" textFill="WHITE"/>
+        <Button layoutX="22.0" layoutY="545.0" mnemonicParsing="false"
+                onMouseClicked="#navigateToSezioneVisualizzazione" prefHeight="26.0" prefWidth="162.0" text="Home"/>
+        <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MODIFICA NODI">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Text>
+    </children>
+</AnchorPane>
