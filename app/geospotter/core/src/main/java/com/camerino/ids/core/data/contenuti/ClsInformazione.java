@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 /**
- * TODO: commentare
+ * Contiene i dati di un informazione
  */
 @MappedSuperclass
 public abstract class ClsInformazione {
@@ -16,7 +16,6 @@ public abstract class ClsInformazione {
     Long idCreatore;
 
     //region Getters and setters
-
     public Long getId() {
         return (id);
     }
@@ -32,7 +31,6 @@ public abstract class ClsInformazione {
     public void setIdCreatore(Long idCreatore) {
         this.idCreatore = idCreatore;
     }
-
     //endregion
 
 }

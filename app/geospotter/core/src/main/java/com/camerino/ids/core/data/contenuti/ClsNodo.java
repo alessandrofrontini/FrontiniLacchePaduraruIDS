@@ -5,12 +5,11 @@ import jakarta.persistence.Entity;
 import java.util.Objects;
 
 /**
- * TODO: commentare
+ * Contiene i dati di un nodo
  */
 @Entity
 public class ClsNodo extends ClsContenuto {
 
-    //endregion
     private Long idComuneAssociato;
     private eTipologiaNodo eTipologiaNodo;
     private Boolean aTempo;
@@ -85,6 +84,7 @@ public class ClsNodo extends ClsContenuto {
     public void setDataFine(String dataFine) {
         this.dataFine = dataFine;
     }
+    //endregion
 
     public String visualizzaNodo() {
         String dummy = "";
@@ -111,8 +111,7 @@ public class ClsNodo extends ClsContenuto {
         return Objects.hash(idComuneAssociato, eTipologiaNodo, aTempo, dataInizio, dataFine);
     }
 
-    //endregion
-
     //region Tipologia nodo (enumerazione)
     public enum eTipologiaNodo {COMMERCIALE, CULTURALE, CULINARIO}
+    //endregion
 }

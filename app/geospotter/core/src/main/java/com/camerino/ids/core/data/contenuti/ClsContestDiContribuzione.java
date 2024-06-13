@@ -18,6 +18,7 @@ public class ClsContestDiContribuzione {
     @JoinColumn(name = "id")
     ClsComune location;
 
+    //region G&S
     public Long getId() {
         return id;
     }
@@ -49,6 +50,7 @@ public class ClsContestDiContribuzione {
     public void setLocation(ClsComune location) {
         this.location = location;
     }
+    //endregion
 
     public String visualizzaContest() {
 

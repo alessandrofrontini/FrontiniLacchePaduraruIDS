@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * TODO: commentare
+ * Contiene i dati di un itinerario
  */
 @Entity
 public class ClsItinerario {

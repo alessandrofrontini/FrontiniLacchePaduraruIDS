@@ -6,11 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 /**
- * TODO: commentare
+ * Contiene i dati di una segnalazione
  */
 @Entity
-public class ClsSegnalazione {
-
+public class ClsSegnalazione
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id = 0L;
@@ -18,7 +18,6 @@ public class ClsSegnalazione {
     String descrizione;
 
     //region Getters and Setters
-
     public Long getId() {
         return (id);
     }
@@ -42,8 +41,6 @@ public class ClsSegnalazione {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-
-
     //endregion
 
     public String visualizzaSegnalazione() {

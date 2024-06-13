@@ -4,12 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 /**
- * TODO: commentare
+ * Contiene i dati di una recensione
  */
 @Entity
-public class ClsRecensione extends ClsInformazione {
-    //Ho errore referring to multiple physical column names: [idcontenuto_associato], [id_contenuto_associato]
-    //perchè esiste anche in ClsImmagine
+public class ClsRecensione extends ClsInformazione
+{
     @Column(name = "idNodoAssRec")
     Long idNodoAssociato;
     Double valutazione;

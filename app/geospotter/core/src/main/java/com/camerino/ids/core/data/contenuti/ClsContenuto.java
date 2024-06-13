@@ -17,7 +17,6 @@ public abstract class ClsContenuto extends ClsInformazione {
     String descrizione;
 
     //region Getter e setter
-
     public Posizione getPosizione() {
         return posizione;
     }
