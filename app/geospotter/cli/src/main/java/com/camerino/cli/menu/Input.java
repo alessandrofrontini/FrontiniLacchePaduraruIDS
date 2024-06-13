@@ -30,6 +30,7 @@ public class Input {
         ClsNodo nodo = new ClsNodo();
         nodo.setIdCreatore(0L);
         while (!fine) {
+            exit = false;
             Posizione pos = new Posizione();
             print("Inserisci nome: ");
             nodo.setNome(in.nextLine());
@@ -310,5 +311,12 @@ public class Input {
 
     public static boolean checkValore(String input, ArrayList<String> range) {
         return range.contains(input);
+    }
+
+    public static String[] removeCarriageReturn(String [] dati){
+        for(int i = 0; i<dati.length; i++){
+            dati[i] = dati[i].replace("\r", "");
+        }
+        return dati;
     }
 }

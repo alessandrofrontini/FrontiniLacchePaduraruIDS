@@ -67,7 +67,15 @@ public class ClsMenuContributor implements IMenu{
      * Il metodo si occupa di prendere in input un nodo e di inserirlo, tramite richiesta o meno a seconda dell'utente
      */
     public void menuInserisciNodo(){
-        user.inserisciNodo(Input.inserisciNodo());
+        if(user.getAllComuni() != null) {
+            user.inserisciNodo(Input.inserisciNodo());
+            if(user.getClass().equals(ClsContributorAutorizzato.class))
+                user.setPunteggio(user.getPunteggio()+1);
+        }
+        else{
+            println("Nella piattaforma non sono presenti Comuni. Impossibile aggiungere un nodo.");
+            in.nextLine();
+        }
     }
 
     /**
@@ -85,12 +93,18 @@ public class ClsMenuContributor implements IMenu{
             if (checkValore(input, (ArrayList<String>) user.getNodiPossessore().stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))){
                 ClsNodo old = user.getNodoById(Long.parseLong(input)).get(0);
                 user.modificaNodo(Long.valueOf(input), Input.modificaNodo(old));
+                if(user.getClass().equals(ClsContributorAutorizzato.class))
+                    user.setPunteggio(user.getPunteggio()+1);
             }
             else{
                 println("Nessun Nodo Trovato");
                 in.nextLine();
             }
 
+        }
+        else{
+            println("Non ci sono nodi presenti nella Piattaforma.");
+            in.nextLine();
         }
     }
 
@@ -110,6 +124,8 @@ public class ClsMenuContributor implements IMenu{
                 if (checkValore(input, (ArrayList<String>) user.getNodiPossessore().stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
                     if (user.eliminaNodo(Long.parseLong(input))) {
                         println("Richiesta di eliminazione inviata.");
+                        if(user.getClass().equals(ClsContributorAutorizzato.class))
+                            user.setPunteggio(user.getPunteggio()+1);
                         exit = true;
                     }
                 } else{
@@ -117,6 +133,9 @@ public class ClsMenuContributor implements IMenu{
                     in.nextLine();
                 }
             }
+        } else {
+            println("Non ci sono nodi presenti nella Piattaforma");
+            in.nextLine();
         }
     }
 
@@ -125,10 +144,17 @@ public class ClsMenuContributor implements IMenu{
      */
 
     public void menuInserisciItinerario(){
-        ClsItinerario itinerario = Input.richiediItinerario();
-        if(user.getClass()!=ClsContributor.class)
-            itinerario.setIdCreatore(user.getId());
-        user.inserisciItinerario(itinerario);
+        if(user.getAllNodi().size()>=2) {
+            ClsItinerario itinerario = Input.richiediItinerario();
+            if (user.getClass() != ClsContributor.class)
+                itinerario.setIdCreatore(user.getId());
+            user.inserisciItinerario(itinerario);
+            if(user.getClass().equals(ClsContributorAutorizzato.class))
+                user.setPunteggio(user.getPunteggio()+1);
+        } else {
+            println("Nella piattaforma non sono presenti abbastanza nodi. Impossibile aggiungere un itinerario.");
+            in.nextLine();
+        }
     }
 
     /**
@@ -148,6 +174,8 @@ public class ClsMenuContributor implements IMenu{
                 if (itinerario != null) {
                     ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
                     user.modificaItinerario(nuovo, itinerario.getId());
+                    if(user.getClass().equals(ClsContributorAutorizzato.class))
+                        user.setPunteggio(user.getPunteggio()+1);
                     println("Richiesta di modifica effettuata correttamente.");
                     in.nextLine();
                     exit = true;
@@ -292,6 +320,8 @@ public class ClsMenuContributor implements IMenu{
                 ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
                 if (itinerario != null) {
                     user.eliminaItinerario(itinerario.getId());
+                    if(user.getClass().equals(ClsContributorAutorizzato.class))
+                        user.setPunteggio(user.getPunteggio()+1);
                     println("Richiesta di eliminazione effettuata.");
                     exit = true;
                 } else println("Errore. Riprova");

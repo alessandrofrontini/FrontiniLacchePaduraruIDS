@@ -83,35 +83,45 @@ public class ClsMenuCuratore implements IMenu{
      */
 
     public void menuVisualizzaRichieste(){
-        println("1) richieste dei nodi\n2) richieste itinerari\n3) Richieste Immagini\n0) esci");
-        String input = in.nextLine();
-        if(Objects.equals(input, "1")){
-            List<ClsRDCNodo> richieste =user.getRDCNodoPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
-            if(!richieste.isEmpty()) {
-                for (ClsRDCNodo r : richieste) {
-                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: nodo");
+            println("1) richieste dei nodi\n2) richieste itinerari\n3) Richieste Immagini\n0) esci");
+            String input = in.nextLine();
+            if (Objects.equals(input, "1")) {
+                List<ClsRDCNodo> richieste = user.getRDCNodoPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
+                if(!richieste.isEmpty()) {
+                    for (ClsRDCNodo r : richieste) {
+                        println("richiesta n. " + r.getIdRichiesta() + ", tipologia: nodo");
+                    }
+                        sottomenuRichieste(1);
+                } else{
+                    println("Non sono presenti richieste di nodi nella Piattaforma.");
+                    in.nextLine();
                 }
-                sottomenuRichieste(1);
-            }
-        }
-        else if(Objects.equals(input, "2")){
-            List<ClsRdcItinerario> richieste = user.getRDCItinerarioPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
-            if(!richieste.isEmpty()) {
-                for (ClsRdcItinerario r : richieste) {
-                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: itinerario");
+            } else if (Objects.equals(input, "2")) {
+                List<ClsRdcItinerario> richieste = user.getRDCItinerarioPossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
+                    if (!richieste.isEmpty()) {
+                        for (ClsRdcItinerario r : richieste) {
+                            println("richiesta n. " + r.getIdRichiesta() + ", tipologia: itinerario");
+                        }
+                        sottomenuRichieste(2);
+                    }
+                 else {
+                    println("Non sono presenti richieste di itinerari nella Piattaforma.");
+                    in.nextLine();
                 }
-                sottomenuRichieste(2);
-            }
-        }
-        else{
-            List<ClsRDCImmagine> richieste = user.getRDCImmaginePossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
-            if(!richieste.isEmpty()){
-                for(ClsRDCImmagine r:richieste){
-                    println("richiesta n. " + r.getIdRichiesta() + ", tipologia: immagine");
+            } else {
+                    List<ClsRDCImmagine> richieste = user.getRDCImmaginePossessoreCur().stream().filter(rdc -> rdc.getStato() == EStatusRDC.NUOVO).toList();
+                    if (!richieste.isEmpty()) {
+                        for (ClsRDCImmagine r : richieste) {
+                            println("richiesta n. " + r.getIdRichiesta() + ", tipologia: immagine");
+                        }
+                        sottomenuRichieste(3);
+                    }
+                 else {
+                    println("Non sono presenti richieste di immagini nella Piattaforma.");
+                    in.nextLine();
                 }
             }
-            sottomenuRichieste(3);
-        }
+
     }
     /**
      * Il metodo mette a disposizione un pannello in cui l'utente, dopo aver visualizzato l'elenco delle richieste, seleziona una richiesta e sceglie se validarla o meno.
@@ -174,6 +184,7 @@ public class ClsMenuCuratore implements IMenu{
                         else{
                             user.rifiutaRichiestaNodo(r.getIdRichiesta());
                             println("Richiesta rifiutata");
+                            exit = true;
                         }
                     }
                     else println("Richiesta non esistente. Riprova.");
@@ -195,6 +206,7 @@ public class ClsMenuCuratore implements IMenu{
                             user.rifiutaRichiestaImmagine(Long.parseLong(idr));
                             exit = true;
                             println("Richiesta rifiutata");
+                            exit = true;
                         }
                     }
                     else println("Richiesta non esistente. Riprova.");

@@ -1,6 +1,7 @@
 package com.camerino.cli.mock;
 
 import com.camerino.cli.loggers.ClsConsoleLogger;
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utils.Posizione;
@@ -108,7 +109,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
                 }
                 if(comuniFile.length()>1) {
                     String comuniTotal = String.valueOf(comuniFile);
-                    String[] comuniACapo = comuniTotal.split("\n");
+                    String[] comuniACapo = Input.removeCarriageReturn(comuniTotal.split("\n"));
                     for (String comune : comuniACapo) {
                         ClsComune daAggiungere = new ClsComune();
                         String[] dati = comune.split(",");

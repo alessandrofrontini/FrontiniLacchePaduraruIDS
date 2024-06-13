@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.contenuti.ClsImmagine;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -73,7 +74,7 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
                     file.append((char) c);
                 }
                 if(file.length()>1) {
-                    String[] immagini = String.valueOf(file).split("\n");
+                    String[] immagini = Input.removeCarriageReturn(String.valueOf(file).split("\n"));
                     for (String immagine : immagini) {
                         String[] dati = immagine.split(",");
                         ClsImmagine daInserire = new ClsImmagine();

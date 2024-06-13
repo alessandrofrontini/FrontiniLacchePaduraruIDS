@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.utenti.*;
 import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -108,7 +109,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
                 while ((c = input.read()) != -1) {
                     tutti.append((char) c);
                 }
-                String[] utenti = String.valueOf(tutti).split("\n");
+                String[] utenti = Input.removeCarriageReturn(String.valueOf(tutti).split("\n"));
                 for (String utente : utenti) {
                     ClsTuristaAutenticato daAggiungere = null;
                     String[] dati = utente.split(",");

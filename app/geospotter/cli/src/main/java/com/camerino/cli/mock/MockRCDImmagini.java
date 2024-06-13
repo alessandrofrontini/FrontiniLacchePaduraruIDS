@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
@@ -39,6 +40,9 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
                     immagine.setIdCreatore(rdcImm.getCreatore().getId());
                     rdcImm.setStato(EStatusRDC.ACCETTATO);
                     MockLocator.getMockImmagini().insert(immagine);
+                    rdcImm.getCreatore().setPunteggio(rdcImm.getCreatore().getPunteggio()+1);
+                } else {
+                    rdcImm.setStato(EStatusRDC.RIFUTATO);
                 }
             }
         }
@@ -104,7 +108,7 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
                 }
                 if (tutti.length() > 1) {
                     String rcdstutti = String.valueOf(tutti);
-                    String[] rcds = rcdstutti.split("\n");
+                    String[] rcds = Input.removeCarriageReturn(rcdstutti.split("\n"));
                     if (!Objects.equals(rcds[0], "")) {
                         for (String s : rcds) {
                             String[] dati = s.split(",");

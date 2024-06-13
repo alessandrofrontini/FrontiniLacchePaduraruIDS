@@ -60,12 +60,18 @@ public class ClsMenuTuristaAutenticato implements IMenu {
      */
 
     public void menuInserisciRecensione() {
-        ClsRecensione recensione = Input.inserisciRecensione();
-        if(recensione != null) {
-            recensione.setIdCreatore(user.getId());
-            user.inserisciRecensione(recensione);
+        if(!user.getAllNodi().isEmpty()) {
+            ClsRecensione recensione = Input.inserisciRecensione();
+            if (recensione != null) {
+                recensione.setIdCreatore(user.getId());
+                user.inserisciRecensione(recensione);
+                user.setPunteggio(user.getPunteggio()+1);
+            } else ClsConsoleLogger.println("Errore. Riprova.");
         }
-        else ClsConsoleLogger.println("Errore. Riprova.");
+        else{
+            println("Nella piattaforma non sono presenti nodi. Impossibile aggiungere una recensione.");
+            in.nextLine();
+        }
     }
 
     /**
@@ -74,7 +80,7 @@ public class ClsMenuTuristaAutenticato implements IMenu {
      * Se l'utente non ha ancora inserito recensioni verrà stampato un messaggio e le modifiche non saranno consentite.
      */
     public void menuModificaRecensione() {
-        if(user.getRecensioniPosessore() != null) {
+        if(!user.getRecensioniPosessore().isEmpty()) {
             for (ClsRecensione r : user.getRecensioniPosessore()) {
                 println(r.visualizzaRecensione());
             }
@@ -119,20 +125,24 @@ public class ClsMenuTuristaAutenticato implements IMenu {
      * Se il nodo inserito non è presente nella piattaforma viene comunicato all'utente.
      */
     public void menuInserisciFoto() {
-        print("inserisci l'id del nodo a cui vuoi aggiungere una foto:");
-        String contenuto = in.nextLine();
-        if(checkValore(contenuto, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
-            boolean exit = false;
-            while (!exit) {
-                println("1) Inserisci Foto");
-                println("0) Esci");
-                switch (in.nextLine()) {
-                    case "1" -> inserisciFotoContenuto(contenuto);
-                    case "0" -> exit = true;
+        if(!user.getAllNodi().isEmpty()) {
+            print("inserisci l'id del nodo a cui vuoi aggiungere una foto:");
+            String contenuto = in.nextLine();
+            if (checkValore(contenuto, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
+                boolean exit = false;
+                while (!exit) {
+                    println("1) Inserisci Foto");
+                    println("0) Esci");
+                    switch (in.nextLine()) {
+                        case "1" -> inserisciFotoContenuto(contenuto);
+                        case "0" -> exit = true;
+                    }
                 }
-            }
+            } else println("Il nodo non esiste. Riprova");
+        } else {
+            println("Nella piattaforma non sono presenti nodi. Impossibile aggiungere una recensione.");
+            in.nextLine();
         }
-        else println("Il nodo non esiste. Riprova");
     }
 
     /**
@@ -140,12 +150,17 @@ public class ClsMenuTuristaAutenticato implements IMenu {
      * @param idContenuto
      */
     public void inserisciFotoContenuto(String idContenuto){
-        ClsImmagine immagine = new ClsImmagine();
-        immagine.setIdNodoAssociato(Long.valueOf(idContenuto));
-        immagine.setIdCreatore(user.getId());
-        println("Inserisci l'URL dell'immagine");
-        immagine.setURL(in.nextLine());
-        ClsRDCImmagine rdcImmagine = new ClsRDCImmagine(null, immagine);
-        user.postRDCImmagine(rdcImmagine);
+        if(!user.getAllNodi().isEmpty()) {
+            ClsImmagine immagine = new ClsImmagine();
+            immagine.setIdNodoAssociato(Long.valueOf(idContenuto));
+            immagine.setIdCreatore(user.getId());
+            println("Inserisci l'URL dell'immagine");
+            immagine.setURL(in.nextLine());
+            ClsRDCImmagine rdcImmagine = new ClsRDCImmagine(null, immagine);
+            user.postRDCImmagine(rdcImmagine);
+        } else {
+            println("Nella piattaforma non sono presenti nodi. Impossibile aggiungere una recensione.");
+            in.nextLine();
+        }
     }
 }

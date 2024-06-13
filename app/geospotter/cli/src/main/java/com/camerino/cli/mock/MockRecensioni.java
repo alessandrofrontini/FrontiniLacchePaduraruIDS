@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.contenuti.ClsRecensione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -97,7 +98,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
                 }
                 if(tutte.length()>1) {
                     String tutteRecensioni = String.valueOf(tutte);
-                    String[] recensioni = tutteRecensioni.split("\n");
+                    String[] recensioni = Input.removeCarriageReturn(tutteRecensioni.split("\n"));
                     for (String recensione : recensioni) {
                         String[] dati = recensione.split(",");
                         ClsRecensione nuova = new ClsRecensione();

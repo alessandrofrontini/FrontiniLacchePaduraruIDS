@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.azioni.EAzioniDiContribuzione;
@@ -60,6 +61,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                             break;
                         }
                     }
+                    rdcIt.getCreatore().setPunteggio(rdcIt.getCreatore().getPunteggio()+2);
                 }
                 else rdcIt.setStato(EStatusRDC.RIFUTATO);
             }
@@ -147,7 +149,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
                 }
                 if(tutti.length()>1){
 
-                    String[] acapo = String.valueOf(tutti).split("\n");
+                    String[] acapo = Input.removeCarriageReturn(String.valueOf(tutti).split("\n"));
                     for (String richiesta : acapo) {
                         HashMap<String, Object> filtro = new HashMap<>();
                         String[] dati = richiesta.split(",");

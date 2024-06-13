@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.azioni.ClsRDCImmagine;
 import com.camerino.ids.core.data.azioni.ClsRdcItinerario;
 import com.camerino.ids.core.data.azioni.ClsRDCNodo;
@@ -115,7 +116,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
                     }
                     if(nodiFile.length()>1) {
                         String tuttiNodi = String.valueOf(nodiFile);
-                        String[] nodiSingoli = tuttiNodi.split("\n");
+                        String[] nodiSingoli = Input.removeCarriageReturn(tuttiNodi.split("\n"));
                         for (String nodoSingolo : nodiSingoli) {
                             ClsNodo daAggiungere = new ClsNodo();
                             String[] datiNodo = nodoSingolo.split(",");

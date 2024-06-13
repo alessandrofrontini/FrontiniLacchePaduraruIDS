@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.persistence.IPersistenceModel;
@@ -104,7 +105,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
                     tutti.append((char) c);
                 }
                 if(tutti.length()>1){
-                    String [] acapo = String.valueOf(tutti).split("\n");
+                    String [] acapo = Input.removeCarriageReturn(String.valueOf(tutti).split("\n"));
                     for(String itinerario:acapo){
                         ClsItinerario daAggiungere = new ClsItinerario();
                         String [] dati = itinerario.split(",");

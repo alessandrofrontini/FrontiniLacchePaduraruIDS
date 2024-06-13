@@ -1,5 +1,6 @@
 package com.camerino.cli.mock;
 
+import com.camerino.cli.menu.Input;
 import com.camerino.ids.core.data.segnalazioni.ClsSegnalazione;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 
@@ -100,7 +101,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
                 }
                 if(tutte.length()>1) {
                     String tuttesegnalazioni = String.valueOf(tutte);
-                    String[] segnalazioni = tuttesegnalazioni.split("\n");
+                    String[] segnalazioni = Input.removeCarriageReturn(tuttesegnalazioni.split("\n"));
                     for (String segnalazione : segnalazioni) {
                         String[] dati = segnalazione.split(",");
                         ClsSegnalazione daAggiungere = new ClsSegnalazione();
