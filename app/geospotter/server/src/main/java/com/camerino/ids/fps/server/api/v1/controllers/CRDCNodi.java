@@ -22,12 +22,17 @@ public class CRDCNodi {
     @GetMapping(mapping)
     public ResponseEntity<List<ClsRDCNodo>> getRDC(
             @RequestParam(value = "idRDC", required = false) Long idRDC,
-            @RequestParam(value = "idUtente", required = false) Long idUtente
+            @RequestParam(value = "idUtente", required = false) Long idUtente,
+            @RequestParam(value = "onlyContest", required = false) Boolean onlyContest
     ) {
         if (idRDC != null)
             return ResponseEntity.ok(sRDCnodi.getRDCNodiById(idRDC));
-        if (idUtente != null)
-            return ResponseEntity.ok(sRDCnodi.getRDCNodiCur());
+        if(idUtente!=null)
+        {
+            if (onlyContest!=null)
+                return ResponseEntity.ok(sRDCnodi.GetRDCNodiPosessore());
+            return ResponseEntity.ok(sRDCnodi.GetRDCNodiPosessoreCur());
+        }
         return ResponseEntity.ok(sRDCnodi.getAllRDCNodi());
     }
 

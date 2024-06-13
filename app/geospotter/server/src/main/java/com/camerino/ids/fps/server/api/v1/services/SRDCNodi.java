@@ -107,9 +107,12 @@ public class SRDCNodi {
         return true;
     }
 
-    public List<ClsRDCNodo> getRDCNodiCur() {
-        ClsCuratore user = (ClsCuratore) request.getServletContext().getAttribute("user");
-        return user.getRDCNodiPosessoreCur();
+    public List<ClsRDCNodo> GetRDCNodiPosessore() {
+        return ((ClsAnimatore)request.getServletContext().getAttribute("user")).GetRDCNodoPosessore();
+    }
+
+    public List<ClsRDCNodo> GetRDCNodiPosessoreCur() {
+        return ((ClsCuratore)request.getServletContext().getAttribute("user")).getRDCNodiPosessoreCur();
     }
 }
 
