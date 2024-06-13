@@ -113,8 +113,8 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         //region Combobox Scelta Immagini dettaglio
         ObservableList<String> itemss = FXCollections.observableArrayList();
 
-        for (int i = 0; i < richiesteNodo.size(); i++) {
-            itemss.add(richiesteNodo.get(i).getIdRichiesta().toString());
+        for (int i = 0; i < richiesteImmagini.size(); i++) {
+            itemss.add(richiesteImmagini.get(i).getIdRichiesta().toString());
         }
 
         this.selezionaElementoDettaglioImmagine.setItems(itemss);
@@ -263,13 +263,13 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         {
             Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioImmagine));
 
-            if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (true) {
 
                 for (int i = 0; i < richiesteImmagini.size(); i++) {
                     if (IDDaVisualizzare.equals(this.richiesteImmagini.get(i).getIdRichiesta())) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("OK");
-                        alert.setContentText("Vecchi dati:" + richiesteImmagini.get(i).getOldData().visualizzaImmagine() + "\nNuovi Dati:" + richiesteImmagini.get(i).getNewData().visualizzaImmagine());
+                        alert.setContentText("ID: " + richiesteImmagini.get(i).getIdRichiesta() + "\nCreatore:" + richiesteImmagini.get(i).getCreatore().getId());
                         alert.show();
                     }
                 }
@@ -281,7 +281,7 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
                 alert.show();
             }
         }
-        else{
+        else {
             u.alertError();
         }
 
@@ -293,13 +293,13 @@ public class Controller_SezioneContestContribuzioneValidazioneRichieste implemen
         {
             Long IDDaVisualizzare = Long.valueOf(u.getValueFromCombobox(selezionaElementoDettaglioNodo));
 
-            if (this.controllaConformitaID(IDDaVisualizzare)) {
+            if (true) {
 
                 for (int i = 0; i < richiesteNodo.size(); i++) {
                     if (IDDaVisualizzare.equals(this.richiesteNodo.get(i).getIdRichiesta())) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("OK");
-                        alert.setContentText("Vecchi dati:" + richiesteNodo.get(i).getOldData().visualizzaNodo() + "\nNuovi Dati:" + richiesteNodo.get(i).getNewData().visualizzaNodo());
+                        alert.setContentText("ID: " +richiesteNodo.get(i).getIdRichiesta() + "\nCreatore: " + richiesteNodo.get(i).getCreatore().getId() );
                         alert.show();
                     }
                 }

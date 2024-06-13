@@ -92,13 +92,12 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
 
     public void eliminaNodo()
     {
-        if(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != "" && u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID) != null)
-        {
-            Long IDDaEliminare = Long.valueOf(u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID));
+        String IDDaEliminare = u.getValueFromCombobox(this.sezioneEliminazioneNodiComboBoxSceltaNodoID);
 
-            if (IDDaEliminare != null && this.controllaConformitaID(IDDaEliminare)) {
+        if(!Objects.equals(IDDaEliminare, "") && IDDaEliminare != null)
+        {
                 ClsContributor user = (ClsContributor) Controller_SezioneLogin.UTENTE;
-                if (user.eliminaNodo(IDDaEliminare)) {
+                if (user.eliminaNodo(Long.valueOf(IDDaEliminare))) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle(IDDaEliminare.toString());
                     alert.setContentText("Eliminato!");
@@ -106,9 +105,7 @@ public class Controller_SezioneEliminazioneNodi implements Initializable {
                 } else {
                     u.alertError();
                 }
-            } else {
-               u.alertError();
-            }
+
         }
         else {
             u.alertError();
