@@ -3,6 +3,8 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsComune;
 import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsGDP;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
+import com.camerino.ids.core.data.utils.Credenziali;
 import com.camerino.ids.core.data.utils.Posizione;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsCuratoreVisual;
@@ -42,14 +44,14 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+        curatori = this.parseValidCuratori(((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE)
                 .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
                     return tmp;
-                }).toList();*/
-
-        curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getFreeCuratori();
+                }).toList());
+        
+//        curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getFreeCuratori();
 
         setCuratori(curatori);
 
@@ -184,6 +186,19 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
             }
         }
 
+        return tmp;
+    }
+
+    private List<ClsCuratore> parseValidCuratori (List <ClsCuratore> listaGrezza)
+    {
+        List<ClsCuratore> tmp = new ArrayList<>();
+        for(int i = 0; i < listaGrezza.size(); i++)
+        {
+            if(listaGrezza.get(i).getIdComuneAssociato() == null)
+            {
+                tmp.add(listaGrezza.get(i));
+            }
+        }
         return tmp;
     }
 }
