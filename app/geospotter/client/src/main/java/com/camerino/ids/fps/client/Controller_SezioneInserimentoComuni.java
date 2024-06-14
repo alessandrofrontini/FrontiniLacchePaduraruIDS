@@ -43,14 +43,32 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
     Utils u = new Utils();
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+        curatori = new ArrayList<>();
+
         curatori = this.parseValidCuratori(((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE)
                 .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
                     return tmp;
                 }).toList());
+
+        //test
+        ClsCuratore testNonLoVedi = new ClsCuratore();
+        testNonLoVedi.setId(10L);
+        testNonLoVedi.setIdComuneAssociato(4L);
+        curatori.add(testNonLoVedi);
+
+        ClsCuratore testLoVedi = new ClsCuratore();
+        testLoVedi.setId(10L);
+        curatori.add(testLoVedi);
+        //test
         
+        curatori = this.parseValidCuratori(curatori);
+
+
+
 //        curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getFreeCuratori();
 
         setCuratori(curatori);
@@ -191,6 +209,8 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
 
     private List<ClsCuratore> parseValidCuratori (List <ClsCuratore> listaGrezza)
     {
+
+
         List<ClsCuratore> tmp = new ArrayList<>();
         for(int i = 0; i < listaGrezza.size(); i++)
         {
