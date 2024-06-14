@@ -79,7 +79,7 @@ public class DemoUtenti {
 
         cur.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
         cur.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE.getValue());
-        cur.setIdComuneAssociato(1L);
+        //cur.setIdComuneAssociato(1L);
 
         utenti.add(cur);
 

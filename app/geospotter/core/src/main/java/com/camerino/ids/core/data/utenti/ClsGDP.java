@@ -92,5 +92,13 @@ public class ClsGDP extends ClsCuratore implements IAzioniGDP {
         filters.put("ruolo", eRUOLI_UTENTE.CURATORE);
         return iperUtenti.get(filters);
     }
+
+    @Override
+    public List<ClsCuratore> getFreeCuratori() {
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("freeCurartori", true);
+        return  iperUtenti.get(filters).stream().map(tur->(ClsCuratore) tur).toList();
+    }
+
 //endregion
 }

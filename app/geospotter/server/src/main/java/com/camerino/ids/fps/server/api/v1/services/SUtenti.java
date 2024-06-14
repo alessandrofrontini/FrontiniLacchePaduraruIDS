@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.server.api.v1.services;
 
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsGDP;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,5 +25,9 @@ public class SUtenti {
 
     public List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE ruolo) {
         return ((ClsGDP) request.getServletContext().getAttribute("user")).getUtentiByRuolo(ruolo);
+    }
+
+    public List<ClsCuratore> getFreeCuratori() {
+        return ((ClsGDP) request.getServletContext().getAttribute("user")).getFreeCuratori();
     }
 }

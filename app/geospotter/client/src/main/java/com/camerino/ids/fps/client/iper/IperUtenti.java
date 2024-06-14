@@ -21,8 +21,9 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato> {
             return api.Get(Controller_SezioneLogin.UTENTE, null);
         if (filters.containsKey("ruolo"))
             return api.Get(Controller_SezioneLogin.UTENTE, "ruolo=" + filters.get("ruolo"));
-        return api.Get(
-                Controller_SezioneLogin.UTENTE, null);
+        if(filters.containsKey("freeCurartori"))
+            return api.Get(Controller_SezioneLogin.UTENTE, "freeCurartori=true");
+        return api.Get(Controller_SezioneLogin.UTENTE, null);
     }
 
     @Override

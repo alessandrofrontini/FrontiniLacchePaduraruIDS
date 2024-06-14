@@ -28,7 +28,9 @@ public class IperUtenti implements IPersistenceModel<ClsTuristaAutenticato> {
         if (filters == null)
             return new ArrayList<>(repoUtenti.findAll());
         if (filters.containsKey("ruolo"))
-            return new ArrayList<>(repoUtenti.findByRuolo((eRUOLI_UTENTE) filters.get("ruolo")));
+            return repoUtenti.findByRuolo((eRUOLI_UTENTE) filters.get("ruolo"));
+        if(filters.containsKey("freeCurartori"))
+            return repoUtenti.getFreeCuratori();
         return new ArrayList<>(repoUtenti.findAll());
     }
 

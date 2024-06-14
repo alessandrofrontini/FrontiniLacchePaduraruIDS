@@ -13,4 +13,6 @@ public interface IAzioniGDP {
     List<ClsCuratore> getAllCuratori();
     @JsonIgnore
     List<ClsTuristaAutenticato> getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE ruolo);
+    @JsonIgnore
+    List<ClsCuratore> getFreeCuratori();
 }

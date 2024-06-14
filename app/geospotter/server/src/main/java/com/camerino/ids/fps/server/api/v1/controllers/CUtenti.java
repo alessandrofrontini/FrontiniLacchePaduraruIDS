@@ -24,10 +24,14 @@ public class CUtenti {
 
     @GetMapping(value = mapping)
     public ResponseEntity<List<ClsTuristaAutenticato>> getUtenti(
-            @RequestParam(value = "ruolo", required = false) eRUOLI_UTENTE ruolo
+            @RequestParam(value = "ruolo", required = false) eRUOLI_UTENTE ruolo,
+            @RequestParam(value = "freeCurartori", required = false) Boolean freeContr
     ) {
         if (ruolo != null)
             return ResponseEntity.ok(sUtenti.getUtentiByRuolo(ruolo));
+        if(freeContr != null)
+            return ResponseEntity.ok(sUtenti.getFreeCuratori().stream()
+                    .map(cur->(ClsTuristaAutenticato)cur).toList());
         return ResponseEntity.ok(sUtenti.getAllUtenti());
     }
 }

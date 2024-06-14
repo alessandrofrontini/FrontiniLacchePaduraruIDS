@@ -24,4 +24,7 @@ public interface RepoUtenti extends JpaRepository<ClsTuristaAutenticato, Long> {
     @Modifying
     @Query("update ClsTuristaAutenticato usr set usr.punteggio=usr.punteggio+?1 where usr.id=?1")
     void incrementaPunteggio(long idUtente, int punteggio);
+
+    @Query("select cur from ClsCuratore cur where cur.idComuneAssociato IS NULL ")
+    List<ClsTuristaAutenticato> getFreeCuratori();
 }
