@@ -12,8 +12,8 @@ public interface RepoRDCNodi extends JpaRepository<ClsRDCNodo, Long> {
             , nativeQuery = true)
     List<ClsRDCNodo> findRDCNodiByUtente(Long idUtente);
     //Ritorna le RDC che non fanno parte di un contest e che sono del comune del curatore richiedente
-    @Query(value = "SELECT * FROM clsrdcnodo WHERE id_contest_appartenenza_id IS NULL AND (new_data_id in ( SELECT id FROM cls_nodo WHERE id_comune_associato in (SELECT id_comune_associato FROM cls_turista_autenticato WHERE id=4) ) \n" +
-            "OR old_data_id  in (SELECT id FROM cls_nodo WHERE id_comune_associato in (SELECT id_comune_associato FROM cls_turista_autenticato WHERE id=4)));"
+    @Query(value = "SELECT * FROM clsrdcnodo WHERE id_contest_appartenenza_id IS NULL AND (new_data_id in ( SELECT id FROM cls_nodo WHERE id_comune_associato in (SELECT id_comune_associato FROM cls_turista_autenticato WHERE id=?1) ) \n" +
+            "OR old_data_id  in (SELECT id FROM cls_nodo WHERE id_comune_associato in (SELECT id_comune_associato FROM cls_turista_autenticato WHERE id=?1)));"
             , nativeQuery = true)
     List<ClsRDCNodo> findRDCNodiByUtenteCur(Long idUtente);
 }
