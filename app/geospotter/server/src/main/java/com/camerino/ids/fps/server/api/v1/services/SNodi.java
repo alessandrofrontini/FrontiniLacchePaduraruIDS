@@ -49,13 +49,15 @@ public class SNodi {
         if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(nodo.getPosizione()))!=0)
             return false;
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(user.getId(), 1);
+        if(user.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.inserisciNodo(nodo);
     }
 
     public boolean deleteNodoById(Long idNodo) {
         ClsContributor cont = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(cont.getId(), 1);
+        if(cont.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(cont.getId(), 1);
         return cont.deleteNodo(idNodo);
     }
 
@@ -63,7 +65,8 @@ public class SNodi {
         if(repoNodi.countNodiOnSamePosition(convPosizione.convertToDatabaseColumn(nodo.getPosizione()))!=0)
             return false;
         ClsContributor cont = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(cont.getId(), 1);
+        if(cont.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(cont.getId(), 1);
         return cont.modificaNodo(nodo.getId(), nodo);
     }
 

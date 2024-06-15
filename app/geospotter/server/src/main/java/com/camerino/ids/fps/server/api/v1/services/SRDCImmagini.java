@@ -70,7 +70,8 @@ public class SRDCImmagini {
                 //Basta cancellare la RDC
             }break;
         }
-        if(rdc.getIdContestAppartenenza()!=null)
+
+        if(rdc.getCreatore().getPunteggio()<Integer.MAX_VALUE-2)
             repoUtenti.incrementaPunteggio(rdc.getCreatore().getId(), 2);
         return true;
     }

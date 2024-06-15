@@ -32,7 +32,8 @@ public class SRecensioni {
 
     public boolean postRecensione(ClsRecensione recensione) {
         ClsTuristaAutenticato usr = (ClsTuristaAutenticato) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(usr.getId(), 1);
+        if(usr.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(usr.getId(), 1);
         return (usr).pubblicaRecensione(recensione);
     }
 

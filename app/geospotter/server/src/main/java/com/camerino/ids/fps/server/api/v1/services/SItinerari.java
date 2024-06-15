@@ -47,7 +47,8 @@ public class SItinerari {
             return false;
 
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(user.getId(), 1);
+        if(user.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.inserisciItinerario(itinerario);
     }
 
@@ -60,13 +61,15 @@ public class SItinerari {
             return false;
 
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(user.getId(), 1);
+        if(user.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.modificaItinerario(itinerario, itinerario.getId());
     }
 
     public boolean deleteItinerario(Long idItinerario) {
         ClsContributor user = (ClsContributor) request.getServletContext().getAttribute("user");
-        repoUtenti.incrementaPunteggio(user.getId(), 1);
+        if(user.getPunteggio()<Integer.MAX_VALUE-2)
+            repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.eliminaItinerario(idItinerario);
     }
 }
