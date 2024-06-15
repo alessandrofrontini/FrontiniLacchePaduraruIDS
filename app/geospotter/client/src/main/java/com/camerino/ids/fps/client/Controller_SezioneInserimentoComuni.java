@@ -64,7 +64,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
         testLoVedi.setId(10L);
         curatori.add(testLoVedi);
         //test
-        
+
         curatori = this.parseValidCuratori(curatori);
 
 

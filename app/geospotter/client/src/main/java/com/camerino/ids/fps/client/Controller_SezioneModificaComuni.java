@@ -70,12 +70,31 @@ public class Controller_SezioneModificaComuni implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.Curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CONTRIBUTOR)
+        Curatori = new ArrayList<>();
+
+        Curatori = this.parseValidCuratori(((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE)
                 .stream().map(u -> {
                     ClsCuratore tmp = new ClsCuratore();
                     tmp.setId(u.getId());
                     return tmp;
-                }).toList();
+                }).toList());
+
+        //test
+        ClsCuratore testNonLoVedi = new ClsCuratore();
+        testNonLoVedi.setId(10L);
+        testNonLoVedi.setIdComuneAssociato(4L);
+        Curatori.add(testNonLoVedi);
+
+        ClsCuratore testLoVedi = new ClsCuratore();
+        testLoVedi.setId(10L);
+        Curatori.add(testLoVedi);
+        //test
+
+        Curatori = this.parseValidCuratori(Curatori);
+
+
+
+
         this.comuni = Controller_SezioneLogin.UTENTE.getAllComuni();
 
         this.setComuni(comuni);
@@ -261,6 +280,21 @@ public class Controller_SezioneModificaComuni implements Initializable {
                 this.superficieTF.setText(c.getSuperficie().toString());
             }
         }
+    }
+
+    private List<ClsCuratore> parseValidCuratori (List <ClsCuratore> listaGrezza)
+    {
+
+
+        List<ClsCuratore> tmp = new ArrayList<>();
+        for(int i = 0; i < listaGrezza.size(); i++)
+        {
+            if(listaGrezza.get(i).getIdComuneAssociato() == null)
+            {
+                tmp.add(listaGrezza.get(i));
+            }
+        }
+        return tmp;
     }
 
 
