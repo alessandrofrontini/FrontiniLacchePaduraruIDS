@@ -15,6 +15,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
 
     ArrayList<ClsRdcItinerario> rcdi = new ArrayList<>();
@@ -116,7 +118,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
     }
     public void scriviRCDItinerari(){
         try{
-            FileWriter output = new FileWriter("CLIsave/rcdi.csv");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/rcdi.csv"));
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRdcItinerario r:rcdi){
                 daScrivere.append(r.getTipo() +","+ r.getIdRichiesta() + "," + r.getCreatore().getId()+ ",");
@@ -138,7 +140,7 @@ public class MockRCDItinerari implements IPersistenceModel<ClsRdcItinerario> {
     }
 
     public void leggiRCDItinerari(){
-        File f = new File("CLIsave/rcdi.csv");
+        File f = getResourceAsFile("CLIsave/rcdi.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);

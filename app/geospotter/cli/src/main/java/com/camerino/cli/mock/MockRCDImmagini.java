@@ -14,6 +14,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
     ArrayList<ClsRDCImmagine> rcdi = new ArrayList<>();
     long idCounter = 0;
@@ -97,7 +99,7 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
     }
 
     public void LeggiRCDImmagini(){
-        File f = new File("CLIsave/rcdimmagini.csv");
+        File f = getResourceAsFile("CLIsave/rcdimmagini.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -136,7 +138,7 @@ public class MockRCDImmagini implements IPersistenceModel<ClsRDCImmagine> {
     }
     public void ScriviRCDImmagini(){
         try {
-            FileWriter output = new FileWriter("CLIsave/rcdimmagini.csv");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/rcdimmagini.csv"));
             StringBuilder daScrivere = new StringBuilder();
             for (ClsRDCImmagine r : rcdi) {
                 ClsImmagine i = r.getNewData();

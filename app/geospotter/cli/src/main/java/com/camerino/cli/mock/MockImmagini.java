@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 
 public class MockImmagini implements IPersistenceModel<ClsImmagine>
 {
@@ -64,7 +66,7 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     //endregion
 
     public void leggiImmagini(){
-        File f = new File("CLIsave/immagini.csv");
+        File f = getResourceAsFile("CLIsave/immagini.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -99,7 +101,7 @@ public class MockImmagini implements IPersistenceModel<ClsImmagine>
     }
     public void scriviImmagini(){
         try{
-            FileWriter output = new FileWriter("CLIsave/immagini.csv");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/immagini.csv"));
             StringBuilder daScrivere = new StringBuilder();
             for(ClsImmagine i:immagini){
                 daScrivere.append(i.getId() + "," + i.getIdNodoAssociato() + "," + i.getIdCreatore() + "," + i.getURL() + "\n");

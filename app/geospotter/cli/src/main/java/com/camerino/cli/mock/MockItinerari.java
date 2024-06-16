@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 public class MockItinerari implements IPersistenceModel<ClsItinerario> {
 
     private ArrayList<ClsItinerario> itinerari = new ArrayList<ClsItinerario>();
@@ -93,7 +95,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     //endregion
 
     public void leggiItinerari(){
-        File f = new File("CLIsave/itinerari.csv");
+        File f = getResourceAsFile("CLIsave/itinerari.csv");
         if(f.exists()){
             try{
                 FileReader input = new FileReader(f);
@@ -129,7 +131,7 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
     public void scriviItinerari(){
         try {
-            FileWriter output = new FileWriter("CLIsave/itinerari.csv");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/itinerari.csv"));
             StringBuilder daScrivere = new StringBuilder();
             for(ClsItinerario i:itinerari){
                 daScrivere.append(i.getId() + ",");

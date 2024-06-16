@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 
 public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
 {
@@ -90,7 +92,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
     }
 
     public void leggiSegnalazioni(){
-        File f = new File("CLIsave/segnalazioni.txt");
+        File f = getResourceAsFile("CLIsave/segnalazioni.txt");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -125,7 +127,7 @@ public class MockSegnalazioni implements IPersistenceModel<ClsSegnalazione>
     }
     public void scriviSegnalazioni(){
         try{
-            FileWriter output = new FileWriter("CLIsave/segnalazioni.txt");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/segnalazioni.txt"));
             StringBuilder daScrivere = new StringBuilder();
             for(ClsSegnalazione s:segnalazioni){
                 output.append(s.getId() + "," + s.getIdContenuto() + "," + s.getDescrizione() + "\n");

@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
     ArrayList<ClsRDCNodo> rcdi = new ArrayList<>();
     long idCounter = 0;
@@ -116,7 +118,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
         return tmp;
     }
     public void leggiRCD(){
-        File f = new File("CLIsave/rcd.csv");
+        File f = getResourceAsFile("CLIsave/rcd.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -173,7 +175,7 @@ public class MockRCDNodi implements IPersistenceModel<ClsRDCNodo> {
 
     public void scriviRCD(){
         try{
-            FileWriter output = new FileWriter("CLIsave/rcd.csv");
+            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/rcd.csv"));
             StringBuilder daScrivere = new StringBuilder();
             for(ClsRDCNodo r:rcdi){
                 daScrivere.append(r.getTipo() + "," + r.getCreatore().getId() + "," + r.getIdRichiesta() + ",");

@@ -18,6 +18,8 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.camerino.cli.CliUtils.getResourceAsFile;
+
 
 public class MockNodi implements IPersistenceModel<ClsNodo> {
 
@@ -105,7 +107,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         //endregion
 
         public void leggiNodi(){
-            File f = new File("CLIsave/nodi.csv");
+            File f = getResourceAsFile("CLIsave/nodi.csv");
             if(f.exists()) {
                 try {
                     FileReader input = new FileReader(f);
@@ -145,7 +147,7 @@ public class MockNodi implements IPersistenceModel<ClsNodo> {
         }
         public void scriviNodi(){
             try{
-                FileWriter output = new FileWriter("CLIsave/nodi.csv");
+                FileWriter output =  new FileWriter(getResourceAsFile("CLIsave/nodi.csv"));
                 StringBuilder daScrivere = new StringBuilder();
                 for(ClsNodo nodo:nodi){
                     daScrivere.append(nodo.getId() + "," + nodo.getIdComuneAssociato() + "," + nodo.isaTempo() + "," + nodo.getDataFine() + "," + nodo.getTipologiaNodo() + "," + nodo.getIdCreatore() + "," + nodo.getNome() + "," + nodo.getPosizione().getY() + "," + nodo.getPosizione().getX() + "\n");
