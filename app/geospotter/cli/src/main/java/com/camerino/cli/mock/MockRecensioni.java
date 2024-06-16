@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.camerino.cli.CliUtils.getResourceAsFile;
-
 
 public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 {
@@ -89,7 +87,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
     }
 
     public void leggiRecensioni(){
-        File f = getResourceAsFile("CLIsave/recensioni.csv");
+        File f = new File("CLIsave/recensioni.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -128,7 +126,7 @@ public class MockRecensioni implements IPersistenceModel<ClsRecensione>
 
     public void scriviRecensioni(){
         try{
-            FileWriter output =  new FileWriter(getResourceAsFile("CLIsave/recensioni.csv"));
+            FileWriter output = new FileWriter("CLIsave/recensioni.csv");
             StringBuilder tutte = new StringBuilder();
             for(ClsRecensione r:recensioni){
                 tutte.append(r.getId() + "," + r.getIdCreatore() + "," + r.getIdNodoAssociato() + "," + r.getValutazione() + "," + r.getOggetto() + "," + r.getContenuto() + "\n");

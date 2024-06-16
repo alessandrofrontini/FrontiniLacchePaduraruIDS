@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
-import static com.camerino.cli.CliUtils.getResourceAsFile;
-
 public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     private ArrayList<ClsTuristaAutenticato> turisti = new ArrayList<ClsTuristaAutenticato>();
@@ -102,7 +100,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
 
     public void leggiUtenti(){
-        File f = getResourceAsFile("CLIsave/turisti.csv");
+        File f = new File("CLIsave/turisti.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -208,7 +206,7 @@ public class MockTuristi implements IPersistenceModel<ClsTuristaAutenticato> {
 
     public void scriviUtenti(){
         try{
-            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/turisti.csv"));
+            FileWriter output = new FileWriter("CLIsave/turisti.csv");
             StringBuilder daScrivere = new StringBuilder();
             for(ClsTuristaAutenticato c:turisti){
                 daScrivere.append(c.getId() + "," + c.getRuoloUtente() + "," + c.getCredenziali().getUsername() + "," + c.getCredenziali().getPassword() + "," + c.getPunteggio());

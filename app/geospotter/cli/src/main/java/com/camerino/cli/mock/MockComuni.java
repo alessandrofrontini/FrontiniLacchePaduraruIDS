@@ -12,8 +12,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.*;
 
-import static com.camerino.cli.CliUtils.getResourceAsFile;
-
 /**
  * Classe che emula molto semplicemente
  */
@@ -100,7 +98,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
 
     public void leggiComuni()
     {
-        File f = getResourceAsFile("CLIsave/comuni.csv");
+        File f = new File("CLIsave/comuni.csv");
         if(f.exists()) {
             try {
                 FileReader input = new FileReader(f);
@@ -151,7 +149,7 @@ public class MockComuni implements IPersistenceModel<ClsComune>
     }
     public void scriviComuni(){
         try {
-            FileWriter output = new FileWriter(getResourceAsFile("CLIsave/comuni.csv"));
+            FileWriter output = new FileWriter("CLIsave/comuni.csv");
             StringBuilder daScrivere = new StringBuilder("");
             for(ClsComune comune:comuni){
                 daScrivere.append(comune.getId() + "," + comune.getNome() + "," + comune.getDescrizione() + "," + comune.getPosizione().getX() + "," + comune.getPosizione().getY() + "," + comune.getAbitanti() + "," + comune.getSuperficie() + ",");
