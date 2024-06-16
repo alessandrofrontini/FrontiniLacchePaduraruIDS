@@ -213,6 +213,8 @@ public class Input {
 
     public static ClsItinerario richiediItinerario() {
         boolean exit = false;
+        boolean exitInput = false;
+        boolean sezione = true;
         ClsItinerario itinerario = new ClsItinerario();
         while (!exit) {
             itinerario.setTappe(new ArrayList<>());
@@ -221,24 +223,35 @@ public class Input {
             String idNodo = "";
             print("E' ordinato (s/n)?: ");
             itinerario.setOrdinato(in.nextLine().charAt(0) == 's');
-            while (!idNodo.equals("0")) {
-                print("Inserisci id del nodo da aggiungere (0 per terminare l'inserimento): ");
+            while (!exitInput) {
+                sezione = true;
+                println("Inserisci id del nodo da aggiungere (0 per terminare l'inserimento): ");
                 idNodo = in.nextLine();
-                if (idNodo.equals("0") && itinerario.getTappe().isEmpty())
-                    print("Non puoi creare un itinerario con 0 tappe");
-                if (idNodo.equals("0") && itinerario.getTappe().size() == 1)
-                    print("Un itinerario deve avere almeno 2 tappe");
-                else if (idNodo.equals("0"))
-                    break;
-                if (checkValore(idNodo, (ArrayList<String>) itinerario.getTappe().stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
-                    println("Tappa già presente. seleziona un altro nodo.");
+                if (idNodo.equals("0") && itinerario.getTappe().isEmpty()) {
+                    println("Non puoi creare un itinerario con 0 tappe");
                     in.nextLine();
-                } else {
-                    if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList())))) {
-                        HashMap<String, Object> filtro = new HashMap<>();
-                        filtro.put("idNodo", idNodo);
-                        itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
-                    } else println("Nodo inesistente. Riprova.");
+                    sezione = false;
+                }
+                if (idNodo.equals("0") && itinerario.getTappe().size() == 1) {
+                    println("Un itinerario deve avere almeno 2 tappe");
+                    in.nextLine();
+                    sezione = false;
+                }
+                if (idNodo.equals("0") && itinerario.getTappe().size() > 1) {
+                    exitInput = true;
+                    sezione = false;
+                }
+                if(sezione) {
+                    if (checkValore(idNodo, (ArrayList<String>) itinerario.getTappe().stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
+                        println("Tappa già presente. seleziona un altro nodo.");
+                        in.nextLine();
+                    } else {
+                        if ((checkValore(idNodo, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList())))) {
+                            HashMap<String, Object> filtro = new HashMap<>();
+                            filtro.put("idNodo", idNodo);
+                            itinerario.getTappe().add(MockLocator.getMockNodi().get(filtro).get(0));
+                        } else println("Nodo inesistente. Riprova.");
+                    }
                 }
             }
             if (checkItinerarioDuplicato(itinerario))
@@ -250,6 +263,7 @@ public class Input {
         }
         return itinerario;
     }
+
 
     public static Credenziali richiediCredenziali() {
         boolean ok = false;

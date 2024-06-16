@@ -46,17 +46,17 @@ public class ClsMenuContributor implements IMenu{
                 println("0) Esci");
                 print(">> ");
                 switch (in.nextLine()) {
-                    case "1" -> menuta.menuInserisciRecensione(); //funziona
-                    case "2" -> menuta.menuModificaRecensione(); //funziona
-                    case "3" -> menuta.menuEliminaRecensione(); //funziona
-                    case "4" -> menuta.menuInserisciFoto(); //funziona
-                    case "5" -> menuInserisciNodo(); //funziona
-                    case "6" -> menuModificaNodo(); //funziona
-                    case "7" -> menuEliminaNodo(); //funziona
-                    case "8" -> menuInserisciItinerario(); //funziona
-                    case "9" -> menuModificaItinerario(); //funziona
-                    case "10" -> menuEliminaItinerario(); //funziona
-                    case "11" -> sottoMenuContest(); //noimpl
+                    case "1" -> menuta.menuInserisciRecensione();
+                    case "2" -> menuta.menuModificaRecensione();
+                    case "3" -> menuta.menuEliminaRecensione();
+                    case "4" -> menuta.menuInserisciFoto();
+                    case "5" -> menuInserisciNodo();
+                    case "6" -> menuModificaNodo();
+                    case "7" -> menuEliminaNodo();
+                    case "8" -> menuInserisciItinerario();
+                    case "9" -> menuModificaItinerario();
+                    case "10" -> menuEliminaItinerario();
+                    case "11" -> sottoMenuContest();
                     case "0" -> exit = true;
                 }
             }
@@ -174,12 +174,14 @@ public class ClsMenuContributor implements IMenu{
                     ClsItinerario itinerario = user.getItinerarioById(Long.parseLong(input)).get(0);
                     if (itinerario != null) {
                         ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
-                        user.modificaItinerario(nuovo, itinerario.getId());
-                        if (user.getClass().equals(ClsContributorAutorizzato.class))
-                            user.setPunteggio(user.getPunteggio() + 1);
-                        println("Richiesta di modifica effettuata correttamente.");
-                        in.nextLine();
-                        exit = true;
+                        if(nuovo != null) {
+                            user.modificaItinerario(nuovo, itinerario.getId());
+                            if (user.getClass().equals(ClsContributorAutorizzato.class))
+                                user.setPunteggio(user.getPunteggio() + 1);
+                            println("Richiesta di modifica effettuata correttamente.");
+                            in.nextLine();
+                        }
+                            exit = true;
                     } else {
                         println("Errore nella richiesta. Riprova.");
                         in.nextLine();
@@ -227,38 +229,48 @@ public class ClsMenuContributor implements IMenu{
                 println("0 - Salva ed esci dal menu");
                 switch (in.nextLine()) {
                     case "1": {
-                        while (!exitSezione) {
-                            print("inserisci l'id della nuova tappa");
-                            input = in.nextLine();
-                            if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
-                                if (controllaTappaDuplicataItinerario(nuovo, Long.valueOf(input))) {
-                                    nuovo.getTappe().add(user.getNodoById(Long.valueOf(input)).get(0));
-                                    exitSezione = true;
-                                    break;
+                        if(user.getAllNodi().size() != nuovo.getTappe().size()) {
+                            while (!exitSezione) {
+                                print("inserisci l'id della nuova tappa");
+                                input = in.nextLine();
+                                if (checkValore(input, (ArrayList<String>) MockLocator.getMockNodi().get(null).stream().map(nodo -> nodo.getId().toString()).collect(Collectors.toList()))) {
+                                    if (controllaTappaDuplicataItinerario(nuovo, Long.valueOf(input))) {
+                                        nuovo.getTappe().add(user.getNodoById(Long.valueOf(input)).get(0));
+                                        exitSezione = true;
+                                        break;
+                                    } else {
+                                        println("Errore.");
+                                        break;
+                                    }
                                 } else {
-                                    println("Errore.");
-                                    break;
+                                    println("Nodo non esistente. Riprova");
+                                    in.nextLine();
                                 }
-                            } else {
-                                println("Nodo non esistente. Riprova");
-                                in.nextLine();
                             }
+                        } else {
+                            println("Non ci sono altri nodi da aggiungere.");
+                            in.nextLine();
                         }
                         break;
                     }
                     case "2": {
-                        for (ClsNodo nodo : nuovo.getTappe()) {
-                            println(nodo.visualizzaNodo());
-                        }
-                        while (!exitSezione) {
+                        if(nuovo.getTappe().size() != 2) {
+                            for (ClsNodo nodo : nuovo.getTappe()) {
+                                println(nodo.visualizzaNodo());
+                            }
+
                             print("Inserisci l'id della tappa da eliminare");
                             String idTappa = in.nextLine();
                             if (!controllaTappaDuplicataItinerario(nuovo, Long.valueOf(idTappa))) {
-                                nuovo.getTappe().remove(user.getNodoById(Long.valueOf(idTappa)).get(0));
-                                exitSezione = true;
+                                println("Tappa rimossa.");
                             } else {
                                 println("Errore.");
                             }
+                            in.nextLine();
+                        }
+                        else {
+                            println("Un itinerario non può avere meno di 2 tappe.");
+                            in.nextLine();
                         }
                         break;
                     }
@@ -280,15 +292,16 @@ public class ClsMenuContributor implements IMenu{
                     }
                 }
             }
-            if (checkItinerarioDuplicato(nuovo)) {
-                fine = true;
-            }
-            else{
-                println("Itinerario già esistente. Riprova");
+            if(!checkItinerarioDuplicato(nuovo)){
+                println("Itinerario già esistente nella piattaforma. Le modifiche non sono state salvate.");
                 in.nextLine();
             }
+            else{
+                return nuovo;
+            }
+            fine = true;
         }
-        return nuovo;
+        return null;
     }
 
     /**
