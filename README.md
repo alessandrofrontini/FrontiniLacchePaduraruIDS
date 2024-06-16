@@ -11,7 +11,7 @@ GeoSpotter è stata pensata, documentata e implementata dal team - _**SPAFAMAT**
 - [Francesco Saverio Lacchè](https://github.com/Mieti3bbia) : francescosave.lacche@studenti.unicam.it (119 067)
 
 Per qualsiasi cosa abbiate bisogno potete contattarci a una delle tre email riportate sopra. <br/>Vi risponderemo appena possibile.
-# Come è strutturato GeoSpotter?
+# Come è strutturato il GeoSpotter?
 ```console
 ├───app
 │   └───geospotter
