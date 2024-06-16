@@ -45,24 +45,17 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        curatori = new ArrayList<>();
-
-        curatori = this.parseValidCuratori(((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE)
-                .stream().map(u -> {
-                    ClsCuratore tmp = new ClsCuratore();
-                    tmp.setId(u.getId());
-                    return tmp;
-                }).toList());
+        curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getFreeCuratori();
 
         //test
-        ClsCuratore testNonLoVedi = new ClsCuratore();
+        /*ClsCuratore testNonLoVedi = new ClsCuratore();
         testNonLoVedi.setId(10L);
         testNonLoVedi.setIdComuneAssociato(4L);
         curatori.add(testNonLoVedi);
 
         ClsCuratore testLoVedi = new ClsCuratore();
         testLoVedi.setId(10L);
-        curatori.add(testLoVedi);
+        curatori.add(testLoVedi);*/
         //test
 
         curatori = this.parseValidCuratori(curatori);
@@ -123,7 +116,7 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
         List<ClsCuratore> tmp = new ArrayList<>();
         for (int i = 0; i < curatori.size(); i++) {
             for (int j = 0; j < idCuratori.length; j++) {
-                if (Objects.equals(curatori.get(i).getId(), idCuratori[j])) {
+                if (Objects.equals(curatori.get(i).getId(), Long.valueOf(idCuratori[j]))) {
                     tmp.add(curatori.get(i));
                 }
             }
@@ -158,7 +151,6 @@ public class Controller_SezioneInserimentoComuni implements Initializable {
     private String[] convertiCuratoriCoinvoltiInArray(String input) {
         String[] tmp = input.split("-");
         String[] nuova = this.pulisciIDnonPresenti(new ArrayList<>(Arrays.asList(tmp)), curatori);
-        ;
         return nuova;
     }
 

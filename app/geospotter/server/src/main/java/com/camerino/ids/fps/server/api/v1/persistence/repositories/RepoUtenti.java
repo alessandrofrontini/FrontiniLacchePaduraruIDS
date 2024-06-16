@@ -1,5 +1,6 @@
 package com.camerino.ids.fps.server.api.v1.persistence.repositories;
 
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato.eRUOLI_UTENTE;
 import com.camerino.ids.core.data.utils.Credenziali;
@@ -25,6 +26,7 @@ public interface RepoUtenti extends JpaRepository<ClsTuristaAutenticato, Long> {
     @Query("update ClsTuristaAutenticato usr set usr.punteggio=usr.punteggio+?1 where usr.id=?1")
     void incrementaPunteggio(long idUtente, int punteggio);
 
-    @Query("select cur from ClsCuratore cur where cur.idComuneAssociato IS NULL ")
+    @Query(value = "SELECT * FROM cls_turista_autenticato WHERE id_comune_associato IS NULL AND dtype='ClsCuratore'"
+    ,nativeQuery = true)
     List<ClsTuristaAutenticato> getFreeCuratori();
 }

@@ -72,22 +72,16 @@ public class Controller_SezioneModificaComuni implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Curatori = new ArrayList<>();
 
-        Curatori = this.parseValidCuratori(((ClsGDP) Controller_SezioneLogin.UTENTE).getUtentiByRuolo(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE)
-                .stream().map(u -> {
-                    ClsCuratore tmp = new ClsCuratore();
-                    tmp.setId(u.getId());
-                    return tmp;
-                }).toList());
-
+        Curatori = ((ClsGDP) Controller_SezioneLogin.UTENTE).getFreeCuratori();
         //test
-        ClsCuratore testNonLoVedi = new ClsCuratore();
+        /*ClsCuratore testNonLoVedi = new ClsCuratore();
         testNonLoVedi.setId(10L);
         testNonLoVedi.setIdComuneAssociato(4L);
         Curatori.add(testNonLoVedi);
 
         ClsCuratore testLoVedi = new ClsCuratore();
         testLoVedi.setId(10L);
-        Curatori.add(testLoVedi);
+        Curatori.add(testLoVedi);*/
         //test
 
         Curatori = this.parseValidCuratori(Curatori);
@@ -224,7 +218,7 @@ public class Controller_SezioneModificaComuni implements Initializable {
                 for (int j = 0; j < curatoriCoinvoltiArray.length; j++) {
                     try
                     {
-                        if (Objects.equals(Curatori.get(i).getId(), Long.valueOf(curatoriCoinvoltiArray[j]))) {
+                        if (Objects.equals(Curatori.get(i).getId().toString(), curatoriCoinvoltiArray[j])) {
                             curatoriAssociatiToComune.add(Curatori.get(i));
                         }
                     }

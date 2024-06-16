@@ -6,7 +6,5 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface RepoComuni extends JpaRepository<ClsComune, Long> {
-    @Modifying
-    @Query("update ClsComune c set c = ?1 WHERE c.id = ?2")
-    void updateComuneById(ClsComune object, Long idComune);
+
 }

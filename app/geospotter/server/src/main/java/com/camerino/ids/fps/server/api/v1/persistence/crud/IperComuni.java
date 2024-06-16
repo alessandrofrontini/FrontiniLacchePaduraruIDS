@@ -1,8 +1,10 @@
 package com.camerino.ids.fps.server.api.v1.persistence.crud;
 
 import com.camerino.ids.core.data.contenuti.ClsComune;
+import com.camerino.ids.core.data.utenti.ClsCuratore;
 import com.camerino.ids.core.persistence.IPersistenceModel;
 import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoComuni;
+import com.camerino.ids.fps.server.api.v1.persistence.repositories.RepoUtenti;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +16,13 @@ import java.util.Map;
 public class IperComuni implements IPersistenceModel<ClsComune> {
 
     RepoComuni repoComuni;
+    RepoUtenti repoUtenti;
 
     @Autowired
-    public IperComuni(final RepoComuni repoComuni) {
+    public IperComuni(final RepoComuni repoComuni,
+                      RepoUtenti repoUtenti) {
         this.repoComuni = repoComuni;
+        this.repoUtenti = repoUtenti;
     }
 
     @Override
@@ -36,13 +41,31 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsComune object) {
+        List<ClsCuratore> vecchiCuratori = repoComuni.findById(object.getId()).get().getCuratoriAssociati();
+        vecchiCuratori.removeAll(object.getCuratoriAssociati());
+        for (ClsCuratore curatore : vecchiCuratori){
+            curatore.setIdComuneAssociato(null);
+        }
+        repoUtenti.saveAll(vecchiCuratori);
+
+        for (ClsCuratore curatore : object.getCuratoriAssociati())
+            curatore.setIdComuneAssociato(object.getId());
+        repoUtenti.saveAll(object.getCuratoriAssociati());
         repoComuni.save(object);
         return true;
     }
 
     @Override
     public boolean insert(ClsComune object) {
-        repoComuni.save(object);
+        object = repoComuni.save(object);
+        List<ClsCuratore> curatori = new ArrayList<>();
+        for (ClsCuratore curatore : object.getCuratoriAssociati()) {
+            ClsCuratore tmp = (ClsCuratore) repoUtenti.findById(curatore.getId()).get();
+            tmp.setIdComuneAssociato(object.getId());
+            curatori.add(tmp);
+        }
+        object.setCuratoriAssociati(curatori);
+        repoUtenti.saveAll(curatori);
         return true;
     }
 
@@ -52,6 +75,10 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
             return false;
         if (!filters.containsKey("idComune"))
             return false;
+        ClsComune comune = repoComuni.findById((Long) filters.get("idComune")).get();
+        for (ClsCuratore curatore : comune.getCuratoriAssociati())
+            curatore.setIdComuneAssociato(null);
+        repoUtenti.saveAll(comune.getCuratoriAssociati());
         repoComuni.deleteById((Long) filters.get("idComune"));
         return true;
     }
