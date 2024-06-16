@@ -13,7 +13,7 @@ import java.util.List;
 public class ClsComune extends ClsContenuto {
     int abitanti;
     double superficie;
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "idComuneAssociato")
     List<ClsCuratore> curatoriAssociati;
 
     //region Getter e setter

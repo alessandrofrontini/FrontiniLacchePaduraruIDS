@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 public class IperComuni implements IPersistenceModel<ClsComune> {
@@ -41,16 +42,25 @@ public class IperComuni implements IPersistenceModel<ClsComune> {
 
     @Override
     public boolean update(Map<String, Object> filters, ClsComune object) {
-        List<ClsCuratore> vecchiCuratori = repoComuni.findById(object.getId()).get().getCuratoriAssociati();
-        vecchiCuratori.removeAll(object.getCuratoriAssociati());
-        for (ClsCuratore curatore : vecchiCuratori){
-            curatore.setIdComuneAssociato(null);
-        }
-        repoUtenti.saveAll(vecchiCuratori);
+        List<ClsCuratore> curatoriVecchi = repoComuni.findById(object.getId()).get().getCuratoriAssociati();
+        List<ClsCuratore> curatoriAggiornati = object.getCuratoriAssociati().stream()
+                .map(cur->(ClsCuratore)repoUtenti.findById(cur.getId()).get()).toList();
 
-        for (ClsCuratore curatore : object.getCuratoriAssociati())
+        for (ClsCuratore curatore : curatoriAggiornati)
             curatore.setIdComuneAssociato(object.getId());
-        repoUtenti.saveAll(object.getCuratoriAssociati());
+
+        for(ClsCuratore curatore : curatoriVecchi){
+            boolean found = false;
+            for (ClsCuratore aggiornati : curatoriAggiornati){
+                if(Objects.equals(aggiornati.getId(), curatore.getId()))
+                    found=true;
+            }
+            if(!found) {
+                curatore.setIdComuneAssociato(null);
+                repoUtenti.save(curatore);
+            }
+        }
+        repoUtenti.saveAll(curatoriAggiornati);
         repoComuni.save(object);
         return true;
     }

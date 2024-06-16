@@ -101,7 +101,35 @@ public class DemoUtenti {
         utenti.add(gdp);
 
         //endregion
+//region Extra Curatori
+        ClsCuratore cur2 = new ClsCuratore();
 
+        Credenziali c42 = new Credenziali();
+        c42.setUsername("cur2"); // Username univoco per ogni oggetto
+        c42.setPassword("cur2"); // Password univoca per ogni oggetto
+
+        cur2.setCredenziali(c42);
+
+        cur2.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
+        cur2.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE.getValue());
+        //cur.setIdComuneAssociato(1L);
+
+        utenti.add(cur2);
+
+        ClsCuratore cur3 = new ClsCuratore();
+
+        Credenziali c43 = new Credenziali();
+        c43.setUsername("cur2"); // Username univoco per ogni oggetto
+        c43.setPassword("cur2"); // Password univoca per ogni oggetto
+
+        cur3.setCredenziali(c43);
+
+        cur3.setRuoloUtente(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE);
+        cur3.setPunteggio(ClsTuristaAutenticato.eRUOLI_UTENTE.CURATORE.getValue());
+        //cur.setIdComuneAssociato(1L);
+
+        utenti.add(cur3);
+        //endregion
         return args -> repo.saveAll(utenti);
     }
 

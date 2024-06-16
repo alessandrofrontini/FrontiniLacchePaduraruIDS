@@ -214,7 +214,7 @@ public class Controller_SezioneModificaComuni implements Initializable {
         {
             List<ClsCuratore> curatoriAssociatiToComune = new ArrayList<ClsCuratore>();
 
-            for (int i = 0; i < Curatori.size(); i++) {
+            /*for (int i = 0; i < Curatori.size(); i++) {
                 for (int j = 0; j < curatoriCoinvoltiArray.length; j++) {
                     try
                     {
@@ -229,6 +229,11 @@ public class Controller_SezioneModificaComuni implements Initializable {
                     }
 
                 }
+            }*/
+            for (int i = 0; i < curatoriCoinvoltiArray.length; i++) {
+                ClsCuratore tmp = new ClsCuratore();
+                tmp.setId(Long.valueOf(curatoriCoinvoltiArray[i]));
+                curatoriAssociatiToComune.add(tmp);
             }
 
             if (!curatoriAssociatiToComune.isEmpty() &&
@@ -244,8 +249,8 @@ public class Controller_SezioneModificaComuni implements Initializable {
                 comune.setDescrizione(u.getValueFromTextField(descrizioneTF));
                 comune.setAbitanti(Integer.parseInt(u.getValueFromTextField(abitantiTF)));
                 comune.setSuperficie(Double.parseDouble(u.getValueFromTextField(superficieTF)));
-                comune.setCuratoriAssociati(new ArrayList<>());
-
+                comune.setCuratoriAssociati(curatoriAssociatiToComune);
+                comune.setId(Long.valueOf((String) this.sceltaComune.getValue()));
                 return comune;
             } else {
                 return null;

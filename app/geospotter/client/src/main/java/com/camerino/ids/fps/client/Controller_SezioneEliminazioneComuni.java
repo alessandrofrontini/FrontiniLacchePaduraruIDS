@@ -122,7 +122,6 @@ public class Controller_SezioneEliminazioneComuni implements Initializable {
     private void setComuni(List<ClsComune> comuni) {
         for (int i = 0; i < comuni.size(); i++) {
             ClsComuneVisual c = u.convertFromClsComune(comuni.get(i));
-
             elencoComuni.getItems().add(c);
         }
     }
