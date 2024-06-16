@@ -15,7 +15,6 @@ Per qualsiasi cosa abbiate bisogno potete contattarci a una delle tre email ripo
 Come potrai ben vedere, il progetto è composto da diverse componenti:
 - **Documentazione** <br/>Fornisce viste differenti delle diverse componenti del sistema e delle loro interazioni.
 - **Codice** <br/>Codice sorgente di GeoSpotter.
- 
 
 # Documentazione
 Possiamo sommariamente dire che, all'interno della cartella Documentazione, è possibile trovare tutti quei documenti e informazioni utili alla comprensione di come GeoSpotter è stato strutturato e quali componenti esso si serve per il suo funzionamento e delle loro interazioni. In particolar modo possiamo trovare due file:
@@ -46,10 +45,14 @@ La versione Server di GeoSpotter rappresenta un'evoluzione rispetto alla prima v
 
 
 ## Codice, alcuni chiarimenti
-- Versione Java: 19 LTS
-- Versione JavaFX
-- Versione Springboot
-- Librerie Utilizzate
+- Versione Java: 19.0.2 Amazon Corretto
+- Versione JavaFX 19.0.2
+- Versione Springboot 3.2.5
+
+### Librerie Utilizzate:
+- Sprinboot Starter Web
+- Springboot Data JPA
+- Jackson    
   
 
 
