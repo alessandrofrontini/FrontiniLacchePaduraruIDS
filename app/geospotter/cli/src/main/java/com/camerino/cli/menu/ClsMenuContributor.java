@@ -103,7 +103,7 @@ public class ClsMenuContributor implements IMenu{
 
         }
         else{
-            println("Non ci sono nodi presenti nella Piattaforma.");
+            println("Non hai ancora creato nessun Nodo.");
             in.nextLine();
         }
     }
@@ -134,7 +134,7 @@ public class ClsMenuContributor implements IMenu{
                 }
             }
         } else {
-            println("Non ci sono nodi presenti nella Piattaforma");
+            println("Non hai ancora creato nessun Nodo.");
             in.nextLine();
         }
     }
@@ -163,30 +163,35 @@ public class ClsMenuContributor implements IMenu{
      * al tipo di utente.
      */
     public void menuModificaItinerario(){
-        for(ClsItinerario itinerario:user.getItinerariPossessore())
-            println(itinerario.visualizzaItinerario());
-        boolean exit = false;
-        while(!exit) {
-            println("inserisci l'id dell'itinerario");
-            String input = in.nextLine();
-            if (checkValore(input, (ArrayList<String>) user.getItinerariPossessore().stream().map(itinerario -> itinerario.getId().toString()).collect(Collectors.toList()))) {
-                ClsItinerario itinerario = user.getItinerarioById(Long.parseLong(input)).get(0);
-                if (itinerario != null) {
-                    ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
-                    user.modificaItinerario(nuovo, itinerario.getId());
-                    if(user.getClass().equals(ClsContributorAutorizzato.class))
-                        user.setPunteggio(user.getPunteggio()+1);
-                    println("Richiesta di modifica effettuata correttamente.");
-                    in.nextLine();
-                    exit = true;
-                } else{
-                    println("Errore nella richiesta. Riprova.");
+        if(!user.getItinerariPossessore().isEmpty()) {
+            for (ClsItinerario itinerario : user.getItinerariPossessore())
+                println(itinerario.visualizzaItinerario());
+            boolean exit = false;
+            while (!exit) {
+                println("inserisci l'id dell'itinerario");
+                String input = in.nextLine();
+                if (checkValore(input, (ArrayList<String>) user.getItinerariPossessore().stream().map(itinerario -> itinerario.getId().toString()).collect(Collectors.toList()))) {
+                    ClsItinerario itinerario = user.getItinerarioById(Long.parseLong(input)).get(0);
+                    if (itinerario != null) {
+                        ClsItinerario nuovo = sottomenuModificaItinerario(itinerario);
+                        user.modificaItinerario(nuovo, itinerario.getId());
+                        if (user.getClass().equals(ClsContributorAutorizzato.class))
+                            user.setPunteggio(user.getPunteggio() + 1);
+                        println("Richiesta di modifica effettuata correttamente.");
+                        in.nextLine();
+                        exit = true;
+                    } else {
+                        println("Errore nella richiesta. Riprova.");
+                        in.nextLine();
+                    }
+                } else {
+                    println("Itinerario non presente. Riprova");
                     in.nextLine();
                 }
-            } else {
-                println("Itinerario non presente. Riprova");
-                in.nextLine();
             }
+        } else {
+            println("Non hai ancora creato nessun itinerario.");
+            in.nextLine();
         }
     }
 
@@ -305,28 +310,31 @@ public class ClsMenuContributor implements IMenu{
      * Inizialmente si chiede all'utente di inserire l'ID dell'itinerario poi, dopo un controllo sull'input, viene effettuata l'eliminazione.
      */
     public void menuEliminaItinerario(){
-        if(user.getItinerariPossessore()!=null){
-            for(ClsItinerario i:user.getItinerariPossessore()){
+        if(!user.getItinerariPossessore().isEmpty()) {
+            for (ClsItinerario i : user.getItinerariPossessore()) {
                 println(i.visualizzaItinerario());
             }
-        }
-        boolean exit = false;
-        while(!exit) {
-            println("inserisci l'id dell'itinerario");
-            String input = in.nextLine();
-            if (checkValore(input, (ArrayList<String>) user.getItinerariPossessore().stream().map(itinerario -> itinerario.getId().toString()).collect(Collectors.toList()))) {
-                HashMap<String, Object> tmp = new HashMap<>();
-                tmp.put("id", input);
-                ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
-                if (itinerario != null) {
-                    user.eliminaItinerario(itinerario.getId());
-                    if(user.getClass().equals(ClsContributorAutorizzato.class))
-                        user.setPunteggio(user.getPunteggio()+1);
-                    println("Richiesta di eliminazione effettuata.");
-                    exit = true;
-                } else println("Errore. Riprova");
-                in.nextLine();
+            boolean exit = false;
+            while (!exit) {
+                println("inserisci l'id dell'itinerario");
+                String input = in.nextLine();
+                if (checkValore(input, (ArrayList<String>) user.getItinerariPossessore().stream().map(itinerario -> itinerario.getId().toString()).collect(Collectors.toList()))) {
+                    HashMap<String, Object> tmp = new HashMap<>();
+                    tmp.put("id", input);
+                    ClsItinerario itinerario = MockLocator.getMockItinerari().get(tmp).get(0);
+                    if (itinerario != null) {
+                        user.eliminaItinerario(itinerario.getId());
+                        if (user.getClass().equals(ClsContributorAutorizzato.class))
+                            user.setPunteggio(user.getPunteggio() + 1);
+                        println("Richiesta di eliminazione effettuata.");
+                        exit = true;
+                    } else println("Errore. Riprova");
+                    in.nextLine();
+                }
             }
+        } else {
+            println("Non hai ancora creato nessun itinerario.");
+            in.nextLine();
         }
     }
 

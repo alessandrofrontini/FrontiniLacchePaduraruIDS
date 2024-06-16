@@ -54,8 +54,6 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
     }
     private List<ClsItinerario> getItinerarioByCreatore(Long idCreatore){
         List<ClsItinerario> tmp =  itinerari.stream().filter(n->n.getIdCreatore().equals(idCreatore)).toList();
-        if(tmp.isEmpty())
-            return null;
         return tmp;
     }
 
