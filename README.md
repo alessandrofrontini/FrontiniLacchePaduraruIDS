@@ -3,19 +3,35 @@
 <br/>GeoSpotter, in soldoni, è una  _piattaforma di digitalizzazione e valorizzazione del territorio Italiano_, sviluppata in Java e Springboot. <br/> <br/> 
 Questa applicazione è figlia di una specifica di un progetto relativa al corso di "Ingegneria del Software" erogato dall'Università degli studi di Camerino.
 
-![image](https://github.com/alessandrofrontini/FrontiniLacchePaduraruIDS/assets/150078516/b8f97117-f976-47ee-adec-6f2c3f875f57)
+![image](/assets/home_image.png)
 
 GeoSpotter è stata pensata, documentata e implementata dal team - _**SPAFAMAT**_ - composto da:
-- Frontini Alessandro: alessandro.frontini@studenti.unicam.it (118 532)
-- Paduraru Danut Razvan: danutrazvan.paduraru@studenti.unicam.it (118 308)
-- Francesco Saverio Lacchè: francescosave.lacche@studenti.unicam.it (119 067)
+- [Frontini Alessandro](https://github.com/alessandrofrontini) : alessandro.frontini@studenti.unicam.it (118 532)
+- [Paduraru Danut Razvan](https://github.com/PettingStrings) : danutrazvan.paduraru@studenti.unicam.it (118 308)
+- [Francesco Saverio Lacchè](https://github.com/Mieti3bbia) : francescosave.lacche@studenti.unicam.it (119 067)
 
 Per qualsiasi cosa abbiate bisogno potete contattarci a una delle tre email riportate sopra. <br/>Vi risponderemo appena possibile.
 # Come è strutturato il GeoSpotter?
-Come potrai ben vedere, il progetto è composto da diverse componenti:
-- **Documentazione** <br/>Fornisce viste differenti delle diverse componenti del sistema e delle loro interazioni.
-- **Codice** <br/>Codice sorgente di GeoSpotter.
-
+```console
+├───app
+│   └───geospotter
+│       │
+│       ├───cli      # Applicazione locale console in java puro
+│       │   └───...
+│       ├───client   # Client in JavaFX che usa il server in SpringBoot
+│       │   └───...
+│       ├───CLIsave  # Cartella dove la CLI salva i dati su file
+│       │   └───...
+│       ├───core     # Libreria comune che contiene le classi comuni implementate
+│       │   └───...
+│       └───server   # Server scritto in SpringBoot
+│           └───...
+│
+└───Documentazione
+    ├───UML
+    │   └───GeoSpotter.vpp
+    └───README - Sistema a Punteggi.pdf
+```
 # Documentazione
 Possiamo sommariamente dire che, all'interno della cartella Documentazione, è possibile trovare tutti quei documenti e informazioni utili alla comprensione di come GeoSpotter è stato strutturato e quali componenti esso si serve per il suo funzionamento e delle loro interazioni. In particolar modo possiamo trovare due file:
 - _**GeoSpotter.vpp**_<br/>E' da intendersi come la **documentazione effettiva**. <br/>Dentro questo documento troverete tutti i vari diagrammi (o viste, espressi in UML) e documenti che descrivono GeoSpotter.<br/><br/>
