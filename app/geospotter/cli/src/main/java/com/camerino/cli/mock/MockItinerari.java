@@ -38,8 +38,8 @@ public class MockItinerari implements IPersistenceModel<ClsItinerario> {
                 tmp.add(getItinerarioById(Long.valueOf(filters.get("idItinerario").toString())));
                 return tmp;
             }
-            if (filters.containsKey("idCreatore")) {
-                tmp.addAll(getItinerarioByCreatore(Long.valueOf(filters.get("idCreatore").toString())));
+            if (filters.containsKey("owner")) {
+                tmp.addAll(getItinerarioByCreatore(Long.valueOf(filters.get("owner").toString())));
                 return tmp;
             }
         }

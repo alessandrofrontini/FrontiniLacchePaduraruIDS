@@ -72,4 +72,8 @@ public class SItinerari {
             repoUtenti.incrementaPunteggio(user.getId(), 1);
         return user.eliminaItinerario(idItinerario);
     }
+
+    public List<ClsItinerario> getItinerariPosessore() {
+        return ((ClsContributor) request.getServletContext().getAttribute("user")).getItinerariPossessore();
+    }
 }

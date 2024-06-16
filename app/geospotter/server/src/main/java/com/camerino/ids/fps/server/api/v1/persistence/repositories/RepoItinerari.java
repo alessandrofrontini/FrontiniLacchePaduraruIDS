@@ -12,4 +12,6 @@ public interface RepoItinerari extends JpaRepository<ClsItinerario, Long> {
 select * from CLS_ITINERARIO where id not in (select NEW_DATA_ID from CLS_RDC_itinerario where NEW_DATA_ID  is not null)
 """, nativeQuery = true)
     List<ClsItinerario> findAllOfficial();
+
+    List<ClsItinerario> findClsItinerarioByIdCreatore(Long idCreatore);
 }

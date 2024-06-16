@@ -22,10 +22,13 @@ public class CItinerari {
 
     @GetMapping(mapping)
     public ResponseEntity<List<ClsItinerario>> getItinerari(
-            @RequestParam(name = "idItinerario", required = false) Long idItinerario
+            @RequestParam(name = "idItinerario", required = false) Long idItinerario,
+            @RequestParam(name = "owner", required = false) Long owner
     ) {
         if (idItinerario != null)
             return ResponseEntity.ok(sItinerari.getItinerarioById(idItinerario));
+        if(owner!=null)
+            return ResponseEntity.ok(sItinerari.getItinerariPosessore());
         return ResponseEntity.ok(sItinerari.getAllItinerari());
     }
 

@@ -279,13 +279,9 @@ public class ClsContributor extends ClsTuristaAutenticato implements IAzioniCont
 
     @Override
     public List<ClsItinerario> getItinerariPossessore() {
-        List<ClsItinerario> itinerariPossessore = new ArrayList<>();
-        for(ClsItinerario i:getAllItinerari()){
-            if(Objects.equals(i.getIdCreatore(), this.id)){
-                itinerariPossessore.add(i);
-            }
-        }
-        return itinerariPossessore;
+        HashMap<String, Object> filters = new HashMap<>();
+        filters.put("owner", this.id);
+        return this.iperItinerari.get(filters);
     }
     //endregion
 }
