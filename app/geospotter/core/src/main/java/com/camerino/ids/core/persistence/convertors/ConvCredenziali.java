@@ -18,7 +18,7 @@ public class ConvCredenziali implements AttributeConverter<Credenziali, String> 
     public Credenziali convertToEntityAttribute(String s) {
         String[] cred = s.split(SEPARATOR);
         Credenziali credenziali = new Credenziali();
-        credenziali.setPassword(cred[0]);
+        credenziali.setUsername(cred[0]);
         credenziali.setPassword(cred[1]);
         return credenziali;
     }
