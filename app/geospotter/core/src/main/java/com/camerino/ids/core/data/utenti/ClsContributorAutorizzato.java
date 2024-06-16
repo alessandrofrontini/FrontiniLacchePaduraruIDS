@@ -75,6 +75,7 @@ public class ClsContributorAutorizzato extends ClsContributor {
      */
     @Override
     public boolean inserisciItinerario(ClsItinerario itinerario) {
+        itinerario.setIdCreatore(this.id);
         return iperItinerari.insert(itinerario);
     }
 

@@ -3,6 +3,7 @@ package com.camerino.ids.fps.client;
 import com.camerino.ids.core.data.contenuti.ClsItinerario;
 import com.camerino.ids.core.data.contenuti.ClsNodo;
 import com.camerino.ids.core.data.utenti.ClsContributor;
+import com.camerino.ids.core.data.utenti.ClsTuristaAutenticato;
 import com.camerino.ids.fps.client.utils.Utils;
 import com.camerino.ids.fps.client.visual.ClsItinerarioVisual;
 import com.camerino.ids.fps.client.visual.ClsNodoVisual;
@@ -75,7 +76,7 @@ public class Controller_SezioneModificaItinerari implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         nodi = Controller_SezioneLogin.UTENTE.getAllNodi();
-        itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari(); //TODO: add getItinerariPossessore
+        itinerari = ((ClsContributor)Controller_SezioneLogin.UTENTE).getItinerariPossessore();
 
         this.setItinerari(itinerari);
         this.setNodi(nodi);

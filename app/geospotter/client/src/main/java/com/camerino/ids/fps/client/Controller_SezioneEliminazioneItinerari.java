@@ -49,7 +49,7 @@ public class Controller_SezioneEliminazioneItinerari implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        itinerari = Controller_SezioneLogin.UTENTE.getAllItinerari();
+        itinerari = ((ClsContributor)Controller_SezioneLogin.UTENTE).getItinerariPossessore();
 
         this.setItinerari(itinerari);
 
