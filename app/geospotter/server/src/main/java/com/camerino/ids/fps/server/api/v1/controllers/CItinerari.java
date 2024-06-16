@@ -48,7 +48,7 @@ public class CItinerari {
 
     @DeleteMapping(mapping)
     public ResponseEntity<Boolean> deleteItinerari(
-            @RequestParam(name = "idItinerario", required = false) Long idItinerario
+            @RequestParam(name = "idItinerario") Long idItinerario
     ) {
         return ResponseEntity.ok(sItinerari.deleteItinerario(idItinerario));
     }

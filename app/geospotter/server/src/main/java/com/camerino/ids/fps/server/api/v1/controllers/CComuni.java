@@ -31,7 +31,7 @@ public class CComuni {
 
     @DeleteMapping(mapping)
     public ResponseEntity<Boolean> deleteComune(
-            @RequestParam(value = "idComune", required = false) Long idComune
+            @RequestParam(value = "idComune") Long idComune
     ) {
         return ResponseEntity.ok(sComnuni.deleteComuneById(idComune));
     }
