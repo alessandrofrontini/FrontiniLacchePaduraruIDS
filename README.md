@@ -26,13 +26,17 @@ Possiamo sommariamente dire che, all'interno della cartella Documentazione, è p
 # Codice
 E' possibile trovare all' interno del progetto **DUE** versioni di GeoSpotter:
 
-- GeoSpotter (v0): **CLI** 
+- GeoSpotter Console (v0): **CLI** 
 - GeoSpotter (v1): **Server**/**GUI**
   
 Consigliamo fortemente di utilizzare e testare entrambe le versioni di GeoSpotter per comprenderne al meglio l'essenza :)
-## V1 - CLI (Java)
+## V1 - Geospotter Console - CLI (Java)
 La CLI, la prima versione di GeoSpotter, rappresenta una **demo** delle funzionalità cardine di cui GeoSpotter si serve per il suo funzionamento. <br/>
-Questa prima versione utilizza un interfaccia a linea di comando (Command Line Interface) per interagire con l'utente che la utilizza e essa implementa i casi d'uso cruciali di cui GeoSpotter si serve.
+Questa prima versione utilizza un interfaccia a linea di comando (Command Line Interface) per interagire con l'utente che la utilizza e essa implementa i casi d'uso cruciali di cui GeoSpotter si serve; per un'esperienza d'uso migliore la CLI sfrutta il salvataggio su file dei dati. <br/>
+Per eseguire la CLI è necessario posizionarsi nella cartella "src/main/java/com/camerino/cli/" ed eseguire il Main. <br/>
+Attraverso la CLI sarà possibile effettuare il login e, in base al ruolo dell'utente, compariranno le azioni effettuabili dall'utente. Le scelte nei menu vengono effettuate inserendo il numero corrispondente all'elemento da selezionare, rispondendo a domande "Y/N" e inserendo dati apertamente. <br/>
+Effettuando login e logout con diversi utenti sarà possibile provare il funzionamento di Geospotter; non è necessario chiudere l'applicazione prima di cambiare ruolo, è sufficiente effettuare il logout dall'interno di Geospotter. <br/>
+All'interno del progetto è presente la cartella "CLISave": come suggerisce il nome, è una cartella contenente le informazioni salvate dalla CLI, sottoforma di file CSV.
 
 ### Come eseguire la CLI?
 ## V2 - SERVER(SpringBoot) - GUI(JavaFX) 
