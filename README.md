@@ -12,15 +12,13 @@ GeoSpotter è stata pensata, documentata e implementata dal team - _**SPAFAMAT**
 
 Per qualsiasi cosa abbiate bisogno potete contattarci a una delle tre email riportate sopra. <br/>Vi risponderemo appena possibile.
 ## Come è strutturato il GeoSpotter?
-```console
+```
 ├───app
 │   └───geospotter
 │       │
 │       ├───cli      # Applicazione locale console in java puro
 │       │   └───...
 │       ├───client   # Client in JavaFX che usa il server in SpringBoot
-│       │   └───...
-│       ├───CLIsave  # Cartella dove la CLI salva i dati su file
 │       │   └───...
 │       ├───core     # Libreria comune che contiene le classi comuni implementate
 │       │   └───...
