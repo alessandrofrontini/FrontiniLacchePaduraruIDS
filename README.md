@@ -53,12 +53,8 @@ Attraverso la CLI sarà possibile effettuare il login e, in base al ruolo dell'u
 Effettuando login e logout con diversi utenti sarà possibile provare il funzionamento di Geospotter; non è necessario chiudere l'applicazione prima di cambiare ruolo, è sufficiente effettuare il logout dall'interno di Geospotter. <br/>
 All'interno del progetto è presente la cartella "CLISave": come suggerisce il nome, è una cartella contenente le informazioni salvate dalla CLI, sottoforma di file CSV.
 
-### Come eseguire la CLI?
 ## V2 - SERVER(SpringBoot) - GUI(JavaFX) 
 La versione Server di GeoSpotter rappresenta un'evoluzione rispetto alla prima versione, che era una demo delle funzionalità fondamentali del software. <br/> Questa versione di GeoSpotter è da considerarsi **finale e completa**.
-### Come eseguire il Server?
-
-
 
 ## Codice, alcuni chiarimenti
 - Versione Java: 19.0.2 Amazon Corretto
