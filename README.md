@@ -46,7 +46,7 @@ La versione Server di GeoSpotter rappresenta un'evoluzione rispetto alla prima v
 
 
 ## Codice, alcuni chiarimenti
-- Versione Java
+- Versione Java: 19 LTS
 - Versione JavaFX
 - Versione Springboot
 - Librerie Utilizzate
